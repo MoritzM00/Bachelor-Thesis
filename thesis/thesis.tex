@@ -1,0 +1,939 @@
+\documentclass[11pt]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage[a4paper, left=2cm, right=2cm, top=3cm, bottom=3cm]{geometry}
+\usepackage{setspace}
+\setlength{\parskip}{8pt}
+\setlength{\parindent}{0pt}
+
+\usepackage[backend=biber, style=authoryear]{biblatex}
+\setlength\bibitemsep{1.5\itemsep}
+
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{csquotes}
+
+\usepackage{fancyvrb}
+\usepackage{booktabs}
+\usepackage[section]{placeins}
+
+\usepackage{xfrac}
+
+\usepackage{enumitem}
+\usepackage{url}
+
+\usepackage{pgfplots}
+\usepackage{pgf}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	citecolor=black,
+	pdftitle={Faktoranalyse}
+}
+
+\graphicspath{ {./figures/} }
+
+
+% Link zur .bib-Datei, die die Literatureintraege enthaelt
+\addbibresource{literatur.bib}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inhalt der Titelseite
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hinweis: \vspace-Befehl darf nicht geändert werden, da sonst das Titelblatt
+%die Formatierung verliert!
+\vspace{5cm}
+\dedication{\vspace{-19cm} Fakultät für Wirtschaftswissenschaften \\Institut für
+	Operations Research\\Lehrstuhl Analytics and Statistics\\ Prof. Dr. Oliver
+	Grothe}
+\title{\vspace{6cm} Faktoranalyse}
+\subtitle{Seminararbeit \vspace{2cm}}
+\vspace{5cm}
+\author{Moritz Mistol\\ Matrikelnr.: 2281987 \vspace{0.5cm}}
+\date{{\today}\vspace{1cm}}
+
+\publishers{Betreut von Fabian Kächele \vspace{4cm}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% KIT Logo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\titlehead{
+	\begin{minipage}{7.2cm}
+		\vspace{-2cm}
+		\hspace{10cm}
+		\includegraphics[scale=0.085]{logos/kit_logo}
+	\end{minipage}
+}%
+
+% some mathmatical abbreviations
+\newcommand{\empCov}{\widehat{\mathbf{\Sigma}}} % empirical covariance matrix
+
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+
+
+\begin{document}
+	
+	% Header einfügen:
+	\pagestyle{fancy}
+	\singlespacing
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Titelseite
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\maketitle
+
+	% Damit keine Seitenzahl angezeigt wird:
+	\thispagestyle{empty}
+	\onehalfspacing
+	
+	
+	
+	
+	
+	
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inhaltsverzeichnis
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\newpage
+	\pagestyle{plain}
+	% Römische Seitenzahl:
+	\pagenumbering{roman}
+	{\hypersetup{hidelinks} \tableofcontents}
+	
+	
+	
+	
+	
+	
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inhalt
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%
+	% Hinweis: Ein Kapitel muss mit \newpage beendet werden, um einen Seitenumbruch
+	%zu bewirken.
+	%
+	
+	\newpage
+	\pagenumbering{arabic}
+	\pagestyle{fancy}
+	
+	
+	
+	
+	
+	
+	
+	%Beispieltext mit Referenz mit Seitenangabe \parencite[200]{James.2017}, ohne
+	%Seitenangabe \parencite{James.2017} und mit "vgl."
+	%\parencite[vgl.][]{James.2017} bzw. "cf" \parencite[cf][]{James.2017}. \\
+	%Beispieltext mit Erwähnung der Autoren im Text: \textcite{Russell.2018} zeigen,
+	%dass ... 
+	\section{Einleitung} \label{Einleitung}
+	
+	Die Faktoranalyse ist ein in vielen Anwendungsbereichen eingesetztes
+	Analysemodell, welches versucht die beobachteten (\textit{manifesten}) Variablen
+	durch unbeobachtete (\textit{latente}) Variablen, die sogenannten
+	\textit{Faktoren} zu beschreiben.
+	Dabei wird ein linearer Zusammenhang zwischen den Variablen und Faktoren vermutet. 
+	Ein vereinfachendes Beispiel hierfür ist, dass bei Noten ein linearer Zusammenhang zur Intelligenz
+	und zum Fleiß eines Schülers bestehen könnte:
+	\begin{equation*}
+		\begin{aligned}
+			\text{Mathematik-Note} &= \lambda_{11} \cdot \text{Intelligenz} + \lambda_{12} \cdot \text{Fleiß} + \epsilon_1 \\
+			\text{Spanisch-Note} &=  \lambda_{21} \cdot  \text{Intelligenz} + \lambda_{22} \cdot \text{Fleiß} + \epsilon_2 \\
+			\text{Deutsch-Note} &=  \lambda_{31} \cdot \text{Intelligenz} + \lambda_{32} \cdot \text{Fleiß} + \epsilon_3
+		\end{aligned}
+	\end{equation*}
+	Das bedeutet, dass den jeweiligen Noten eigentlich die latenten Konstrukte \enquote{Intelligenz}
+	und \enquote{Fleiß} zugrundeliegen. Die Gewichtungskoeffizienten $\lambda_{ij}$ sind die sogenannten
+	Faktorladungen\footnote{Normalerweise wird \enquote{$\lambda$} für Eigenwerte benutzt. Jedoch ist
+	es in der Literatur zur Faktoranalyse üblich, stattdessen die Ladungen mit \enquote{$\lambda$} und die Eigenwerte mit \enquote{$\theta$} zu bezeichnen}. Beispielsweise gibt $\lambda_{12}$ an, wie
+	\enquote{wichtig} Faktor $2$ (Fleiß) für Variable $1$ (Mathematik-Note) ist. Die Mathematik-Note könnte allerdings auch noch durch etwas
+	Spezifisches beeinflusst werden, was die Faktoren nicht erklären können. Daher hat jede Variable einen additiven Fehlerterm  $\epsilon_i$.
+	
+	Um diese Faktorladungen zu bestimmen gibt es nun zwei unterschiedliche Ausprägungen der Faktoranalyse.
+	Zum einen könnte man eine \textit{exploratorische Faktoranalyse} durchführen,
+	welche anhand der Daten versucht die Faktoren zu extrahieren, ohne spezifische Annahmen
+	über die Existenz von bestimmten Faktoren zu treffen. Daneben gibt es noch die \textit{konfirmatorische 
+	Faktoranalyse}. Diese wird eingesetzt, wenn der Anwender bereits eine Hypothese
+	über die Anzahl und Interpretation der Faktoren hat und diese statistisch überprüfen möchte \parencite[417]{Backhaus.2021}.
+	Im Folgenden gehe ich nur auf die exploratorische Faktoranalyse ein.
+	
+	Nach der sogenannten \textit{Faktorextraktion}, das heißt der Bestimmung der Faktorladungen, könnte es noch
+	von Interesse sein, die konkreten Werte der Faktoren zu kennen. In diesem Beispiel möchte man also
+	wissen, welchen Wert eine Person anstelle der Noten für die Faktoren \enquote{Intelligenz} und \enquote{Fleiß} angegeben hätte. Dann könnte man
+	die Daten anstelle von drei Variablen für jede Person nur noch durch zwei Variablen, nämlich den Faktoren darstellen.
+	Daher wird also auch eine Dimensionsreduktion erreicht. Jedoch ist der Fokus der Faktoranalyse nicht
+	die Dimensionsreduktion, sondern die Extraktion der Faktoren und die damit verbundenen Erkenntnisse über die Daten.
+	
+	\newpage
+	\section{Faktoranalyse}
+	
+	In der Einleitung haben wir eine Intuition für das Problem bekommen,
+	das die Faktoranalyse zu lösen versucht. Nun gehe ich auf die einzelnen
+	Bestandteile genauer ein. Wie werden sehen, wie sich das Faktorenmodell
+	mathematisch beschreiben lässt und das Problem der Unbestimmtheit
+	einer Faktorlösung kennenlernen. Danach gehen wir zur Schätzung der
+	Modellparameter und Faktorwerte über. Am Ende
+	dieses Kapitels gehe ich noch kurz darauf ein, wie man eine exploratorische
+	Faktoranalyse in der Praxis durchführt.
+	
+	\subsection{Das $k$-Faktor-Modell} \label{Faktorenmodell}
+	In diesem Kapitel gehe ich auf das allgemeine $k$-Faktor-Modell näher ein.
+	Wir werden sehen, dass sich die Variablen als eine Linearkombination der Faktoren
+	darstellen lassen. Es werden außerdem die Modellannahmen vorgestellt, die für
+	die Faktoranalyse benötigt werden.
+	Mit diesen Annahmen lässt sich die Varianzzerlegung einer Variable herleiten, wodurch
+	man schließlich das Fundamentaltheorem der Faktoranalyse erhält.
+	Dieses Kapitel ist somit essentiell für das Verständnis der Schätzmethoden
+	(\ref{Schätzmethoden}), sowie für die systematische Anwendung der Faktoranalyse
+	(Kapitel \ref{Vorgehensweise} und \ref{Anwendungsbeispiel}).
+	
+	\subsubsection{Grundidee}
+	\label{Grundidee}
+	Im Folgenden gehen wir davon aus, dass $p$  Zufallsvariablen vorliegen, die
+	durch $k$
+	Faktoren erklärt werden sollen, wobei $k < p$ gilt. Dazu bezeichnen wir $X = (X_1, X_2, \dotsc,
+	X_p)' $ als den $p$-dimensionalen Zufallsvektor mit Erwartungswertvektor $\mu$ = 0. 
+	Wie schon in der Einleitung erwähnt, wird ein linearer Zusammenhang zwischen den Variablen
+	und Faktoren unterstellt.
+	Als Gleichung formuliert lässt sich dieser Zusammenhang für Variable
+	$X_i$ mit $i = 1,
+	\dotsc, p$ bei einem $k$-Faktor-Modell durch eine Linearkombination wie folgt ausdrücken:
+	\begin{equation} \label{Faktorgleichung}
+		\begin{split}
+			X_i &= \lambda_{i1}f_1 + \lambda_{i2}f_2 + \dotsb + \lambda_{ik}f_k + \epsilon_i \\
+			&= \sum_{j=1}^{k} \lambda_{ij}f_j + \epsilon_i
+		\end{split}
+	\end{equation}
+	wobei die Gewichtungskoeffizienten $\lambda_{ij}$
+	als \enquote{Ladung}
+	der $i$-ten Variable auf Faktor $j$ bezeichnet werden \parencite[409-410]{Rencher.2002}. Je höher
+	dabei eine Ladung ist, desto wichtiger ist dieser Faktor für die entsprechende Variable. Das bedeutet, dass
+	die Faktorladung die Beziehung zwischen einer Ausgangsvariable und einem Faktor beschreibt. $f_j$ entspricht dem (unbeobachteten)
+	Wert des Faktors $j$ und $\epsilon_i$ dem spezifischen Fehlerterm
+	für Variable $i$. Also hat jede Variable einen
+	Anteil, der nicht mit den anderen Variablen geteilt wird und daher nicht durch die
+	Faktoren erklärt werden kann. 
+	
+	In Matrix-Notation lässt sich dies kompakter darstellen als
+	\begin{equation} \label{lineares Faktorenmodell}
+		\begin{split}
+			X &= \begin{pmatrix} 
+				\lambda_{11} & \lambda_{12} & \cdots & \lambda_{1k} \\
+				\lambda_{21} & \lambda_{22} & \cdots & \lambda_{2k} \\
+				\vdots  & \vdots  & \ddots & \vdots  \\
+				\lambda_{p1} & \lambda_{p2} & \cdots & \lambda_{pk} 
+			\end{pmatrix} 
+			\begin{pmatrix}f_1 \\ \vdots \\ f_k\end{pmatrix}
+			+ \begin{pmatrix}\epsilon_1 \\ \vdots \\ \epsilon_p\end{pmatrix} \\ \\
+			&= \mathbf{\Lambda}f + \epsilon
+		\end{split}
+	\end{equation}
+	Dabei ist $\mathbf{\Lambda}\in \mathbb{R}^{p \times k}$ die Faktorladungsmatrix
+	(engl. auch \textit{pattern matrix} genannt) und $\epsilon \in \mathbb{R}^p$
+	der Vektor der Fehlerterme, sowie $f \in \mathbb{R}^k$ der Vektor der
+	unbeobachteten Faktoren.
+	
+	\subsubsection{Modellannahmen} \label{Modellannahmen}
+	
+	Ich stelle nun einige Annahmen vor, welche üblicherweise
+	bei einer Faktoranalyse getroffen werden und orientiere mich dabei
+	an \textcite[137]{Everitt.2011} und \textcite[410-411]{Rencher.2002}.
+	
+	Zunächst einmal kann gezeigt werden, dass die Faktoranalyse ein
+	skalenunabhängiges Modell ist \parencite[138-139]{Everitt.2011}.
+	Um einige Berechnungen zu vereinfachen, werden wir daher 
+	annehmen, dass die Variablen in
+	standardisierter Form vorliegen, das heißt $Z = \frac{X - E(X)}{\sqrt{\Var(X)}}$.
+	Gleichung \ref{lineares Faktorenmodell} gilt dann ebenfalls für $Z$.
+	
+	Weil die Faktoren unbeobachtet sind, nehmen wir im Folgenden an, dass sie
+	standardisiert vorkommen und paarweise unkorreliert sind\footnote{Es kann unter Umständen
+		sinnvoll sein, korrelierte Faktoren ($\Cov(f) \neq \mathbf{I}_k$) zuzulassen. Auf diesen Fall gehe ich hier aber nicht näher ein.}. Das heißt 
+	\begin{equation}
+		\label{Verteilung von f}
+		\text{E}(f) = 0 \quad \text{und} \quad \Cov(f) = \mathbf{I}_{k}
+	\end{equation}
+    wobei $\mathbf{I}_k$ eine $(k \times k)$-Einheitsmatrix ist.
+	Für die Fehlerterme sei ebenfalls $\text{E}(\epsilon) = 0$, jedoch dürfen sie
+	unterschiedlich variieren. Für die Kovarianzmatrix der Fehlerterme gilt daher:
+	\begin{equation} \label{Psi}
+		\Cov(\epsilon) =
+		\mathbf{\Psi} =
+		\begin{pmatrix}
+			\psi_1 & 0 & \cdots & 0 \\
+			0 & \psi_2 &\cdots & 0 \\
+			\vdots  & \vdots  & \ddots & \vdots  \\
+			0 & 0 & \cdots & \psi_p 
+		\end{pmatrix} = \diag \left(\psi_1,\dotsc, \psi_p\right)
+	\end{equation}
+	%und damit
+	%\begin{equation} \label{Verteilung der Fehlerterme}
+	%	\epsilon \sim (0, \mathbf{\Psi})
+	%\end{equation}
+	Des Weiteren nehmen wir an, dass die Faktoren und Fehlerterme unkorreliert sind, also
+	\begin{equation} \label{Unkorrelierte Faktoren und Fehlerterme}
+		\Cov(f_j, \epsilon_i) = 0 \qquad \text{für } j = 1, \dotsc, k; \; i = 1,\dotsc,p
+	\end{equation}
+	Diese Annahmen ermöglichen uns die nachfolgend gezeigte Varianzzerlegung
+	von $Z$.
+	\subsubsection{Varianzzerlegung}
+	\label{Varianzzerlegung}
+	Eine zentrale Beobachtung in der Faktoranalyse ist, dass sich die Varianz einer Variablen $Z_i$
+	mit den im vorangehenden Kapitel eingeführten Annahmen in zwei Teile zerlegen lässt:
+	\begin{equation}
+		\begin{split}
+			\Var\left(Z_i\right) &= \Var\left(\sum_{j=1}^k \lambda_{ij}f_j +
+			\epsilon_i\right) \\
+			&= \sum_{j=1}^k \lambda_{ij}^2 \underbrace{\Var(f_j)}_{=\; 1} +
+			\Var(\epsilon_i) \\
+			&= \underbrace{\sum_{j=1}^k \lambda_{ij}^2}_\text{Kommunalität $h_i^2$} + \quad \psi_i
+		\end{split}
+	\end{equation}
+	Die Kommunalität $h_i^2$, auch \textit{gemeinsame Varianz} genannt, spiegelt
+	den Anteil an Varianz der Variable $X_i$ wider, der \textit{gemeinsam} durch die Faktoren $f_1,\dotsc,f_k$
+	erklärt werden kann. Die spezifische Varianz $\psi_i$ hingegen kann nicht
+	durch die Faktoren erklärt werden und ist für jede Variable einzigartig, weshalb
+	sie im Englischen auch \textit{uniqueness} genannt wird \parencite[441]{Backhaus.2021}.
+	
+	Da die Variablen $Z_i$ gemäß \ref{Modellannahmen} eine Einheitsvarianz
+	aufweisen, gilt 
+	\begin{equation} \label{Varianzzerlegung Ergebnis}
+		1 = h_i^2 + \psi_i
+	\end{equation}
+	was später zur Berechnung der spezifischen Varianz
+	in Abschnitt \ref{Schätzmethoden} ausgenutzt wird.
+	\subsubsection{Fundamentaltheorem}
+	
+	Die Idee ist nun, die Kovarianzmatrix $\mathbf{\Sigma}$ der Grundgesamtheit
+	möglichst
+	gut durch das $k$-Faktor-Modell zu rekonstruieren. Um zu sehen, wie man die
+	Kovarianzmatrix
+	aus dem Modell berechnen kann, betrachten wir die Kovarianzmatrix von $Z$.
+	Dies führt uns auf das Fundamentaltheorem der Faktoranalyse \parencite[412]{Rencher.2002}:
+	\begin{equation} \label{fundamentaltheorem}
+		\begin{split} 
+			\Cov(Z) &= \Cov(\mathbf{\Lambda}f + \epsilon) \\
+			&= \Cov(\mathbf{\Lambda}f) + \Cov(\epsilon) \\
+			&= \mathbf{\Lambda}\Cov(f) \mathbf{\Lambda'} + \mathbf{\Psi} \\
+			&= \mathbf{\Lambda\Lambda'} + \mathbf{\Psi} \\ 
+			%&\approx \mathbf{\Sigma}
+		\end{split}
+	\end{equation}
+	wobei $\mathbf{\Lambda}'$ die Transponierte bezeichnet und $\mathbf{\Psi}$ nach Gleichung \ref{Psi} die Diagonalmatrix mit den
+	Varianzen der Fehlerterme ist. Der letzte Umformungsschritt ergibt sich aus der Annahme,
+	dass die Kovarianzmatrix der Faktoren eine Einheitsmatrix ist (Gleichung \ref{Verteilung von f}).
+	Das Fundamentaltheorem sagt also aus, dass sich
+	die Kovarianzmatrix nicht vollständig aus den Faktorladungen rekonstruieren
+	lässt. Die Diagonale wird noch additiv um die spezifischen Varianzen erweitert.
+	Daran erkennt man auch, dass der Fokus der Faktoranalyse auf der Erklärung
+	der Kovarianzen, beziehungsweise Korrelationen liegt und nicht auf der Erklärung
+	der Varianzen.
+	
+	\subsection{Unbestimmtheit einer Faktorlösung}
+	\label{Unbestimmtheit_faktorlösung}
+	Eine Eigenschaft, weswegen die Faktoranalyse bei einigen Statistikern in der Kritik steht, ist die Unbestimmtheit der Faktorladungsmatrix.
+	Das bedeutet, dass die Faktorladungen nur bis zu einer
+	orthogonalen Transformation hin eindeutig sind. Für jede orthogonale Matrix
+	$\mathbf{T} \in \mathbb{R}^{k \times k}$, das heißt
+	$\mathbf{T}\mathbf{T}' = \mathbf{T}'\mathbf{T} = \mathbf{I}_k$ gilt:
+	\begin{equation}
+		Z = \mathbf{\Lambda}f + \epsilon =
+		\underbrace{ \left(\mathbf{\Lambda T} \right)}_{\coloneqq \; \mathbf{\Lambda}^\star}
+		\underbrace{\left( \mathbf{T'}f \right)}_{\coloneqq \; f^\star} + \epsilon =
+		\mathbf{\Lambda^\star}f^\star + \epsilon
+		\coloneqq Y
+	\end{equation}
+	sodass
+	\begin{equation}
+		\begin{split}
+			\Cov(Y) &= \Cov(\mathbf{\Lambda^\star}f^\star + \epsilon) \\
+			&= \mathbf{\Lambda^\star}(\mathbf{\Lambda^\star})^{'} + \mathbf{\Psi} \\
+			&= \mathbf{\Lambda T}\mathbf{T'\Lambda'} + \mathbf{\Psi} \\
+			&= \mathbf{\Lambda\Lambda'} + \mathbf{\Psi} \\
+		\end{split}
+	\end{equation}
+	ein äquivalentes Faktormodell ergibt \parencite[143-144]{Everitt.2011}. 
+	%Lässt man korrelierte Faktoren zu,
+	%erweitert sich dieser Sachverhalt auf (nicht unbedingt orthogonale) lineare
+	%Transformationen mit $\mathbf{\Lambda}^\star = \mathbf{\Lambda T}$ und $f^\star =
+	%\mathbf{T}^{-1}f$.
+	%Dazu muss $\mathbf{T}$ lediglich invertierbar sein.
+	Dies zeigt, dass es prinzipiell unendlich
+	viele äquivalente Lösungen in dem Sinne gibt, dass die Kommunalitäten unverändert bleiben.
+	Um eine gewisse Vergleichbarkeit zu erhalten, wählt man den ersten Faktor so, dass er
+	den größten Teil der gemeinsamen Varianz erklärt. Den zweiten Faktor wählt man dann anschließend
+	mit dem zweitgrößten Teil der gemeinsamen Varianz, der unkorreliert zum ersten Faktor ist und so weiter \parencite[vgl.][144]{Everitt.2011}.
+	
+	%Wir werden später in
+	%Abschnitt \ref{Faktorrotation und -interpretation} und im Anwendungsbeispiel \ref{Anwendungsbeispiel} sehen, wie die Faktorrotation bei der Interpretation
+	%der Faktorladungen helfen kann. 
+	
+	\newpage
+	\subsection{Schätzen der Modellparameter} \label{Schätzmethoden}
+	In diesem Abschnitt behandle ich das Schätzen der Modellparameter, das bedeutet
+	das Schätzen der Faktorladungen, sowie der Kommunalitäten und spezifischen Varianzen.
+	Dafür stelle ich drei Extraktionsmethoden vor, wobei jedoch zu erwähnen ist, dass es noch viele weitere
+	Möglichkeiten gibt, die Faktorladungen zu schätzen. In der Praxis kommen auch
+	andere Schätzverfahren wie zum Beispiel eine Maximum-Likelihood-Schätzung zum Einsatz
+	\parencite[vgl. Tab. 7.15,][445]{Backhaus.2021}.
+	
+	Im Folgenden bezeichnen wir $\mathbf{X}$ als die $(n \times p)$-Datenmatrix und
+	$\mathbf{Z}$
+	als die standardisierte Datenmatrix. Im Falle von standardisierten Daten ist die
+	Korrelationsmatrix identisch mit der Kovarianzmatrix, weshalb sich die
+	Berechnung
+	der Korrelationsmatrix zu $\mathbf{R} = \frac{1}{n - 1}\mathbf{Z'}\mathbf{Z}$
+	vereinfacht.
+	
+	Die Idee der folgenden Methoden ist, die Faktorladungen so zu extrahieren,
+	dass die \textit{reproduzierte Korrelationsmatrix}
+	\begin{equation} \label{Reproduzierte Korrelationsmatrix}
+		\widehat{\mathbf{R}} = \mathbf{\widehat{\Lambda}} \mathbf{\widehat{\Lambda}}' + \widehat{\mathbf{\Psi}}
+	\end{equation}
+	die empirische Korrelationsmatrix möglichst gut approximiert. 
+	%In anderen Worten
+	%bedeutet dies, dass die Residualmatrix $\mathbf{E} = \mathbf{R} - \widehat{\mathbf{R}}$
+	%minimiert werden soll. 
+	%Dabei wird dieser Fehler allerdings nicht explizit minimiert. Extraktionsmethoden,
+	%die diesen Fehler mathematisch minimieren sind zum Beispiel
+	
+	\subsubsection{Hauptkomponenten-Methode}
+	\label{Hauptkomponenten-Methode}
+	Eine einfache Variante der Schätzung der Faktorladungen ist die
+	Hauptkomponenten-Methode \parencite[415-419]{Rencher.2002}. Hierbei werden die spezifischen Varianzen
+	vernachlässigt, sodass sich Gleichung \ref{fundamentaltheorem} zu
+	\begin{equation}
+		\label{HK-Vernachlässigung-von-psi}
+		\mathbf{R} = \mathbf{\Lambda} \mathbf{\Lambda}'
+	\end{equation}
+	vereinfacht.
+	Dann kann eine Eigenwertzerlegung von $\mathbf{R}$
+	wie folgt durchgeführt werden:
+	\begin{equation} \label{Eigenwertzerlegung}
+		\begin{split}
+					\mathbf{R} = \mathbf{V D V'} &= \left( \mathbf{V} \mathbf{D}^{\sfrac{1}{2}} \right) \left( \mathbf{D}^{\sfrac{1}{2}} \mathbf{V}' \right) \\
+					&= \left( \mathbf{V} \mathbf{D}^{\sfrac{1}{2}} \right) \left( \mathbf{V} \mathbf{D}^{\sfrac{1}{2}} \right)'
+		\end{split}
+	\end{equation} 
+	wobei $\mathbf{V} = \left[ v^{(1)}, \dotsc, v^{(p)} \right] \in \mathbb{R}^{p \times p}$
+	eine orthogonale Matrix mit den $p$ normierten Eigenvektoren in den Spalten und
+	$\mathbf{D} = \text{diag}(\theta_1,\dotsc,\theta_p) \in \mathbb{R}^{p
+		\times p}$ die Diagonalmatrix mit den absteigend sortierten Eigenwerten auf der
+	Hauptdiagonalen ist, das heißt $\theta_1 > \theta_2 > \dotsb > \theta_p$. Die
+	Eigenvektoren seien ebenfalls mit absteigendem zugehörigen Eigenwert
+	sortiert. Nun wählt man die $k$ größten Eigenwerte und die dazugehörigen Eigenvektoren, das
+	heißt $\mathbf{V}_k = [v^{(1)}, \dotsc, v^{(k)}]$ und $\mathbf{D}_k  = \diag(\theta_1, \dotsc, \theta_k)$, sodass
+	\begin{equation} \label{Schätzen der Faktorladungsmatrix}
+		\mathbf{\widehat{\Lambda}} = \mathbf{V}_k \mathbf{D}^{1/2}_k = \begin{pmatrix}
+			v_{1}^{(1)} \sqrt{\theta_1} & \cdots & v_{1}^{(k)} \sqrt{\theta_k} \\
+			v_{2}^{(1)} \sqrt{\theta_1}&\cdots & v_{2}^{(k)} \sqrt{\theta_k} \\
+			\vdots                                & \cdots & \vdots  \\
+			v_{p}^{(1)} \sqrt{\theta_1} & \cdots & v_{p}^{(k)} \sqrt{\theta_k} 
+		\end{pmatrix}
+	\end{equation}
+	die geschätzte Faktorladungsmatrix $\mathbf{\widehat{\Lambda}} \in \mathbb{R}^{p \times k}$ ergibt.
+	Die geschätzte Kommunalität $\hat{h}_i^2$ entspricht dann wegen Gleichung \ref{HK-Vernachlässigung-von-psi}
+	dem $i$-ten Diagonalelement der Matrix $\mathbf{\widehat{\Lambda}} \mathbf{\widehat{\Lambda}}'$,
+	was äquivalent ist zur Summe der quadrierten Ladungen über die Zeilen:
+	\begin{equation} \label{Schätzen der Kommunalitäten}
+		\hat{h}_i^2 = \sum_{j=1}^{k} \hat{\lambda}_{ij}^{\,2} \qquad \text{für} \; i=1,\dotsc,p
+	\end{equation}
+	Die spezifischen Varianzen ergeben sich gemäß Gleichung \ref{Varianzzerlegung Ergebnis} zu
+	$\hat{\psi_i} = 1 - \hat{h}_i^2$. Aus Gleichung \ref{Schätzen der Faktorladungsmatrix} ergibt sich,
+	dass die Summe der 
+	quadrierten Ladungen in Spalte $j$ dem $j$-ten Eigenwert entspricht \parencite[vgl.][418]{Rencher.2002}:
+	\begin{equation}
+		\sum_{i=1}^{p} \hat{\lambda}^2_{ij} = \theta_j
+	\end{equation}
+	
+	In Abschnitt \ref{Varianzzerlegung} haben wir gesehen, dass die Varianz einer
+	Variable in zwei Teile zerlegt werden kann. Bei der Hauptkomponenten-Methode
+	wird dies jedoch unzureichend berücksichtigt, da versucht wird die komplette
+	Varianz durch die gemeinsame Varianz der Faktoren zu erklären (Gl. \ref{HK-Vernachlässigung-von-psi}). Daraus folgt,
+	dass die Kommunaliltäten üblicherweise überschätzt werden.
+	Diese Problematik wird in der nachfolgenden Methode angegangen.
+	
+	\subsubsection{Hauptachsen-Faktorisierung} \label{HAF}
+	Die Hauptachsen-Faktorisierung (engl. \textit{principal axis factoring} (PAF)) ist in
+	der Grundidee sehr ähnlich zur Hauptkomponenten-Methode, jedoch werden hier nicht die spezifischen Varianzen vernachlässigt. Stattdessen werden im ersten
+	Schritt die spezifischen Varianzen geschätzt und die sogenannte
+	\textit{reduzierte Korrelationsmatrix} 
+	\begin{equation}
+		\label{reduzierte Korrelationsmatrix}
+		\mathbf{R}_{red} = \mathbf{R} - \widehat{\mathbf{\Psi}}
+	\end{equation}
+	berechnet. Das bedeutet, dass auf der Hauptdiagonalen
+	von $\mathbf{R}_{red}$ die geschätzten Kommunalitäten stehen. Die Ladungen
+	erhält man dann analog zur Hauptkomponenten-Methode, siehe Gleichung
+	\ref{Eigenwertzerlegung} und \ref{Schätzen der Faktorladungsmatrix}.
+	
+	Diese Vorgehensweise führt jedoch zunächst auf ein Problem, denn für die
+	Schätzung der spezifischen Varianzen, beziehungsweise der Kommunalitäten
+	(vgl. \ref{Varianzzerlegung Ergebnis}), werden die noch unbekannten Faktorladungen benötigt. Die
+	Lösung des Problems ist die Verwendung einer geeigneten initialen Schätzung der
+	Kommunalitäten. Eine gängige
+	Möglichkeit zur Schätzung der Kommunalitäten, die auch in vielen
+	Statistikprogrammen die Standardeinstellung ist \parencite[9]{Grieder.2021}, sind
+	die quadrierten multiplen Korrelationen (engl. \textit{squared multiple
+	correlations} (SMC)). Diese geben an, wie gut eine Variable durch die restlichen
+	$p - 1$ Variablen erklärt werden kann und berechnet sich hier für $i = 1, \dotsc, p$
+	durch
+	\begin{equation}
+		\text{SMC}_i = 1 - \frac{1}{ \left( \mathbf{R}^{-1} \right)_{ii} }
+	\end{equation}
+	wobei $\left( \mathbf{R}^{-1} \right)_{ii}$ das $i$-te Diagonalelement der
+	inversen Korrelationsmatrix bezeichnet \parencite[422]{Rencher.2002}.
+	Daneben gibt es noch weitere Möglichkeiten, wie zum Beispiel die maximale
+	absolute Korrelation zwischen jeweils einer und den restlichen $p - 1$
+	Variablen. 
+%	\textcite{Widaman.1985} hat jedoch gezeigt, dass die initiale Schätzung nicht
+%	unbedingt zu höheren Kommunalitäten führen muss, wenn bei der iterierten
+%	Variante dieses Verfahrens das Konvergenzkriterium stringent genug gewählt wird.
+	
+	Ein \enquote{Unschönheit} bei dieser Vorgehenweise ist jedoch die Indefinitheit der
+	reduzierten Korrelationsmatrix (Gl. \ref{reduzierte Korrelationsmatrix}).
+	Dies hat zur Folge, dass negative Eigenwerte
+	vorkommen können. Da allerdings zur Schätzung der Ladungen die Wurzel aus den
+	Eigenwerten benötigt wird (siehe \ref{Schätzen der Faktorladungsmatrix}), ergibt
+	sich, dass der $j$-te Faktor nicht extrahiert werden kann, wenn der zugehörige
+	Eigenwert negativ ist. Folglich kann auch der Anteil an erklärter Varianz pro Faktor
+	anhand der reduzierten Korrelationsmatrix nicht sinnvoll angegeben werden \parencite[6 - 8]{LorenzoSeva.2013}. 
+	
+	\subsubsection{Iterierte Hauptachsen-Faktorisierung}
+	\label{Iterierte HAF}
+	Das eben vorgestellte Verfahren  (Abschnitt \ref{HAF}) kann auch iterativ angewandt werden, indem
+	man die durch Gleichung \ref{Schätzen der Kommunalitäten} erhaltene Schätzung der Kommunalitäten
+	in die Diagonale der empirischen Korrelationsmatrix $\mathbf{R}$ einsetzt. Dann
+	wird erneut eine Eigenwertzerlegung (Gleichung \ref{Eigenwertzerlegung}) wie in Abschnitt \ref{Hauptkomponenten-Methode}
+	durchgeführt, wodurch man eine neue Schätzung der Ladungsmatrix und Kommunalitäten erhält. Dies wird
+	solange wiederholt, bis ein geeignetes Konvergenzkriterium oder eine maximale
+	Anzahl an Iterationen erreicht ist. In meiner Implementierung bricht das iterative Verfahren
+	ab, wenn sich die Summe der Kommunalitäten um nicht mehr als $1\mathrm{e}{-3}$ ändert, wie es von
+	\cite[30]{Grieder.2021} empfohlen wird.
+		
+	Unter Umständen kann es während der Iteration dazu kommen, dass eine geschätzte
+	Kommunalität einen Wert größer oder gleich eins besitzt. Dies bedeutet, dass die spezifische
+	Varianz dieser Variable null oder sogar negativ wäre. Ein solcher Fall wird als
+	\textit{Heywood Case} bezeichnet \parencite{Heywood.1931} und muss entsprechend behandelt werden.
+	Dabei gibt es allerdings keine einheitliche Vorgehensweise. Ich habe mich dafür entschieden,
+	dass der Anwender entscheiden kann, ob die Iteration fortgesetzt oder abgebrochen werden soll.
+	\newpage
+	
+	\subsection{Bestimmen der Faktorwerte}
+	\label{Faktorwerte}
+	Bisher haben wir uns hauptsächlich für die Faktorladungsmatrix interessiert, jedoch gibt es Anwendungen, in denen man wissen möchte, wie konkrete Faktorwerte $\hat{f}_s = (\hat{f}_{s1}, \dotsc,
+	\hat{f}_{sk})'$ für jede Beobachtung $s = 1, \dotsc ,n $ aussehen würden. Man fragt sich also, wie Person $s$
+	anstelle der $p$ ursprünglichen Merkmale die $k$ Faktoren bewertet hätte. Liegen nun konkrete
+	standardisierte Beobachtungen $z_{si}$ von Person $s$ für Variable $i$ vor, so lässt sich Gleichung \ref{Faktorgleichung} als
+	\begin{equation}
+		\begin{split}
+			z_{si} &= \lambda_{i1} f_{s1} + \lambda_{i2} f_{s2}+ \dotsb + \lambda_{ik} f_{sk}, \qquad s=1, \dotsc, n, \; i=1, \dotsc, p
+		\end{split} 
+	\end{equation}
+	formulieren. In Matrix-Notation lautet dies
+	\begin{equation}
+		\mathbf{Z} = \mathbf{F} \mathbf{\Lambda'}
+	\end{equation}
+	wobei $\mathbf{F}$ die $(n \times k)$-Matrix der Faktorwerte ist. Formt man diese Gleichung geschickt
+	um \parencite[vgl.][453 - 454]{Backhaus.2021}), erhält man
+	\begin{equation}
+		\mathbf{F} = \mathbf{Z}\mathbf{\Lambda} \left( \mathbf{\Lambda'\Lambda}\right)^{-1}
+	\end{equation}
+	Dieses Vorgehen ist jedoch aufgrund der Invertierung oft nicht möglich. Daher
+	benutzt man wieder Schätzmethoden, um  $\mathbf{F}$ zu erhalten.
+	Eine der gängigsten Schätzmethoden ist die \textit{Regressionsmethode} \parencite[439 - 440]{Rencher.2002}.
+	Die Faktorwerte ergeben sich dabei durch eine multivariate lineare Regression zu
+	\begin{equation}
+		\mathbf{\widehat{F}} = \mathbf{Z} \mathbf{R}^{-1} \mathbf{\widehat{\Lambda}}
+	\end{equation}
+	Die daraus resultierenden Faktorwerte sind zentriert, variieren jedoch in der Varianz
+	abhängig von der benutzten Extraktionsmethode \parencite[4]{DiStefano.2009}.
+	Wenn die Hauptkomponenten-Methode benutzt wurde, weisen die Faktorwerte
+	eine Einheitsvarianz auf.
+	Allerdings ist dieser Schätzer nicht erwartungstreu. Es kann außerdem sein, dass die Faktorwerte eine paarweise Korrelation aufweisen, auch wenn die zugrundeliegenden Faktoren unkorreliert sind. Deswegen gibt es noch weitere Schätzmethoden, die diese Probleme angehen \parencite[vgl.][4 - 5]{DiStefano.2009}.
+
+	\newpage
+	
+	\subsection{Vorgehensweise der exploratorischen Faktoranalyse}
+	\label{Vorgehensweise}
+	Möchte man die exploratorische Faktoranalyse anwenden, muss man sich an eine
+	systematische Vorgehensweise halten, um wiederholbare und konsistente Ergebnisse
+	zu erhalten. Dazu möchte ich hier in aller Kürze auf die wichtigsten Stichpunkte eingehen, um einen
+	Überblick zu verschaffen.
+	Im ersten Schritt wird dazu die Geeignetheit der Daten für die Faktoranalyse
+	untersucht. Im Anschluss wird versucht, die Faktorzahl $k$ zu wählen, um dann die entsprechenden
+	Faktoren zu extrahieren. Bevor die Faktoren jedoch interpretiert werden, rotiert
+	man sie im Falle von unkorrelierten Faktoren mit einer orthogonalen Matrix, da wir in Abschnitt
+	\ref{Unbestimmtheit_faktorlösung} gesehen haben, dass man dafür eine äquivalente
+	Lösung erhält. Diese ist je nach gewählter Rotation unter Umständen einfacher zu interpretieren.
+	Am Ende werden
+	noch die Faktorwerte geschätzt, um eventuelle weitere Untersuchungen mit den transformierten
+	Daten anzustellen. 
+	
+	\subsubsection{Geeignetheit der Daten}
+	\label{Geeignetheit}
+	Bevor die Faktoranalyse zur Anwendung kommt, sollte die Geeignetheit der Daten für
+	die Faktoranalyse überprüft werden. Dabei gibt es allerdings nicht \enquote{das} Mittel zur Feststellung
+	der Geeignetheit, sondern es muss auf mehrere Methoden zurückgegriffen werden. Beispielhaft stelle ich dafür
+	zwei Maße vor.  
+	
+	Die Korrelationsmatrix spielt bei der Geeignetheit die zentrale Rolle, da darauf basierend die Faktoren
+	extrahiert werden. Theoretisch möchte man, dass zum Beispiel bei $p=5$
+	die Korrelationsmatrix folgendermaßen aussieht (abgesehen von der Singularität):
+	\begin{equation}
+	\label{Wünschenswerte Korrelationsmatrix}
+			\begin{pmatrix}
+			1 & 1 & 0 & 0 & 0 \\
+			1 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 1 & 1 \\
+			0 & 0 & 1 & 1 & 1 \\
+			0 & 0 & 1 & 1 & 1
+		\end{pmatrix}
+	\end{equation}
+	Das bedeutet, dass eine Gruppe von Variablen, hier $X_1$ und $X_2$, eine hohe
+	Korrelation aufweist und eine andere Gruppe von Variablen, hier $X_3$ bis $X_5$,
+	ebenfalls eine hohe Korrelation aufweist. Zwischen den beiden Gruppen besteht jedoch
+	keine Korrelation. Ein $2$-Faktor-Modell würde in diesem Fall optimale Ergebnisse liefern.
+	
+%	Eine Methode zur Überprüfung der Geeignetheit ist \textit{Bartlett's Test auf Spherizität} \parencite[389 - 390]{Backhaus.2021}.
+%	Dieser testet, ob sich die Korrelationsmatrix signifikant von einer Einheitsmatrix unterscheidet, das
+%	heißt ob die Variablen korreliert sind.	
+%	
+%	Die Teststatistik lautet
+%	\begin{equation} \label{Bartlett's Sphericity}
+%		W = - \left( n - 1 - \frac{2p + 5}{6} \right) \cdot \text{ln}(|\mathbf{R}|)
+%	\end{equation}
+%	und ist unter der Nullhypothese approximativ $\chi^2$-verteilt mit $p(p - 1)/2$ Freiheitsgraden. $W$
+%	wird klein, wenn sich die Determinante der Korrelationsmatrix $|\mathbf{R}|$ einer Einheitsmatrix annähert.
+%	In diesem Fall kann die Nullhypothese nicht abgelehnt werden. Folglich sind die
+%	Daten wahrscheinlich nicht für eine Faktoranalyse geeignet. Man muss sich jedoch bewusst sein, dass
+%	der Test normalverteilte Daten voraussetzt und empfindlich auf eine Verletzung dieser Annahme reagiert.
+	
+	Ein verbreitetes Kriterium zur Überprüfung der Geeignetheit ist das \textit{Kaiser-Meyer-Olkin-Kriterium}
+	(KMO-Kriterium). Dieses berechnet sich durch
+	\begin{equation} \label{KMO-Kriterium}
+		\text{KMO} = \frac{\sum\limits_{i = 1}^{p} \sum\limits_{j=1, i \neq j}^{p} r_{X_i X_j}^2}
+		{\sum\limits_{i = 1}^{p} \sum\limits_{j=1, i \neq j}^{p} r_{X_i X_j}^2 + \sum\limits_{i = 1}^{p} \sum\limits_{j=1, i \neq j}^{p} partial\_r_{X_i X_j}^2}
+	\end{equation}
+	wobei $r_{X_i X_j}$ den Schätzer für die Korrelation und $partial\_r_{X_i X_j}$
+	die partielle Korrelation der Variablen $X_i$ und $X_j$ bezeichnet \parencite[423]{Backhaus.2021}. Der KMO-Wert wird maximal, wenn die
+	Summe der quadrierten partiellen Korrelationen null ist. Dieser Fall ist für die Faktoranalyse optimal, da
+	dann die Korrelationen der Variablen zu einem hohen Teil durch die anderen Variablen beeinflusst werden.
+	Das bedeutet, dass die Korrelation zwischen $X_i$ und $X_j$ eventuell durch einen gemeinsamen
+	Faktor erklärt werden kann.  Als Grenzwert ist $\text{KMO}=0{,}5$ interessant. In diesem Fall
+	ist die Summe der quadrierten Korrelationen und die Summe der quadrierten partiellen Korrelationen identisch.
+	Als Daumenregel hat sich daher ergeben, dass ein KMO-Wert unter 0,5 nicht für die Faktoranalyse geeignet ist.
+	
+	Eng damit verwandt ist das sogenannte \textit{Measure of Sampling Adequacy} (MSA), das
+	den in Gleichung \ref{KMO-Kriterium} gezeigten Quotienten nur für Variable $i$ bildet, das heißt die Korrelationen werden
+	nicht über alle Variablen im Datensatz aufsummiert \parencite[424]{Backhaus.2021}. Dadurch kann die Eignung jeder Variable
+	einzeln untersucht werden. Der MSA-Wert kann ebenfalls Werte zwischen null und eins annehmen. Auch hier gilt,
+	dass Variablen mit einem MSA-Wert unter $0{,}5$ nicht für die Faktoranalyse geeignet sind.	
+	\subsubsection{Wahl der Faktorzahl und Faktorextraktion}
+	\label{Faktorextraktion und Faktorzahl}
+	Hat man herausgefunden, dass die Daten für eine Faktoranalyse
+	prinzipiell geeignet sind, stellt sich nun die Frage, wie man die Faktorzahl $k$ wählen sollte.
+	Da die Faktoranalyse sensitiv gegenüber $k$ ist, das heißt die Schätzungen fallen oftmals sehr
+	unterschiedlich für $k=m$ und für $k=m+1$ aus \parencite[142]{Everitt.2011}, sollten mehrere 
+	Heuristiken zur Wahl der Faktorzahl herangezogen werden.
+	Eine Möglichkeit ist die subjektive Einschätzung anhand des \textit{Scree-Plots} (Abbildung \ref{fig:Scree-Plot} im Anwendungsbeispiel).
+	Dabei werden die Faktoren nach absteigenden Eigenwerten (y-Achse) sortiert und auf der x-Achse aufgetragen.
+	Die Intuition dabei ist, dass ab einem erkennbaren \enquote{Knick} eine weitere Hinzunahme von Faktoren
+	nicht mehr zu einer signifikanten Änderung der erklärten Varianz führt \parencite[448]{Backhaus.2021}.
+	Ebenso kann man am Scree-Plot das \textit{Kaiser-Kriterium} ablesen. Demnach sollten nur die Faktoren
+	behalten werden, die einen Eigenwert größer als eins haben \parencite[447 - 448]{Backhaus.2021}. Dies wird
+	durch die Standardisierung der Daten begründet, da in diesem Fall jede Variable eine Einheitsvarianz aufweist.
+	Ist nun der Eigenwert eines Faktors unter eins, so ist dieser nicht in der Lage, mehrere Ausgangsvariablen in sich
+	\enquote{zusammenzufassen}.
+	
+	
+	\subsubsection{Faktorrotation und -interpretation} 
+	\label{Faktorrotation und -interpretation}
+	
+	Die Interpretation der Faktoren ist höchst subjektiv und erfordert bereichsspezifisches Wissen über die Ausgangsvariablen. Erschwert wird dies
+	durch Mehrfachladungen, das heißt mehrere hohe Ladungen in einer Zeile der Ladungsmatrix. In diesem Fall kann eine Variable nicht eindeutig einem Faktor zugeordnet werden. Dabei bezeichnen wir eine Ladung als \enquote{hoch} beziehungsweise \enquote{relevant} für einen Faktor, wenn sie betraglich größer als 0,5 ist \parencite[451]{Backhaus.2021}.
+	
+	Erleichtert werden kann die Interpretation jedoch durch eine Rotation der Ladungsmatrix, da diese wie in
+	Abschnitt \ref{Unbestimmtheit_faktorlösung} besprochen eine äquivalente Lösung
+	ergibt. Dafür stehen mehrere orthogonale Rotationsmethoden zur Verfügung, die die Unkorreliertheit
+	der Faktoren erhalten. Hierbei ist die \textit{Varimax}-Rotation die Gängigste (\cite[434]{Rencher.2002}; \cite{Kaiser.1958}).
+	Diese maximiert die Varianz der quadrierten Ladungen innerhalb einer Spalte von
+	$\mathbf{\Lambda}$. Dadurch wird eine \enquote{Umverteilung} der Ladungen
+	erreicht, sodass hohe Ladungen höher und geringe Ladungen geringer werden.
+	
+	Neben den orthogonalen Rotationsmethoden gibt es noch die sogenannten \textit{oblique} Rotationsmethoden.
+	Dabei ist die Bezeichnung \enquote{Rotation} irreführend, da die Faktoren nicht mehr orthogonal zu einander stehen müssen
+	und es daher keine mathematische Rotation des Koordinatensystems darstellt.
+	Alle Rotationsmethoden haben jedoch gemein, dass sie versuchen eine \enquote{einfachere} Struktur
+	der Faktorladungsmatrix zu erhalten \parencite[vgl.][145]{Everitt.2011}. Eine einfache Struktur kennzeichnet sich
+	unter anderem dadurch, dass eine Variable nur auf einen Faktor sehr hoch lädt, das heißt jede Zeile der Ladungsmatrix
+	enthält nur eine hohe Ladung und die restlichen Ladungen sind nahe bei null.
+	
+	\newpage
+	\section{Anwendungsbeispiel}
+	\label{Anwendungsbeispiel}
+	Im Folgenden zeige ich eine exemplarische Durchführung einer Faktoranalyse auf dem Datensatz \enquote{California Housing Data (1990)}.
+	Dabei orientiere ich mich an der Vorgehensweise, die in Abschnitt \ref{Vorgehensweise} vorgestellt wurde.
+
+	Ich benutze den Originaldatensatz\footnote{Eine leicht modifizierte Version ist auf \href{https://www.kaggle.com/harrywang/housing}{Kaggle} erhältlich, bei der aus didaktischen Gründen einige Beobachtungen zufällig entfernt und ein kategorisches Merkmal eingeführt wurden. Dies sollte jedoch nicht der Fokus dieser Arbeit sein, weshalb ich den Originaldatensatz verwende.}, der das erste mal von \textcite{KelleyPace.1997} benutzt wurde und über
+	\href{https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html}{diese Website} erhältlich ist. In Tabelle \ref{tab:datensatz_head} sind die ersten fünf Beobachtungen des Datensatzes dargestellt.
+	Insgesamt gibt es 20640 Beobachtungen (Zeile) von jeweils neun metrisch skalierten Merkmalen (Spalte). Eine Beobachtung ist dabei eine sogenannte \href{https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_4}{\textit{block group}}, die wir im Folgenden vereinfachend als \enquote{Bezirk} bezeichnen.
+	Ein Bezirk in diesem Sinne ist eine Aufteilung des Volkszählungsamtes aus den USA, die zwischen 600 und 3000 Menschen umfassen.
+
+	\begin{table}[h]
+		\centering
+		\small
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{@{}ccccccccc@{}}
+				\toprule
+				longitude & latitude & housing\_median\_age & total\_rooms & total\_bedrooms & population & households & median\_income & median\_house\_value \\ \midrule
+				-122,23   & 37,88    & 41,00                & 880          & 129             & 322        & 126        & 8,33           & 452\,600,00           \\
+				-122,22   & 37,86    & 21,00                & 7\,099        & 1\,106           & 2\,401      & 1\,138      & 8,30           & 358\,500,00           \\
+				-122,24   & 37,85    & 52,00                & 1\,467        & 190             & 496        & 177        & 7,26           & 352\,100,00           \\
+				-122,25   & 37,85    & 52,00                & 1\,274        & 235             & 558        & 219        & 5,64           & 341\,300,00           \\
+				-122,25   & 37,85    & 52,00                & 1\,627        & 280             & 565        & 259        & 3,85           & 342\,200,00           \\ 
+				\vdots      & \vdots    & \vdots   			   & \vdots 	 & \vdots 			&\vdots 	& \vdots 	& \vdots  		& \vdots \\ \bottomrule
+			\end{tabular}%
+		}
+		\caption{Die Ausprägungen der Merkmale für die ersten fünf Bezirke aus dem Datensatz.}
+		\label{tab:datensatz_head}
+	\end{table}
+	Einige Bezirke im Datensatz enthalten jedoch
+	weitaus mehr Menschen (bis zu knapp 35700 Menschen) als oben beschrieben. Daher wurde eine Ausreißeranalyse
+	mittels \textit{Local Outlier Factor} durchgeführt. Dabei wurden 701 Bezirke als Ausreißer identifiziert und aus dem Datensatz entfernt. Eine detailliertere Betrachtung der Verteilung der Merkmale befindet sich im Notebook.
+	
+	\subsubsection*{Geeignetheit der Daten}
+	
+	Zunächst untersuchen wir die Geeignetheit der Daten. Dazu betrachten wir das KMO-Kriterium für alle Merkmale zusammen (Gl. \ref{KMO-Kriterium}) und die MSA-Werte für jedes Merkmal. Der KMO-Wert ist mit $0{,}65$ nicht optimal, aber über dem Schwellenwert. In Tabelle \ref{tab:MSA-Werte} sind die MSA-Werte dargestellt.
+	% Tabelle, die einige Werte zeigt.
+	\begin{table}[h]
+		\centering
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{@{}cllllllll@{}}
+				\toprule
+				longitude & latitude & housing\_median\_age & total\_rooms & total\_bedrooms & population & households & median\_income & median\_house\_value \\ \midrule
+				0,4346    & 0,4325   & 0,7372               & 0,8163       & 0,7182          & 0,8449     & 0,7390     & 0,3985        & 0,3872
+			\end{tabular}%
+		}
+		\caption{MSA-Werte für alle neun metrischen Merkmale}
+		\label{tab:MSA-Werte}
+	\end{table}
+
+	Die einzelnen MSA-Werte
+	unterschreiten bei vier Variablen den Schwellenwert von $0{,}5$. Beispielsweise könnte man nun
+	diese vier Variablen für die weitere Analyse außen vor lassen. Hier habe ich mich jedoch aufgrund
+	der relativ geringen Gesamtzahl an Variablen ($p=9$) dafür entschieden, sie nicht zu entfernen.
+	Wir können uns noch für eine genauere Betrachtung die Korrelationsmatrix direkt anschauen.
+	Abbildung \ref{fig:Korrelations-Heatmap} zeigt die empirische Korrelationsmatrix $\mathbf{R}$. Hier können
+	wir sehen, dass die Korrelationsmatrix sehr ähnliche Eigenschaften wie die eingangs in Abschnitt \ref{Geeignetheit} besprochene Matrix (Gl. \ref{Wünschenswerte Korrelationsmatrix}) aufweist.
+	
+	\begin{figure}[h]
+		\centering
+		\input{./figures/cal_housing_corr_heatmap.pgf}
+		\caption[Korrelationsmatrix als Heatmap]{An der Korrelationsmatrix kann man drei Gruppen von Merkmalen
+			feststellen, die in der Heatmap eine \enquote{Box} bilden (wenn sie richtig angeordnet sind, wie es hier der Fall ist). Innerhalb dieser Gruppen sind hohe paarweise Korrelationen und zwischen den Gruppen nur sehr geringe beobachtbar. Es fällt lediglich
+			auf, dass das Merkmal \enquote{housing\_median\_age} nur gering mit anderen Merkmalen korreliert, was sich später auch in den Faktorladungen widerspiegeln wird. Diese drei Merkmalsgruppen deuten schon auf ein 3-Faktor-Modell hin.
+		    (Eigene Darstellung)}
+		\label{fig:Korrelations-Heatmap}
+	\end{figure}
+	
+	\subsubsection*{Wahl der Faktorzahl $k$}
+	
+	Im zweiten Schritt versuchen wir die Faktorzahl $k$ mittels den in \ref{Faktorextraktion und Faktorzahl} vorgestellten Heuristiken zu wählen. Dazu extrahieren wir mit der Hauptkomponenten-Methode alle $k=p=9$ Faktoren und betrachten die Eigenwerte in einem Scree-Plot (Abbildung \ref{fig:Scree-Plot}). 
+	\begin{figure}[h]
+		\centering
+		\input{./figures/california_housing_scree_plot.pgf}
+		\caption[Scree-Plot]{Die Faktoren (x-Achse) sind mit absteigendem
+			zugehörigen Eigenwert (y-Achse) sortiert. Die grüne Linie kennzeichnet das Kaiser-Kriterium.
+			Nach diesem sollten alle Faktoren mit einem Eigenwert größer eins behalten werden. Der \enquote{Knick}
+			ist nicht stark ausgeprägt, aber bei $k=5$ erkennbar. (Eigene Darstellung)}
+		\label{fig:Scree-Plot}
+	\end{figure}
+	Nach dem Kaiser-Kriterium sollten wir ein 3-Faktor-Modell
+	wählen, da ab dem vierten Faktor der Eigenwert unter eins fällt. Der Eigenwert des vierten Faktors ist jedoch nur minimal unter eins, weshalb dieser auch nicht direkt ausgeschlossen werden sollte. 
+	
+	Die Eigenwerte sind ab dem fünften Faktor sehr klein und nehmen auch nicht mehr stark ab, weshalb der \enquote{Knick}  bei $k=5$ zu erkennen sein könnte. Deshalb wäre auch ein
+	5-Faktor-Modell nach dieser Methode nicht auszuschließen.
+	
+	\subsubsection*{Faktorextraktion}
+	
+	Wir extrahieren nun die Faktoren mit $k \in \{3, 4, 5\}$ und vergleichen die drei vorgestellten Extraktionsmethoden.
+	Ein Vergleich der Faktorladungsmatrizen zeigt, dass ein 3-Faktor-Modell am sinnvollsten erscheint. Dies sieht man daran, dass
+	die Ladungen des vierten
+	und fünften Faktors sehr gering ausfallen und daher wohl drei Faktoren ausreichend sind. Nun können wir noch die drei
+	vorgestellten Extraktionsmethoden miteinander vergleichen.
+	Abbildung \ref{fig:ladungsmatrix-drei-faktoren} zeigt das Ergebnis der unterschiedlichen
+	Methoden bei einem 3-Faktor-Modell. 
+	\begin{figure}[h]
+		\centering
+		\input{./figures/cal_housing_loadings_with_3_factors.pgf}
+		\caption[Faktorladungsmatrizen mit drei Faktoren]{Hier sieht man die Ladungsmatrizen eines 3-Faktor-Modells mit der Hauptkomponenten-Methode (PC), sowie der nicht-iterierten 
+		und iterierten Hauptachsen-Faktorisierung (PAF). Die drei Methoden liefern auf diesem Datensatz sehr ähnliche
+		Ergebnisse. Die Ladungen der Hauptkomponenten-Methode fallen jedoch etwas \enquote{extremer} aus und der zweite Faktor dieser Methode besitzt ein umgedrehtes
+		Vorzeichen. (Eigene Darstellung, angelehnt an dieses \href{https://scikit-learn.org/stable/auto_examples/decomposition/plot_varimax_fa.html\#sphx-glr-auto-examples-decomposition-plot-varimax-fa-py}{Sklearn-FA-Beispiel})}
+		\label{fig:ladungsmatrix-drei-faktoren}
+	\end{figure} 
+	Bei beiden Hauptachsen-Faktorisierungen wurden quadrierte multiple Korrelationen
+	als initiale Schätzung der Kommunalitäten benutzt.
+	Betrachtet man nochmals die Korrelationsmatrix in Abbildung \ref{fig:Korrelations-Heatmap},
+	so erkennt man die Merkmalsgruppen in der Faktorladungsmatrix wieder.
+	
+	Wir können sehen, dass die drei Methoden auf diesem Datensatz bis auf kleine Abweichungen sehr ähnliche Ergebnisse liefern.
+	In Abbildung \ref{fig:Residualmatrizen} sind die absoluten Abweichungen zwischen der reproduzierten und empirischen Korrelationsmatrix dargestellt. Hier fällt auf, dass die iterierte Hauptachsen-Faktorisierung deutlich besser abschneidet als die Hauptkomponenten-Methode.
+	\begin{figure}[h]
+		\input{./figures/cal_housing_residual_mtx.pgf}
+		\caption[(Absolute) Residualmatrizen als Heatmap]{Hier sieht man die absoluten Abweichungen zwischen der empirischen und der reproduzierten Korrelationsmatrix bei zwei verschiedenen Methoden. Vor allem die Korrelationen zwischen Merkmal 3 (\textit{housing\_median\_age}) und
+			den restlichen Merkmalen können nicht gut reproduziert werden. Die Abweichungen sind bei der iterierten Hauptachsen-Faktorisierung
+			jedoch im Durchschnitt geringer. Diese Extraktionsmethode kann die empirische Korrelationsmatrix also besser reproduzieren.
+			(Eigene Darstellung)}
+		\label{fig:Residualmatrizen}
+	\end{figure}
+	Dies spiegelt sich im \textit{root mean squared error} (RMSE) \footnote{Der RMSE wird hier nur über die nicht-diagonalen Elemente der oberen Dreiecksmatrix von  $\mathbf{E} = \mathbf{R} - \widehat{\mathbf{R}}$ berechnet. Der Grund dafür ist, dass die Residualmatrix $\mathbf{E}$ symmetrisch ist und die Elemente auf der Hauptdiagonalen wegen Gleichung \ref{Varianzzerlegung Ergebnis} immer null sind.} wider, der bei der Hauptkomponenten-Methode mit $0{,}0545$ gegenüber der iterierten Hauptachsen-Faktorisierung mit $0{,}0364$ deutlich höher ausfällt. 
+	Die iterierte und nicht-iterierte Hauptachsen-Faktorisierung sind jedoch fast identisch. Des Weiteren fällt auf, dass gerade das Merkmal \enquote{housing\_median\_age} mit den
+	niedrigen paarweisen Korrelationen (vgl. Abbildung \ref{fig:Korrelations-Heatmap}) Probleme macht.
+	Genau dieses Merkmal hat mit $0{,}8980$ auch eine sehr hohe spezifische Varianz. Das bedeutet,
+	dass nur circa $10$\% der
+	Varianz des Merkmals gemeinsam durch die Faktoren erklärt werden kann. Da das 3-Faktor-Modell der iterierten Hauptachsen-Faktorisierung ohne diesem Merkmal bei sonst gleichen Verhältnissen einen um circa $44\%$ reduzierten RMSE
+	aufweist, werden wir dieses Merkmal für die weitere Analyse entfernen.
+	%\VerbatimInput[frame=single,label=Output der \textit{print\_summary}-Methode,samepage=true, fontsize=\footnotesize, framesep=3.5mm]{./figures/cal_housing_summary_3factor_paf.txt}
+	
+	\subsubsection*{Faktorrotation und -interpretation}
+	
+	Nun können wir durch eine Faktorrotation versuchen, eine einfachere Struktur in der Ladungsmatrix zu erhalten. Da die Faktorextraktion
+	auf diesem Datensatz schon eine Ladungsmatrix mit einer simplen Struktur ergibt, werden wir wahrscheinlich keine größeren Unterschiede feststellen.
+	Tabelle \ref{tab:rotierte-unrotierte-Ladungen} zeigt die unrotierte Ladungsmatrix im Vergleich zur rotierten Ladungsmatrix
+	der iterierten Hauptachsen-Faktorisierung.
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{@{}lrrr c rrr@{}}
+			\toprule
+			& \multicolumn{3}{c}{Unrotiert} && \multicolumn{3}{c}{Varimax-Rotation} \\
+			\cmidrule(lr){2-4} \cmidrule(lr){6-8}
+			Merkmale & $f_1$ & $f_2$ & $f_3$ && $f_1$ & $f_2$ & $f_3$ \\ \midrule
+			longitude & 0,13     & \textbf{-0,93}    & -0,20   && 0,03   & \textbf{0,96}       & -0,05      \\ \addlinespace[1.3pt]
+			latitude  & -0,15    & \textbf{0,97}     & 0,05    && -0,04      & \textbf{-0,97}      & -0,11      \\ \addlinespace[1.3pt]
+			total\_rooms         & \textbf{0,93}     & 0,09     & 0,15    &&\textbf{ 0,93}       & -0,01      & 0,19       \\ \addlinespace[1.3pt]
+			total\_bedrooms         & \textbf{0,97}     & 0,09     & -0,07   && \textbf{0,98}       & 0,02       & -0,02      \\ \addlinespace[1.3pt]
+			population          & \textbf{0,90}     & 0,02     & -0,12   && \textbf{0,90}       & 0,09       & -0,07      \\ \addlinespace[1.3pt]
+			households         & \textbf{0,99}     & 0,09     & -0,05   && \textbf{0,99}       & 0,02       & -0,00      \\ \addlinespace[1.3pt]
+			median\_income        & 0,06     & -0,14    & \textbf{0,84}    && 0,01       & 0,01       & \textbf{0,85}       \\ \addlinespace[1.3pt]
+			median\_house\_value          & 0,08     & -0,15    & \textbf{0,79}    && 0,03       & 0,03       & \textbf{0,81}       \\ \bottomrule
+		\end{tabular}
+		\caption{Unrotierte und mittels Varimax rotierte Faktorladungsmatrix}
+		\label{tab:rotierte-unrotierte-Ladungen}
+	\end{table}
+	Man kann sehen, dass die geringeren Ladungen besser auf die höheren Ladungen in einer Spalte \enquote{verteilt} wurden. Dies erkennt man zum Beispiel in den letzten beiden Merkmalen: Auf der rechten Seite (rotiert) sind die Ladungen der ersten beiden Faktoren nahe bei null, während es bei der unrotierten Variante beim zweiten Faktor immerhin $-0{,}14$ und $-0{,}15$ sind.
+	
+	\newpage
+	Müssten wir die Faktoren interpretieren, könnte man sagen, dass
+	\begin{itemize}
+		\item der erste Faktor die Größe des Bezirks widerspiegelt,
+	    \item der zweite Faktor den Standort des Bezirks berücksichtigt und
+		\item der dritte Faktor den Wohlstand im Bezirk bezeichnet.
+	\end{itemize}
+
+	\subsubsection*{Faktorwerte bestimmen} Im letzten Schritt können noch die Faktorwerte für eine weiterführende Analyse bestimmt werden. In der Tabelle \ref{tab:Faktorwerte} sind die geschätzten Faktorwerte für die ersten fünf Bezirke aufgelistet.
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{@{}ccc@{}}
+			\toprule
+			\textbf{Größe} & \textbf{Standort} & \textbf{Wohlstand} \\ \midrule
+			-1,18          & 0,77              & 2,26               \\
+			-0,97          & 0,82              & 1,75               \\
+			-0,92          & 0,90              & 1,22               \\
+			-0,83          & 0,97              & 0,82               \\
+			-1,06          & 0,95              & 0,55               \\ 
+			\vdots & \vdots & \vdots \\ \bottomrule
+		\end{tabular}
+		\caption{Die mittels der Regressionsmethode geschätzten Faktorwerte für das 3-Faktor-Modell der iterierten Hauptachsen-Faktorisierung (nur die ersten fünf Bezirke).}
+		\label{tab:Faktorwerte}
+	\end{table}
+    Hätte also der erste Bezirk in diesem Datensatz nicht die neun Merkmale bewertet, sondern stattdessen je einen Wert für die drei Faktoren angegeben, so würde die Größe des Bezirks unterdurchschnittlich bewertet werden. Standort und Wohlstand würden überdurchschnittlich bewertet werden, wobei der Standort mit
+	$2{,}26$ deutlich über dem Durchschnitt liegt. Um ein Gefühl für die durchschnittliche Bewertung eines Faktors
+	zu bekommen, könnte man die Mittelwerte der einzelnen Merkmale betrachten.
+	
+	
+	\newpage
+	\section{Schluss}
+	
+	Wir haben also gesehen, dass das Modell der Faktoranalyse darin besteht, die beobachteten
+	Variablen durch eine Linearkombination von unbeobachteten Faktoren auszudrücken. Jedoch wird angenommen, dass die Variablen nicht
+	perfekt durch die Faktoren erklärt werden können, weshalb man einen additiven Fehlerterm einführt.
+	Dies führt dazu, dass sich die Varianz einer Variable in zwei Teile zerlegen lässt. Ein Teil der Varianz, die sogenannte Kommunalität,
+	kann gemeinsam durch die Faktoren erklärt werden. Der andere Teil ist
+	spezifisch für jede Variable, lässt sich also nicht durch die Faktoren erklären. Diesen Teil haben wir spezifische
+	Varianz genannt. Betrachtet man nicht nur eine Variable, sondern den Vektor $Z$ der Variablen, so
+	erhält man das Fundamentaltheorem der Faktoranalyse. Dies sagt aus, dass sich die Kovarianzmatrix,
+	beziehungsweise die Korrelationsmatrix im Falle von standardisierten Variablen, durch die Faktorladungsmatrix $\mathbf{\Lambda}$
+	und der Matrix mit den spezifischen Varianzen $\mathbf{\Psi}$ reproduzieren lässt. Da üblicherweise nicht alle $k = p$ Faktoren
+	extrahiert werden, wird die empirische Korrelationsmatrix lediglich approximiert. 
+	Bei den hier vorgestellten Faktorextraktionsmethoden
+	wie der Hauptachsen-Faktorisierung versucht man dann, diesen Approximationsfehler möglichst klein zu halten.
+	
+	Dabei bringt das Verfahren jedoch einige Schwierigkeiten mit sich, worüber sich der Anwender bewusst sein muss.
+	Oftmals gibt es kein hierbei kein \enquote{Richtig} oder \enquote{Falsch}, sondern es muss anhand mehrerer Kriterien
+	Abhilfe geschaffen werden, um begründete Entscheidungen zu treffen. Nicht zuletzt aufgrund der vielen unterschiedlichen Extraktionsmethoden, der Unbestimmtheit einer Faktorlösung und der subjektiven Wahl der Faktorzahl $k$
+	könnte man meinen, dass der Anwender genau das, was er vermitteln will, auch immer mit einer geeigneten
+	Faktorrotation erreichen kann. Nichtsdestotrotz ist die Faktoranalyse ein in vielen Anwendungsbereichen wie zum Beispiel im Marketing, in der Psychologie oder Medizin angewendetes Verfahren \parencite[415]{Backhaus.2021}, um Redundanz im Datensatz zu reduzieren und zugrundeliegende Faktoren zu untersuchen. Dabei
+	muss eine systematische Vorgehensweise eingehalten werden, die hier in Grundzügen näher gebracht werden sollte. Versucht man,
+	eine Faktoranalyse auf nicht passende Daten anzuwenden, das heißt einige der Modellannahmen sind verletzt, so
+	äußert sich dies zum Beispiel durch eine fehlende Interpretierbarkeit der Faktoren oder das Auftreten von \textit{Heywood Cases}, was wir in \ref{Iterierte HAF} kurz besprochen haben. Man muss sich außerdem bewusst sein, dass Korrelation keine Kausalität begründet. Hat man daher scheinbar sinnvolle Faktoren gefunden, so ist die tatsächliche Existenz
+	dieser Faktoren dahingestellt.
+
+	\newpage
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Abbildungsverzeichnis
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\pagestyle{plain}
+	\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+	\listoffigures
+	
+	
+	
+	
+	
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Literaturverzeichnis
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\newpage
+	
+	% Wird das Literaturverzeichnis nicht angezeigt, muss in den Optionen -
+	%TeXstudio konfigurieren - Erzeugen - Standard Bibliographieprogramm auf "Biber"
+	%umgestellt werden.
+	\printbibliography[heading=bibintoc,title={Literaturverzeichnis}]
+	\pagestyle{plain}
+	
+	\newpage
+	
+	\section*{Erklärung}
+	
+	Ich versichere wahrheitsgemäß, die Arbeit selbstständig verfasst, alle benutzten
+	Hilfsmittel vollständig und genau angegeben und alles kenntlich gemacht zu
+	haben, was aus Arbeiten anderer unverändert oder mit Abänderungen entnommen
+	wurde sowie die Satzung des KIT zur Sicherung guter wissenschaftlicher Praxis in
+	der jeweils gültigen Fassung beachtet zu haben.
+	
+	\vspace{3cm}
+	
+	\hspace{0.5cm} Karlsruhe, den \today
+	
+	
+	
+\end{document}
