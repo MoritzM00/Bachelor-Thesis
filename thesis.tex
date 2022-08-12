@@ -1,6 +1,8 @@
 \documentclass[11pt]{scrartcl}
 
 \usepackage[ngerman]{babel}
+
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
 \usepackage[a4paper, left=2cm, right=2cm, top=3cm, bottom=3cm]{geometry}
@@ -11,6 +13,9 @@
 \usepackage[backend=biber, style=authoryear]{biblatex}
 \setlength\bibitemsep{1.5\itemsep}
 
+% ---------------------------------
+%     Packages      
+% ---------------------------------
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
@@ -33,19 +38,25 @@
 	colorlinks=true,
 	linkcolor=blue,
 	citecolor=black,
-	pdftitle={Faktoranalyse}
+	pdftitle={Bachelorarbeit}
 }
 
 \graphicspath{ {./figures/} }
+\DeclareGraphicsExtensions{.png,.jpg,.svg}
 
 
 % Link zur .bib-Datei, die die Literatureintraege enthaelt
 \addbibresource{literatur.bib}
 
+% section number before equation number
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inhalt der Titelseite
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	Information about the thesis
+%----------------------------------------------------------------------------------------
+
 % Hinweis: \vspace-Befehl darf nicht geändert werden, da sonst das Titelblatt
 %die Formatierung verliert!
 \vspace{5cm}
@@ -61,25 +72,38 @@
 \publishers{Betreut von Fabian Kächele \vspace{4cm}}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% KIT Logo
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% KIT Logo
 \titlehead{
 	\begin{minipage}{7.2cm}
 		\vspace{-2cm}
 		\hspace{10cm}
 		\includegraphics[scale=0.085]{logos/kit_logo}
 	\end{minipage}
-}%
+}
 
-% some mathmatical abbreviations
+%----------------------------------------------------------------------------------------
+%	Math commands
+%----------------------------------------------------------------------------------------
+
+% TODO: put this into a .sty file
 \newcommand{\empCov}{\widehat{\mathbf{\Sigma}}} % empirical covariance matrix
 
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\Var}{Var}
 
+\includeonly{
+	chapters/abstract,
+	chapters/introduction,
+	chapters/overview,
+	chapters/comparison,
+	chapters/conclusion,
+	appendices/appendix
+}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here, main documents begins %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 	
 	% Header einfügen:
@@ -87,23 +111,19 @@
 	\singlespacing
 	
 	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Titelseite
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%----------------------------------------------------------------------------------------
+	%	TITLE PAGE
+	%----------------------------------------------------------------------------------------
 	\maketitle
 
 	% Damit keine Seitenzahl angezeigt wird:
 	\thispagestyle{empty}
 	\onehalfspacing
 	
-	
-	
-	
-	
-	
-	
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inhaltsverzeichnis
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+	%----------------------------------------------------------------------------------------
+	%	LIST OF CONTENTS
+	%----------------------------------------------------------------------------------------
 	
 	\newpage
 	\pagestyle{plain}
@@ -113,17 +133,15 @@
 	
 	
 	
+	%----------------------------------------------------------------------------------------
+	%	ABBREVIATIONS
+	%----------------------------------------------------------------------------------------
 	
+	% TODO	
 	
-	
-	
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inhalt
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%
-	% Hinweis: Ein Kapitel muss mit \newpage beendet werden, um einen Seitenumbruch
-	%zu bewirken.
-	%
+	%----------------------------------------------------------------------------------------
+	%	THESIS CONTENT - CHAPTERS
+	%----------------------------------------------------------------------------------------
 	
 	\newpage
 	\pagenumbering{arabic}
@@ -131,8 +149,16 @@
 	
 	
 	
+	\include{chapters/introduction}
+	\include{chapters/overview}
+	\include{chapters/comparison}
+	\include{chapters/conclusion}
 	
 	
+	
+	%----------------------------------------------------------------------------------------
+	%	THESIS CONTENT - APPENDICES
+	%----------------------------------------------------------------------------------------
 	
 	
 	
@@ -149,8 +175,9 @@
 	
 	
 	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Literaturverzeichnis
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%----------------------------------------------------------------------------------------
+	%	BIBLIOGRAPHY
+	%----------------------------------------------------------------------------------------
 	
 	\newpage
 	
@@ -161,6 +188,11 @@
 	\pagestyle{plain}
 	
 	\newpage
+	
+	
+	%----------------------------------------------------------------------------------------
+	%	DECLARATION PAGE
+	%----------------------------------------------------------------------------------------
 	
 	\section*{Erklärung}
 	
