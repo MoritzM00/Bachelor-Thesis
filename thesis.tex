@@ -1,8 +1,6 @@
 \documentclass[11pt]{scrartcl}
 
 \usepackage[ngerman]{babel}
-
-\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
 \usepackage[a4paper, left=2cm, right=2cm, top=3cm, bottom=3cm]{geometry}
@@ -16,6 +14,7 @@
 % ---------------------------------
 %     Packages      
 % ---------------------------------
+
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
@@ -26,6 +25,7 @@
 \usepackage{fancyvrb}
 \usepackage{booktabs}
 \usepackage[section]{placeins}
+\usepackage{breakcites}
 
 \usepackage{xfrac}
 
@@ -51,6 +51,11 @@
 % section number before equation number
 \renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
 
+
+%----------------------------------------------------------------------------------------
+%	Math Commands (Shortcuts)
+%----------------------------------------------------------------------------------------
+\input{math_commands.tex}
 
 
 %----------------------------------------------------------------------------------------
@@ -85,12 +90,6 @@
 %	Math commands
 %----------------------------------------------------------------------------------------
 
-% TODO: put this into a .sty file
-\newcommand{\empCov}{\widehat{\mathbf{\Sigma}}} % empirical covariance matrix
-
-\DeclareMathOperator{\diag}{diag}
-\DeclareMathOperator{\Cov}{Cov}
-\DeclareMathOperator{\Var}{Var}
 
 \includeonly{
 	chapters/abstract,
@@ -168,6 +167,9 @@
 	\pagestyle{plain}
 	\addcontentsline{toc}{section}{Abbildungsverzeichnis}
 	\listoffigures
+	
+	\addcontentsline{toc}{section}{Tabellenverzeichnis}
+	\listoftables
 	
 	
 	

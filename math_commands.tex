@@ -1,0 +1,78 @@
+%----------------------------------------------------------------------------------------
+%	Math commands
+%----------------------------------------------------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Highlight a newly defined term
+\newcommand{\newterm}[1]{{\bf #1}}
+
+% Mark sections of captions for referring to divisions of figures
+\newcommand{\figleft}{{\em (Left)}}
+\newcommand{\figcenter}{{\em (Center)}}
+\newcommand{\figright}{{\em (Right)}}
+\newcommand{\figtop}{{\em (Top)}}
+\newcommand{\figbottom}{{\em (Bottom)}}
+\newcommand{\captiona}{{\em (a)}}
+\newcommand{\captionb}{{\em (b)}}
+\newcommand{\captionc}{{\em (c)}}
+\newcommand{\captiond}{{\em (d)}}
+
+% references ----------
+
+% Figure reference
+\def\figref#1{Abbildung~\ref{#1}}
+
+% Section reference
+\def\secref#1{Abschnitt~\ref{#1}}
+
+\def\subsecref#1{Unterabschnitt~\ref{#1}}
+
+\def\chapref#1{Kapitel~\ref{#1}}
+
+% Reference to two sections.
+\def\twosecrefs#1#2{Abschnitte \ref{#1} und \ref{#2}}
+% Reference to three sections.
+\def\secrefs#1#2#3{Abschnitte \ref{#1}, \ref{#2} und \ref{#3}}
+% Reference to an equation
+\def\eqref#1{Gleichung~\ref{#1}}
+% A raw reference to an equation---avoid using if possible
+\def\plaineqref#1{\ref{#1}}
+
+% Reference to a range of chapters
+\def\rangechapref#1#2{Kapitel \ref{#1}--\ref{#2}}
+
+% Reference to an algorithm, upper case.
+\def\Algref#1{Algorithmus~\ref{#1}}
+\def\twoalgref#1#2{Algorithmen \ref{#1} und \ref{#2}}
+
+% ------------
+
+
+
+% Common matrices
+
+
+
+% Math operators ----------
+
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+
+\newcommand{\estWide}[1]{\widehat{#1}}
+\newcommand{\estNormal}[1]{\hat{#1}}
+
+\newcommand{\empCov}{\estWide{\mat{\Sigma}}}
+
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Exp}{\mathbb{E}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
