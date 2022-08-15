@@ -97,11 +97,16 @@
 % Userful command for partially translating the document (for bug-fixing e.g.)
 \includeonly{
 titlepage,
-%chapters/abstract,
-chapters/content,  %feel free to introduce additional files for structuring your thesis
-chapters/affidavit,
+chapters/abstract,
+chapters/introduction, 
+chapters/overview,
+chapters/comparison,
+chapters/conclusion,
+appendices/affidavit,
 appendices/appendix
 }
+
+\input{math_commands.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Here, main documents begins %%
@@ -136,7 +141,10 @@ appendices/appendix
 %% -----------------
 \mainmatter
 \pagenumbering{arabic}
-\include{chapters/content}
+\include{chapters/introduction}
+\include{chapters/overview}
+\include{chapters/comparison}
+\include{chapters/conclusion}
 
 
 \backmatter

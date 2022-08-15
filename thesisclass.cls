@@ -25,7 +25,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc} % Input in ISO 8859-1 (Latin1)
 
-\usepackage{ae}               % Almost european, virtual T1-Font
+%\usepackage{ae}               % Almost european, virtual T1-Font
 \usepackage[pdftex]{graphicx}
 \usepackage{vmargin}          % Adjust margins in a simple way
 \usepackage{fancyhdr}         % Define simple headings
@@ -211,7 +211,7 @@
 %% |  Style of appendix numbering   |
 %% ----------------------------------
  \renewcommand\appendix{\par 
-   \setcounter{section}{0}% 
+   \setcounter{section}{0}%    
    \setcounter{subsection}{0}% 
    \setcounter{figure}{0}%
    \renewcommand\thesection{\Alph{section}}% 
