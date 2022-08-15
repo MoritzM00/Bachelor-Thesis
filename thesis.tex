@@ -26,7 +26,7 @@
 \usepackage{booktabs}
 \usepackage[section]{placeins}
 \usepackage{breakcites}
-
+\usepackage{longtable}
 \usepackage{xfrac}
 
 \usepackage{enumitem}
@@ -35,9 +35,8 @@
 \usepackage{pgfplots}
 \usepackage{pgf}
 \hypersetup{
-	colorlinks=true,
-	linkcolor=blue,
-	citecolor=black,
+	colorlinks=false,
+	raiselinks=true,
 	pdftitle={Bachelorarbeit}
 }
 
@@ -121,7 +120,7 @@
 	
 		
 	%----------------------------------------------------------------------------------------
-	%	TABLE OF CONTENTS
+	%	TABLE OF CONTENTS/FIGURES/TABLES
 	%----------------------------------------------------------------------------------------
 	
 	\newpage
@@ -131,12 +130,25 @@
 	{\hypersetup{hidelinks} \tableofcontents}
 	
 	
+	\newpage
+	\addcontentsline{toc}{section}{Tabellenverzeichnis}
+	\listoftables
+	
+	\newpage
+	\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+	\listoffigures
+	
+	\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+	
 	
 	%----------------------------------------------------------------------------------------
-	%	ABBREVIATIONS
+	%	ABBREVIATIONS AND SYMBOLS
 	%----------------------------------------------------------------------------------------
+	\newpage
+	\section*{Abkürzungsverzeichnis}
 	
-	% TODO	
+	\newpage
+	\section*{Symbolverzeichnis}
 	
 	%----------------------------------------------------------------------------------------
 	%	THESIS CONTENT - CHAPTERS
@@ -168,11 +180,6 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	\pagestyle{plain}
-	\addcontentsline{toc}{section}{Abbildungsverzeichnis}
-	\listoffigures
-	
-	\addcontentsline{toc}{section}{Tabellenverzeichnis}
-	\listoftables
 	
 	
 	
