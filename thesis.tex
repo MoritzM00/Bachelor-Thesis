@@ -1,222 +1,163 @@
-\documentclass[11pt]{scrartcl}
+\documentclass{thesisclass}
+
+%% -------------------------------
+%% |    ISSD Thesis Template       |
+%% -------------------------------
+%% Further additions by:
+%%   Philipp Stroehle, IM, 2013 
+%%   Jasper Feine, ISSD, 2018
+%%   Merlin Knaeble, ISSD, 2020 
+%% firstname.lastname "at" kit.edu
+
+%% Notes:
+%% Language switch after \begin{document}
+
+% Based on thesisclass.cls of Timo Rohrberg, 2009
+% ----------------------------------------------------------------
+% Thesis - Main document
+% ----------------------------------------------------------------
 
 \usepackage[ngerman]{babel}
-\usepackage[utf8]{inputenc}
-
-\usepackage[a4paper, left=2cm, right=2cm, top=3cm, bottom=3cm]{geometry}
-\usepackage{setspace}
-\setlength{\parskip}{8pt}
-\setlength{\parindent}{0pt}
-
-\usepackage[backend=biber, style=authoryear]{biblatex}
-\setlength\bibitemsep{1.5\itemsep}
-
-% ---------------------------------
-%     Packages      
-% ---------------------------------
-
-\usepackage{graphicx}
-\usepackage{fancyhdr}
-\usepackage{hyperref}
-\usepackage{mathtools}
-\usepackage{amsfonts}
 \usepackage{csquotes}
 
-\usepackage{fancyvrb}
+%% ---------------------------------
+%% |      Additional packages      |
+%% ---------------------------------
+%% 
+
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pgf,.pdf,.png,.jpg}
+\graphicspath{{./figures/}} %Use curly braces for each path to add and don't forget trailing slash '/'
+% \usepackage{epstopdf} %Nice to automatically convert eps figures to pdf format  (from inkscape, etc)
+\usepackage[style=authoryear, backend=biber, natbib=true, hyperref=true, uniquelist=true]{biblatex}
+\addbibresource{thesis.bib}
 \usepackage{booktabs}
-\usepackage[section]{placeins}
-\usepackage{breakcites}
-\usepackage{longtable}
-\usepackage{xfrac}
 
-\usepackage{enumitem}
-\usepackage{url}
+%% ---------------------------------
+%% | Needed for the List of Abbreviations |
+%% ---------------------------------
+\usepackage{nomencl}
+\renewcommand{\nomname}{Abkürzungsverzeichnis}
+\setlength{\nomlabelwidth}{.40\hsize}
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+\setlength{\nomitemsep}{-\parsep}
+\makenomenclature
+\usepackage[normalem]{ulem}
+\newcommand{\markup}[1]{\uline{#1}}
 
-\usepackage{pgfplots}
-\usepackage{pgf}
+
+
+
+%% ---------------------------------
+%% | Information about the thesis  |
+%% ---------------------------------
+
+% uncomment one of the following, according to your thesis
+\newcommand{\mytype}{Bachelorarbeit} 
+%\newcommand{\mytype}{Master's Thesis}
+%\newcommand{\mytype}{Seminar Thesis}
+
+\newcommand{\myname}{Moritz Mistol}
+\newcommand{\matricle}{2281987}
+\newcommand{\mytitle}{Dimensionsreduktion}
+\newcommand{\mytitleger}{Ein Vergleich von traditionellen und modernen Dimensionsreduktionsmethoden}
+\newcommand{\myinstitute}{Institut für Operations Research (IOR)}
+
+
+\newcommand{\reviewerone}{Prof. Dr. Oliver Grothe}
+\newcommand{\advisor}{Fabian Kächele}
+
+\newcommand{\submissiontime}{DD.MM.20XX}
+
+%% -------------------------------
+%% |  Information for PDF file   |
+%% -------------------------------
 \hypersetup{
-	colorlinks=false,
-	raiselinks=true,
-	pdftitle={Bachelorarbeit}
+ pdfauthor={\myname},
+ pdftitle={\mytitle},
+ pdfsubject={\mytype},
+ pdfkeywords={\mytype}
 }
 
-\graphicspath{ {./figures/} }
-\DeclareGraphicsExtensions{.png,.jpg,.svg}
+
+%% --------------------------------
+%% | Settings for word separation |
+%% --------------------------------
+% Describe separation hints here:
+%\hyphenation{
+%opos-sum
+%he-lio-trope
+%}
 
 
-% Link zur .bib-Datei, die die Literatureintraege enthaelt
-\addbibresource{literatur.bib}
-
-% section number before equation number
-\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
-
-
-%----------------------------------------------------------------------------------------
-%	Math Commands (Shortcuts)
-%----------------------------------------------------------------------------------------
-\input{math_commands.tex}
-
-
-%----------------------------------------------------------------------------------------
-%	Information about the thesis
-%----------------------------------------------------------------------------------------
-
-% Hinweis: \vspace-Befehl darf nicht geändert werden, da sonst das Titelblatt
-%die Formatierung verliert!
-\vspace{5cm}
-\dedication{\vspace{-19cm} Fakultät für Wirtschaftswissenschaften \\Institut für
-	Operations Research\\Lehrstuhl Analytics and Statistics\\ Prof. Dr. Oliver
-	Grothe}
-\title{\vspace{6cm} Faktoranalyse}
-\subtitle{Seminararbeit \vspace{2cm}}
-\vspace{5cm}
-\author{Moritz Mistol\\ Matrikelnr.: 2281987 \vspace{0.5cm}}
-\date{{\today}\vspace{1cm}}
-
-\publishers{Betreut von Fabian Kächele \vspace{4cm}}
-
-
-% KIT Logo
-\titlehead{
-	\begin{minipage}{7.2cm}
-		\vspace{-2cm}
-		\hspace{10cm}
-		\includegraphics[scale=0.085]{logos/kit_logo}
-	\end{minipage}
-}
-
-%----------------------------------------------------------------------------------------
-%	Math commands
-%----------------------------------------------------------------------------------------
-
-
+%% ------------------------
+%% |    Including files   |
+%% ------------------------
+% Only files listed here will be included!
+% Userful command for partially translating the document (for bug-fixing e.g.)
 \includeonly{
-	chapters/abstract,
-	chapters/introduction,
-	chapters/overview,
-	chapters/comparison,
-	chapters/conclusion,
-	appendices/appendix
+titlepage,
+%chapters/abstract,
+chapters/content,  %feel free to introduce additional files for structuring your thesis
+chapters/affidavit,
+appendices/appendix
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Here, main documents begins %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-	
-	% Header einfügen:
-	\pagestyle{fancy}
-	\singlespacing
-	
-	
-	%----------------------------------------------------------------------------------------
-	%	TITLE PAGE
-	%----------------------------------------------------------------------------------------
-	\maketitle
 
-	% Damit keine Seitenzahl angezeigt wird:
-	\thispagestyle{empty}
-	\onehalfspacing
-	
-		
-	%----------------------------------------------------------------------------------------
-	%	TABLE OF CONTENTS/FIGURES/TABLES
-	%----------------------------------------------------------------------------------------
-	
-	\newpage
-	\pagestyle{plain}
-	% Römische Seitenzahl:
-	\pagenumbering{roman}
-	{\hypersetup{hidelinks} \tableofcontents}
-	
-	
-	\newpage
-	\addcontentsline{toc}{section}{Tabellenverzeichnis}
-	\listoftables
-	
-	\newpage
-	\addcontentsline{toc}{section}{Abbildungsverzeichnis}
-	\listoffigures
-	
-	\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
-	
-	
-	%----------------------------------------------------------------------------------------
-	%	ABBREVIATIONS AND SYMBOLS
-	%----------------------------------------------------------------------------------------
-	\newpage
-	\section*{Abkürzungsverzeichnis}
-	
-	\newpage
-	\section*{Symbolverzeichnis}
-	
-	%----------------------------------------------------------------------------------------
-	%	THESIS CONTENT - CHAPTERS
-	%----------------------------------------------------------------------------------------
-	
-	\newpage
-	\pagenumbering{arabic}
-	\pagestyle{fancy}
-	
-	
-	
-	\include{chapters/introduction}
-	\include{chapters/overview}
-	\include{chapters/comparison}
-	\include{chapters/conclusion}
-	
-	
-	
-	%----------------------------------------------------------------------------------------
-	%	THESIS CONTENT - APPENDICES
-	%----------------------------------------------------------------------------------------
-	
-	
-	\appendix
-	\include{appendices/appendix}
-	
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Abbildungsverzeichnis
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	\pagestyle{plain}
-	
-	
-	
-	
-	
-	
-	%----------------------------------------------------------------------------------------
-	%	BIBLIOGRAPHY
-	%----------------------------------------------------------------------------------------
-	
-	\newpage
-	
-	% Wird das Literaturverzeichnis nicht angezeigt, muss in den Optionen -
-	%TeXstudio konfigurieren - Erzeugen - Standard Bibliographieprogramm auf "Biber"
-	%umgestellt werden.
-	\printbibliography[heading=bibintoc,title={Literaturverzeichnis}]
-	\pagestyle{plain}
-	
-	\newpage
-	
-	
-	%----------------------------------------------------------------------------------------
-	%	DECLARATION PAGE
-	%----------------------------------------------------------------------------------------
-	
-	\section*{Erklärung}
-	
-	Ich versichere wahrheitsgemäß, die Arbeit selbstständig verfasst, alle benutzten
-	Hilfsmittel vollständig und genau angegeben und alles kenntlich gemacht zu
-	haben, was aus Arbeiten anderer unverändert oder mit Abänderungen entnommen
-	wurde sowie die Satzung des KIT zur Sicherung guter wissenschaftlicher Praxis in
-	der jeweils gültigen Fassung beachtet zu haben.
-	
-	\vspace{3cm}
-	
-	\hspace{0.5cm} Karlsruhe, den \today
-	
-	
-	
+\frontmatter
+\include{titlepage}
+\pagenumbering{roman}
+%\include{chapters/abstract}
+
+% ISSD Style: No additional blank page
+% \blankpage
+
+
+%% -------------------
+%% |   Directories   |
+%% -------------------
+\tableofcontents
+
+% ISSD Style: No additional blank page
+% \blankpaage
+
+% You may elect not to include a list of figures, list of tables and list of abbreviations, if the work is a seminar thesis (comment out the following)
+\listoffigures \addcontentsline{toc}{chapter}{Abbildungsverzeichnis} 
+\listoftables  \addcontentsline{toc}{chapter}{Tabellenverzeichnis} 
+\printnomenclature   \addcontentsline{toc}{chapter}{Abkürzungsverzeichnis} 
+
+
+%% -----------------
+%% |   Main part   |
+%% -----------------
+\mainmatter
+\pagenumbering{arabic}
+\include{chapters/content}
+
+
+\backmatter
+\pagenumbering{Roman}
+
+
+%% --------------------
+%% |   Bibliography   |
+%% --------------------
+
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
+\printbibliography
+
+%% ----------------
+%% |   Appendix   |
+%% ----------------
+
+\appendix
+
+\include{appendices/appendix}
+
+\include{appendices/affidavit}
 \end{document}
