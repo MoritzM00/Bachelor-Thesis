@@ -36,4 +36,4 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: thesis.pdf
+          files: thesis-${{ github.ref_name }}.pdf
