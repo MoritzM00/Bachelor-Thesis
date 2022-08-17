@@ -52,10 +52,8 @@
 %% | Information about the thesis  |
 %% ---------------------------------
 
-% uncomment one of the following, according to your thesis
 \newcommand{\mytype}{Bachelorarbeit} 
-%\newcommand{\mytype}{Master's Thesis}
-%\newcommand{\mytype}{Seminar Thesis}
+
 
 \newcommand{\myname}{Moritz Mistol}
 \newcommand{\matricle}{2281987}
@@ -80,16 +78,6 @@
 }
 
 
-%% --------------------------------
-%% | Settings for word separation |
-%% --------------------------------
-% Describe separation hints here:
-%\hyphenation{
-%opos-sum
-%he-lio-trope
-%}
-
-
 %% ------------------------
 %% |    Including files   |
 %% ------------------------
@@ -97,13 +85,13 @@
 % Userful command for partially translating the document (for bug-fixing e.g.)
 \includeonly{
 titlepage,
-chapters/abstract,
+%chapters/abstract,
 chapters/introduction, 
 chapters/overview,
 chapters/comparison,
 chapters/conclusion,
 appendices/affidavit,
-appendices/appendix
+%appendices/appendix
 }
 
 \input{math_commands.tex}
@@ -116,10 +104,8 @@ appendices/appendix
 \frontmatter
 \include{titlepage}
 \pagenumbering{roman}
-%\include{chapters/abstract}
+\include{chapters/abstract}
 
-% ISSD Style: No additional blank page
-% \blankpage
 
 
 %% -------------------
@@ -127,10 +113,7 @@ appendices/appendix
 %% -------------------
 \tableofcontents
 
-% ISSD Style: No additional blank page
-% \blankpaage
 
-% You may elect not to include a list of figures, list of tables and list of abbreviations, if the work is a seminar thesis (comment out the following)
 \listoffigures \addcontentsline{toc}{chapter}{Abbildungsverzeichnis} 
 \listoftables  \addcontentsline{toc}{chapter}{Tabellenverzeichnis} 
 \printnomenclature   \addcontentsline{toc}{chapter}{Abkürzungsverzeichnis} 
