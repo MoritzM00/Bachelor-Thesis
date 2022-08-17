@@ -4,7 +4,9 @@ on:
   push:
     tags:
       - "v*.*.*"
-      
+
+env:
+  FILENAME: thesis 
 jobs:
   build:
     name: Build LaTex File
@@ -16,13 +18,13 @@ jobs:
         uses: xu-cheng/texlive-action/full@v1
         with:
           run: |
-            pdflatex -synctex=1 -interaction=nonstopmode thesis.tex
-            makeindex -s nomencl.ist -t thesis.nlg -o thesis.nls thesis.nlo
-            pdflatex -synctex=1 -interaction=nonstopmode -jobname=thesis-${{ github.ref_name }} thesis.tex
+            pdflatex -synctex=1 -interaction=nonstopmode ${{ env.FILENAME }}.tex
+            makeindex -s nomencl.ist -t ${{ env.FILENAME }}.nlg -o ${{ env.FILENAME }}.nls ${{ env.FILENAME }}.nlo
+            pdflatex -synctex=1 -interaction=nonstopmode -jobname=${{ env.FILENAME }}-${{ github.ref_name }} ${{ env.FILENAME }}.tex
       - uses: actions/upload-artifact@v3
         with:
-          name: thesis-${{ github.ref_name }}
-          path: ./thesis-${{ github.ref_name}}.pdf
+          name: ${{ env.FILENAME }}-${{ github.ref_name }}
+          path: ./${{ env.FILENAME }}-${{ github.ref_name}}.pdf
 
   release:
     needs: build
@@ -32,8 +34,8 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
-          name: thesis-${{ github.ref_name }}
+          name: ${{ env.FILENAME }}-${{ github.ref_name }}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: thesis-${{ github.ref_name }}.pdf
+          files: ${{ env.FILENAME }}-${{ github.ref_name }}.pdf
