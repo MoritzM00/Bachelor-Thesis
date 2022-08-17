@@ -21,7 +21,7 @@ jobs:
             pdflatex -synctex=1 -interaction=nonstopmode thesis.tex
       - uses: actions/upload-artifact@v3
         with:
-          name: thesis 
+          name: thesis-${{ github.ref_name }}
           path: ./thesis.pdf
 
   release:
@@ -32,7 +32,7 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
-          name: thesis
+          name: thesis-${{ github.ref_name }}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
