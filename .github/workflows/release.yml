@@ -13,9 +13,12 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v3
       - name: Compile LaTex Document
-        uses: xu-cheng/latex-action@v2
+        uses: xu-cheng/texlive-action/full@v1
         with:
-          root_file: thesis.tex
+          run: |
+            pdflatex -synctex=1 -interaction=nonstopmode thesis.tex
+            makeindex -s nomencl.ist -t thesis.nlg -o thesis.nls thesis.nlo
+            pdflatex -synctex=1 -interaction=nonstopmode thesis.tex
       - uses: actions/upload-artifact@v3
         with:
           name: thesis 
