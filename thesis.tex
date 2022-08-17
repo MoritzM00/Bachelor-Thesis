@@ -44,6 +44,10 @@
 \usepackage[normalem]{ulem}
 \newcommand{\markup}[1]{\uline{#1}}
 
+\renewcommand{\nomgroup}[1]{%
+    \ifthenelse{\equal{#1}{V}}{\item[\textbf{Variablen}]}{%
+    {}}}
+
 
 
 
