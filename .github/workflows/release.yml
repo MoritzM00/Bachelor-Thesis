@@ -21,7 +21,7 @@ jobs:
           run: |
             pdflatex -synctex=1 -interaction=nonstopmode ${{ env.FILENAME }}.tex
             makeindex -s nomencl.ist -t ${{ env.FILENAME }}.nlg -o ${{ env.FILENAME }}.nls ${{ env.FILENAME }}.nlo
-            biber ${{ env.FILENAME }}.tex
+            biber ${{ env.FILENAME }}
             pdflatex -synctex=1 -interaction=nonstopmode -jobname=${{ env.FILENAME }}-${{ github.ref_name }} ${{ env.FILENAME }}.tex
       - uses: actions/upload-artifact@v3
         with:
