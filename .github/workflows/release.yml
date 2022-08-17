@@ -24,7 +24,7 @@ jobs:
             biber ${{ env.FILENAME }}
             pdflatex -synctex=1 -interaction=nonstopmode ${{ env.FILENAME }}.tex
             pdflatex -synctex=1 -interaction=nonstopmode ${{ env.FILENAME }}.tex
-            mv $env.FILENAME".pdf" $env.FILENAME"-"$github.ref_name".pdf"
+            mv ${{ env.FILENAME }}".pdf" ${{ env.FILENAME }}"-"${{ github.ref_name }}".pdf"
  
       - uses: actions/upload-artifact@v3
         with:
