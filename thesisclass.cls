@@ -91,7 +91,8 @@
 %% |          Headings           |
 %% -------------------------------
 \pagestyle{fancy}
-%\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\renewcommand{\chaptermark}[1]{%
+    \markboth{\MakeUppercase{\thechapter.\ #1}}{}}
 \fancyhf{}
 %\fancyhead[LE,RO]{{\headfont\thepage}}						% Left/right header for even/odd pages
 \fancyhead[L]{\headfont\nouppercase{\rightmark}}
