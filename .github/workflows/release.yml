@@ -20,8 +20,9 @@ jobs:
         with:
           run: |
             pdflatex -synctex=1 -interaction=nonstopmode ${{ env.FILENAME }}.tex
-            makeindex -s nomencl.ist -t ${{ env.FILENAME }}.nlg -o ${{ env.FILENAME }}.nls ${{ env.FILENAME }}.nlo
             biber ${{ env.FILENAME }}
+            pdflatex -synctex=1 -interaction=nonstopmode ${{ env.FILENAME }}.tex
+            makeindex -s nomencl.ist -t ${{ env.FILENAME }}.nlg -o ${{ env.FILENAME }}.nls ${{ env.FILENAME }}.nlo
             pdflatex -synctex=1 -interaction=nonstopmode ${{ env.FILENAME }}.tex
             pdflatex -synctex=1 -interaction=nonstopmode ${{ env.FILENAME }}.tex
             mv ${{ env.FILENAME }}".pdf" ${{ env.FILENAME }}"-"${{ github.ref_name }}".pdf"
