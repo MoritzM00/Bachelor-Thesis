@@ -36,11 +36,11 @@ Hier werden Moderne Methoden vorgestellt.
 \label{ch:TechnikenDerDimRed:sec:ModerneMethoden:subsec:AE}
 
 \begin{figure}[h]
-	\label{fig:5-layer-Autoencoder}
-	\begin{center}
-		\includegraphics[width=\textwidth]{5_layer_AE.pdf}
-		\caption{Autoencoder mit fünf Schichten und dreidimensionalem Bottleneck.}
-	\end{center}
+  \label{fig:5-layer-Autoencoder}
+  \begin{center}
+    \includegraphics[width=\textwidth]{5_layer_AE.pdf}
+    \caption{Autoencoder mit fünf Schichten und dreidimensionalem Bottleneck.}
+  \end{center}
 \end{figure}
 
 \subsection{Variational Autoencoder}
