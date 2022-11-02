@@ -38,7 +38,8 @@
 % see http://www.ctan.org/tex-archive/macros/latex/contrib/algorithm2e/algorithm2e.pdf
 % for more sophisticated algorithm listings
 
-\usepackage[hidelinks,colorlinks=false]{hyperref}
+% add hidelinks when printing the thesis
+\usepackage[colorlinks=false,linkbordercolor=white]{hyperref}
 						
 %% IM Packages
 \usepackage{setspace} % 1.5 line spacing

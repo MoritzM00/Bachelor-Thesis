@@ -48,9 +48,14 @@
 \usepackage[normalem]{ulem}
 \newcommand{\markup}[1]{\uline{#1}}
 
+\usepackage{etoolbox}
 \renewcommand{\nomgroup}[1]{%
-    \ifthenelse{\equal{#1}{V}}{\item[\textbf{Variablen}]}{%
-    {}}}
+    \item[\parbox{\nomlabelwidth}{\bfseries%
+    \ifstrequal{#1}{A}{Allgemeine Notation}{%
+    \ifstrequal{#1}{Z}{Zufallsvariablen}{%
+        {}}}
+    }]
+}
 
 
 
@@ -91,7 +96,7 @@
 %% |    Including files   |
 %% ------------------------
 % Only files listed here will be included!
-% Userful command for partially translating the document (for bug-fixing e.g.)
+% Useful command for partially translating the document (for bug-fixing e.g.)
 \includeonly{
 titlepage,
 %chapters/abstract,

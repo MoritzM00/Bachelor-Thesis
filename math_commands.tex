@@ -10,11 +10,11 @@
 \newcommand{\newterm}[1]{{\textbf{#1}}}
 
 % Mark sections of captions for referring to divisions of figures
-\newcommand{\figleft}{{\em (Left)}}
-\newcommand{\figcenter}{{\em (Center)}}
-\newcommand{\figright}{{\em (Right)}}
-\newcommand{\figtop}{{\em (Top)}}
-\newcommand{\figbottom}{{\em (Bottom)}}
+\newcommand{\figleft}{{\em (Links)}}
+\newcommand{\figcenter}{{\em (Mitte)}}
+\newcommand{\figright}{{\em (Rechts)}}
+\newcommand{\figtop}{{\em (Oben)}}
+\newcommand{\figbottom}{{\em (Unten)}}
 \newcommand{\captiona}{{\em (a)}}
 \newcommand{\captionb}{{\em (b)}}
 \newcommand{\captionc}{{\em (c)}}
@@ -61,14 +61,6 @@
 \newcommand{\ceil}[1]{\lceil #1 \rceil}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 
-\newcommand{\vect}[1]{\mathbf{#1}}
-\newcommand{\mat}[1]{\mathbf{#1}}
-
-\newcommand{\estWide}[1]{\widehat{#1}}
-\newcommand{\estNormal}[1]{\hat{#1}}
-
-\newcommand{\empCov}{\estWide{\mat{\Sigma}}}
-
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\Var}{Var}
@@ -76,3 +68,20 @@
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+
+
+% real-valued
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\mat}[1]{\boldsymbol{#1}}
+
+% random variables
+\newcommand{\rv}[1]{\textnormal{#1}}
+\newcommand{\rvect}[1]{\mathbf{#1}}
+\newcommand{\rmat}[1]{\mathbf{#1}}
+
+
+% others
+\newcommand{\estWide}[1]{\widehat{#1}}
+\newcommand{\estNormal}[1]{\hat{#1}}
+
+\newcommand{\empCov}{\estWide{\mat{\Sigma}}}
