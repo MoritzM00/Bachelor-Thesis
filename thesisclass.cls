@@ -25,7 +25,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc} % Input in ISO 8859-1 (Latin1)
 
-%\usepackage{ae}               % Almost european, virtual T1-Font
+%\usepackage{ae}              % Almost european, virtual T1-Font
 \usepackage[pdftex]{graphicx}
 \usepackage{vmargin}          % Adjust margins in a simple way
 \usepackage{fancyhdr}         % Define simple headings
@@ -95,8 +95,7 @@
 \renewcommand{\chaptermark}[1]{%
     \markboth{\MakeUppercase{\thechapter.\ #1}}{}}
 \fancyhf{}
-%\fancyhead[LE,RO]{{\headfont\thepage}}						% Left/right header for even/odd pages
-\fancyhead[L]{\headfont\nouppercase{\rightmark}}
+%\fancyhead[L]{\headfont\nouppercase{\rightmark}}
 \fancyhead[R]{\headfont\leftmark}   % Header for onesided Version
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
