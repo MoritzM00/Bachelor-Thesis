@@ -1,32 +1,42 @@
 %% ==============================
-\chapter{Techniken der Dimensionsreduktion}
-\label{ch:TechnikenDerDimRed}
+\chapter{Methoden der Dimensionsreduktion}
+\label{ch:MethodenDerDimRed}
 %% ==============================
 
+Nachdem wir nun die Motivation und Idee hinter der Dimensionsreduktion in \chapref{ch:Enleitung} und die mathematische Formulierung
+in \chapref{ch:Dimensionsreduktion} allgemein angeschaut haben,
+werden nun einige Methoden zur Dimensionsreduktion vorgestellt.
 
-Hier werden ausgewählte traditionelle und moderne Techniken der Dimensionsreduktion vorgestellt.
+In jüngster Zeit haben vor allem verschiedenste Varianten von neuronale Netzen einen hohen Grad an Aufmerksamkeit durch bahnbrechende Errungenschaften in Gebieten der Spracherkennung oder \textit{Computer Vision} erlangt. Fraglich ist, ob diese neuen Algorithmen auch auf dem Bereich der Dimensionsreduktion einen entscheidenden Fortschritt gemacht haben. Deshalb unterteilen wir die Algorithmen in \textit{traditionelle}
+und \textit{moderne} Methoden, um diese später in \chapref{ch:Vergleich} gegenüberstellen zu können. Mit traditionellen Methoden
+sind statistische Methoden wie die Hauptkomponentenanalyse (\chapref{ch:MethodenDerDimRed:traditionell:PCA}) oder andere etablierte
+Methoden der Dimensionsreduktion gemeint, wohingegen moderne Methoden auf neuere Entwicklungen wie neuronale Netze und die Varianten davon abzielt. Allerdings ist hier aus jeder Kategorie nur eine kleine repräsentative Auswahl getroffen worden. Weitere wichtige Algorithmen, die hier nicht vorgestellt werden können sind beispielsweise \dots \todo{Nachweise für Algorithmen + aufzählen}.
 
 \section{Traditionelle Methoden}
-\label{ch:TechnikenDerDimRed:sec:TraditionelleMethoden}
+\label{ch:MethodenDerDimRed:traditionell}
 
-Hier werden traditionelle Methoden vorgestellt.
+Zuerst widmen wir uns den traditionellen Methoden der Dimensionsreduktion.
+Dazu gehören die \newterm{Hauptkomponentenanalyse} (engl. \textit{principal components analysis} (PCA)) in \chapref{ch:MethodenDerDimRed:traditionell:PCA},
+die nicht-lineare Erweiterung der
+Hauptkomponentenanalyse (\chapref{ch:MethodenDerDimRed:traditionell:kPCA})
+und die für die Visualisierung sehr verbreitete Methode \newterm{t-distributed stochastic neighborhood embedding} (t-SNE).
 
 
 \newpage
 
 %% ==============================
 \subsection{Principal Component Analysis}
-\label{ch:TechnikenDerDimRed:sec:TradtionelleMethoden:subsec:PCA}
+\label{ch:MethodenDerDimRed:traditionell:PCA}
 \nomenclature[Z]{PCA}{Principal Component Analysis}
 
 %% ==============================
 \subsection{Kernel Principal Component Analysis}
-\label{ch:TechnikenDerDimRed:sec:TradtionelleMethoden:subsec:kPCA}
+\label{ch:MethodenDerDimRed:traditionell:kPCA}
 \nomenclature[Z]{kPCA}{Kernel Principal Component Analysis}
 
 %% ==============================
 \subsection{t-distributed Stochastic Neighborhood Embedding}
-\label{ch:TechnikenDerDimRed:sec:TradtionelleMethoden:subsec:t-SNE}
+\label{ch:MethodenDerDimRed:traditionell:t-SNE}
 \nomenclature[Z]{t-SNE}{t-distributed Stochastic Neighborhood Embedding}
 
 \newpage
@@ -34,12 +44,12 @@ Hier werden traditionelle Methoden vorgestellt.
 %% ==============================
 %% ==============================
 \section{Moderne Methoden}
-\label{ch:TechnikenDerDimRed:sec:ModerneMethoden}
+\label{ch:MethodenDerDimRed:modern}
 %% ==============================
 Hier werden Moderne Methoden vorgestellt.
 
 \subsection{Autoencoder}
-\label{ch:TechnikenDerDimRed:sec:ModerneMethoden:subsec:AE}
+\label{ch:MethodenDerDimRed:modern:AE}
 \nomenclature[Z]{AE}{Autoencoder}
 
 \begin{figure}[h]
@@ -51,9 +61,9 @@ Hier werden Moderne Methoden vorgestellt.
 \end{figure}
 
 \subsection{Variational Autoencoder}
-\label{ch:TechnikenDerDimRed:sec:ModerneMethoden:subsec:VAE}
+\label{ch:MethodenDerDimRed:modern:VAE}
 \nomenclature[Z]{VAE}{Variational Autoencoder}
 
 \subsection{Self-Organizing Maps}
-\label{ch:TechnikenDerDimRed:sec:ModerneMethoden:subsec:SOM}
+\label{ch:MethodenDerDimRed:modern:SOM}
 \nomenclature[Z]{SOM}{Self-Organizing Map}
