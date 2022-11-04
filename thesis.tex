@@ -32,7 +32,7 @@
 \addbibresource{thesis.bib}
 \usepackage{booktabs}
 
-\usepackage[german,colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\usepackage[disable,german,colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 \newcommand{\addref}{\todo[color=red!40]{Add reference.}}
 \newcommand{\rewrite}[1]{\todo[color=green!40]{#1}}
 \newcommand{\unsure}[1]{\todo[color=blue!25]{#1}}
@@ -134,6 +134,7 @@ appendices/appendix
 \listoftables  \addcontentsline{toc}{chapter}{Tabellenverzeichnis}
 \printnomenclature   \addcontentsline{toc}{chapter}{Symbolverzeichnis}
 
+\pagestyle{plain}
 \include{chapters/notation}
 
 %% -----------------
