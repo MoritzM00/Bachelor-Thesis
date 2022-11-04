@@ -3,15 +3,32 @@
 \label{ch:MathematischeNotation}
 %% ==============================
 
-In diesem Kapital wird kurz auf die in dieser Arbeit benutzte mathematische Notation eingegangen.
+In diesem Kapital wird kurz auf die in dieser Arbeit benutzte mathematische Notation eingegangen, die sich größtenteils an \textcite{Goodfellow.2016} orientiert.
 
-Skalare werden klein und kursiv geschrieben.
-Vektoren werden durch ein fettgedruckte kleine Buchstaben gekennzeichnet.
-Matrizen werden dann durch
+Skalare werden klein und nicht-kursiv geschrieben.\nomenclature[A, 01]{$\sc{a}$}{Ein Skalar}
+Vektoren werden durch ein fettgedruckte kleine Buchstaben $\vect{a}$\nomenclature[A, 02]{$\vect{a}$}{Ein Vektor}
+und Matrizen durch fettgedruckte große Buchstaben, wie zum Beispiel $\mat{A}$, gekennzeichnet.\nomenclature[A, 03]{$\mat{A}$}{Eine Matrix}
+Zufallsvariablen werden analog gekennzeichnet, unterscheiden sich jedoch durch die kursive Schriftart.\unsure{wie soll ich Zufallsvariablen von nicht-ZV unterscheiden?}
 
-Wir bezeichnen ein Skalar mit $a$\nomenclature[A, 01]{$a$}{Ein Skalar} und einen Vektor mit $\vect{a}$\nomenclature[A, 02]{$\vect{a}$}{Ein Vektor}. Eine Matrix wird mit einem fettgedruckten Großbuchstaben $\mat{A}$\nomenclature[A, 03]{$\mat{A}$}{Eine Matrix} gekennzeichnet.
-Zufallszahlen sind die kursiven Äquivalente zu Skalaren, Vektoren und Matrizen.
+\nomenclature[A, 04]{$\tr{\mat{A}}$}{Die Transponierte einer Matrix}
+\nomenclature[A, 05]{$\det(\mat{A})$}{Die Determinante einer Matrix}
+\nomenclature[A, 06]{$\set{A}$}{Eine Menge}
+\nomenclature[A, 07]{$\real$}{Die reellen Zahlen}
+\nomenclature[A, 08]{$f: \set{A} \rightarrow \set{B}$}{Eine Funktion $f$, die von der Menge $\set{A}$ auf die Menge $\set{B}$ abbildet.}
 
-\nomenclature[Z, 01]{$\rv{a}$}{Eine eindimensionale Zufallsvariable}
-\nomenclature[Z, 02]{$\rvect{a}$}{Ein Zufallsvektor}
-\nomenclature[Z, 03]{$\rmat{A}$}{Eine Zufallsmatrix}
+\nomenclature[A, 09]{$\diag(\vect{a})$}{Eine Diagonalmatrix mit den Diagonalelementen impliziert durch den Vektor $\vect{a}$}
+\nomenclature[A, 10]{$\diag(\mat{A})$}{Ein Vektor mit den Diagonalelementen der Matrix $\mat{A}$}
+
+\nomenclature[P, 01]{$\rv{a}$}{Eine eindimensionale Zufallsvariable}
+\nomenclature[P, 02]{$\rvect{a}$}{Ein vektorwertige Zufallsvariable, auch Zufallsvektor}
+\nomenclature[P, 03]{$\rmat{A}$}{Eine matrixwertige Zufallsvariable, auch Zufallsmatrix}
+
+
+\nomenclature[P, 04]{$\rv{a} \sim P$}{$\rv{a}$ folgt einer $P$-Verteilung}
+\nomenclature[P, 05]{$\Exp_{\rv{x} \sim P}[f(x)]$ oder $\Exp{[f(x)]}$}{Erwartungswert von $f(x)$ bezüglich $P$}
+
+\nomenclature[P, 06]{$\Var(f(x))$}{Varianz von $f(x)$}
+\nomenclature[P, 07]{$\Cov(f(x), g(x))$}{Kovarianz von $f(x)$ und $g(x)$}
+
+%\nomenclature[P, 08]{$\KLDiv(P || Q)$}{Kullback-Leibler Divergenz von $P$ und $Q$}
+\nomenclature[P, 09]{$\gaussian(\vect{x} | \vect{\mu}, \mat{\Sigma})$}{Normalverteilung über $\vect{x}$ mit Erwartungswertvektor $\vect{\mu}$ und Kovarianzmatrix $\mat{\Sigma}$}

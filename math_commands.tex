@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{bm}
 
 % Highlight a newly defined term
 \newcommand{\newterm}[1]{{\textbf{#1}}}
@@ -61,6 +62,8 @@
 \newcommand{\ceil}[1]{\lceil #1 \rceil}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 
+\newcommand{\tr}[1]{#1^\top}
+
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\Var}{Var}
@@ -71,13 +74,14 @@
 
 
 % real-valued
-\newcommand{\vect}[1]{\boldsymbol{#1}}
-\newcommand{\mat}[1]{\boldsymbol{#1}}
+\newcommand{\sc}[1]{\textnormal{#1}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
 
 % random variables
-\newcommand{\rv}[1]{\textnormal{#1}}
-\newcommand{\rvect}[1]{\mathbf{#1}}
-\newcommand{\rmat}[1]{\mathbf{#1}}
+\newcommand{\rv}[1]{#1}
+\newcommand{\rvect}[1]{\bm{#1}}
+\newcommand{\rmat}[1]{\bm{#1}}
 
 
 % others
@@ -85,3 +89,13 @@
 \newcommand{\estNormal}[1]{\hat{#1}}
 
 \newcommand{\empCov}{\estWide{\mat{\Sigma}}}
+
+\newcommand{\KLDiv}{D_{\textnormal{KL}}}
+
+% sets
+\newcommand{\set}[1]{\mathbb{#1}}
+
+\newcommand{\real}{\set{R}}
+
+% common distributions
+\newcommand{\gaussian}{\mathcal{N}}
