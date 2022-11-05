@@ -31,14 +31,42 @@ Principal Component Analysis ist \textit{die} Methode der Dimensionsreduktion un
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:traditionell:PCA:Grundidee}
-Die zentrale Idee der Hauptkomponentenanalyse ist die Transformation des Koordinatensystems in einer möglichst \textit{verlustfreien} Art und Weise. Verlustfrei bedeutet im Kontext der Hauptkomponentenanalyse, dass möglichst viel Variation in den Daten erhalten bleiben soll \parencite[vgl.][1]{Jolliffe.2002}. Möchte man dann die Dimension von $D$ auf die intrinsische Dimension $d$ reduzieren wählt man einfach die \textit{ersten} $d$ Hauptkomponenten. Was diese Hauptkomponenten sind, werden wir im nächsten Abschnitt genauer sehen.
+Die zentrale Idee der Hauptkomponentenanalyse ist die Transformation des Koordinatensystems in einer möglichst \textit{verlustfreien} Art und Weise. Verlustfrei bedeutet im Kontext der Hauptkomponentenanalyse, dass möglichst viel Variation in den Daten erhalten bleiben soll \parencite[vgl.][1]{Jolliffe.2002}. Möchte man dann die Dimension von $D$ auf die intrinsische Dimension $d$ reduzieren wählt man einfach die \textit{ersten} $d$ Hauptkomponenten. Was diese Hauptkomponenten sind, werden wir im Folgenden genauer sehen.
+
+\subsubsection{Definition der Hauptkomponenten}
+\label{ch:MethodenDerDimRed:traditionell:PCA:Definition}
+Wir haben also als Ausgangsbasis einen $D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x}_1, \ldots, \rv{x}_D)}$ und unser Ziel ist es, eine $k$-dimensionale Repräsentation $\rvect{y} = \tr{(\rv{y_1},\ldots,\rv{y}_k)}$ zu erhalten. Idealerweise setzt man $k$ auf die intrinsische Dimension $d$ von $\rvect{x}$, hier soll jedoch nur der Fokus auf die allgemeine Dimensionsreduktion gelegt werden. Wir drücken also $\rvect{y}$ als eine Linearkombination des ursprünglichen hochdimensionalen Vektors $\rvect{x}$ wie folgt aus:
+\begin{equation}
+	\rv{y}_i = \tr{\vect{a}_i} \rvect{x} = \sc{a}_{i1} \rv{x}_1 + \cdots + \sc{a}_{iD} \rv{x}_D
+	\quad i = 1,\ldots,k
+\end{equation}
+wobei $\vect{a}_i$ die \newterm{Koeffizienten} der $i$-ten Hauptkomponente sind \parencite[vgl.][2]{Jolliffe.2002}. Die Anzahl $k$ der Hauptkomponenten bestimmt den Grad der Dimensionsreduktion, kann jedoch beliebig zwischen $1 \leq k \leq D$ gewählt werden.\footnote{Der Grenzfall $k = D$ wird oft für eine Anonymisierung des Datensatzes mit personenbezogenen Daten verwendet. Beispielsweise kann so bei Finanztransaktionen der Datensatz mithilfe von PCA vorverarbeitet (\textit{Preprocessing}) und erst dann veröffentlicht werden.}
 
 \subsubsection{Herleitung der Hauptkomponenten}
-\label{ch:MethodenDerDimRed:traditionell:PCA:Herleitung}
-Wir haben also als Ausgangsbasis einen $D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x}_1, \ldots, \rv{x}_D)}$ und unser Ziel ist es, eine $d$-dimensionale Repräsentation $\rvect{y}$ zu erhalten. Dabei drücken wir nun $\rvect{y}$ als eine Linearkombination des ursprünglichen hochdimensionalen Vektors $\rvect{x}$ wie folgt aus:
+\label{ch:MethodenDerDimRed:traditionell:PCA:Herleitung1PC}
+Wir betrachten nun zunächst lediglich die \textit{erste} Hauptkomponente $\tr{\vect{a}_1} \rvect{x}$ und erinnern uns daran, dass wir wie in \subsecref{ch:MethodenDerDimRed:traditionell:PCA:Grundidee} erwähnt möglichst viel Variation von $\rvect{x}$ erhalten möchten. Daher maximieren wir die erste Hauptkomponente so, dass die Varianz maximal wird:
 \begin{equation}
-	\rvect{y} = \sc{a}_1 \rv{x}_1 + \cdots + \sc{a}_D \rv{x}_D
+	\label{eq:PCA-Optimierungsproblem}
+	\max_\vect{a_1} \Var \left( \tr{\vect{a}_1} \rvect{x} \right) = \max_\vect{a_1} \tr{\vect{a}_1} \mat{\Sigma} \vect{a}_1
 \end{equation}
+wobei $\mat{\Sigma}$ die Kovarianzmatrix von $\rvect{x}$ ist. Dieses Maximierungsproblem ist jedoch nach oben unbeschränkt, weshalb man zusätzlich die Bedingung
+\begin{equation}
+	\norm{ \vect{a}_1 }^2 = \tr{\vect{a}_1} \vect{a}_1 = 1
+\end{equation}
+zum nun \textit{restringierten} Maximierungsproblem hinzufügt, welches mithilfe des Lagrange-Ansatzes gelöst werden kann. Diese Bedingung führt dazu, dass wir eine orthogonale Transformation erhalten. Wie sich heraustellt, ist dieses Maximierungsproblem ein Eigenwertproblem und kann somit effizient gelöst werden \parencite[vgl.][4 -- 6]{Jolliffe.2002}.
+Man erhält somit die Koeffizienten der ersten Hauptkomponente $\vect{a}_1$, welche ein Eigenvektor von $\mat{\Sigma}$ mit zugehörigem Eigenwert 
+\begin{equation}
+	\lambda_1 = \Var(\tr{\vect{a}_1} \rvect{x})
+\end{equation}
+sind. Beachte, dass dies gleichzeitig die Zielfunktion des Optimierungsproblems (\eqref{eq:PCA-Optimierungsproblem}) ist. Das bedeutet, dass die Koeffizienten der erste Hauptkomponente dem Eigenvektor mit dem größten zugehörigen Eigenwert entspricht.
+
+Um nun die zweite Hauptkomponente zu erhalten maximieren wir wieder die Varianz mit der Einheitsvektor-Nebenbedingung $\norm{\vect{a}_2}$ = 1. Zusätzlich muss jedoch gelten, dass die zweite Hauptkomponente zur Ersten \textit{unkorreliert} ist, das heißt \parencite[5]{Jolliffe.2002}
+\begin{equation}
+	\Cov(\tr{\vect{a}_1}\rvect{x}, \tr{\vect{a}_2}\rvect{x}) = 0
+\end{equation}
+Auch dieses Optimierungsproblem ist ein Eigenwertproblem und man erhält, dass die Koeffizienten $\vect{a}_2$ der zweiten Hauptkomponente der Eigenvektor mit dem zweitgrößten Eigenwert von $\mat{\Sigma}$ ist.
+Generell lässt sich zeigen, dass die Koeffizienten der $i$-ten Hauptkomponente dem Eigenvektor mit $i$-größten Eigenwert entspricht \parencite[6]{Jolliffe.2002}.
+
 
 %% ==============================
 \subsection{Kernel Principal Component Analysis}
