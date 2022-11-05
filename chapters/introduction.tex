@@ -3,11 +3,29 @@
 \label{ch:Enleitung}
 %% ==============================
 
-\eqref{eq:beispiel} zeigt die Verwendung von vordefinierten Kommandos
-\begin{equation}
-	\label{eq:beispiel}
-	\Exp [\vect{a}] = \textnormal{x} \cdot \estWide{\mat{X}} \cdot \empCov
-	\partial_s
-\end{equation}
+\idea{
+	\begin{enumerate}
+		\item Motivation anhand von Stable Diffusion ? -> Latent Diffusion Model
+		\item Was ist Dimensionsreduktion in verständlichen Worten?
+	\end{enumerate}
+}
+\idea{Wofür braucht man DimRed?
+	\begin{enumerate}
+		\item Reduzierung des Speicheraufwands
+		\item Reduzierung des Rechenaufwands beim Training
+		\item Reduzierung von Overfitting
+		\item Datenvisualisierung
+		\item Anwendungen v.a. auch in Computer Vision
+	\end{enumerate}
+	Punkte zwei und drei (und eins eig. auch) treffen auf Stable Diffusion zu
+}
+\idea{Curse of Dimensionality erläutern + Beispiel vlt}
+\idea{Related Work: Welche Arbeiten wurden auf diesem Bereich schon veröffentlicht
 
-Dies zeigen auch \textcite[vgl.][100 -- 232]{Maaten.2009} und \textcite[100 -- 232]{Goodfellow.2016}. Wir werden später sehen, wie das für uns hilfreich sein kann \citep[vgl.][234 -- 239]{Goodfellow.2016}.
+	Wie grenze ich meine Arbeit davon ab?
+
+	Das Ziel meiner Arbeit darlegen
+
+	Wichtig: Andere DimRed Methoden nennen (die die nicht hier vorkommen) mit Verweis auf ein entsprechendes Buch oder so}
+
+\idea{Schön wäre ein User Guide als Resultat: Für welche Probleme eignet sich welcher Algorithmus und warum? auf was muss man achten? + Vergleich von PCA mit linearem Autoencoder}
