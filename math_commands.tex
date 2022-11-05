@@ -6,6 +6,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{bm}
+\usepackage{mathtools}
 
 % Highlight a newly defined term
 \newcommand{\newterm}[1]{{\textbf{#1}}}
@@ -91,7 +92,12 @@
 
 \newcommand{\empCov}{\estWide{\mat{\Sigma}}}
 
-\newcommand{\KLDiv}[2]{D_{\textnormal{KL}}\left(#1\, || \, #2\right)}
+% for KL-Divergence
+\DeclarePairedDelimiterX{\infdivx}[2]{(}{)}{%
+	#1\;\delimsize\|\;#2%
+}
+\newcommand{\KLDiv}{D_{\textnormal{KL}}\infdivx}
+% usage of KL Div: \KLDiv[\bigg] for fixed-size delimiter, \KLDiv* for extensible size
 
 % sets
 \newcommand{\set}[1]{\mathbb{#1}}
