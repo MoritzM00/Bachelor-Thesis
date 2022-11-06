@@ -83,7 +83,7 @@ Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenv
 \nomenclature[Z]{kPCA}{Kernel Principal Component Analysis}
 Wie soeben erwähnt ist die Kernel Principal Components Analysis insofern eine Generalisierung der klassischen Hauptkomponentenanalyse, dass auch nichtlineare Zusammenhänge erkannt werden können.
 Um das zu erreichen, bedient man sich am sogenannten \newterm{Kernel Trick}, der beispielsweise erfolgreich auf \textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde.
-Dazu gehen wir wieder in \subsecref{ch:MethodenDerDimRed:traditionell:kPCA:Grundidee} auf die Grundidee dieser Methode ein und befassen uns dann in den Unterabschnitten \ref{ch:MethodenDerDimRed:traditionell:kPCA:AnwendungKernelTrick} und \ref{ch:MethodenDerDimRed:traditionell:kPCA:Algorithmus} mit der konkreten Vorgehensweise bei der Kernel PCA.
+Dazu gehen wir wieder in \subsecref{ch:MethodenDerDimRed:traditionell:kPCA:Grundidee} auf die Grundidee dieser Methode ein und befassen uns dann in \subsecref{ch:MethodenDerDimRed:traditionell:kPCA:AnwendungKernelTrick} kurz mit der konkreten Vorgehensweise bei der Kernel PCA.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:traditionell:kPCA:Grundidee}
@@ -104,10 +104,10 @@ Damit man den Kernel Trick anwenden kann, muss die Hauptkomponentenanalyse in ei
 
 Man berechnet also die die $n \times n$ \textit{Kernel Matrix}
 \begin{equation}
-	\mat{K}_{ij} = \kappa(\vect{x}_i, \vect{x})_j \quad \text{für}\; i,j = 1,\ldots,D
+	\mat{K}_{ij} = \kappa(\vect{x}_i, \vect{x}_j) \qquad \text{für}\; i,j = 1,\ldots,n
 \end{equation}
 welche anschließend zentriert werden muss \parencite[598]{Bishop.2006}.
-Nun können die Eigenvektoren und Eigenwerte von $\mat{K}$ bestimmt und damit die Projektion auf die niedrigdimensionale Repräsentation $\rvect{y}$ berechnet werden.
+Nun können die Eigenvektoren und Eigenwerte von $\mat{K}$ bestimmt und damit die Projektion auf die niedrigdimensionale Repräsentation $\rvect{y}$ berechnet werden.\rewrite{Diesen Abschnitt (3.1.2.2) muss ich nochmal ganz umschreiben}
 
 
 
