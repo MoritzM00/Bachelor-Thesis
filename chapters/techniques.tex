@@ -88,20 +88,30 @@ Dazu gehen wir wieder in \subsecref{ch:MethodenDerDimRed:traditionell:kPCA:Grund
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:traditionell:kPCA:Grundidee}
 
-Die Grundidee der Kernel PCA ist es, die Daten mithilfe einer Abbildung $\bm{\phi}$ in einen Raum $\mathcal{H}$ abzubilden, der nichtlinear mit dem Merkmalsraum $\mathcal{X}$ von $\rvect{x}$ verbunden ist. Die Motivation dahinter ist, dass die Daten in $\mathcal{X}$ auf einer \textit{nichtlinearen} Mannigfaltigkeit liegen, während sie in $\mathcal{H}$ auf einer \textit{linearen} Mannigfaltigkeit liegen und damit für lineare Dimensionsreduktionsmethoden wie PCA geeignet sind. Nach der Transformation wird also
+Die Grundidee der Kernel PCA ist es, die Daten mithilfe einer Abbildung $\bm{\phi}$ in einen Raum $\mathcal{H}$ abzubilden, der nichtlinear mit dem Merkmalsraum $\mathcal{X}$ von $\rvect{x}$ verbunden ist. Die Motivation dahinter ist, dass die Daten in $\mathcal{X}$ auf einer \textit{nichtlinearen} Mannigfaltigkeit liegen können, während sie in $\mathcal{H}$ auf einer \textit{linearen} Mannigfaltigkeit liegen und damit für lineare Dimensionsreduktionsmethoden wie PCA geeignet sind. Nach der Transformation wird also
 die lineare Hauptkomponentenanalyse durchgeführt, um damit die niedrigdimensionale Repräsentation $\rvect{y}$ zu erhalten. Der entscheidene Punkt ist jedoch, dass man diesen \enquote{Umweg} über die Abbildung $\bm{\phi}$ nicht konkret berechnen muss, sondern mithilfe einer Kernel-Funktion $\kappa: \mathcal{X} \times \mathcal{X} \rightarrow \real$ implizit miteinbeziehen kann \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Dies ist die Eleganz der Kernel-Methoden wie Kernel PCA und daher kommt auch die Bezeichnung \textit{Kernel Trick}.\missingfigure{hier könnte eine bildliche Beschreibung sehr gut passen}
 
-Für eine tiefere Behandlung des Kernel Tricks und anderer Kernel-Methoden wird auf \textcite{ShaweTaylor.2011}
-verwiesen.
+Für eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden wird auf \textcite{ShaweTaylor.2011} verwiesen.
 
 \subsubsection{Anwendung des Kernel Tricks}
 \label{ch:MethodenDerDimRed:traditionell:kPCA:AnwendungKernelTrick}
-Damit man den Kernel Trick anwenden kann, muss die Hauptkomponentenanalyse in eine Form gebracht werden, in der nur Skalarprodukte vorkommen, sodass alle Skalarprodukte durch die Kernel Funktion ersetzt werden können \parencite[586]{Bishop.2006}.
+
+Die Kernel-Funktion ist definiert als das Skalarprodukt im transformierten Raum \parencite[60]{ShaweTaylor.2011}:
+\begin{equation}
+	\kappa(\vect{x}_i, \vect{x}_j) = \tr{\bm{\phi}(\vect{x}_i)} \bm{\phi}(\vect{x}_j)
+\end{equation}
+Damit man den Kernel Trick anwenden kann, muss die Hauptkomponentenanalyse in eine Form gebracht werden, in der nur Skalarprodukte von $\rvect{x}$ vorkommen. Dann können alle Skalarprodukte durch die Kernel-Funktion ersetzt werden \parencite[586]{Bishop.2006} und man umgeht die explizite Berechnung von $\bm{\phi}$.
+
+Man berechnet also die die $n \times n$ \textit{Kernel Matrix}
+\begin{equation}
+	\mat{K}_{ij} = \kappa(\vect{x}_i, \vect{x})_j \quad \text{für}\; i,j = 1,\ldots,D
+\end{equation}
+welche anschließend zentriert werden muss \parencite[598]{Bishop.2006}.
+Nun können die Eigenvektoren und Eigenwerte von $\mat{K}$ bestimmt und damit die Projektion auf die niedrigdimensionale Repräsentation $\rvect{y}$ berechnet werden.
 
 
-\subsubsection{Algorithmus}
-\label{ch:MethodenDerDimRed:traditionell:kPCA:Algorithmus}
-\ldots
+
+
 
 
 
