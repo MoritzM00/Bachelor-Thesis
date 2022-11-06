@@ -71,11 +71,22 @@ Generell lässt sich zeigen, dass die Koeffizienten der $i$-ten Hauptkomponente 
 \end{equation}
 ausdrücken, wobei $\mat{A} = [\vect{a}_1,\ldots,\vect{a}_k] \in \real^{D \times k}$ die Matrix der Eigenvektoren als Spaltenvektoren ist und wieder $1 \leq k \leq D$ gilt.
 
+\subsubsection{Erweiterungen}
+\label{ch:MethodenDerDimRed:traditionell:PCA:Erweiterungen}
+Trotz der großen Beliebtheit der Hauptkomponentenanalyse hat diese Methode natürlich auch ihre Nachteile, weswegen zahlreiche Erweiterungen wie zum Beispiel \ldots\addref
+Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenvektorbasis der Kovarianzmatrix inhärent linear ist. Die Hauptkomponentenanalyse ist also in dieser klassischen Form nicht in der Lage, eine nicht-lineare Mannigfaltigkeit in den Daten zu erkennen. Deswegen wurde unter anderem eine Generalisierung von PCA von \textcite{Scholkopf.1997}\unsure{ist das das richtige? Bishop zitiert eins von 1998} entwickelt, die sogenannte \newterm{Kernel Principal Component Analysis} (kPCA). Diese Methode wird in \subsecref{ch:MethodenDerDimRed:traditionell:kPCA} genauer behandelt.
+
 
 %% ==============================
 \subsection{Kernel Principal Component Analysis}
 \label{ch:MethodenDerDimRed:traditionell:kPCA}
 \nomenclature[Z]{kPCA}{Kernel Principal Component Analysis}
+Wie soeben erwähnt ist die Kernel Principal Components Analysis insofern eine Generalisierung der klassischen Hauptkomponentenanalyse, dass auch nicht-lineare Zusammenhänge erkannt werden können.
+Um das zu erreichen, bedient man sich am sogenannten \newterm{Kernel Trick}, der beispielsweise erfolgreich auf \textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde.
+Dazu gehen wir wieder in Unterabschnitt \ldots\rewrite{Die nächsten Kapitel einleiten, wie strukturieren?}
+
+\subsubsection{Grundidee}
+
 
 %% ==============================
 \subsection{t-distributed Stochastic Neighborhood Embedding}
