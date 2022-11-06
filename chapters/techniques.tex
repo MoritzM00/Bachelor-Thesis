@@ -17,7 +17,7 @@ Methoden der Dimensionsreduktion gemeint, wohingegen moderne Methoden auf neuere
 
 Zuerst widmen wir uns den traditionellen Methoden der Dimensionsreduktion.
 Dazu gehören die \newterm{Hauptkomponentenanalyse} (engl. \textit{principal components analysis} (PCA)) in \subsecref{ch:MethodenDerDimRed:traditionell:PCA},
-die nicht-lineare Erweiterung der
+die nichtlineare Erweiterung der
 Hauptkomponentenanalyse (\subsecref{ch:MethodenDerDimRed:traditionell:kPCA})
 und die für die Visualisierung sehr verbreitete Methode \newterm{t-distributed stochastic neighborhood embedding} (t-SNE) in \subsecref{ch:MethodenDerDimRed:traditionell:t-SNE}.
 
@@ -35,12 +35,12 @@ Die zentrale Idee der Hauptkomponentenanalyse ist die Transformation des Koordin
 
 \subsubsection{Definition der Hauptkomponenten}
 \label{ch:MethodenDerDimRed:traditionell:PCA:Definition}
-Wir haben also als Ausgangsbasis einen $D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x}_1, \ldots, \rv{x}_D)}$ und unser Ziel ist es, eine $k$-dimensionale Repräsentation $\rvect{y} = \tr{(\rv{y_1},\ldots,\rv{y}_k)}$ zu erhalten. Idealerweise setzt man $k$ auf die intrinsische Dimension $d$ von $\rvect{x}$, hier soll jedoch nur der Fokus auf die allgemeine Dimensionsreduktion gelegt werden. Wir drücken also $\rvect{y}$ als eine Linearkombination des ursprünglichen hochdimensionalen Vektors $\rvect{x}$ wie folgt aus:
+Wir haben also als Ausgangsbasis einen $D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x}_1, \ldots, \rv{x}_D)}$ mit $\Exp[\rvect{x}] = \vect{0}$ und unser Ziel ist es, eine $k$-dimensionale Repräsentation $\rvect{y} = \tr{(\rv{y_1},\ldots,\rv{y}_k)}$ zu erhalten. Idealerweise setzt man $k$ auf die intrinsische Dimension $d$ von $\rvect{x}$, hier soll jedoch nur der Fokus auf die allgemeine Dimensionsreduktion gelegt werden. Wir drücken also $\rvect{y}$ als eine Linearkombination des ursprünglichen hochdimensionalen Vektors $\rvect{x}$ wie folgt aus:
 \begin{equation}
 	\rv{y}_i = \tr{\vect{a}_i} \rvect{x} = \sc{a}_{i1} \rv{x}_1 + \cdots + \sc{a}_{iD} \rv{x}_D
 	\quad i = 1,\ldots,k
 \end{equation}
-wobei $\vect{a}_i$ die \newterm{Koeffizienten} der $i$-ten Hauptkomponente sind \parencite[vgl.][2]{Jolliffe.2002}. Die Anzahl $k$ der Hauptkomponenten bestimmt den Grad der Dimensionsreduktion, kann jedoch beliebig zwischen $1 \leq k \leq D$ gewählt werden.\footnote{Der Grenzfall $k = D$ wird oft für eine Anonymisierung des Datensatzes mit personenbezogenen Daten verwendet. Beispielsweise kann so bei Finanztransaktionen der Datensatz mithilfe von PCA vorverarbeitet (\textit{Preprocessing}) und erst dann veröffentlicht werden.}
+wobei $\vect{a}_i$ die \newterm{Koeffizienten} (auch: Ladungen) der $i$-ten Hauptkomponente sind \parencite[vgl.][2]{Jolliffe.2002}. Die Anzahl $k$ der Hauptkomponenten bestimmt den Grad der Dimensionsreduktion, kann jedoch beliebig zwischen $1 \leq k \leq D$ gewählt werden.\footnote{Der Grenzfall $k = D$ wird oft für eine Anonymisierung des Datensatzes mit personenbezogenen Daten verwendet. Beispielsweise kann so bei Finanztransaktionen der Datensatz mithilfe von PCA vorverarbeitet (\textit{Preprocessing}) und erst dann veröffentlicht werden.}
 
 \subsubsection{Herleitung der Hauptkomponenten}
 \label{ch:MethodenDerDimRed:traditionell:PCA:HerleitungPC}
@@ -73,19 +73,34 @@ ausdrücken, wobei $\mat{A} = [\vect{a}_1,\ldots,\vect{a}_k] \in \real^{D \times
 
 \subsubsection{Erweiterungen}
 \label{ch:MethodenDerDimRed:traditionell:PCA:Erweiterungen}
-Trotz der großen Beliebtheit der Hauptkomponentenanalyse hat diese Methode natürlich auch ihre Nachteile, weswegen zahlreiche Erweiterungen wie zum Beispiel \ldots\addref
-Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenvektorbasis der Kovarianzmatrix inhärent linear ist. Die Hauptkomponentenanalyse ist also in dieser klassischen Form nicht in der Lage, eine nicht-lineare Mannigfaltigkeit in den Daten zu erkennen. Deswegen wurde unter anderem eine Generalisierung von PCA von \textcite{Scholkopf.1997}\unsure{ist das das richtige? Bishop zitiert eins von 1998} entwickelt, die sogenannte \newterm{Kernel Principal Component Analysis} (kPCA). Diese Methode wird in \subsecref{ch:MethodenDerDimRed:traditionell:kPCA} genauer behandelt.
+Trotz der großen Beliebtheit der Hauptkomponentenanalyse hat diese Methode natürlich auch ihre Nachteile, weswegen zahlreiche Erweiterungen wie zum Beispiel \ldots\addref entwickelt wurden.
+Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenvektorbasis der Kovarianzmatrix inhärent linear ist. Die Hauptkomponentenanalyse ist also in dieser klassischen Form nicht in der Lage, eine nichtlineare Mannigfaltigkeit in den Daten zu erkennen. Deswegen wurde unter anderem eine Generalisierung von PCA von \textcite{Scholkopf.1997} entwickelt, die sogenannte \newterm{Kernel Principal Component Analysis} (kPCA). Diese Methode wird in \subsecref{ch:MethodenDerDimRed:traditionell:kPCA} genauer behandelt.
 
 
 %% ==============================
 \subsection{Kernel Principal Component Analysis}
 \label{ch:MethodenDerDimRed:traditionell:kPCA}
 \nomenclature[Z]{kPCA}{Kernel Principal Component Analysis}
-Wie soeben erwähnt ist die Kernel Principal Components Analysis insofern eine Generalisierung der klassischen Hauptkomponentenanalyse, dass auch nicht-lineare Zusammenhänge erkannt werden können.
+Wie soeben erwähnt ist die Kernel Principal Components Analysis insofern eine Generalisierung der klassischen Hauptkomponentenanalyse, dass auch nichtlineare Zusammenhänge erkannt werden können.
 Um das zu erreichen, bedient man sich am sogenannten \newterm{Kernel Trick}, der beispielsweise erfolgreich auf \textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde.
-Dazu gehen wir wieder in Unterabschnitt \ldots\rewrite{Die nächsten Kapitel einleiten, wie strukturieren?}
+Dazu gehen wir wieder in \subsecref{ch:MethodenDerDimRed:traditionell:kPCA:Grundidee} auf die Grundidee dieser Methode ein und befassen uns dann in den Unterabschnitten \ref{ch:MethodenDerDimRed:traditionell:kPCA:AnwendungKernelTrick} und \ref{ch:MethodenDerDimRed:traditionell:kPCA:Algorithmus} mit der konkreten Vorgehensweise bei der Kernel PCA.
 
 \subsubsection{Grundidee}
+\label{ch:MethodenDerDimRed:traditionell:kPCA:Grundidee}
+
+Die Grundidee der Kernel PCA ist es, die Daten mithilfe einer Abbildung $\bm{\phi}$ in einen Raum $\mathcal{H}$ abzubilden, der nichtlinear mit dem Merkmalsraum $\mathcal{X}$ von $\rvect{x}$ verbunden ist. Die Motivation dahinter ist, dass die Daten in $\mathcal{X}$ auf einer nichtlinearen Mannigfaltigkeit liegen, während sie in $\mathcal{H}$ auf einer linearen Mannigfaltigkeit liegen und damit für lineare Dimensionsreduktionsmethoden wie PCA geeignet sind. Nach der Transformation wird also
+die lineare Hauptkomponentenanalyse durchgeführt, um damit die niedrigdimensionale Repräsentation $\rvect{y}$ zu erhalten. Der entscheidene Punkt ist jedoch, dass man diesen \enquote{Umweg} über die Abbildung $\bm{\phi}$ nicht konkret berechnen muss, sondern mithilfe einer Kernel-Funktion $\kappa: \mathcal{X} \times \mathcal{X} \rightarrow \real$ implizit miteinbeziehen kann \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Dies ist die Eleganz der Kernel-Methoden wie Kernel PCA und daher kommt auch die Bezeichnung \textit{Kernel Trick}.\missingfigure{hier könnte eine bildliche Beschreibung sehr gut passen}. Für eine tiefere Behandlung des Kernel Tricks und anderer Kernel-Methoden wird auf \textcite{ShaweTaylor.2011}
+verwiesen.
+
+\subsubsection{Anwendung des Kernel Tricks}
+\label{ch:MethodenDerDimRed:traditionell:kPCA:AnwendungKernelTrick}
+Damit man den Kernel Trick anwenden kann, muss die Hauptkomponentenanalyse in eine Form gebracht werden, in der nur Skalarprodukte vorkommen, sodass alle Skalarprodukte durch die Kernel Funktion ersetzt werden können \parencite[586]{Bishop.2006}.
+
+
+\subsubsection{Algorithmus}
+\label{ch:MethodenDerDimRed:traditionell:kPCA:Algorithmus}
+\ldots
+
 
 
 %% ==============================
