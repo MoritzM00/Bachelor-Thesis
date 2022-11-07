@@ -146,11 +146,15 @@ $D$-dimensionalen Inputvektor $\rvect{x}$ haben (in diesem Beispiel ist $D = 12$
 
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:modern:AE:MathematischeFormulierung}
-Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^k$, der die linke Hälfte des Autoencoders entspricht und zum anderen den \newterm{Decoder} $g: \real^k \rightarrow \real^D$, der die rechte Hälfte des Autoencoders widerspiegelt ($k < D$). Das Ziel des Autoencoders ist es, dass der Outputvektor $\tilde{\rvect{x}}$ ungefähr dem Inputvektor entspricht und dabei eine sinnvolle Repräsentation im Bottleneck gelernt wird:
+Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^k$, der der linken Hälfte des Autoencoders entspricht und zum anderen den \newterm{Decoder} $g: \real^k \rightarrow \real^D$, der die rechte Hälfte des Autoencoders widerspiegelt ($k < D$). Das Ziel des Autoencoders ist es, dass der Outputvektor $\tilde{\rvect{x}}$ ungefähr dem Inputvektor entspricht und dabei eine sinnvolle Repräsentation im Bottleneck gelernt wird:
 \begin{equation}
 	\tilde{\rvect{x}} = g(f(\rvect{x})) \approx \rvect{x}
 \end{equation}
 Die Gefahr dabei ist, dass der Autoencoder bei zu großer Kapazität einfach die Identitätsfunktion ohne sinnvolle Repräsentation lernt.
+
+\subsubsection{Regularisierung}
+
+Um eine sinnvolle Repräsentation $\rvect{y}$ zu erhalten, muss der Autoencoder oftmals regularisiert, das heißt eingeschränkt, werden.
 
 
 \subsection{Variational Autoencoder}
