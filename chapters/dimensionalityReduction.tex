@@ -3,20 +3,15 @@
 \label{ch:Dimensionsreduktion}
 %% ==============================
 
-In diesem Kapitel wird auf die zentrale Idee hinter der Dimensionsreduktion und dafür spezifische Terminologie eingegangen. \ldots\rewrite{Hier auf die allgemeine Definition von Dimensionsreduktion und Terminologie eingehen}
-
-Hierbeich bezeichnet $D$ die hochdimensionale Dimension und $d$ die \newterm{intrinsische Dimension}.
-
-Ein wichtiges Teilgebiet der Dimensionsreduktion ist das Lernen von Mannigfaltigkeiten, welches auf der sogenannten \newterm{Mannigfaltigkeits-Hypothese} (engl. \textit{manifold hypothesis})\addref basiert. Diese besagt, dass
-reale \textit{hochdimensionale} Daten auf einer in diesem hochdimensionalen Raum eingebetteten Mannigfaltigkeit der Dimensionalität $d$ < $D$ liegen.\addref
+In diesem Kapitel wird auf die zentrale Idee hinter der Dimensionsreduktion und dafür spezifische Terminologie eingegangen.
+Die Dimensionsreduktion hat im Kern das Ziel der Abbildung eines hochdimensionalen Datensatzes auf eine niedrigdimensionale, sogenannte \newterm{latente} Repräsentation, wobei möglichst wenig Information über die Daten verloren gehen soll. Dies ist darin begründet, dass Daten oft nur künstlich hochdimensional sind, wie es oft bei Bildern oder Videos der Fall ist \addref (Clayton 2005). Eng damit verbunden ist die Idee, dass Daten auf einer sogenannten \newterm{Mannigfaltigkeit} liegen, welches ein wichtiges Teilgebiet der Dimensionsreduktion ist. Das Lernen von Mannigfaltigkeiten wird durch die \newterm{Mannigfaltigkeits-Hypothese} (engl. \textit{manifold hypothesis})\addref motiviert. Diese behauptet, dass
+reale \textit{hochdimensionale} Daten in sehr vielen Fällen auf einer in diesem hochdimensionalen Raum eingebetteten Mannigfaltigkeit $\mathcal{M}$ der Dimensionalität $d$ < $D$ liegen.\addref
 \missingfigure{Ekläre Mannigfaltigkeit mit einer AB}
+Hierbei bezeichnet $D$ die \newterm{extrinsische Dimension} des zugehörigen Merkmalsraumes $\mathcal{X}$ (welcher überlicherweise dem $\real^D$ entspricht) und $d$ bezeichnet die \newterm{intrinsische Dimension} der Daten, welche in diesem Kontext die Dimension der Mannigfaltigkeit $\mathcal{M}$ ist.
 
-Das Ziel der Dimensionsreduktion ist es also, diese Mannigfaltigkeit zu entdecken und die Daten in diese neue \textit{niedrigdimensionale} Repräsentation zu projizieren. Wir bezeichnen die hochdimensionale Repräsentation durch den $D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x_1}, \ldots, \rv{x_D})}$ und die niedrigdimensionale Repräsentation durch den $d$-dimensionalen Zufallsvektor $\rvect{y}$.
-$d$ wird auch als \newterm{intrinsische Dimension} bezeichnet. Liegt eine konkrete Stichprobe vor, so werden die einzelnen Stichproben $\vect{x}^{(i)}, i = 1,\ldots,n$ als Spaltenvektoren in der $n \times D$-Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die transformierten Daten in der Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet.
+Wir beziehen uns auf die hochdimensionale Repräsentation durch den $D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x_1}, \ldots, \rv{x_D})}$ und auf die niedrigdimensionale Repräsentation durch den $d$-dimensionalen Zufallsvektor $\rvect{y}$.
+Liegt eine konkrete Stichprobe vor, so werden die einzelnen Stichproben $\vect{x}^{(i)}, i = 1,\ldots,n$ als Spaltenvektoren in der $n \times D$ Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die transformierten Daten in der Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet.
 
-Wie wir in der Einleitung in \chapref{ch:Enleitung} gesehen haben, gibt es viele Gründe, wieso man dies tun möchte. Unter anderem können so sehr große Datenmengen reduziert und damit effizienter gespeichert werden, ohne dabei zu viel Informationen zu verlieren. Deswegen ist das Gebiets der Dimensionsreduktion ein immer noch aktuelles Forschungsthema, weshalb mittlerweile auch eine ganze Reihe an verschiedensten Methoden zur Dimensionsreduktion zur Verfügung stehen. Dem Anwender kann es mitunter schwerfallen, den richtigen Algorithmus auszuwählen, da es laut dem dem \newterm{No Free Lunch Theorem}\addref keinen \enquote{besten} Algorithmus für jede Situation gibt. Im nächsten Schritt (\chapref{ch:MethodenDerDimRed}) werden einige dieser Algorithmen vorgestellt.
-
-
-%Das Ziel der Dimensionsreduktion ist es nun, diesen Unterraum zu finden und die Daten in diese niedrigdimensionale Repräsentation zu projizieren, wobei möglichst wenig Informationen gegenüber der ursprünglichen (hochdimensionalen) Repräsentation verloren gehen sollen.
+Wie wir in der Einleitung in \chapref{ch:Enleitung} gesehen haben, gibt es viele Gründe, wieso man eine Reduktion der Dimension eines Datensatzes erreichen möchte. Unter anderem können so sehr große Datenmengen effizienter gespeichert werden, ohne dabei einen zu großen Informationensverlust zu erleiden. Deswegen ist das Gebiet der Dimensionsreduktion ein immer noch aktuelles Forschungsthema, weshalb mittlerweile auch eine ganze Reihe an verschiedensten Methoden zur Dimensionsreduktion zur Verfügung stehen. Dem Anwender kann es mitunter schwerfallen, den richtigen Algorithmus auszuwählen, da es laut dem dem \newterm{No Free Lunch Theorem}\addref keinen \enquote{besten} Algorithmus für jede Situation gibt. Im nächsten Schritt (\chapref{ch:MethodenDerDimRed}) werden einige dieser Algorithmen vorgestellt.
 
 \idea{generelle Ansätze grob formulieren, also nichtlinear vs. linear, topology vs. distance preservation, convex vs. non-convex}
