@@ -27,5 +27,5 @@ def plot_3d(points, points_color, title):
 def plot_2d(points, points_color, title):
     fig, ax = plt.subplots(figsize=(3, 3), facecolor="white", constrained_layout=True)
     fig.suptitle(title, size=16)
-    add_2d_scatter(ax, points, points_color)
+    plt.scatter(ax, points, points_color)
     plt.show()
