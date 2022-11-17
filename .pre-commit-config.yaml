@@ -3,3 +3,4 @@ repos:
     rev: V3.18
     hooks:
       - id: latexindent
+        args: [-l, -m, -s, -w]
