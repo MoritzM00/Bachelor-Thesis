@@ -3,15 +3,38 @@
 \label{ch:Dimensionsreduktion}
 %% ==============================
 
-In diesem Kapitel wird auf die zentrale Idee hinter der Dimensionsreduktion und dafür spezifische Terminologie eingegangen.
-Die Dimensionsreduktion hat im Kern das Ziel der Abbildung eines hochdimensionalen Datensatzes auf eine niedrigdimensionale, sogenannte \newterm{latente} Repräsentation, wobei möglichst wenig Information über die Daten verloren gehen soll. Dies ist darin begründet, dass Daten oft nur künstlich hochdimensional sind. Eng damit verbunden ist die Idee, dass Daten auf einer sogenannten \newterm{Mannigfaltigkeit}\footnote{Dabei wird hier der Begriff Mannigfaltigkeit eher umgangssprachlich und nicht in der abstrakten Definition aus der Topologie, einem Teilgebiet der Mathematik, verwendet.} liegen, welche der Grundbaustein eines wichtiges Teilgebietes der Dimensionsreduktion, nämlich dem Erlernen von Mannigfaltigkeiten \parencite{Cayton.2005} ist. Dieses Teilgebiet wird durch die \newterm{Mannigfaltigkeits-Hypothese} (engl. \textit{manifold hypothesis})\addref motiviert. Diese behauptet, dass
-reale \textit{hochdimensionale} Daten in sehr vielen Fällen auf einer in diesem hochdimensionalen Raum eingebetteten Mannigfaltigkeit $\mathcal{M}$ der Dimensionalität $d$ < $D$ liegen \parencite[vgl.][1]{Cayton.2005}. 
-\missingfigure{Ekläre Mannigfaltigkeit mit einer AB}
-Hierbei bezeichnet $D$ die \newterm{extrinsische Dimension} des zugehörigen Merkmalsraumes $\mathcal{X}$ (welcher überlicherweise dem $\real^D$ entspricht) und $d$ bezeichnet die \newterm{intrinsische Dimension} der Daten, welche in diesem Kontext die Dimension der Mannigfaltigkeit $\mathcal{M}$ ist.
+In diesem Kapitel wird auf die zentrale Idee hinter der Dimensionsreduktion und dafür spezifische
+Terminologie eingegangen. Die Dimensionsreduktion hat im Kern das Ziel der Abbildung eines
+hochdimensionalen Datensatzes auf eine niedrigdimensionale, sogenannte \newterm{latente}
+Repräsentation, wobei möglichst wenig Information über die Daten verloren gehen soll. Dies ist
+darin begründet, dass Daten oft nur künstlich hochdimensional sind. Eng damit verbunden ist die
+Idee, dass Daten auf einer sogenannten \newterm{Mannigfaltigkeit}\footnote{Dabei wird hier der
+	Begriff Mannigfaltigkeit eher umgangssprachlich und nicht in der abstrakten Definition aus der
+	Topologie, einem Teilgebiet der Mathematik, verwendet.} liegen, welche der Grundbaustein eines
+wichtiges Teilgebietes der Dimensionsreduktion, nämlich dem Erlernen von Mannigfaltigkeiten \parencite{Cayton.2005} ist. Dieses Teilgebiet wird durch die \newterm{Mannigfaltigkeits-Hypothese}
+(engl. \textit{manifold hypothesis})\addref motiviert. Diese behauptet, dass reale
+\textit{hochdimensionale} Daten in sehr vielen Fällen auf einer in diesem hochdimensionalen Raum
+eingebetteten Mannigfaltigkeit $\mathcal{M}$ der Dimensionalität $d$ < $D$ liegen \parencite[vgl.][1]{Cayton.2005}. \missingfigure{Ekläre Mannigfaltigkeit mit einer AB} Hierbei
+bezeichnet $D$ die \newterm{extrinsische Dimension} des zugehörigen Merkmalsraumes $\mathcal{X}$
+(welcher überlicherweise dem $\real^D$ entspricht) und $d$ bezeichnet die \newterm{intrinsische
+	Dimension} der Daten, welche in diesem Kontext die Dimension der Mannigfaltigkeit $\mathcal{M}$
+ist.
 
-Wir beziehen uns auf die hochdimensionale Repräsentation durch den $D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x_1}, \ldots, \rv{x_D})}$ und auf die niedrigdimensionale Repräsentation durch den $d$-dimensionalen Zufallsvektor $\rvect{y}$.
-Liegt eine konkrete Stichprobe vor, so werden die einzelnen Stichproben $\vect{x}^{(i)}, i = 1,\ldots,n$ als Spaltenvektoren in der $n \times D$ Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die transformierten Daten in der Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet.
+Wir beziehen uns auf die hochdimensionale Repräsentation durch den $D$-dimensionalen Zufallsvektor
+$\rvect{x} = \tr{(\rv{x_1}, \ldots, \rv{x_D})}$ und auf die niedrigdimensionale Repräsentation
+durch den $d$-dimensionalen Zufallsvektor $\rvect{y}$. Liegt eine konkrete Stichprobe vor, so
+werden die einzelnen Stichproben $\vect{x}^{(i)}, i = 1,\ldots,n$ als Spaltenvektoren in der $n
+	\times D$ Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die transformierten Daten in der
+Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet.
 
-Wie wir in der Einleitung in \chapref{ch:Enleitung} gesehen haben, gibt es viele Gründe, wieso man eine Reduktion der Dimension eines Datensatzes erreichen möchte. Unter anderem können so sehr große Datenmengen effizienter gespeichert werden, ohne dabei einen zu großen Informationensverlust zu erleiden. Deswegen ist das Gebiet der Dimensionsreduktion ein immer noch aktuelles Forschungsthema, weshalb mittlerweile auch eine ganze Reihe an verschiedensten Methoden zur Dimensionsreduktion zur Verfügung stehen. Dem Anwender kann es mitunter schwerfallen, den richtigen Algorithmus auszuwählen, da es laut dem dem \newterm{No Free Lunch Theorem}\addref (Wolpert 1997) keinen \enquote{besten} Algorithmus für jede Situation gibt. Im nächsten Schritt (\chapref{ch:MethodenDerDimRed}) werden einige dieser Algorithmen vorgestellt.
+Wie wir in der Einleitung in \chapref{ch:Enleitung} gesehen haben, gibt es viele Gründe, wieso man
+eine Reduktion der Dimension eines Datensatzes erreichen möchte. Unter anderem können so sehr große
+Datenmengen effizienter gespeichert werden, ohne dabei einen zu großen Informationensverlust zu
+erleiden. Deswegen ist das Gebiet der Dimensionsreduktion ein immer noch aktuelles Forschungsthema,
+weshalb mittlerweile auch eine ganze Reihe an verschiedensten Methoden zur Dimensionsreduktion zur
+Verfügung stehen. Dem Anwender kann es mitunter schwerfallen, den richtigen Algorithmus
+auszuwählen, da es laut dem dem \newterm{No Free Lunch Theorem}\addref (Wolpert 1997) keinen
+\enquote{besten} Algorithmus für jede Situation gibt. Im nächsten Schritt
+(\chapref{ch:MethodenDerDimRed}) werden einige dieser Algorithmen vorgestellt.
 
 \idea{generelle Ansätze grob formulieren, also nichtlinear vs. linear, topology vs. distance preservation, convex vs. non-convex}
