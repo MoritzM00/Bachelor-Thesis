@@ -5,12 +5,15 @@
 
 \idea{
 	\begin{enumerate}
-		\item Motivation anhand von Stable Diffusion ? -> Latent Diffusion Model
+		\item Motivation der Dimensionsreduktion darstellen (s. Kasten eins weiter unten)
 		\item Was ist Dimensionsreduktion in verständlichen Worten?
+		\item Vorteile von Dimensionsreduktion
+		\item Anwendungsgebiete, zB Stable Diffusion
 	\end{enumerate}
 }
 \idea{Wofür braucht man DimRed?
 	\begin{enumerate}
+		\item Curse of Dimensionality
 		\item Reduzierung des Speicheraufwands
 		\item Reduzierung des Rechenaufwands beim Training
 		\item Reduzierung von Overfitting
@@ -24,9 +27,25 @@
 
 	Wie grenze ich meine Arbeit davon ab?
 
-	Das Ziel meiner Arbeit darlegen
-
 	Wichtig: Andere DimRed Methoden nennen (die die nicht hier vorkommen) mit Verweis auf ein
 	entsprechendes Buch oder so}
 
-\idea{Schön wäre ein User Guide als Resultat: Für welche Probleme eignet sich welcher Algorithmus und warum? auf was muss man achten? + Vergleich von PCA mit linearem Autoencoder}
+Das Ziel dieser Arbeit ist es herauszufinden, ob modernere Methoden der Dimensionsreduktion wie zum
+Beispiel \newterm{Autoencoder} gegenüber traditionelleren Methoden wie die
+\newterm{Hauptkomponentenanalyse} (PCA) einen echten Vorteil durch die erhöhte Flexibilität
+erreichen können. Die hier vorgestellten Methoden sind die PCA, Kernel PCA sowie t-SNE \unsure{wie
+	nenne ich die Methoden hier? mit Abkürzungen oder ausgeschrieben, englisch/deutsch?}als Vertreter
+der traditionellen Methoden (\secref{ch:MethodenDerDimRed:traditionell}) und der Autoencoder,
+Variational Autoencoder sowie die Self-Organizing Maps als Vertreter der modernen Methoden
+(\secref{ch:MethodenDerDimRed:modern}). Darüber hinaus soll herausgearbeitet werden, wann sich
+bestimmte Algorithmen besser eignen als andere und dies begründet darlegt werden. Außerdem wird
+untersucht, inwiefern ein Autoencoder, der ausschließlich lineare Aktivierungsfunktionen benutzt,
+tatsächlich mit der Hauptkomponentenanalyse übereinstimmt.
+
+Die Arbeit gliedert sich wie folgt in drei Teile ein: Zuerst wird in
+\chapref{ch:Dimensionsreduktion} die Grundlage für das Verständnis der Dimensionsreduktionsmethoden
+gelegt, sowie wichtige Begrifflichkeiten erläutert. Im darauffolgenden
+\chapref{ch:MethodenDerDimRed} werden dann die einzelnen traditionellen und modernen Methoden
+vorgestellt. Anschließend werden die zwei Gruppen in einem empirischen Vergleich in
+\chapref{ch:Vergleich} gegenübergestellt und abgeschlossen wird die Arbeit mit einem Fazit in
+\chapref{ch:Schluss}.
