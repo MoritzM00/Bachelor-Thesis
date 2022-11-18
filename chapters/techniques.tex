@@ -190,13 +190,10 @@ Bottleneck-Schicht möglichst verlustfrei zu rekonstruieren \parencites[502]{Goo
 beispielhafte Architektur eines Autoencoders mit fünf Schichten und dreidimensionalem Bottleneck.
 Nehmen wir nun wieder an, dass wir einen $D$-dimensionalen Inputvektor $\rvect{x}$ haben (in diesem
 Beispiel ist $D = 12$), dann muss der Autoencoder lernen, $\rvect{x}$ zu kodieren, wobei in der
-Mitte des Autoencoders die niedrigdimensionale Repräsentation $\rvect{y}$ gelernt wird.\footnote{Im
-	Kontext von Autoencodern wird die Bottleneck-Schicht (und damit die niedrigdimensionale
-	Repräsentation) auch mit $\rvect{h}$ bezeichnet, da es sich um eine bestimmte \textit{versteckte}
-	Schicht des neuronalen Netzwerks handelt.} Die Größe $k$ des Bottlenecks bestimmt, wie stark die
-Dimensionsreduktion sein soll. In \figref{fig:5-layer-Autoencoder} ist $k = 3$. Dies bedeutet, dass
-durch den Autoencoder eine um den Faktor 4 reduzierte niedrigdimensionale Repräsentation gelernt
-werden soll.
+Mitte des Autoencoders die niedrigdimensionale Repräsentation $\rvect{y}$ gelernt wird. Die Größe
+$k$ des Bottlenecks bestimmt, wie stark die Dimensionsreduktion sein soll. In
+\figref{fig:5-layer-Autoencoder} ist $k = 3$. Dies bedeutet, dass durch den Autoencoder eine um den
+Faktor 4 reduzierte niedrigdimensionale Repräsentation gelernt werden soll.
 \begin{figure}[h]
 	\label{fig:5-layer-Autoencoder}
 	\begin{center}
@@ -207,7 +204,7 @@ werden soll.
 
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:modern:AE:MathematischeFormulierung}
-Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^k$, der den Inputvektor in die niedrigdimensionale Repräsentation codiert und zum anderen den \newterm{Decoder} $g: \real^k \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Das Ziel des Autoencoders ist es, dass der Outputvektor $\tilde{\rvect{x}}$ ungefähr dem Inputvektor entspricht und dabei eine sinnvolle Repräsentation im Bottleneck gelernt wird:
+Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^k$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ codiert und zum anderen den \newterm{Decoder} $g: \real^k \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Das Ziel des Autoencoders ist es, dass der Outputvektor $\tilde{\rvect{x}}$ ungefähr dem Inputvektor entspricht und dabei eine sinnvolle Repräsentation im Bottleneck gelernt wird:
 \begin{equation}
 	\tilde{\rvect{x}} = g(f(\rvect{x})) \approx \rvect{x}
 \end{equation}
