@@ -25,7 +25,9 @@ $\rvect{x} = \tr{(\rv{x_1}, \ldots, \rv{x_D})}$ und auf die niedrigdimensionale 
 durch den $d$-dimensionalen Zufallsvektor $\rvect{y}$. Liegt eine konkrete Stichprobe vor, so
 werden die einzelnen Stichproben $\vect{x}^{(i)}, i = 1,\ldots,n$ als Spaltenvektoren in der $n
 	\times D$ Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die transformierten Daten in der
-Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet.
+Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet. Wir werden annehmen, dass die Datenmatrix
+$\mat{X}$ \textit{zentriert} ist. Dies kann jederzeit durch Subtraktion des Erwartungswertes einer
+Variable $x_i$ von Spalte $i$ sichergestellt werden.
 
 Wie wir in der Einleitung in \chapref{ch:Enleitung} gesehen haben, gibt es viele Gründe, wieso man
 eine Reduktion der Dimension eines Datensatzes erreichen möchte. Unter anderem können so sehr große
