@@ -19,10 +19,17 @@ empirischen Vergleichs vorgestellt.
 \subsection{Allgemeines Vorgehen}
 \label{ch:Vergleich:sec:Methodik:subsec:AllgemeinesVorgehen}
 
-\idea{Wie vergleicht man die unterschiedlichen Methoden?
-	Rekonstruktionsfehler alleine ist wenig aussagekräftig
+\idea{
+	Verschiedene Gütemaße nennen und begründet auswählen
 
-	Generalisierungsfehler eines 1-NN Klassifizieres wie Maaten 2009 }
+	Mögliche Gütemaße sind
+	\begin{enumerate}
+		\item Generalisierungsfehler eines 1-NN Klassifizieres wie Maaten.2009
+		\item Trustworthiness und Continuity
+		\item Co-Ranking Matrix + viele darauf basierende Maße (Lee.2009)
+		\item Correlation Dimension
+	\end{enumerate}
+}
 
 \idea{Vergleich von PCA mit Autoencoder
 
@@ -31,6 +38,8 @@ empirischen Vergleichs vorgestellt.
 
 \subsection{Schätzen der intrinsischen Dimension}
 \label{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim}
+
+\idea{sehr mathematisch im Detail, Maaten.2009 benutzt den MLE-Schätzer (Levina 2004). Dazu tendiere ich momentan auch}
 
 \section{Verwendete Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze}
