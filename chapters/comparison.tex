@@ -7,44 +7,58 @@ In \chapref{ch:Dimensionsreduktion} haben wir grundlegende Begriffe geklärt und
 \chapref{ch:MethodenDerDimRed} sechs Methoden der Dimensionsreduktion näher betrachtet. Im jetzigen
 Kapitel möchten wir die traditionellen Methoden aus \secref{ch:MethodenDerDimRed:traditionell} mit
 den modernen Methoden aus \secref{ch:MethodenDerDimRed:modern} vergleichen. Dazu gehen wir in
-\secref{ch:Vergleich:sec:Methodik} auf die Methodik ein, wobei wir uns unter anderem kurz
-anschauen, wie man die intrinsische Dimension schätzen kann. In
-\secref{ch:Vergleich:sec:VerwendeteDatensaetze} werden die beim Vergleich verwendeten Datensätze
-vorgestellt und anschließend werden in \secref{ch:Vergleich:sec:Resultate} die Ergebnisse des
+\secref{ch:Vergleich:sec:Methodik} auf die Methodik ein, wobei hier unterschiedliche
+Qualitätskriterien und Methoden zur Schätzung der intrinsischen Dimension betrachtet werden. In
+\secref{ch:Vergleich:sec:VerwendeteDatensaetze} wird auf die im Vergleich verwendeten Datensätzen
+eingegangen und anschließend werden in \secref{ch:Vergleich:sec:Resultate} die Ergebnisse des
 empirischen Vergleichs vorgestellt.
 
 \section{Methodik}
 \label{ch:Vergleich:sec:Methodik}
 
-\subsection{Allgemeines Vorgehen}
-\label{ch:Vergleich:sec:Methodik:subsec:AllgemeinesVorgehen}
+In diesem Abschnitt wird auf die Methodik des Vergleichs der Dimensionsreduktionsmethoden
+eingegangen. Dazu werden in \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} die
+hier verwendeten Qualitätskriterien einer Dimensionsreduktion genauer betrachtet. Des Weiteren wird
+in \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} kurz die
+nicht-triviale Schätzung der intrinsischen Dimension behandelt.\todo{hier noch kurz auf das
+	allgemeine Setup eingehen und PCA-AE Vergleich erwähnen} \idea{Vergleich von PCA mit Autoencoder
+
+	Hier könnte man vor allem untersuchen, inwiefern ein Autoencoder mit linearen Akt.Funktionen PCA
+	identisch ist, sowie schrittweise Nichtlinearität hinzunehmen }
+\subsection{Qualitätskriterien der Dimensionsreduktion}
+\label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien}
+Trotz des immensen Forschungsinteresses für Methoden der Dimensionsreduktion, so sind Qualitätskriterien, die die Güte einer Dimensionsreduktion beschreiben, vergleichsweise wenig erforscht. Deshalb gibt es keine eindeutige Kennzahl, die bei einem Vergleich von Dimensionsreduktionsmethoden eingesetzt wird.\todo{hier noch auf den naheliegenden Rekonstruktionsfehler eingehen + erklären wieso er nicht sehr aussagekräftig ist}
+
+Im ausführlichen Benchmark von \textcite{vanderMaaten.2009} wird auf den Generalisierungsfehler
+eines 1-Nächste-Nachbar Klassifikators, sowie auf die zwei Kennzahlen \newterm{Trustworthiness} und
+\newterm{Continuity} gesetzt. Daneben gibt es noch viele weitere Kennzahlen, die auf der
+sogenannten \newterm{Co-Ranking Matrix} basieren \parencite{Lee.2009}.
+
+\ldots
+
+\subsubsection{Die Co-Ranking Matrix}
+\subsubsection{Trustworthiness und Continuity}
 
 \idea{
-	Verschiedene Gütemaße nennen und begründet auswählen
-
 	Mögliche Gütemaße sind
 	\begin{enumerate}
-		\item Generalisierungsfehler eines 1-NN Klassifizieres wie \textcite{vanderMaaten.2009}
+		\item Generalisierungsfehler eines 1-NN Klassifikators wie \textcite{vanderMaaten.2009}
 		\item Trustworthiness und Continuity
 		\item Co-Ranking Matrix + viele darauf basierende Maße \parencite{Lee.2009}
 		\item Correlation Dimension
 	\end{enumerate}
 }
 
-\idea{Vergleich von PCA mit Autoencoder
-
-	Hier könnte man vor allem untersuchen, inwiefern ein Autoencoder mit linearen Akt.Funktionen PCA
-	identisch ist, sowie schrittweise Nichtlinearität hinzunehmen}
-
 \subsection{Schätzen der intrinsischen Dimension}
 \label{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim}
 
-\idea{sehr mathematisch im Detail, Maaten.2009 benutzt den MLE-Schätzer \parencite{Levina.2004}. Dazu tendiere ich momentan auch}
+\idea{sehr mathematisch im Detail, Maaten.2009 benutzt den MLE-Schätzer
+	\parencite{Levina.2004}. Dazu tendiere ich momentan auch }
 
 \section{Verwendete Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze}
 \idea{Es gibt viele Standard-Benchmark Datensätze die in anderen Arbeiten verwendet werden. Vlt ist es sinnvoll, 1-2 davon auch hier reinzunehmen für die Vergleichbarkeit, und dann 1-2 neue Datensätze,
 
-	insgesamt vlt 2 künstliche Datensätze und 4 real-world Datensätze}
+	insgesamt vlt 2 künstliche Datensätze und 4 real-world Datensätze }
 \section{Resultate}
 \label{ch:Vergleich:sec:Resultate}
