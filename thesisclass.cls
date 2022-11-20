@@ -38,12 +38,20 @@
 % see http://www.ctan.org/tex-archive/macros/latex/contrib/algorithm2e/algorithm2e.pdf
 % for more sophisticated algorithm listings
 
+\usepackage{hyperref}
 % hyperref config for online version
 %\usepackage[colorlinks=false,linkbordercolor=white]{hyperref}
-\usepackage[colorlinks]{hyperref}
+%\usepackage[colorlinks]{hyperref}
 
 % hyperref config for paper version
 %\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
 						
 %% IM Packages
 \usepackage{setspace} % 1.5 line spacing
