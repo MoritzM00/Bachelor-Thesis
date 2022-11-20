@@ -204,11 +204,11 @@ Faktor 4 reduzierte niedrigdimensionale Repräsentation gelernt werden soll.
 
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:modern:AE:MathematischeFormulierung}
-Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^k$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ codiert und zum anderen den \newterm{Decoder} $g: \real^k \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Das Ziel des Autoencoders ist es, dass der Outputvektor $\tilde{\rvect{x}}$ ungefähr dem Inputvektor entspricht und dabei eine sinnvolle Repräsentation im Bottleneck gelernt wird:
+Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^k$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ codiert und zum anderen den \newterm{Decoder} $g: \real^k \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Das Ziel des Autoencoders ist es, den Inputvektor zu rekonstruieren und dabei eine sinnvolle Repräsentation im Bottleneck zu lernen:
 \begin{equation}
 	\tilde{\rvect{x}} = g(f(\rvect{x})) \approx \rvect{x}
 \end{equation}
-Die Gefahr dabei ist jedoch, dass der Autoencoder bei zu großer Kapazität einfach die Identitätsfunktion ohne sinnvolle Repräsentation lernt. Dies ist zum Beispiel der Fall, wenn zu viele Schichten eingesetzt werden und der Autoencoder einfach den Inputvektor auf Indizes mappt.
+Die Gefahr dabei ist jedoch, dass der Autoencoder bei zu großer Kapazität einfach die Identitätsfunktion ohne sinnvolle Repräsentation lernt. Dies ist zum Beispiel der Fall, wenn zu viele Schichten eingesetzt werden und der Autoencoder einfach die Inputvektoren auf Indizes abbildet. Aus diesem Grund muss ein Autoencoder oftmals regularisiert werden, worauf im nächsten Unterabschnitt eingegangen wird.
 
 \subsubsection{Regularisierung}
 
