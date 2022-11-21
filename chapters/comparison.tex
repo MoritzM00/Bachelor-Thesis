@@ -45,17 +45,43 @@ Im Folgenden werden die in dieser Arbeit verwendeten Qualitätskriterien kurz vo
 
 \subsubsection{Vertrauenswürdigkeit und Kontinuität}
 Diese beiden Kennzahlen basieren auf der Idee des Erhalts von Nachbarschaften (engl.
-\textit{neighborhood preservation}) einer Dimensionsreduktion. Eine $k$-Nachbarschaft $N_k(i)$
-eines Punktes $\vect{x}_i$ ist definiert als die Menge der $k$-nächsten Punkte zu $\vect{x}_i$.
-Diese Nachbarschaft wird in einer Dimensionsreduktion erhalten, wenn sich die Menge nicht ändert,
-das heißt kein Punkt verlässt die Nachbarschaft und es kommt auch kein anderer neuer Punkt hinzu.
+\textit{neighborhood preservation}) einer Dimensionsreduktion. Eine $k$-Nachbarschaft
+$\set{M}_k(i)$ eines Punktes $\vect{x}_i$ ist definiert als die Menge der $k$-nächsten Punkte zu
+$\vect{x}_i$ ($i = 1, \ldots, n$). Analog kann die $k$-Nachbarschaft $\widetilde{\set{M}}_k(i)$ des
+dazugehörigen niedrigdimensionalen Punktes $\vect{y}_i$ definiert werden. Diese Nachbarschaft wird
+in einer Dimensionsreduktion erhalten, wenn $\set{M}_k(i) = \widetilde{\set{M}}_k(i)$, das heißt
+die Nachbarschaften bleiben von der Dimensionsreduktion unverändert.
 
-Zum einen kann es passieren, dass Punkte, die \textit{vor} der Projektion weit weg voneinander
+Zum einen kann es nun passieren, dass Punkte, die \textit{vor} der Projektion weit weg voneinander
 lagen, \textit{nach} der Projektion aber nah beieinander sind. Mit anderen Worten können Punkte,
 die eigentlich unterschiedlich sind, nun ähnlich erscheinen. Aus diesem Grund sagt man, dass die
 Vertrauenswürdigkeit der Dimensionsreduktion niedrig ist. Zum anderen ist der gegenteilige Fall
 möglich. Nah beieinander liegende Punkte sind nach der Projektion weit weg voneinander. Dies
 reduziert die Kontinuität einer Dimensionsreduktion \parencite[486 -- 487]{Venna.2001}.
+
+Formal definiert man zusätzlich zu den Nachbarschaftsmengen von oben die beiden Mengen
+$\set{U}_k(i)$ und $\set{V}_k(i)$ wie folgt:
+\begin{gather}
+	\set{U}_k(i) =  \left\{ \vect{y}_j\, |\, \vect{x}_j \notin \set{M}_k(i) \land \vect{y}_j \in \widetilde{\set{M}}_k(i) \right\} \\
+	\set{V}_k(i) =  \left\{ \vect{x}_j\, |\, \vect{x}_j \in \set{M}_k(i) \land \vect{y}_j \notin \widetilde{\set{M}}_k(i) \right\}
+\end{gather}
+Diese beiden Mengen bilden lediglich die zwei intuitiv besprochenen Fälle im vorherigen Absatz mathematisch ab. Hierbei entspricht $\set{U}_k(i)$ dem ersten und $\set{V}_k(i)$ dem zweiten Fall.
+Damit kann die Vertrauenswürdigkeit $T_k$ als
+\begin{equation}
+	T_k = 1 - \frac{2}{nk(2n - 3k - 1)} \sum_{i = 1}^{n}\sum_{\vect{y}_j \in \set{U}_k(i) } \left( r(\vect{y}_i, \vect{y}_j) - k \right)
+\end{equation}
+definiert werden \parencite[487]{Venna.2001}, wobei $r(\vect{y}_i, \vect{y}_j)$ den Rang von $\vect{y}_j$ bezeichnet,
+wenn die Datenpunkte absteigend nach der euklidischen Distanz von $\vect{y}_i$ geordnet sind. Der
+Term vor der Summation skaliert das Qualitätskriterium so, dass $0 \leq T_k \leq 1$
+gilt.\footnote{Dies gilt nur für den Fall, dass $k < n/2$ gilt.} Ein Wert von $T_k = 1­$ spricht
+für eine hohe Vertrauenswürdigkeit.
+
+Analog wird die Kontinuität $C_k$ über $\set{V}_k(i)$ wie folgt definiert:
+\begin{equation}
+	C_k = 1 - \frac{2}{nk(2n - 3k - 1)} \sum_{i = 1}^{n}\sum_{\vect{x}_j \in \set{V}_k(i) } \left( r(\vect{x}_i, \vect{x}_j) - k \right)
+\end{equation}
+wobei $r(\vect{x}_i, \vect{x}_j)$ nun den Rang zwischen den Datenpunkten in der hochdimensionalen Repräsentation bezeichnet \parencite[487]{Venna.2001}. Auch hier gilt $0 \leq C_k \leq 1$ und höher ist besser. Die Kontinuität
+misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden.
 
 \subsubsection{Die Co-Ranking Matrix}
 \unsure{Welche Gütemaße, die auf dieser Matrix basieren verwende ich?}
