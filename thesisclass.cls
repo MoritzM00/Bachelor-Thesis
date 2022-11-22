@@ -107,7 +107,7 @@
 \renewcommand{\chaptermark}[1]{%
     \markboth{\MakeUppercase{\thechapter.\ #1}}{}}
 \fancyhf{}
-%\fancyhead[L]{\headfont\nouppercase{\rightmark}}
+%\fancyhead[L]{\headfont\nouppercase{\rightmark}} % this causes problems with TOC and symbols list
 \fancyhead[R]{\headfont\leftmark}   % Header for onesided Version
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
