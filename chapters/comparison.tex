@@ -82,10 +82,25 @@ Analog wird die Kontinuität $C_k$ über $\set{V}_k(i)$ wie folgt definiert:
 	C_k = 1 - \frac{2}{nk(2n - 3k - 1)} \sum_{i = 1}^{n}\sum_{j \in \set{V}_k(i) } \left( r(i, j) - k \right)
 \end{equation}
 wobei $r(i, j)$ nun den Rang zwischen den Datenpunkten in der hochdimensionalen Repräsentation bezeichnet \parencite[487]{Venna.2001}. Auch hier gilt $0 \leq C_k \leq 1$ und höher ist besser. Die Kontinuität
-misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden.
+misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden. \idea{Man könnte die
+	Gesamtqualität dann auch als den Mittelwert der beiden Kennzahlen T\&C definieren \parencite[1435]{Lee.2009}}
 
 \subsubsection{Die Co-Ranking Matrix}
-\unsure{Welche Gütemaße, die auf dieser Matrix basieren verwende ich?}
+Ein Eintrag $q_{kl}$ der Co-Ranking Matrix $\mat{Q}$ ist die Anzahl der Paare von Datenpunkten $(i,
+	j)$, die den Rang $r(i, j) = k$ in der hochdimensionalen und den Rang $\tilde{r}(i, j) = l$ in der
+niedrigdimensionalen Repräsentation haben.
+
+\idea{Welche Gütemaße, die auf dieser Matrix basieren verwende ich?
+	Diese werden in \textcite{Lee.2009} vorgestellt, darunter
+	\begin{enumerate}
+		\item local continuity meta criterion (LCMC)
+		\item Mean relative Rank error (ähnliche Idee wie T\&C)
+		\item andere Kennzahlen, die jeweils unterschiedliche Teile der Co-Ranking Matrix betrachten. Um diese zu
+		      verstehen, muss man noch weitere Begriffe wie (milde, harte) ($k$)-Intrusionen und Extrusionen
+		      erklären. Kann dann relativ lang werden dieser Abschnitt
+	\end{enumerate}
+	LCMC fokussiert mehr darauf was in einer Projektion gut läuft (T\&C fokussieren auf das was schlecht läuft). Und es hat den Vorteil nur ein einziger Skalar zu sein.
+}
 
 \subsection{Schätzen der intrinsischen Dimension}
 \label{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim}
