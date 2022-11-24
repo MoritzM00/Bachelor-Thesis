@@ -48,10 +48,10 @@ Diese beiden Kennzahlen basieren auf der Idee des Erhalts von Nachbarschaften (e
 \textit{neighborhood preservation}) einer Dimensionsreduktion. Sie bilden also ab, wie gut die
 lokale Struktur erhalten wird. Eine $K$-Nachbarschaft $\set{M}_i(K)$ eines Punktes $\vect{x}^{(i)}$
 ist definiert als die Menge der Indizes\unsure{Nachbarschaft als Menge der Indizes oder Vektoren
-	definieren? je nachdem muss ich dann auch unten die Mengen U und V anpassen, so wie es jetzt gerade
-	ist, ist es falsch} der $K$-nächsten Punkte zu $\vect{x}_i$ ($i = 1, \ldots, n$). Analog kann die
-$K$-Nachbarschaft $\widetilde{\set{M}}_i(K)$ des dazugehörigen niedrigdimensionalen Punktes
-$\vect{y}_i$ definiert werden. Diese Nachbarschaft wird in einer Dimensionsreduktion erhalten, wenn
+	definieren? je nachdem muss ich dann auch unten die Mengen U und V anpassen} der $K$-nächsten
+Punkte zu $\vect{x}^{(i)}$ ($i = 1, \ldots, n$). Analog kann die $K$-Nachbarschaft
+$\widetilde{\set{M}}_i(K)$ des dazugehörigen niedrigdimensionalen Punktes $\vect{y}^{(i)}$
+definiert werden. Diese Nachbarschaft wird in einer Dimensionsreduktion erhalten, wenn
 $\set{M}_i(K) = \widetilde{\set{M}}_i(K)$, das heißt die Nachbarschaften bleiben von der
 Dimensionsreduktion unverändert.
 
@@ -65,8 +65,8 @@ reduziert die Kontinuität einer Dimensionsreduktion \parencite[486 -- 487]{Venn
 Formal definiert man zusätzlich zu den Nachbarschaftsmengen von oben die beiden Mengen
 $\set{U}_i(K)$ und $\set{V}_i(K)$ wie folgt:
 \begin{gather}
-	\set{U}_i(K) =  \left\{ j\, |\, \vect{x}_j \notin \set{M}_i(K) \land \vect{y}_j \in \widetilde{\set{M}}_i(K) \right\} \\
-	\set{V}_i(K) =  \left\{ j\, |\, \vect{x}_j \in \set{M}_i(K) \land \vect{y}_j \notin \widetilde{\set{M}}_i(K) \right\}
+	\set{U}_i(K) =  \left\{ j \mid j \notin \set{M}_i(K) \land j \in \widetilde{\set{M}}_i(K) \right\} \\
+	\set{V}_i(K) =  \left\{ j \mid j \in \set{M}_i(K) \land j \notin \widetilde{\set{M}}_i(K) \right\}
 \end{gather}
 Diese beiden Mengen bilden lediglich die zwei intuitiv besprochenen Fälle im vorherigen Absatz mathematisch ab. Hierbei entspricht $\set{U}_i(K)$ dem ersten und $\set{V}_i(K)$ dem zweiten Fall.
 Damit kann die Vertrauenswürdigkeit $T(K)$ als
@@ -74,9 +74,9 @@ Damit kann die Vertrauenswürdigkeit $T(K)$ als
 	T(K) = 1 - \frac{2}{nK(2n - 3K - 1)} \sum_{i = 1}^{n}\sum_{j \in \set{U}_i(K) } \left( \tilde{r}(i, j) - K \right)
 \end{equation}
 definiert werden \parencite[487]{Venna.2001}, wobei $\tilde{r}(i, j)$ den Rang von des niedrigdimensionalen Vektors
-$\vect{y}_j$ bezeichnet, wenn die Datenpunkte absteigend nach der euklidischen Distanz von
-$\vect{y}_i$ geordnet sind. Der Term vor der Summation skaliert das Qualitätskriterium so, dass $0
-	\leq T(K) \leq 1$ gilt.\footnote{Dies gilt nur für den Fall, dass $k < n/2$ gilt.} Ein Wert von
+$\vect{y}^{(j)}$ bezeichnet, wenn die Datenpunkte absteigend nach der euklidischen Distanz von
+$\vect{y}^{(i)}$ geordnet sind. Der Term vor der Summation skaliert das Qualitätskriterium so, dass
+$0 \leq T(K) \leq 1$ gilt.\footnote{Dies gilt nur für den Fall, dass $k < n/2$ gilt.} Ein Wert von
 $T(K) = 1­$ spricht für eine hohe Vertrauenswürdigkeit.
 
 Analog wird die Kontinuität $C(K)$ über $\set{V}_i(K)$ wie folgt definiert:
