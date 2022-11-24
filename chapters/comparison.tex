@@ -46,12 +46,14 @@ Im Folgenden werden die in dieser Arbeit verwendeten Qualitätskriterien kurz vo
 \subsubsection{Vertrauenswürdigkeit und Kontinuität}
 Diese beiden Kennzahlen basieren auf der Idee des Erhalts von Nachbarschaften (engl.
 \textit{neighborhood preservation}) einer Dimensionsreduktion. Sie bilden also ab, wie gut die
-lokale Struktur erhalten wird. Eine $K$-Nachbarschaft $\set{M}_i(K)$ eines Punktes $\vect{x}_i$ ist
-definiert als die Menge der Indizes der $K$-nächsten Punkte zu $\vect{x}_i$ ($i = 1, \ldots, n$).
-Analog kann die $K$-Nachbarschaft $\widetilde{\set{M}}_i(K)$ des dazugehörigen niedrigdimensionalen
-Punktes $\vect{y}_i$ definiert werden. Diese Nachbarschaft wird in einer Dimensionsreduktion
-erhalten, wenn $\set{M}_i(K) = \widetilde{\set{M}}_i(K)$, das heißt die Nachbarschaften bleiben von
-der Dimensionsreduktion unverändert.
+lokale Struktur erhalten wird. Eine $K$-Nachbarschaft $\set{M}_i(K)$ eines Punktes $\vect{x}^{(i)}$
+ist definiert als die Menge der Indizes\unsure{Nachbarschaft als Menge der Indizes oder Vektoren
+	definieren? je nachdem muss ich dann auch unten die Mengen U und V anpassen, so wie es jetzt gerade
+	ist, ist es falsch} der $K$-nächsten Punkte zu $\vect{x}_i$ ($i = 1, \ldots, n$). Analog kann die
+$K$-Nachbarschaft $\widetilde{\set{M}}_i(K)$ des dazugehörigen niedrigdimensionalen Punktes
+$\vect{y}_i$ definiert werden. Diese Nachbarschaft wird in einer Dimensionsreduktion erhalten, wenn
+$\set{M}_i(K) = \widetilde{\set{M}}_i(K)$, das heißt die Nachbarschaften bleiben von der
+Dimensionsreduktion unverändert.
 
 Zum einen kann es nun passieren, dass Punkte, die \textit{vor} der Projektion weit weg voneinander
 lagen, \textit{nach} der Projektion aber nah beieinander sind. Mit anderen Worten können Punkte,
