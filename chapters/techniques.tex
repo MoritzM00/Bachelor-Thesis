@@ -116,17 +116,19 @@ kurz mit der konkreten Vorgehensweise bei der Kernel PCA.
 \label{ch:MethodenDerDimRed:traditionell:kPCA:Grundidee}
 
 Die Grundidee der Kernel PCA ist es, die Daten mithilfe einer Abbildung $\bm{\phi}$ in einen Raum
-$\mathcal{H}$ abzubilden, der nichtlinear mit dem Merkmalsraum\unsure{vlt hier einfach $\real^D$
+$\mathcal{H}$ abzubilden, der nichtlinear mit dem Ursprungsraum \unsure{vlt hier einfach $\real^D$
 	anstelle von $\mathcal{X}$ benutzen um Verwirrung zu vermeiden. Vlt muss ich dafür auch die
 	Begriffe eindeutiger definieren (feature space und input space)} $\mathcal{X}$ von $\rvect{x}$
-verbunden ist. Die Motivation dahinter ist, dass die Daten in $\mathcal{X}$ auf einer
-\textit{nichtlinearen} Mannigfaltigkeit liegen können, während sie in $\mathcal{H}$ auf einer
-\textit{linearen} Mannigfaltigkeit liegen und damit für lineare Dimensionsreduktionsmethoden wie
-PCA geeignet sind. Nach der Transformation wird also die lineare Hauptkomponentenanalyse
-durchgeführt, um damit die niedrigdimensionale Repräsentation $\rvect{y}$ zu erhalten. Der
-entscheidene Punkt ist jedoch, dass man diesen \enquote{Umweg} über die Abbildung $\bm{\phi}$ nicht
-konkret berechnen muss, sondern mithilfe einer Kernel-Funktion $\kappa: \mathcal{X} \times
-	\mathcal{X} \rightarrow \real$ implizit miteinbeziehen kann \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Dies ist die Eleganz der Kernel-Methoden wie
+verbunden ist. Der Raum $\mathcal{H}$ wird in diesem Kontext auch Merkmalsraum (engl.
+\textit{feature space}) genannt und kann potentiell sehr hochdimensional sein. Die Motivation
+dahinter ist, dass die Daten in $\mathcal{X}$ auf einer \textit{nichtlinearen} Mannigfaltigkeit
+liegen können, während sie in $\mathcal{H}$ auf einer \textit{linearen} Mannigfaltigkeit liegen und
+damit für lineare Dimensionsreduktionsmethoden wie PCA geeignet sind. Nach der Transformation wird
+also die lineare Hauptkomponentenanalyse durchgeführt, um damit die niedrigdimensionale
+Repräsentation $\rvect{y}$ zu erhalten. Der entscheidene Punkt ist jedoch, dass man diesen
+\enquote{Umweg} über die Abbildung $\bm{\phi}$ nicht konkret berechnen muss, sondern mithilfe einer
+Kernel-Funktion $\kappa: \mathcal{X} \times \mathcal{X} \rightarrow \real$ implizit miteinbeziehen
+kann \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Dies ist die Eleganz der Kernel-Methoden wie
 Kernel PCA und daher kommt auch die Bezeichnung \textit{Kernel Trick}.\missingfigure{hier könnte
 	eine bildliche Beschreibung sehr gut passen}
 
