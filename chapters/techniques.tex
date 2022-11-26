@@ -68,7 +68,7 @@ Dimensionsreduktion, kann jedoch beliebig zwischen $1 \leq k \leq D$ gewählt we
 Wir betrachten nun zunächst lediglich die \textit{erste} Hauptkomponente $\tr{\vect{a}_1} \rvect{x}$ und erinnern uns daran, dass wir wie in \subsecref{ch:MethodenDerDimRed:traditionell:PCA:Grundidee} erwähnt möglichst viel Variation von $\rvect{x}$ erhalten möchten. Daher maximieren wir die erste Hauptkomponente so, dass die Varianz maximal wird:
 \begin{equation}
 	\label{eq:PCA-Optimierungsproblem}
-	\max_\vect{a_1} \Var \left( \tr{\vect{a}_1} \rvect{x} \right) = \max_\vect{a_1} \tr{\vect{a}_1} \mat{\Sigma} \vect{a}_1
+	\max_{\vect{a}_1} \Var \left( \tr{\vect{a}_1} \rvect{x} \right) = \max_{\vect{a}_1} \tr{\vect{a}_1} \mat{\Sigma} \vect{a}_1
 \end{equation}
 wobei $\mat{\Sigma}$ die Kovarianzmatrix von $\rvect{x}$ ist. Dieses Maximierungsproblem ist jedoch nach oben unbeschränkt, weshalb man zusätzlich die Bedingung
 \begin{equation}
