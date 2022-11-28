@@ -14,17 +14,17 @@ Ursprungsraumes $\mathcal{X}$ (welcher üblicherweise dem $\real^D$ entspricht) 
 die \newterm{intrinsische Dimension} der Daten. Die intrinsische Dimension wird teilweise auch als
 latente Dimension bezeichnet.
 
-Wir beziehen uns also auf die ursprüngliche (hochdimensionale) Repräsentation durch den
-$D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x_1}, \ldots, \rv{x_D})}$ und auf die latente
-(niedrigdimensionale) Repräsentation durch den $d$-dimensionalen Zufallsvektor $\rvect{y}$. Liegt
-eine konkrete Stichprobe vor, so werden die einzelnen Stichproben $\vect{x}^{(i)}, i = 1,\ldots,n$
-als Spaltenvektoren in der $n \times D$ Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die
-transformierten Daten in der Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet. Wir werden
-annehmen, dass die Datenmatrix $\mat{X}$ \textit{zentriert} ist. Dies kann jederzeit durch
+Formell wird die ursprüngliche (hochdimensionale) Repräsentation mit dem $D$-dimensionalen
+Zufallsvektor $\rvect{x} = \tr{(\rv{x_1}, \ldots, \rv{x_D})}$ und die latente (niedrigdimensionale)
+Repräsentation mit dem $d$-dimensionalen Zufallsvektor $\rvect{y}$ gekennzeichnet. Liegt eine
+konkrete Stichprobe vor, so werden die einzelnen Stichproben $\vect{x}^{(i)}, i = 1,\ldots,n$ als
+Spaltenvektoren in der $n \times D$ Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die
+transformierten Daten in der Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet. Es wird
+angenommen, dass die Datenmatrix $\mat{X}$ \textit{zentriert} ist. Dies kann jederzeit durch
 Subtraktion des Erwartungswertes einer Variable $x_i$ von Spalte $i$ sichergestellt werden.
 
-Nachdem wir nun grundlegende Terminologie und das Ziel der Dimensionsreduktion geklärt haben, wird
-nun noch auf einige weitere wichtige Ideen der Dimensionsreduktion eingegangen. Dazu wird in
+Nachdem nun grundlegende Terminologie und das Ziel der Dimensionsreduktion geklärt wurde, wird nun
+noch auf einige weitere wichtige Ideen der Dimensionsreduktion eingegangen. Dazu wird in
 \secref{ch:Dimensionsreduktion:FluchDerDim} der Fluch der Dimensionalität sowie in
 \secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim} die Idee von Mannigfaltigkeiten und
 der intrinsischen Dimension behandelt. In \secref{ch:Dimensionsreduktion:Ansaetze} werden kurz
@@ -37,9 +37,9 @@ Merksmalsextrahierung (engl. \textit{feature extraction}) besprochen.
 \section{Mannigfaltigkeiten und intrinsische Dimension}
 \label{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim}
 
-Wie eingangs besprochen geht man bei hochdimensionalen Daten oft von Redundanz oder
-Abhängigkeitsstrukturen in den Merkmalen aus. Eng damit verbunden ist die Idee, dass Daten auf
-einer sogenannten \newterm{Mannigfaltigkeit} liegen, welche der Grundbaustein eines wichtiges
+Wie eingangs besprochen wird bei hochdimensionalen Daten oft von Redundanz oder
+Abhängigkeitsstrukturen in den Merkmalen ausgegangen. Eng damit verbunden ist die Idee, dass Daten
+auf einer sogenannten \newterm{Mannigfaltigkeit} liegen, welche der Grundbaustein eines wichtiges
 Teilgebietes der Dimensionsreduktion, nämlich dem Erlernen von Mannigfaltigkeiten \parencite{Cayton.2005} ist. Dieses Teilgebiet wird durch die \newterm{Mannigfaltigkeits-Hypothese}
 (engl. \textit{manifold hypothesis}) motiviert. Dabei wird hier mehr der Fokus auf das intuitive
 Verständnis einer Mannigfaltigkeit gelegt. Für eine mathematisch korrekte Definition aus der
