@@ -7,15 +7,14 @@ Die Dimensionsreduktion hat im Kern das Ziel der Abbildung eines hochdimensional
 eine niedrigdimensionale, sogenannte \newterm{latente} Repräsentation, wobei möglichst wenig
 Information über die Daten verloren gehen soll.\addref Dies ist darin begründet, dass Daten oft nur
 künstlich hochdimensional, also \textit{redundant} sind. Dies bedeutet, dass die Daten effizienter
-über eine kleinere Menge von Merkmalen $\rvect{y}_1,\ldots,\rvect{y}_d$ ausgedrückt werden kann,
-als über die ursprüngliche Repräsentation durch die Merkmale $\rvect{x}_1,\ldots,\rvect{x}_D$ mit
-$d < D$. Hierbei bezeichnet $D$ die \newterm{extrinsische Dimension} des zugehörigen
-Ursprungsraumes $\mathcal{X}$ (welcher üblicherweise dem $\real^D$ entspricht) und $d$ bezeichnet
-die \newterm{intrinsische Dimension} der Daten. Die intrinsische Dimension wird teilweise auch als
-latente Dimension bezeichnet.
+über eine kleinere Menge von Merkmalen $y_1,\ldots,y_d$ ausgedrückt werden kann, als über die
+ursprüngliche Repräsentation durch die Merkmale $x_1,\ldots,x_D$ mit $d < D$. Hierbei bezeichnet
+$D$ die \newterm{extrinsische Dimension} des zugehörigen Ursprungsraumes $\mathcal{X}$ (welcher
+üblicherweise dem $\real^D$ entspricht) und $d$ bezeichnet die \newterm{intrinsische Dimension} der
+Daten. Die intrinsische Dimension wird teilweise auch als latente Dimension bezeichnet.
 
 Formell wird die ursprüngliche (hochdimensionale) Repräsentation mit dem $D$-dimensionalen
-Zufallsvektor $\rvect{x} = \tr{(\rv{x_1}, \ldots, \rv{x_D})}$ und die latente (niedrigdimensionale)
+Zufallsvektor $\rvect{x} = \tr{(x_1, \ldots, x_D)}$ und die latente (niedrigdimensionale)
 Repräsentation mit dem $d$-dimensionalen Zufallsvektor $\rvect{y}$ gekennzeichnet. Liegt eine
 konkrete Stichprobe vor, so werden die einzelnen Stichproben $\vect{x}^{(i)}, i = 1,\ldots,n$ als
 Spaltenvektoren in der $n \times D$ Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die
