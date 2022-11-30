@@ -57,6 +57,20 @@ $\mathcal{M}$.
 \section{Relation zur Merkmalsextrahierung}
 \label{ch:Dimensionsreduktion:Merkmalsextrahierung}
 
+Die Merkmalsextrahierung ist ein sehr verwandtes Gebiet zur Dimensionsreduktion, da Methoden der
+Dimensionsreduktion für die Merkmalsextrahierung eingesetzt werden. Das Ziel hierbei ist es
+oftmals, in einem Vorverarbeitungsschritt (Preprocessing) irrelevante Merkmale durch eine
+Transformation der Merkmale zu entfernen und dann den eigentlichen Schätzer (Klassifikator oder
+Regressor) auf den neuen Merkmalen zu trainieren. Eng damit verbunden ist die Merkmalsauswahl
+(engl. \textit{feature selection}). Hier wird jedoch im Gegensatz zur Merkmalsextraktion keine
+Transformation der Merkmale durchgeführt, sondern nur eine Teilmenge der verfügbaren Merkmale
+gewählt. Daher ist die Merkmalsextrahierung auch näher an der Dimensionsreduktion als die
+Merkmalsauswahl.
+
+Man erhofft sich, dass der Klassifikator (oder Regressor) durch die Merkmalsextrahierung robuster
+gegenüber Rauschen (engl. \textit{noise}) ist und teilweise sogar eine höhere Genauigkeit gegenüber
+einem Klassifikator, der auf den ursprünglichen Merkmalen trainiert wurde, aufweist.
+
 \ldots
 
 Wie wir in der Einleitung in \chapref{ch:Enleitung} gesehen haben, gibt es viele Gründe, wieso man
