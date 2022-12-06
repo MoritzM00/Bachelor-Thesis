@@ -26,23 +26,26 @@
 
 	Wie grenze ich meine Arbeit davon ab?}
 
-Das Ziel dieser Arbeit ist es herauszufinden, ob modernere Methoden der Dimensionsreduktion wie zum
-Beispiel \newterm{Autoencoder} gegenüber traditionelleren Methoden wie der
-\newterm{Hauptkomponentenanalyse} (PCA) einen echten Vorteil durch die erhöhte Flexibilität
-erreichen können. Die hier vorgestellten Methoden sind die PCA, Kernel PCA sowie t-SNE \unsure{wie
-	nenne ich die Methoden hier? mit Abkürzungen oder ausgeschrieben, englisch/deutsch?}als Vertreter
-der traditionellen Methoden (\secref{ch:MethodenDerDimRed:traditionell}) und der Autoencoder,
-Variational Autoencoder sowie die Self-Organizing Maps als Vertreter der modernen Methoden
-(\secref{ch:MethodenDerDimRed:modern}). Darüber hinaus soll herausgearbeitet werden, wann sich
-bestimmte Algorithmen besser eignen als andere und dies begründet darlegt werden. Außerdem wird
-untersucht, inwiefern ein Autoencoder mit ausschließlich linearen Aktivierungsfunktionen
-tatsächlich mit der Hauptkomponentenanalyse übereinstimmt und was passiert, wenn man schrittweise
-Nichtlinearität hinzunimmt.
+Das Ziel dieser Arbeit ist es herauszufinden, ob moderne Machine Learning Methoden gegenüber
+traditionellen statistischen Methoden auf dem Gebiet der Dimensionsreduktion gegenüber
+statistischen Methoden wie der einen echten Vorteil durch die erhöhte Flexibilität erreichen
+können. Die hier vorgestellten Methoden sind die weit verbreitete \newterm{Hauptkomponentenanalyse}
+(engl. \textit{Principal Component Analysis} (PCA)), die \newterm{Kernel PCA} sowie die
+\newterm{Multidimensionale Skalierung} als Vertreter der statistischen Methoden
+(\secref{ch:MethodenDerDimRed:statistisch}) und der (klassische) Autoencoder und eine Variante
+davon, der \newterm{Contractive Autoencoder} als Vertreter der Machine Learning Ansätze
+(\secref{ch:MethodenDerDimRed:modern}).
+
+Es soll herausgearbeitet werden, wann sich bestimmte Algorithmen besser eignen als andere und dies
+begründet darlegt werden. Außerdem wird untersucht, inwiefern ein Autoencoder mit ausschließlich
+linearen Aktivierungsfunktionen tatsächlich mit der Hauptkomponentenanalyse übereinstimmt und was
+passiert, wenn man schrittweise Nichtlinearität hinzunimmt.\rewrite{etwas mehr interesse wecken, zu
+	trocken}
 
 Die Arbeit gliedert sich wie folgt in drei Teile ein: Zuerst wird in
 \chapref{ch:Dimensionsreduktion} die Grundlage für das Verständnis der Dimensionsreduktionsmethoden
 gelegt, sowie wichtige Begrifflichkeiten erläutert. Im darauffolgenden
-\chapref{ch:MethodenDerDimRed} werden dann die einzelnen traditionellen und modernen Methoden
-vorgestellt. Anschließend werden die zwei Gruppen in einem systematischen empirischen Vergleich in
+\chapref{ch:MethodenDerDimRed} werden dann die einzelnen statistischen und Machine Learning
+Methoden vorgestellt. Anschließend werden die zwei Gruppen in einem empirischen Vergleich in
 \chapref{ch:Vergleich} gegenübergestellt und abgeschlossen wird die Arbeit mit einem Fazit in
 \chapref{ch:Schluss}.

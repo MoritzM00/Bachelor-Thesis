@@ -5,55 +5,57 @@
 
 Nachdem nun die Motivation und Idee hinter der Dimensionsreduktion in \chapref{ch:Enleitung} und
 die mathematische Formulierung in \chapref{ch:Dimensionsreduktion} allgemein angeschaut wurde,
-werden nun einige konkrete Methoden zur Dimensionsreduktion vorgestellt.
+werden nun einige konkrete Methoden der Dimensionsreduktion vorgestellt.
 
 In jüngster Zeit haben vor allem verschiedenste Varianten von neuronale Netzen einen hohen Grad an
 Aufmerksamkeit durch bemerkenswerte Errungenschaften in Gebieten der automatischen Spracherkennung
 oder \textit{Computer Vision} erlangt. Fraglich ist, ob diese neuen Algorithmen auch auf dem
 Bereich der Dimensionsreduktion einen entscheidenden Fortschritt gemacht haben. Deshalb werden die
-Algorithmen in dieser Arbeit in \textit{traditionelle} und \textit{moderne} Methoden unterteilt, um
-diese später in \chapref{ch:Vergleich} gegenüberstellen zu können. Mit traditionellen Methoden sind
-statistische Methoden wie die Hauptkomponentenanalyse
-(\subsecref{ch:MethodenDerDimRed:traditionell:PCA}) oder andere etablierte Methoden der
-Dimensionsreduktion gemeint, wohingegen moderne Methoden auf neuere Entwicklungen wie neuronale
-Netze und die Varianten davon abzielt. Allerdings ist hier aus jeder Kategorie nur eine kleine
-repräsentative Auswahl getroffen worden. Weitere wichtige Algorithmen, die hier nicht vorgestellt
-werden können sind beispielsweise \dots \todo{Aufzählung der Algorithmen die nicht betrachtet
-	werden hier oder in der Einleitung?}.
+Algorithmen in dieser Arbeit in \textit{statistischen} und \textit{Machine Learning} Methoden
+unterteilt, um diese später in \chapref{ch:Vergleich} gegenüberstellen zu können. Statistische
+Methoden haben eine solide theoretische Fundierung und sind meist etablierte Algorithmen auf einem
+jeweiligen Gebiet, wie das zum Beispiel mit der Hauptkomponentenanalyse
+(\subsecref{ch:MethodenDerDimRed:statistisch:PCA}) der Fall ist. Machine Learning Methoden hingegen
+haben lediglich das Ziel, von Trainingsdaten auf neue, das heißt ungesehene (Test-)Daten zu
+generaliesieren. Neuronale Netze sind hierfür ein Paradebeispiel und werden deshalb in
+\secref{ch:MethodenDerDimRed:modern} genau behandelt. Allerdings ist hier aus jeder Kategorie nur
+eine kleine repräsentative Auswahl getroffen worden. Weitere wichtige Algorithmen, die hier nicht
+vorgestellt werden können sind beispielsweise \dots \todo{Aufzählung der Algorithmen die nicht
+	betrachtet werden hier oder in der Einleitung?}.
 
-\section{Traditionelle Methoden}
-\label{ch:MethodenDerDimRed:traditionell}
+\section{Statistische Methoden}
+\label{ch:MethodenDerDimRed:statistisch}
 
-Wie bereits erwähnt sind mit traditionellen Methoden vor allem statistische Ansätze gemeint. Dazu
-gehören die \newterm{Hauptkomponentenanalyse} (engl. \textit{principal components analysis} (PCA))
-in \subsecref{ch:MethodenDerDimRed:traditionell:PCA}, eine nichtlineare Erweiterung der
-Hauptkomponentenanalyse (\subsecref{ch:MethodenDerDimRed:traditionell:kPCA}) und die für die
-Visualisierung sehr verbreitete Methode \newterm{t-distributed stochastic neighbor embedding}
-(t-SNE) in \subsecref{ch:MethodenDerDimRed:traditionell:t-SNE}.
+Zu den statistischen Methoden, die in dieser Arbeit vorgestellt werden, gehören die
+\newterm{Hauptkomponentenanalyse} (PCA) in \subsecref{ch:MethodenDerDimRed:statistisch:PCA} sowie
+die nichtlineare Erweiterung der Hauptkomponentenanalyse, die Kernel PCA
+(\subsecref{ch:MethodenDerDimRed:statistisch:kPCA}). Außerdem wird die Multidimensionale Skalierung
+(MDS) in \subsecref{ch:MethodenDerDimRed:statistisch:MDS} als Vertreter der statistischen Methoden
+genauer behandelt.
 
 %% ==============================
 \subsection{Principal Component Analysis}
-\label{ch:MethodenDerDimRed:traditionell:PCA}
+\label{ch:MethodenDerDimRed:statistisch:PCA}
 \nomenclature[Z]{PCA}{Principal Component Analysis}
 
 Principal Component Analysis ist \textit{die} Methode der Dimensionsreduktion und wurde erstmals
 von \textcite{Pearson.1901} und \textcite{Hotelling.1933} entwickelt. Trotz des mittlerweile
 relativ hohen Alters ist die Hauptkomponentenanalyse immer noch aufgrund der simplen Anwendbarkeit
 oft die erste Wahl einer Dimensionsreduktionsmethode. Im Folgenden möchte ich kurz auf die zentrale
-Idee und Motivation (\ref{ch:MethodenDerDimRed:traditionell:PCA:Grundidee}) der
+Idee und Motivation (\ref{ch:MethodenDerDimRed:statistisch:PCA:Grundidee}) der
 Hauptkomponentenanalyse, sowie die mathematische Herleitung der sogenannten
-\newterm{Hauptkomponenten} (Unterabschnitte \ref{ch:MethodenDerDimRed:traditionell:PCA:Definition}
-und \ref{ch:MethodenDerDimRed:traditionell:PCA:HerleitungPC}) eingehen.
+\newterm{Hauptkomponenten} (Unterabschnitte \ref{ch:MethodenDerDimRed:statistisch:PCA:Definition}
+und \ref{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}) eingehen.
 
 \subsubsection{Grundidee}
-\label{ch:MethodenDerDimRed:traditionell:PCA:Grundidee}
+\label{ch:MethodenDerDimRed:statistisch:PCA:Grundidee}
 Die zentrale Idee der Hauptkomponentenanalyse ist die Transformation des Koordinatensystems in einer möglichst \textit{verlustfreien} Art und Weise. Verlustfrei bedeutet im Kontext der Hauptkomponentenanalyse, dass möglichst viel Variation in den Daten erhalten bleiben soll \parencite[vgl.][1]{Jolliffe.2002}. Möchte man dann die Dimension von $D$ auf die intrinsische
 Dimension $d$ reduzieren, so wählt man einfach die \textit{ersten} $d$ Hauptkomponenten.\rewrite{Zu
 	ungenau, und hier gleich das Ergebnis zu erwähnen ist auch nicht so hilfreich für die Grundidee}
 Was diese Hauptkomponenten sind und wie man sie herleitet, wird im Folgenden genauer betrachtet.
 
 \subsubsection{Definition der Hauptkomponenten}
-\label{ch:MethodenDerDimRed:traditionell:PCA:Definition}
+\label{ch:MethodenDerDimRed:statistisch:PCA:Definition}
 Als Ausgangsbasis wird ein $D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x}_1, \ldots, \rv{x}_D)}$ mit $\Exp[\rvect{x}] = \vect{0}$ angenommen und das Ziel ist es, eine $k$-dimensionale Repräsentation $\rvect{y} = \tr{(\rv{y_1},\ldots,\rv{y}_k)}$ zu erhalten. Idealerweise setzt man $k$ auf die intrinsische Dimension $d$ von $\rvect{x}$, hier soll jedoch nur der Fokus auf die allgemeine Dimensionsreduktion gelegt werden. Wir drücken also $\rvect{y}$ als eine Linearkombination des ursprünglichen hochdimensionalen Vektors $\rvect{x}$ wie folgt aus:
 \begin{equation}
 	\rv{y}_i = \tr{\vect{a}_i} \rvect{x} = a_{i1} \rv{x}_1 + \cdots + a_{iD} \rv{x}_D
@@ -66,8 +68,8 @@ Dimensionsreduktion, kann jedoch beliebig zwischen $1 \leq k \leq D$ gewählt we
 	vorverarbeitet (\textit{Preprocessing}) und erst dann veröffentlicht werden.}
 
 \subsubsection{Herleitung der Hauptkomponenten}
-\label{ch:MethodenDerDimRed:traditionell:PCA:HerleitungPC}
-Betrachtet wird nun zunächst lediglich die \textit{erste} Hauptkomponente $\tr{\vect{a}_1} \rvect{x}$ und erinnern uns daran, dass wir wie in \subsecref{ch:MethodenDerDimRed:traditionell:PCA:Grundidee} erwähnt möglichst viel Variation von $\rvect{x}$ erhalten möchten. Daher wird die erste Hauptkomponente so gewählt, dass die Varianz maximal wird:
+\label{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}
+Betrachtet wird nun zunächst lediglich die \textit{erste} Hauptkomponente $\tr{\vect{a}_1} \rvect{x}$ und erinnern uns daran, dass wir wie in \subsecref{ch:MethodenDerDimRed:statistisch:PCA:Grundidee} erwähnt möglichst viel Variation von $\rvect{x}$ erhalten möchten. Daher wird die erste Hauptkomponente so gewählt, dass die Varianz maximal wird:
 \begin{equation}
 	\label{eq:PCA-Optimierungsproblem}
 	\max_{\vect{a}_1} \Var \left( \tr{\vect{a}_1} \rvect{x} \right) = \max_{\vect{a}_1} \tr{\vect{a}_1} \mat{\Sigma} \vect{a}_1
@@ -100,22 +102,22 @@ Generell lässt sich zeigen, dass die Koeffizienten der $i$-ten Hauptkomponente 
 ausdrücken, wobei $\mat{A} = [\vect{a}_1,\ldots,\vect{a}_k] \in \real^{D \times k}$ die Matrix der Eigenvektoren als Spaltenvektoren ist und wieder $1 \leq k \leq D$ gilt.
 
 \subsubsection{Erweiterungen}
-\label{ch:MethodenDerDimRed:traditionell:PCA:Erweiterungen}
+\label{ch:MethodenDerDimRed:statistisch:PCA:Erweiterungen}
 Trotz der großen Beliebtheit der Hauptkomponentenanalyse hat diese Methode natürlich auch ihre Nachteile, weswegen zahlreiche Erweiterungen wie zum Beispiel \ldots\addref entwickelt wurden.
-Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenvektorbasis der Kovarianzmatrix inhärent linear ist. Die Hauptkomponentenanalyse ist also in dieser klassischen Form nicht in der Lage, eine nichtlineare Mannigfaltigkeit in den Daten zu erkennen. Deswegen wurde unter anderem eine Generalisierung von PCA von \textcite{Scholkopf.1997} entwickelt, die sogenannte \newterm{Kernel Principal Component Analysis} (kPCA). Diese Methode wird in \subsecref{ch:MethodenDerDimRed:traditionell:kPCA} genauer behandelt.
+Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenvektorbasis der Kovarianzmatrix inhärent linear ist. Die Hauptkomponentenanalyse ist also in dieser klassischen Form nicht in der Lage, eine nichtlineare Mannigfaltigkeit in den Daten zu erkennen. Deswegen wurde unter anderem eine Generalisierung von PCA von \textcite{Scholkopf.1997} entwickelt, die sogenannte \newterm{Kernel Principal Component Analysis} (kPCA). Diese Methode wird in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA} genauer behandelt.
 
 %% ==============================
 \subsection{Kernel Principal Component Analysis}
-\label{ch:MethodenDerDimRed:traditionell:kPCA}
+\label{ch:MethodenDerDimRed:statistisch:kPCA}
 \nomenclature[Z]{kPCA}{Kernel Principal Component Analysis}
 Wie soeben erwähnt ist die Kernel Principal Components Analysis insofern eine Generalisierung der klassischen Hauptkomponentenanalyse, dass auch nichtlineare Zusammenhänge erkannt werden können.
 Um das zu erreichen, bedient man sich am sogenannten \newterm{Kernel Trick}, der beispielsweise erfolgreich auf \textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde. Dazu gehen wir wieder in
-\subsecref{ch:MethodenDerDimRed:traditionell:kPCA:Grundidee} auf die Grundidee dieser Methode ein
-und befassen uns dann in \subsecref{ch:MethodenDerDimRed:traditionell:kPCA:AnwendungKernelTrick}
+\subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} auf die Grundidee dieser Methode ein
+und befassen uns dann in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:AnwendungKernelTrick}
 kurz mit der konkreten Vorgehensweise bei der Kernel PCA.
 
 \subsubsection{Grundidee}
-\label{ch:MethodenDerDimRed:traditionell:kPCA:Grundidee}
+\label{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee}
 
 Die Grundidee der Kernel PCA ist es, die Daten mithilfe einer Abbildung $\bm{\phi}$ in einen Raum
 $\mathcal{H}$ abzubilden, der nichtlinear mit dem Ursprungsraum \unsure{vlt hier einfach $\real^D$
@@ -138,7 +140,7 @@ Für eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden 
 \textcite{ShaweTaylor.2011} verwiesen.
 
 \subsubsection{Anwendung des Kernel Tricks}
-\label{ch:MethodenDerDimRed:traditionell:kPCA:AnwendungKernelTrick}
+\label{ch:MethodenDerDimRed:statistisch:kPCA:AnwendungKernelTrick}
 
 Die Kernel-Funktion ist definiert als das Skalarprodukt im transformierten Raum \parencite[60]{ShaweTaylor.2011}:
 \begin{equation}
@@ -155,9 +157,9 @@ damit die Projektion auf die niedrigdimensionale Repräsentation $\rvect{y}$ ber
 werden.\rewrite{Diesen Abschnitt (3.1.2.2) muss ich nochmal ganz umschreiben}
 
 %% ==============================
-\subsection{t-distributed Stochastic Neighbor Embedding}
-\label{ch:MethodenDerDimRed:traditionell:t-SNE}
-\nomenclature[Z]{t-SNE}{t-distributed Stochastic Neighbor Embedding}
+\subsection{Multidimensionale Skalierung}
+\label{ch:MethodenDerDimRed:statistisch:MDS}
+\nomenclature[Z]{MDS}{Multidimensionale Skalierung}
 
 \subsubsection{Grundidee}
 
@@ -168,17 +170,17 @@ werden.\rewrite{Diesen Abschnitt (3.1.2.2) muss ich nochmal ganz umschreiben}
 \section{Moderne Methoden}
 \label{ch:MethodenDerDimRed:modern}
 %% ==============================
-In \secref{ch:MethodenDerDimRed:traditionell} wurden einige traditionelle Methoden der
+In \secref{ch:MethodenDerDimRed:statistisch} wurden einige statistischen Methoden der
 Dimensionsreduktion näher betrachtet. Nun werden \enquote{moderne} Methoden vorgestellt. Dazu
 gehören in dieser Arbeit drei ausgewählte Algorithmen, nämlich der \newterm{Autoencoder} (AE)
 (\subsecref{ch:MethodenDerDimRed:modern:AE}), der \newterm{Variational Autoencoder} (VAE)
 (\subsecref{ch:MethodenDerDimRed:modern:VAE}) und die \newterm{Self-Organizing Map} (SOM)
 (\subsecref{ch:MethodenDerDimRed:modern:SOM}). Die Bezeichnung der Algorithmen als \enquote{modern}
 ist hier etwas irreführend, da die vorgestellten Methoden keineswegs brandneu sind, sich jedoch von
-der Funktionsweise von den eben vorgestellten traditionellen Methoden abheben. Alle drei
-Algorithmen sind im Prinzip Varianten von neuronalen Netzwerken -- ein Modell das in jüngster Zeit
-für sehr gute Ergebnisse in vielen Gebieten gesorgt hat. Allerdings eilt die empirische Forschung
-den neuronalen Netzwerken voraus, da man theoretisch bisher nicht beweisen konnte, wieso diese
+der Funktionsweise von den eben vorgestellten statistisch Methoden abheben. Alle drei Algorithmen
+sind im Prinzip Varianten von neuronalen Netzwerken -- ein Modell das in jüngster Zeit für sehr
+gute Ergebnisse in vielen Gebieten gesorgt hat. Allerdings eilt die empirische Forschung den
+neuronalen Netzwerken voraus, da man theoretisch bisher nicht beweisen konnte, wieso diese
 Architektur funktioniert. Man stellt lediglich fest, dass je größer das Netzwerk ist und je mehr
 Rechenkapazität man zur Verfügung hat, desto besser ist das Ergebnis eines neuronalen
 Netzwerkes\addref. Inwiefern dies auf das Gebiet der Dimensionsreduktion zutrifft, werden wir
