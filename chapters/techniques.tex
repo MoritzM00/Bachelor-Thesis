@@ -167,27 +167,28 @@ werden.\rewrite{Diesen Abschnitt (3.1.2.2) muss ich nochmal ganz umschreiben}
 
 %% ==============================
 %% ==============================
-\section{Moderne Methoden}
+\section{Machine Learning Methoden}
 \label{ch:MethodenDerDimRed:modern}
 %% ==============================
-In \secref{ch:MethodenDerDimRed:statistisch} wurden einige statistischen Methoden der
-Dimensionsreduktion näher betrachtet. Nun werden \enquote{moderne} Methoden vorgestellt. Dazu
-gehören in dieser Arbeit drei ausgewählte Algorithmen, nämlich der \newterm{Autoencoder} (AE)
-(\subsecref{ch:MethodenDerDimRed:modern:AE}), der \newterm{Variational Autoencoder} (VAE)
-(\subsecref{ch:MethodenDerDimRed:modern:VAE}) und die \newterm{Self-Organizing Map} (SOM)
-(\subsecref{ch:MethodenDerDimRed:modern:SOM}). Die Bezeichnung der Algorithmen als \enquote{modern}
-ist hier etwas irreführend, da die vorgestellten Methoden keineswegs brandneu sind, sich jedoch von
-der Funktionsweise von den eben vorgestellten statistisch Methoden abheben. Alle drei Algorithmen
-sind im Prinzip Varianten von neuronalen Netzwerken -- ein Modell das in jüngster Zeit für sehr
-gute Ergebnisse in vielen Gebieten gesorgt hat. Allerdings eilt die empirische Forschung den
-neuronalen Netzwerken voraus, da man theoretisch bisher nicht beweisen konnte, wieso diese
-Architektur funktioniert. Man stellt lediglich fest, dass je größer das Netzwerk ist und je mehr
-Rechenkapazität man zur Verfügung hat, desto besser ist das Ergebnis eines neuronalen
-Netzwerkes\addref. Inwiefern dies auf das Gebiet der Dimensionsreduktion zutrifft, werden wir
-später in \chapref{ch:Vergleich} sehen.
+Nachdem in \secref{ch:MethodenDerDimRed:statistisch} einige statistischen Methoden der
+Dimensionsreduktion näher betrachtet wurden, werden nun zwei ausgewählte Machine Learning Methoden,
+nämlich der \newterm{Autoencoder} in seiner klassischen Form
+(\subsecref{ch:MethodenDerDimRed:ML:AE}) sowie der \newterm{Contractive Autoencoder} (CAE)
+(\subsecref{ch:MethodenDerDimRed:ML:CAE}) vorgestellt.
+
+Die Bezeichnung der Algorithmen als \enquote{modern} ist hier etwas irreführend, da die
+vorgestellten Methoden keineswegs brandneu sind, sich jedoch von\rewrite{Das war noch zum alten
+	Titel, muss man umschreiben} der Funktionsweise von den eben vorgestellten statistisch Methoden
+abheben. Alle drei Algorithmen sind im Prinzip Varianten von neuronalen Netzwerken -- ein Modell
+das in jüngster Zeit für sehr gute Ergebnisse in vielen Gebieten gesorgt hat. Allerdings eilt die
+empirische Forschung den neuronalen Netzwerken voraus, da man theoretisch bisher nicht beweisen
+konnte, wieso diese Architektur funktioniert. Man stellt lediglich fest, dass je größer das
+Netzwerk ist und je mehr Rechenkapazität man zur Verfügung hat, desto besser ist das Ergebnis eines
+neuronalen Netzwerkes\addref. Inwiefern dies auf das Gebiet der Dimensionsreduktion zutrifft,
+werden wir später in \chapref{ch:Vergleich} sehen.
 
 \subsection{Autoencoder}
-\label{ch:MethodenDerDimRed:modern:AE}
+\label{ch:MethodenDerDimRed:ML:AE}
 \nomenclature[Z]{AE}{Autoencoder}
 
 Der Autoencoder ist ein neuronales Netzwerk mit einer ungeraden Anzahl an Schichten, sodass das
@@ -211,7 +212,7 @@ Faktor 4 reduzierte niedrigdimensionale Repräsentation gelernt werden soll.
 \end{figure}
 
 \subsubsection{Mathematische Formulierung}
-\label{ch:MethodenDerDimRed:modern:AE:MathematischeFormulierung}
+\label{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}
 Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^k$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ codiert und zum anderen den \newterm{Decoder} $g: \real^k \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Das Ziel des Autoencoders ist es, den Inputvektor zu rekonstruieren und dabei eine sinnvolle Repräsentation im Bottleneck zu lernen:
 \begin{equation}
 	\tilde{\rvect{x}} = g(f(\rvect{x})) \approx \rvect{x}
@@ -227,11 +228,11 @@ bedeutet, dass die Bottleneck-Schicht kleiner ist, als die Dimension des Inputve
 
 Neben dieser intuitiven Regularisierungsmethode gibt es noch viele weitere, wie zum Beispiel der
 \newterm{Sparse Autoencoder} oder der für das Lernen von Mannigfaltigkeiten besonders interessante
-\newterm{Contractive Autoencoder}, der im Abschnitt \subsecref{ch:MethodenDerDimRed:modern:CAE}
-genauer behandelt wird.
+\newterm{Contractive Autoencoder}, der im Abschnitt \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer
+behandelt wird.
 
 \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
 
 \subsection{Contractive Autoencoder}
-\label{ch:MethodenDerDimRed:modern:CAE}
+\label{ch:MethodenDerDimRed:ML:CAE}
 \nomenclature[Z]{CAE}{Contractive Autoencoder}
