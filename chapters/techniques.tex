@@ -224,17 +224,12 @@ regularisiert, das heißt eingeschränkt, werden. Ein Beispiel hierfür ist der 
 bedeutet, dass die Bottleneck-Schicht kleiner ist, als die Dimension des Inputvektors \parencite[503]{Goodfellow.2016}.\rewrite{das liest sich nicht gut}
 
 Neben dieser intuitiven Regularisierungsmethode gibt es noch viele weitere, wie zum Beispiel der
-\newterm{Sparse} Autoencoder oder der Variational Autoencoder
-(\subsecref{ch:MethodenDerDimRed:modern:VAE}).
+\newterm{Sparse Autoencoder} oder der für das Lernen von Mannigfaltigkeiten besonders interessante
+\newterm{Contractive Autoencoder}, der im Abschnitt \subsecref{ch:MethodenDerDimRed:modern:CAE}
+genauer behandelt wird.
 
 \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
 
-\subsection{Variational Autoencoder}
-\label{ch:MethodenDerDimRed:modern:VAE}
-\nomenclature[Z]{VAE}{Variational Autoencoder}
-
-\subsection{Self-Organizing Maps}
-\label{ch:MethodenDerDimRed:modern:SOM}
-\nomenclature[Z]{SOM}{Self-Organizing Map}
-\todo[inline]{SOMs werden meist nur für die Visualisierung bzw. Clustering oder Anomaly Detection verwendet, da es oft ein $m \times n$ Grid ist, d.h. die Daten werden auf ein zweidimensionales diskretes Grid gemappt. Außerdem kombinieren SOMs
-	Dimensionsreduktion mit Clustering. Daher bin ich mir momentan nicht sicher, ob ich diese Methode nicht durch eine andere ersetze}
+\subsection{Contractive Autoencoder}
+\label{ch:MethodenDerDimRed:modern:CAE}
+\nomenclature[Z]{CAE}{Contractive Autoencoder}
