@@ -194,11 +194,10 @@ werden wir später in \chapref{ch:Vergleich} sehen.
 Der Autoencoder ist ein neuronales Netzwerk, das die Rekonstruktion des Inputvektors $\vect{x}$ aus
 den Trainingsdaten lernt. Um das sinnvoll zu erreichen, besitzt der Autoencoder eine bestimmte
 Architektur. In der klassischen Form hat das Netzwerk eine ungerade Anzahl an Schichten, sodass in
-der Mitte eine \newterm{Bottleneck}-Schicht entsteht. Diese wird als \textit{Bottleneck}
-bezeichnet, da diese Schicht nur $d < D$ Neuronen besitzt. In diesem Fall wird der Autoencoder als
-\textit{unterbestimmt} (engl. \textit{undercomplete}) bezeichnet.\footnote{Es gibt demnach auch
-	überbestimmte Autoencoder mit $k > D$ Neuronen in der mittleren Schicht. Diese Variante reduziert
-	die Dimension nicht, sondern erhöht sie \parencite[504]{Goodfellow.2016}.} Damit erzielt die Bottleneck-Schicht die gewünschte
+der Mitte eine \newterm{Bottleneck}-Schicht entsteht \parencite[2]{Bank.2020}. Diese wird als \textit{Bottleneck} bezeichnet, da diese Schicht nur $d < D$
+Neuronen besitzt. In diesem Fall wird der Autoencoder als \textit{unterbestimmt} (engl.
+\textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}.\footnote{Es gibt demnach auch überbestimmte Autoencoder mit $k > D$
+	Neuronen in der mittleren Schicht. Diese Variante reduziert die Dimension nicht, sondern erhöht sie \parencite[504]{Goodfellow.2016}.} Damit erzielt die Bottleneck-Schicht die gewünschte
 Dimensionsreduktion des Inputvektors, da der Autoencoder lernen muss, den Inputvektor aus dieser
 niedrigdimensionalen Repräsentation möglichst verlustfrei zu rekonstruieren \parencites[502]{Goodfellow.2016}[2]{Bank.2020}. \figref{fig:5-layer-Autoencoder} zeigt eine
 beispielhafte Architektur eines Autoencoders mit fünf Schichten und dreidimensionalem Bottleneck.
