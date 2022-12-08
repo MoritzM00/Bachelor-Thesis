@@ -195,7 +195,7 @@ Der Autoencoder ist ein neuronales Netzwerk, das die Rekonstruktion des Inputvek
 den Trainingsdaten lernt. Um das sinnvoll zu erreichen, besitzt der Autoencoder eine bestimmte
 Architektur. In der klassischen Form hat das Netzwerk eine ungerade Anzahl an Schichten, sodass in
 der Mitte eine \newterm{Bottleneck}-Schicht entsteht \parencite[2]{Bank.2020}. Diese wird als \textit{Bottleneck} bezeichnet, da diese Schicht nur $d < D$
-Neuronen besitzt. In diesem Fall wird der Autoencoder als \textit{unterbestimmt} (engl.
+Neuronen besitzt. In diesem Fall wird der Autoencoder als \newterm{unterbestimmt} (engl.
 \textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}.\footnote{Es gibt demnach auch überbestimmte Autoencoder mit $k > D$
 	Neuronen in der mittleren Schicht. Diese Variante reduziert die Dimension nicht, sondern erhöht sie \parencite[504]{Goodfellow.2016}.} Damit erzielt die Bottleneck-Schicht die gewünschte
 Dimensionsreduktion des Inputvektors, da der Autoencoder lernen muss, den Inputvektor aus dieser
@@ -206,6 +206,14 @@ Beispiel ist $D = 12$), dann muss der Autoencoder lernen, $\rvect{x}$ zu kodiere
 Mitte des Autoencoders die niedrigdimensionale Repräsentation $\rvect{y}$ gelernt wird. In
 \figref{fig:5-layer-Autoencoder} ist $d = 3$. Dies bedeutet, dass durch den Autoencoder eine um den
 Faktor 4 reduzierte niedrigdimensionale Repräsentation gelernt werden soll.
+
+Die Nichtlinearität eines Autoencoders wird durch die Auswahl der Aktivierungsfunktionen bestimmt.
+Werden ausschließlich lineare Funktionen verwendet, bekommt man einen linearen Autoencoder, welcher
+sehr ähnlich zur Hauptkomponentenanalyse ist. Dies wird in
+\subsecref{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA} noch genauer betrachtet. In den meisten
+Fällen werden jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt \addref, um die
+Flexibilität der Architektur auszunutzen.
+
 \begin{figure}[h]
 	\label{fig:5-layer-Autoencoder}
 	\begin{center}
@@ -224,7 +232,7 @@ wobei $\estNormal{\vect{x}}$ die Rekontruktion des Autoencoders bezeichnet.
 Dazu minimiert der Autoencoder eine Fehlerfunktion $L(\vect{x}, \vect{\estNormal{x}})$ die eine große Ungleichheit zwischen dem Input- und Outputvektor bestraft. Hier wird traditionell der mittlere quadratische Fehler (MSE) verwendet, das heißt
 \begin{equation}
 	L(\vect{x}, \vect{\estNormal{x}}) = L_{\text{rec}} = \norm{\vect{x} - \vect{\estNormal{x}}}^2
-\end{equation}
+\end{equation}\unsure{wie definieren? über Erwartungswert?}
 \parencite[507]{Goodfellow.2016}, wobei $L_{\text{rec}}$ den Rekonstruktionfehler bezeichnet. Dieser
 Rekonstruktionfehler ist also lediglich die L2-Norm der Abweichung der beiden Vektoren.
 
@@ -235,7 +243,7 @@ abbildet. Aus diesem Grund muss ein Autoencoder oftmals regularisiert werden, wo
 Unterabschnitt eingegangen wird.
 
 \subsubsection{Regularisierung}
-
+\label{ch:MethodenDerDimRed:ML:AE:Regularisierung}
 Um eine sinnvolle Repräsentation $\rvect{y}$ zu erhalten, muss der Autoencoder oftmals
 regularisiert, das heißt eingeschränkt, werden. Ein erstes Beispiel hierfür ist der in
 \figref{fig:5-layer-Autoencoder} gezeigte unterbestimmte Autoencoder, mit dem eine $d$-dimensionale
@@ -253,11 +261,23 @@ $\vect{y}$ sind ungleich Null. Dazu wird ein Bestrafungsterm auf den Output des 
 \begin{equation}
 	L(\vect{x}, \vect{\estNormal{x}}) = L_{rec} + \Omega(\vect{y})
 \end{equation} \Parencite[505]{Goodfellow.2016}. Für das Lernen von Mannigfaltigkeiten besonders interessant ist der
-\newterm{Contractive Autoencoder}\addref %\parencite[]{Rifai.2011}
+\newterm{Contractive Autoencoder}\addref %\parencite{Rifai.2011}
 , der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer
 behandelt wird.
 
 \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
+\label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}
+
+%\textcite{Plaut.2018}
+\addref haben gezeigt, dass die Repräsentation $\rvect{y}$ eines linearen Autoencoders äquivalent, aber nicht identisch, zu den Hauptkomponenten einer PCA (siehe \secref{ch:MethodenDerDimRed:statistisch:PCA}) ist. Betrachtet man beispielsweise einen einfachen linearen Autoencoder mit drei Schichten, kann der Encoder als
+\begin{equation}
+	f(\vect{x}) = \mat{W}_1 \vect{x} + \vect{b}_1 = \vect{y}
+\end{equation}
+und der Decoder als
+\begin{equation}
+	g(\vect{y}) = \mat{W}_2 \vect{y} + \vect{b}_2 = \estNormal{\vect{x}}
+\end{equation}
+formuliert werden, wobei $\mat{W}_i$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$).
 
 \subsection{Contractive Autoencoder}
 \label{ch:MethodenDerDimRed:ML:CAE}
