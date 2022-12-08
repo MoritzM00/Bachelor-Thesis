@@ -191,17 +191,21 @@ werden wir später in \chapref{ch:Vergleich} sehen.
 \label{ch:MethodenDerDimRed:ML:AE}
 \nomenclature[Z]{AE}{Autoencoder}
 
-Der Autoencoder ist ein neuronales Netzwerk mit einer ungeraden Anzahl an Schichten, sodass das
-Netzwerk in der Mitte eine sogenannte \newterm{Bottleneck}-Schicht besitzt.\rewrite{Allgemeiner
-	formulieren. Das trifft nur auf undercomplete autoencoder zu} Diese Schicht erzielt die gewünschte
+Der Autoencoder ist ein neuronales Netzwerk, das versucht, den Inputvektor zu rekonstruieren. Um
+das sinnvoll zu erreichen, besitzt der Autoencoder eine bestimmte Architektur. In der klassischen
+Form hat das Netzwerk eine ungerade Anzahl an Schichten, sodass in der Mitte eine
+\newterm{Bottleneck}-Schicht entsteht. Diese wird als \textit{Bottleneck} bezeichnet, da diese
+Schicht nur $d < D$ Neuronen. In diesem Fall wird der Autoencoder als \textit{unterbestimmt} (engl.
+\textit{undercomplete}) bezeichnet.\footnote{Es gibt demnach auch überbestimmte Autoencoder mit $k
+		> D$ Neuronen in der mittleren Schicht. Diese Variante reduziert die Dimension nicht, sondern
+	erhöht sie \parencite[504]{Goodfellow.2016}.} Damit erzielt die Bottleneck-Schicht die gewünschte
 Dimensionsreduktion des Inputvektors, da der Autoencoder lernen muss, den Inputvektor aus dieser
-Bottleneck-Schicht möglichst verlustfrei zu rekonstruieren \parencites[502]{Goodfellow.2016}[2]{Bank.2020}. \figref{fig:5-layer-Autoencoder} zeigt eine
+niedrigdimensionalen Repräsentation möglichst verlustfrei zu rekonstruieren \parencites[502]{Goodfellow.2016}[2]{Bank.2020}. \figref{fig:5-layer-Autoencoder} zeigt eine
 beispielhafte Architektur eines Autoencoders mit fünf Schichten und dreidimensionalem Bottleneck.
 Nehmen wir nun wieder an, dass wir einen $D$-dimensionalen Inputvektor $\rvect{x}$ haben (in diesem
 Beispiel ist $D = 12$), dann muss der Autoencoder lernen, $\rvect{x}$ zu kodieren, wobei in der
-Mitte des Autoencoders die niedrigdimensionale Repräsentation $\rvect{y}$ gelernt wird. Die Größe
-$k$ des Bottlenecks bestimmt, wie stark die Dimensionsreduktion sein soll. In
-\figref{fig:5-layer-Autoencoder} ist $k = 3$. Dies bedeutet, dass durch den Autoencoder eine um den
+Mitte des Autoencoders die niedrigdimensionale Repräsentation $\rvect{y}$ gelernt wird. In
+\figref{fig:5-layer-Autoencoder} ist $d = 3$. Dies bedeutet, dass durch den Autoencoder eine um den
 Faktor 4 reduzierte niedrigdimensionale Repräsentation gelernt werden soll.
 \begin{figure}[h]
 	\label{fig:5-layer-Autoencoder}
@@ -213,22 +217,45 @@ Faktor 4 reduzierte niedrigdimensionale Repräsentation gelernt werden soll.
 
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}
-Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^k$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ codiert und zum anderen den \newterm{Decoder} $g: \real^k \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Das Ziel des Autoencoders ist es, den Inputvektor zu rekonstruieren und dabei eine sinnvolle Repräsentation im Bottleneck zu lernen:
+Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^d$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ codiert und zum anderen den \newterm{Decoder} $g: \real^d \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Das Ziel des Autoencoders ist es, den Inputvektor zu rekonstruieren und dabei eine sinnvolle Repräsentation im Bottleneck zu lernen:
 \begin{equation}
-	\tilde{\rvect{x}} = g(f(\rvect{x})) \approx \rvect{x}
+	\estNormal{\rvect{x}} = g(f(\rvect{x})) \approx \rvect{x}
 \end{equation}
-Die Gefahr dabei ist jedoch, dass der Autoencoder bei zu großer Kapazität einfach die Identitätsfunktion ohne sinnvolle Repräsentation lernt. Dies ist zum Beispiel der Fall, wenn zu viele Schichten eingesetzt werden und der Autoencoder einfach die Inputvektoren auf Indizes abbildet. Aus diesem Grund muss ein Autoencoder oftmals regularisiert werden, worauf im nächsten Unterabschnitt eingegangen wird.
+wobei $\estNormal{\vect{x}}$ die Rekontruktion des Autoencoders bezeichnet.
+Dazu minimiert der Autoencoder eine Fehlerfunktion $L(\vect{x}, \vect{\estNormal{x}})$ die eine große Ungleichheit zwischen dem Input- und Outputvektor bestraft. Hier wird traditionell der mittlere quadratische Fehler (MSE) verwendet, das heißt
+\begin{equation}
+	L(\vect{x}, \vect{\estNormal{x}}) = L_{\text{rec}} = \norm{\vect{x} - \vect{\estNormal{x}}}^2
+\end{equation}
+\parencite[507]{Goodfellow.2016}, wobei $L_{\text{rec}}$ den Rekonstruktionfehler bezeichnet. Dieser
+Rekonstruktionfehler ist also lediglich die L2-Norm der Abweichung der beiden Vektoren.
+
+Die Gefahr dabei ist jedoch, dass der Autoencoder bei zu großer Kapazität einfach die
+Identitätsfunktion ohne sinnvolle Repräsentation lernt. Dies ist zum Beispiel der Fall, wenn zu
+viele Schichten eingesetzt werden und der Autoencoder einfach die Inputvektoren auf Indizes
+abbildet. Aus diesem Grund muss ein Autoencoder oftmals regularisiert werden, worauf im nächsten
+Unterabschnitt eingegangen wird.
 
 \subsubsection{Regularisierung}
 
 Um eine sinnvolle Repräsentation $\rvect{y}$ zu erhalten, muss der Autoencoder oftmals
-regularisiert, das heißt eingeschränkt, werden. Ein Beispiel hierfür ist der in
-\figref{fig:5-layer-Autoencoder} gezeigte sogenannte \newterm{unterbestimmte} Autoencoder. Das
-bedeutet, dass die Bottleneck-Schicht kleiner ist, als die Dimension des Inputvektors \parencite[503]{Goodfellow.2016}.\rewrite{das liest sich nicht gut}
+regularisiert, das heißt eingeschränkt, werden. Ein erstes Beispiel hierfür ist der in
+\figref{fig:5-layer-Autoencoder} gezeigte unterbestimmte Autoencoder, mit dem eine $d$-dimensionale
+Repräsentation in der Mitte forciert wird. Besitzt der Autoencoder jedoch eine zu große Kapazität,
+das heißt es werden zu viele Schichten eingesetzt, dann kann der Autoencoder trotz des Bottlenecks
+eine uninformative niedrigdimensionale Repräsentation lernen, auch wenn das Bottleneck nur
+eindimensional ist. Neben dieser \textit{impliziten} Regularisierung, gibt es deswegen noch einige
+weitere explizite Regularisierungsmethoden, die zusätzlich zum Rekonstruktionfehler $L_{rec}$ einen
+Bestrafungsterm $\Omega$ zur Fehlerfunktion $L$ hinzufügen.
 
-Neben dieser intuitiven Regularisierungsmethode gibt es noch viele weitere, wie zum Beispiel der
-\newterm{Sparse Autoencoder} oder der für das Lernen von Mannigfaltigkeiten besonders interessante
-\newterm{Contractive Autoencoder}, der im Abschnitt \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer
+Eine Umsetzung dessen ist zum Beispiel der \newterm{Sparse Autoencoder}, der eine dünn besetzte
+(engl. \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, das heißt nur wenige Einträge von
+$\vect{y}$ sind ungleich Null. Dazu wird ein Bestrafungsterm auf den Output des Encoders $\vect{y}
+	= f(\vect{x})$ zur Fehlerfunktion hinzugefügt, das heißt
+\begin{equation}
+	L(\vect{x}, \vect{\estNormal{x}}) = L_{rec} + \Omega(\vect{y})
+\end{equation} \Parencite[505]{Goodfellow.2016}. Für das Lernen von Mannigfaltigkeiten besonders interessant ist der
+\newterm{Contractive Autoencoder}\addref %\parencite[]{Rifai.2011}
+, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer
 behandelt wird.
 
 \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
