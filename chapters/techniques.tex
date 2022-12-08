@@ -266,7 +266,17 @@ $\vect{y}$ sind ungleich Null. Dazu wird ein Bestrafungsterm auf den Output des 
 \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
 \label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}
 
-\textcite{Plaut.2018} haben gezeigt, dass die Repräsentation $\rvect{y}$ eines linearen Autoencoders äquivalent, aber nicht identisch, zu den Hauptkomponenten einer PCA (siehe \secref{ch:MethodenDerDimRed:statistisch:PCA}) ist. Betrachtet man beispielsweise einen einfachen linearen Autoencoder mit drei Schichten, kann der Encoder als
+\textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y}$ eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten einer PCA (siehe \secref{ch:MethodenDerDimRed:statistisch:PCA}) ist: Die Gewichte des Autoencoders spannen den gleichen Unterraum auf wie die Eigenvektoren der Kovarianzmatrix der Daten. Dies gilt sogar dann, wenn in einem dreischichtiger Autoencoder nichtlineare Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die Lösung eines linearen Autoencoders
+mit der von PCA wie folgt:\unsure{was meine ich mit "Lösung" des linearen Autoencoders? Genauer
+	beschreiben}
+\begin{enumerate}
+	\item Die Lösung eines linearen Autoencoders ist nicht orthogonal, das heißt sie ist nicht unkorrelliert.
+	\item Die Lösung eines linearen Autoencoders ist nicht absteigend nach zugehöriger Varianz sortiert.
+	\item Die Lösung einer Reduktion auf $k_1$ Neuronen in der Bottleneck-Schicht ist keine Teilmenge für
+	      eine Reduktion auf $k_2$ Neuronen mit $k_2 < k_1$.
+\end{enumerate}
+\parencite[3]{Plaut.2018}. Betrachtet man beispielsweise einen einfachen linearen Autoencoder mit drei
+Schichten, so kann der Encoder als
 \begin{equation}
 	f(\vect{x}) = \mat{W}_1 \vect{x} + \vect{b}_1 = \vect{y}
 \end{equation}
@@ -274,7 +284,10 @@ und der Decoder als
 \begin{equation}
 	g(\vect{y}) = \mat{W}_2 \vect{y} + \vect{b}_2 = \estNormal{\vect{x}}
 \end{equation}
-formuliert werden, wobei $\mat{W}_i$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$).\footnote{Es kann jedoch gezeigt werden, dass ein Autoencoder mit dieser Architektur und \textit{nichtlinearen} Aktivierungsfunktionen trotzdem eine äquivalente Lösung zur PCA liefert. Für Autoencoder mit mehr als drei Schichten gilt dies nicht mehr.}
+formuliert werden, wobei $\mat{W}_i$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Insgesamt kann der Output direkt wie folgt ausgedrückt werden:
+\begin{equation}
+	\estNormal{\vect{x}} = g(f(\vect{x})) = \mat{W}_2(\mat{W}_1 \vect{x} + \vect{b_1}) + \vect{b}_2
+\end{equation}\unsure{passen die Dimensionen der Matrizen?}
 
 \subsection{Contractive Autoencoder}
 \label{ch:MethodenDerDimRed:ML:CAE}
