@@ -231,10 +231,10 @@ Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum ein
 wobei $\estNormal{\vect{x}}$ die Rekontruktion des Autoencoders bezeichnet.
 Dazu minimiert der Autoencoder eine Fehlerfunktion $L(\vect{x}, \vect{\estNormal{x}})$ die eine große Ungleichheit zwischen dem Input- und Outputvektor bestraft. Hier wird traditionell der mittlere quadratische Fehler (MSE) verwendet, das heißt
 \begin{equation}
+	\label{eq:AE_MSE}
 	L(\vect{x}, \vect{\estNormal{x}}) = \Exp \left[ L_{\text{rec}} \right] = \Exp \left[ \norm{\vect{x} - \vect{\estNormal{x}}}^2 \right]
 \end{equation}\unsure{wie definieren? über Erwartungswert?}
-\parencite[507]{Goodfellow.2016}, wobei $L_{\text{rec}}$ den Rekonstruktionsfehler bezeichnet. Dieser
-Rekonstruktionsfehler ist also lediglich die L2-Norm der Abweichung der beiden Vektoren.
+\parencite[507]{Goodfellow.2016}, wobei $L_{\text{rec}}$ den Rekonstruktionsfehler bezeichnet.
 
 Die Gefahr dabei ist jedoch, dass der Autoencoder bei zu großer Kapazität einfach die
 Identitätsfunktion ohne sinnvolle Repräsentation lernt. Dies ist zum Beispiel der Fall, wenn zu
@@ -266,7 +266,7 @@ $\vect{y}$ sind ungleich Null. Dazu wird ein Bestrafungsterm auf den Output des 
 \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
 \label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}
 
-\textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y}$ eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten einer PCA (siehe \secref{ch:MethodenDerDimRed:statistisch:PCA}) ist: Die Gewichte des Autoencoders spannen den gleichen Unterraum auf wie die Eigenvektoren der Kovarianzmatrix der Daten. Dies gilt sogar dann, wenn in einem dreischichtiger Autoencoder nichtlineare Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die Lösung eines linearen Autoencoders
+\textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y}$ eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten einer PCA (siehe \secref{ch:MethodenDerDimRed:statistisch:PCA}) ist: Die Gewichte des Autoencoders spannen den gleichen Unterraum auf wie die Eigenvektoren der Kovarianzmatrix der Daten. Dies gilt sogar dann, wenn in einem dreischichtigen Autoencoder nichtlineare Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die Lösung eines linearen Autoencoders
 mit der von PCA wie folgt:\unsure{was meine ich mit "Lösung" des linearen Autoencoders? Genauer
 	beschreiben}
 \begin{enumerate}
@@ -275,8 +275,9 @@ mit der von PCA wie folgt:\unsure{was meine ich mit "Lösung" des linearen Autoe
 	\item Die Lösung einer Reduktion auf $k_1$ Neuronen in der Bottleneck-Schicht ist keine Teilmenge für
 	      eine Reduktion auf $k_2$ Neuronen mit $k_2 < k_1$.
 \end{enumerate}
-\parencite[3]{Plaut.2018}. Betrachtet man beispielsweise einen einfachen linearen Autoencoder mit drei
-Schichten, so kann der Encoder als
+\parencite[3]{Plaut.2018}. Um den Zusammenhang zwischen der PCA und dem Autoencoder zu verdeutlichen,
+wird im Folgenden ein einfacher linearer Autoencoder mit drei Schichten betrachtet. Der Encoder
+kann somit als
 \begin{equation}
 	f(\vect{x}) = \mat{W}_1 \vect{x} + \vect{b}_1 = \vect{y}
 \end{equation}
@@ -284,11 +285,11 @@ und der Decoder als
 \begin{equation}
 	g(\vect{y}) = \mat{W}_2 \vect{y} + \vect{b}_2 = \estNormal{\vect{x}}
 \end{equation}
-formuliert werden, wobei $\mat{W}_i$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Insgesamt kann der Output direkt wie folgt ausgedrückt werden:
+formuliert werden, wobei $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{D \times d}$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Liegt eine Stichprobe in der Datenmatrix $\mat{X} \in \real^{n \times D}$ vor und minimiert der Autoencoder den mittleren quadratischen Fehler (\eqref{eq:AE_MSE}), dann löst dies
 \begin{equation}
-	\estNormal{\vect{x}} = g(f(\vect{x})) = \mat{W}_2(\mat{W}_1 \vect{x} + \vect{b_1}) + \vect{b}_2
-\end{equation}\unsure{passen die Dimensionen der Matrizen?}
-
+	\min \norm{ \mat{X} - \tr{ \left( \mat{W}_2( \mat{W}_1 \tr{\mat{X}} + \vect{b}_1 \tr{\ones_n}) + \vect{b}_2 \tr{\ones_D}  \right) } }^2_F
+\end{equation}\rewrite{oben die Gewichtsmatrizen transponieren, dann muss ich nicht die Daten transponieren}
+wobei $\ones_D = \tr{(1, \ldots, 1)} \in \real^D$ der Vektor mit Einsen und $\norm{\,\cdot\,}_F$ die Frobenius-Norm einer Matrix ist \parencite[3]{Plaut.2018}.
 \subsection{Contractive Autoencoder}
 \label{ch:MethodenDerDimRed:ML:CAE}
 \nomenclature[Z]{CAE}{Contractive Autoencoder}
