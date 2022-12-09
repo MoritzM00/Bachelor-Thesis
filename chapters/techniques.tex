@@ -285,11 +285,11 @@ und der Decoder als
 \begin{equation}
 	g(\vect{y}) = \mat{W}_2 \vect{y} + \vect{b}_2 = \estNormal{\vect{x}}
 \end{equation}
-formuliert werden, wobei $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{D \times d}$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Liegt eine Stichprobe in der Datenmatrix $\mat{X} \in \real^{n \times D}$ vor und minimiert der Autoencoder den mittleren quadratischen Fehler (\eqref{eq:AE_MSE}), dann löst dies
+formuliert werden, wobei $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{D \times d}$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Liegt eine Stichprobe in der Datenmatrix $\mat{X} \in \real^{n \times D}$ vor und minimiert der Autoencoder den mittleren quadratischen Fehler (\eqref{eq:AE_MSE}), dann löst dies\rewrite{das ganze hier bringt mir irgendwie nichts}
 \begin{equation}
-	\min \norm{ \mat{X} - \tr{ \left( \mat{W}_2( \mat{W}_1 \tr{\mat{X}} + \vect{b}_1 \tr{\ones_n}) + \vect{b}_2 \tr{\ones_D}  \right) } }^2_F
+	\min \norm{ \mat{X} - \tr{ \left( \mat{W}_2( \mat{W}_1 \tr{\mat{X}} + \vect{b}_1 \tr{\ones_n}) + \vect{b}_2 \tr{\ones_n}  \right) } }^2_F
 \end{equation}\rewrite{oben die Gewichtsmatrizen transponieren, dann muss ich nicht die Daten transponieren}
-wobei $\ones_D = \tr{(1, \ldots, 1)} \in \real^D$ der Vektor mit Einsen und $\norm{\,\cdot\,}_F$ die Frobenius-Norm einer Matrix ist \parencite[3]{Plaut.2018}.
+wobei $\ones_D = \tr{(1, \ldots, 1)} \in \real^D$ der Vektor mit Einsen und $\norm{\,\cdot\,}_F$ die Frobenius-Norm ist \parencite[3]{Plaut.2018}.
 \subsection{Contractive Autoencoder}
 \label{ch:MethodenDerDimRed:ML:CAE}
 \nomenclature[Z]{CAE}{Contractive Autoencoder}
