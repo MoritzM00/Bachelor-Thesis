@@ -111,42 +111,48 @@ Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenv
 \label{ch:MethodenDerDimRed:statistisch:kPCA}
 \nomenclature[Z]{kPCA}{Kernel Principal Component Analysis}
 Wie soeben erwähnt ist die Kernel Principal Components Analysis insofern eine Generalisierung der klassischen Hauptkomponentenanalyse, dass auch nichtlineare Zusammenhänge erkannt werden können.
-Um das zu erreichen, bedient man sich am sogenannten \newterm{Kernel Trick}, der beispielsweise erfolgreich auf \textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde. Dazu gehen wir wieder in
+Um das zu erreichen, wird sich am sogenannten \newterm{Kernel Trick} bedient, der schon erfolgreich auf \textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde. Dazu gehen wir wieder in
 \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} auf die Grundidee dieser Methode ein
-und befassen uns dann in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:AnwendungKernelTrick}
-kurz mit der konkreten Vorgehensweise bei der Kernel PCA.
+und befassen uns dann in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise} kurz mit
+der konkreten Vorgehensweise bei der Kernel PCA.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee}
 
-Die Grundidee der Kernel PCA ist es, die Daten mithilfe einer Abbildung $\bm{\phi}$ in einen Raum
-$\mathcal{H}$ abzubilden, der nichtlinear mit dem Ursprungsraum \unsure{vlt hier einfach $\real^D$
-	anstelle von $\mathcal{X}$ benutzen um Verwirrung zu vermeiden. Vlt muss ich dafür auch die
-	Begriffe eindeutiger definieren (feature space und input space)} $\mathcal{X}$ von $\rvect{x}$
-verbunden ist. Der Raum $\mathcal{H}$ wird in diesem Kontext auch Merkmalsraum (engl.
-\textit{feature space}) genannt und kann potentiell sehr hochdimensional sein. Die Motivation
-dahinter ist, dass die Daten in $\mathcal{X}$ auf einer \textit{nichtlinearen} Mannigfaltigkeit
-liegen können, während sie in $\mathcal{H}$ auf einer \textit{linearen} Mannigfaltigkeit liegen und
-damit für lineare Dimensionsreduktionsmethoden wie PCA geeignet sind. Nach der Transformation wird
-also die lineare Hauptkomponentenanalyse durchgeführt, um damit die niedrigdimensionale
-Repräsentation $\rvect{y}$ zu erhalten. Der entscheidene Punkt ist jedoch, dass man diesen
-\enquote{Umweg} über die Abbildung $\bm{\phi}$ nicht konkret berechnen muss, sondern mithilfe einer
-Kernel-Funktion $\kappa: \mathcal{X} \times \mathcal{X} \rightarrow \real$ implizit miteinbeziehen
-kann \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Dies ist die Eleganz der Kernel-Methoden wie
-Kernel PCA und daher kommt auch die Bezeichnung \textit{Kernel Trick}.\missingfigure{hier könnte
-	eine bildliche Beschreibung sehr gut passen}
+Die Grundidee der Kernel PCA ist es, die Daten mithilfe einer Funktion $\bm{\phi}$ in einen
+Vektorraum $\mathcal{H}$ abzubilden, der nichtlinear mit dem Ursprungsraum $\mathcal{X}$ verbunden
+ist. Der Raum $\mathcal{H}$ wird in diesem Kontext auch Merkmalsraum (engl. \textit{feature space})
+genannt und kann potentiell sehr hochdimensional sein. Nach der Transformation wird also die
+traditionelle Hauptkomponentenanalyse durchgeführt, um damit die niedrigdimensionale Repräsentation
+$\rvect{y}$ zu erhalten. Dies erscheint auf den ersten Blick kontraintuitiv, da durch den
+\enquote{Umweg} über die Abbildung $\bm{\phi}$ die Dimension zuerst erhöht wird. Motiviert wird es
+dadurch, dass die Daten in $\mathcal{X}$ einen \textit{nichtlinearen} Zusammenhang aufweisen
+können, während in $\mathcal{H}$ der Zusammenhang linear und damit für lineare Algorithmen wie die
+Hauptkomponentenanalyse erkennbar ist \parencite[vgl.][26]{ShaweTaylor.2011}.
 
-Für eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden wird auf
+Der entscheidende Punkt ist jedoch, dass man die Abbildung $\bm{\phi}$ nicht explizit berechnet,
+sondern mithilfe einer Kernel-Funktion $\kappa: \mathcal{X} \times \mathcal{X} \rightarrow \real$
+implizit gegeben hat \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Der Kernel Trick ist immer dann anwendbar,
+wenn der Algorithmus so formuliert werden kann, dass $\bm{\phi}$ ausschließlich als Skalarprodukt
+vorkommt. Im Folgenden wird die Vorgehensweise bei der Kernel PCA kurz erläutert, allerdings wird
+für eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden auf
 \textcite{ShaweTaylor.2011} verwiesen.
 
-\subsubsection{Anwendung des Kernel Tricks}
-\label{ch:MethodenDerDimRed:statistisch:kPCA:AnwendungKernelTrick}
+\subsubsection{Vorgehensweise}
+\label{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise}
 
-Die Kernel-Funktion ist definiert als das Skalarprodukt im transformierten Raum \parencite[60]{ShaweTaylor.2011}:
+Die Kernel-Funktion ist definiert als das Skalarprodukt im transformierten Raum \parencite[34]{ShaweTaylor.2011}:
 \begin{equation}
+	\label{eq:KernelFunction}
 	\kappa(\vect{x}_i, \vect{x}_j) = \tr{\bm{\phi}(\vect{x}_i)} \bm{\phi}(\vect{x}_j)
 \end{equation}
-Damit man den Kernel Trick anwenden kann, muss die Hauptkomponentenanalyse in eine Form gebracht werden, in der nur Skalarprodukte von $\rvect{x}$ vorkommen. Dann können alle Skalarprodukte durch die Kernel-Funktion ersetzt werden \parencite[586]{Bishop.2006} und man umgeht die explizite Berechnung von $\bm{\phi}$.
+
+Wie bereits in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} erwähnt, muss die
+Hauptkomponentenanalyse Hauptkomponentenanalyse in eine Form gebracht werden, in der nur
+Skalarprodukte von $\bm{\phi}(\rvect{x})$ vorkommen. Diese Skalarprodukte können dann gemäß
+\eqref{eq:KernelFunction} durch die Kernel-Funktion ersetzt werden.
+
+Dann können alle Skalarprodukte durch die Kernel-Funktion ersetzt werden \parencite[586]{Bishop.2006} und man umgeht die explizite Berechnung von $\bm{\phi}$.
 
 Man berechnet also die $n \times n$ \textit{Kernel Matrix}
 \begin{equation}
