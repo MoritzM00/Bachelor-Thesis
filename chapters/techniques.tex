@@ -138,29 +138,57 @@ vorkommt. Im Folgenden wird die Vorgehensweise bei der Kernel PCA kurz erläuter
 für eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden auf
 \textcite{ShaweTaylor.2011} verwiesen.
 
-\subsubsection{Vorgehensweise}
-\label{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise}
+\subsubsection{Die Kernel-Funktion}
+\label{ch:MethodenDerDimRed:statistisch:kPCA:KernelFunktion}
 
 Die Kernel-Funktion ist definiert als das Skalarprodukt im Merkmalsraum \parencite[34]{ShaweTaylor.2011}:
 \begin{equation}
-	\label{eq:KernelFunction}
+	\label{eq:kPCA:KernelFunction}
 	\kappa(\vect{x}_i, \vect{x}_j) = \tr{\bm{\phi}(\vect{x}_i)} \bm{\phi}(\vect{x}_j)
 \end{equation}
 und ist damit intuitiv gesehen ein \enquote{Orakel} für die Ähnlichkeit der Daten im Merkmalsraum, weil dies ohne Kenntnis der Koordinaten berechnet werden kann \parencite[71]{ShaweTaylor.2011}. Wie bereits in
 \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} erwähnt, muss die
 Hauptkomponentenanalyse nun in eine Form gebracht werden, in der nur Skalarprodukte von
-$\bm{\phi}(\rvect{x})$ vorkommen. Diese Skalarprodukte können dann gemäß \eqref{eq:KernelFunction}
-durch die Kernel-Funktion ersetzt werden.
+$\bm{\phi}(\rvect{x})$ vorkommen. Diese Skalarprodukte können dann gemäß
+\eqref{eq:kPCA:KernelFunction} durch die Kernel-Funktion ersetzt werden.
 
-\ldots
+In der Praxis häufig anzutreffen sind der Gauß-Kernel ...
 
-Man berechnet also die $n \times n$ \textit{Kernel Matrix}
+\unsure{Kernel-Matrix hier definieren?}
+
+\subsubsection{Vorgehensweise}
+\label{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise}
+Die Kovarianzmatrix $\mat{C}$ der (zentrierten) Daten im Merkmalsraum ist definiert als
 \begin{equation}
-	\mat{K}_{ij} = \kappa(\vect{x}_i, \vect{x}_j) \qquad \text{für}\; i,j = 1,\ldots,n
+	\mat{C} = \frac{1}{n} \tr{\bm{\phi}(\mat{X})} \bm{\phi}(\mat{X})
 \end{equation}
-welche anschließend zentriert werden muss \parencite[598]{Bishop.2006}. Nun können die Eigenvektoren und Eigenwerte von $\mat{K}$ bestimmt und
-damit die Projektion auf die niedrigdimensionale Repräsentation $\rvect{y}$ berechnet
-werden.\rewrite{Diesen Abschnitt (3.1.2.2) muss ich nochmal ganz umschreiben}
+wobei $\bm{\phi}$ hier elementweise angewandt wird. Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt ist diese Matrix aber sehr ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über die Kernel-Funktion $\kappa$ als
+\begin{equation}
+	\label{eq:kPCA:KernelMatrix}
+	\begin{aligned}
+		\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1,\ldots,n} \\
+		        & = \bm{\phi}(\mat{X}) \tr{\bm{\phi}(\mat{X})}                       \\
+	\end{aligned}
+\end{equation}
+definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertszerlegung der zentrierten Kernel Matrix liefert die
+Eigenvektoren der Kovarianzmatrix $\mat{C}$.
+
+Konkret wird die zentrierte $n \times n$ Kernel Matrix in ihre Eigenvektoren $\vect{v_i}$ und
+Eigenwerte $\lambda_i$ mit $i = 1, \ldots, n$ zerlegt, womit über den Zusammenhang
+\begin{equation}
+	\label{eq:kPCA:ZusammenhangEigenvektoren}
+	\vect{a}_i = \frac{1}{\sqrt{\lambda_i}} \vect{v}_i
+\end{equation}
+die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[142]{ShaweTaylor.2011}.
+% Letztlich kann die Projektion eines Punktes $\vect{x}$ auf die niedrigdimensionale Repräsentation $\rvect{y}$
+% durch
+% \begin{equation}
+% 	\vect{y} = \sum_{i=1}^n \vect{a}_i \kappa(\vect{x}_i, \vect{x}) 
+% \end{equation}
+% berechnet werden.
+
+\subsubsection{Auswahl der Kernel Funktion}
+\label{ch:MethodenDerDimRed:statistisch:kPCA:AuswahlKF}
 
 %% ==============================
 \subsection{Multidimensionale Skalierung}
