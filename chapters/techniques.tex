@@ -141,18 +141,18 @@ für eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden 
 \subsubsection{Vorgehensweise}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise}
 
-Die Kernel-Funktion ist definiert als das Skalarprodukt im transformierten Raum \parencite[34]{ShaweTaylor.2011}:
+Die Kernel-Funktion ist definiert als das Skalarprodukt im Merkmalsraum \parencite[34]{ShaweTaylor.2011}:
 \begin{equation}
 	\label{eq:KernelFunction}
 	\kappa(\vect{x}_i, \vect{x}_j) = \tr{\bm{\phi}(\vect{x}_i)} \bm{\phi}(\vect{x}_j)
 \end{equation}
+und ist damit intuitiv gesehen ein \enquote{Orakel} für die Ähnlichkeit der Daten im Merkmalsraum, weil dies ohne Kenntnis der Koordinaten berechnet werden kann \parencite[71]{ShaweTaylor.2011}. Wie bereits in
+\subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} erwähnt, muss die
+Hauptkomponentenanalyse nun in eine Form gebracht werden, in der nur Skalarprodukte von
+$\bm{\phi}(\rvect{x})$ vorkommen. Diese Skalarprodukte können dann gemäß \eqref{eq:KernelFunction}
+durch die Kernel-Funktion ersetzt werden.
 
-Wie bereits in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} erwähnt, muss die
-Hauptkomponentenanalyse Hauptkomponentenanalyse in eine Form gebracht werden, in der nur
-Skalarprodukte von $\bm{\phi}(\rvect{x})$ vorkommen. Diese Skalarprodukte können dann gemäß
-\eqref{eq:KernelFunction} durch die Kernel-Funktion ersetzt werden.
-
-Dann können alle Skalarprodukte durch die Kernel-Funktion ersetzt werden \parencite[586]{Bishop.2006} und man umgeht die explizite Berechnung von $\bm{\phi}$.
+\ldots
 
 Man berechnet also die $n \times n$ \textit{Kernel Matrix}
 \begin{equation}
