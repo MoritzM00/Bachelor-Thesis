@@ -87,8 +87,8 @@ misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden. \idea{M
 
 \subsubsection{Die Co-Ranking Matrix}
 Ein Eintrag $q_{kl}$ der Co-Ranking Matrix $\mat{Q}$ ist die Anzahl der Paare von Datenpunkten $(i,
-	j)$, die den Rang $r(i, j) = k$ in der hochdimensionalen und den Rang $\tilde{r}(i, j) = l$ in der
-niedrigdimensionalen Repräsentation haben.
+	j)$, die den Rang $r_{\vect{x}}(i, j) = k$ in der hochdimensionalen und den Rang $r_{\vect{y}}(i,
+	j) = l$ in der niedrigdimensionalen Repräsentation haben.
 
 \idea{Welche Gütemaße, die auf dieser Matrix basieren verwende ich?
 	Diese werden in \textcite{Lee.2009} vorgestellt, darunter
@@ -123,14 +123,17 @@ weswegen die meisten Schätzer der intrinsischen Dimension auf der damit verwand
 Arbeit verwendete \newterm{Maximum Likelihood Schätzer} von \textcite{Levina.2004}. Diese Schätzer
 betrachten die Verteilung der Nachbarschaft eines Punktes $\rvect{x}$ als Funktion der
 intrinsischen Dimension, üblicherweise innerhalb einer kleinen Kugel um $\rvect{x}$
-\Parencite[8]{Campadelli.2015}. Der Maximum Likelihood Schätzer nimmt konkret an, dass die
+\parencite[8]{Campadelli.2015}. Der Maximum Likelihood Schätzer nimmt konkret an, dass die
 Beobachtungen, die in einer solchen Kugel liegen, einem homogenen Poisson-(Zähl-)Prozess folgen
-\Parencite[2]{Levina.2004}. Dieser Prozess hängt von $d$ ab, weshalb mittels der Maximum Likelihood
+\parencite[2]{Levina.2004}. Dieser Prozess hängt von $d$ ab, weshalb mittels der Maximum Likelihood
 Methode ein Schätzwert $\estNormal{d}$ für einen fixen Punkt $\rvect{x}_i$ als
 \begin{equation}
 	\estNormal{d}_K(\vect{x}_i) = \left( \frac{1}{K - 1} \sum_{j=1}^{K - 1} \log \frac{T_K(\vect{x}_i)}{T_j(\vect{x}_i)} \right)^{-1}
 \end{equation}
-berechnet werden kann \Parencite[4]{Levina.2004}. Hierbei ist $K$ die Anzahl der nächste Nachbarn und $T_{K}(\vect{x}_i)$ die euklidische Distanz von $\vect{x}_i$ zu seinem $K$-ten Nachbar. Dies ist jedoch nur eine lokale Schätzung für einen fixen Punkt $\vect{x}_i$. Um eine globale Schätzung zu erhalten, wird der Mittelwert über alle Beobachtungen für mehrere Werte von $K$ gebildet.
+berechnet werden kann \parencite[4]{Levina.2004}. Hierbei ist $K$ die Anzahl der nächste Nachbarn und $T_{K}(\vect{x}_i)$ die
+euklidische Distanz von $\vect{x}_i$ zu seinem $K$-ten Nachbar. Dies ist jedoch nur eine lokale
+Schätzung für einen fixen Punkt $\vect{x}_i$. Um eine globale Schätzung zu erhalten, wird der
+Mittelwert über alle Beobachtungen für mehrere Werte von $K$ gebildet.
 \section{Verwendete Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze}
 \idea{Es gibt viele Standard-Benchmark Datensätze die in anderen Arbeiten verwendet werden. Vlt ist es sinnvoll, 1-2 davon auch hier reinzunehmen für die Vergleichbarkeit, und dann 1-2 neue Datensätze,
