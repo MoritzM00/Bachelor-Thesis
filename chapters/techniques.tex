@@ -138,10 +138,10 @@ vorkommt. Im Folgenden wird die Vorgehensweise bei der Kernel PCA kurz erläuter
 für eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden auf
 \textcite{ShaweTaylor.2011} verwiesen.
 
-\subsubsection{Die Kernel-Funktion}
+\subsubsection{Der Kernel}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:KernelFunktion}
 
-Die Kernel-Funktion ist definiert als das Skalarprodukt im Merkmalsraum \parencite[34]{ShaweTaylor.2011}:
+Ein Kernel $\kappa$ ist definiert als das Skalarprodukt im Merkmalsraum \parencite[34]{ShaweTaylor.2011}:
 \begin{equation}
 	\label{eq:kPCA:KernelFunction}
 	\kappa(\vect{x}_i, \vect{x}_j) = \tr{\bm{\phi}(\vect{x}_i)} \bm{\phi}(\vect{x}_j)
@@ -162,7 +162,7 @@ Die Kovarianzmatrix $\mat{C}$ der (zentrierten) Daten im Merkmalsraum ist defini
 \begin{equation}
 	\mat{C} = \frac{1}{n} \tr{\bm{\phi}(\mat{X})} \bm{\phi}(\mat{X})
 \end{equation}
-wobei $\bm{\phi}$ hier elementweise angewandt wird. Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt ist diese Matrix aber sehr ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über die Kernel-Funktion $\kappa$ als
+wobei $\bm{\phi}$ hier elementweise angewandt wird. Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt ist diese Matrix aber sehr ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
 \begin{equation}
 	\label{eq:kPCA:KernelMatrix}
 	\begin{aligned}
@@ -187,7 +187,7 @@ die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[
 % \end{equation}
 % berechnet werden.
 
-\subsubsection{Auswahl der Kernel Funktion}
+\subsubsection{Auswahl des Kernels}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:AuswahlKF}
 
 %% ==============================
