@@ -270,15 +270,15 @@ wobei $\estNormal{\vect{x}}$ die Rekontruktion des Autoencoders bezeichnet.
 Dazu minimiert der Autoencoder einen \newterm{Rekonstruktionsfehler} $L(\vect{x}, \vect{\estNormal{x}})$, der eine Ungleichheit zwischen dem Input- und Outputvektor bestraft. Hier wird meistens die quadratische Abweichung der beiden Vektoren verwendet, das heißt
 \begin{equation}
 	\label{eq:MSE_loss}
-	L(\vect{x}, \vect{\estNormal{x}}) = \norm{\vect{x} - \vect{\estNormal{x}}}^2
+	L(\vect{x}, \vect{\estNormal{x}}) = L(\vect{x}, g(f(\vect{x}))) = \norm{\vect{x} - g(f(\vect{x}))}^2
 \end{equation}
 \parencite[507]{Goodfellow.2016}. Die Zielfunktion $\mathcal{J}_{\text{AE}}$, die der Autoencoder
-minimiert, ist dann der Mittelwert über die Fehlerfunktion in den Trainingsdaten:
+minimiert, ist dann beispielsweise der Mittelwert über die Fehlerfunktion in den Trainingsdaten:
 \begin{equation}
 	\label{eq:AE_objectiveFunction}
 	\mathcal{J}_{\text{AE}} = \frac{1}{n} \sum_{i = 1}^n L(\vect{x}_i, \estNormal{\vect{x}}_i)
 \end{equation}
-Eine weitere Möglichkeit ist der \newterm{Binary Cross-Entropy Loss}, wenn die Daten im Intervall $[0, 1]$ liegen.
+Eine weitere Möglichkeit ist der \newterm{Binary Cross-Entropy Loss}, wenn die Daten im Intervall $[0, 1]$ liegen.\unsure{wirklich das erwähnen?}
 
 Die Gefahr dabei ist, dass der Autoencoder bei zu großer Kapazität einfach die Identitätsfunktion
 ohne sinnvolle Repräsentation lernt. Dies ist zum Beispiel der Fall, wenn zu viele Schichten
@@ -295,17 +295,16 @@ Repräsentation in der Mitte forciert wird. Besitzt der Autoencoder jedoch eine 
 das heißt es werden zu viele Schichten eingesetzt, dann kann der Autoencoder trotz des Bottlenecks
 eine uninformative niedrigdimensionale Repräsentation lernen, auch wenn das Bottleneck nur
 eindimensional ist. Neben dieser \textit{impliziten} Regularisierung, gibt es deswegen noch einige
-weitere explizite Regularisierungsmethoden, die zusätzlich zum Rekonstruktionfehler $L_{rec}$ einen
-Bestrafungsterm $\Omega$ zur Fehlerfunktion $L$ hinzufügen.
+weitere \textit{explizite} Regularisierungsmethoden, die zusätzlich zum Rekonstruktionfehler einen
+Bestrafungsterm $\Omega$ zur Fehlerfunktion $L$ hinzufügen. Die Zielfunktion lautet dann
+\begin{equation}
+	\mathcal{J}_{\text{AE+reg}} = \sum L(\vect{x}, \estNormal{\vect{x}}) + \lambda \Omega
+\end{equation}
 \idea{Weight Decay als einfachste Methode?}
-
+wobei $\lambda \geq 0$ ein \textit{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert.
 Eine Umsetzung dessen ist zum Beispiel der \newterm{Sparse Autoencoder}, der eine dünn besetzte
 (engl. \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, das heißt nur wenige Einträge von
-$\vect{y}$ sind ungleich Null. Dazu wird ein Bestrafungsterm $\Omega(\vect{y})$ auf den Output des
-Encoders $\vect{y} = f(\vect{x})$ zur Fehlerfunktion hinzugefügt, das heißt
-\begin{equation}
-	L(\vect{x}, \vect{\estNormal{x}}) = L_{rec} + \lambda \Omega(\vect{y})
-\end{equation} \Parencite[505]{Goodfellow.2016}, über den Parameter $\lambda$ die Stärke der Regularisierung kontrolliert wird. Für das Lernen von Mannigfaltigkeiten besonders interessant ist jedoch der
+$\vect{y}$ sind ungleich Null. Dazu wird ein Bestrafungsterm $\Omega(\vect{y})$ abhängig vom Output $\vect{y}$ des Encoders verwendet. Für das Lernen von Mannigfaltigkeiten besonders interessant ist jedoch der
 \newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird. Wie
 eingangs erwähnt ist ein linearer Autoencoder sehr ähnlich zur Hauptkomponentenanalyse. Dieser
 Zusammenhang wird im Folgenden betrachtet.
