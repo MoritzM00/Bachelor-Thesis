@@ -291,14 +291,15 @@ eine uninformative niedrigdimensionale Repräsentation lernen, auch wenn das Bot
 eindimensional ist. Neben dieser \textit{impliziten} Regularisierung, gibt es deswegen noch einige
 weitere explizite Regularisierungsmethoden, die zusätzlich zum Rekonstruktionfehler $L_{rec}$ einen
 Bestrafungsterm $\Omega$ zur Fehlerfunktion $L$ hinzufügen.
+\idea{Weight Decay als einfachste Methode?}
 
 Eine Umsetzung dessen ist zum Beispiel der \newterm{Sparse Autoencoder}, der eine dünn besetzte
 (engl. \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, das heißt nur wenige Einträge von
-$\vect{y}$ sind ungleich Null. Dazu wird ein Bestrafungsterm auf den Output des Encoders $\vect{y}
-	= f(\vect{x})$ zur Fehlerfunktion hinzugefügt, das heißt
+$\vect{y}$ sind ungleich Null. Dazu wird ein Bestrafungsterm $\Omega(\vect{y})$ auf den Output des
+Encoders $\vect{y} = f(\vect{x})$ zur Fehlerfunktion hinzugefügt, das heißt
 \begin{equation}
-	L(\vect{x}, \vect{\estNormal{x}}) = L_{rec} + \Omega(\vect{y})
-\end{equation} \Parencite[505]{Goodfellow.2016}, wobei für den Bestrafungsterm $\Omega(\vect{y})$ beispielsweise eine L2-Regularisierung verwendet werden kann. Für das Lernen von Mannigfaltigkeiten besonders interessant ist jedoch der
+	L(\vect{x}, \vect{\estNormal{x}}) = L_{rec} + \lambda \Omega(\vect{y})
+\end{equation} \Parencite[505]{Goodfellow.2016}, über den Parameter $\lambda$ die Stärke der Regularisierung kontrolliert wird. Für das Lernen von Mannigfaltigkeiten besonders interessant ist jedoch der
 \newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird. Wie
 eingangs erwähnt ist ein linearer Autoencoder sehr ähnlich zur Hauptkomponentenanalyse. Dieser
 Zusammenhang wird im Folgenden betrachtet.
