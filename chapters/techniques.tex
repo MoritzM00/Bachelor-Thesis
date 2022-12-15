@@ -341,7 +341,14 @@ mit der von PCA wie folgt \parencite[3]{Plaut.2018}:\unsure{was meine ich mit "L
 
 Der Contractive Autoencoder \parencite{Rifai.2011} stellt eine Variante des eben vorgestellten klassichen Autoencoders
 \subsecref{ch:MethodenDerDimRed:ML:AE} dar. Ähnlich wie der Sparse Autoencoder wird die
-Zielfunktion des Autoencoders um einen zusätzlichen Regularisierungsterm erweitert. Die Idee ist
+Zielfunktion des Autoencoders lediglich um einen zusätzlichen Regularisierungsterm erweitert. Dazu
+wird wieder in \subsecref{ch:MethodenDerDimRed:CAE:Grundidee} auf die Grundidee eingegangen und
+dann in \subsecref{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm} die konkrete Berechnung des
+Regularisierungsterms vorgestellt.
+
+\subsubsection{Grundidee}
+\label{ch:MethodenDerDimRed:CAE:Grundidee}
+Die Idee ist
 es, die \textit{Sensitivität} des Autoencoders für den Input zu bestrafen. Das bedeutet, dass bei
 kleinen Änderungen des Inputs $\vect{x}$ die Kodierung $f(\vect{x})$ ebenfalls nur minimal geändert
 werden soll. Dies entspricht einer kleinen ersten Ableitung und kann über die (quadrierte)
