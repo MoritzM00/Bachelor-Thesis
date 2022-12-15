@@ -267,18 +267,24 @@ Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum ein
 	\estNormal{\rvect{x}} = g(f(\rvect{x})) \approx \rvect{x}
 \end{equation}
 wobei $\estNormal{\vect{x}}$ die Rekontruktion des Autoencoders bezeichnet.
-Dazu minimiert der Autoencoder eine Fehlerfunktion $L(\vect{x}, \vect{\estNormal{x}})$ die eine große Ungleichheit zwischen dem Input- und Outputvektor bestraft. Hier wird traditionell der mittlere quadratische Fehler (MSE) verwendet, das heißt
+Dazu minimiert der Autoencoder einen \newterm{Rekonstruktionsfehler} $L(\vect{x}, \vect{\estNormal{x}})$, der eine Ungleichheit zwischen dem Input- und Outputvektor bestraft. Hier wird meistens die quadratische Abweichung der beiden Vektoren verwendet, das heißt
 \begin{equation}
-	\label{eq:AE_MSE}
-	L(\vect{x}, \vect{\estNormal{x}}) = \Exp \left[ L_{\text{rec}} \right] = \Exp \left[ \norm{\vect{x} - \vect{\estNormal{x}}}^2 \right]
-\end{equation}\unsure{wie definieren? über Erwartungswert?}
-\parencite[507]{Goodfellow.2016}, wobei $L_{\text{rec}}$ den Rekonstruktionsfehler bezeichnet.
+	\label{eq:MSE_loss}
+	L(\vect{x}, \vect{\estNormal{x}}) = \norm{\vect{x} - \vect{\estNormal{x}}}^2
+\end{equation}
+\parencite[507]{Goodfellow.2016}. Die Zielfunktion $\mathcal{J}_{\text{AE}}$, die der Autoencoder
+minimiert, ist dann der Mittelwert über die Fehlerfunktion in den Trainingsdaten:
+\begin{equation}
+	\label{eq:AE_objectiveFunction}
+	\mathcal{J}_{\text{AE}} = \frac{1}{n} \sum_{i = 1}^n L(\vect{x}_i, \estNormal{\vect{x}}_i)
+\end{equation}
+Eine weitere Möglichkeit ist der \newterm{Binary Cross-Entropy Loss}, wenn die Daten im Intervall $[0, 1]$ liegen.
 
-Die Gefahr dabei ist jedoch, dass der Autoencoder bei zu großer Kapazität einfach die
-Identitätsfunktion ohne sinnvolle Repräsentation lernt. Dies ist zum Beispiel der Fall, wenn zu
-viele Schichten eingesetzt werden und der Autoencoder einfach die Inputvektoren auf Indizes
-abbildet. Aus diesem Grund muss ein Autoencoder oftmals regularisiert werden, worauf im nächsten
-Unterabschnitt eingegangen wird.
+Die Gefahr dabei ist, dass der Autoencoder bei zu großer Kapazität einfach die Identitätsfunktion
+ohne sinnvolle Repräsentation lernt. Dies ist zum Beispiel der Fall, wenn zu viele Schichten
+eingesetzt werden und der Autoencoder einfach die Inputvektoren auf Indizes abbildet. Aus diesem
+Grund muss ein Autoencoder oftmals regularisiert werden, worauf im Folgenden in
+\subsecref{ch:MethodenDerDimRed:ML:AE:Regularisierung} eingegangen wird.
 
 \subsubsection{Regularisierung}
 \label{ch:MethodenDerDimRed:ML:AE:Regularisierung}
