@@ -163,18 +163,14 @@ Die Kovarianzmatrix $\mat{C}$ der (zentrierten) Daten im Merkmalsraum ist defini
 	\mat{C} = \frac{1}{n} \tr{\bm{\phi}(\mat{X})} \bm{\phi}(\mat{X})
 \end{equation}
 wobei $\bm{\phi}$ hier elementweise angewandt wird. Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt ist diese Matrix aber sehr ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
-\begin{equation}
-	\label{eq:kPCA:KernelMatrix}
-	\begin{aligned}
-		\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1,\ldots,n} \\
-		        & = \bm{\phi}(\mat{X}) \tr{\bm{\phi}(\mat{X})}                       \\
-	\end{aligned}
-\end{equation}
-definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertszerlegung der zentrierten Kernel Matrix liefert die
-Eigenvektoren der Kovarianzmatrix $\mat{C}$.
-
-Konkret wird die zentrierte $n \times n$ Kernel Matrix in ihre Eigenvektoren $\vect{v_i}$ und
-Eigenwerte $\lambda_i$ mit $i = 1, \ldots, n$ zerlegt, womit über den Zusammenhang
+\begin{align}
+	\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1,\ldots,n} \label{eq:kPCA:KernelMatrix_A} \\
+	        & = \bm{\phi}(\mat{X}) \tr{\bm{\phi}(\mat{X})} \label{eq:kPCA:KernelMatrix_B}
+\end{align}
+definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertszerlegung der zentrierten Kernel Matrix liefert mit
+einer entsprechenden Skalierung die Eigenvektoren der Kovarianzmatrix $\mat{C}$. Konkret wird die
+zentrierte $n \times n$ Kernel Matrix in ihre Eigenvektoren $\vect{v_i}$ und Eigenwerte $\lambda_i$
+mit $i = 1, \ldots, n$ zerlegt, womit über den Zusammenhang
 \begin{equation}
 	\label{eq:kPCA:ZusammenhangEigenvektoren}
 	\vect{a}_i = \frac{1}{\sqrt{\lambda_i}} \vect{v}_i
@@ -193,10 +189,14 @@ die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[
 %% ==============================
 \subsection{Locally Linear Embedding}
 \label{ch:MethodenDerDimRed:statistisch:LLE}
-\nomenclature[Z]{MDS}{Locally Linear Embedding}
+\nomenclature[Z]{LLE}{Locally Linear Embedding}
+Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt die lokalen Eigenschaften der Daten aus. Gleichzeitig werden dadurch globale Eigenschaften gelernt. Dazu geht LLE in drei Schritten vor:
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:LLE:Grundidee}
+\subsubsection{Herleitung der Rekontruktionsgewichte}
+
+\subsubsection{Finden der niedrigdimensionalen Repräsentation}
 
 \newpage
 
@@ -227,27 +227,30 @@ werden wir später in \chapref{ch:Vergleich} sehen.
 \nomenclature[Z]{AE}{Autoencoder}
 
 Der Autoencoder ist ein neuronales Netzwerk, das die Rekonstruktion des Inputvektors $\vect{x}$ aus
-den Trainingsdaten lernt. Um das sinnvoll zu erreichen, besitzt der Autoencoder eine bestimmte
-Architektur. In der klassischen Form hat das Netzwerk eine ungerade Anzahl an Schichten, sodass in
-der Mitte eine \newterm{Bottleneck}-Schicht entsteht \parencite[2]{Bank.2020}. Diese wird als \textit{Bottleneck} bezeichnet, da diese Schicht nur $d < D$
-Neuronen besitzt. In diesem Fall wird der Autoencoder als \newterm{unterbestimmt} (engl.
+den Trainingsdaten lernt. Um das sinnvoll zu erreichen, besitzt der Autoencoder eine wie in
+\figref{fig:5-layer-Autoencoder} gezeigte symmetrische Architektur. Diese besteht in der
+klassischen Form aus einer ungeraden Anzahl an Schichten mit einer \newterm{Bottleneck}-Schicht in
+der Mitte \parencite[2]{Bank.2020}. Diese Schicht wird als \textit{Bottleneck} bezeichnet, da sie nur $d < D$
+Neuronen und damit die \enquote{kleinste} Stelle im Netzwerk darstellt, durch die der Inputvektor
+kodiert werden muss. In diesem Fall wird der Autoencoder als \newterm{unterbestimmt} (engl.
 \textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}.\footnote{Es gibt demnach auch überbestimmte Autoencoder mit $k > D$
 	Neuronen in der mittleren Schicht. Diese Variante reduziert die Dimension nicht, sondern erhöht sie \parencite[504]{Goodfellow.2016}.} Damit erzielt die Bottleneck-Schicht die gewünschte
 Dimensionsreduktion des Inputvektors, da der Autoencoder lernen muss, den Inputvektor aus dieser
-niedrigdimensionalen Repräsentation möglichst verlustfrei zu rekonstruieren \parencites[502]{Goodfellow.2016}[2]{Bank.2020}. \figref{fig:5-layer-Autoencoder} zeigt eine
-beispielhafte Architektur eines Autoencoders mit fünf Schichten und dreidimensionalem Bottleneck.
-Nehmen wir nun wieder an, dass wir einen $D$-dimensionalen Inputvektor $\rvect{x}$ haben (in diesem
-Beispiel ist $D = 12$), dann muss der Autoencoder lernen, $\rvect{x}$ zu kodieren, wobei in der
-Mitte des Autoencoders die niedrigdimensionale Repräsentation $\rvect{y}$ gelernt wird. In
-\figref{fig:5-layer-Autoencoder} ist $d = 3$. Dies bedeutet, dass durch den Autoencoder eine um den
-Faktor 4 reduzierte niedrigdimensionale Repräsentation gelernt werden soll.
+niedrigdimensionalen Repräsentation möglichst verlustfrei zu rekonstruieren \parencites[502]{Goodfellow.2016}[2]{Bank.2020}. Die in \figref{fig:5-layer-Autoencoder} gezeigte
+Architektur eines klassischen vollvernetzten Autoencoders besteht aus fünf Schichten und einem
+dreidimensionalem Bottleneck. Nehmen wir nun wieder an, dass wir einen $D$-dimensionalen
+Inputvektor $\rvect{x}$ haben (in diesem Beispiel ist $D = 12$), dann muss der Autoencoder lernen,
+$\rvect{x}$ zu kodieren, wobei in der Mitte des Autoencoders die niedrigdimensionale Repräsentation
+$\rvect{y}$ gelernt wird. In \figref{fig:5-layer-Autoencoder} ist $d = 3$. Dies bedeutet, dass
+durch den Autoencoder eine um den Faktor 4 reduzierte niedrigdimensionale Repräsentation gelernt
+werden soll.
 
 Die Nichtlinearität eines Autoencoders wird durch die Auswahl der Aktivierungsfunktionen bestimmt.
-Werden ausschließlich lineare Funktionen verwendet, bekommt man einen linearen Autoencoder, welcher
-sehr ähnlich zur Hauptkomponentenanalyse ist. Dies wird in
+Werden ausschließlich lineare Funktionen verwendet, resultiert dies in einem linearen Autoencoder,
+welcher sehr ähnlich zur Hauptkomponentenanalyse ist. Dies wird in
 \subsecref{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA} noch genauer betrachtet. In den meisten
-Fällen werden jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt, um die Flexibilität der
-Architektur auszunutzen \parencite[4]{Charte.2018}.
+Fällen werden jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt, um einen nichtlinearen
+Zusammenhang zu lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Charte.2018}.
 
 \begin{figure}[h]
 	\label{fig:5-layer-Autoencoder}
@@ -295,8 +298,10 @@ $\vect{y}$ sind ungleich Null. Dazu wird ein Bestrafungsterm auf den Output des 
 	= f(\vect{x})$ zur Fehlerfunktion hinzugefügt, das heißt
 \begin{equation}
 	L(\vect{x}, \vect{\estNormal{x}}) = L_{rec} + \Omega(\vect{y})
-\end{equation} \Parencite[505]{Goodfellow.2016}. Für das Lernen von Mannigfaltigkeiten besonders interessant ist der
-\newterm{Contractive Autoencoder} \parencite{Rifai.2011} , der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird.
+\end{equation} \Parencite[505]{Goodfellow.2016}, wobei für den Bestrafungsterm $\Omega(\vect{y})$ beispielsweise eine L2-Regularisierung verwendet werden kann. Für das Lernen von Mannigfaltigkeiten besonders interessant ist jedoch der
+\newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird. Wie
+eingangs erwähnt ist ein linearer Autoencoder sehr ähnlich zur Hauptkomponentenanalyse. Dieser
+Zusammenhang wird im Folgenden betrachtet.
 
 \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
 \label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}
