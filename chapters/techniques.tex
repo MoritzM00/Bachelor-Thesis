@@ -333,3 +333,15 @@ wobei $\ones_D = \tr{(1, \ldots, 1)} \in \real^D$ der Vektor mit Einsen und $\no
 \subsection{Contractive Autoencoder}
 \label{ch:MethodenDerDimRed:ML:CAE}
 \nomenclature[Z]{CAE}{Contractive Autoencoder}
+
+Der Contractive Autoencoder \parencite{Rifai.2011} stellt eine Variante des eben vorgestellten klassichen Autoencoders
+\subsecref{ch:MethodenDerDimRed:ML:AE} dar. Ähnlich wie der Sparse Autoencoder wird die
+Fehlerfunktion des Autoencoders um einen zusätzlichen Regularisierungsterm erweitert. Die Idee ist
+es, die \textit{Sensitivität} des Autoencoders für den Input zu bestrafen. Das bedeutet, dass bei
+kleiner Änderung des Inputs $\vect{x}$ die Kodierung $f(\vect{x})$ sich ebenfalls nur minimal
+ändern soll. Dies entspricht einer kleinen ersten Ableitung und kann über die (quadrierte)
+Frobeniusnorm der Jacobi-Matrix $\mat{J}$ des Encoders $f$ erzielt werden \parencite[2]{Rifai.2011}:
+\begin{equation}
+	\label{eq:CAE-Regularisierung}
+	\norm{\mat{J}_f(\vect{x})}_F^2 = \sum_{ij} \left( \frac{\partial f_i(x)}{\partial x_j} \right)^2
+\end{equation}
