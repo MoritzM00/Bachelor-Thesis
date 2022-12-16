@@ -194,13 +194,23 @@ Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt lok
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:LLE:Grundidee}
-LLE nimmt an, dass die ursprünglichen Daten auf einer $d$-dimensionalen (glatten) Mannigfaltigkeit im $\real^D$ eingebettet sind und dass diese Mannigfaltigkeit auf kleinen Stücken (engl. \textit{patches}) linear ist. Daher kann ein hochdimensionaler Vektor $\vect{x}$ durch eine Linearkombination der sogenannten Rekonstruktionsgewichte $W_{ij}$
-ausgedrückt werden \parencite[1]{Roweis.2000}. Um die Rekonstruktionsgewichte zu finden,wird die Zielfunktion
+LLE nimmt an, dass die ursprünglichen Daten auf einer $d$-dimensionalen (glatten) Mannigfaltigkeit im $\real^D$ eingebettet sind und dass diese Mannigfaltigkeit auf kleinen Stücken (engl. \textit{patches}) linear ist. Daher kann ein hochdimensionaler Vektor $\vect{x}_i$ mit $i = 1,\ldots,n$ durch eine Linearkombination der sogenannten Rekonstruktionsgewichte $W_{ij}$
+ausgedrückt werden \parencite[1]{Roweis.2000}. Um die Rekonstruktionsgewichte zu finden, wird die Zielfunktion
 \begin{equation}
 	\min_{W_{ij}} \sum_{i = 1}^n \norm[\Big]{ \vect{x}_i - \sum_{j = 1}^n W_{ij}\vect{x}_j}^2
 \end{equation}
-minimiert, unter denen Nebenbedingungen, dass sich (i) die Zeilen der Gewichtsmatrix $\mat{W}$ zu Eins summieren und (ii) $W_{ij} = 0$ gilt, wenn $\vect{x}_j$ kein Nachbar von $\vect{x}_i$ ist
-
+minimiert. Die Minimierung erfolgt unter den Folgenden zwei Nebenbedingungen \parencite[2]{Roweis.2000}. Erstens müssen sich alle Zeilen der Gewichtsmatrix $\mat{W}$ zu Eins
+summieren:
+\begin{equation}
+	\label{eq:LLE:ErsteNebenbedingung}
+	\sum_{j = 1}^n W_{ij} = 1 \qquad \forall i = 1, \ldots, n
+\end{equation}
+und zweitens sollen Datenpunkte, die keine Nachbarn sind, keinen Einfluss auf die Rekonstruktion haben, das heißt
+\begin{equation}
+	\label{eq:LLE:ZweiteNebenbedingung}
+	W_{ij} = 0 \qquad \text{falls } \vect{x}_j \text{ kein Nachbar von } \vect{x}_i \text{ ist.}
+\end{equation}
+Die Gewichtsmatrizen, die dieses Optimierungsproblem lösen, sind invariant gegenüber Translationen, Rotationen und Skalierungen.
 \subsubsection{Finden der niedrigdimensionalen Repräsentation}
 
 \newpage
