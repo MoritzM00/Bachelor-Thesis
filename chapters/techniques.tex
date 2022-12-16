@@ -341,10 +341,13 @@ mit der von PCA wie folgt \parencite[3]{Plaut.2018}:\unsure{was meine ich mit "L
 
 Der Contractive Autoencoder \parencite{Rifai.2011} stellt eine Variante des eben vorgestellten klassichen Autoencoders
 \subsecref{ch:MethodenDerDimRed:ML:AE} dar. Ähnlich wie der Sparse Autoencoder wird die
-Zielfunktion des Autoencoders lediglich um einen zusätzlichen Regularisierungsterm erweitert. Dazu
-wird wieder in \subsecref{ch:MethodenDerDimRed:CAE:Grundidee} auf die Grundidee eingegangen und
-dann in \subsecref{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm} die konkrete Berechnung des
-Regularisierungsterms vorgestellt.
+Zielfunktion des Autoencoders lediglich um einen zusätzlichen Regularisierungsterm erweitert. Dies
+führt zu einer kontrahierenden Eigenschaft: Ähnliche Punkte werden auf eine kleinere
+Nachbarschaften auf der Mannigfaltigkeit abgebildet und damit \enquote{zusammengezogen}. Dies gilt
+aber nur \textit{lokal}, das heißt unähnliche Punkte können immer noch weit weg auf der
+Mannigfaltigkeit liegen \parencite[521]{Goodfellow.2016}. Dazu wird wieder in \subsecref{ch:MethodenDerDimRed:CAE:Grundidee}
+auf die Grundidee eingegangen und dann in \subsecref{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm}
+die konkrete Berechnung des Regularisierungsterms vorgestellt.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:CAE:Grundidee}
@@ -357,7 +360,8 @@ Frobeniusnorm der Jacobi-Matrix $\mat{J}$ des Encoders $f$ erzielt werden \paren
 	\label{eq:CAE-Regularisierung}
 	\Omega(\vect{y}) = \norm{\mat{J}_f(\vect{x})}_F^2 =  \norm{ \frac{\partial f(\vect{x})}{\partial \vect{x}} }^2_F
 \end{equation}
-was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Dieser Term ist, wie wir in \subsecref{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm} sehen werden, für einen dreischichtigen Autoencoder leicht zu berechnen, nicht aber für einen tiefen Autoencoder. Dies stellt ein praktisches Problem dar, welches allerdings über ein schichtenweises vortrainieren teilweise umgangen werden werden kann \parencite[vgl.][522]{Goodfellow.2016}.
+was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Intuitiv gesehen werden so lokale Nachbarschaften auf \textit{kleinere} Nachbarschaften in der niedrigdimensionalen Repräsentation abgebildet, das heißt der Autoencoder wirkt kontrahierend.
+Der Regularisierungsterm ist, wie wir in \subsecref{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm} sehen werden, für einen dreischichtigen Autoencoder leicht zu berechnen, nicht aber für einen tiefen Autoencoder. Dies stellt ein praktisches Problem dar, welches allerdings über ein schichtenweises vortrainieren teilweise umgangen werden werden kann \parencite[vgl.][522]{Goodfellow.2016}.
 
 \subsubsection{Berechnung des Regularisierungsterms}
 \label{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm}
