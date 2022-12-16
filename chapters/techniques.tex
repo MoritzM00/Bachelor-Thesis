@@ -300,11 +300,12 @@ Bestrafungsterm $\Omega$ zur Fehlerfunktion $L$ hinzufügen. Die Zielfunktion la
 \begin{equation}
 	\mathcal{J}_{\text{AE+reg}} = \sum \left( L(\vect{x}, \estNormal{\vect{x}}) + \lambda \Omega \right)
 \end{equation}
-wobei $\lambda \geq 0$ ein \textit{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert.
+wobei $\lambda \geq 0$ ein \textit{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den Rekonstruktionfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden, was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch also eine informativere niedrigdimensionale Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
+
 Eine Umsetzung dessen ist zum Beispiel der \newterm{Sparse Autoencoder}, der eine dünn besetzte
 (engl. \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, das heißt nur wenige Einträge von
-$\vect{y}$ sind ungleich Null. Dazu wird ein Bestrafungsterm $\Omega(\vect{y})$ abhängig vom Output $\vect{y}$ des Encoders verwendet. Für das Lernen von Mannigfaltigkeiten besonders interessant ist jedoch der
-\newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird. Wie
+$\vect{y}$ sind ungleich Null. Für das Lernen von Mannigfaltigkeiten besonders interessant ist
+jedoch der \newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird. Wie
 eingangs erwähnt ist ein linearer Autoencoder sehr ähnlich zur Hauptkomponentenanalyse. Dieser
 Zusammenhang wird im Folgenden betrachtet.
 
@@ -380,7 +381,7 @@ formuliert werden, wobei $\mat{W} \in \real^{d \times D}$ und $\mat{\widetilde{W
 \end{equation}
 verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
 \begin{equation}
-	\norm{\mat{J}_f(\vect{x})}_F^2 = \sum \left( \vect{y}_i (1 - \vect{y}_i)\right)^2 \sum \mat{W_{ij}}^2
+	\norm{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^d \left( \vect{y}_i (1 - \vect{y}_i)\right)^2 \sum_{ij} \mat{W}^2_{ij}
 \end{equation}\unsure{was sind hier die Grenzen der Summen ? n oder d, D?}
 effizient berechnet werden \parencite[4]{Rifai.2011}. Für einen Autoencoder mit mehr als einer versteckten Schicht gibt es keine
 geschlossene Form mehr und die Berechnung wird teuer, was das Trainieren eines tiefen Contractive
@@ -389,4 +390,4 @@ Autoencoders ohne Tricks wie beispielsweise das gierige schichtenweise vortraini
 Autoencoder schichtenweise durch untiefe Autoencoder (drei Schichten) vortrainiert und im letzten
 Schritt erfolgt eine Feinabstimmung des kompletten Netzwerks (engl. \textit{fine-tuning}) \parencite[522]{Goodfellow.2016}. Dieses Vorgehen kann analog auch für klassische Autoencoder verwendet
 werden, um eine gute Initialisierung der Gewichte zu erreichen und damit suboptimale lokale Minima
-der Zielfunktion zu umgehen.
+der Zielfunktion zu umgehen \parencite[509]{Goodfellow.2016}.
