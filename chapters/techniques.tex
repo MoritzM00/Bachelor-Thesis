@@ -190,11 +190,16 @@ die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[
 \subsection{Locally Linear Embedding}
 \label{ch:MethodenDerDimRed:statistisch:LLE}
 \nomenclature[Z]{LLE}{Locally Linear Embedding}
-Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt die lokalen Eigenschaften der Daten aus. Gleichzeitig werden dadurch globale Eigenschaften gelernt. Dazu geht LLE in drei Schritten vor:
+Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt lokale Eigenschaften der Daten aus und bezieht damit gleichzeitig globale Eigenschaften mit ein. Wie LLE dies erreicht wird im Folgenden klarer.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:LLE:Grundidee}
-\subsubsection{Herleitung der Rekontruktionsgewichte}
+LLE nimmt an, dass die ursprünglichen Daten auf einer $d$-dimensionalen (glatten) Mannigfaltigkeit im $\real^D$ eingebettet sind und dass diese Mannigfaltigkeit auf kleinen Stücken (engl. \textit{patches}) linear ist. Daher kann ein hochdimensionaler Vektor $\vect{x}$ durch eine Linearkombination der sogenannten Rekonstruktionsgewichte $W_{ij}$
+ausgedrückt werden \parencite[1]{Roweis.2000}. Um die Rekonstruktionsgewichte zu finden,wird die Zielfunktion
+\begin{equation}
+	\min_{W_{ij}} \sum_{i = 1}^n \norm{ \vect{x}_i - \sum_{j = 1}^n W_{ij}\vect{x}_j}^2
+\end{equation}
+minimiert, unter denen Nebenbedingungen, dass sich (i) die Zeilen der Gewichtsmatrix $\mat{W}$ zu Eins summieren und (ii) $W_{ij} = 0$ gilt, wenn $\vect{x}_j$ kein Nachbar von $\vect{x}_i$ ist
 
 \subsubsection{Finden der niedrigdimensionalen Repräsentation}
 
