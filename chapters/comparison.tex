@@ -64,7 +64,7 @@ Formal definiert man zusätzlich zu den Nachbarschaftsmengen von oben die beiden
 $\set{U}_i(K)$ und $\set{V}_i(K)$ wie folgt:
 \begin{gather}
 	\set{U}_i(K) =  \left\{ j \in \N \mid j \notin \set{M}_i(K) \land j \in \widetilde{\set{M}}_i(K) \right\} \\
-	\set{V}_i(K) =  \left\{ j \in \N \mid j \in \set{M}_i(K) \land j \notin \widetilde{\set{M}}_i(K) \right\}
+	\set{V}_i(K) =  \left\{ j \in \N \mid j \in \set{M}_i(K) \land j \notin \widetilde{\set{M}}_i(K) \right\} \, .
 \end{gather}
 Diese beiden Mengen bilden lediglich die zwei intuitiv besprochenen Fälle im vorherigen Absatz mathematisch ab. Hierbei entspricht $\set{U}_i(K)$ dem ersten und $\set{V}_i(K)$ dem zweiten Fall.
 Damit kann die Vertrauenswürdigkeit $T(K)$ als
@@ -77,9 +77,9 @@ $\vect{y}_i$ geordnet sind. Der Term vor der Summation skaliert das Qualitätskr
 	\leq T(K) \leq 1$ gilt.\footnote{Dies gilt nur für den Fall, dass $k < n/2$ gilt.} Ein Wert von
 $T(K) = 1­$ spricht für eine hohe Vertrauenswürdigkeit.
 
-Analog wird die Kontinuität $C(K)$ über $\set{V}_i(K)$ wie folgt definiert:
+Analog wird die Kontinuität $C(K)$ über $\set{V}_i(K)$ wie folgt definiert
 \begin{equation}
-	C(K) = 1 - \frac{2}{nK(2n - 3K - 1)} \sum_{i = 1}^{n}\sum_{j \in \set{V}_i(K) } \left( r_{\vect{x}}(i, j) - K \right)
+	C(K) = 1 - \frac{2}{nK(2n - 3K - 1)} \sum_{i = 1}^{n}\sum_{j \in \set{V}_i(K) } \left( r_{\vect{x}}(i, j) - K \right) \, ,
 \end{equation}
 wobei $r_{\vect{x}}(i, j)$ nun den Rang zwischen den Datenpunkten in der hochdimensionalen Repräsentation bezeichnet \parencite[487]{Venna.2001}. Auch hier gilt $0 \leq C(K) \leq 1$ und höher ist besser. Die Kontinuität
 misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden. \idea{Man könnte die
@@ -95,7 +95,7 @@ Ein Eintrag $q_{kl}$ der Co-Ranking Matrix $\mat{Q}$ ist die Anzahl der Paare vo
 	\begin{enumerate}
 		\item local continuity meta criterion (LCMC)
 		\item Mean relative Rank error (ähnliche Idee wie T\&C)
-		\item andere Kennzahlen, die jeweils unterschiedliche Teile der Co-Ranking Matrix betrachten. Um diese zu
+		\item andere Kennzahlen, die jeweils unterschiedliche Teile der Co-Ranking Matrix betrachten. Um diese z
 		      verstehen, muss man noch weitere Begriffe wie (milde, harte) ($k$)-Intrusionen und Extrusionen
 		      erklären. Kann dann relativ lang werden dieser Abschnitt
 	\end{enumerate}
