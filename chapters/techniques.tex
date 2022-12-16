@@ -204,12 +204,12 @@ minimiert. Die Minimierung erfolgt unter den Folgenden zwei Nebenbedingungen \pa
 summieren
 \begin{equation}
 	\label{eq:LLE:ErsteNebenbedingung}
-	\sum_{j = 1}^n W_{ij} = 1 \qquad \forall i = 1, \ldots, n
+	\sum_{j = 1}^nW_{ij} = 1 \, , \quad \forall i = 1, \ldots, n
 \end{equation}
 und zweitens sollen Datenpunkte, die keine Nachbarn sind, keinen Einfluss auf die Rekonstruktion haben, das heißt
 \begin{equation}
 	\label{eq:LLE:ZweiteNebenbedingung}
-	W_{ij} = 0 \qquad \text{falls } \vect{x}_j \text{ kein Nachbar von } \vect{x}_i \text{ ist.}
+	W_{ij} = 0 \, , \quad \text{falls } \vect{x}_j \text{ kein Nachbar von } \vect{x}_i \text{ ist.}
 \end{equation}
 Die Gewichtsmatrizen, die dieses Optimierungsproblem lösen, sind invariant gegenüber Translationen, Rotationen und Skalierungen. Damit begründen sie das in \subsecref{ch:MethodenDerDimRed:statistisch:LLE:FindenDerRepr} erläuterte Finden der niedrigdimensionalen Repräsentation mithilfe derselben Rekonstruktionsgewichte.
 
