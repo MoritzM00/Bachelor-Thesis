@@ -364,20 +364,25 @@ was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Dies
 Der Regularisierungsterm ist wie eben erwähnt für einen Autoencoder mit nur einer versteckten Schicht leicht zu berechen. Der Encoder
 kann in diesem Fall als
 \begin{equation}
-	f(\vect{x}) = s \left( \mat{W}_1 \vect{x} + \vect{b}_1 \right) = \vect{y}
+	f(\vect{x}) = s \left( \mat{W} \vect{x} + \vect{b}_1 \right) = \vect{y}
 \end{equation}
 und der Decoder als
 \begin{equation}
-	g(\vect{y}) = s \left( \mat{W}_2 \vect{y} + \vect{b}_2 \right) = \estNormal{\vect{x}}
+	g(\vect{y}) = s \left( \mat{\widetilde{W}} \vect{y} + \vect{b}_2 \right) = \estNormal{\vect{x}}
 \end{equation}
-formuliert werden, wobei $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{D \times d}$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Gilt außerdem, dass $\mat{W} \coloneqq \mat{W}_1 = \tr{\mat{W}}_2$ und wird für die Aktivierungfunkion $s$ die Sigmoid-Funktion
+formuliert werden, wobei $\mat{W} \in \real^{d \times D}$ und $\mat{\widetilde{W}} \in \real^{D \times d}$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Dies entspricht jeweils einer affinen Transformation gefolgt von einer (nichtlinearen) Aktivierungsfunktion. Gilt außerdem, dass die Gewichte des Encoders und Decoders verbunden sind, das heißt $\mat{\widetilde{W}} = \tr{\mat{W}}$ und wird für die Aktivierungfunkion $s$ die Sigmoid-Funktion
 \begin{equation}
 	\operatorname{sigmoid}(\vect{x}) = \frac{1}{1 + \exp (-\vect{x})}
 \end{equation}
 verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
 \begin{equation}
 	\norm{\mat{J}_f(\vect{x})}_F^2 = \sum \left( \vect{y}_i (1 - \vect{y}_i)\right)^2 \sum \mat{W_{ij}}^2
-\end{equation}
+\end{equation}\unsure{was sind hier die Grenzen der Summen ? n oder d, D?}
 effizient berechnet werden \parencite[4]{Rifai.2011}. Für einen Autoencoder mit mehr als einer versteckten Schicht gibt es keine
 geschlossene Form mehr und die Berechnung wird teuer, was das Trainieren eines tiefen Contractive
-Autoencoders ohne Tricks unpraktikabel macht.
+Autoencoders ohne Tricks wie beispielsweise das gierige schichtenweise vortrainieren (engl.
+\textit{greedy layerwise pre-training}) unpraktikabel macht. Bei diesem Vorgehen wird ein tiefer
+Autoencoder schichtenweise durch untiefe Autoencoder (drei Schichten) vortrainiert und im letzten
+Schritt erfolgt eine Feinabstimmung des kompletten Netzwerks (engl. \textit{fine-tuning}) \parencite[522]{Goodfellow.2016}. Dieses Vorgehen kann analog auch für klassische Autoencoder verwendet
+werden, um eine gute Initialisierung der Gewichte zu erreichen und damit suboptimale lokale Minima
+der Zielfunktion zu umgehen.
