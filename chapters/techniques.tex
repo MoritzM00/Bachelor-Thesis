@@ -141,7 +141,7 @@ für eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden 
 \subsubsection{Der Kernel}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:KernelFunktion}
 
-Ein Kernel $\kappa$ ist definiert als das Skalarprodukt im Merkmalsraum \parencite[34]{ShaweTaylor.2011}:
+Ein Kernel $\kappa$ ist definiert als das Skalarprodukt im Merkmalsraum \parencite[34]{ShaweTaylor.2011}
 \begin{equation}
 	\label{eq:kPCA:KernelFunction}
 	\kappa(\vect{x}_i, \vect{x}_j) = \tr{\bm{\phi}(\vect{x}_i)} \bm{\phi}(\vect{x}_j)
@@ -160,7 +160,7 @@ In der Praxis häufig anzutreffen sind der Gauß-Kernel ...
 \label{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise}
 Die Kovarianzmatrix $\mat{C}$ der (zentrierten) Daten im Merkmalsraum ist definiert als
 \begin{equation}
-	\mat{C} = \frac{1}{n} \tr{\bm{\phi}(\mat{X})} \bm{\phi}(\mat{X})
+	\mat{C} = \frac{1}{n} \tr{\bm{\phi}(\mat{X})} \bm{\phi}(\mat{X}) \, ,
 \end{equation}
 wobei $\bm{\phi}$ hier elementweise angewandt wird. Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt ist diese Matrix aber sehr ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
 \begin{align}
@@ -190,17 +190,18 @@ die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[
 \subsection{Locally Linear Embedding}
 \label{ch:MethodenDerDimRed:statistisch:LLE}
 \nomenclature[Z]{LLE}{Locally Linear Embedding}
-Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt lokale Eigenschaften der Daten aus und bezieht damit gleichzeitig globale Eigenschaften mit ein. Wie LLE dies erreicht wird im Folgenden klarer.
+Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt lokale Eigenschaften der Daten aus und bezieht damit gleichzeitig globale Eigenschaften mit ein. Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die optimale lineare Rekonstruktion durch die Nachbarn eines Datenpunktes bestimmt. Im Zweiten Schritt werden dann geometrische Eigenschaften dieser Rekonstruktion ausgenutzt, durch die die niedrigdimensionale Repräsentation abgeleitet werden kann.
 
-\subsubsection{Grundidee}
-\label{ch:MethodenDerDimRed:statistisch:LLE:Grundidee}
+\subsubsection{Lineare Rekonstruktion durch die Nachbarn}
+\label{ch:MethodenDerDimRed:statistisch:LLE:LineareRekonstruktion}
 LLE nimmt an, dass die ursprünglichen Daten auf einer $d$-dimensionalen (glatten) Mannigfaltigkeit im $\real^D$ eingebettet sind und dass diese Mannigfaltigkeit auf kleinen Stücken (engl. \textit{patches}) linear ist. Daher kann ein hochdimensionaler Vektor $\vect{x}_i$ mit $i = 1,\ldots,n$ durch eine Linearkombination der sogenannten Rekonstruktionsgewichte $W_{ij}$
-ausgedrückt werden \parencite[1]{Roweis.2000}. Um die Rekonstruktionsgewichte zu finden, wird die Zielfunktion
+ausgedrückt werden \parencite[2323]{Roweis.2000}. Um die Rekonstruktionsgewichte zu finden, wird die Zielfunktion
 \begin{equation}
-	\min_{W_{ij}} \sum_{i = 1}^n \norm[\Big]{ \vect{x}_i - \sum_{j = 1}^n W_{ij}\vect{x}_j}^2
+	\label{eq:LLE:Zielfunktion}
+	\sum_{i = 1}^n \norm[\Big]{ \vect{x}_i - \sum_{j = 1}^n W_{ij}\vect{x}_j}^2
 \end{equation}
 minimiert. Die Minimierung erfolgt unter den Folgenden zwei Nebenbedingungen \parencite[2]{Roweis.2000}. Erstens müssen sich alle Zeilen der Gewichtsmatrix $\mat{W}$ zu Eins
-summieren:
+summieren
 \begin{equation}
 	\label{eq:LLE:ErsteNebenbedingung}
 	\sum_{j = 1}^n W_{ij} = 1 \qquad \forall i = 1, \ldots, n
@@ -210,11 +211,18 @@ und zweitens sollen Datenpunkte, die keine Nachbarn sind, keinen Einfluss auf di
 	\label{eq:LLE:ZweiteNebenbedingung}
 	W_{ij} = 0 \qquad \text{falls } \vect{x}_j \text{ kein Nachbar von } \vect{x}_i \text{ ist.}
 \end{equation}
-Die Gewichtsmatrizen, die dieses Optimierungsproblem lösen, sind invariant gegenüber Translationen, Rotationen und Skalierungen.
+Die Gewichtsmatrizen, die dieses Optimierungsproblem lösen, sind invariant gegenüber Translationen, Rotationen und Skalierungen. Damit begründen sie das in \subsecref{ch:MethodenDerDimRed:statistisch:LLE:FindenDerRepr} erläuterte Finden der niedrigdimensionalen Repräsentation mithilfe derselben Rekonstruktionsgewichte.
+
 \subsubsection{Finden der niedrigdimensionalen Repräsentation}
+\label{ch:MethodenDerDimRed:statistisch:LLE:FindenDerRepr}
+Wurden die optimalen Rekonstruktionsgewichte $W_{ij}$, die die Zielfunktion aus
+\eqref{eq:LLE:Zielfunktion} unter den genannten Nebenbedingungen minimieren, gefunden, so kann in einem zweiten Schritt die niedrigdimensionale Repräsentation $\vect{y}$ hergeleitet werden. Dazu werden die Eigenschaften der Gewichtsmatrix $\mat{W}$ ausgenutzt. Nimmt man wie eingangs erwähnt die Einbettung der Daten auf einer niedrigdimensionalen Mannigfaltigkeit an, dann gibt es eine Abbildung eines hochdimensionalen Punktes $\vect{x}$ auf die niedrigdimensionale Repräsentation $\vect{y}$. Diese Abbildung besteht aus einer Translation, Rotation und Skalierung -- genau die Eigenschaften gegenüber den die Gewichtsmatrix invariant ist. Man benutzt also dieselben Gewichte $W_{ij}$, die auch für die Rekonstruktion der ursprünglichen Repräsentation genutzt wurden, und löst mit fixem $W_{ij}$ das folgende Optimierungsproblem, um die latente Repräsentation zu finden \parencite[2324]{Roweis.2000}
+\begin{equation}
+	\min_{\mat{Y}} \sum_{i = 1}^n \norm[\Big]{\vect{y}_i - \sum_{j = 1}^n W_{ij}\vect{y}_j}^2
+\end{equation}
+Dieses Optimierungsproblem ist jedoch nicht
 
 \newpage
-
 %% ==============================
 %% ==============================
 \section{Machine Learning Methoden}
