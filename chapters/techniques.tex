@@ -194,13 +194,14 @@ Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt lok
 
 \subsubsection{Lineare Rekonstruktion durch die Nachbarn}
 \label{ch:MethodenDerDimRed:statistisch:LLE:LineareRekonstruktion}
-LLE nimmt an, dass die ursprünglichen Daten auf einer $d$-dimensionalen (glatten) Mannigfaltigkeit im $\real^D$ eingebettet sind und dass diese Mannigfaltigkeit auf kleinen Stücken (engl. \textit{patches}) linear ist. Daher kann ein hochdimensionaler Vektor $\vect{x}_i$ mit $i = 1,\ldots,n$ durch eine Linearkombination der sogenannten Rekonstruktionsgewichte $W_{ij}$
-ausgedrückt werden \parencite[2323]{Roweis.2000}. Um die Rekonstruktionsgewichte zu finden, wird die Zielfunktion
+LLE nimmt an, dass die ursprünglichen Daten auf einer $d$-dimensionalen glatten Mannigfaltigkeit im $\real^D$ eingebettet sind und dass diese Mannigfaltigkeit auf kleinen Stücken (engl. \textit{patches}) approximativ linear ist. Daher kann ein hochdimensionaler Vektor $\vect{x}_i$ mit $i = 1,\ldots,n$ durch eine Linearkombination seiner Nachbarn
+ausgedrückt werden \parencite[2323]{Roweis.2000}. Die Koeffizienten dieser Linearkombination sind die sogenannten
+Rekonstruktionsgewichte $W_{ij}$, welche durch Minimierung der Zielfunktion
 \begin{equation}
 	\label{eq:LLE:Zielfunktion}
 	\sum_{i = 1}^n \norm[\Big]{ \vect{x}_i - \sum_{j = 1}^n W_{ij}\vect{x}_j}^2
 \end{equation}
-minimiert. Die Minimierung erfolgt unter den Folgenden zwei Nebenbedingungen \parencite[2]{Roweis.2000}. Erstens müssen sich alle Zeilen der Gewichtsmatrix $\mat{W}$ zu Eins
+gefunden werden. Die Minimierung erfolgt unter den Folgenden zwei Nebenbedingungen \parencite[2]{Roweis.2000}. Erstens müssen sich alle Zeilen der Gewichtsmatrix $\mat{W}$ zu Eins
 summieren
 \begin{equation}
 	\label{eq:LLE:ErsteNebenbedingung}
@@ -211,8 +212,17 @@ und zweitens sollen Datenpunkte, die keine Nachbarn sind, keinen Einfluss auf di
 	\label{eq:LLE:ZweiteNebenbedingung}
 	W_{ij} = 0 \, , \quad \text{falls } \vect{x}_j \text{ kein Nachbar von } \vect{x}_i \text{ ist.}
 \end{equation}
-Die Gewichtsmatrizen, die dieses Optimierungsproblem lösen, sind invariant gegenüber Translationen, Rotationen und Skalierungen. Damit begründen sie das in \subsecref{ch:MethodenDerDimRed:statistisch:LLE:FindenDerRepr} erläuterte Finden der niedrigdimensionalen Repräsentation mithilfe derselben Rekonstruktionsgewichte.
+Die erste Nebenbedingung (\eqref{eq:LLE:ErsteNebenbedingung}) macht die Gewichtsmatrix invariant gegenüber Translationen: Werden alle Datenpunkte um den Wert $\alpha \in \real$ verschoben, so ist $W_{ij}$ wegen $\sum_j W_{ij}\alpha = \alpha$ immer noch eine optimale Lösung \parencite[8]{Cayton.2005}:
+\begin{equation}
+	\sum_{i = 1}^n \norm[\Big]{ \vect{x}_i + \alpha - \sum_{j = 1}^n W_{ij}(\vect{x}_j + \alpha)}^2 = \sum_{i = 1}^n \norm[\Big]{ \vect{x}_i - \sum_{j = 1}^n W_{ij}\vect{x}_j}^2 \, .
+\end{equation}
+Des Weiteren sind die Gewichtsmatrizen, die dieses Optimierungsproblem lösen, invariant gegenüber Rotationen und Skalierungen. Damit begründen sie das in \subsecref{ch:MethodenDerDimRed:statistisch:LLE:FindenDerRepr} erläuterte Finden der niedrigdimensionalen Repräsentation mithilfe derselben Rekonstruktionsgewichte.
 
+% Das restringierte Optimierungsproblem kann mittels des Lagrange-Ansatzes gelöst werden, womit man auf eine geschlossene Form der Rekonstruktionsgewichte für einen Vektor $\vect{x}_i$ kommt \parencites[2325 -- 2326]{Roweis.2000}[3]{Ghojogh.2020}:
+% \begin{equation}
+% 	\vect{W}_i = \frac{\sum_k C_{jk}^{-1}}{\sum_{lm} C_{lm}^{-1}} \, ,
+% \end{equation}
+% wobei $\mat{C}$ die lokale Kovarianzmatrix ist. 
 \subsubsection{Finden der niedrigdimensionalen Repräsentation}
 \label{ch:MethodenDerDimRed:statistisch:LLE:FindenDerRepr}
 Wurden die optimalen Rekonstruktionsgewichte $W_{ij}$, die die Zielfunktion aus
