@@ -33,27 +33,25 @@ die Algorithmen teilweise stabiler, da durch die Dimensionsreduktion unrepräsen
 für die Datenvisualisierung unumgänglich, da hochdimensionale natürliche Datensätze so auf zwei
 oder drei Dimensionen für die Veranschaulichung reduziert werden können.
 
-Über die Zeit wurden deshalb eine Vielzahl von Dimensionsreduktionsmethoden entwickelt,
-wobei der wohl bekannteste und immer noch vielfach verwendete Algorithmus die
-Hauptkomponentenanalyse ist. Die große Auswahl an verschiedensten Methoden macht die Selektion der richtigen Methode für eine spezifische Aufgabe allerdings sehr schwer. \textcite{vanderMaaten.2008} hat dazu zwölf nichtlineare Methoden untersucht und mit der Hauptkomponentenanalyse verglichen. Weitere vorangehende Arbeiten dazu sind ...
-\idea{Related Work: Welche Arbeiten wurden auf diesem Bereich schon veröffentlicht
-
-	Wie grenze ich meine Arbeit davon ab?}
+Über die Zeit wurden deshalb eine Vielzahl von Dimensionsreduktionsmethoden entwickelt, für eine Übersicht wird auf \textcites{Burges.2009}{Sarveniazi.2014}{Sorzano.2014}{Cunningham.2014}{Lee.2007} verwiesen.
+Der wohl bekannteste und immer noch vielfach verwendete Algorithmus ist die
+Hauptkomponentenanalyse ist. Die große Auswahl an verschiedensten Methoden macht die Selektion der richtigen Methode für eine spezifische Aufgabe allerdings sehr schwer. \
+\Textcite{vanderMaaten.2009} hat dazu zwölf nichtlineare Methoden untersucht und mit der Hauptkomponentenanalyse verglichen.
 
 Das Ziel dieser Arbeit ist es herauszufinden, ob Machine Learning Methoden gegenüber statistischen
-Methoden auf dem Gebiet der Dimensionsreduktion einen echten Vorteil durch die erhöhte Flexibilität
-erreichen können. Die hier vorgestellten Methoden sind die weit verbreitete
+Methoden auf dem Gebiet der Dimensionsreduktion einen Vorteil durch die erhöhte Flexibilität
+bringen können. Dazu werden drei statistische und zwei Machine Learning Methoden genauer
+betrachtet. Die hier vorgestellten Methoden sind die weit verbreitete
 \newterm{Hauptkomponentenanalyse} (engl. \textit{Principal Component Analysis} (PCA)), die
 \newterm{Kernel PCA} sowie das \newterm{Locally Linear Embedding} als Vertreter der statistischen
 Methoden (\secref{ch:MethodenDerDimRed:statistisch}). Der Autoencoder in der klassischen Form und
 eine Variante davon, der \newterm{Contractive Autoencoder} werden als Vertreter der Machine
-Learning Ansätze (\secref{ch:MethodenDerDimRed:modern}) vorgestellt.
-
-Es soll herausgearbeitet werden, wann sich bestimmte Algorithmen besser eignen als andere und dies
-begründet darlegt werden. Außerdem wird untersucht, inwiefern ein Autoencoder mit ausschließlich
-linearen Aktivierungsfunktionen tatsächlich mit der Hauptkomponentenanalyse übereinstimmt und was
-passiert, wenn man schrittweise Nichtlinearität hinzunimmt.\rewrite{etwas mehr interesse wecken, zu
-	trocken}
+Learning Ansätze (\secref{ch:MethodenDerDimRed:modern}) vorgestellt. Vor diesem Hintergrund soll
+untersucht werden, ob Machine Learning Methoden traditionelle statistische Methoden auf dem Gebiet
+der Dimensionsreduktion übertreffen. Mehrere Veröffentlichungen zur Relation zwischen der
+Hauptkomponentenanalyse und den Autoencodern haben außerdem gezeigt, dass die Ergebnisse dieser
+beiden Methoden unter gewissen Annahmen sehr ähnlich sind \parencites{Baldi.1989}{Bourlard.1988}{Plaut.2018}. Es soll daher empirisch herausgearbeitet werden,
+inwiefern ein Autoencoder mit der Hauptkomponentenanalyse übereinstimmt.
 
 Die Arbeit gliedert sich wie folgt in drei Teile ein: Zuerst wird in
 \chapref{ch:Dimensionsreduktion} die Grundlage für das Verständnis der Dimensionsreduktionsmethoden
