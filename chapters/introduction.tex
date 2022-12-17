@@ -4,54 +4,50 @@
 %% ==============================
 
 Viele interessante Anwendungsgebiete für Machine Learning umfassen oftmals eine sehr große Anzahl
-an Merkmalen, wie es beispielsweise bei der Genexpressionsanalyse oder der verarbeitung von anderen
-Bilddatensätzen der Fall ist. Diese Datensätze weisen eine hohe Dimensionalität auf und bereiten
-damit vielen Algorithmen Probleme. Unter anderem übersteigt vor allem in medizinischen Datensätzen
-die Anzahl der Merkmale die Stichprobengröße des Datensatzes. Des Weiteren wird zunehmend der Fluch
-der Dimensionalität zum Problem: Das Volumen im Raum steigt exponentiell an, was bei hinreichend
-großen Dimensionen dazu führt, dass alle Punkte gleich weit weg voneinander liegen und damit
-Distanzmaße ihre Aussagekraft verlieren. Es treten jedoch nicht nur algorithmische, sondern auch
-praktische Probleme auf. Datensätze mit sehr vielen Stichproben, die zusätzlich eine hohe Dimension
-aufweisen, benötigen eine immense Speicherkapazität. Dies ist oft bei Bilddatensätzen wie
-beispielweise LAION-5B der Fall. Dieser Datensatz enthält 5,6 Milliarden Text-Bilder-Paare, wobei
-die Bilder eine Größe von $3 \times 384 \times 384$ haben, was einer Dimensionalität von 442 368
-entspricht. In dieser Auflösung werden 240 TeraByte Speicherplatz benötigt. Dieser Datensatz wurde
-für das Trainieren von Stable Diffusion \addref verwendet, was sich sehr schnell von großer
-Beliebtheit erfreut hat. Dies ist ein \textit{latent diffusion model} oder mit anderen Worten:
-Stable Diffusion arbeitet nicht in der hochdimensionalen Auflösung sondern in der latenten
-Repräsentation eines Bildes, das eine deutlich niedrigere Auflösung besitzt und macht so das
-effiziente Trainieren auf einem solch großen Datensatz überhaupt erst möglich. Auch wenn LAION-5B
-ein extrem großer Datensatz ist, so sind auch schon kleinere Datensätze ein Problem für
-herkömmliche Rechner aufgrund von Beschränkungen des Arbeitsspeichers. Diesen und einigen anderen
-Problemen versucht die Dimensionsreduktion zu entgegenzuwirken, in dem der Datensatz auf eine
-kleinere Dimension abgebildet wird. Man erhofft sich, dass der Informationsgehalt der Daten nach
-der Transformation immer noch hoch ist und in vielen Fällen sogar weniger Rauschen enthält, wodurch
-Algorithmen stabiler werden. Es wurden eine Vielzahl von Dimensionsreduktionsmethoden entwickelt,
+an Merkmalen, wie es beispielsweise bei der Genexpressionsanalyse mit tausenden von Genen \parencite{Parmigiani.2003} oder der Verarbeitung von Bild-, Text- oder Videodaten der Fall ist. Diese
+große Anzahl an Merkmalen, das heißt die hohe Dimensionalität der Daten, bereitet vielen
+Algorithmen Probleme. Die mathematischen und statistischen Probleme, die bei Datensätzen hoher
+Dimensionalität auftreten, werden unter dem Begriff \newterm{Fluch der Dimensionalität} \parencite{Aggarwal.2001} zusammengefasst. Hinzu kommt, dass die Anzahl der Merkmale auf diesen
+Anwendungsgebieten oft die Stichprobengröße eines Datensatzes übersteigt. Beispielsweise gibt es in
+klinischen Studien oft nur wenige Teilnehmer, weshalb gerade medizinische Datensätze wie die
+Magnetresonanztomographie (MRT) von diesem Problem betroffen sind. Es treten jedoch nicht nur
+algorithmische, sondern auch praktische Probleme auf, da Datensätze mit sehr vielen Stichproben und
+zusätzlich hoher Dimension eine immense Speicherkapazität und Rechenleistung benötigen
+können.\footnote{Der Bilddatensatz LAION-5B umfasst circa 5,8 Milliarden Text-Bilder-Paare, wobei
+	die Bilder eine Größe von $3 \times 384 \times 384$ haben. Dies entspricht einer Dimensionalität
+	von 442 368. In dieser Auflösung werden 240 TeraByte Speicherplatz benötigt.}
+% Ein Teil dieses Datensatzes wurde
+% für das Trainieren von Stable Diffusion \addref verwendet. Dies ist ein \textit{latent diffusion model} oder mit anderen Worten:
+% Stable Diffusion arbeitet nicht in der hochdimensionalen Auflösung sondern in der latenten
+% Repräsentation eines Bildes, das eine deutlich niedrigere Auflösung besitzt und macht so das
+% effiziente Trainieren auf einem solch großen Datensatz überhaupt erst möglich. Auch wenn LAION-5B
+% ein extrem großer Datensatz ist, so sind auch schon kleinere Datensätze ein Problem für
+% herkömmliche Rechner aufgrund von Beschränkungen des Arbeitsspeichers und der Rechenleistung.
+Diesen und noch einigen anderen Problemen versucht die Dimensionsreduktion entgegenzuwirken, indem
+der Datensatz auf eine kleinere Dimension abgebildet wird. Man erhofft sich, dass der
+Informationsgehalt der Daten nach der Transformation immer noch hoch ist und damit die Redundanz
+reduziert wurde. Häufig wird die Dimensionsreduktion als ein Vorverabeitungsschritt eingesetzt,
+woraufhin dann der eigentliche Klassifikator oder Regressor trainiert wird. In diesen Fällen sind
+die Algorithmen teilweise stabiler, da durch die Dimensionsreduktion unrepräsentative Merkmale
+(\textit{noise}) entfernt wurden und somit die Gefahr des \textit{Overfitting} geringer ist \parencites[siehe]{Plastria.2008}{MustafaAbdulSalam.2021}. Die Dimensionsreduktion ist darüber hinaus
+für die Datenvisualisierung unumgänglich, da hochdimensionale natürliche Datensätze so auf zwei
+oder drei Dimensionen für die Veranschaulichung reduziert werden können.
+
+Über die Zeit wurden deshalb eine Vielzahl von Dimensionsreduktionsmethoden entwickelt,
 wobei der wohl bekannteste und immer noch vielfach verwendete Algorithmus die
-Hauptkomponentenanalyse ist. \idea{Wofür braucht man DimRed?
-	\begin{enumerate}
-		\item Curse of Dimensionality
-		\item Reduzierung des Speicheraufwands
-		\item Reduzierung des Rechenaufwands beim Training
-		\item Reduzierung von Overfitting
-		\item Datenvisualisierung
-		\item Anwendungen v.a. auch in Computer Vision
-	\end{enumerate}
-	Punkte zwei und drei (und eins eig. auch) treffen auf Stable Diffusion zu
-}
+Hauptkomponentenanalyse ist. Die große Auswahl an verschiedensten Methoden macht die Selektion der richtigen Methode für eine spezifische Aufgabe allerdings sehr schwer. \textcite{vanderMaaten.2008} hat dazu zwölf nichtlineare Methoden untersucht und mit der Hauptkomponentenanalyse verglichen. Weitere vorangehende Arbeiten dazu sind ...
 \idea{Related Work: Welche Arbeiten wurden auf diesem Bereich schon veröffentlicht
 
 	Wie grenze ich meine Arbeit davon ab?}
 
-Das Ziel dieser Arbeit ist es herauszufinden, ob moderne Machine Learning Methoden gegenüber
-traditionellen statistischen Methoden auf dem Gebiet der Dimensionsreduktion gegenüber
-statistischen Methoden wie der einen echten Vorteil durch die erhöhte Flexibilität erreichen
-können. Die hier vorgestellten Methoden sind die weit verbreitete \newterm{Hauptkomponentenanalyse}
-(engl. \textit{Principal Component Analysis} (PCA)), die \newterm{Kernel PCA} sowie das
-\newterm{Locally Linear Embedding} als Vertreter der statistischen Methoden
-(\secref{ch:MethodenDerDimRed:statistisch}). Der Autoencoder in der klassischen Form und eine
-Variante davon, der \newterm{Contractive Autoencoder} werden als Vertreter der Machine Learning
-Ansätze (\secref{ch:MethodenDerDimRed:modern}) vorgestellt.
+Das Ziel dieser Arbeit ist es herauszufinden, ob Machine Learning Methoden gegenüber statistischen
+Methoden auf dem Gebiet der Dimensionsreduktion einen echten Vorteil durch die erhöhte Flexibilität
+erreichen können. Die hier vorgestellten Methoden sind die weit verbreitete
+\newterm{Hauptkomponentenanalyse} (engl. \textit{Principal Component Analysis} (PCA)), die
+\newterm{Kernel PCA} sowie das \newterm{Locally Linear Embedding} als Vertreter der statistischen
+Methoden (\secref{ch:MethodenDerDimRed:statistisch}). Der Autoencoder in der klassischen Form und
+eine Variante davon, der \newterm{Contractive Autoencoder} werden als Vertreter der Machine
+Learning Ansätze (\secref{ch:MethodenDerDimRed:modern}) vorgestellt.
 
 Es soll herausgearbeitet werden, wann sich bestimmte Algorithmen besser eignen als andere und dies
 begründet darlegt werden. Außerdem wird untersucht, inwiefern ein Autoencoder mit ausschließlich
