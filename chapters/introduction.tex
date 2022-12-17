@@ -3,15 +3,32 @@
 \label{ch:Enleitung}
 %% ==============================
 
-\idea{
-	\begin{enumerate}
-		\item Motivation der Dimensionsreduktion darstellen (s. Kasten eins weiter unten)
-		\item Was ist Dimensionsreduktion in verständlichen Worten?
-		\item Anwendungsgebiete, zB Stable Diffusion oder PCA on Image Data
-	\end{enumerate}
-	Wenn der VAE rausfällt, kann ich nicht mit SD einleiten
-}
-\idea{Wofür braucht man DimRed?
+Viele interessante Anwendungsgebiete für Machine Learning umfassen oftmals eine sehr große Anzahl
+an Merkmalen, wie es beispielsweise bei der Genexpressionsanalyse oder der verarbeitung von anderen
+Bilddatensätzen der Fall ist. Diese Datensätze weisen eine hohe Dimensionalität auf und bereiten
+damit vielen Algorithmen Probleme. Unter anderem übersteigt vor allem in medizinischen Datensätzen
+die Anzahl der Merkmale die Stichprobengröße des Datensatzes. Des Weiteren wird zunehmend der Fluch
+der Dimensionalität zum Problem: Das Volumen im Raum steigt exponentiell an, was bei hinreichend
+großen Dimensionen dazu führt, dass alle Punkte gleich weit weg voneinander liegen und damit
+Distanzmaße ihre Aussagekraft verlieren. Es treten jedoch nicht nur algorithmische, sondern auch
+praktische Probleme auf. Datensätze mit sehr vielen Stichproben, die zusätzlich eine hohe Dimension
+aufweisen, benötigen eine immense Speicherkapazität. Dies ist oft bei Bilddatensätzen wie
+beispielweise LAION-5B der Fall. Dieser Datensatz enthält 5,6 Milliarden Text-Bilder-Paare, wobei
+die Bilder eine Größe von $3 \times 384 \times 384$ haben, was einer Dimensionalität von 442 368
+entspricht. In dieser Auflösung werden 240 TeraByte Speicherplatz benötigt. Dieser Datensatz wurde
+für das Trainieren von Stable Diffusion \addref verwendet, was sich sehr schnell von großer
+Beliebtheit erfreut hat. Dies ist ein \textit{latent diffusion model} oder mit anderen Worten:
+Stable Diffusion arbeitet nicht in der hochdimensionalen Auflösung sondern in der latenten
+Repräsentation eines Bildes, das eine deutlich niedrigere Auflösung besitzt und macht so das
+effiziente Trainieren auf einem solch großen Datensatz überhaupt erst möglich. Auch wenn LAION-5B
+ein extrem großer Datensatz ist, so sind auch schon kleinere Datensätze ein Problem für
+herkömmliche Rechner aufgrund von Beschränkungen des Arbeitsspeichers. Diesen und einigen anderen
+Problemen versucht die Dimensionsreduktion zu entgegenzuwirken, in dem der Datensatz auf eine
+kleinere Dimension abgebildet wird. Man erhofft sich, dass der Informationsgehalt der Daten nach
+der Transformation immer noch hoch ist und in vielen Fällen sogar weniger Rauschen enthält, wodurch
+Algorithmen stabiler werden. Es wurden eine Vielzahl von Dimensionsreduktionsmethoden entwickelt,
+wobei der wohl bekannteste und immer noch vielfach verwendete Algorithmus die
+Hauptkomponentenanalyse ist. \idea{Wofür braucht man DimRed?
 	\begin{enumerate}
 		\item Curse of Dimensionality
 		\item Reduzierung des Speicheraufwands
