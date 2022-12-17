@@ -72,7 +72,7 @@ Dimensionsreduktion, kann jedoch beliebig zwischen $1 \leq k \leq D$ gewählt we
 Betrachtet wird nun zunächst lediglich die \textit{erste} Hauptkomponente $\tr{\vect{a}_1} \rvect{x}$ und erinnern uns daran, dass wir wie in \subsecref{ch:MethodenDerDimRed:statistisch:PCA:Grundidee} erwähnt möglichst viel Variation von $\rvect{x}$ erhalten möchten. Daher wird die erste Hauptkomponente so gewählt, dass die Varianz maximal wird:
 \begin{equation}
 	\label{eq:PCA-Optimierungsproblem}
-	\max_{\vect{a}_1} \Var \left( \tr{\vect{a}_1} \rvect{x} \right) = \max_{\vect{a}_1} \tr{\vect{a}_1} \mat{\Sigma} \vect{a}_1
+	\max_{\vect{a}_1}\, \Var \left( \tr{\vect{a}_1} \rvect{x} \right) = \max_{\vect{a}_1} \tr{\vect{a}_1} \mat{\Sigma} \vect{a}_1
 \end{equation}
 wobei $\mat{\Sigma}$ die Kovarianzmatrix von $\rvect{x}$ ist. Dieses Maximierungsproblem ist jedoch nach oben unbeschränkt, weshalb man zusätzlich die Bedingung
 \begin{equation}
@@ -228,9 +228,17 @@ Des Weiteren sind die Gewichtsmatrizen, die dieses Optimierungsproblem lösen, i
 Wurden die optimalen Rekonstruktionsgewichte $W_{ij}$, die die Zielfunktion aus
 \eqref{eq:LLE:Zielfunktion} unter den genannten Nebenbedingungen minimieren, gefunden, so kann in einem zweiten Schritt die niedrigdimensionale Repräsentation $\vect{y}$ hergeleitet werden. Dazu werden die Eigenschaften der Gewichtsmatrix $\mat{W}$ ausgenutzt. Nimmt man wie eingangs erwähnt die Einbettung der Daten auf einer niedrigdimensionalen Mannigfaltigkeit an, dann gibt es eine Abbildung eines hochdimensionalen Punktes $\vect{x}$ auf die niedrigdimensionale Repräsentation $\vect{y}$. Diese Abbildung besteht aus einer Translation, Rotation und Skalierung -- genau die Eigenschaften gegenüber den die Gewichtsmatrix invariant ist. Man benutzt also dieselben Gewichte $W_{ij}$, die auch für die Rekonstruktion der ursprünglichen Repräsentation genutzt wurden, und löst mit fixem $W_{ij}$ das folgende Optimierungsproblem, um die latente Repräsentation zu finden \parencite[2324]{Roweis.2000}:
 \begin{equation}
-	\min_{\mat{Y}} \sum_{i = 1}^n \norm[\Big]{\vect{y}_i - \sum_{j = 1}^n W_{ij}\vect{y}_j}^2 \, .
+	\label{eq:LLE:ZielfunktionY}
+	\min_{\mat{Y}}\, \sum_{i = 1}^n \norm[\Big]{\vect{y}_i - \sum_{j = 1}^n W_{ij}\vect{y}_j}^2 \, .
 \end{equation}
-Dieses Optimierungsproblem ist jedoch nicht
+\eqref{eq:LLE:ZielfunktionY} kann äquivalent umgeformt werden zu \parencite[4]{Ghojogh.2020}
+\begin{equation}
+	\min_{\mat{Y}}\, \Spur(\tr{\mat{Y}} \mat{M} \mat{Y}) \, ,
+\end{equation}
+wobei $\mat{M} = \tr{(\identity_n - \mat{W})} (\identity_n - \mat{W})$. Jedoch ist dieses Optimierungsproblem unterbestimmt, weswegen man für $\mat{Y}$ eine Einheits-Kovarianzmatrix und einen spaltenweisen Mittelwert von Null fordert \parencite[11]{Saul.2000}. Wie \textcite[3 -- 4]{Ghojogh.2020} zeigen, wird das Problem über die
+Eigenwertzerlegung der dünnbesetzten Matrix $\mat{M}$ gelöst: Die Spalten von $\mat{Y}$ entsprechen
+den unteren $d$ Eigenvektoren von $\mat{M}$, wobei das triviale Eigenvektor-Eigenwert-Paar $(\ones,
+	0)$ ausgelassen wird.
 
 \newpage
 %% ==============================
