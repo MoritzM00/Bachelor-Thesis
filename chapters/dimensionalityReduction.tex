@@ -38,16 +38,19 @@ Merksmalsextrahierung (engl. \textit{feature extraction}) besprochen.
 
 Wie eingangs besprochen wird bei hochdimensionalen Daten oft von Redundanz oder
 Abhängigkeitsstrukturen in den Merkmalen ausgegangen. Eng damit verbunden ist die Idee, dass Daten
-auf einer sogenannten \newterm{Mannigfaltigkeit} liegen, welche der Grundbaustein eines wichtiges
-Teilgebietes der Dimensionsreduktion, nämlich dem Erlernen von Mannigfaltigkeiten \parencite{Cayton.2005} ist. Dieses Teilgebiet wird durch die \newterm{Mannigfaltigkeits-Hypothese}
-(engl. \textit{manifold hypothesis}) motiviert. Dabei wird hier mehr der Fokus auf das intuitive
-Verständnis einer Mannigfaltigkeit gelegt. Für eine mathematisch korrekte Definition aus der
-Topologie, einem Teilgebiet der Mathematik, wird auf ..\addref verwiesen.
+auf einer sogenannten \newterm{Mannigfaltigkeit} (engl. \textit{manifold}) liegen.
+Dimensionsreduktionsmethoden, die auf dieser Idee basieren, gehören zu einem wichtigen Teilgebiet
+der Dimensionreduktion: dem Erlernen von Mannigfaltigkeiten \parencite{Cayton.2005}. Motiviert werden diese Ansätze durch die Hypothese, dass reale
+hochdimensionale Daten in sehr vielen Fällen auf einer in diesem hochdimensionalen Raum
+\textit{eingebetteten} Mannigfaltigkeit $\mathcal{M}$ der Dimensionalität $d$ < $D$ liegen \parencite[vgl.][1]{Cayton.2005}. In diesem Abschnitt wird ein kurzer Überblick über den abstrakten
+Begriff einer Mannigfaltigkeit gegeben, wodurch ein geometrischer Bezug der intrinsischen Dimension
+hergestellt werden kann.
 
-Die Mannigfaltigkeits-Hypothese behauptet, dass reale hochdimensionale Daten in sehr vielen Fällen
-auf einer in diesem hochdimensionalen Raum \textit{eingebetteten} Mannigfaltigkeit $\mathcal{M}$
-der Dimensionalität $d$ < $D$ liegen \parencite[vgl.][1]{Cayton.2005}. \missingfigure{Ekläre Mannigfaltigkeit mit einer Abbildung}. Die
-intrinsische Dimension $d$ entspricht in diesem Kontext der Dimension der Mannigfaltigkeit
+Dabei wird hier mehr der Fokus auf das intuitive Verständnis einer Mannigfaltigkeit gelegt. Für
+eine mathematisch korrekte Definition aus der Topologie, einem Teilgebiet der Mathematik, wird auf
+..\addref verwiesen.
+
+Die intrinsische Dimension $d$ entspricht in diesem Kontext der Dimension der Mannigfaltigkeit
 $\mathcal{M}$.
 
 \section{Ansätze der Dimensionsreduktion}
