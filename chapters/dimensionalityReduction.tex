@@ -61,9 +61,9 @@ ebenfalls die intrinsische Dimension vorstellen: Während die Erdoberfläche in 
 dreidimensionalen Raum eingebettet ist (extrinsische Dimension), so ist die zugrundeliegende Fläche
 zweidimensional (intrinsische Dimension). Die intrinsische Dimension entspricht also in diesem
 Kontext der Dimension der im $\real^D$ eingebetteten $d$-Mannigfaltigkeit $\mathcal{M}$. Auf eine
-umfassende formale Definition wird an dieser Stelle jedoch verzichtet, da es über den Rahmen dieser
-Arbeit hinausgehen würde. Für eine mathematisch korrekte Definition der hier genannten Begriffe aus
-der Topologie wird dazu auf \textcites{Lee.2011}{Lee.2012} verwiesen.
+umfassende formale Definition wird an dieser Stelle jedoch verzichtet. Für eine mathematisch
+korrekte Definition der hier genannten Begriffe aus der Topologie wird dazu auf
+\textcites{Lee.2011}{Lee.2012} verwiesen.
 
 Eine Mannigfaltigkeit kann darüberhinaus noch mit weiteren Eigenschaften versehen werden. Dazu
 gehören glatte Mannigfaltigkeiten, auf denen Differentialrechnung möglich ist und ein sogenannter
@@ -75,7 +75,29 @@ weitere Annahmen über die Struktur( glatt, zusammenhängend) genommen.
 
 \section{Ansätze der Dimensionsreduktion}
 \label{ch:Dimensionsreduktion:Ansaetze}
-\idea{generelle Ansätze grob formulieren, also nichtlinear vs. linear, topology vs. distance preservation, convex vs. non-convex}
+Methoden der Dimensionsreduktion können auf unterschiedlichste Weise in Kategorien eingeteilt werden. In diesem Abschnitt werden kurz die gängigsten Kategorisierungsmöglichkeiten vorgestellt. Dazu gehört die Unterteilung in (i) lineare und nichtlineare Methoden, (ii) konvexe und nicht-konvexe Methoden, sowie die Unterteilung in (iii) Distanz- und Topologie-erhaltende Methoden und (iv) lokale vs. globale Methoden.
+
+Eine simple Unterteilung ist die in lineare und nichtlineare Methoden. Während lineare Methoden wie
+die Hauptkomponentenanalyse (\secref{ch:MethodenDerDimRed:statistisch:PCA}) nur lineare
+Zusammenhänge in den Daten erkennen können, sind nichtlineare Methoden in dieser Hinsicht deutlich
+flexibler. Zu letzteren gehören beispielsweise die Kernel PCA
+(\secref{ch:MethodenDerDimRed:statistisch:kPCA}) und Autoencoder
+(\secref{ch:MethodenDerDimRed:ML:AE}).
+
+\textbf{Distanz-basierte Methoden} versuchen die paarweisen Distanzen in den Daten zu erhalten, womit die zugrundeliegende Struktur erhalten werden soll \parencite[3]{Gracia.2014}. Vertreter dieser Kategorie sind die (klassische) Multidimensionale
+Skalierung \parencites{Kruskal.1964}{Cox.2008}, das Sammon Mapping \addref und die Curvilinear Component Analysis
+\addref. Hierbei muss eine Distanz jedoch nicht die euklidische Distanz zwischen zwei Punkten sein.
+Beispielweise ist die \newterm{geodätische Distanz} als die Distanz entlang der Mannigfaltigkeit
+definiert, auf der die Punkte liegen. Mit dem Hintergrundwissen zu Mannigfaltigkeiten wird jedoch
+deutlich, dass Distanzen vor allem bei nichtlinearen Mannigfaltigkeiten mit einer hohen Krümmung
+irreführend sein können. Aber auch schon Mannigfaltigkeiten wie die Swiss Roll deuten hier auf
+Probleme hin: Punkte die nah beieinander liegen müssen durch die Dimensionsreduktion
+\enquote{entfaltet} werden, wodurch sie danach weiter weg voneinander liegen können aber die
+Struktur der Mannigfaltigkeit trotzdem erhalten geblieben ist. Die geodätische Distanz wirkt diesem
+Problem entgegen, ist aber nicht immer leicht zu berechnen. Deswegen gibt es auch
+\textbf{Topologie-erhaltende Methoden}, die gezielt die Topologie der Mannigfaltigkeit erhalten
+wollen und dies durch geometrische Überlegungen erzielen \parencite[4]{Gracia.2014}. Zu dieser Kategorie gehört beispielsweise das Locally Linear Embedding
+(\secref{ch:MethodenDerDimRed:statistisch:LLE}), die Self-Organizing Map \parencite{Kohonen.1990}, Uniform Manifold Approximation and Projection (UMAP)% \parencite{McInnes.2018}  
 
 Andere Algorithmen, die in dieser Arbeit nicht vorgestellt werden können sind Isomap \parencite{Tenenbaum.2000}, Maximum Variance Unfolding (MVU) \parencite{Weinberger.2006}, Multidimensional Scaling (MDS) \parencites{Kruskal.1964}{Cox.2008}
 
