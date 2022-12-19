@@ -7,9 +7,9 @@ Viele interessante Anwendungsgebiete für Machine Learning umfassen oftmals eine
 an Merkmalen, wie es beispielsweise bei der Genexpressionsanalyse mit tausenden von Genen \parencite{Parmigiani.2003} oder der Verarbeitung von Bild-, Text- oder Videodaten der Fall ist. Diese
 große Anzahl an Merkmalen, das heißt die hohe Dimensionalität der Daten, bereitet vielen
 Algorithmen Probleme. Die mathematischen und statistischen Probleme, die bei Datensätzen hoher
-Dimensionalität auftreten, werden unter dem Begriff \newterm{Fluch der Dimensionalität} \parencite{Aggarwal.2001} zusammengefasst. Hinzu kommt, dass die Anzahl der Merkmale auf diesen
+Dimensionalität auftreten, werden unter dem \newterm{Fluch der Dimensionalität} \parencite{Aggarwal.2001} zusammengefasst. Hinzu kommt, dass die Anzahl der Merkmale auf diesen
 Anwendungsgebieten oft die Stichprobengröße eines Datensatzes übersteigt. Beispielsweise gibt es in
-klinischen Studien oft nur wenige Teilnehmer, weshalb gerade medizinische Datensätze wie die
+klinischen Studien meistens nur wenige Teilnehmer, weshalb gerade medizinische Datensätze wie die
 Magnetresonanztomographie (MRT) von diesem Problem betroffen sind. Es treten jedoch nicht nur
 algorithmische, sondern auch praktische Probleme auf, da Datensätze mit sehr vielen Stichproben und
 zusätzlich hoher Dimension eine immense Speicherkapazität und Rechenleistung benötigen
@@ -35,8 +35,7 @@ oder drei Dimensionen für die Veranschaulichung reduziert werden können.
 
 Über die Zeit wurden deshalb eine Vielzahl von Dimensionsreduktionsmethoden entwickelt, für eine Übersicht wird auf \textcites{Burges.2009}{Sarveniazi.2014}{Sorzano.2014}{Cunningham.2014}{Lee.2007} verwiesen.
 Der wohl bekannteste und immer noch vielfach verwendete Algorithmus ist die
-Hauptkomponentenanalyse ist. Die große Auswahl an verschiedensten Methoden macht die Selektion der richtigen Methode für eine spezifische Aufgabe allerdings sehr schwer. \
-\Textcite{vanderMaaten.2009} hat dazu zwölf nichtlineare Methoden untersucht und mit der Hauptkomponentenanalyse verglichen.
+Hauptkomponentenanalyse ist. Die große Auswahl an verschiedensten Methoden macht die Selektion der richtigen Methode für eine spezifische Aufgabe allerdings sehr schwer. \Textcite{vanderMaaten.2009} hat dazu zwölf nichtlineare Methoden untersucht und mit der Hauptkomponentenanalyse verglichen.
 
 Das Ziel dieser Arbeit ist es herauszufinden, ob Machine Learning Methoden gegenüber statistischen
 Methoden auf dem Gebiet der Dimensionsreduktion einen Vorteil durch die erhöhte Flexibilität
@@ -53,10 +52,9 @@ Hauptkomponentenanalyse und den Autoencodern haben außerdem gezeigt, dass die E
 beiden Methoden unter gewissen Annahmen sehr ähnlich sind \parencites{Baldi.1989}{Bourlard.1988}{Plaut.2018}. Es soll daher empirisch herausgearbeitet werden,
 inwiefern ein Autoencoder mit der Hauptkomponentenanalyse übereinstimmt.
 
-Die Arbeit gliedert sich wie folgt in drei Teile ein: Zuerst wird in
-\chapref{ch:Dimensionsreduktion} die Grundlage für das Verständnis der Dimensionsreduktionsmethoden
-gelegt, sowie wichtige Begrifflichkeiten erläutert. Im darauffolgenden
-\chapref{ch:MethodenDerDimRed} werden dann die einzelnen statistischen und Machine Learning
-Methoden vorgestellt. Anschließend werden die zwei Gruppen in einem empirischen Vergleich in
-\chapref{ch:Vergleich} gegenübergestellt und abgeschlossen wird die Arbeit mit einem Fazit in
-\chapref{ch:Schluss}.
+Die Arbeit ist wie folgt aufgebaut: Zuerst wird in \chapref{ch:Dimensionsreduktion} die Grundlage
+für das Verständnis der Dimensionsreduktionsmethoden gelegt, sowie wichtige Begrifflichkeiten
+erläutert. Im darauffolgenden \chapref{ch:MethodenDerDimRed} werden dann die einzelnen
+statistischen und Machine Learning Methoden vorgestellt. Anschließend werden die zwei Gruppen in
+einem empirischen Vergleich in \chapref{ch:Vergleich} gegenübergestellt und abgeschlossen wird die
+Arbeit mit einem Fazit in \chapref{ch:Schluss}.

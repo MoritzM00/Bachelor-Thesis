@@ -341,9 +341,9 @@ das heißt es werden zu viele Schichten eingesetzt, dann kann der Autoencoder tr
 eine uninformative niedrigdimensionale Repräsentation lernen, auch wenn das Bottleneck nur
 eindimensional ist. Neben dieser \textit{impliziten} Regularisierung, gibt es deswegen noch einige
 weitere \textit{explizite} Regularisierungsmethoden, die zusätzlich zum Rekonstruktionfehler einen
-Bestrafungsterm $\Omega$ zur Fehlerfunktion $L$ hinzufügen. Die Zielfunktion lautet dann
+Bestrafungsterm $\Omega$ zur Zielfunktion $\mathcal{J}$ hinzufügen. Die Zielfunktion lautet dann
 \begin{equation}
-	\mathcal{J}_{\text{AE+reg}} = \sum \left( L(\vect{x}, \estNormal{\vect{x}}) + \lambda \Omega \right) \, ,
+	\mathcal{J}_{\text{AE+reg}} = \frac{1}{n} \sum_{i = 1}{n} \left( L(\vect{x}_i, \estNormal{\vect{x}_i}) + \lambda \Omega \right) \, ,
 \end{equation}
 wobei $\lambda \geq 0$ ein \textit{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den Rekonstruktionfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden, was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch also eine informativere niedrigdimensionale Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
 
@@ -426,13 +426,13 @@ formuliert werden, wobei $\mat{W} \in \real^{d \times D}$ und $\mat{\widetilde{W
 \end{equation}
 verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
 \begin{equation}
-	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^d \left( \vect{y}_i (1 - \vect{y}_i)\right)^2 \sum_{ij} \mat{W}^2_{ij}
+	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^n \left( \vect{y}_i (1 - \vect{y}_i)\right)^2 \sum_{ij} \mat{W}^2_{ij}
 \end{equation}\unsure{was sind hier die Grenzen der Summen ? n oder d, D?}
-effizient berechnet werden \parencite[4]{Rifai.2011}. Für einen Autoencoder mit mehr als einer versteckten Schicht gibt es keine
-geschlossene Form mehr und die Berechnung wird teuer, was das Trainieren eines tiefen Contractive
-Autoencoders ohne Tricks wie beispielsweise das gierige schichtenweise vortrainieren (engl.
-\textit{greedy layerwise pre-training}) unpraktikabel macht. Bei diesem Vorgehen wird ein tiefer
+effizient berechnet werden \parencite[4]{Rifai.2011}. Für einen Autoencoder mit mehr als einer versteckten Schicht wird die
+Berechnung sehr teuer, was das Trainieren eines tiefen Contractive Autoencoders ohne Tricks wie
+beispielsweise das in \textcite{Bengio.2006} erläuterte gierige schichtenweise vortrainieren (engl.
+\textit{greedy layer-wise pretraining}) unpraktikabel macht. Bei diesem Vorgehen wird ein tiefer
 Autoencoder schichtenweise durch untiefe Autoencoder (drei Schichten) vortrainiert und im letzten
-Schritt erfolgt eine Feinabstimmung des kompletten Netzwerks (engl. \textit{fine-tuning}) \parencite[522]{Goodfellow.2016}. Dieses Vorgehen kann analog auch für klassische Autoencoder verwendet
+Schritt erfolgt eine Feinabstimmung des kompletten Netzwerks \parencite[522]{Goodfellow.2016}. Dieses Vorgehen kann analog auch für klassische Autoencoder verwendet
 werden, um eine gute Initialisierung der Gewichte zu erreichen und damit suboptimale lokale Minima
 der Zielfunktion zu umgehen \parencite[509]{Goodfellow.2016}.

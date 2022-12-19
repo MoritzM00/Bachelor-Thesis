@@ -5,13 +5,13 @@
 
 Die Dimensionsreduktion hat im Kern das Ziel der Abbildung eines hochdimensionalen Datensatzes auf
 eine niedrigdimensionale, sogenannte \newterm{latente} Repräsentation, wobei möglichst wenig
-Information über die Daten verloren gehen soll.\addref Dies ist darin begründet, dass Daten oft nur
-künstlich hochdimensional, also \textit{redundant} sind. Dies bedeutet, dass die Daten effizienter
-über eine kleinere Menge von Merkmalen $y_1,\ldots,y_d$ ausgedrückt werden kann, als über die
-ursprüngliche Repräsentation durch die Merkmale $x_1,\ldots,x_D$ mit $d < D$. Hierbei bezeichnet
-$D$ die \newterm{extrinsische Dimension} des zugehörigen Ursprungsraumes $\mathcal{X}$ (welcher
-üblicherweise dem $\real^D$ entspricht) und $d$ bezeichnet die \newterm{intrinsische Dimension} der
-Daten. Die intrinsische Dimension wird teilweise auch als latente Dimension bezeichnet.
+Information über die Daten verloren gehen soll \parencite[2]{Lee.2007}. Dies ist darin begründet, dass Daten oft nur künstlich hochdimensional, also
+\textit{redundant} sind. Dies bedeutet, dass die Daten effizienter über eine kleinere Menge von
+Merkmalen $y_1,\ldots,y_d$ ausgedrückt werden kann, als über die ursprüngliche Repräsentation durch
+die Merkmale $x_1,\ldots,x_D$ mit $d < D$. Hierbei bezeichnet $D$ die \newterm{extrinsische
+	Dimension} des zugehörigen Ursprungsraumes $\mathcal{X}$ (welcher üblicherweise dem $\real^D$
+entspricht) und $d$ bezeichnet die \newterm{intrinsische Dimension} der Daten. Die intrinsische
+Dimension wird teilweise auch als latente Dimension bezeichnet.
 
 Formell wird die ursprüngliche (hochdimensionale) Repräsentation mit dem $D$-dimensionalen
 Zufallsvektor $\rvect{x} = \tr{(x_1, \ldots, x_D)}$ und die latente (niedrigdimensionale)
@@ -22,13 +22,13 @@ transformierten Daten in der Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet.
 angenommen, dass die Datenmatrix $\mat{X}$ \textit{zentriert} ist. Dies kann jederzeit durch
 Subtraktion des Erwartungswertes einer Variable $x_i$ von Spalte $i$ sichergestellt werden.
 
-Nachdem nun grundlegende Terminologie und das Ziel der Dimensionsreduktion geklärt wurde, wird nun
-noch auf einige weitere wichtige Ideen der Dimensionsreduktion eingegangen. Dazu wird in
+Nachdem nun grundlegende Terminologie und das Ziel der Dimensionsreduktion geklärt wurde, werden im
+Folgenden einige weitere wichtige Ideen und Konzepte erläutert. Dazu wird in
 \secref{ch:Dimensionsreduktion:FluchDerDim} der Fluch der Dimensionalität sowie in
 \secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim} die Idee von Mannigfaltigkeiten und
 der intrinsischen Dimension behandelt. In \secref{ch:Dimensionsreduktion:Ansaetze} werden kurz
-verschiedene Ansätze zur Dimensionsreduktion vorgestellt und in
-\secref{ch:Dimensionsreduktion:Merkmalsextrahierung} wird die Relation zum Gebiet der
+verschiedene Ansätze zur Dimensionsreduktion vorgestellt und letztlich wird in
+\secref{ch:Dimensionsreduktion:Merkmalsextrahierung} die Relation zum Gebiet der
 Merksmalsextrahierung (engl. \textit{feature extraction}) besprochen.
 \section{Der Fluch der Dimensionalität}
 \label{ch:Dimensionsreduktion:FluchDerDim}
@@ -114,19 +114,18 @@ Methoden der Dimensionsreduktion für die Merkmalsextrahierung eingesetzt werden
 eigentlichen Schätzer (Klassifikator oder Regressor) auf den neuen Merkmalen zu trainieren.
 Abzugrenzen davon ist ein Teilgebiet der Merkmalsextrahierung, nämlich die Merkmalsauswahl (engl.
 \textit{feature selection}) \parencite{Blum.1997}. Hier wird keine Transformation der Merkmale durchgeführt, sondern nur eine
-Teilmenge der verfügbaren Merkmale ausgewählt.
-
-Es wird erhofft, dass der Klassifikator (oder Regressor) durch die Merkmalsextrahierung robuster
-gegenüber Rauschen (engl. \textit{noise}) ist und teilweise sogar eine höhere Genauigkeit gegenüber
-einem Klassifikator, der auf den ursprünglichen Merkmalen trainiert wurde, aufweist.
-
-\ldots
+Teilmenge der verfügbaren Merkmale ausgewählt. Insgesamt erhofft man sich durch eine
+Merkmalsextrahierung, dass der Klassifikator (oder Regressor) durch die Merkmalsextrahierung
+robuster gegenüber Rauschen (engl. \textit{noise}) ist und eine ähnliche oder bessere Performance
+bezüglich gewählter Gütemaße aufweist.
 
 Wie wir in der Einleitung in \chapref{ch:Enleitung} gesehen haben, gibt es viele Gründe, wieso man
 eine Reduktion der Dimension eines Datensatzes erreichen möchte. Unter anderem können so sehr große
 Datenmengen effizienter gespeichert werden, ohne dabei einen zu großen Informationsverlust zu
-erleiden. Deswegen ist das Gebiet der Dimensionsreduktion ein immer noch aktuelles Forschungsthema,
-weshalb mittlerweile auch eine ganze Reihe an verschiedensten Methoden zur Dimensionsreduktion zur
-Verfügung stehen. Dem Anwender kann es mitunter schwerfallen, den richtigen Algorithmus
-auszuwählen, da es laut dem dem \newterm{No Free Lunch Theorem} \parencite{Wolpert.1997} keinen \enquote{besten} Algorithmus für jede Situation gibt. Im nächsten
-Schritt (\chapref{ch:MethodenDerDimRed}) werden einige dieser Algorithmen vorgestellt.
+erleiden. Deswegen ist das Gebiet der Dimensionsreduktion ein immer noch aktuelles Forschungsthema
+mit einer großen Bandbreite an unterschiedlichen Methoden, wie in wir in
+\secref{ch:Dimensionsreduktion:Ansaetze} gesehen haben. Dem Anwender kann es mitunter schwerfallen,
+den richtigen Algorithmus auszuwählen, da es laut dem dem \newterm{No Free Lunch Theorem} \parencite{Wolpert.1997} keinen \enquote{besten} Algorithmus für jede Situation gibt. Im nächsten
+Schritt (\chapref{ch:MethodenDerDimRed}) werden einige dieser Algorithmen vorgestellt, die dann in
+\chapref{ch:Vergleich} miteinander verglichen werden, um dem Anwender einen Anhaltspunkt für die
+Auswahl einer Dimensionsreduktionsmethode zu geben.
