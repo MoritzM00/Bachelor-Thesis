@@ -2,26 +2,25 @@
 \chapter{Methoden der Dimensionsreduktion}
 \label{ch:MethodenDerDimRed}
 %% ==============================
-
-Nachdem nun die Motivation und Idee hinter der Dimensionsreduktion in \chapref{ch:Enleitung} und
-die mathematische Formulierung in \chapref{ch:Dimensionsreduktion} allgemein angeschaut wurde,
-werden nun einige konkrete Methoden der Dimensionsreduktion vorgestellt.
-
 In jüngster Zeit haben vor allem verschiedenste Varianten von neuronale Netzen einen hohen Grad an
 Aufmerksamkeit durch bemerkenswerte Errungenschaften in Gebieten der automatischen Spracherkennung
 oder \textit{Computer Vision} erlangt. Fraglich ist, ob diese neuen Algorithmen auch auf dem
 Bereich der Dimensionsreduktion einen entscheidenden Fortschritt gemacht haben. Deshalb werden die
-Algorithmen in dieser Arbeit in \textit{statistischen} und \textit{Machine Learning} Methoden
+Algorithmen in dieser Arbeit in \textit{statistische} und \textit{Machine Learning} Methoden
 unterteilt, um diese später in \chapref{ch:Vergleich} gegenüberstellen zu können. Statistische
 Methoden haben eine solide theoretische Fundierung und sind meist etablierte Algorithmen auf einem
 jeweiligen Gebiet, wie das zum Beispiel mit der Hauptkomponentenanalyse
 (\subsecref{ch:MethodenDerDimRed:statistisch:PCA}) der Fall ist. Machine Learning Methoden hingegen
-haben lediglich das Ziel, von Trainingsdaten auf neue, das heißt ungesehene (Test-)Daten zu
-generalisieren. Neuronale Netze sind hierfür ein Paradebeispiel und werden deshalb in
-\secref{ch:MethodenDerDimRed:modern} eingehend behandelt. Allerdings ist hier aus jeder Kategorie
-nur eine kleine repräsentative Auswahl getroffen worden. Weitere wichtige Algorithmen, die hier
-nicht vorgestellt werden können sind beispielsweise \dots \todo{Aufzählung der Algorithmen die
-	nicht betrachtet werden hier oder in der Einleitung?}.
+haben das Ziel von Trainingsdaten auf neue, das heißt ungesehene (Test-)Daten zu generalisieren und
+besitzen nicht immer theoretische Optimalitätsgarantien. Neuronale Netze sind hierfür ein
+Paradebeispiel und werden deshalb in \secref{ch:MethodenDerDimRed:modern} eingehend behandelt.
+
+Nachdem die Motivation und Idee in \chapref{ch:Enleitung}, sowie die Terminologie und mathematische
+Fundierung für die Dimensionsreduktion in \chapref{ch:Dimensionsreduktion} besprochen wurde, können
+nun einige konkrete Methoden der Dimensionsreduktion vorgestellt werden. Allerdings ist hier aus
+jeder Kategorie nur eine kleine repräsentative Auswahl getroffen worden. Weitere wichtige
+Algorithmen, die hier nicht behandelt werden können, wurden bereits in
+\secref{ch:Dimensionsreduktion:Ansaetze} genannt.
 
 \section{Statistische Methoden}
 \label{ch:MethodenDerDimRed:statistisch}
@@ -29,8 +28,8 @@ nicht vorgestellt werden können sind beispielsweise \dots \todo{Aufzählung der
 Zu den statistischen Methoden, die in dieser Arbeit vorgestellt werden, gehören die
 \newterm{Hauptkomponentenanalyse} (PCA) in \subsecref{ch:MethodenDerDimRed:statistisch:PCA} sowie
 die nichtlineare Erweiterung der Hauptkomponentenanalyse, die Kernel PCA
-(\subsecref{ch:MethodenDerDimRed:statistisch:kPCA}). Außerdem wird die Multidimensionale Skalierung
-(MDS) in \subsecref{ch:MethodenDerDimRed:statistisch:MDS} als Vertreter der statistischen Methoden
+(\subsecref{ch:MethodenDerDimRed:statistisch:kPCA}). Außerdem wird das Locally Linear Embedding
+(LLE) in \subsecref{ch:MethodenDerDimRed:statistisch:LLE} als Vertreter der statistischen Methoden
 genauer behandelt.
 
 %% ==============================
