@@ -138,22 +138,58 @@ Schätzung für einen fixen Punkt $\vect{x}_i$. Um eine globale Schätzung zu er
 Mittelwert über alle Beobachtungen für mehrere Werte von $K$ gebildet.
 \section{Verwendete Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze}
-Es sowohl künstliche als auch natürliche Datensätze eingesetzt, um Eigenschaften der verschiedenen Methoden miteinander zu vergleichen. Zu den künstlichen Datensätzen gehört die weit verbreitete \textit{Swiss Roll} und \dots.
-Bei den natürlichen Datensätzen wurde einerseits Bilddatensätze, aber auch Textdatensätze ausgewählt, da diese eine sehr hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion sehr gut geeignet sind. Daher wurde der MNIST Datensatz \addref sowie \dots ausgewählt.
+% \begin{figure}[ht]
+% 	\label{fig:ArtificialDatasets}
+% 	\begin{center}
+% 		\input{\figures/artificial_datasets.pgf}
+% 	\end{center}	
+% 	\caption[Künstliche Datensätze]{\figleft Swiss Roll \figright Twin Peaks}
+% \end{figure}
+Es werden sowohl künstliche als auch natürliche Datensätze eingesetzt, um Eigenschaften der
+verschiedenen Methoden miteinander zu vergleichen. Zu den künstlichen Datensätzen gehört die weit
+verbreitete \textit{Swiss Roll} und der \textit{Twin Peaks} Datensatz, die in dargestellt sind.
+Beide künstlichen Datensätze haben eine extrinsische Dimension von drei und eine intrinsische
+Dimension von zwei. Dies erlaubt eine visuelle Betrachtung der Datensätze und der gefundenen
+latenten Räume, schränkt aber gleichzeitig die Architektur eines (unterbestimmten) Autoencoders
+sehr ein. Künstliche Datensätze alleine sind wenig aussagekräftig für die tatsächliche Performance
+einer Methode, weswegen zusätzlich ... natürliche Datensätze hinzugezogen werden. Natürliche
+Datensätze weisen empirischen Ergebnissen zufolge \addref oft komplexe nichtlineare Zusammenhänge
+auf und sin daher für die Dimensionsreduktion anspruchsvoller als kleine künstlich generierte
+Datensätze. Der Nachteil besteht darin, dass die intrinsische Dimension in der Regel deutlich über
+zwei liegt und daher der latente Raum nicht visualisiert werden kann. Nichtsdestotrotz liefern die
+Qualitätskriterien hinreichende gute Indizien für die Performance der Methoden. Bei den natürlichen
+Datensätzen wurden einerseits Bilddatensätze, aber auch Textdatensätze ausgewählt, da diese eine
+sehr hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
+Daher wurde der MNIST Datensatz \addref sowie \dots ausgewählt.%\figref{fig:ArtificialDatasets}
+
+\idea{Übersicht über alle Datensätze in einer Tabelle mit n_samples und intrinsischer Dimension?}
 \section{Resultate}
 \label{ch:Vergleich:sec:Resultate}
 
+\subsection{Resultate auf künstlichen Datensätzen}
+\label{ch:Vergleich:sec:Resultate:kuenstlich}
+
+Wie in \figref{fig:SwissRollMetrics} und \figref{fig:TwinPeaksMetrics} schneidet zeigt der
+klassische Autoencoder in Hinsicht auf Vertrauenswürdigkeit und LCMC am besten ab, wobei Kernel PCA
+und die traditionelle Hauptkomponentenanalyse eine sehr ähnliche Performance zeigen. Locally Linear
+Embedding schneidet auf allen drei Kriterien am schlechtesten ab, wobei die Einbettung in zwei
+Dimensionen bei Betrachtung größerer Nachbarschaften deutlich schlechter wird. Dies macht in
+Anbetracht der lokalen Eigenschaft von LLE Sinn.
+
 \begin{figure}[ht]
-	\label{fig:SwissRoll-Metrics}
+	\label{fig:SwissRollMetrics}
 	\begin{center}
 		\input{\figures/SwissRoll_comparison.pgf}
 	\end{center}
-	\caption[Swiss Roll Qualitätskriterien]{Qualitätskriterien $T(K), C(K)$ und $LCMC(K)$ für den Swiss Roll Datensatz. (Eigene Darstellung)}
+	\caption[Swiss Roll Qualitätskriterien]{Qualitätskriterien $T(K)$,  $C(K)$ und $LCMC(K)$ für den Swiss Roll Datensatz. (Eigene Darstellung)}
 \end{figure}
 \begin{figure}[ht]
 	\label{fig:TwinPeaksMetrics}
 	\begin{center}
 		\input{\figures/TwinPeaks_comparison.pgf}
 	\end{center}
-	\caption[Twin Peaks Qualitätskriterien]{Qualitätskriterien $T(K), C(K)$ und $LCMC(K)$ für den Twin Peaks Datensatz. (Eigene Darstellung)}
+	\caption[Twin Peaks Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und LCMC$(K)$ für den Twin Peaks Datensatz. (Eigene Darstellung)}
 \end{figure}
+
+\subsection{Resultate auf natürlichen Datensätzen}
+\label{ch:Vergleich:sec:Resultate:natuerlich}
