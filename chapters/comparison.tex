@@ -138,16 +138,17 @@ Schätzung für einen fixen Punkt $\vect{x}_i$. Um eine globale Schätzung zu er
 Mittelwert über alle Beobachtungen für mehrere Werte von $K$ gebildet.
 \section{Verwendete Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze}
-% \begin{figure}[ht]
-% 	\label{fig:ArtificialDatasets}
-% 	\begin{center}
-% 		\input{\figures/artificial_datasets.pgf}
-% 	\end{center}	
-% 	\caption[Künstliche Datensätze]{\figleft Swiss Roll \figright Twin Peaks}
-% \end{figure}
 Es werden sowohl künstliche als auch natürliche Datensätze eingesetzt, um Eigenschaften der
 verschiedenen Methoden miteinander zu vergleichen. Zu den künstlichen Datensätzen gehört die weit
-verbreitete \textit{Swiss Roll} und der \textit{Twin Peaks} Datensatz, die in dargestellt sind.
+verbreitete \textit{Swiss Roll} und der \textit{Twin Peaks} Datensatz,
+\begin{figure}[ht]
+	\label{fig:ArtificialDatasets}
+	\begin{center}
+		\input{\figures/artificial_datasets.pgf}
+	\end{center}
+	\caption[Künstliche Datensätze]{\figleft Swiss Roll \figright Twin Peaks}
+\end{figure}
+die in dargestellt \figref{fig:ArtificialDatasets} sind.
 Beide künstlichen Datensätze haben eine extrinsische Dimension von drei und eine intrinsische
 Dimension von zwei. Dies erlaubt eine visuelle Betrachtung der Datensätze und der gefundenen
 latenten Räume, schränkt aber gleichzeitig die Architektur eines (unterbestimmten) Autoencoders
@@ -160,9 +161,7 @@ zwei liegt und daher der latente Raum nicht visualisiert werden kann. Nichtsdest
 Qualitätskriterien hinreichende gute Indizien für die Performance der Methoden. Bei den natürlichen
 Datensätzen wurden einerseits Bilddatensätze, aber auch Textdatensätze ausgewählt, da diese eine
 sehr hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
-Daher wurde der MNIST Datensatz \addref sowie \dots ausgewählt.%\figref{fig:ArtificialDatasets}
-
-\idea{Übersicht über alle Datensätze in einer Tabelle mit n_samples und intrinsischer Dimension?}
+Daher wurde der MNIST Datensatz \addref sowie \dots ausgewählt.
 \section{Resultate}
 \label{ch:Vergleich:sec:Resultate}
 
