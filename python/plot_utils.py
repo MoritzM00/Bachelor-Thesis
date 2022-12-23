@@ -16,9 +16,9 @@ def plot_3d(points, points_color, title):
     fig.suptitle(title, size=16)
     col = ax.scatter(x, y, z, c=points_color, s=50, alpha=0.8)
     ax.view_init(azim=-60, elev=9)
-    ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
-    ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
-    ax.zaxis.set_major_locator(ticker.MultipleLocator(1))
+    ax.xaxis.set_major_locator(ticker.MultipleLocator(4))
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(4))
+    ax.zaxis.set_major_locator(ticker.MultipleLocator(4))
 
     fig.colorbar(col, ax=ax, orientation="horizontal", shrink=0.6, aspect=60, pad=0.01)
     plt.show()
