@@ -146,9 +146,9 @@ verbreitete \textit{Swiss Roll} und der \textit{Twin Peaks} Datensatz,
 	\begin{center}
 		\input{\figures/artificial_datasets.pgf}
 	\end{center}
-	\caption[Künstliche Datensätze]{\figleft Swiss Roll \figright Twin Peaks}
+	\caption[Künstliche Datensätze]{\figleft Die Swiss Roll. Die intrinsische Dimension beträgt zwei weil die Daten auf einer \enquote{eingerollten Ebene} liegen. Die Dimensionsreduktionsmethoden müssen die Swiss Roll \enquote{entfalten}, um eine zweidimensionale Repräsentation zu erhalten. \figright Der Twin Peaks Datensatz. Dieser besteht aus je zwei spitzen Bergen, die nach oben und unten zeigen. Auch dieser Datensatz hat eine intrinsische Dimension von zwei, denn die Berge können \enquote{plattgedrückt} werden, womit man eine zweidimensionale Repräsentation erhält.}
 \end{figure}
-die in dargestellt \figref{fig:ArtificialDatasets} sind.
+die in \figref{fig:ArtificialDatasets} dargestellt sind.
 Beide künstlichen Datensätze haben eine extrinsische Dimension von drei und eine intrinsische
 Dimension von zwei. Dies erlaubt eine visuelle Betrachtung der Datensätze und der gefundenen
 latenten Räume, schränkt aber gleichzeitig die Architektur eines (unterbestimmten) Autoencoders
@@ -165,30 +165,40 @@ Daher wurde der MNIST Datensatz \addref sowie \dots ausgewählt.
 \section{Resultate}
 \label{ch:Vergleich:sec:Resultate}
 
+In diesem Abschnitt werden die Resultate des empirischen Vergleichs vorgestellt. Dazu werden die
+Werte der verschiedenen Qualitätskriterien auf den künstlichen und natürlichen Datensätzen in
+Abhängigkeit der Nachbarschaftsgröße $K$ abgebildet. In
+\secref{ch:Vergleich:sec:Resultate:kuenstlich} werden die Ergebnisse auf künstlichen Datensätzen
+und in \secref{ch:Vergleich:sec:Resultate:natuerlich} die Ergebnisse auf den natürliche Datensätzen
+diskutiert.
+
 \subsection{Resultate auf künstlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:kuenstlich}
 
 Wie in \figref{fig:SwissRollMetrics} und \figref{fig:TwinPeaksMetrics} schneidet zeigt der
-klassische Autoencoder in Hinsicht auf Vertrauenswürdigkeit und LCMC am besten ab, wobei Kernel PCA
-und die traditionelle Hauptkomponentenanalyse eine sehr ähnliche Performance zeigen. Locally Linear
-Embedding schneidet auf allen drei Kriterien am schlechtesten ab, wobei die Einbettung in zwei
-Dimensionen bei Betrachtung größerer Nachbarschaften deutlich schlechter wird. Dies macht in
-Anbetracht der lokalen Eigenschaft von LLE Sinn.
+klassische Autoencoder in Hinsicht auf Vertrauenswürdigkeit und $\lcmc$ am besten ab, wobei Kernel
+PCA und die traditionelle Hauptkomponentenanalyse eine sehr ähnliche Performance zeigen. Locally
+Linear Embedding schneidet auf allen drei Kriterien am schlechtesten ab, wobei die Einbettung in
+zwei Dimensionen bei Betrachtung größerer Nachbarschaften deutlich schlechter wird. Dies ergibt in
+Anbetracht der lokalen Erhaltung der Nachbarschaften von LLE Sinn.
 
 \begin{figure}[ht]
 	\label{fig:SwissRollMetrics}
 	\begin{center}
 		\input{\figures/SwissRoll_comparison.pgf}
 	\end{center}
-	\caption[Swiss Roll Qualitätskriterien]{Qualitätskriterien $T(K)$,  $C(K)$ und $LCMC(K)$ für den Swiss Roll Datensatz. (Eigene Darstellung)}
+	\caption[Swiss Roll Qualitätskriterien]{Qualitätskriterien $T(K)$,  $C(K)$ und $\lcmc(K)$ für den Swiss Roll Datensatz. (Eigene Darstellung)}
 \end{figure}
 \begin{figure}[ht]
 	\label{fig:TwinPeaksMetrics}
 	\begin{center}
 		\input{\figures/TwinPeaks_comparison.pgf}
 	\end{center}
-	\caption[Twin Peaks Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und LCMC$(K)$ für den Twin Peaks Datensatz. (Eigene Darstellung)}
+	\caption[Twin Peaks Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den Twin Peaks Datensatz. (Eigene Darstellung)}
 \end{figure}
 
 \subsection{Resultate auf natürlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:natuerlich}
+
+\subsection{PCA und lineare Autoencoder}
+\label{ch:Vergleich:sec:Resultate:PCA_linearAE}
