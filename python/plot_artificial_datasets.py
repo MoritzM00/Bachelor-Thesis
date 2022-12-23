@@ -6,9 +6,9 @@ from sklearn import datasets
 plt.style.use("science")
 
 swiss_roll, sr_color = datasets.make_swiss_roll(
-    n_samples=1500, noise=0.0, random_state=0
+    n_samples=1000, noise=0.0, random_state=0
 )
-twin_peaks = skdim.datasets.hyperTwinPeaks(n=2000, d=2, height=1, random_state=0)
+twin_peaks = skdim.datasets.hyperTwinPeaks(n=1000, d=2, height=1, random_state=0)
 
 
 fig, (ax1, ax2) = plt.subplots(
@@ -21,7 +21,7 @@ fig, (ax1, ax2) = plt.subplots(
 )
 
 ax1.scatter(
-    swiss_roll[:, 0], swiss_roll[:, 1], swiss_roll[:, 2], c=sr_color, alpha=0.8, s=30
+    swiss_roll[:, 0], swiss_roll[:, 1], swiss_roll[:, 2], c=sr_color, alpha=0.8, s=50
 )
 ax1.view_init(azim=-70, elev=15)
 ax1.xaxis.set_major_formatter(plt.NullFormatter())
@@ -35,7 +35,7 @@ ax2.scatter(
     twin_peaks[:, 2],
     c=twin_peaks[:, 2],
     alpha=0.8,
-    s=30,
+    s=50,
 )
 ax2.view_init(azim=-70, elev=15)
 ax2.xaxis.set_major_formatter(plt.NullFormatter())
