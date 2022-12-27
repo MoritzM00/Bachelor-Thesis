@@ -153,7 +153,7 @@ Beide künstlichen Datensätze haben eine extrinsische Dimension von drei und ei
 Dimension von zwei. Dies erlaubt eine visuelle Betrachtung der Datensätze und der gefundenen
 latenten Räume, schränkt aber gleichzeitig die Architektur eines (unterbestimmten) Autoencoders
 sehr ein. Künstliche Datensätze alleine sind wenig aussagekräftig für die tatsächliche Performance
-einer Methode, weswegen zusätzlich ... natürliche Datensätze hinzugezogen werden. Natürliche
+einer Methode, weswegen zusätzlich vier\unsure{subject to change} natürliche Datensätze hinzugezogen werden. Natürliche
 Datensätze weisen empirischen Ergebnissen zufolge \addref oft komplexe nichtlineare Zusammenhänge
 auf und sin daher für die Dimensionsreduktion anspruchsvoller als kleine künstlich generierte
 Datensätze. Der Nachteil besteht darin, dass die intrinsische Dimension in der Regel deutlich über
@@ -161,11 +161,21 @@ zwei liegt und daher der latente Raum nicht visualisiert werden kann. Nichtsdest
 Qualitätskriterien hinreichende gute Indizien für die Performance der Methoden. Bei den natürlichen
 Datensätzen wurden einerseits Bilddatensätze, aber auch Textdatensätze ausgewählt, da diese eine
 sehr hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
-Daher wurde (1) der \textit{MNIST} Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Face} Datensatz
-%\footenote{\url{https://cam-orl.co.uk/facedatabase.html}}
-, (3) der \textit{Labeled Faces in the Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007} und (4) der \textit{20 Newsgroups} Datensatz ausgewählt, um die
-Performance der Dimensionsreduktionsmethoden auf na
-%\footnote{url{http://qwone.com/~jason/20Newsgroups/}}
+Daher wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Face}-Datensatz
+\footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Labeled Faces in the
+	Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007} und (4) der \textit{20
+	Newsgroups}\footnote{\url{http://qwone.com/~jason/20Newsgroups/}} Datensatz ausgewählt, um die
+Performance der Dimensionsreduktionsmethoden auf natürlichen Datensätzen zu evaluieren. Der weit
+verbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von handgeschriebenen Zahlen in der
+Auflösung $28 \times 28$. Die Anzahl der Pixel und damit die extrinsische Dimension beträgt damit
+784. Der \textit{Olivetti Face}-Datensatz enthält Bilder von Gesichtern aus zehn unterschiedlichen
+Positionen von 40 Personen und ist damit der kleinste natürliche Datensatz in diesem Vergleich mit
+400 Bildern. Die Bilder haben eine Auflösung von $64 \times 64$, was einer extrinsischen Dimension
+von 4096 entspricht. Der LFW-People-Datensatz enthält insgesamt über 13 000 Bilder von Gesichtern,
+jedoch wurde hier eine Teilmenge ausgewählt, sodass jede Person mindestens 30 Bilder hat. Dies
+resultiert in einer Stichprobengröße von 2370. Die Bilder haben eine Auflösung von $62 \times 47$
+und damit eine extrinsische Dimension von 2914. Beispiele der Bild-Datensätze sind in FIGREF
+\missingfigure{Bild Datensätze Beispiel-Bilder} abgebildet.
 \section{Resultate}
 \label{ch:Vergleich:sec:Resultate}
 
