@@ -139,7 +139,11 @@ Mittelwert über alle Beobachtungen für mehrere Werte von $K$ gebildet.
 \section{Verwendete Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze}
 Es werden sowohl künstliche als auch natürliche Datensätze eingesetzt, um Eigenschaften der
-verschiedenen Methoden miteinander zu vergleichen. Zu den künstlichen Datensätzen gehört die weit
+verschiedenen Methoden miteinander zu vergleichen.
+
+\subsection{Künstliche Datensätze}
+\label{ch:Vergleich:sec:VerwendeteDatensaetze:kuenstlich}
+Zu den künstlichen Datensätzen gehört die weit
 verbreitete \textit{Swiss Roll} und der \textit{Twin Peaks} Datensatz,
 \begin{figure}[ht]
 	\label{fig:ArtificialDatasets}
@@ -153,17 +157,21 @@ Beide künstlichen Datensätze haben eine extrinsische Dimension von drei und ei
 Dimension von zwei. Dies erlaubt eine visuelle Betrachtung der Datensätze und der gefundenen
 latenten Räume, schränkt aber gleichzeitig die Architektur eines (unterbestimmten) Autoencoders
 sehr ein. Künstliche Datensätze alleine sind wenig aussagekräftig für die tatsächliche Performance
-einer Methode, weswegen zusätzlich vier\unsure{subject to change} natürliche Datensätze hinzugezogen werden. Natürliche
+einer Methode, weswegen zusätzlich vier\unsure{subject to change} natürliche Datensätze hinzugezogen werden.
+
+\subsection{Natürliche Datensätze}
+\label{ch:Vergleich:sec:VerwendeteDatensaetze:natuerlich}
+Natürliche
 Datensätze weisen empirischen Ergebnissen zufolge \addref oft komplexe nichtlineare Zusammenhänge
-auf und sin daher für die Dimensionsreduktion anspruchsvoller als kleine künstlich generierte
+auf und sind daher für die Dimensionsreduktion anspruchsvoller als kleine künstlich generierte
 Datensätze. Der Nachteil besteht darin, dass die intrinsische Dimension in der Regel deutlich über
 zwei liegt und daher der latente Raum nicht visualisiert werden kann. Nichtsdestotrotz liefern die
 Qualitätskriterien hinreichende gute Indizien für die Performance der Methoden. Bei den natürlichen
-Datensätzen wurden einerseits Bilddatensätze, aber auch Textdatensätze ausgewählt, da diese eine
+Datensätzen wurden größtenteils Bilddatensätze, aber auch ein Textdatensatz ausgewählt, da diese eine
 sehr hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
-Daher wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Face}-Datensatz
+Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Face}-Datensatz
 \footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Labeled Faces in the
-	Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007} und (4) der \textit{20
+	Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der \textit{20
 	Newsgroups}\footnote{\url{http://qwone.com/~jason/20Newsgroups/}} Datensatz ausgewählt, um die
 Performance der Dimensionsreduktionsmethoden auf natürlichen Datensätzen zu evaluieren. Der weit
 verbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von handgeschriebenen Zahlen in der
@@ -176,6 +184,22 @@ jedoch wurde hier eine Teilmenge ausgewählt, sodass jede Person mindestens 30 B
 resultiert in einer Stichprobengröße von 2370. Die Bilder haben eine Auflösung von $62 \times 47$
 und damit eine extrinsische Dimension von 2914. Beispiele der Bild-Datensätze sind in FIGREF
 \missingfigure{Bild Datensätze Beispiel-Bilder} abgebildet.
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{@{}llll@{}}
+		\toprule
+		Datensatz      & extrinsische Dimension D & intrinsische Dimension d & Stichprobengröße n \\ \midrule
+		Swiss Roll     & 3                        & 2                        & 5000               \\
+		Twin Peaks     & 3                        & 2                        & 5000               \\
+		MNIST          & 784                      & 10                       & 60000              \\
+		Olivetti Faces & 4096                     & ?                        & 400                \\
+		LFW-People     & 2914                     & ?                        & 2370               \\
+		FER 2013       & ?                        & ?                        & ?                  \\ \bottomrule
+	\end{tabular}
+	\caption{Beschreibungen der verwendeten Datensätze}
+	\label{tab:my-table}
+\end{table}
 \section{Resultate}
 \label{ch:Vergleich:sec:Resultate}
 
@@ -224,7 +248,7 @@ LLE geschuldet.
 	\begin{center}
 		\input{\figures/MNIST_comparison.pgf}
 	\end{center}
-	\caption[Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den MNIST Datensatz. (Eigene Darstellung)}
+	\caption[MNIST Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den MNIST Datensatz. (Eigene Darstellung)}
 \end{figure}
 
 \begin{figure}[ht]
@@ -232,7 +256,7 @@ LLE geschuldet.
 	\begin{center}
 		\input{\figures/OlivettiFaces_comparison.pgf}
 	\end{center}
-	\caption[Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den Olivetti Faces Datensatz. (Eigene Darstellung)}
+	\caption[Olivetti Faces Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den Olivetti Faces Datensatz. (Eigene Darstellung)}
 \end{figure}
 
 \begin{figure}[ht]
@@ -240,7 +264,7 @@ LLE geschuldet.
 	\begin{center}
 		\input{\figures/LfwPeople_comparison.pgf}
 	\end{center}
-	\caption[Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den LFW People Datensatz. (Eigene Darstellung)}
+	\caption[LFW People Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den LFW People Datensatz. (Eigene Darstellung)}
 \end{figure}
 
 \begin{figure}[ht]
@@ -248,7 +272,7 @@ LLE geschuldet.
 	\begin{center}
 		\input{\figures/FER2013_comparison.pgf}
 	\end{center}
-	\caption[Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den FER 2013 Datensatz. (Eigene Darstellung)}
+	\caption[FER2013 Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den FER 2013 Datensatz. (Eigene Darstellung)}
 \end{figure}
 
 \subsection{PCA und lineare Autoencoder}
