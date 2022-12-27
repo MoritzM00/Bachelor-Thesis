@@ -161,7 +161,11 @@ zwei liegt und daher der latente Raum nicht visualisiert werden kann. Nichtsdest
 Qualitätskriterien hinreichende gute Indizien für die Performance der Methoden. Bei den natürlichen
 Datensätzen wurden einerseits Bilddatensätze, aber auch Textdatensätze ausgewählt, da diese eine
 sehr hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
-Daher wurde der MNIST Datensatz \addref sowie \dots ausgewählt.
+Daher wurde (1) der \textit{MNIST} Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Face} Datensatz
+%\footenote{\url{https://cam-orl.co.uk/facedatabase.html}}
+, (3) der \textit{Labeled Faces in the Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007} und (4) der \textit{20 Newsgroups} Datensatz ausgewählt, um die
+Performance der Dimensionsreduktionsmethoden auf na
+%\footnote{url{http://qwone.com/~jason/20Newsgroups/}}
 \section{Resultate}
 \label{ch:Vergleich:sec:Resultate}
 
@@ -199,6 +203,38 @@ Anbetracht der lokalen Erhaltung der Nachbarschaften von LLE Sinn.
 
 \subsection{Resultate auf natürlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:natuerlich}
+
+\begin{figure}[ht]
+	\label{fig:MNISTMetrics}
+	\begin{center}
+		\input{\figures/MNIST_comparison.pgf}
+	\end{center}
+	\caption[Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den MNIST Datensatz. (Eigene Darstellung)}
+\end{figure}
+
+\begin{figure}[ht]
+	\label{fig:OlivettiFacesMetrics}
+	\begin{center}
+		\input{\figures/OlivettiFaces_comparison.pgf}
+	\end{center}
+	\caption[Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den Olivetti Faces Datensatz. (Eigene Darstellung)}
+\end{figure}
+
+\begin{figure}[ht]
+	\label{fig:LfwPeopleMetrics}
+	\begin{center}
+		\input{\figures/LfwPeople_comparison.pgf}
+	\end{center}
+	\caption[Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den LFW People Datensatz. (Eigene Darstellung)}
+\end{figure}
+
+\begin{figure}[ht]
+	\label{fig:FER2013Metrics}
+	\begin{center}
+		\input{\figures/FER2013_comparison.pgf}
+	\end{center}
+	\caption[Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den FER 2013 Datensatz. (Eigene Darstellung)}
+\end{figure}
 
 \subsection{PCA und lineare Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_linearAE}
