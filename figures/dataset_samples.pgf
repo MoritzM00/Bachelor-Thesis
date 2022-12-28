@@ -1,0 +1,101 @@
+%% Creator: Matplotlib, PGF backend
+%%
+%% To include the figure in your LaTeX document, write
+%%   \input{<filename>.pgf}
+%%
+%% Make sure the required packages are loaded in your preamble
+%%   \usepackage{pgf}
+%%
+%% Also ensure that all the required font packages are loaded; for instance,
+%% the lmodern package is sometimes necessary when using math font.
+%%   \usepackage{lmodern}
+%%
+%% Figures using additional raster images can only be included by \input if
+%% they are in the same directory as the main LaTeX file. For loading figures
+%% from other directories you can use the `import` package
+%%   \usepackage{import}
+%%
+%% and then include the figures with
+%%   \import{<path to file>}{<filename>.pgf}
+%%
+%% Matplotlib used the following preamble
+%%   
+%%   \usepackage{fontspec}
+%%   \setmainfont{DejaVuSerif.ttf}[Path=\detokenize{/Users/moritzmistol/.pyenv/versions/3.9.13/envs/thesis/lib/python3.9/site-packages/matplotlib/mpl-data/fonts/ttf/}]
+%%   \setsansfont{DejaVuSans.ttf}[Path=\detokenize{/Users/moritzmistol/.pyenv/versions/3.9.13/envs/thesis/lib/python3.9/site-packages/matplotlib/mpl-data/fonts/ttf/}]
+%%   \setmonofont{DejaVuSansMono.ttf}[Path=\detokenize{/Users/moritzmistol/.pyenv/versions/3.9.13/envs/thesis/lib/python3.9/site-packages/matplotlib/mpl-data/fonts/ttf/}]
+%%   \makeatletter\@ifpackageloaded{underscore}{}{\usepackage[strings]{underscore}}\makeatother
+%%
+\begingroup%
+\makeatletter%
+\begin{pgfpicture}%
+\pgfpathrectangle{\pgfpointorigin}{\pgfqpoint{5.474492in}{5.811320in}}%
+\pgfusepath{use as bounding box, clip}%
+\begin{pgfscope}%
+\pgfsetbuttcap%
+\pgfsetmiterjoin%
+\definecolor{currentfill}{rgb}{1.000000,1.000000,1.000000}%
+\pgfsetfillcolor{currentfill}%
+\pgfsetlinewidth{0.000000pt}%
+\definecolor{currentstroke}{rgb}{1.000000,1.000000,1.000000}%
+\pgfsetstrokecolor{currentstroke}%
+\pgfsetdash{}{0pt}%
+\pgfpathmoveto{\pgfqpoint{0.000000in}{0.000000in}}%
+\pgfpathlineto{\pgfqpoint{5.474492in}{0.000000in}}%
+\pgfpathlineto{\pgfqpoint{5.474492in}{5.811320in}}%
+\pgfpathlineto{\pgfqpoint{0.000000in}{5.811320in}}%
+\pgfpathlineto{\pgfqpoint{0.000000in}{0.000000in}}%
+\pgfpathclose%
+\pgfusepath{fill}%
+\end{pgfscope}%
+\begin{pgfscope}%
+\pgfpathrectangle{\pgfqpoint{0.050000in}{2.975000in}}{\pgfqpoint{2.576359in}{2.576359in}}%
+\pgfusepath{clip}%
+\pgfsys@transformshift{0.050000in}{2.975000in}%
+\pgftext[left,bottom]{\includegraphics[interpolate=true,width=2.580000in,height=2.580000in]{dataset_samples-img0.png}}%
+\end{pgfscope}%
+\begin{pgfscope}%
+\definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
+\pgfsetstrokecolor{textcolor}%
+\pgfsetfillcolor{textcolor}%
+\pgftext[x=1.338179in,y=5.634692in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont MNIST Zahlen}%
+\end{pgfscope}%
+\begin{pgfscope}%
+\pgfpathrectangle{\pgfqpoint{2.848134in}{2.975000in}}{\pgfqpoint{2.576359in}{2.576359in}}%
+\pgfusepath{clip}%
+\pgfsys@transformshift{2.848134in}{2.975000in}%
+\pgftext[left,bottom]{\includegraphics[interpolate=true,width=2.580000in,height=2.580000in]{dataset_samples-img1.png}}%
+\end{pgfscope}%
+\begin{pgfscope}%
+\definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
+\pgfsetstrokecolor{textcolor}%
+\pgfsetfillcolor{textcolor}%
+\pgftext[x=4.136313in,y=5.634692in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Facial Emotion Recognition}%
+\end{pgfscope}%
+\begin{pgfscope}%
+\pgfpathrectangle{\pgfqpoint{0.361656in}{0.050000in}}{\pgfqpoint{1.953046in}{2.576359in}}%
+\pgfusepath{clip}%
+\pgfsys@transformshift{0.361656in}{0.050000in}%
+\pgftext[left,bottom]{\includegraphics[interpolate=true,width=1.960000in,height=2.580000in]{dataset_samples-img2.png}}%
+\end{pgfscope}%
+\begin{pgfscope}%
+\definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
+\pgfsetstrokecolor{textcolor}%
+\pgfsetfillcolor{textcolor}%
+\pgftext[x=1.338179in,y=2.709692in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Labeled Faces in the Wild}%
+\end{pgfscope}%
+\begin{pgfscope}%
+\pgfpathrectangle{\pgfqpoint{2.848134in}{0.050000in}}{\pgfqpoint{2.576359in}{2.576359in}}%
+\pgfusepath{clip}%
+\pgfsys@transformshift{2.848134in}{0.050000in}%
+\pgftext[left,bottom]{\includegraphics[interpolate=true,width=2.580000in,height=2.580000in]{dataset_samples-img3.png}}%
+\end{pgfscope}%
+\begin{pgfscope}%
+\definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
+\pgfsetstrokecolor{textcolor}%
+\pgfsetfillcolor{textcolor}%
+\pgftext[x=4.136313in,y=2.709692in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Olivetti Faces}%
+\end{pgfscope}%
+\end{pgfpicture}%
+\makeatother%
+\endgroup%
