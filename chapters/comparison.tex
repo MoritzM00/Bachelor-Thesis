@@ -143,11 +143,11 @@ verschiedenen Methoden miteinander zu vergleichen. Eine Übersicht über die Dim
 Zu den künstlichen Datensätzen gehört die weit
 verbreitete \textit{Swiss Roll} und der \textit{Twin Peaks} Datensatz,
 \begin{figure}[ht]
-	\label{fig:ArtificialDatasets}
 	\begin{center}
 		\input{\figures/artificial_datasets.pgf}
 	\end{center}
 	\caption[Künstliche Datensätze]{\figleft Die Swiss Roll. Die intrinsische Dimension beträgt zwei weil die Daten auf einer \enquote{eingerollten Ebene} liegen. Die Dimensionsreduktionsmethoden müssen die Swiss Roll \enquote{entfalten}, um eine zweidimensionale Repräsentation zu erhalten. \figright Der Twin Peaks Datensatz. Dieser besteht aus je zwei spitzen Bergen, die nach oben und unten zeigen. Auch dieser Datensatz hat eine intrinsische Dimension von zwei, denn die Berge können \enquote{plattgedrückt} werden, womit man eine zweidimensionale Repräsentation erhält.}
+	\label{fig:ArtificialDatasets}
 \end{figure}
 die in \figref{fig:ArtificialDatasets} dargestellt sind.
 Beide künstlichen Datensätze haben eine extrinsische Dimension von drei und eine intrinsische
@@ -183,11 +183,11 @@ von Gesichtern mit sechs unterschiedlichen Emotionen. Die Bilder haben eine Aufl
 	\times 48$ und sind damit 2304-dimensional. Beispiele der Bild-Datensätze sind in
 \figref{fig:Dataset_samples} zu finden.
 \begin{figure}
-	\label{fig:Dataset_samples}
 	\begin{center}
 		\input{\figures/dataset_samples.pgf}
 	\end{center}
 	\caption{Beispielbilder der natürlichen Datensätze}
+	\label{fig:Dataset_samples}
 \end{figure}
 
 \begin{table}[]
@@ -220,19 +220,19 @@ Datensätzen diskutiert.
 
 Wie in \figref{fig:SwissRollMetrics}
 \begin{figure}[ht]
-	\label{fig:SwissRollMetrics}
 	\begin{center}
 		\input{\figures/SwissRoll_comparison.pgf}
 	\end{center}
 	\caption[Swiss Roll Qualitätskriterien]{Qualitätskriterien $T(K)$,  $C(K)$ und $\lcmc(K)$ für den Swiss Roll Datensatz. LLE schneidet mit Abstand am besten ab. Die restlichen Methoden unterscheiden sich nicht deutlich, jedoch kann sich die Hauptkomponentenanalyse (PCA) von den anderen drei Methoden (AE, Kernel PCA und CAE) hinsichtlich der Vertrauenswürdigkeit und dem $\lcmc$-Kriterium etwas absetzen. (Eigene Darstellung)}
+	\label{fig:SwissRollMetrics}
 \end{figure}
 und \figref{fig:TwinPeaksMetrics}
 \begin{figure}[ht]
-	\label{fig:TwinPeaksMetrics}
 	\begin{center}
 		\input{\figures/TwinPeaks_comparison.pgf}
 	\end{center}
 	\caption[Twin Peaks Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den Twin Peaks Datensatz. Auch hier zeigt LLE die beste Performance hinsichtlich allen drei Kriterien, gefolgt von Kernel PCA und dem Contractive Autoencoder (CAE). Am schlechtesten schneiden der klassische Autoencoder und die Hauptkomponentenanalyse ab. Letztere kann vor allem auf der Vertrauenswürdigkeit nicht mithalten. (Eigene Darstellung)}
+	\label{fig:TwinPeaksMetrics}
 \end{figure}
 erkennbar schneidet Locally Linear Embedding hinsichtlich allen drei Qualitätskriterien am besten ab, wobei im $\lcmc$ der größte Abstand zu den restlichen Methoden ist. Die anderen vier Methoden sind relativ ähnlich. Kernel PCA und der Contractive Autoencoder können sich auf dem Twin Peaks Datensatz von den klassischen Varianten der PCA und des Autoencoders abheben, nicht jedoch auf dem Swiss Roll Datensatz.
 
@@ -249,35 +249,35 @@ deutlicher abnimmt als bei den restlichen Methoden. Dies ist wahrscheinlich der 
 LLE geschuldet.
 
 \begin{figure}[ht]
-	\label{fig:MNISTMetrics}
 	\begin{center}
 		\input{\figures/MNIST_comparison.pgf}
 	\end{center}
 	\caption[MNIST Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den MNIST Datensatz. (Eigene Darstellung)}
+	\label{fig:MNISTMetrics}
 \end{figure}
 
 \begin{figure}[ht]
-	\label{fig:OlivettiFacesMetrics}
 	\begin{center}
 		\input{\figures/OlivettiFaces_comparison.pgf}
 	\end{center}
 	\caption[Olivetti Faces Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den Olivetti Faces Datensatz. (Eigene Darstellung)}
+	\label{fig:OlivettiFacesMetrics}
 \end{figure}
 
 \begin{figure}[ht]
-	\label{fig:LfwPeopleMetrics}
 	\begin{center}
 		\input{\figures/LfwPeople_comparison.pgf}
 	\end{center}
 	\caption[LFW People Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den LFW People Datensatz. (Eigene Darstellung)}
+	\label{fig:LfwPeopleMetrics}
 \end{figure}
 
 \begin{figure}[ht]
-	\label{fig:FER2013Metrics}
 	\begin{center}
 		\input{\figures/FER2013_comparison.pgf}
 	\end{center}
 	\caption[FER2013 Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den FER 2013 Datensatz. (Eigene Darstellung)}
+	\label{fig:FER2013Metrics}
 \end{figure}
 
 \subsection{PCA und lineare Autoencoder}
