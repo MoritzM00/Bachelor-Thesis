@@ -59,21 +59,22 @@ hergestellt werden kann.
 Eine $d$-dimensionale Mannigfaltigkeit $\mathcal{M}$ ist lokal \textit{homöomorph} zum $\real^d$,
 das heißt $\mathcal{M}$ ähnelt \textit{lokal} dem $\real^d$ \parencite[3]{Lee.2011}. Das bedeutet, dass es für jeden Punkt $\vect{z} \in \mathcal{M}$ eine stetige
 Abbildung $\phi: B_\epsilon(\vect{z}) \rightarrow \real^d$ gibt, deren Inverse ebenfalls stetig
-ist. Hierbei ist $B_\epsilon(\vect{z})$ ein Ball mit Radius $\epsilon > 0$ um $\vect{z}$. $\phi$
-heißt \textit{Karte} und die Gesamtheit aller Karten ergibt den \textit{Atlas} von $\mathcal{M}$ \parencite[4]{Cayton.2005}. Ein anschauliches Beispiel für eine (zweidimensionale) Mannigfaltigkeit ist
-die Erdoberfläche. Lokal erscheint die Erdoberfläche flach, das heißt zweidimensional, eingebettet
-ist sie aber in einem dreidimensionalen Raum. Eine Karte kann informell also genau wie eine
-traditionelle Karte eines Teils der Erdoberfläche beschrieben werden. Bewegt man sich nun entlang
-der Erdoberfläche, so muss die Karte irgendwann gewechselt werden. Dieser Übergang von zwei sich
+ist. Hierbei ist $B_\epsilon(\vect{z})$ ein Ball mit Radius $\epsilon > 0$ um $\vect{z}$. Die
+Abbildung $\phi$ heißt \textit{Karte} und die Gesamtheit aller Karten ergibt den \textit{Atlas} von
+$\mathcal{M}$ \parencite[4]{Cayton.2005}. Intuitiv können diese Begriffe besser anhand eines anschaulichen Beispiels
+erklärt werden, weshalb in \figref{fig:Torus} ein Torus dargestellt ist. Dieses Objekt ist eine
+zweidimensionale Mannigfaltigkeit eingebettet im $\real^D$.
+\begin{figure}[ht]
+	\centering
+	\input{\figures/torus.pgf}
+	\caption{Gezeigt ist ein Beispiel für eine zweidimensionale Mannigfaltigkeit eingebettet im $\real^3$, der sogenannte Torus. Bewegt man sich entlang der Oberfläche des Torus, so erscheint sie lokal flach und ähnelt damit dem $\real^2$. Aus diesem Grund ist der abgebildete Torus eine 2-Mannigfaltigkeit -- trotz der Tatsache, dass das Objekt als Ganzes nicht in einem zweidimensionalen Raum dargestellt werden kann.}
+	\label{fig:Torus}
+\end{figure}
+\figref{fig:Torus}
+Lokal erscheint die Oberfläche des Torus flach, das heißt sie ähnelt dem $\real^2$ und nicht dem $\real^3$, in dem sie eingebettet ist. Die intrinsische Dimension im Kontext der Topologie ist also zwei. Eine Karte kann nun informell wie eine Landkarte eines Teils der Oberfläche beschrieben werden. Bewegt man sich entlang
+dieser Oberfläche, so muss die Karte irgendwann gewechselt werden. Dieser Übergang von zwei sich
 überlappenden Karten wird durch den Homöomorphismus $\phi$ formalisiert. Betrachtet man alle Karten
-von allen Teilen der Erdoberfläche ergibt dies den Atlas der Erde. Auf diese Weise kann man sich
-ebenfalls die intrinsische Dimension vorstellen: Während die Erdoberfläche in einem
-dreidimensionalen Raum eingebettet ist (extrinsische Dimension), so ist die zugrundeliegende Fläche
-zweidimensional (intrinsische Dimension). Die intrinsische Dimension entspricht also in diesem
-Kontext der Dimension der im $\real^D$ eingebetteten $d$-Mannigfaltigkeit $\mathcal{M}$. Auf eine
-umfassende formale Definition wird an dieser Stelle jedoch verzichtet. Für eine mathematisch
-korrekte Definition der hier genannten Begriffe aus der Topologie wird dazu auf
-\textcites{Lee.2011}{Lee.2012} verwiesen.
+von allen Teilen der Oberfläche ergibt dies den Atlas des Torus.
 
 Eine Mannigfaltigkeit kann darüberhinaus noch mit weiteren Eigenschaften versehen werden. Dazu
 gehören glatte Mannigfaltigkeiten, auf denen Differentialrechnung möglich ist und ein sogenannter
@@ -81,7 +82,11 @@ Tangentialraum definiert werden kann. Außerdem kann zwischen zusammenhängenden
 nicht-zusammenhängenden Mannigfaltigkeiten unterschieden werden, wobei letztere aus mehreren
 nicht-verbundenen Untermannigfaltigkeiten besteht. Im restlichen Teil dieser Arbeit wird mit einer
 Mannigfaltigkeit Bezug auf eine im $\real^D$ eingebettete $d$-dimensionale Mannigfaltigkeit ohne
-weitere Annahmen über die Struktur( glatt, zusammenhängend) genommen.
+weitere Annahmen über die Struktur (glatt, zusammenhängend) genommen. Die intrinsische Dimension
+von Daten kann also als die topologische Dimension der im $\real^D$ eingebetteten Mannigfaltigkeit
+$\mathcal{M}$, auf der die Daten liegen, definiert werden. Auf eine umfassende formale Definition
+wird an dieser Stelle jedoch verzichtet. Für eine mathematisch korrekte Definition der hier
+genannten Begriffe aus der Topologie wird auf \textcites{Lee.2011}{Lee.2012} verwiesen.
 
 \section{Ansätze der Dimensionsreduktion}
 \label{ch:Dimensionsreduktion:Ansaetze}
