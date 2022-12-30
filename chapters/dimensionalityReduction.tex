@@ -19,12 +19,13 @@ Mannigfaltigkeiten erläutert.
 
 Formell wird die ursprüngliche (hochdimensionale) Repräsentation mit dem $D$-dimensionalen
 Zufallsvektor $\rvect{x} = \tr{(x_1, \ldots, x_D)}$ und die latente (niedrigdimensionale)
-Repräsentation mit dem $d$-dimensionalen Zufallsvektor $\rvect{y}$ gekennzeichnet. Liegt eine
-konkrete Stichprobe vor, so werden die einzelnen Stichproben $\vect{x}_i, i = 1,\ldots,n$ als
-Spaltenvektoren in der $n \times D$ Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die
-transformierten Daten in der Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet. Es wird
-angenommen, dass die Datenmatrix $\mat{X}$ \textit{zentriert} ist. Dies kann jederzeit durch
-Subtraktion des Erwartungswertes einer Variable $x_i$ von Spalte $i$ sichergestellt werden.
+Repräsentation mit dem $d$-dimensionalen Zufallsvektor $\rvect{y}$ gekennzeichnet. Hierbei
+bezeichnet $\tr{\,(\cdot)\,}$ die Transponierte. Liegt eine konkrete Stichprobe vor, so werden die
+einzelnen Stichproben $\vect{x}_i, i = 1,\ldots,n$ als Spaltenvektoren in der $n \times D$
+Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die transformierten (auch: projizierten) Daten
+in der Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet. Es wird angenommen, dass die Datenmatrix
+$\mat{X}$ \textit{zentriert} ist. Dies kann jederzeit durch Subtraktion des Erwartungswertes
+$\Exp[x_i]$ einer Variable $x_i$ von Spalte $i$ sichergestellt werden.
 
 Nachdem nun die grundlegende Terminologie und das Ziel der Dimensionsreduktion geklärt wurde,
 werden im Folgenden einige weitere wichtige Ideen und Konzepte erläutert. Dazu wird in
@@ -79,7 +80,7 @@ Eine Mannigfaltigkeit kann darüberhinaus noch mit weiteren Eigenschaften verseh
 gehören glatte Mannigfaltigkeiten, auf denen Differentialrechnung möglich ist und ein sogenannter
 Tangentialraum definiert werden kann. Außerdem kann zwischen zusammenhängenden und
 nicht-zusammenhängenden Mannigfaltigkeiten unterschieden werden, wobei letztere aus mehreren
-nicht-verbundenen Untermannigfaltigkeiten besteht. Im restlichen Teil dieser Arbeit wird mit einer
+nicht-verbundenen Untermannigfaltigkeiten bestehen. Im restlichen Teil dieser Arbeit wird mit einer
 Mannigfaltigkeit Bezug auf eine im $\real^D$ eingebettete $d$-dimensionale Mannigfaltigkeit ohne
 weitere Annahmen über die Struktur (glatt, zusammenhängend) genommen. Die intrinsische Dimension
 von Daten kann also auch als die topologische Dimension der im $\real^D$ eingebetteten
@@ -96,25 +97,23 @@ Eine simple und weitverbreitete Unterteilung ist die in lineare und nichtlineare
 lineare Methoden wie die Hauptkomponentenanalyse (\secref{ch:MethodenDerDimRed:statistisch:PCA})
 nur lineare Zusammenhänge in den Daten erkennen können, sind nichtlineare Methoden in dieser
 Hinsicht deutlich flexibler. Zu letzteren gehören beispielsweise die Kernel PCA
-(\secref{ch:MethodenDerDimRed:statistisch:kPCA}) und Autoencoder
-(\secref{ch:MethodenDerDimRed:ML:AE}).
+(\secref{ch:MethodenDerDimRed:statistisch:kPCA}) und die Autoencoder
+(\secref{ch:MethodenDerDimRed:ML:AE}), welche eine bestimmte Klasse von neuronalen Netzen
+darstellen.
 
-\textbf{Konvexe} Methoden optimieren eine Zielfunktion, die nur globale Optima besitzt und dadurch nicht in suboptimalen Lösungen resultieren kann. Die Optimierung ist daher leichter, jedoch sind die möglichen Zielfunktionen auch deutlich eingeschränkter. Nicht-konvexe Methoden wie Autoencoder, Sammon Mapping oder Manifold Charting optimieren nicht-konvexe Zielfunktionen und können damit bei der Optimierung in suboptimalen lokalen Extrempunkten \enquote{steckenbleiben}. Die Optimierung erfolgt meist mittels des Gradientenabstiegsverfahrens (engl. \textit{gradient descent}) oder anderen mathmatischen Optimierungsverfahren.\addref
+\textbf{Konvexe} Methoden optimieren eine Zielfunktion, bei der jedes lokale Optimum gleichzeitig das globale Optimum ist. Die Optimierung ist daher leichter, jedoch sind die möglichen Zielfunktionen auch deutlich eingeschränkter. \textbf{Nicht-konvexe} Methoden wie der Autoencoder, das Sammon Mapping oder das Manifold Charting\addref optimieren nicht-konvexe Zielfunktionen und können damit bei der Optimierung in suboptimalen lokalen Extrempunkten \enquote{steckenbleiben}. Die Optimierung erfolgt meist mittels des Gradientenabstiegsverfahrens (engl. \textit{gradient descent}) oder anderen mathmatischen Optimierungsverfahren \parencite[siehe z.B.][]{Guler.2010}.
 
 \textbf{Distanz-basierte Methoden} versuchen die paarweisen Distanzen in den Daten zu erhalten, womit die zugrundeliegende Struktur erhalten werden soll \parencite[3]{Gracia.2014}. Vertreter dieser Kategorie sind die (klassische) Multidimensionale
 Skalierung \parencites{Kruskal.1964}{Cox.2008}, das Sammon Mapping \addref und die Curvilinear Component Analysis
 \addref. Hierbei muss eine Distanz jedoch nicht die euklidische Distanz zwischen zwei Punkten sein.
 Beispielweise ist die \newterm{geodätische Distanz} als die Distanz entlang der Mannigfaltigkeit
 definiert, auf der die Punkte liegen. Mit dem Hintergrundwissen zu Mannigfaltigkeiten wird jedoch
-deutlich, dass Distanzen vor allem bei nichtlinearen Mannigfaltigkeiten mit einer hohen Krümmung
-irreführend sein können. Aber auch schon Mannigfaltigkeiten wie die Swiss Roll deuten hier auf
-Probleme hin: Punkte die nah beieinander liegen müssen durch die Dimensionsreduktion
-\enquote{entfaltet} werden, wodurch sie danach weiter weg voneinander liegen können aber die
-Struktur der Mannigfaltigkeit trotzdem erhalten geblieben ist. Die geodätische Distanz wirkt diesem
-Problem entgegen, ist aber nicht immer leicht zu berechnen. Daneben gibt es
-\textbf{Topologie-erhaltende Methoden}, die gezielt die Topologie der Mannigfaltigkeit erhalten
-wollen und dies durch geometrische Überlegungen erzielen \parencite[4]{Gracia.2014}. Zu dieser Kategorie gehört beispielsweise das Locally Linear Embedding
-(\secref{ch:MethodenDerDimRed:statistisch:LLE}), die Self-Organizing Map \parencite{Kohonen.1990} oUniform Manifold Approximation and Projection (UMAP) \parencite{McInnes.2018}.
+deutlich, dass euklidische Distanzen vor allem bei nichtlinearen Mannigfaltigkeiten mit einer hohen
+Krümmung irreführend sein können. Die geodätische Distanz wirkt diesem Problem entgegen, ist aber
+nicht immer leicht zu berechnen. Daneben gibt es \textbf{Topologie-erhaltende Methoden}, die
+gezielt die Topologie der Mannigfaltigkeit erhalten wollen und dies durch geometrische Überlegungen
+erzielen \parencite[4]{Gracia.2014}. Zu dieser Kategorie gehört beispielsweise das Locally Linear Embedding
+(\secref{ch:MethodenDerDimRed:statistisch:LLE}), die Self-Organizing Map \parencite{Kohonen.1990} oder die Uniform Manifold Approximation and Projection (UMAP) \parencite{McInnes.2018}.
 
 Andere Algorithmen, die in dieser Arbeit nicht vorgestellt werden können sind Isomap \parencite{Tenenbaum.2000}, Maximum Variance Unfolding (MVU) \parencite{Weinberger.2006}, Laplacian Eigenmaps, Diffusion Maps, Varianten von LLE wie Hessian LLE
 oder Local Tangent Space Alignment (LTSA), sowie Manifold Charting und Local Linear
@@ -124,15 +123,12 @@ Charting.\addref
 \label{ch:Dimensionsreduktion:Merkmalsextrahierung}
 
 Die Merkmalsextrahierung ist ein sehr verwandtes Gebiet zur Dimensionsreduktion, da oftmals
-Methoden der Dimensionsreduktion für die Merkmalsextrahierung eingesetzt werden \parencite[3]{Guyon.2006b}. Das Ziel hierbei ist meistens, in einem Vorverarbeitungsschritt
-\enquote{irrelevante} Merkmale durch eine Transformation der Merkmale zu entfernen und dann den
-eigentlichen Schätzer (Klassifikator oder Regressor) auf den neuen Merkmalen zu trainieren.
-Abzugrenzen davon ist ein Teilgebiet der Merkmalsextrahierung, nämlich die Merkmalsauswahl (engl.
-\textit{feature selection}) \parencite{Blum.1997}. Hier wird keine Transformation der Merkmale durchgeführt, sondern nur eine
-Teilmenge der verfügbaren Merkmale ausgewählt. Insgesamt erhofft man sich durch eine
-Merkmalsextrahierung, dass der Klassifikator (oder Regressor) durch die Merkmalsextrahierung
-robuster gegenüber Rauschen (engl. \textit{noise}) ist und eine ähnliche oder bessere Performance
-bezüglich gewählter Gütemaße aufweist.
+Methoden der Dimensionsreduktion für die Merkmalsextrahierung eingesetzt werden \parencite[3]{Guyon.2006b}. Das Ziel hierbei ist es, in einem Vorverarbeitungsschritt
+\enquote{irrelevante} Merkmale durch eine Transformation oder Selektion der Merkmale zu entfernen
+und dann den eigentlichen Schätzer (Klassifikator oder Regressor) auf den neuen Merkmalen zu
+trainieren. Insgesamt erhofft man sich durch eine Merkmalsextrahierung, dass der Klassifikator
+(oder Regressor) durch robuster gegenüber Rauschen (engl. \textit{noise}) ist und eine ähnliche
+oder bessere Performance bezüglich gewählter Gütemaße aufweist.
 
 Wie wir in der Einleitung in \chapref{ch:Enleitung} gesehen haben, gibt es viele Gründe, wieso man
 eine Reduktion der Dimension eines Datensatzes erreichen möchte. Unter anderem können so sehr große
