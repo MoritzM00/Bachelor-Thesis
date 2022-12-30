@@ -3,18 +3,20 @@
 \label{ch:MethodenDerDimRed}
 %% ==============================
 
-In jüngster Zeit haben vor allem verschiedenste Varianten von neuronale Netzen einen hohen Grad an
-Aufmerksamkeit durch bemerkenswerte Errungenschaften in Gebieten der automatischen Spracherkennung
-oder \textit{Computer Vision} erlangt. Fraglich ist, ob diese neuen Algorithmen auch auf dem
-Bereich der Dimensionsreduktion einen entscheidenden Fortschritt gemacht haben. Deshalb wird von
-der üblichen Unterteilung (siehe \secref{ch:Dimensionsreduktion:Ansaetze}) abgewichen der Methoden
-abgewichen. Stattdessen werden die Methoden in dieser Arbeit in \textit{statistische} und
-\textit{Machine Learning} Methoden unterteilt, um diese später in \chapref{ch:Vergleich}
-gegenüberstellen zu können. Statistische Methoden haben eine solide theoretische Fundierung und
-sind meist etablierte Algorithmen auf einem jeweiligen Gebiet, wie das zum Beispiel mit der
-Hauptkomponentenanalyse (\subsecref{ch:MethodenDerDimRed:statistisch:PCA}) der Fall ist. Machine
-Learning Methoden hingegen haben das Ziel von Trainingsdaten auf neue, das heißt ungesehene
-(Test-)Daten zu generalisieren und besitzen nicht immer theoretische Optimalitätsgarantien.
+Wie bereits in der Einleitung erwähnt wurde, haben kürzlich vor allem verschiedenste Varianten von
+neuronale Netzen einen hohen Grad an Aufmerksamkeit durch bemerkenswerte Errungenschaften in
+Gebieten der automatischen Spracherkennung oder \textit{Computer Vision} erlangt. Fraglich ist, ob
+diese neuen Algorithmen auch auf dem Bereich der Dimensionsreduktion einen entscheidenden
+Fortschritt gemacht haben. Deshalb wird von der üblichen Unterteilung (siehe
+\secref{ch:Dimensionsreduktion:Ansaetze}) der Methoden abgewichen. Stattdessen werden die Methoden
+in dieser Arbeit in statistische Methoden und Machine Learning Ansätze unterteilt, um diese später
+in \chapref{ch:Vergleich} gegenüberstellen zu können. Statistische Methoden haben eine solide
+theoretische Fundierung und sind meist etablierte Algorithmen auf einem jeweiligen Gebiet, wie es
+zum Beispiel mit der Hauptkomponentenanalyse (\subsecref{ch:MethodenDerDimRed:statistisch:PCA}) der
+Fall ist. Machine Learning Methoden hingegen versuchen mithilfe einer großen Menge an
+Trainingsdaten eine Funktion oder Verteilung zu lernen und damit auf neue, ungesehene Daten zu
+generaliseren. Da hier oft nicht-konvexe Zielfunktionen mittels mathematischer
+Optimierungsfunktionen optimiert werden, kann meistens keine Optimalitätsgarantie bewiesen werden.
 Neuronale Netze sind hierfür ein Paradebeispiel und werden deshalb in
 \secref{ch:MethodenDerDimRed:modern} eingehend behandelt.
 
@@ -30,24 +32,24 @@ Algorithmen, die hier nicht behandelt werden können, wurden bereits in
 
 Zu den statistischen Methoden, die in dieser Arbeit vorgestellt werden, gehören die
 \newterm{Hauptkomponentenanalyse} (PCA) in \subsecref{ch:MethodenDerDimRed:statistisch:PCA} sowie
-die nichtlineare Erweiterung der Hauptkomponentenanalyse, die Kernel PCA
-(\subsecref{ch:MethodenDerDimRed:statistisch:kPCA}). Außerdem wird das Locally Linear Embedding
-(LLE) in \subsecref{ch:MethodenDerDimRed:statistisch:LLE} als Vertreter der statistischen Methoden
-genauer behandelt.
+die nichtlineare Erweiterung der Hauptkomponentenanalyse, die \newterm{Kernel Principal Component
+	Analysis} (Kernel PCA) (\subsecref{ch:MethodenDerDimRed:statistisch:kPCA}). Außerdem wird das
+\newterm{Locally Linear Embedding} (LLE) in \subsecref{ch:MethodenDerDimRed:statistisch:LLE} als
+Vertreter der statistischen Methoden genauer behandelt.
 
 %% ==============================
 \subsection{Principal Component Analysis}
 \label{ch:MethodenDerDimRed:statistisch:PCA}
 \nomenclature[Z]{PCA}{Principal Component Analysis}
 
-Principal Component Analysis ist \textit{die} Methode der Dimensionsreduktion und wurde erstmals
-von \textcite{Pearson.1901} und \textcite{Hotelling.1933} entwickelt. Trotz des mittlerweile
-relativ hohen Alters ist die Hauptkomponentenanalyse immer noch aufgrund der simplen Anwendbarkeit
-oft die erste Wahl einer Dimensionsreduktionsmethode. Im Folgenden möchte ich kurz auf die zentrale
-Idee und Motivation (\ref{ch:MethodenDerDimRed:statistisch:PCA:Grundidee}) der
-Hauptkomponentenanalyse, sowie die mathematische Herleitung der sogenannten
-\newterm{Hauptkomponenten} (Unterabschnitte \ref{ch:MethodenDerDimRed:statistisch:PCA:Definition}
-und \ref{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}) eingehen.
+Die Hauptkomponentenanalyse ist \textit{die} Methode der Dimensionsreduktion und wurde erstmals von
+\textcite{Pearson.1901} und \textcite{Hotelling.1933} entwickelt. Trotz des mittlerweile relativ
+hohen Alters ist die Hauptkomponentenanalyse immer noch aufgrund der simplen Anwendbarkeit oft die
+erste Wahl einer Dimensionsreduktionsmethode. Im Folgenden möchte ich kurz auf die zentrale Idee
+und Motivation (\ref{ch:MethodenDerDimRed:statistisch:PCA:Grundidee}) der Hauptkomponentenanalyse,
+sowie die mathematische Herleitung der sogenannten \newterm{Hauptkomponenten} (Unterabschnitte
+\ref{ch:MethodenDerDimRed:statistisch:PCA:Definition} und
+\ref{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}) eingehen.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Grundidee}
@@ -97,7 +99,7 @@ dass die zweite Hauptkomponente zur Ersten \textit{unkorreliert}\unsure{wieso mu
 	\Cov(\tr{\vect{a}_1}\rvect{x}, \tr{\vect{a}_2}\rvect{x}) = 0
 \end{equation}
 Auch dieses Optimierungsproblem ist ein Eigenwertproblem und man erhält, dass die Koeffizienten $\vect{a}_2$ der zweiten Hauptkomponente der Eigenvektor mit dem zweitgrößten Eigenwert von $\mat{\Sigma}$ ist.
-Generell lässt sich zeigen, dass die Koeffizienten der $i$-ten Hauptkomponente dem Eigenvektor mit $i$-ten nach der Größe geordneten Eigenwert entspricht \parencite[6]{Jolliffe.2002}. Aus diesem Grund lassen sich die Hauptkomponenten kompakt durch
+Generell lässt sich zeigen, dass die Koeffizienten der $i$-ten Hauptkomponente dem Eigenvektor mit dem $i$-ten nach der Größe geordneten Eigenwert entspricht \parencite[6]{Jolliffe.2002}. Aus diesem Grund lassen sich die Hauptkomponenten kompakt durch
 \begin{equation}
 	\rvect{y} = \tr{\mat{A}} \rvect{x}
 \end{equation}
@@ -113,10 +115,10 @@ Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenv
 \label{ch:MethodenDerDimRed:statistisch:kPCA}
 \nomenclature[Z]{kPCA}{Kernel Principal Component Analysis}
 Wie soeben erwähnt ist die Kernel Principal Components Analysis insofern eine Generalisierung der klassischen Hauptkomponentenanalyse, dass auch nichtlineare Zusammenhänge erkannt werden können.
-Um das zu erreichen, wird sich am sogenannten \newterm{Kernel Trick} bedient, der schon erfolgreich auf \textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde. Dazu gehen wir wieder in
-\subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} auf die Grundidee dieser Methode ein
-und befassen uns dann in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise} kurz mit
-der konkreten Vorgehensweise bei der Kernel PCA.
+Um das zu erreichen, wird sich am sogenannten \newterm{Kernel Trick} bedient, der schon erfolgreich auf \textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde. Dazu wird in
+\subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} die Grundidee dieser Methode erläutert
+und in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise} wird sich mit der konkreten
+Vorgehensweise befasst.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee}
@@ -124,11 +126,11 @@ der konkreten Vorgehensweise bei der Kernel PCA.
 Die Grundidee der Kernel PCA ist es, die Daten mithilfe einer Funktion $\bm{\phi}$ in einen
 Vektorraum $\mathcal{H}$ abzubilden, der nichtlinear mit dem Ursprungsraum $\mathcal{X}$ verbunden
 ist. Der Raum $\mathcal{H}$ wird in diesem Kontext auch Merkmalsraum (engl. \textit{feature space})
-genannt und kann potentiell sehr hochdimensional sein. Nach der Transformation wird also die
+genannt und kann potentiell sehr hochdimensional sein. Nach der Transformation wird die
 traditionelle Hauptkomponentenanalyse durchgeführt, um damit die niedrigdimensionale Repräsentation
-$\rvect{y}$ zu erhalten. Dies erscheint auf den ersten Blick kontraintuitiv, da durch den
-\enquote{Umweg} über die Abbildung $\bm{\phi}$ die Dimension zuerst erhöht wird. Motiviert wird es
-dadurch, dass die Daten in $\mathcal{X}$ einen \textit{nichtlinearen} Zusammenhang aufweisen
+$\rvect{y}$ zu erhalten. Dieses Vorgehen erscheint auf den ersten Blick kontraintuitiv, da durch
+den \enquote{Umweg} über die Abbildung $\bm{\phi}$ die Dimension zuerst erhöht wird. Motiviert wird
+es dadurch, dass die Daten in $\mathcal{X}$ einen \textit{nichtlinearen} Zusammenhang aufweisen
 können, während in $\mathcal{H}$ der Zusammenhang linear und damit für lineare Algorithmen wie die
 Hauptkomponentenanalyse erkennbar ist \parencite[vgl.][26]{ShaweTaylor.2011}.
 
@@ -136,8 +138,8 @@ Der entscheidende Punkt ist jedoch, dass man die Abbildung $\bm{\phi}$ nicht exp
 sondern mithilfe einer Kernel-Funktion $\kappa: \mathcal{X} \times \mathcal{X} \rightarrow \real$
 implizit gegeben hat \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Der Kernel Trick ist immer dann anwendbar,
 wenn der Algorithmus so formuliert werden kann, dass $\bm{\phi}$ ausschließlich als Skalarprodukt
-vorkommt. Im Folgenden wird die Vorgehensweise bei der Kernel PCA kurz erläutert, allerdings wird
-für eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden auf
+vorkommt. Im Folgenden wird die Vorgehensweise der Kernel PCA kurz erläutert. Allerdings wird für
+eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden auf
 \textcite{ShaweTaylor.2011} verwiesen.
 
 \subsubsection{Der Kernel}
@@ -164,7 +166,7 @@ Die Kovarianzmatrix $\mat{C}$ der (zentrierten) Daten im Merkmalsraum ist defini
 \begin{equation}
 	\mat{C} = \frac{1}{n} \tr{\bm{\phi}(\mat{X})} \bm{\phi}(\mat{X}) \, ,
 \end{equation}
-wobei $\bm{\phi}$ hier elementweise angewandt wird. Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt ist diese Matrix aber sehr ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
+wobei $\bm{\phi}(\mat{X}) = \tr{\left[ \bm{\phi}(\vect{x}_1), \ldots, \bm{\phi}(\vect{x}_n) \right]}$ hier elementweise auf die Zeilen von $\mat{X}$ angewandt wird. Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt, ist diese Matrix aber sehr ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
 \begin{align}
 	\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1,\ldots,n} \label{eq:kPCA:KernelMatrix_A} \\
 	        & = \bm{\phi}(\mat{X}) \tr{\bm{\phi}(\mat{X})} \label{eq:kPCA:KernelMatrix_B}
@@ -192,7 +194,7 @@ die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[
 \subsection{Locally Linear Embedding}
 \label{ch:MethodenDerDimRed:statistisch:LLE}
 \nomenclature[Z]{LLE}{Locally Linear Embedding}
-Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt lokale Eigenschaften der Daten aus und bezieht damit gleichzeitig globale Eigenschaften mit ein. Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die optimale lineare Rekonstruktion durch die Nachbarn eines Datenpunktes bestimmt. Im Zweiten Schritt werden dann geometrische Eigenschaften dieser Rekonstruktion ausgenutzt, durch die die niedrigdimensionale Repräsentation abgeleitet werden kann.
+Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt lokale Eigenschaften der Daten aus und bezieht damit gleichzeitig globale Eigenschaften mit ein. Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die optimale lineare Rekonstruktion durch die Nachbarn eines Datenpunktes bestimmt. Im zweiten Schritt werden dann geometrische Eigenschaften dieser Rekonstruktion ausgenutzt, durch die die niedrigdimensionale Repräsentation abgeleitet werden kann.
 
 \subsubsection{Lineare Rekonstruktion durch die Nachbarn}
 \label{ch:MethodenDerDimRed:statistisch:LLE:LineareRekonstruktion}
@@ -203,7 +205,7 @@ Rekonstruktionsgewichte $W_{ij}$, welche durch Minimierung der Zielfunktion
 	\label{eq:LLE:Zielfunktion}
 	\sum_{i = 1}^n \norm[\Big]{ \vect{x}_i - \sum_{j = 1}^n W_{ij}\vect{x}_j}^2
 \end{equation}
-gefunden werden. Die Minimierung erfolgt unter den Folgenden zwei Nebenbedingungen \parencite[2]{Roweis.2000}. Erstens müssen sich alle Zeilen der Gewichtsmatrix $\mat{W}$ zu Eins
+gefunden werden. Die Minimierung erfolgt unter den folgenden zwei Nebenbedingungen \parencite[2]{Roweis.2000}. Erstens müssen sich alle Zeilen der Gewichtsmatrix $\mat{W}$ zu Eins
 summieren
 \begin{equation}
 	\label{eq:LLE:ErsteNebenbedingung}
@@ -254,19 +256,8 @@ den unteren $d$ Eigenvektoren von $\mat{M}$, wobei das triviale Eigenvektor-Eige
 Nachdem in \secref{ch:MethodenDerDimRed:statistisch} einige statistischen Methoden der
 Dimensionsreduktion näher betrachtet wurden, werden nun zwei ausgewählte Machine Learning Methoden,
 nämlich der \newterm{Autoencoder} in seiner klassischen Form
-(\subsecref{ch:MethodenDerDimRed:ML:AE}) sowie der \newterm{Contractive Autoencoder} (CAE)
-(\subsecref{ch:MethodenDerDimRed:ML:CAE}) vorgestellt.
-
-Die Bezeichnung der Algorithmen als \enquote{modern} ist hier etwas irreführend, da die
-vorgestellten Methoden keineswegs brandneu sind, sich jedoch von\rewrite{Das war noch zum alten
-	Titel, muss man umschreiben} der Funktionsweise von den eben vorgestellten statistisch Methoden
-abheben. Alle drei Algorithmen sind im Prinzip Varianten von neuronalen Netzwerken -- ein Modell
-das in jüngster Zeit für sehr gute Ergebnisse in vielen Gebieten gesorgt hat. Allerdings eilt die
-empirische Forschung den neuronalen Netzwerken voraus, da man theoretisch bisher nicht beweisen
-konnte, wieso diese Architektur funktioniert. Man stellt lediglich fest, dass je größer das
-Netzwerk ist und je mehr Rechenkapazität man zur Verfügung hat, desto besser ist das Ergebnis eines
-neuronalen Netzwerkes\addref. Inwiefern dies auf das Gebiet der Dimensionsreduktion zutrifft,
-werden wir später in \chapref{ch:Vergleich} sehen.
+(\subsecref{ch:MethodenDerDimRed:ML:AE}) und eine Modifizierung in Form des \newterm{Contractive
+	Autoencoder} (CAE) (\subsecref{ch:MethodenDerDimRed:ML:CAE}) vorgestellt.
 
 \subsection{Autoencoder}
 \label{ch:MethodenDerDimRed:ML:AE}
@@ -274,10 +265,19 @@ werden wir später in \chapref{ch:Vergleich} sehen.
 
 Der Autoencoder ist ein neuronales Netzwerk, das die Rekonstruktion des Inputvektors $\vect{x}$ aus
 den Trainingsdaten lernt. Um das sinnvoll zu erreichen, besitzt der Autoencoder eine wie in
-\figref{fig:5-layer-Autoencoder} gezeigte symmetrische Architektur. Diese besteht in der
+\figref{fig:5-layer-Autoencoder} gezeigte symmetrische Architektur. \rewrite{hier eine allgemeinere
+	Darstellung wählen}
+\begin{figure}[ht]
+	\label{fig:5-layer-Autoencoder}
+	\begin{center}
+		\includegraphics[width=\textwidth]{5_layer_AE.pdf}
+		\caption[Schematische Abbildung der Architektur eines Autoencoders]{Gezeigt ist eine schematische Abbildung der Architektur eines (\textit{vollvernetzten}) Autoencoders. Dieser Autoencoder besitzt fünf Schichten, wobei das \textit{Bottleneck} dreidimensional und die \textit{Input}-Dimension zwölf ist. Das bedeutet, dass ein 12-dimensionaler Inputvektor in der Mitte des Autoencoders durch einen dreidimensionalen Vektor kodiert und anschließend wieder dekodiert werden muss, um zu einer möglichst verlustfreien Rekonstruktion zu gelangen. Eigene Darstellung, erstellt mittels \href{https://alexlenail.me/NN-SVG/}{NN-SVG}}
+	\end{center}
+\end{figure}
+Diese besteht in der
 klassischen Form aus einer ungeraden Anzahl an Schichten mit einer \newterm{Bottleneck}-Schicht in
 der Mitte \parencite[2]{Bank.2020}. Diese Schicht wird als \textit{Bottleneck} bezeichnet, da sie nur $d < D$
-Neuronen und damit die \enquote{kleinste} Stelle im Netzwerk darstellt, durch die der Inputvektor
+besteht und damit die \enquote{kleinste} Stelle im Netzwerk darstellt, durch die der Inputvektor
 kodiert werden muss. In diesem Fall wird der Autoencoder als \newterm{unterbestimmt} (engl.
 \textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}.\footnote{Es gibt demnach auch überbestimmte Autoencoder mit $k > D$
 	Neuronen in der mittleren Schicht. Diese Variante reduziert die Dimension nicht, sondern erhöht sie \parencite[504]{Goodfellow.2016}.} Damit erzielt die Bottleneck-Schicht die gewünschte
@@ -298,14 +298,6 @@ welcher sehr ähnlich zur Hauptkomponentenanalyse ist. Dies wird in
 Fällen werden jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt, um einen nichtlinearen
 Zusammenhang zu lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Charte.2018}.
 
-\begin{figure}[h]
-	\label{fig:5-layer-Autoencoder}
-	\begin{center}
-		\includegraphics[width=\textwidth]{5_layer_AE.pdf}
-		\caption[Schematische Abbildung der Architektur eines Autoencoders]{Gezeigt ist eine schematische Abbildung der Architektur eines (\textit{vollvernetzten}) Autoencoders. Dieser Autoencoder besitzt fünf Schichten, wobei das \textit{Bottleneck} dreidimensional und die \textit{Input}-Dimension zwölf ist. Das bedeutet, dass ein 12-dimensionaler Inputvektor in der Mitte des Autoencoders durch einen dreidimensionalen Vektor kodiert und anschließend wieder dekodiert werden muss, um zu einer möglichst verlustfreien Rekonstruktion zu gelangen. Eigene Darstellung, erstellt mittels \href{https://alexlenail.me/NN-SVG/}{NN-SVG}}
-	\end{center}
-\end{figure}
-
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}
 Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^d$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ codiert und zum anderen den \newterm{Decoder} $g: \real^d \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Das Ziel des Autoencoders ist es, den Inputvektor zu rekonstruieren
@@ -324,11 +316,9 @@ minimiert, ist dann beispielsweise der Mittelwert über die Fehlerfunktion in de
 	\label{eq:AE_objectiveFunction}
 	\mathcal{J}_{\text{AE}} = \frac{1}{n} \sum_{i = 1}^n L(\vect{x}_i, \estNormal{\vect{x}}_i) \, .
 \end{equation}
-Eine weitere Möglichkeit ist der \newterm{Binary Cross-Entropy Loss}, wenn die Daten im Intervall $[0, 1]$ liegen.\unsure{wirklich das erwähnen?}
-
 Die Gefahr dabei ist, dass der Autoencoder bei zu großer Kapazität einfach die Identitätsfunktion
 ohne sinnvolle Repräsentation lernt. Dies ist zum Beispiel der Fall, wenn zu viele Schichten
-eingesetzt werden und der Autoencoder einfach die Inputvektoren auf Indizes abbildet. Aus diesem
+eingesetzt werden. Aus diesem
 Grund muss ein Autoencoder oftmals regularisiert werden, worauf im Folgenden in
 \subsecref{ch:MethodenDerDimRed:ML:AE:Regularisierung} eingegangen wird.
 
@@ -387,12 +377,12 @@ mit der von PCA wie folgt \parencite[3]{Plaut.2018}:\unsure{was meine ich mit "L
 \nomenclature[Z]{CAE}{Contractive Autoencoder}
 
 Der Contractive Autoencoder \parencite{Rifai.2011} stellt eine Variante des eben vorgestellten klassichen Autoencoders
-\subsecref{ch:MethodenDerDimRed:ML:AE} dar. Ähnlich wie der Sparse Autoencoder wird die
-Zielfunktion des Autoencoders lediglich um einen zusätzlichen Regularisierungsterm erweitert. Dies
-führt zu einer kontrahierenden Eigenschaft: Ähnliche Punkte werden auf eine kleinere
-Nachbarschaften auf der Mannigfaltigkeit abgebildet und damit \enquote{zusammengezogen}. Dies gilt
-aber nur \textit{lokal}, das heißt unähnliche Punkte können immer noch weit weg auf der
-Mannigfaltigkeit liegen \parencite[521]{Goodfellow.2016}. Dazu wird wieder in \subsecref{ch:MethodenDerDimRed:CAE:Grundidee}
+(\subsecref{ch:MethodenDerDimRed:ML:AE}) dar. Ähnlich wie der Sparse Autoencoder wird die
+Zielfunktion des Autoencoders lediglich um einen zusätzlichen Regularisierungsterm erweitert.
+Dieser zusätzliche Term in der Zielfunktion führt zu einer kontrahierenden Eigenschaft: Ähnliche
+Punkte werden auf eine kleinere Nachbarschaften auf der Mannigfaltigkeit abgebildet und damit
+\enquote{zusammengezogen}. Dies gilt aber nur \textit{lokal}, das heißt unähnliche Punkte können
+immer noch weit weg auf der Mannigfaltigkeit liegen \parencite[521]{Goodfellow.2016}. Dazu wird wieder in \subsecref{ch:MethodenDerDimRed:CAE:Grundidee}
 auf die Grundidee eingegangen und dann in \subsecref{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm}
 die konkrete Berechnung des Regularisierungsterms vorgestellt.
 
@@ -428,12 +418,12 @@ formuliert werden, wobei $\mat{W} \in \real^{d \times D}$ und $\mat{\widetilde{W
 verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
 \begin{equation}
 	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^n \left( \vect{y}_i (1 - \vect{y}_i)\right)^2 \sum_{ij} \mat{W}^2_{ij}
-\end{equation}\unsure{was sind hier die Grenzen der Summen ? n oder d, D?}
+\end{equation}
 effizient berechnet werden \parencite[4]{Rifai.2011}. Für einen Autoencoder mit mehr als einer versteckten Schicht wird die
 Berechnung sehr teuer, was das Trainieren eines tiefen Contractive Autoencoders ohne Tricks wie
-beispielsweise das in \textcite{Bengio.2006} erläuterte gierige schichtenweise vortrainieren (engl.
-\textit{greedy layer-wise pretraining}) unpraktikabel macht. Bei diesem Vorgehen wird ein tiefer
-Autoencoder schichtenweise durch untiefe Autoencoder (drei Schichten) vortrainiert und im letzten
-Schritt erfolgt eine Feinabstimmung des kompletten Netzwerks \parencite[522]{Goodfellow.2016}. Dieses Vorgehen kann analog auch für klassische Autoencoder verwendet
+beispielsweise das von \textcite{Bengio.2006} erläuterte gierige schichtenweise Vortrainieren
+(engl. \textit{greedy layer-wise pretraining}) unpraktikabel macht. Bei diesem Vorgehen wird ein
+tiefer Autoencoder schichtenweise durch untiefe Autoencoder (drei Schichten) vortrainiert und im
+letzten Schritt erfolgt eine Feinabstimmung des kompletten Netzwerks \parencite[522]{Goodfellow.2016}. Dieses Vorgehen kann analog auch für klassische Autoencoder verwendet
 werden, um eine gute Initialisierung der Gewichte zu erreichen und damit suboptimale lokale Minima
 der Zielfunktion zu umgehen \parencite[509]{Goodfellow.2016}.
