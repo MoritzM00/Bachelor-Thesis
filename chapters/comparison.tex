@@ -5,14 +5,15 @@
 
 In \chapref{ch:Dimensionsreduktion} wurden grundlegende Begriffe geklärt und in
 \chapref{ch:MethodenDerDimRed} sechs Methoden der Dimensionsreduktion näher betrachtet. Im jetzigen
-Kapitel möchten werden die statistischen Methoden aus \secref{ch:MethodenDerDimRed:statistisch} mit
-den Machine Learning Methoden aus \secref{ch:MethodenDerDimRed:modern} empirisch auf künstlichen
-und natürlichen Datensätzen vergleichen. Dazu wird im Folgenden in
-\secref{ch:Vergleich:sec:Methodik} auf die Methodik des Vergleichs eingegangen, indem die Schätzung
-der intrinsischen Dimension und die eingesetzten Qualitätskriterien erläutert. Außerdem werden in
-\secref{ch:Vergleich:sec:VerwendeteDatensaetze} die verwendeten Datensätze vorgestellt und
-anschließend werden in \secref{ch:Vergleich:sec:Resultate} die Resultate des empirischen Vergleichs
-diskutiert.
+Kapitel werden die statistischen Methoden aus \secref{ch:MethodenDerDimRed:statistisch} mit den
+Machine Learning Methoden aus \secref{ch:MethodenDerDimRed:modern} empirisch auf künstlichen und
+natürlichen Datensätzen verglichen. Dazu wird in \secref{ch:Vergleich:sec:Methodik} auf die
+Methodik des Vergleichs eingegangen, indem die Schätzung der intrinsischen Dimension und die
+eingesetzten Qualitätskriterien erläutert werden. Außerdem werden in
+\secref{ch:Vergleich:sec:VerwendeteDatensaetze} die verwendeten Datensätze und in
+\secref{ch:Vergleich:sec:ParameterwahlArchitektur} die Parameterwahl der Methoden und insbesondere
+die Architektur der Autoencoder vorgestellt. Letztlich werden in
+\secref{ch:Vergleich:sec:Resultate} die Resultate des empirischen Vergleichs diskutiert.
 
 \section{Methodik}
 \label{ch:Vergleich:sec:Methodik}
@@ -140,8 +141,7 @@ verschiedenen Methoden miteinander zu vergleichen. Eine Übersicht über die Dim
 
 \subsection{Künstliche Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze:kuenstlich}
-Zu den künstlichen Datensätzen gehört die weit
-verbreitete \textit{Swiss Roll} und der \textit{Twin Peaks} Datensatz,
+Zu den künstlichen Datensätzen gehört die weitverbreitete \textit{Swiss Roll} und der \textit{Twin Peaks} Datensatz,
 \begin{figure}[ht]
 	\begin{center}
 		\input{\figures/artificial_datasets.pgf}
@@ -150,10 +150,10 @@ verbreitete \textit{Swiss Roll} und der \textit{Twin Peaks} Datensatz,
 	\label{fig:ArtificialDatasets}
 \end{figure}
 die in \figref{fig:ArtificialDatasets} dargestellt sind.
-Beide künstlichen Datensätze haben eine extrinsische Dimension von drei und eine intrinsische
+Beide künstlichen Datensätze bestehen aus 5000 Datenpunkten und haben eine extrinsische Dimension von drei und eine intrinsische
 Dimension von zwei. Dies erlaubt eine visuelle Betrachtung der Datensätze und der gefundenen
 latenten Räume, schränkt aber gleichzeitig die Architektur eines (unterbestimmten) Autoencoders
-sehr ein. Künstliche Datensätze sind aber nicht zwangsweise aussagekräftig für Performance auf echten Datensätzen, weswegen zusätzlich vier natürliche Datensätze hinzugezogen werden.
+sehr ein. Künstliche Datensätze sind aber nicht zwangsweise aussagekräftig für die Performance auf echten Datensätzen, weswegen zusätzlich vier natürliche Datensätze hinzugezogen werden.
 
 \subsection{Natürliche Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze:natuerlich}
@@ -205,6 +205,10 @@ von Gesichtern mit sechs unterschiedlichen Emotionen. Die Bilder haben eine Aufl
 	\caption{Übersicht über die Dimensionen und Stichprobengröße der verwendeten Datensätze}
 	\label{tab:uebersicht-datensaetze}
 \end{table}
+
+\section{Parameterwahl und Autoencoder Architektur}
+\label{ch:Vergleich:sec:ParameterwahlArchitektur}
+
 \section{Resultate}
 \label{ch:Vergleich:sec:Resultate}
 
