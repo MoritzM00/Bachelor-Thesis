@@ -167,21 +167,20 @@ Datensätzen wurden größtenteils Bilddatensätze, aber auch ein Textdatensatz 
 sehr hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
 Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Face}-Datensatz
 \footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Labeled Faces in the
-	Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der \textit{20
-	Newsgroups}\footnote{\url{http://qwone.com/~jason/20Newsgroups/}} Datensatz ausgewählt, um die
-Performance der Dimensionsreduktionsmethoden auf natürlichen Datensätzen zu evaluieren. Der weit
-verbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von handgeschriebenen Zahlen in der
-Auflösung $28 \times 28$. Die Anzahl der Pixel und damit die extrinsische Dimension beträgt 784.
-Der \textit{Olivetti Face}-Datensatz enthält Bilder von Gesichtern aus zehn unterschiedlichen
-Positionen von 40 Personen und ist damit der kleinste natürliche Datensatz in diesem Vergleich mit
-400 Bildern. Die Bilder haben eine Auflösung von $64 \times 64$, was einer extrinsischen Dimension
-von 4096 entspricht. Der LFW-People-Datensatz enthält insgesamt über 13 000 Bilder von Gesichtern,
-jedoch wurde hier eine Teilmenge ausgewählt, sodass jede Person mindestens 30 mal vorkommt. Dies
-resultiert in einer Stichprobengröße von 2370. Die Bilder haben eine Auflösung von $62 \times 47$
-und damit eine extrinsische Dimension von 2914. Der FER-2013 Datensatz besteht aus 28 709 Bildern
-von Gesichtern mit sechs unterschiedlichen Emotionen. Die Bilder haben eine Auflösung von $48
-	\times 48$ und sind damit 2304-dimensional. Beispiele der Bild-Datensätze sind in
-\figref{fig:Dataset_samples} zu finden.
+	Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der \textit{ICMR}-Datensatz
+ausgewählt, um die Performance der Dimensionsreduktionsmethoden auf natürlichen Datensätzen zu
+evaluieren. Der weit verbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von
+handgeschriebenen Zahlen in der Auflösung $28 \times 28$. Die Anzahl der Pixel und damit die
+extrinsische Dimension beträgt 784. Der \textit{Olivetti Face}-Datensatz enthält Bilder von
+Gesichtern aus zehn unterschiedlichen Positionen von 40 Personen und ist damit der kleinste
+natürliche Datensatz in diesem Vergleich mit 400 Bildern. Die Bilder haben eine Auflösung von $64
+	\times 64$, was einer extrinsischen Dimension von 4096 entspricht. Der LFW-People-Datensatz enthält
+insgesamt über 13 000 Bilder von Gesichtern, jedoch wurde hier eine Teilmenge ausgewählt, sodass
+jede Person mindestens 30 mal vorkommt. Dies resultiert in einer Stichprobengröße von 2370. Die
+Bilder haben eine Auflösung von $62 \times 47$ und damit eine extrinsische Dimension von 2914. Der
+FER-2013 Datensatz besteht aus 28 709 Bildern von Gesichtern mit sechs unterschiedlichen Emotionen.
+Die Bilder haben eine Auflösung von $48 \times 48$ und sind damit 2304-dimensional. Beispiele der
+Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
 \begin{figure}
 	\begin{center}
 		\input{\figures/dataset_samples.pgf}
@@ -189,6 +188,8 @@ von Gesichtern mit sechs unterschiedlichen Emotionen. Die Bilder haben eine Aufl
 	\caption{Beispielbilder der natürlichen Datensätze}
 	\label{fig:Dataset_samples}
 \end{figure}
+
+Letztlich ist der ICMR-Datensatz ein Gen-Datensatzs \rewrite{ICMR beschreiben}
 
 \begin{table}[]
 	\centering
@@ -251,38 +252,6 @@ Datensatz (\figref{fig:LfwPeopleMetrics}) schneidet LLE auf allen drei Kriterien
 ab. Zusätzlich nehmen die Qualitätskriterien von LLE mit größer werdender Nachbarschaftsgröße $K$
 deutlicher abnimmt als bei den restlichen Methoden. Dies ist wahrscheinlich der lokalen Natur von
 LLE geschuldet.
-
-\begin{figure}[ht]
-	\begin{center}
-		\input{\figures/MNIST_comparison.pgf}
-	\end{center}
-	\caption[MNIST Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den MNIST Datensatz. (Eigene Darstellung)}
-	\label{fig:MNISTMetrics}
-\end{figure}
-
-\begin{figure}[ht]
-	\begin{center}
-		\input{\figures/OlivettiFaces_comparison.pgf}
-	\end{center}
-	\caption[Olivetti Faces Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den Olivetti Faces Datensatz. (Eigene Darstellung)}
-	\label{fig:OlivettiFacesMetrics}
-\end{figure}
-
-\begin{figure}[ht]
-	\begin{center}
-		\input{\figures/LfwPeople_comparison.pgf}
-	\end{center}
-	\caption[LFW People Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den LFW People Datensatz. (Eigene Darstellung)}
-	\label{fig:LfwPeopleMetrics}
-\end{figure}
-
-\begin{figure}[ht]
-	\begin{center}
-		\input{\figures/FER2013_comparison.pgf}
-	\end{center}
-	\caption[FER2013 Qualitätskriterien]{Qualitätskriterien $T(K)$, $C(K)$ und $\lcmc(K)$ für den FER 2013 Datensatz. (Eigene Darstellung)}
-	\label{fig:FER2013Metrics}
-\end{figure}
 
 \subsection{PCA und lineare Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_linearAE}
