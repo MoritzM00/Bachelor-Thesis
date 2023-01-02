@@ -258,7 +258,14 @@ LLE geschuldet.
 \subsection{PCA und lineare Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_linearAE}
 
-\begin{figure}
+In diesem Abschnitt wird die Hauptkomponentenanalyse mit linearen Autoencodern verglichen. Dazu
+wird die Hauptkomponentenanalyse und unterschiedliche Modelle des Autoencoder auf dem FER-2013
+Datensatz trainiert. In \figref{fig:Gewichtsvergleich} sind die Gewichtsmatrizen von PCA, einem
+linearen Autoencoder und einem Autoencoder mit Sigmoid-Aktivierungsfunktion im Encoder abgebildet.
+Wie zu erkennen ist, sind die Gewichte von des linearen Autoencoders bis auf das Vorzeichen sehr
+ähnlich zu der Ladungsmatrix von PCA.
+
+\begin{figure}[ht]
 	\centering
 	\input{\figures/weights-comparison.pgf}
 	\caption[Gewichtsmatrizen von ausgewählten Methoden]{Gewichtsmatrizen}

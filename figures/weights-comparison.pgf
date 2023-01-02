@@ -105,7 +105,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=0.780804in,y=2.660000in,,top]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont PCA}%
+\pgftext[x=0.780804in,y=2.660000in,,top]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont (a)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -164,7 +164,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=2.747471in,y=2.660000in,,top]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Linear AE}%
+\pgftext[x=2.747471in,y=2.660000in,,top]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont (b)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -223,7 +223,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=4.714138in,y=2.660000in,,top]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Sigmoid-linear AE}%
+\pgftext[x=4.714138in,y=2.660000in,,top]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont (c)}%
 \end{pgfscope}%
 \end{pgfpicture}%
 \makeatother%
