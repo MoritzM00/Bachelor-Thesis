@@ -201,7 +201,9 @@ Letztlich ist der ICMR-Datensatz ein Gen-Datensatzs \rewrite{ICMR beschreiben}
 		MNIST          & 784                        & 10                         & 60000                \\
 		Olivetti Faces & 4096                       & ?                          & 400                  \\
 		LFW-People     & 2914                       & ?                          & 2370                 \\
-		FER-2013       & ?                          & ?                          & ?                    \\ \bottomrule
+		FER-2013       & ?                          & ?                          & ?                    \\
+		ICMR           & ?                          & ?                          & ?                    \\
+		\bottomrule
 	\end{tabular}
 	\caption{Übersicht über die Dimensionen und Stichprobengröße der verwendeten Datensätze}
 	\label{tab:uebersicht-datensaetze}
@@ -255,3 +257,10 @@ LLE geschuldet.
 
 \subsection{PCA und lineare Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_linearAE}
+
+\begin{figure}
+	\centering
+	\input{\figures/weights-comparison.pgf}
+	\caption[Gewichtsmatrizen von ausgewählten Methoden]{Gewichtsmatrizen}
+	\label{fig:Gewichtsvergleich}
+\end{figure}
