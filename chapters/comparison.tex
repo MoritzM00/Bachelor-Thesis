@@ -217,31 +217,31 @@ Letztlich ist der ICMR-Datensatz ein Gen-Datensatzs \rewrite{ICMR beschreiben}
 
 In diesem Abschnitt werden die Resultate des empirischen Vergleichs vorgestellt. Dazu werden die
 Werte der verschiedenen Qualitätskriterien auf den künstlichen und natürlichen Datensätzen in
-Abhängigkeit der Nachbarschaftsgröße $K$ abgebildet. In
-\secref{ch:Vergleich:sec:Resultate:kuenstlich} werden die Ergebnisse auf künstlichen Datensätzen
-und in \secref{ch:Vergleich:sec:Resultate:natuerlich} die Ergebnisse auf den natürlichen
-Datensätzen diskutiert.
+Abhängigkeit der Nachbarschaftsgröße $K$ abgebildet. Die verschiedenen Methoden wurden mit den im
+vorhergehenden Abschnitt (\secref{ch:Vergleich:sec:ParameterwahlArchitektur}) erläuterten
+Parametern auf den künstlichen und natürlichen Datensätzen trainiert und hinsichtlich der in
+\secref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} vorgestellten Qualitätskriterien für
+eine Nachbarschaftsgröße von $1 \leq K \leq 100$ evaluiert. Einige der Abbildungen für die
+Qualitätskriterien sind im Appendix \ref{ch:Appendix:Qualitaetskriterien} zu finden.\unsure{vlt
+	eine Tabelle mit Werten für K=10 (?) einfügen für die Übersicht?} In
+\secref{ch:Vergleich:sec:Resultate:kuenstlich} werden die Ergebnisse auf den künstlichen
+Datensätzen und in \secref{ch:Vergleich:sec:Resultate:natuerlich} die Ergebnisse auf den
+natürlichen Datensätzen diskutiert. Letztlich wird in
+\secref{ch:Vergleich:sec:Resultate:PCA_linearAE} der Zusammenhang zwischen der
+Hauptkomponentenanalyse und linearen Autoencodern empirisch untersucht.
 
 \subsection{Resultate auf künstlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:kuenstlich}
 
-Wie in \figref{fig:SwissRollMetrics}
+Die Qualitätskriterien für den Swiss Roll Datensatz sind in \figref{fig:SwissRollMetrics}
 \begin{figure}[ht]
 	\begin{center}
 		\input{\figures/SwissRoll_comparison.pgf}
 	\end{center}
-	\caption[Swiss Roll Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. LLE schneidet mit Abstand am besten ab. Die restlichen Methoden unterscheiden sich nicht deutlich, jedoch kann sich die Hauptkomponentenanalyse (PCA) von den anderen drei Methoden (AE, Kernel PCA und CAE) hinsichtlich der Vertrauenswürdigkeit und dem $\lcmc$-Kriterium etwas absetzen. (Eigene Darstellung)}
+	\caption[Swiss Roll Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab, dicht gefolgt vom Autoencoder (AE) und der Kernel PCA. Die restlichen Methoden unterscheiden sich nicht stark, lediglich bei der Vertrauenswürdigkeit kann sich die Kernel PCA etwas nach oben absetzen. Die PCA und der Autoencoder sind hinsichtlich der Kontinuität und des LCMC sehr ähnlich. (Eigene Darstellung)}
 	\label{fig:SwissRollMetrics}
 \end{figure}
-und \figref{fig:TwinPeaksMetrics}
-\begin{figure}[ht]
-	\begin{center}
-		\input{\figures/TwinPeaks_comparison.pgf}
-	\end{center}
-	\caption[Twin Peaks Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Twin Peaks Datensatz. Auch hier zeigt LLE die beste Performance hinsichtlich allen drei Kriterien, gefolgt von Kernel PCA und dem Contractive Autoencoder (CAE). Am schlechtesten schneiden der klassische Autoencoder und die Hauptkomponentenanalyse ab. Letztere kann vor allem auf der Vertrauenswürdigkeit nicht mithalten. (Eigene Darstellung)}
-	\label{fig:TwinPeaksMetrics}
-\end{figure}
-erkennbar schneidet Locally Linear Embedding hinsichtlich allen drei Qualitätskriterien am besten ab, wobei im $\lcmc$ der größte Abstand zu den restlichen Methoden ist. Die anderen vier Methoden sind relativ ähnlich. Kernel PCA und der Contractive Autoencoder können sich auf dem Twin Peaks Datensatz von den klassischen Varianten der PCA und des Autoencoders abheben, nicht jedoch auf dem Swiss Roll Datensatz.
+und die Qualitaetskriterien für den Twin Peaks Datensatz in \figref{fig:TwinPeaksMetrics} abgebildet. Wie dort zu erkennen ist, zeigt Locally Linear Embedding eine sehr starke Performance auf den beiden künstlichen Datensätzen. Der Autoencoder kann sich hinsichtlich des Twin Peaks Datensatzes von den restlichen Methoden abheben. Bei der Swiss Roll ist dies jedoch nicht der Fall. Hier sind die PCA, die Kernel PCA, sowie beide Varianten des Autoencoders relativ ähnlich.
 
 \subsection{Resultate auf natürlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:natuerlich}

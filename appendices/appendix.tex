@@ -5,10 +5,19 @@
 \label{ch:Appendix}
 
 \section{Autoencoder Architektur und Training Details}
+\label{ch:Appendix:Architektur-Details}
 
 \dots
 
-\section{Qualitätskriterien für alle natürlichen Datensätze}
+\section{Qualitätskriterien für die Datensätze}
+\label{ch:Appendix:Qualitaetskriterien}
+\begin{figure}[ht]
+	\begin{center}
+		\input{\figures/TwinPeaks_comparison.pgf}
+	\end{center}
+	\caption[Twin Peaks Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Twin Peaks Datensatz. Locally Linear Embedding (LLE) schneidet wie bei der Swiss Roll insgesamt am besten ab, dicht gefolgt vom Autoencoder und der Kernel PCA. Lediglich der Contractive Autoencoder (CAE) und PCA fallen auf diesem künstlichen Datensatz etwas zurück, wobei die Vertrauenswürdigkeit der Dimensionsreduktion von PCA deutlich schlechter als bei den restlichen Methoden ist. Dies ist höchstwahrscheinlich der nichtlinearen Mannigfaltigkeit geschuldet, was der linearen Hauptkomponentenanalyse Schwierigkeiten bereitet. (Eigene Darstellung)}
+	\label{fig:TwinPeaksMetrics}
+\end{figure}
 \begin{figure}[ht]
 	\begin{center}
 		\input{\figures/MNIST_comparison.pgf}
