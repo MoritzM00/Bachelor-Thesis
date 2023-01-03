@@ -7,23 +7,20 @@
 \section{Autoencoder Architektur und Training Details}
 \label{ch:Appendix:Architektur-Details}
 
-\dots
-
 \section{Qualitätskriterien für die Datensätze}
 \label{ch:Appendix:Qualitaetskriterien}
+
+In diesem Abschnitt werden die Abbildungen der Qualitätskriterien für die restlichen Datensätze
+gesammelt. In \figref{fig:TwinPeaksMetrics} sind die Qualitätskriterien für die Twin Peaks, in
+\figref{fig:ICMRMetrics} die Qualitätskriterien für ICMR, in \figref{fig:OlivettiFacesMetrics} die
+Qualitätskriterien für den Olivetti Faces Datensatz, in \figref{fig:LfwPeopleMetrics} für den
+LFW-People Datensatz und in \figref{fig:FER2013Metrics} für den FER-2013 Datensatz.
 \begin{figure}[ht]
 	\begin{center}
 		\input{\figures/TwinPeaks_comparison.pgf}
 	\end{center}
 	\caption[Twin Peaks Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Twin Peaks Datensatz. Locally Linear Embedding (LLE) schneidet wie bei der Swiss Roll insgesamt am besten ab, dicht gefolgt vom Autoencoder und der Kernel PCA. Lediglich der Contractive Autoencoder (CAE) und PCA fallen auf diesem künstlichen Datensatz etwas zurück, wobei die Vertrauenswürdigkeit der Dimensionsreduktion von PCA deutlich schlechter als bei den restlichen Methoden ist. Dies ist höchstwahrscheinlich der nichtlinearen Mannigfaltigkeit geschuldet, was der linearen Hauptkomponentenanalyse Schwierigkeiten bereitet. (Eigene Darstellung)}
 	\label{fig:TwinPeaksMetrics}
-\end{figure}
-\begin{figure}[ht]
-	\begin{center}
-		\input{\figures/MNIST_comparison.pgf}
-	\end{center}
-	\caption[MNIST Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine starke Performance zeigen, da der Datensatz von hoher Qualität ist und eine hohe Stichprobengröße von 60 000 aufweisen kann. Nichtsdestotrotz kann die Hauptkomponentenanalyse nur knapp dahinter sehr gut mithalten und hinsichtlich der Kontinuität sogar übertreffen. Die Kernel PCA und der klassische vollvernetzte Autoencoder schneiden ebenfalls relativ gut ab, wobei letzteres aber für größere Werte von $K$ auf der Vertrauenswürdigkeit stärker abfällt, als die zuvor genannten Methoden. LLE und der Contractive Autoencoder können vor allem auf dem LCMC nicht mithalten. (Eigene Darstellung)}
-	\label{fig:MNISTMetrics}
 \end{figure}
 
 \begin{figure}[ht]

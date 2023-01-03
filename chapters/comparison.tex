@@ -248,12 +248,30 @@ und die Qualitaetskriterien für den Twin Peaks Datensatz in \figref{fig:TwinPea
 
 Die Qualitätskriterien auf den natürlichen Datensätzen zeigen ein etwas anderes Bild, als es bei
 den künstlichen Datensätzen der Fall war. Die starke Performance von Locally Linear Embedding setzt
-sich nicht auf den natürlichen hochdimensionalen Datensätzen fort. Für die Olivetti Faces
-(\figref{fig:OlivettiFacesMetrics}), den FER 2013 (\figref{fig:FER2013Metrics}) und den LFW People
-Datensatz (\figref{fig:LfwPeopleMetrics}) schneidet LLE auf allen drei Kriterien am schlechtesten
-ab. Zusätzlich nehmen die Qualitätskriterien von LLE mit größer werdender Nachbarschaftsgröße $K$
-deutlicher abnimmt als bei den restlichen Methoden. Dies ist wahrscheinlich der lokalen Natur von
-LLE geschuldet.
+sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
+\begin{figure}[ht]
+	\begin{center}
+		\input{\figures/MNIST_comparison.pgf}
+	\end{center}
+	\caption[MNIST Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine starke Performance zeigen, da der Datensatz von hoher Qualität ist und eine hohe Stichprobengröße von 60 000 aufweisen kann. Nichtsdestotrotz kann die Hauptkomponentenanalyse nur knapp dahinter sehr gut mithalten und hinsichtlich der Kontinuität sogar übertreffen. Die Kernel PCA und der klassische vollvernetzte Autoencoder schneiden ebenfalls relativ gut ab, wobei letzteres aber für größere Werte von $K$ auf der Vertrauenswürdigkeit stärker abfällt, als die zuvor genannten Methoden. LLE und der Contractive Autoencoder können vor allem auf dem LCMC nicht mithalten. (Eigene Darstellung)}
+	\label{fig:MNISTMetrics}
+\end{figure}
+Für die Olivetti Faces (\figref{fig:OlivettiFacesMetrics}), den FER 2013
+(\figref{fig:FER2013Metrics}) und den LFW People Datensatz (\figref{fig:LfwPeopleMetrics})
+schneidet LLE auf allen drei Kriterien am schlechtesten ab. Zusätzlich nehmen die
+Qualitätskriterien von LLE mit größer werdender Nachbarschaftsgröße $K$ deutlicher ab, als bei den
+restlichen Methoden. Aufgrund der Wahl der Nachbarschaftsgröße von $K=10$ für Locally Linear
+Embedding und der lokalen Eigenschaften macht dies jedoch Sinn. Aus diesem Grund ist die
+Betrachtung einer größeren Nachbarschaft der Qualitätskriterien für LLE benachteiligend, wurde aber
+der Vollständigkeit halber und zu Vergleichszwecken trotzdem mit aufgenommen. Überraschenderweise
+kann die Hauptkomponentenanalyse auf fast allen natürlichen Datensätzen eine sehr gute oder sogar die
+beste relative Performance aufweisen. Auf den vier Bilddatensätzen kann jedoch der Convolutional
+Autoencoder seine Stärken zeigen, insbesondere wenn genügend Trainingsdaten zur Verfügung stehen, was für den MNIST-Datensatz in \figref{fig:MNISTMetrics} zutrifft.
+Ist dies jedoch nicht der Fall, so kann die Performance stark darunter leiden. Dies ist
+beispielsweise auf dem Olivetti Faces Datensatz der Fall, wie in \figref{fig:OlivettiFacesMetrics}
+zu erkennen ist. Das Problem einer geringen Menge an Trainingsdaten gilt gleichermaßen für alle
+Varianten von neuronalen Netzen, insbesondere jedoch für vollvernetzte Autoencoder aufgrund der
+hohen Anzahl an Freiheitsgraden im Netz.
 
 \subsection{PCA und lineare Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_linearAE}
