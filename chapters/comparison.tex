@@ -223,9 +223,9 @@ Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 In diesem Abschnitt werden die gewählten (Hyper-)Parameter und Details des Trainierens der
 Dimensionsreduktionsmethoden vorgestellt. Eine Übersicht ist in Tabelle xxx zu finden. Für die
 Hauptkomponentenanalyse gibt es neben der Anzahl der zu behaltenden Hauptkomponenten keine
-Parameter. Die Anzahl Hauptkomponenten entspricht der intrinsischen Dimension, welche vom Datensatz
-abhängt und für alle Methoden identisch ist. Dies trifft analog auf Kernel PCA und auf Locally
-Linear Embedding zu. Für Autoencoder bestimmt die intrinsische Dimension die Größe der
+Parameter. Die Anzahl der Hauptkomponenten entspricht der intrinsischen Dimension, welche vom
+Datensatz abhängt und für alle Methoden identisch ist. Dies trifft analog auf Kernel PCA und auf
+Locally Linear Embedding zu. Für Autoencoder bestimmt die intrinsische Dimension die Größe der
 Bottleneck-Schicht. Für Kernel PCA wird ein RBF-Kernel (Gauß-Kernel) eingesetzt, wofür ein
 Hyperparameter $\gamma$ gewählt werden kann. Dieser wird Datensatz-spezifisch auf $\gamma =
 	\sfrac{1}{D}$ gesetzt. Für Locally Linear Embedding gibt es mehrere Parameter: (1) einen Parameter
@@ -234,31 +234,32 @@ Regularisierungs-Konstante $\epsilon$, die auf die Diagonale der lokalen Kovaria
 wird.
 
 Den statistischen Methoden gegenüber haben Autoencoder deutlich mehr Freiheitsgrade, um die
-Architektur zu bestimmen. Die wichtigsten Parameter sind die Anzahl der Schichten und die Wahl der
-Aktivierungsfunktionen. Daneben gibt es noch viele weitere Freiheitsgrade für das Trainieren des
-Autoencoders, welche teilweise vom Datensatz abhängen. Diese wurden für alle Autoencoder nahezu
+Architektur zu bestimmen. Die wichtigsten Parameter sind die Anzahl der Schichten $m$ und die Wahl
+der Aktivierungsfunktionen. Daneben gibt es noch viele weitere Freiheitsgrade für das Trainieren
+des Autoencoders, welche teilweise vom Datensatz abhängen. Diese wurden für alle Autoencoder nahezu
 identisch gewählt und werden in Appendix~\ref{ch:Appendix:Architektur-Details} genauer erläutert.
 Für beide künstlichen Datensätze und für den Olivetti Face Datensatz wird ein dreischichtiger
 Autoencoder eingesetzt. Für alle anderen Datensätze wird ein fünfschichtiger Autoencoder trainiert.
 Alle vollvernetzten Autoencoder und der Contractive Autoencoder verwenden
-Sigmoid-Aktivierungsfunktionen im Encoder und Decoder. Auf Bilddatensätze wurden zusätzlich
+Sigmoid-Aktivierungsfunktionen im Encoder und Decoder. Auf Bilddatensätzen wurden zusätzlich
 Convolutional Autoencoder trainiert, deren Architekturen an \textcite[14]{Ghosh.2019} angelehnt
 sind und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
 
-\begin{table}[]
+\begin{table}[ht]
 	\centering
 	\begin{tabular}{@{}cc@{}}
 		\toprule
-		Methode          & Parameter                                            \\ \midrule
-		PCA              & --                                                   \\
-		Kernel PCA       & RBF-Kernel, $\gamma=\sfrac{1}{D}$                    \\
-		LLE              & $K=10$, $\epsilon=1\mathrm{e}{-3}$                   \\
-		Autoencoder      & siehe Appendix~\ref{ch:Appendix:Architektur-Details} \\
-		Contractive AE   & siehe Appendix~\ref{ch:Appendix:Architektur-Details} \\
-		Convolutional AE & siehe Appendix~\ref{ch:Appendix:Architektur-Details} \\
-		\bottomrule
+		Methode                            & Parameter                                                            \\ \midrule
+		Hauptkomponentenanalyse (PCA)      & --                                                                   \\
+		Kernel PCA                         & $\kappa = \exp(- \norm{x - y}^2/(2\gamma^2))$, $\gamma=\sfrac{1}{D}$ \\
+		Locally Linear Embedding (LLE)     & $K=10$, $\epsilon=1\mathrm{e}{-3}$                                   \\
+		Autoencoder (AE)                   & $m \in \{3, 5\}$, Sigmoid-Aktivierungsfunktion (siehe
+		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ Contractive Autoencoder (CAE) & $m = 3$,
+		Sigmoid-Aktivierungsfunktion (siehe Appendix~\ref{ch:Appendix:Architektur-Details})                       \\
+		Convolutional Autoencoder (ConvAE) & $m > 5$, ReLU-Aktivierungsfunktion (siehe
+		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ \bottomrule
 	\end{tabular}
-	\caption{Übersicht über die verwendeten Parameter}
+	\caption{Übersicht über die verwendeten Parameter. Hierbei ist $\kappa$ die Kernel-Funktion, $D$ die extrinsische Dimension des Datensatzes, $K$ die Nachbarschaftsgröße, $\epsilon$ eine Regularisierungskonstante für LLE und $m$ die Anzahl der Schichten im Autoencoder.}
 	\label{tab:uebersicht-parameter}
 \end{table}
 
