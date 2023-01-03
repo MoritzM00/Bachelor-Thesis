@@ -246,23 +246,23 @@ Convolutional Autoencoder trainiert, deren Architekturen an \textcite[14]{Ghosh.
 sind und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
 
 \begin{table}[ht]
+	\tymax=300pt
 	\centering
-	\begin{tabular}{@{}cc@{}}
+	\begin{tabulary}{\linewidth}{@{}CC@{}}
 		\toprule
 		Methode                            & Parameter                                                            \\ \midrule
 		Hauptkomponentenanalyse (PCA)      & --                                                                   \\
-		Kernel PCA                         & $\kappa = \exp(- \norm{x - y}^2/(2\gamma^2))$, $\gamma=\sfrac{1}{D}$ \\
+		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\gamma^2))$, $\gamma=\sfrac{1}{D}$ \\
 		Locally Linear Embedding (LLE)     & $K=10$, $\epsilon=1\mathrm{e}{-3}$                                   \\
 		Autoencoder (AE)                   & $m \in \{3, 5\}$, Sigmoid-Aktivierungsfunktion (siehe
 		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ Contractive Autoencoder (CAE) & $m = 3$,
 		Sigmoid-Aktivierungsfunktion (siehe Appendix~\ref{ch:Appendix:Architektur-Details})                       \\
 		Convolutional Autoencoder (ConvAE) & $m > 5$, ReLU-Aktivierungsfunktion (siehe
 		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ \bottomrule
-	\end{tabular}
-	\caption{Übersicht über die verwendeten Parameter. Hierbei ist $\kappa$ die Kernel-Funktion, $D$ die extrinsische Dimension des Datensatzes, $K$ die Nachbarschaftsgröße, $\epsilon$ eine Regularisierungskonstante für LLE und $m$ die Anzahl der Schichten im Autoencoder.}
+	\end{tabulary}
+	\caption[Übersicht über die verwendeten Parameter der Methoden]{Übersicht über die verwendeten Parameter. Hierbei ist $\kappa$ die Kernel-Funktion, $D$ die extrinsische Dimension des Datensatzes, $K$ die Nachbarschaftsgröße, $\epsilon$ eine Regularisierungskonstante für LLE und $m$ die Anzahl der Schichten im Autoencoder.}
 	\label{tab:uebersicht-parameter}
 \end{table}
-
 \section{Resultate}
 \label{ch:Vergleich:sec:Resultate}
 
