@@ -251,12 +251,12 @@ sind und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifizier
 	\begin{tabulary}{\linewidth}{@{}CC@{}}
 		\toprule
 		Methode                            & Parameter                                                            \\ \midrule
-		Hauptkomponentenanalyse (PCA)      & --                                                                   \\
-		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\gamma^2))$, $\gamma=\sfrac{1}{D}$ \\
-		Locally Linear Embedding (LLE)     & $K=10$, $\epsilon=1\mathrm{e}{-3}$                                   \\
+		Hauptkomponentenanalyse (PCA)      & --                                                                   \\ \midrule
+		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\gamma^2))$, $\gamma=\sfrac{1}{D}$ \\ \midrule
+		Locally Linear Embedding (LLE)     & $K=10$, $\epsilon=1\mathrm{e}{-3}$                                   \\ \midrule
 		Autoencoder (AE)                   & $m \in \{3, 5\}$, Sigmoid-Aktivierungsfunktion (siehe
-		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ Contractive Autoencoder (CAE) & $m = 3$,
-		Sigmoid-Aktivierungsfunktion (siehe Appendix~\ref{ch:Appendix:Architektur-Details})                       \\
+		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ \midrule Contractive Autoencoder (CAE) & $m = 3$,
+		Sigmoid-Aktivierungsfunktion (siehe Appendix~\ref{ch:Appendix:Architektur-Details})                       \\ \midrule
 		Convolutional Autoencoder (ConvAE) & $m > 5$, ReLU-Aktivierungsfunktion (siehe
 		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ \bottomrule
 	\end{tabulary}
