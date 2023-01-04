@@ -234,16 +234,17 @@ Regularisierungs-Konstante $\epsilon$, die auf die Diagonale der lokalen Kovaria
 wird.
 
 Den statistischen Methoden gegenüber haben Autoencoder deutlich mehr Freiheitsgrade, um die
-Architektur zu bestimmen. Die wichtigsten Parameter sind die Anzahl der Schichten $m$ und die Wahl
-der Aktivierungsfunktionen. Daneben gibt es noch viele weitere Freiheitsgrade für das Trainieren
-des Autoencoders, welche teilweise vom Datensatz abhängen. Diese wurden für alle Autoencoder nahezu
-identisch gewählt und werden in Appendix~\ref{ch:Appendix:Architektur-Details} genauer erläutert.
-Für beide künstlichen Datensätze und für den Olivetti Face Datensatz wird ein dreischichtiger
-Autoencoder eingesetzt. Für alle anderen Datensätze wird ein fünfschichtiger Autoencoder trainiert.
-Alle vollvernetzten Autoencoder und der Contractive Autoencoder verwenden
-Sigmoid-Aktivierungsfunktionen im Encoder und Decoder. Auf Bilddatensätzen wurden zusätzlich
-Convolutional Autoencoder trainiert, deren Architekturen an \textcite[14]{Ghosh.2019} angelehnt
-sind und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
+Architektur zu bestimmen. Die wichtigsten Parameter sind die Anzahl der Schichten $m$, sowie die
+Anzahl an Neuronen pro Schicht und die Wahl der Aktivierungsfunktionen. Daneben gibt es noch viele
+weitere Freiheitsgrade für das Trainieren des Autoencoders, welche teilweise vom Datensatz
+abhängen. Diese wurden für alle Autoencoder nahezu identisch gewählt und werden in
+Appendix~\ref{ch:Appendix:Architektur-Details} genauer erläutert. Für beide künstlichen Datensätze
+und für den Olivetti Face Datensatz wird ein dreischichtiger Autoencoder eingesetzt. Für alle
+anderen Datensätze wird ein fünfschichtiger Autoencoder trainiert. Alle vollvernetzten Autoencoder
+und der Contractive Autoencoder verwenden Sigmoid-Aktivierungsfunktionen im Encoder und Decoder.
+Auf Bilddatensätzen wurden zusätzlich Convolutional Autoencoder trainiert, deren Architekturen an
+\textcite[14]{Ghosh.2019} angelehnt sind und ebenfalls in
+Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
 
 \begin{table}[ht]
 	\tymax=300pt
@@ -255,7 +256,7 @@ sind und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifizier
 		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\gamma^2))$, $\gamma=\sfrac{1}{D}$ \\ \midrule
 		Locally Linear Embedding (LLE)     & $K=10$, $\epsilon=1\mathrm{e}{-3}$                                   \\ \midrule
 		Autoencoder (AE)                   & $m \in \{3, 5\}$, Sigmoid-Aktivierungsfunktion (siehe
-		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ \midrule Contractive Autoencoder (CAE) & $m = 3$,
+		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ \midrule Contractive Autoencoder (CAE) & $m = 3$, $\lambda=1\mathrm{e}{-4}$,
 		Sigmoid-Aktivierungsfunktion (siehe Appendix~\ref{ch:Appendix:Architektur-Details})                       \\ \midrule
 		Convolutional Autoencoder (ConvAE) & $m > 5$, ReLU-Aktivierungsfunktion (siehe
 		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ \bottomrule
@@ -328,22 +329,47 @@ hohen Anzahl an Freiheitsgraden im Netz.
 \label{ch:Vergleich:sec:Resultate:PCA_linearAE}
 
 In diesem Abschnitt wird die Hauptkomponentenanalyse mit linearen Autoencodern verglichen. Dazu
-wird die Hauptkomponentenanalyse und unterschiedliche Modelle des Autoencoder auf dem FER-2013
-Datensatz trainiert. In \figref{fig:Gewichtsvergleich} sind die Gewichtsmatrizen von PCA, einem
-linearen Autoencoder und einem Autoencoder mit Sigmoid-Aktivierungsfunktion im Encoder abgebildet.
-Wie zu erkennen ist, sind die Gewichte von des linearen Autoencoders bis auf das Vorzeichen sehr
-ähnlich zu der Ladungsmatrix von PCA.
+wird zuerst der theoretische Zusammenhang zwischen den beiden Methoden erklärt. Im Anschluss wird
+die Hauptkomponentenanalyse und unterschiedliche Modelle des Autoencoders für einen empirischen
+Vergleich auf dem FER-2013 Datensatz trainiert, wobei aufgrund der sechs unterschiedlichen
+Emotionen im Datensatz eine Reduktion auf sechs Dimensionen durchgeführt wurde.
+
+\subsubsection{Theoretischer Zusammenhang}
+
+\textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y} = f(\vect{x})$ (siehe \secref{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}) eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten $\tr{\mat{A}}\vect{x}$ der PCA (siehe \secref{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}) ist: Die Gewichte eines linearen Autoencoders, der den quadrierten Fehler (\eqref{eq:AE_objectiveFunction}) minimiert, spannen einen äquivalanten Unterraum auf, wie die Ladungsmatrix $\mat{A}$. Dies gilt sogar dann, wenn im Encoder eines dreischichtigen Autoencoders Sigmoid-Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die Lösung eines linearen Autoencoders
+mit der von PCA wie folgt \parencite[3]{Plaut.2018}:\unsure{was meine ich mit "Lösung" des linearen Autoencoders? Genauer
+	beschreiben}
+\begin{enumerate}
+	\item Die Lösung eines linearen Autoencoders ist nicht orthogonal, das heißt sie ist nicht unkorrelliert.
+	\item Die Lösung eines linearen Autoencoders ist nicht absteigend nach zugehöriger Varianz sortiert.
+	\item Die Lösung einer Reduktion auf $k_1$ Neuronen in der Bottleneck-Schicht ist keine Teilmenge für
+	      eine Reduktion auf $k_2$ Neuronen mit $k_2 < k_1$.
+\end{enumerate}
+
+Im Folgenden wollen wir die theoretischen Überlegungen empirisch belegen und untersuchen, was
+Verletzungen bestimmter Annahmen für die gefundenen latenten Raum bedeutet.
+
+\subsubsection{Empirische Untersuchung des Zusammenhangs}
+
+In \figref{fig:Gewichtsvergleich} sind die Gewichtsmatrizen von PCA, einem linearen Autoencoder und
+einem Autoencoder mit Sigmoid-Aktivierungsfunktion im Encoder abgebildet. Wie zu erkennen ist, sind
+die Gewichte des linearen Autoencoders bis auf das Vorzeichen sehr ähnlich zur Ladungsmatrix von
+PCA.
 
 \begin{figure}[ht]
 	\centering
 	\input{\figures/weights-comparison.pgf}
-	\caption[Gewichtsmatrizen von ausgewählten Methoden]{(a) PCA (b) Linearer dreischichtiger Autoencoder (c) Nichtlinearer dreischichtiger Autoencoder, wobei der der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist. Die Gewichte von PCA und dem linearen Autoencoder sind bis auf die Vorzeichen (erkennbar am invertierten Grauwert) sehr ähnlich. (Eigene Darstellung)}
+	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-2013 Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-2013 Datensatz auf sechs Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse \captionb Die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders \captionc Die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist.
+		Bei genauer Betrachtung der Ladungen von PCA (a) und der Gewichte des linearen Autoencoders (b) fällt auf, dass diese bis auf die Vorzeichen (erkennbar am invertierten Grauwert) fast identisch sind. Ist der Encoder nichtlinear wie in (c), so ist dies nicht mehr der Fall. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}
 
+Die Projektion der Daten durch die Ladungsmatrix $\mat{A}$ ist orthogonal, das heißt die Daten im
+latenten Raum sind unkorreliert. Dies ist in \figref{fig:Korrelationsmatrizen}a zu erkennen, da die
+Korrelationsmatrix einer Einheitsmatrix entspricht.
 \begin{figure}[ht]
 	\centering
 	\input{\figures/covariance-matrices.pgf}
-	\caption[Korrelationsmatrizen]{Korrelationsmatrizen von ausgewählten Methoden: (a) PCA (b) Linearer dreischichtiger Autoencoder (c) Nichtlinearer dreischichtiger Autoencoder, wobei der der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist. (d) Nichtlinearer dreischichtiger Autoencoder, wobei sowohl Encoder als auch Decoder eine Sigmoid-Nichtlinearität verwenden. (Eigene Darstellung)}
+	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-2013 Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-2013 Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder, in \captionc ein nichtlinearer dreischichtiger Autoencoder, wobei der der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist und in \captiond ein dreischichtiger Autoencoder mit ausschließlich Sigmoid-Aktivierungsfunktionen verwendet wurde, um die Daten auf sechs Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch die Autoencoder besteht Korrelation, wobei der lineare Autoencoder in diesem Fall betragsmäßig kleinere Korrelationen erzeugt als die nichtlinearen Autoencoder. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Korrelationsmatrizen}
 \end{figure}
