@@ -6,6 +6,22 @@
 
 \section{Autoencoder Architektur und Training Details}
 \label{ch:Appendix:Architektur-Details}
+In diesem Abschnitt werden Details zu den Autoencoder-Architekturen und Details zum Training der Autoencoder erläutert. Zuerst werden die Architekturen der klassischen vollvernetzten Autoencoder (AE), dann die Architekturen der Convolutional Autoencoder (ConvAE) und zuletzt die Architektur der Contractive Autoencoder (CAE) spezifiziert. Anschließend wird der benutzte Optimierer und andere Trainings-Details genannt. Da die Architekturen sehr vom Datensatz abhängen, werden diese in folgender Tabelle nach dem Datensatz gruppiert.
+
+\ldots
+
+Alle Autoencoder werden mit dem \textit{PyTorch}-Framework implementiert, wobei \textit{Skorch} für
+die Kompatibilität mit anderen \textit{Scikit-Learn} Algorithmen eingesetzt wird. Als Optimierer
+wird \textit{Adam} eingesetzt, der häufig für das Trainieren neuronaler Netze gegenüber anderen
+Optimierern wie \textit{Stochastic Gradient Descent} (SGD) präferiert wird. Die Lernrate $\eta$
+wird mittels eines exponentiellen Verfalls nach jeder Epoche aktualisiert. Dazu wird $\eta$ nach
+jeder Epoche $t = 1, \ldots, t_{\text{max}}$ mit einem Wert $\gamma$ multipliziert. Dieser Wert
+wird für alle Autoencoder auf $\gamma = 0.9$ gesetzt. Die klassischen und Contractive Autoencoder
+werden für maximal 100 Epochen und die Convolutional Autoencoder für maximal 150 Epochen trainiert.
+Das Training wird frühzeitig beendet, wenn sich der Validierungsfehler innerhalb von 20 Epochen
+nicht mehr verbessert. Die Größes eines Batches ist datensatzabhängig gewählt worden und beträgt 32
+für Swiss Roll und Twin Peaks, acht für Olivetti Faces, 100 für MNIST, 64 für LfwPeople, acht für
+ICMR, und 100 für FER-2013.
 
 \section{Qualitätskriterien für die Datensätze}
 \label{ch:Appendix:Qualitaetskriterien}
