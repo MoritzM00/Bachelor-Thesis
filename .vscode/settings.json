@@ -1,6 +1,10 @@
 {
   "cSpell.words": [
     "Autoencoder",
+    "Autoencodern",
+    "Autoencoders",
+    "Conv",
+    "Convolutional",
     "Diagonalelementen",
     "Dimensionsreduktion",
     "Dimensionsreduktionsmethode",
@@ -12,12 +16,16 @@
     "hochdimensionalen",
     "Homöomorphismus",
     "Kovarianzmatrix",
+    "LCMC",
     "Maaten",
     "Mannigfaltigkeiten",
     "Merkmalsextrahierung",
+    "MNIST",
+    "Nachbarschaftsgröße",
     "niedrigdimensionale",
     "niedrigdimensionalem",
     "niedrigdimensionalen",
-    "Rekonstruktionsgewichte"
+    "Rekonstruktionsgewichte",
+    "vollvernetzte"
   ]
 }

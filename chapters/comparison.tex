@@ -29,8 +29,8 @@ Vergleich werden zwei künstliche und vier natürliche Datensätze verwendet, di
 ein Überblick über die Stärken und Schwächen der statistischen und der Machine Learning Methoden
 geschafft werden. Wie in \subsecref{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA} erwähnt, besteht
 zwischen Autoencodern und der Hauptkomponentenanalyse eine enge Verbindung. Neben dem Vergleich der
-zwei Gruppen wird daher in \secref{ch:Vergleich:sec:Resultate:PCA_linearAE} der Zusammenhang
-zwischen der Hauptkomponentenanalyse und einem linearen Autoencoder genauer untersucht.
+zwei Gruppen wird daher in \secref{ch:Vergleich:sec:Resultate:PCA_AE} der Zusammenhang zwischen der
+Hauptkomponentenanalyse und einem linearen Autoencoder genauer untersucht.
 
 \subsection{Qualitätskriterien der Dimensionsreduktion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien}
@@ -174,12 +174,12 @@ handgeschriebenen Zahlen in der Auflösung $28 \times 28$. Die Anzahl der Pixel 
 extrinsische Dimension beträgt 784. Der \textit{Olivetti Face}-Datensatz enthält Bilder von
 Gesichtern aus zehn unterschiedlichen Positionen von 40 Personen und ist damit der kleinste
 natürliche Datensatz in diesem Vergleich mit 400 Bildern. Die Bilder haben eine Auflösung von $64
-	\times 64$, was einer extrinsischen Dimension von 4096 entspricht. Der LFW-People-Datensatz enthält
+	\times 64$, was einer extrinsischen Dimension von 4096 entspricht. Der LFW-Datensatz enthält
 insgesamt über 13 000 Bilder von Gesichtern, jedoch wurde hier eine Teilmenge ausgewählt, sodass
 jede Person mindestens 30 mal vorkommt. Dies resultiert in einer Stichprobengröße von 2370. Die
 Bilder haben eine Auflösung von $62 \times 47$ und damit eine extrinsische Dimension von 2914. Der
-FER-2013 Datensatz besteht aus 28 709 Bildern von Gesichtern mit sechs unterschiedlichen Emotionen.
-Die Bilder haben eine Auflösung von $48 \times 48$ und sind damit 2304-dimensional. Beispiele der
+FER Datensatz besteht aus 28 709 Bildern von Gesichtern mit sechs unterschiedlichen Emotionen. Die
+Bilder haben eine Auflösung von $48 \times 48$ und sind damit 2304-dimensional. Beispiele der
 Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
 \begin{figure}
 	\begin{center}
@@ -208,12 +208,12 @@ Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 		Twin Peaks     & 3                          & 2                          & 5000                 \\
 		MNIST          & 784                        & 10                         & 60 000               \\
 		Olivetti Faces & 4096                       & 10                         & 400                  \\
-		LFW-People     & 2914                       & 21                         & 2370                 \\
-		FER-2013       & 2304                       & 26 (6)                     & 28 709               \\
+		LFW            & 2914                       & 21                         & 2370                 \\
+		FER            & 2304                       & 26 (6)                     & 28 709               \\
 		ICMR           & 20 531                     & 22                         & 801                  \\
 		\bottomrule
 	\end{tabular}
-	\caption{Übersicht über die extrinischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild.}
+	\caption{Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild.}
 	\label{tab:uebersicht-datensaetze}
 \end{table}
 
@@ -278,9 +278,9 @@ Qualitätskriterien sind im Appendix \ref{ch:Appendix:Qualitaetskriterien} zu fi
 	eine Tabelle mit Werten für K=10 (?) einfügen für die Übersicht?} In
 \secref{ch:Vergleich:sec:Resultate:kuenstlich} werden die Ergebnisse auf den künstlichen
 Datensätzen und in \secref{ch:Vergleich:sec:Resultate:natuerlich} die Ergebnisse auf den
-natürlichen Datensätzen diskutiert. Letztlich wird in
-\secref{ch:Vergleich:sec:Resultate:PCA_linearAE} der Zusammenhang zwischen der
-Hauptkomponentenanalyse und linearen Autoencodern empirisch untersucht.
+natürlichen Datensätzen diskutiert. Letztlich wird in \secref{ch:Vergleich:sec:Resultate:PCA_AE}
+der Zusammenhang zwischen der Hauptkomponentenanalyse und linearen Autoencodern empirisch
+untersucht.
 
 \subsection{Resultate auf künstlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:kuenstlich}
@@ -325,31 +325,28 @@ zu erkennen ist. Das Problem einer geringen Menge an Trainingsdaten gilt gleiche
 Varianten von neuronalen Netzen, insbesondere jedoch für vollvernetzte Autoencoder aufgrund der
 hohen Anzahl an Freiheitsgraden im Netz.
 
-\subsection{PCA und lineare Autoencoder}
-\label{ch:Vergleich:sec:Resultate:PCA_linearAE}
+\subsection{PCA und Autoencoder}
+\label{ch:Vergleich:sec:Resultate:PCA_AE}
 
-In diesem Abschnitt wird die Hauptkomponentenanalyse mit linearen Autoencodern verglichen. Dazu
-wird zuerst der theoretische Zusammenhang zwischen den beiden Methoden erklärt. Im Anschluss wird
-die Hauptkomponentenanalyse und unterschiedliche Modelle des Autoencoders für einen empirischen
-Vergleich auf dem FER-2013 Datensatz trainiert, wobei aufgrund der sechs unterschiedlichen
-Emotionen im Datensatz eine Reduktion auf sechs Dimensionen durchgeführt wurde.
+In diesem Abschnitt wird die Hauptkomponentenanalyse mit Autoencodern verglichen. Dazu wird zuerst
+der theoretische Zusammenhang zwischen den beiden Methoden erklärt. Im Anschluss wird die
+Hauptkomponentenanalyse und unterschiedliche Modelle des Autoencoders für einen empirischen
+Vergleich auf dem FER Datensatz trainiert, wobei aufgrund der sechs unterschiedlichen Emotionen im
+Datensatz eine Reduktion auf sechs Dimensionen durchgeführt wurde.
 
-\subsubsection{Theoretischer Zusammenhang}
-
-\textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y} = f(\vect{x})$ (siehe \secref{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}) eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten $\tr{\mat{A}}\vect{x}$ der PCA (siehe \secref{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}) ist: Die Gewichte eines linearen Autoencoders, der den quadrierten Fehler (\eqref{eq:AE_objectiveFunction}) minimiert, spannen einen äquivalanten Unterraum auf, wie die Ladungsmatrix $\mat{A}$. Dies gilt sogar dann, wenn im Encoder eines dreischichtigen Autoencoders Sigmoid-Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die Lösung eines linearen Autoencoders
-mit der von PCA wie folgt \parencite[3]{Plaut.2018}:\unsure{was meine ich mit "Lösung" des linearen Autoencoders? Genauer
-	beschreiben}
+\textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y} = f(\vect{x})$ (siehe \secref{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}) eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten $\tr{\mat{A}}\vect{x}$ der PCA (siehe \secref{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}) ist: Die Gewichte eines linearen Autoencoders, der den quadrierten Fehler (\eqref{eq:AE_objectiveFunction}) minimiert, spannen den gleichen Unterraum auf, wie die Ladungsmatrix $\mat{A}$. Dies gilt sogar dann, wenn im Encoder eines dreischichtigen Autoencoders Sigmoid-Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die latente Repräsentation $\mat{Y}$
+eines linearen Autoencoders mit der von PCA wie folgt \parencite[3]{Plaut.2018}:
 \begin{enumerate}
-	\item Die Lösung eines linearen Autoencoders ist nicht orthogonal, das heißt sie ist nicht unkorrelliert.
-	\item Die Lösung eines linearen Autoencoders ist nicht absteigend nach zugehöriger Varianz sortiert.
-	\item Die Lösung einer Reduktion auf $k_1$ Neuronen in der Bottleneck-Schicht ist keine Teilmenge für
-	      eine Reduktion auf $k_2$ Neuronen mit $k_2 < k_1$.
+	\item Die Kovarianzmatrix von $\mat{Y}$ ist nicht diagonal, das heißt die latente Repräsentation ist
+	      nicht unkorreliert.\footnote{Äquivalent dazu ist die Korrelationsmatrix von $\mat{Y}$, welche
+		      lediglich eine skalierte Kovarianzmatrix darstellt, keine Einheitsmatrix.}
+	\item Die transformierten Daten $\mat{Y}$ sind nicht nach absteigender Varianz sortiert.
+	\item Hat man einen Encoder $f: \real^D \rightarrow \real^{k_1}$ und möchte man einen Vektor $\vect{x}
+		      \in \real^D$ auf nur $k_2$ Dimensionen mit $k_2 < k_1$ reduzieren, so können nicht einfach die
+	      ersten $k_2$ Koordinaten von $f(\vect{x})$ verwendet werden. Das bedeutet, dass die Lösungen von
+	      Autoencodern auf unterschiedliche Dimensionen nicht geschachtelt sind.
 \end{enumerate}
-
-Im Folgenden wollen wir die theoretischen Überlegungen empirisch belegen und untersuchen, was
-Verletzungen bestimmter Annahmen für die gefundenen latenten Raum bedeutet.
-
-\subsubsection{Empirische Untersuchung des Zusammenhangs}
+Punkt 1 ist in beispielsweise in \figref{fig:Korrelationsmatrizen} zu erkennen. Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in (a) die Hauptkomponentenanalyse, in (b) ein linearer dreischichtiger Autoencoder und in (c) und (d) nichtlineare Autoencoder verwendet wurden. Die Korrelationsmatrix der Hauptkomponentenanalyse ist eine Einheitsmatrix, während die Korrelationsmatrizen der durch die Autoencoder gefundenen latenten Repräsentation von Null verschiedene Werte auf der Nicht-diagonalen aufweisen.
 
 In \figref{fig:Gewichtsvergleich} sind die Gewichtsmatrizen von PCA, einem linearen Autoencoder und
 einem Autoencoder mit Sigmoid-Aktivierungsfunktion im Encoder abgebildet. Wie zu erkennen ist, sind
@@ -359,7 +356,7 @@ PCA.
 \begin{figure}[ht]
 	\centering
 	\input{\figures/weights-comparison.pgf}
-	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-2013 Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-2013 Datensatz auf sechs Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse \captionb Die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders \captionc Die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist.
+	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER Datensatz auf sechs Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse \captionb Die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders \captionc Die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist.
 		Bei genauer Betrachtung der Ladungen von PCA (a) und der Gewichte des linearen Autoencoders (b) fällt auf, dass diese bis auf die Vorzeichen (erkennbar am invertierten Grauwert) fast identisch sind. Ist der Encoder nichtlinear wie in (c), so ist dies nicht mehr der Fall. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}
@@ -370,6 +367,6 @@ Korrelationsmatrix einer Einheitsmatrix entspricht.
 \begin{figure}[ht]
 	\centering
 	\input{\figures/covariance-matrices.pgf}
-	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-2013 Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-2013 Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder, in \captionc ein nichtlinearer dreischichtiger Autoencoder, wobei der der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist und in \captiond ein dreischichtiger Autoencoder mit ausschließlich Sigmoid-Aktivierungsfunktionen verwendet wurde, um die Daten auf sechs Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch die Autoencoder besteht Korrelation, wobei der lineare Autoencoder in diesem Fall betragsmäßig kleinere Korrelationen erzeugt als die nichtlinearen Autoencoder. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder, in \captionc ein nichtlinearer dreischichtiger Autoencoder, wobei der der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist und in \captiond ein dreischichtiger Autoencoder mit ausschließlich Sigmoid-Aktivierungsfunktionen verwendet wurde, um die Daten auf sechs Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch die Autoencoder besteht Korrelation, wobei der lineare Autoencoder in diesem Fall betragsmäßig kleinere Korrelationen erzeugt als die nichtlinearen Autoencoder. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Korrelationsmatrizen}
 \end{figure}
