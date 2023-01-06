@@ -167,7 +167,8 @@ Datensätzen wurden größtenteils Bilddatensätze, aber auch ein Textdatensatz 
 sehr hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
 Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Face}-Datensatz
 \footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Labeled Faces in the
-	Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der \textit{ICMR}-Datensatz
+	Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der
+\textit{ICMR}-Datensatz\footnote{\url{https://www.kaggle.com/datasets/shibumohapatra/icmr-data?select=labels.csv}}
 ausgewählt, um die Performance der Dimensionsreduktionsmethoden auf natürlichen Datensätzen zu
 evaluieren. Der weit verbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von
 handgeschriebenen Zahlen in der Auflösung $28 \times 28$. Die Anzahl der Pixel und damit die
@@ -189,15 +190,13 @@ Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
 	\label{fig:Dataset_samples}
 \end{figure}
 
-Letztlich ist der
-ICMR-Datensatz\footnote{\url{https://www.kaggle.com/datasets/shibumohapatra/icmr-data?select=labels.csv}}
-enthält die Genausprägungen von 801 Personen, die mit fünf unterschiedlichen Arten von Krebs
-diagnostiziert wurden. Der Datensatz enthält Genausprägungen von über 20 000 Genen, womit dieser
-Datensatz die höchste extrinsische Dimension im Vergleich besitzt. In Tabelle
-\ref{tab:uebersicht-datensaetze} sind die extrinsischen und intrinsischen Dimensionen, sowie die
-Stichprobengröße der Datensätze zusammengefasst. Die intrinsischen Dimensionen sind die Schätzungen
-des in \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} erläuterten
-Maximum Likelihood Schätzers für den jeweiligen Datensatz.
+Letztlich ist der ICMR-Datensatz enthält die Genausprägungen von 801 Personen, die mit fünf
+unterschiedlichen Arten von Krebs diagnostiziert wurden. Der Datensatz enthält Genausprägungen von
+über 20 000 Genen, womit dieser Datensatz die höchste extrinsische Dimension im Vergleich besitzt.
+In Tabelle \ref{tab:uebersicht-datensaetze} sind die extrinsischen und intrinsischen Dimensionen,
+sowie die Stichprobengröße der Datensätze zusammengefasst. Die intrinsischen Dimensionen sind die
+Schätzungen des in \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim}
+erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 
 \begin{table}[]
 	\centering
@@ -288,7 +287,7 @@ untersucht.
 Die Qualitätskriterien für den Swiss Roll Datensatz sind in \figref{fig:SwissRollMetrics}
 \begin{figure}[ht]
 	\begin{center}
-		\input{\figures/SwissRoll_comparison copy.pgf}
+		\input{\figures/SwissRoll_comparison.pgf}
 	\end{center}
 	\caption[Swiss Roll Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab, dicht gefolgt vom Autoencoder (AE) und der Kernel PCA. Die restlichen Methoden unterscheiden sich nicht stark, lediglich bei der Vertrauenswürdigkeit kann sich die Kernel PCA etwas nach oben absetzen. Die PCA und der Autoencoder sind hinsichtlich der Kontinuität und des LCMC sehr ähnlich. (Eigene Darstellung)}
 	\label{fig:SwissRollMetrics}
@@ -366,7 +365,7 @@ Weise kann die \enquote{Arbeitsweise} des Autoencoders anschaulich untersucht we
 	\centering
 	\input{\figures/weights-comparison.pgf}
 	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER Datensatz auf sechs Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse \captionb Die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders \captionc Die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist.
-		Bei genauer Betrachtung der Ladungen von PCA \captiona und der Gewichte des linearen Autoencoders \captionb fällt auf, dass diese bis auf die Vorzeichen (erkennbar am invertierten Grauwert) fast identisch sind. Ist der Encoder nichtlinear wie in \captionc, so ist dies nicht mehr der Fall. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+		Bei genauer Betrachtung der Ladungen von PCA und der Gewichte des linearen Autoencoders fällt auf, dass diese bis auf die Vorzeichen (erkennbar am invertierten Grauwert) fast identisch sind. Bei einem nichtlinearen Encoder ist dies nicht mehr der Fall. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}
 Hierbei ist in \captiona die Ladungsmatrix von PCA, in \captionb die Gewichtsmatrix $\mat{W}_2$ eines linearen dreischichtigen Autoencoders und in \captionc die Gewichtsmatrix $\mat{W}_2$ eines nichtlinearen Autoencoders dargestellt. Wie zu erkennen ist, sind
