@@ -334,7 +334,7 @@ eindimensional ist. Neben dieser \textit{impliziten} Regularisierung, gibt es de
 weitere \textit{explizite} Regularisierungsmethoden, die zusätzlich zum Rekonstruktionfehler einen
 Bestrafungsterm $\Omega$ zur Zielfunktion $\mathcal{J}$ hinzufügen. Die Zielfunktion lautet dann
 \begin{equation}
-	\mathcal{J}_{\text{AE+reg}} = \frac{1}{n} \sum_{i = 1}{n} \left( L(\vect{x}_i, \estNormal{\vect{x}_i}) + \lambda \Omega \right) \, ,
+	\mathcal{J}_{\text{AE+reg}} = \frac{1}{n} \sum_{i = 1}^{n} \left( L(\vect{x}_i, \estNormal{\vect{x}_i}) + \lambda \Omega \right) \, ,
 \end{equation}
 wobei $\lambda \geq 0$ ein \textit{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den Rekonstruktionfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden, was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch also eine informativere niedrigdimensionale Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
 
