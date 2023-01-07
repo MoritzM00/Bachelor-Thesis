@@ -352,7 +352,7 @@ Autoencodern auf unterschiedliche Dimensionen nicht geschachtelt sind.
 
 \begin{figure}[ht]
 	\centering
-	\input{\figures/covariance-matrices.pgf}
+	\input{\figures/correlation-matrices.pgf}
 	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder, in \captionc ein nichtlinearer dreischichtiger Autoencoder, wobei der der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist und in \captiond ein dreischichtiger Autoencoder mit ausschließlich Sigmoid-Aktivierungsfunktionen verwendet wurde, um die Daten auf sechs Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch die Autoencoder besteht Korrelation, wobei der lineare Autoencoder in diesem Fall betragsmäßig kleinere Korrelationen erzeugt als die nichtlinearen Autoencoder. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Korrelationsmatrizen}
 \end{figure}
