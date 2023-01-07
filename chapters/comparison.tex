@@ -158,12 +158,12 @@ sehr ein. Künstliche Datensätze sind aber nicht zwangsweise aussagekräftig f�
 \subsection{Natürliche Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze:natuerlich}
 Natürliche
-Datensätze weisen empirischen Ergebnissen zufolge \addref oft komplexe nichtlineare Zusammenhänge
+Datensätze weisen laut empirischen Ergebnissen \addref oft komplexe nichtlineare Zusammenhänge
 auf und sind daher für die Dimensionsreduktion anspruchsvoller als kleine, künstlich generierte
 Datensätze. Der Nachteil besteht darin, dass die intrinsische Dimension in der Regel deutlich über
 zwei liegt und daher der latente Raum nicht visualisiert werden kann. Nichtsdestotrotz liefern die
 Qualitätskriterien hinreichende gute Indizien für die Performance der Methoden. Bei den natürlichen
-Datensätzen wurden größtenteils Bilddatensätze, aber auch ein Textdatensatz ausgewählt, da diese eine
+Datensätzen wurden größtenteils Bilddatensätze, aber auch ein Datensatz mit Genausprägungen ausgewählt, da diese eine
 sehr hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
 Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Face}-Datensatz
 \footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Labeled Faces in the
@@ -200,7 +200,7 @@ erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 
 \begin{table}[]
 	\centering
-	\begin{tabular}{@{}cccc@{}}
+	\begin{tabular}{cccc}
 		\toprule
 		Datensatz      & extrinsische Dimension $D$ & intrinsische Dimension $d$ & Stichprobengröße $n$ \\ \midrule
 		Swiss Roll     & 3                          & 2                          & 5000                 \\
@@ -208,7 +208,7 @@ erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 		MNIST          & 784                        & 10                         & 60 000               \\
 		Olivetti Faces & 4096                       & 10                         & 400                  \\
 		LFW            & 2914                       & 21                         & 2370                 \\
-		FER            & 2304                       & 26 (6)                     & 28 709               \\
+		FER            & 2304                       & 26                         & 28 709               \\
 		ICMR           & 20 531                     & 22                         & 801                  \\
 		\bottomrule
 	\end{tabular}
