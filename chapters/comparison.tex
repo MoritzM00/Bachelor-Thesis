@@ -186,7 +186,7 @@ Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
 	\begin{center}
 		\input{\figures/dataset_samples.pgf}
 	\end{center}
-	\caption{Beispielbilder der natürlichen Datensätze}
+	\caption[Beispielbilder der natürlichen Datensätze]{Zu sehen sind je vier Beispielbilder der natürlichen Bilddatensätze aus dem Vergleich. \captiona Handgeschriebene Zahlen aus dem MNIST-Datensatz \captionb Beispielbilder aus dem FER-Datensatz \captionc Beispielbilder aus dem LFW-Datensatz \captionc Der Olivetti Faces Datensatz }
 	\label{fig:Dataset_samples}
 \end{figure}
 
@@ -353,7 +353,7 @@ Autoencodern auf unterschiedliche Dimensionen nicht geschachtelt sind.
 \begin{figure}[ht]
 	\centering
 	\input{\figures/correlation-matrices.pgf}
-	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder, in \captionc ein nichtlinearer dreischichtiger Autoencoder, wobei der der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist und in \captiond ein dreischichtiger Autoencoder mit ausschließlich Sigmoid-Aktivierungsfunktionen verwendet wurde, um die Daten auf sechs Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch die Autoencoder besteht Korrelation, wobei der lineare Autoencoder in diesem Fall betragsmäßig kleinere Korrelationen erzeugt als die nichtlinearen Autoencoder. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer dreischichtiger Autoencoder mit Sigmoid-Encoder und linearem Decoder verwendet wurde, um die Daten auf sechs Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch die Autoencoder besteht Korrelation, wobei der lineare Autoencoder zufälligerweise betragsmäßig größere Korrelationen erzeugt als der nichtlineare Autoencoder.  (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Korrelationsmatrizen}
 \end{figure}
 Punkt 1 ist in beispielsweise in \figref{fig:Korrelationsmatrizen} zu erkennen. Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc und (d) nichtlineare Autoencoder verwendet wurden. Die Korrelationsmatrix der Hauptkomponentenanalyse ist eine Einheitsmatrix, während die Korrelationsmatrizen der durch die Autoencoder gefundenen latenten Repräsentationen von Null verschiedene Werte auf der Nicht-diagonalen aufweisen.

@@ -29,7 +29,7 @@
 \begingroup%
 \makeatletter%
 \begin{pgfpicture}%
-\pgfpathrectangle{\pgfpointorigin}{\pgfqpoint{4.680250in}{3.338151in}}%
+\pgfpathrectangle{\pgfpointorigin}{\pgfqpoint{4.680250in}{3.327511in}}%
 \pgfusepath{use as bounding box, clip}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -42,8 +42,8 @@
 \pgfsetdash{}{0pt}%
 \pgfpathmoveto{\pgfqpoint{0.000000in}{0.000000in}}%
 \pgfpathlineto{\pgfqpoint{4.680250in}{0.000000in}}%
-\pgfpathlineto{\pgfqpoint{4.680250in}{3.338151in}}%
-\pgfpathlineto{\pgfqpoint{0.000000in}{3.338151in}}%
+\pgfpathlineto{\pgfqpoint{4.680250in}{3.327511in}}%
+\pgfpathlineto{\pgfqpoint{0.000000in}{3.327511in}}%
 \pgfpathlineto{\pgfqpoint{0.000000in}{0.000000in}}%
 \pgfpathclose%
 \pgfusepath{fill}%
@@ -58,7 +58,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=0.723566in,y=3.160466in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont empört}%
+\pgftext[x=0.723566in,y=3.160466in,,base]{\color{textcolor}\rmfamily\fontsize{11.000000}{13.200000}\selectfont empört}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{1.666559in}{1.730000in}}{\pgfqpoint{1.347132in}{1.347132in}}%
@@ -70,7 +70,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=2.340125in,y=3.160466in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont ängstlich}%
+\pgftext[x=2.340125in,y=3.160466in,,base]{\color{textcolor}\rmfamily\fontsize{11.000000}{13.200000}\selectfont ängstlich}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{3.283118in}{1.730000in}}{\pgfqpoint{1.347132in}{1.347132in}}%
@@ -82,7 +82,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=3.956684in,y=3.160466in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont glücklich}%
+\pgftext[x=3.956684in,y=3.160466in,,base]{\color{textcolor}\rmfamily\fontsize{11.000000}{13.200000}\selectfont glücklich}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{0.050000in}{0.050000in}}{\pgfqpoint{1.347132in}{1.347132in}}%
@@ -94,7 +94,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=0.723566in,y=1.480466in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont traurig}%
+\pgftext[x=0.723566in,y=1.480466in,,base]{\color{textcolor}\rmfamily\fontsize{11.000000}{13.200000}\selectfont traurig}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{1.666559in}{0.050000in}}{\pgfqpoint{1.347132in}{1.347132in}}%
@@ -106,7 +106,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=2.340125in,y=1.480466in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont überrascht}%
+\pgftext[x=2.340125in,y=1.480466in,,base]{\color{textcolor}\rmfamily\fontsize{11.000000}{13.200000}\selectfont überrascht}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{3.283118in}{0.050000in}}{\pgfqpoint{1.347132in}{1.347132in}}%
@@ -118,7 +118,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=3.956684in,y=1.480466in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont neutral}%
+\pgftext[x=3.956684in,y=1.480466in,,base]{\color{textcolor}\rmfamily\fontsize{11.000000}{13.200000}\selectfont neutral}%
 \end{pgfscope}%
 \end{pgfpicture}%
 \makeatother%
