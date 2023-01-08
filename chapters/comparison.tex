@@ -34,7 +34,7 @@ und Autoencodern genauer untersucht.
 
 \subsection{Qualitätskriterien der Dimensionsreduktion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien}
-Wie bereits in \secref{ch:Dimensionsreduktion} erläutert, hat die Dimensionsreduktion das Ziel einer möglichst \enquote{verlustfreien} Transformation der ursprünglichen Repräsentation in eine latente Repräsentation von geringerer Dimension. Der Rekonstruktionsfehler, den man beispielsweise vom Autoencoder kennt, ist jedoch wie \textcite[18]{vanderMaaten.2009} hervorhebt, nicht sehr aussagekräftig für die Güte einer Dimensionsreduktion. Hinzu kommt, dass der Rekonstruktionsfehler nicht für alle Methoden berechnet werden kann, da eine inverse Transformation der niedrigdimensionalen in die ursprüngliche Repräsentation benötigt wird. Damit fällt der Rekonstruktionsfehler als geeignetes Qualitätskriterium heraus. Das immense Forschungsinteresse für Methoden der Dimensionsreduktion hat daher mit der Zeit dafür gesorgt, dass immer mehr Qualitätskriterien entwickelt wurden. \textcite{Gracia.2014} stellen einige Qualitätskriterien vor und vergleichen diese miteinander. Trotzdem gibt es in der Literatur keine eindeutige Kennzahl, die bei einem Vergleich von Dimensionsreduktionsmethoden standardmäßig eingesetzt wird \parencite[vgl.][1 -- 2]{Lee.2009}. Stattdessen bedient man sich mehrerer Kennzahlen, die
+Wie bereits in \chapref{ch:Dimensionsreduktion} erläutert, hat die Dimensionsreduktion das Ziel einer möglichst \enquote{verlustfreien} Transformation der ursprünglichen Repräsentation in eine latente Repräsentation von geringerer Dimension. Für Autoencoder bedeutet \enquote{verlustfrei} die Minimierung des Rekonstruktionsfehlers wie z.B. die quadratische Abweichung (siehe \eqref{eq:MSE_loss}). Dieser Rekonstruktionsfehler ist jedoch wie \textcite[18]{vanderMaaten.2009} hervorhebt, nicht sehr aussagekräftig für die Güte einer Dimensionsreduktion. Hinzu kommt, dass der Rekonstruktionsfehler nicht für alle Methoden berechnet werden kann, da eine inverse Transformation der niedrigdimensionalen in die ursprüngliche Repräsentation benötigt wird. Damit fällt der Rekonstruktionsfehler als geeignetes Qualitätskriterium heraus. Das immense Forschungsinteresse für Methoden der Dimensionsreduktion hat daher mit der Zeit dafür gesorgt, dass immer mehr Qualitätskriterien entwickelt wurden. \textcite{Gracia.2014} stellen einige Qualitätskriterien vor und vergleichen diese miteinander. Trotzdem gibt es in der Literatur keine eindeutige Kennzahl, die bei einem Vergleich von Dimensionsreduktionsmethoden standardmäßig eingesetzt wird \parencite[vgl.][1 -- 2]{Lee.2009}. Stattdessen bedient man sich mehrerer Kennzahlen, die
 unterschiedliche Dinge bestrafen und versucht so die Stärken und Schwächen einer
 Dimensionsreduktionsmethode zu erkennen \parencite[486]{Venna.2001}. Die im Folgenden vorgestellten Qualitätskriterien versuchen die Güte
 mithilfe von Rängen zu quantifizieren.
@@ -106,9 +106,11 @@ Das Local Continuity Meta-Criterion (LCMC), entwickelt von \textcite{Chen.2009},
 	\label{eq:LCMC}
 	\text{LCMC}(K) = \frac{1}{nK} \sum_{i=1}^{n} \left( \left| M_i(K) \cap \widetilde{M}_i(K) \right| \right) - \frac{K}{n - 1} \,,
 \end{equation}
-wobei $­|\cdot|$ die Kardinalität einer Menge und $\set{A} \cap \set{B}$ den Durchschnitt zweier Mengen $\set{A}$ und $\set{B}$ bezeichnet. Der Term vor der Summation skaliert auch dieses Kriterium auf den Wertebereich zwischen Null und Eins, wobei LCMC$(K) = 1$ den besten Wert darstellt. Die durschnittliche Überschneidung der beiden Indexmengen wird wie in \eqref{eq:LCMC} ersichtlich noch um einen additiven Term korrigiert. Dieser Term entspricht dem Erwartungswert einer zufällige Überschneidung und kann durch eine hypergeometrische Verteilung modelliert werden \parencite[213]{Chen.2009}. Diese sogenannte Basislinie (engl. \textit{Baseline}) wird mit steigendem
-$K$ größer, so dass das Kriterium für große $K$ klein wird. Deshalb besitzt das LCMC ein
-wohldefiniertes Maximum.
+wobei $­|\cdot|$ die Kardinalität einer Menge und $\set{A} \cap \set{B}$ den Durchschnitt zweier Mengen $\set{A}$ und $\set{B}$ bezeichnet. Der Term vor der Summation skaliert auch dieses Kriterium auf den Wertebereich zwischen Null und Eins, wobei LCMC$(K) = 1$ den besten Wert darstellt. Die durschnittliche Überschneidung der beiden Indexmengen wird wie in \eqref{eq:LCMC} ersichtlich noch um einen additiven Term korrigiert. Dieser Term entspricht dem Erwartungswert einer zufälligen Überschneidung und kann durch eine hypergeometrische Verteilung mit $K$ Defekten aus $n - 1$ modelliert werden \parencite[213]{Chen.2009}. Diese sogenannte Basislinie (engl. \textit{Baseline}) wird mit steigendem
+$K$ größer, so dass das Kriterium für den maximalen Wert der Nachbarschftsgröße $K = n - 1$ den
+Wert Null annimmt. Aus diesem Grund besitzt das LCMC ein wohldefiniertes Maximum. Allerdings sind
+kleinere Werte von $K$ oftmals wichtiger, um beispielsweise die Erhaltung der Struktur einer
+Mannigfaltigkeit zu messen.
 
 \subsection{Schätzen der intrinsischen Dimension}
 \label{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim}
@@ -276,17 +278,16 @@ Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
 In diesem Abschnitt werden die Resultate des empirischen Vergleichs vorgestellt. Dazu werden die
 Werte der verschiedenen Qualitätskriterien auf den künstlichen und natürlichen Datensätzen in
 Abhängigkeit der Nachbarschaftsgröße $K$ abgebildet. Die verschiedenen Methoden wurden mit den im
-vorhergehenden Abschnitt (\secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails}) erläuterten
-Parametern auf den künstlichen und natürlichen Datensätzen trainiert und hinsichtlich der in
+vorhergehenden \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails} erläuterten Parametern auf
+den künstlichen und natürlichen Datensätzen trainiert und hinsichtlich der in
 \secref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} vorgestellten Qualitätskriterien für
 eine Nachbarschaftsgröße von $1 \leq K \leq 100$ evaluiert. Einige der Abbildungen für die
 Qualitätskriterien sind im Appendix \ref{ch:Appendix:Qualitaetskriterien} zu finden.\unsure{vlt
-	eine Tabelle mit Werten für K=10 (?) einfügen für die Übersicht?} In
+	eine Tabelle mit Mittelwert von T und C und Maximum von LCMC einfügen für die Übersicht} In
 \secref{ch:Vergleich:sec:Resultate:kuenstlich} werden die Ergebnisse auf den künstlichen
 Datensätzen und in \secref{ch:Vergleich:sec:Resultate:natuerlich} die Ergebnisse auf den
 natürlichen Datensätzen diskutiert. Letztlich wird in \secref{ch:Vergleich:sec:Resultate:PCA_AE}
-der Zusammenhang zwischen der Hauptkomponentenanalyse und linearen Autoencodern empirisch
-untersucht.
+der Zusammenhang zwischen der Hauptkomponentenanalyse und Autoencodern empirisch untersucht.
 
 \subsection{Resultate auf künstlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:kuenstlich}
@@ -363,12 +364,12 @@ Autoencodern auf unterschiedliche Dimensionen nicht geschachtelt sind.
 	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer dreischichtiger Autoencoder mit Sigmoid-Encoder und linearem Decoder verwendet wurde, um die Daten auf sechs Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch die Autoencoder besteht Korrelation, wobei der lineare Autoencoder zufälligerweise betragsmäßig größere Korrelationen erzeugt als der nichtlineare Autoencoder.  (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Korrelationsmatrizen}
 \end{figure}
-Punkt 1 ist in beispielsweise in \figref{fig:Korrelationsmatrizen} zu erkennen. Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc und (d) nichtlineare Autoencoder verwendet wurden. Die Korrelationsmatrix der Hauptkomponentenanalyse ist eine Einheitsmatrix, während die Korrelationsmatrizen der durch die Autoencoder gefundenen latenten Repräsentationen von Null verschiedene Werte auf der Nicht-diagonalen aufweisen.
+Punkt 1 ist in beispielsweise in \figref{fig:Korrelationsmatrizen} zu erkennen. Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer Autoencoder verwendet wurde. Die Korrelationsmatrix der Hauptkomponentenanalyse ist eine Einheitsmatrix, während die Korrelationsmatrizen der durch die Autoencoder gefundenen latenten Repräsentationen von Null verschiedene Werte auf der Nicht-diagonalen aufweisen.
 
 Um die gefundenen Lösungen einer Hauptkomponentenanalyse und von Autoencodern genauer betrachten zu
 können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines dreischichtigen
 Autoencoders verglichen werden. Im Falle eines dreischichtigen Autoencoders sind die Gewichte des
-Encoders eine Matrix $\mat{W}_2 \in \real^{d \times D}$ und die Gewichte des Decoders eine Matrix
+Encoders eine Matrix $\mat{W}_1 \in \real^{d \times D}$ und die Gewichte des Decoders eine Matrix
 $\mat{W}_2 \in \real^{D \times d}$. Auf Bilddatensätzen können diese Matrizen so umgeformt werden,
 dass sich für jede Zeile von $\mat{W}_1$ oder Spalte von $\mat{W}_2$ ein Bild ergibt. Auf diese
 Weise kann die \enquote{Arbeitsweise} des Autoencoders anschaulich untersucht werden.
@@ -376,8 +377,8 @@ Weise kann die \enquote{Arbeitsweise} des Autoencoders anschaulich untersucht we
 \begin{figure}[ht]
 	\centering
 	\input{\figures/weights-comparison.pgf}
-	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER Datensatz auf sechs Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse \captionb Die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders \captionc Die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist.
-		Bei genauer Betrachtung der Ladungen von PCA und der Gewichte des linearen Autoencoders fällt auf, dass diese bis auf die Vorzeichen (erkennbar am invertierten Grauwert) fast identisch sind. Bei einem nichtlinearen Encoder ist dies nicht mehr der Fall. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf sechs Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders und \captionc die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist.
+		Bei genauer Betrachtung der Ladungen von PCA und der Gewichte des linearen Autoencoders fällt auf, dass diese bis auf die Vorzeichen (erkennbar am invertierten Grauwert) sehr ähnlich sind. Bei einem nichtlinearen Encoder ist dies nicht mehr der Fall. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}
 Hierbei ist in \captiona die Ladungsmatrix von PCA, in \captionb die Gewichtsmatrix $\mat{W}_2$ eines linearen dreischichtigen Autoencoders und in \captionc die Gewichtsmatrix $\mat{W}_2$ eines nichtlinearen Autoencoders dargestellt. Wie zu erkennen ist, sind
