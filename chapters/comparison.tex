@@ -230,16 +230,27 @@ erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 
 In diesem Abschnitt werden die gewählten (Hyper-)Parameter und Details des Trainierens der
 Dimensionsreduktionsmethoden vorgestellt. Eine Übersicht ist in
-Tabelle~\ref{tab:uebersicht-parameter} zu finden. Für die Hauptkomponentenanalyse gibt es neben der
-Anzahl der zu behaltenden Hauptkomponenten keine Parameter. Die Anzahl der Hauptkomponenten
-entspricht der intrinsischen Dimension, welche vom Datensatz abhängt und für alle Methoden
-identisch ist. Dies trifft analog auf Kernel PCA und auf Locally Linear Embedding zu. Für
-Autoencoder bestimmt die intrinsische Dimension die Größe der Bottleneck-Schicht. Für Kernel PCA
-wird ein RBF-Kernel (Gauß-Kernel) eingesetzt, wofür ein Hyperparameter $\gamma$ gewählt werden
-kann. Dieser wird Datensatz-spezifisch auf $\gamma = \sfrac{1}{D}$ gesetzt. Für Locally Linear
-Embedding gibt es mehrere Parameter: (1) einen Parameter $K$, der die Größe der verwendeten
-Nachbarschaft kontrolliert und (2) eine Regularisierungs-Konstante $\epsilon$, die auf die
-Diagonale der lokalen Kovarianzmatrix addiert wird.
+Tabelle~\ref{tab:uebersicht-parameter} zu finden. Alle Datensätze wurde vor dem Anwenden der
+Dimensionsreduktionsmethoden standardisiert, das heißt $\mat{X}$ weist einen spaltenweisen
+Erwartungswert von Null und eine spaltenweise Varianz von Eins auf. Für die Evaluierung der
+Methoden wurde aufgrund von Restriktionen der Rechenleistung (insbesondere des Arbeitsspeichers)
+ein Downsampling auf maximal 25 000 Stichproben durchgeführt. Dies ist allerdings nur für den
+MNIST- und FER-Datensatz von Relevanz. Alle anderen Datensätze haben weniger
+Stichproben.\footnote{Die Evaluierung ist aufgrund der Berechnung der Co-Ranking-Matrix
+	speicherintensiv, da diese maximal $(n-1) \times (n-1)$ groß ist und damit quadratisch mit $n$
+	ansteigt. Um die Qualitätskriterien für den MNIST-Datensatz zu berechnen, werden circa 25 GB
+	Arbeitsspeicher benötigt.}
+
+Für die Hauptkomponentenanalyse gibt es neben der Anzahl der zu behaltenden Hauptkomponenten keine
+Parameter. Die Anzahl der Hauptkomponenten entspricht der intrinsischen Dimension, welche vom
+Datensatz abhängt und für alle Methoden identisch ist. Dies trifft analog auf Kernel PCA und auf
+Locally Linear Embedding zu. Für Autoencoder bestimmt die intrinsische Dimension die Größe der
+Bottleneck-Schicht. Für Kernel PCA wird ein RBF-Kernel (Gauß-Kernel) eingesetzt, wofür ein
+Hyperparameter $\gamma$ gewählt werden kann. Dieser wird Datensatz-spezifisch auf $\gamma =
+	\sfrac{1}{D}$ gesetzt. Für Locally Linear Embedding gibt es zwei Parameter: (1) einen Parameter
+$K$, der die Größe der verwendeten Nachbarschaft kontrolliert und (2) eine
+Regularisierungs-Konstante $\epsilon$, die auf die Diagonale der lokalen Kovarianzmatrix addiert
+wird.
 
 Den statistischen Methoden gegenüber haben Autoencoder deutlich mehr Freiheitsgrade, um die
 Architektur zu bestimmen. Die wichtigsten Parameter sind die Anzahl der Schichten $m$, sowie die
@@ -346,7 +357,7 @@ aus den Originalbildern als Referenz.
 	\caption[Rekonstruktierte MNIST-Zahlen]{Gezeigt sind einige rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch den Convolutional Autoencoder und (5) Rekonstruktion durch den Contractive Autoencoder}
 	\label{fig:MNIST-reconstructions}
 \end{figure}
-Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Die Rekonstrukionen der Hauptkomponentenanalyse und des Contractive Autoencoders sind visuell nicht überzeugend, da sie deutlich verwaschener sind. Der Convolutional Autoencoder hat auf dem MNIST-Datensatz auf den Qualitätskriterien ebenfalls am besten abgeschnitten (siehe \figref{fig:MNISTMetrics}). Der für den MNIST-Datensats eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte. Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER- oder LFW-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
+Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Die Rekonstrukionen der Hauptkomponentenanalyse und des Contractive Autoencoders sind visuell nicht überzeugend, da sie deutlich unscharfer sind. Der Convolutional Autoencoder hat auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien ebenfalls am besten abgeschnitten (siehe \figref{fig:MNISTMetrics}). Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte. Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER- oder LFW-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
 
 \subsection{PCA und Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}
