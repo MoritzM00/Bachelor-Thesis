@@ -219,7 +219,7 @@ erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 		ICMR           & 20 531                     & 22                         & 801                  \\
 		\bottomrule
 	\end{tabular}
-	\caption[Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätz]{Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild. Die intrinsische Dimension wurde mit dem Maximum Likelihood Schätzer aus \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} mit einer Nachbarschaftsgröße $K=5$ geschätzt.}
+	\caption[Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze]{Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild. Die intrinsische Dimension wurde mit dem Maximum Likelihood Schätzer aus \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} mit einer Nachbarschaftsgröße $K=5$ geschätzt.}
 	\label{tab:uebersicht-datensaetze}
 \end{table}
 
@@ -296,7 +296,7 @@ Die Qualitätskriterien für den Swiss Roll Datensatz sind in \figref{fig:SwissR
 	\begin{center}
 		\input{\figures/SwissRoll_comparison.pgf}
 	\end{center}
-	\caption[Swiss Roll Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab, dicht gefolgt vom Autoencoder (AE) und der Kernel PCA. Die restlichen Methoden unterscheiden sich nicht stark, lediglich bei der Vertrauenswürdigkeit kann sich die Kernel PCA etwas nach oben absetzen. Die PCA und der Autoencoder sind hinsichtlich der Kontinuität und des LCMC sehr ähnlich. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für die Swiss Roll]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab, dicht gefolgt vom Autoencoder (AE) und der Kernel PCA. Die restlichen Methoden unterscheiden sich nicht stark, lediglich bei der Vertrauenswürdigkeit kann sich die Kernel PCA etwas nach oben absetzen. Die PCA und der Autoencoder sind hinsichtlich der Kontinuität und des LCMC sehr ähnlich. (Eigene Darstellung)}
 	\label{fig:SwissRollMetrics}
 \end{figure}
 und die Qualitaetskriterien für den Twin Peaks Datensatz in \figref{fig:TwinPeaksMetrics} abgebildet. Wie dort zu erkennen ist, zeigt Locally Linear Embedding eine sehr starke Performance auf den beiden künstlichen Datensätzen. Der Autoencoder kann sich hinsichtlich des Twin Peaks Datensatzes von den restlichen Methoden abheben. Bei der Swiss Roll ist dies jedoch nicht der Fall. Hier sind die PCA, die Kernel PCA, sowie beide Varianten des Autoencoders relativ ähnlich.
@@ -311,10 +311,10 @@ sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
 	\begin{center}
 		\input{\figures/MNIST_comparison.pgf}
 	\end{center}
-	\caption[MNIST Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST-Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine starke Performance zeigen, da der Datensatz von hoher Qualität ist und eine hohe Stichprobengröße aufweisen kann. Nichtsdestotrotz kann die Hauptkomponentenanalyse nur knapp dahinter sehr gut mithalten und hinsichtlich der Kontinuität sogar übertreffen. Die Kernel PCA und der klassische vollvernetzte Autoencoder schneiden ebenfalls relativ gut ab, die Kernel PCA aber durchweg etwas schlechter ist als der Autoencoder. LLE und der Contractive Autoencoder können vor allem auf dem LCMC nicht mithalten. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für MNIST]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST-Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine starke Performance zeigen, da der Datensatz von hoher Qualität ist und eine hohe Stichprobengröße aufweisen kann. Nichtsdestotrotz kann die Hauptkomponentenanalyse nur knapp dahinter sehr gut mithalten und hinsichtlich der Kontinuität sogar übertreffen. Die Kernel PCA und der klassische vollvernetzte Autoencoder schneiden ebenfalls relativ gut ab, die Kernel PCA aber durchweg etwas schlechter ist als der Autoencoder. LLE und der Contractive Autoencoder können vor allem auf dem LCMC nicht mithalten. (Eigene Darstellung)}
 	\label{fig:MNISTMetrics}
 \end{figure}
-Für die Olivetti Faces (\figref{fig:OlivettiFacesMetrics}), den FER-(\figref{fig:FER2013Metrics}) und den LFW-Datensatz (\figref{fig:LfwPeopleMetrics})
+Für die Olivetti Faces (\figref{fig:OlivettiFacesMetrics}), den FER- (\figref{fig:FER2013Metrics}) und den LFW-Datensatz (\figref{fig:LfwPeopleMetrics})
 schneidet LLE auf allen drei Kriterien am schlechtesten ab. Zusätzlich nehmen die
 Qualitätskriterien von LLE mit größer werdender Nachbarschaftsgröße $K$ deutlicher ab, als bei den
 restlichen Methoden. Aufgrund der Wahl der Nachbarschaftsgröße von $K=10$ für Locally Linear
@@ -376,7 +376,7 @@ Weise kann die \enquote{Arbeitsweise} des Autoencoders anschaulich untersucht we
 \begin{figure}[ht]
 	\centering
 	\input{\figures/weights-comparison.pgf}
-	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER Datensatz auf sechs Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse \captionb Die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders \captionc Die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist.
+	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER Datensatz auf sechs Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse \captionb Die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders \captionc Die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist.
 		Bei genauer Betrachtung der Ladungen von PCA und der Gewichte des linearen Autoencoders fällt auf, dass diese bis auf die Vorzeichen (erkennbar am invertierten Grauwert) fast identisch sind. Bei einem nichtlinearen Encoder ist dies nicht mehr der Fall. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}

@@ -30,12 +30,12 @@ In diesem Abschnitt werden die Abbildungen der Qualitätskriterien für die rest
 gesammelt. In \figref{fig:TwinPeaksMetrics} sind die Qualitätskriterien für die Twin Peaks, in
 \figref{fig:ICMRMetrics} die Qualitätskriterien für ICMR, in \figref{fig:OlivettiFacesMetrics} die
 Qualitätskriterien für den Olivetti Faces Datensatz, in \figref{fig:LfwPeopleMetrics} für den
-LFW-People Datensatz und in \figref{fig:FER2013Metrics} für den FER-2013 Datensatz.
+LFW-atensatz und in \figref{fig:FER2013Metrics} für den FER-Datensatz.
 \begin{figure}[ht]
 	\begin{center}
 		\input{\figures/TwinPeaks_comparison.pgf}
 	\end{center}
-	\caption[Twin Peaks Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Twin Peaks Datensatz. Locally Linear Embedding (LLE) schneidet wie bei der Swiss Roll insgesamt am besten ab, dicht gefolgt vom Autoencoder und der Kernel PCA. Lediglich der Contractive Autoencoder (CAE) und PCA fallen auf diesem künstlichen Datensatz etwas zurück, wobei die Vertrauenswürdigkeit der Dimensionsreduktion von PCA deutlich schlechter als bei den restlichen Methoden ist. Dies ist höchstwahrscheinlich der nichtlinearen Mannigfaltigkeit geschuldet, was der linearen Hauptkomponentenanalyse Schwierigkeiten bereitet. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für die Twin Peaks]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Twin Peaks Datensatz. Locally Linear Embedding (LLE) schneidet wie bei der Swiss Roll insgesamt am besten ab, dicht gefolgt vom Autoencoder und der Kernel PCA. Lediglich der Contractive Autoencoder (CAE) und PCA fallen auf diesem künstlichen Datensatz etwas zurück, wobei die Vertrauenswürdigkeit der Dimensionsreduktion von PCA deutlich schlechter als bei den restlichen Methoden ist. Dies ist höchstwahrscheinlich der nichtlinearen Mannigfaltigkeit geschuldet, was der linearen Hauptkomponentenanalyse Schwierigkeiten bereitet. (Eigene Darstellung)}
 	\label{fig:TwinPeaksMetrics}
 \end{figure}
 
@@ -43,7 +43,7 @@ LFW-People Datensatz und in \figref{fig:FER2013Metrics} für den FER-2013 Datens
 	\begin{center}
 		\input{\figures/ICMR_comparison.pgf}
 	\end{center}
-	\caption[ICMR Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den ICMR Datensatz. Dieser Datensatz ist kein Bilddatensatz, weswegen hier der Convolutional Autoencoder nicht eingesetzt werden konnte. Auch hier schneidet die Hauptkomponentenanalyse wieder am besten ab, gefolgt vom vollvernetzten Autoencoder (AE) und der Kernel PCA. Am schlechtesten sind der Contractive Autoencoder und Locally Linear Embedding. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den ICMR-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den ICMR Datensatz. Dieser Datensatz ist kein Bilddatensatz, weswegen hier der Convolutional Autoencoder nicht eingesetzt werden konnte. Auch hier schneidet die Hauptkomponentenanalyse wieder am besten ab, gefolgt vom vollvernetzten Autoencoder (AE) und der Kernel PCA. Am schlechtesten sind der Contractive Autoencoder und Locally Linear Embedding. (Eigene Darstellung)}
 	\label{fig:ICMRMetrics}
 \end{figure}
 
@@ -51,7 +51,7 @@ LFW-People Datensatz und in \figref{fig:FER2013Metrics} für den FER-2013 Datens
 	\begin{center}
 		\input{\figures/OlivettiFaces_comparison.pgf}
 	\end{center}
-	\caption[Olivetti Faces Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Olivetti Faces Datensatz. Hier schneiden alle Varianten der Autoencoder nicht so gut ab, wie es beispielweise auf dem MNIST Datensatz der Fall war. Dies könnte an der deutlich geringeren Stichprobengröße von 400 liegen, wodurch eine Konvergenz der Autoencoder schwieriger wird. Neben den Autoencoder schneidet hier auch LLE für größere Werte von $K$ schlecht ab, kann jedoch bei geringeren Nachbarschaftsgrößen sehr hohe Werte für die Vertrauenswürdigkeit und Kontinuität erreichen. PCA schneidet hinsichtlich allen drei Kriterien für alle Werte von $K$ am besten ab, gefolgt von der Kernel PCA. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den Olivetti Faces Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Olivetti Faces Datensatz. Hier schneiden alle Varianten der Autoencoder nicht so gut ab, wie es beispielweise auf dem MNIST Datensatz der Fall war. Dies könnte an der deutlich geringeren Stichprobengröße von 400 liegen, wodurch eine Konvergenz der Autoencoder schwieriger wird. Neben den Autoencoder schneidet hier auch LLE für größere Werte von $K$ schlecht ab, kann jedoch bei geringeren Nachbarschaftsgrößen sehr hohe Werte für die Vertrauenswürdigkeit und Kontinuität erreichen. PCA schneidet hinsichtlich allen drei Kriterien für alle Werte von $K$ am besten ab, gefolgt von der Kernel PCA. (Eigene Darstellung)}
 	\label{fig:OlivettiFacesMetrics}
 \end{figure}
 
@@ -59,7 +59,7 @@ LFW-People Datensatz und in \figref{fig:FER2013Metrics} für den FER-2013 Datens
 	\begin{center}
 		\input{\figures/LfwPeople_comparison.pgf}
 	\end{center}
-	\caption[LFW People Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den LFW People Datensatz. Die Kriterien auf diesem Datensatz zeigen ein ähnliches Bild wie auf dem Olivetti Faces Datensatz, jedoch bereitet hier die Stichprobengröße keine Probleme beim Trainieren der Autoencoder. Daher können auch der Autoencoder und der Convolutional Autoencoder wieder eine bessere Performance aufweisen. Trotzdem ist auch hier die Hauptkomponentenanalyse wieder für alle Werte der Nachbarschaftsgröße am besten. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den LFW-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den LFW People Datensatz. Die Kriterien auf diesem Datensatz zeigen ein ähnliches Bild wie auf dem Olivetti Faces Datensatz, jedoch bereitet hier die Stichprobengröße keine Probleme beim Trainieren der Autoencoder. Daher können auch der Autoencoder und der Convolutional Autoencoder wieder eine bessere Performance aufweisen. Trotzdem ist auch hier die Hauptkomponentenanalyse wieder für alle Werte der Nachbarschaftsgröße am besten. (Eigene Darstellung)}
 	\label{fig:LfwPeopleMetrics}
 \end{figure}
 
@@ -67,6 +67,6 @@ LFW-People Datensatz und in \figref{fig:FER2013Metrics} für den FER-2013 Datens
 	\begin{center}
 		\input{\figures/FER2013_comparison.pgf}
 	\end{center}
-	\caption[FER2013 Qualitätskriterien]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den FER 2013 Datensatz. Hier ist die Performance des Convolutional Autoencoders und der Hauptkomponentenanalyse nahezu identisch und im Vergleich mit den anderen Methoden am besten. Aber auch der Autoencoder und die Kernel PCA können einen konstant hohen Wert für $T(K)$ und $C(K)$ erreichen. Auch auf diesem Datensatz schneiden LLE und der Contractive Autoencoder mit Abstand am schlechtesten. Besonders LLE zeigt hier die Schwäche einer lokalen Erhaltung der Struktur, da die Qualitätskriterien für steigende Werte von $K$ sehr stark abfallen. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den FER-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den FER 2013 Datensatz. Hier ist die Performance des Convolutional Autoencoders und der Hauptkomponentenanalyse nahezu identisch und im Vergleich mit den anderen Methoden am besten. Aber auch der Autoencoder und die Kernel PCA können einen konstant hohen Wert für $T(K)$ und $C(K)$ erreichen. Auch auf diesem Datensatz schneiden LLE und der Contractive Autoencoder mit Abstand am schlechtesten. Besonders LLE zeigt hier die Schwäche einer lokalen Erhaltung der Struktur, da die Qualitätskriterien für steigende Werte von $K$ sehr stark abfallen. (Eigene Darstellung)}
 	\label{fig:FER2013Metrics}
 \end{figure}
