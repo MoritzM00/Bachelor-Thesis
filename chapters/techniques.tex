@@ -293,9 +293,9 @@ werden soll.
 Die Nichtlinearität eines Autoencoders wird durch die Auswahl der Aktivierungsfunktionen bestimmt.
 Werden ausschließlich lineare Funktionen verwendet, resultiert dies in einem linearen Autoencoder,
 welcher sehr ähnlich zur Hauptkomponentenanalyse ist. Dies wird in
-\subsecref{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA} noch genauer betrachtet. In den meisten
-Fällen werden jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt, um einen nichtlinearen
-Zusammenhang zu lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Charte.2018}.
+\subsecref{ch:Vergleich:sec:Resultate:PCA_AE} noch genauer betrachtet. In den meisten Fällen werden
+jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt, um einen nichtlinearen Zusammenhang zu
+lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Charte.2018}.
 
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}
@@ -344,19 +344,9 @@ jedoch der \newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \sub
 eingangs erwähnt ist ein linearer Autoencoder sehr ähnlich zur Hauptkomponentenanalyse. Dieser
 Zusammenhang wird im Folgenden betrachtet.
 
-\subsubsection{Verhältnis zur Hauptkomponentenanalyse}
-\label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}
+% \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
+% \label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}
 
-\unsure{Diesen Abschnitt weglassen und stattdessen im Vergleich}
-\textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y}$ eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten einer PCA (siehe \secref{ch:MethodenDerDimRed:statistisch:PCA}) ist: Die Gewichte des Autoencoders spannen den gleichen Unterraum auf wie die Eigenvektoren der Kovarianzmatrix der Daten. Dies gilt sogar dann, wenn in einem dreischichtigen Autoencoder nichtlineare Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die Lösung eines linearen Autoencoders
-mit der von PCA wie folgt \parencite[3]{Plaut.2018}:\unsure{was meine ich mit "Lösung" des linearen Autoencoders? Genauer
-	beschreiben}
-\begin{enumerate}
-	\item Die Lösung eines linearen Autoencoders ist nicht orthogonal, das heißt sie ist nicht unkorrelliert.
-	\item Die Lösung eines linearen Autoencoders ist nicht absteigend nach zugehöriger Varianz sortiert.
-	\item Die Lösung einer Reduktion auf $k_1$ Neuronen in der Bottleneck-Schicht ist keine Teilmenge für
-	      eine Reduktion auf $k_2$ Neuronen mit $k_2 < k_1$.
-\end{enumerate}
 %Um den Zusammenhang zwischen der PCA und dem Autoencoder zu verdeutlichen,
 % wird im Folgenden ein einfacher linearer Autoencoder mit drei Schichten betrachtet. Der Encoder
 % kann somit als
