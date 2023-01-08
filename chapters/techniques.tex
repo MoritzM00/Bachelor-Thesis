@@ -53,17 +53,17 @@ sowie die mathematische Herleitung der sogenannten \newterm{Hauptkomponenten} (U
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Grundidee}
-Die zentrale Idee der Hauptkomponentenanalyse ist die Transformation des Koordinatensystems in einer möglichst \textit{verlustfreien} Art und Weise. Verlustfrei bedeutet im Kontext der Hauptkomponentenanalyse, dass möglichst viel Variation in den Daten erhalten bleiben soll \parencite[vgl.][1]{Jolliffe.2002}. Möchte man dann die Dimension von $D$ auf die intrinsische
-Dimension $d$ reduzieren, so wählt man einfach die \textit{ersten} $d$ Hauptkomponenten.\rewrite{Zu
-	ungenau, und hier gleich das Ergebnis zu erwähnen ist auch nicht so hilfreich für die Grundidee}
-Was diese Hauptkomponenten sind und wie man sie herleitet, wird im Folgenden genauer betrachtet.
+Die zentrale Idee der Hauptkomponentenanalyse ist die Transformation des Koordinatensystems in einer möglichst \textit{verlustfreien} Art und Weise. Verlustfrei bedeutet im Kontext der Hauptkomponentenanalyse, dass möglichst viel Variation in den Daten erhalten bleiben soll \parencite[vgl.][1]{Jolliffe.2002}. Das Ziel ist also, die Richtungen der größten Varianz in den Daten
+zu finden, da diese den höchsten Informationsgehalt besitzen. Daher wird sukzessive die Varianz der
+im Folgenden definierten Hauptkomponenten maximiert. Was diese Hauptkomponenten sind und wie man
+sie herleitet, wird in den folgenden zwei Unterabschnitten genauer betrachtet.
 
 \subsubsection{Definition der Hauptkomponenten}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Definition}
 Als Ausgangsbasis wird ein $D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x}_1, \ldots, \rv{x}_D)}$ mit $\Exp[\rvect{x}] = \vect{0}$ angenommen und das Ziel ist es, eine $k$-dimensionale Repräsentation $\rvect{y} = \tr{(\rv{y_1},\ldots,\rv{y}_k)}$ zu erhalten. Idealerweise setzt man $k$ auf die intrinsische Dimension $d$ von $\rvect{x}$, hier soll jedoch nur der Fokus auf die allgemeine Dimensionsreduktion gelegt werden. Wir drücken also $\rvect{y}$ als eine Linearkombination des ursprünglichen hochdimensionalen Vektors $\rvect{x}$ wie folgt aus:
 \begin{equation}
 	\rv{y}_i = \tr{\vect{a}_i} \rvect{x} = a_{i1} \rv{x}_1 + \cdots + a_{iD} \rv{x}_D
-	\quad i = 1,\ldots,k
+	\quad \text{mit } i = 1,\ldots,k \,
 \end{equation}
 wobei $\vect{a}_i$ die \newterm{Koeffizienten} (auch: Ladungen) der $i$-ten Hauptkomponente sind \parencite[vgl.][2]{Jolliffe.2002}. Die Anzahl $k$ der Hauptkomponenten bestimmt den Grad der
 Dimensionsreduktion, kann jedoch beliebig zwischen $1 \leq k \leq D$ gewählt werden.\footnote{Der
@@ -73,7 +73,7 @@ Dimensionsreduktion, kann jedoch beliebig zwischen $1 \leq k \leq D$ gewählt we
 
 \subsubsection{Herleitung der Hauptkomponenten}
 \label{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}
-Betrachtet wird nun zunächst lediglich die \textit{erste} Hauptkomponente $\tr{\vect{a}_1} \rvect{x}$ und erinnern uns daran, dass wir wie in \subsecref{ch:MethodenDerDimRed:statistisch:PCA:Grundidee} erwähnt möglichst viel Variation von $\rvect{x}$ erhalten möchten. Daher wird die erste Hauptkomponente so gewählt, dass die Varianz maximal wird:
+Betrachtet wird nun zunächst lediglich die \textit{erste} Hauptkomponente $\tr{\vect{a}_1} \rvect{x}$. Wie in \subsecref{ch:MethodenDerDimRed:statistisch:PCA:Grundidee} erwähnt, soll möglichst viel Variation von der ursprünglichen Repräsentation $\rvect{x}$ erhalten bleiben. Daher wird die erste Hauptkomponente so gewählt, dass die Varianz maximal wird:
 \begin{equation}
 	\label{eq:PCA-Optimierungsproblem}
 	\max_{\vect{a}_1}\, \Var \left( \tr{\vect{a}_1} \rvect{x} \right) = \max_{\vect{a}_1} \tr{\vect{a}_1} \mat{\Sigma} \vect{a}_1
@@ -93,10 +93,9 @@ sind. Man beachte, dass dies gleichzeitig die Zielfunktion unseres Optimierungsp
 
 Um nun die zweite Hauptkomponente zu erhalten, wird wieder die Varianz mit der
 Einheitsvektor-Nebenbedingung $\norm{\vect{a}_2}$ = 1 maximiert. Zusätzlich muss jedoch gelten,
-dass die zweite Hauptkomponente zur Ersten \textit{unkorreliert}\unsure{wieso muss das gelten? Ein
-	satz dazu wäre gut} ist \parencite[5]{Jolliffe.2002}, das heißt
+dass die zweite Hauptkomponente zur Ersten \textit{unkorreliert} ist \parencite[5]{Jolliffe.2002}, das heißt
 \begin{equation}
-	\Cov(\tr{\vect{a}_1}\rvect{x}, \tr{\vect{a}_2}\rvect{x}) = 0
+	\Cov(\tr{\vect{a}_1}\rvect{x}, \tr{\vect{a}_2}\rvect{x}) \overset{!}{=} 0
 \end{equation}
 Auch dieses Optimierungsproblem ist ein Eigenwertproblem und man erhält, dass die Koeffizienten $\vect{a}_2$ der zweiten Hauptkomponente der Eigenvektor mit dem zweitgrößten Eigenwert von $\mat{\Sigma}$ ist.
 Generell lässt sich zeigen, dass die Koeffizienten der $i$-ten Hauptkomponente dem Eigenvektor mit dem $i$-ten nach der Größe geordneten Eigenwert entspricht \parencite[6]{Jolliffe.2002}. Aus diesem Grund lassen sich die Hauptkomponenten kompakt durch
