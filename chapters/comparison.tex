@@ -316,7 +316,7 @@ sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
 	\label{fig:MNISTMetrics}
 \end{figure}
 Für die Olivetti Faces (\figref{fig:OlivettiFacesMetrics}), den FER- (\figref{fig:FER2013Metrics}) und den LFW-Datensatz (\figref{fig:LfwPeopleMetrics})
-schneidet LLE auf allen drei Kriterien am schlechtesten ab. Zusätzlich nehmen die
+schneidet LLE auf allen drei Kriterien relativ gesehen sehr schlecht ab. insbesondere nehmen die
 Qualitätskriterien von LLE mit größer werdender Nachbarschaftsgröße $K$ deutlicher ab, als bei den
 restlichen Methoden. Aufgrund der Wahl der Nachbarschaftsgröße von $K=10$ für Locally Linear
 Embedding und der lokalen Eigenschaften macht dies jedoch Sinn. Aus diesem Grund ist die
@@ -331,6 +331,23 @@ zu erkennen ist. Das Problem einer geringen Menge an Trainingsdaten gilt gleiche
 Varianten von neuronalen Netzen, insbesondere jedoch für vollvernetzte Autoencoder aufgrund der
 hohen Anzahl an Freiheitsgraden im Netz.
 
+Interessant ist außerdem, wie gut die Dimensionsreduktionsmethoden ein originales Bild wieder
+rekonstruieren können. In diesem Vergleich können allerdings nur die Hauptkomponentenanalyse und
+alle Varianten der Autoencoder für die Rekonstruktion verwendet werden. Kernel PCA und Locally
+Linear Embedding erlauben keine inverse Transformation aus der latenten Repräsentation $\vect{y}$
+zurück in eine approximierte ursprüngliche Repräsentation $\estNormal{\vect{x}}$. Für die
+Hauptkomponentenanalyse, den klassischen vollvernetzten Autoencoder, den Convolutional Autoencoder
+und für den Contractive Autoencoder wurde auf dem MNIST-Datensatz je ein Beispielbild für eine der
+Zahlen rekonstruiert und in \figref{fig:MNIST-reconstructions} abgebildet. Die erste Zeile besteht
+aus den Originalbildern als Referenz.
+\begin{figure}[ht]
+	\centering
+	\includegraphics{reconstructions_mnist_pca_ae_convae_cae.png}
+	\caption[Rekonstruktierte MNIST-Zahlen]{Gezeigt sind einige rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch den Convolutional Autoencoder und (5) Rekonstruktion durch den Contractive Autoencoder}
+	\label{fig:MNIST-reconstructions}
+\end{figure}
+Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Die Rekonstrukionen der Hauptkomponentenanalyse und des Contractive Autoencoders sind visuell nicht überzeugend, da sie deutlich verwaschener sind. Der Convolutional Autoencoder hat auf dem MNIST-Datensatz auf den Qualitätskriterien ebenfalls am besten abgeschnitten (siehe \figref{fig:MNISTMetrics}). Der für den MNIST-Datensats eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte. Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER- oder LFW-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
+
 \subsection{PCA und Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}
 
@@ -339,7 +356,8 @@ der theoretische Zusammenhang zwischen den beiden Methoden erklärt. Im Anschlus
 Hauptkomponentenanalyse und unterschiedliche Modelle des Autoencoders für einen empirischen
 Vergleich auf dem FER-Datensatz trainiert, wobei aufgrund der sechs unterschiedlichen Emotionen im
 Datensatz eine Reduktion auf sechs Dimensionen durchgeführt wurde. Ein Beispielbild für jede
-Emotion des FER-Datensatz ist in \figref{fig:FER-Datensatz-Beispiele} dargestellt.
+Emotion des FER-Datensatzes ist in \figref{fig:FER-Datensatz-Beispiele} dargestellt.\rewrite{FER
+	hat 7 Emotionen. wütend fehlt hier}
 
 \begin{figure}[ht]
 	\centering
@@ -377,8 +395,7 @@ Weise kann die \enquote{Arbeitsweise} des Autoencoders anschaulich untersucht we
 \begin{figure}[ht]
 	\centering
 	\input{\figures/weights-comparison.pgf}
-	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf sechs Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders und \captionc die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist.
-		Bei genauer Betrachtung der Ladungen von PCA und der Gewichte des linearen Autoencoders fällt auf, dass diese bis auf die Vorzeichen (erkennbar am invertierten Grauwert) sehr ähnlich sind. Bei einem nichtlinearen Encoder ist dies nicht mehr der Fall. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf sechs Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders und \captionc die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}
 Hierbei ist in \captiona die Ladungsmatrix von PCA, in \captionb die Gewichtsmatrix $\mat{W}_2$ eines linearen dreischichtigen Autoencoders und in \captionc die Gewichtsmatrix $\mat{W}_2$ eines nichtlinearen Autoencoders dargestellt. Wie zu erkennen ist, sind
