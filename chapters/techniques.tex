@@ -410,7 +410,7 @@ formuliert werden, wobei $\mat{W} \in \real^{d \times D}$ und $\mat{\widetilde{W
 \end{equation}
 verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
 \begin{equation}
-	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^n \left( \vect{y}_i (1 - \vect{y}_i)\right)^2 \sum_{ij} \mat{W}^2_{ij}
+	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^d \left( y_i (1 - y_i)\right)^2 \sum_{j = 1}^D \mat{W}^2_{ij}
 \end{equation}
 effizient berechnet werden \parencite[4]{Rifai.2011}. Für einen Autoencoder mit mehr als einer versteckten Schicht wird die
 Berechnung sehr teuer, was das Trainieren eines tiefen Contractive Autoencoders ohne Tricks wie

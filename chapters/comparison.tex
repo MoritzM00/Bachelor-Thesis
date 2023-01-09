@@ -104,7 +104,7 @@ misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden.
 Das Local Continuity Meta-Criterion (LCMC), entwickelt von \textcite{Chen.2009}, ist ebenso wie die Vertrauenswürdigkeit und Kontinuität ein rang-basiertes Qualitätskriterium. LCMC betrachtet die Überschneidung der $K$-Nachbarschaften in der ursprünglichen und latenten Repräsentation. Nimmt man wieder die $K$-Nachbarschaften aös $M_i(K)$ und $\widetilde{M}_i(K)$ an, das heißt die Indexmengen der $K$-Nachbarschaften in der ursprünglichen beziehungsweise latenten Repräsentation, dann lässt sich das LCMC wie folgt berechnen \parencite[212]{Chen.2009}:
 \begin{equation}
 	\label{eq:LCMC}
-	\text{LCMC}(K) = \frac{1}{nK} \sum_{i=1}^{n} \left( \left| M_i(K) \cap \widetilde{M}_i(K) \right| \right) - \frac{K}{n - 1} \,,
+	\text{LCMC}(K) = \frac{1}{nK} \sum_{i=1}^{n} \left( \left| \set{M}_i(K) \cap \widetilde{\set{M}}_i(K) \right| \right) - \frac{K}{n - 1} \,,
 \end{equation}
 wobei $­|\cdot|$ die Kardinalität einer Menge und $\set{A} \cap \set{B}$ den Durchschnitt zweier Mengen $\set{A}$ und $\set{B}$ bezeichnet. Der Term vor der Summation skaliert auch dieses Kriterium auf den Wertebereich zwischen Null und Eins, wobei LCMC$(K) = 1$ den besten Wert darstellt. Die durschnittliche Überschneidung der beiden Indexmengen wird wie in \eqref{eq:LCMC} ersichtlich noch um einen additiven Term korrigiert. Dieser Term entspricht dem Erwartungswert einer zufälligen Überschneidung und kann durch eine hypergeometrische Verteilung mit $K$ Defekten aus $n - 1$ modelliert werden \parencite[213]{Chen.2009}. Diese sogenannte Basislinie (engl. \textit{Baseline}) wird mit steigendem
 $K$ größer, so dass das Kriterium für den maximalen Wert der Nachbarschftsgröße $K = n - 1$ den
