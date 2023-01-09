@@ -4546,7 +4546,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.719260in,y=1.732526in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Koninuität}%
+\pgftext[x=1.719260in,y=1.732526in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Kontinuität}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
