@@ -128,7 +128,7 @@ dieser Schätzer auf \textcites{Campadelli.2015}{Bac.2021}{Verveer.1995} verwies
 In \secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim} haben wir die \textit{topologische
 	Dimension} kennengelernt, welche sich in der Literatur zur Strukturerkennung durchgesetzt hat \parencite[1]{Campadelli.2015}. Allerdings bringt diese Definition praktische Schwierigkeiten mit sich,
 weswegen die meisten Schätzer der intrinsischen Dimension auf der damit verwandten
-\textit{fraktalen Dimension} wie zum Beispiel der Schätzer der Korrelationsdimension \parencite{Camastra.2002} basieren. Daneben gibt es noch Nächste-Nachbar-basierte Schätzer \parencite[1]{Campadelli.2015}. Zu dieser Kategorie gehört auch der weit verbreitete und in dieser
+\textit{fraktalen Dimension} wie zum Beispiel der Schätzer der Korrelationsdimension \parencite{Camastra.2002} basieren. Daneben gibt es noch Nächste-Nachbar-basierte Schätzer \parencite[1]{Campadelli.2015}. Zu dieser Kategorie gehört auch der weitverbreitete und in dieser
 Arbeit verwendete \newterm{Maximum Likelihood Schätzer} von \textcite{Levina.2004}. Diese Schätzer
 betrachten die Verteilung der Nachbarschaft eines Punktes $\rvect{x}$ als Funktion der
 intrinsischen Dimension -- üblicherweise innerhalb einer kleinen Kugel um $\rvect{x}$
@@ -179,7 +179,7 @@ Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \
 	Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der
 \textit{ICMR}-Datensatz\footnote{\url{https://www.kaggle.com/datasets/shibumohapatra/icmr-data?select=labels.csv}}
 ausgewählt, um die Performance der Dimensionsreduktionsmethoden auf natürlichen Datensätzen zu
-evaluieren. Der weit verbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von
+evaluieren. Der weitverbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von
 handgeschriebenen Zahlen in der Auflösung $28 \times 28$. Die Anzahl der Pixel und damit die
 extrinsische Dimension beträgt 784. Der \textit{Olivetti Faces}-Datensatz enthält Bilder von
 Gesichtern aus zehn unterschiedlichen Positionen von 40 Personen und ist damit der kleinste
@@ -188,7 +188,7 @@ natürliche Datensatz in diesem Vergleich mit 400 Bildern. Die Bilder haben eine
 insgesamt über 13 000 Bilder von Gesichtern, jedoch wurde hier eine Teilmenge ausgewählt, sodass
 jede Person mindestens 30 mal vorkommt. Dies resultiert in einer Stichprobengröße von 2370. Die
 Bilder haben eine Auflösung von $62 \times 47$ und damit eine extrinsische Dimension von 2914. Der
-FER-Datensatz besteht aus 28 709 Bildern von Gesichtern mit sechs unterschiedlichen Emotionen. Die
+FER-Datensatz besteht aus 28 709 Bildern von Gesichtern mit sieben unterschiedlichen Emotionen. Die
 Bilder haben eine Auflösung von $48 \times 48$ und sind damit 2304-dimensional. Beispiele der
 Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
 \begin{figure}
@@ -203,7 +203,7 @@ Letztlich enthält der ICMR-Datensatz Genausprägungen von 801 Personen, die mit
 unterschiedlichen Arten von Krebs diagnostiziert wurden. Der Datensatz enthält Genausprägungen von
 über 20 000 Genen, womit dieser Datensatz die höchste extrinsische Dimension im Vergleich besitzt.
 In Tabelle \ref{tab:uebersicht-datensaetze} sind die extrinsischen und intrinsischen Dimensionen,
-sowie die Stichprobengröße der Datensätze zusammengefasst. Die intrinsischen Dimensionen sind die
+sowie die Stichprobengrößen der Datensätze zusammengefasst. Die intrinsischen Dimensionen sind die
 Schätzungen des in \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim}
 erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 
@@ -212,12 +212,12 @@ erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 	\begin{tabular}{@{}lrrr@{}}
 		\toprule
 		Datensatz      & extrinsische Dimension $D$ & intrinsische Dimension $d$ & Stichprobengröße $n$ \\ \midrule
-		Swiss Roll     & 3                          & 2                          & 5000                 \\
-		Twin Peaks     & 3                          & 2                          & 5000                 \\
+		Swiss Roll     & 3                          & 2                          & 5 000                \\
+		Twin Peaks     & 3                          & 2                          & 5 000                \\
 		MNIST          & 784                        & 10                         & 60 000               \\
-		Olivetti Faces & 4096                       & 10                         & 400                  \\
-		LFW            & 2914                       & 21                         & 2370                 \\
-		FER            & 2304                       & 26                         & 28 709               \\
+		Olivetti Faces & 4 096                      & 10                         & 400                  \\
+		LFW            & 2 914                      & 21                         & 2370                 \\
+		FER            & 2 304                      & 26                         & 28 709               \\
 		ICMR           & 20 531                     & 22                         & 801                  \\
 		\bottomrule
 	\end{tabular}
@@ -225,7 +225,7 @@ erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 	\label{tab:uebersicht-datensaetze}
 \end{table}
 
-\section{Parameterwahl und Trainingsdetails}
+\section{Trainingsdetails und Parameterwahl}
 \label{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
 
 In diesem Abschnitt werden die gewählten (Hyper-)Parameter und Details des Trainierens der
@@ -234,12 +234,11 @@ Tabelle~\ref{tab:uebersicht-parameter} zu finden. Alle Datensätze wurde vor dem
 Dimensionsreduktionsmethoden standardisiert, das heißt $\mat{X}$ weist einen spaltenweisen
 Erwartungswert von Null und eine spaltenweise Varianz von Eins auf. Für die Evaluierung der
 Methoden wurde aufgrund von Restriktionen der Rechenleistung (insbesondere des Arbeitsspeichers)
-ein Downsampling auf maximal 25 000 Stichproben durchgeführt. Dies ist allerdings nur für den
-MNIST- und FER-Datensatz von Relevanz. Alle anderen Datensätze haben weniger
-Stichproben.\footnote{Die Evaluierung ist aufgrund der Berechnung der Co-Ranking-Matrix
-	speicherintensiv, da diese maximal $(n-1) \times (n-1)$ groß ist und damit quadratisch mit $n$
-	ansteigt. Um die Qualitätskriterien für den MNIST-Datensatz zu berechnen, werden circa 25 GB
-	Arbeitsspeicher benötigt.}
+ein Downsampling auf maximal 25 000 Stichproben durchgeführt.\footnote{Die Evaluierung ist aufgrund
+	der Berechnung der Co-Ranking-Matrix speicherintensiv, da diese maximal $(n-1) \times (n-1)$ groß
+	ist und damit quadratisch mit $n$ ansteigt. Um die Qualitätskriterien für den MNIST-Datensatz zu
+	berechnen, werden circa 25 GB Arbeitsspeicher benötigt.} Dies ist allerdings nur für den MNIST- und
+FER-Datensatz von Relevanz. Alle anderen Datensätze haben weniger Stichproben.
 
 Für die Hauptkomponentenanalyse gibt es neben der Anzahl der zu behaltenden Hauptkomponenten keine
 Parameter. Die Anzahl der Hauptkomponenten entspricht der intrinsischen Dimension, welche vom
@@ -262,8 +261,8 @@ und für den Olivetti Face Datensatz wird ein dreischichtiger Autoencoder einges
 anderen Datensätze wird ein fünfschichtiger Autoencoder trainiert. Alle vollvernetzten Autoencoder
 und der Contractive Autoencoder verwenden Sigmoid-Aktivierungsfunktionen im Encoder und Decoder.
 Auf Bilddatensätzen wurden zusätzlich Convolutional Autoencoder trainiert, deren Architekturen an
-\textcite[14]{Ghosh.2019} angelehnt sind und ebenfalls in
-Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
+\textcite[14]{Ghosh.2019} angelehnt und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details}
+spezifiziert sind.
 
 \begin{table}[ht]
 	\tymax=300pt
@@ -308,7 +307,7 @@ Die Qualitätskriterien für den Swiss Roll Datensatz sind in \figref{fig:SwissR
 	\begin{center}
 		\input{\figures/SwissRoll_comparison.pgf}
 	\end{center}
-	\caption[Qualitätskriterien für die Swiss Roll]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab, dicht gefolgt vom Autoencoder (AE) und der Kernel PCA. Die restlichen Methoden unterscheiden sich nicht stark, lediglich bei der Vertrauenswürdigkeit kann sich die Kernel PCA etwas nach oben absetzen. Die PCA und der Autoencoder sind hinsichtlich der Kontinuität und des LCMC sehr ähnlich. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für die Swiss Roll]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab. Die restlichen Methoden unterscheiden sich nicht stark, lediglich bei der Vertrauenswürdigkeit können sich die Kernel PCA und der Contractive Autoencoder etwas nach oben absetzen. Die PCA und der Autoencoder sind hinsichtlich der Kontinuität und des LCMC sehr ähnlich. (Eigene Darstellung)}
 	\label{fig:SwissRollMetrics}
 \end{figure}
 und die Qualitaetskriterien für den Twin Peaks Datensatz in \figref{fig:TwinPeaksMetrics} abgebildet. Wie dort zu erkennen ist, zeigt Locally Linear Embedding eine sehr starke Performance auf den beiden künstlichen Datensätzen. Der Autoencoder kann sich hinsichtlich des Twin Peaks Datensatzes von den restlichen Methoden abheben. Bei der Swiss Roll ist dies jedoch nicht der Fall. Hier sind die PCA, die Kernel PCA, sowie beide Varianten des Autoencoders relativ ähnlich.
@@ -323,7 +322,7 @@ sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
 	\begin{center}
 		\input{\figures/MNIST_comparison.pgf}
 	\end{center}
-	\caption[Qualitätskriterien für MNIST]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST-Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine starke Performance zeigen, da der Datensatz von hoher Qualität ist und eine hohe Stichprobengröße aufweisen kann. Nichtsdestotrotz kann die Hauptkomponentenanalyse nur knapp dahinter sehr gut mithalten und hinsichtlich der Kontinuität sogar übertreffen. Die Kernel PCA und der klassische vollvernetzte Autoencoder schneiden ebenfalls relativ gut ab, die Kernel PCA aber durchweg etwas schlechter ist als der Autoencoder. LLE und der Contractive Autoencoder können vor allem auf dem LCMC nicht mithalten. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für MNIST]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST-Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine starke Performance zeigen, da der Datensatz von hoher Qualität ist und eine hohe Stichprobengröße aufweisen kann. Nichtsdestotrotz kann die Hauptkomponentenanalyse nur knapp dahinter sehr gut mithalten und hinsichtlich der Kontinuität sogar übertreffen. Die Kernel PCA und der klassische vollvernetzte Autoencoder schneiden ebenfalls relativ gut ab, jedoch ist die Reduktion der Kernel PCA weniger vertrauenswürdig. Locally Linear Embedding und der Contractive Autoencoder können vor allem auf dem LCMC nicht mithalten. (Eigene Darstellung)}
 	\label{fig:MNISTMetrics}
 \end{figure}
 Für die Olivetti Faces (\figref{fig:OlivettiFacesMetrics}), den FER- (\figref{fig:FER2013Metrics}) und den LFW-Datensatz (\figref{fig:LfwPeopleMetrics})
@@ -345,16 +344,17 @@ hohen Anzahl an Freiheitsgraden im Netz.
 Interessant ist außerdem, wie gut die Dimensionsreduktionsmethoden ein originales Bild wieder
 rekonstruieren können. In diesem Vergleich können allerdings nur die Hauptkomponentenanalyse und
 alle Varianten der Autoencoder für die Rekonstruktion verwendet werden. Kernel PCA und Locally
-Linear Embedding erlauben keine inverse Transformation aus der latenten Repräsentation $\vect{y}$
-zurück in eine approximierte ursprüngliche Repräsentation $\estNormal{\vect{x}}$. Für die
-Hauptkomponentenanalyse, den klassischen vollvernetzten Autoencoder, den Convolutional Autoencoder
-und für den Contractive Autoencoder wurde auf dem MNIST-Datensatz je ein Beispielbild für eine der
-Zahlen rekonstruiert und in \figref{fig:MNIST-reconstructions} abgebildet. Die erste Zeile besteht
-aus den Originalbildern als Referenz.
+Linear Embedding erlauben ohne Approximation keine inverse Transformation aus der latenten
+Repräsentation $\vect{y}$ zurück in eine approximierte ursprüngliche Repräsentation
+$\estNormal{\vect{x}}$. Für die Hauptkomponentenanalyse, den klassischen vollvernetzten
+Autoencoder, den Convolutional Autoencoder und für den Contractive Autoencoder wurde auf dem
+MNIST-Datensatz je ein Beispielbild für eine der Zahlen rekonstruiert und in
+\figref{fig:MNIST-reconstructions} abgebildet. Die erste Zeile besteht aus den Originalbildern als
+Referenz.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{reconstructions_mnist_pca_ae_convae_cae.png}
-	\caption[Rekonstruktierte MNIST-Zahlen]{Gezeigt sind einige rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch den Convolutional Autoencoder und (5) Rekonstruktion durch den Contractive Autoencoder}
+	\caption[Rekonstruktierte MNIST-Zahlen]{Gezeigt sind einige rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch den Convolutional Autoencoder und (5) Rekonstruktion durch den Contractive Autoencoder.}
 	\label{fig:MNIST-reconstructions}
 \end{figure}
 Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Die Rekonstrukionen der Hauptkomponentenanalyse und des Contractive Autoencoders sind visuell nicht überzeugend, da sie deutlich unscharfer sind. Der Convolutional Autoencoder hat auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien ebenfalls am besten abgeschnitten (siehe \figref{fig:MNISTMetrics}). Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte. Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER- oder LFW-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
@@ -365,15 +365,15 @@ Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt
 In diesem Abschnitt wird die Hauptkomponentenanalyse mit Autoencodern verglichen. Dazu wird zuerst
 der theoretische Zusammenhang zwischen den beiden Methoden erklärt. Im Anschluss wird die
 Hauptkomponentenanalyse und unterschiedliche Modelle des Autoencoders für einen empirischen
-Vergleich auf dem FER-Datensatz trainiert, wobei aufgrund der sechs unterschiedlichen Emotionen im
-Datensatz eine Reduktion auf sechs Dimensionen durchgeführt wurde. Ein Beispielbild für jede
+Vergleich auf dem FER-Datensatz trainiert, wobei aufgrund der sieben unterschiedlichen Emotionen im
+Datensatz eine Reduktion auf sieben Dimensionen durchgeführt wurde. Ein Beispielbild für jede
 Emotion des FER-Datensatzes ist in \figref{fig:FER-Datensatz-Beispiele} dargestellt.\rewrite{FER
 	hat 7 Emotionen. wütend fehlt hier}
 
 \begin{figure}[ht]
 	\centering
 	\input{\figures/fer2013-images.pgf}
-	\caption[Beispielbilder des FER-Datensatzes]{Abgebildet ist je ein Bild für eine der sechs Emotionen im FER-Datensatz.}
+	\caption[Beispielbilder des FER-Datensatzes]{Abgebildet ist je ein Bild für eine der sieben Emotionen im FER-Datensatz.}
 	\label{fig:FER-Datensatz-Beispiele}
 \end{figure}
 
@@ -390,10 +390,10 @@ Autoencodern auf unterschiedliche Dimensionen nicht geschachtelt sind.
 \begin{figure}[ht]
 	\centering
 	\input{\figures/correlation-matrices.pgf}
-	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer dreischichtiger Autoencoder mit Sigmoid-Encoder und linearem Decoder verwendet wurde, um die Daten auf sechs Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch die Autoencoder besteht Korrelation, wobei der lineare Autoencoder zufälligerweise betragsmäßig größere Korrelationen erzeugt als der nichtlineare Autoencoder.  (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer dreischichtiger Autoencoder mit Sigmoid-Encoder und linearem Decoder verwendet wurde, um die Daten auf sieben Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch die Autoencoder besteht Korrelation, wobei der lineare Autoencoder zufälligerweise betragsmäßig größere Korrelationen erzeugt als der nichtlineare Autoencoder.  (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Korrelationsmatrizen}
 \end{figure}
-Punkt 1 ist in beispielsweise in \figref{fig:Korrelationsmatrizen} zu erkennen. Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer Autoencoder verwendet wurde. Die Korrelationsmatrix der Hauptkomponentenanalyse ist eine Einheitsmatrix, während die Korrelationsmatrizen der durch die Autoencoder gefundenen latenten Repräsentationen von Null verschiedene Werte auf der Nicht-diagonalen aufweisen.
+Punkt 1 ist beispielsweise in \figref{fig:Korrelationsmatrizen} zu erkennen. Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer Autoencoder verwendet wurde. Die Korrelationsmatrix der Hauptkomponentenanalyse ist eine Einheitsmatrix, während die Korrelationsmatrizen der durch die Autoencoder gefundenen latenten Repräsentationen von Null verschiedene Werte auf der Nicht-diagonalen aufweisen.
 
 Um die gefundenen Lösungen einer Hauptkomponentenanalyse und von Autoencodern genauer betrachten zu
 können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines dreischichtigen
@@ -406,7 +406,7 @@ Weise kann die \enquote{Arbeitsweise} des Autoencoders anschaulich untersucht we
 \begin{figure}[ht]
 	\centering
 	\input{\figures/weights-comparison.pgf}
-	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf sechs Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders und \captionc die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf sieben Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders und \captionc die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}
 Hierbei ist in \captiona die Ladungsmatrix von PCA, in \captionb die Gewichtsmatrix $\mat{W}_2$ eines linearen dreischichtigen Autoencoders und in \captionc die Gewichtsmatrix $\mat{W}_2$ eines nichtlinearen Autoencoders dargestellt. Wie zu erkennen ist, sind
