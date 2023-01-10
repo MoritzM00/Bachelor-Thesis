@@ -189,6 +189,29 @@ die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[
 \subsubsection{Auswahl des Kernels}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:AuswahlKF}
 
+Die Performance der Kernel PCA hängt entscheidend von der Wahl des Kernels ab. Leider gibt es keine
+Möglichkeit, vorab den besten Kernel für ein spezifisches Problem auszuwählen. Dies ist die größte
+Schwachstelle der Kernel PCA und ein Grund, wieso sich die Kernel PCA nicht so stark in der
+Dimensionsreduktion durchsetzen konnte wie die klassische Hauptkomponentenanalyse. Allgemein umgeht
+man das Problem der manuellen Auswahl eines Kernels für Kernel-Methoden mittels Kreuz-Validierung
+(engl. \textit{Cross-Validation} (CV)). Dabei wird ein Qualitätskriterium festgelegt und die
+Methode mit einer vorab definierten Auswahl an Kernel-Funktionen auf einer Teilmenge des
+Trainingsdatensatzes trainiert und evaluiert. Die Parameter der Methode, die hinsichtlich des
+Qualitätskriteriums am besten abgeschnitten hat, werden dann für das eigentliche Modell übernommen
+und auf dem größeren Trainingsdatensatz trainiert. Dies funktioniert für Klassifikatoren und
+Regressoren wie z.B. die Support Vector Machine sehr gut, da die Wahl der Qualitätskriterien klar
+ist. Für die Dimensionsreduktion ist die Wahl des Qualitätskriteriums nicht so trivial, wie wir
+später in \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} sehen werden.
+
+In der Praxis sehr häufig anzutreffen sind Gaußsche Kernel (auch: Radiale Basisfunktionen (RBF))
+\begin{equation}
+	\kappa(\vect{x}_i, \vect{x}_j) = \exp \left(- \frac{\norm{ \vect{x}_i - \vect{x}_j}^2}{2\sigma}\right) \, ,
+\end{equation}
+wobei der Parameter $\sigma > 0$ die \enquote{Breite} des Kernels bestimmt \parencite[296]{ShaweTaylor.2011}. Außerdem sind polynomiale Funktionen \parencite[292]{ShaweTaylor.2011}
+\begin{equation}
+	\kappa(\vect{x}_i, \vect{x}_j) = (\vect{x}_i \cdot \vect{x}_j)^p
+\end{equation}
+des Grades $p$ eine häufige Wahl des Kernels.
 %% ==============================
 \subsection{Locally Linear Embedding}
 \label{ch:MethodenDerDimRed:statistisch:LLE}
