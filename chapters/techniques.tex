@@ -165,7 +165,7 @@ Die Kovarianzmatrix $\mat{C}$ der (zentrierten) Daten im Merkmalsraum ist defini
 \begin{equation}
 	\mat{C} = \frac{1}{n} \tr{\bm{\phi}(\mat{X})} \bm{\phi}(\mat{X}) \, ,
 \end{equation}
-wobei $\bm{\phi}(\mat{X}) = \tr{\left[ \bm{\phi}(\vect{x}_1), \ldots, \bm{\phi}(\vect{x}_n) \right]}$ hier elementweise auf die Zeilen von $\mat{X}$ angewandt wird. Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt, ist diese Matrix aber sehr ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
+wobei $\bm{\phi}(\mat{X}) = \tr{\left[ \bm{\phi}(\vect{x}_1), \ldots, \bm{\phi}(\vect{x}_n) \right]}$ hier elementweise auf die Zeilen von $\mat{X}$ angewandt wird. Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt, ist diese Matrix aber ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
 \begin{align}
 	\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1,\ldots,n} \label{eq:kPCA:KernelMatrix_A} \\
 	        & = \bm{\phi}(\mat{X}) \tr{\bm{\phi}(\mat{X})} \label{eq:kPCA:KernelMatrix_B}
@@ -199,11 +199,11 @@ Methode mit einer vorab definierten Auswahl an Kernel-Funktionen auf einer Teilm
 Trainingsdatensatzes trainiert und evaluiert. Die Parameter der Methode, die hinsichtlich des
 Qualitätskriteriums am besten abgeschnitten hat, werden dann für das eigentliche Modell übernommen
 und auf dem größeren Trainingsdatensatz trainiert. Dies funktioniert für Klassifikatoren und
-Regressoren wie z.B. die Support Vector Machine sehr gut, da die Wahl der Qualitätskriterien klar
-ist. Für die Dimensionsreduktion ist die Wahl des Qualitätskriteriums nicht so trivial, wie wir
-später in \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} sehen werden.
+Regressoren wie z.B. die Support Vector Machine gut, da die Wahl der Qualitätskriterien klar ist.
+Für die Dimensionsreduktion ist die Wahl des Qualitätskriteriums nicht so trivial, wie wir später
+in \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} sehen werden.
 
-In der Praxis sehr häufig anzutreffen sind Gaußsche Kernel (auch: Radiale Basisfunktionen (RBF))
+In der Praxis häufig anzutreffen sind Gaußsche Kernel (auch: Radiale Basisfunktionen (RBF))
 \begin{equation}
 	\kappa(\vect{x}_i, \vect{x}_j) = \exp \left(- \frac{\norm{ \vect{x}_i - \vect{x}_j}^2}{2\sigma}\right) \, ,
 \end{equation}
@@ -315,7 +315,7 @@ werden soll.
 
 Die Nichtlinearität eines Autoencoders wird durch die Auswahl der Aktivierungsfunktionen bestimmt.
 Werden ausschließlich lineare Funktionen verwendet, resultiert dies in einem linearen Autoencoder,
-welcher sehr ähnlich zur Hauptkomponentenanalyse ist. Dies wird in
+welcher ähnlich zur Hauptkomponentenanalyse ist. Dies wird in
 \subsecref{ch:Vergleich:sec:Resultate:PCA_AE} noch genauer betrachtet. In den meisten Fällen werden
 jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt, um einen nichtlinearen Zusammenhang zu
 lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Charte.2018}.
@@ -364,7 +364,7 @@ Eine Umsetzung dessen ist zum Beispiel der \newterm{Sparse Autoencoder}, der ein
 (engl. \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, das heißt nur wenige Einträge von
 $\vect{y}$ sind ungleich Null. Für das Lernen von Mannigfaltigkeiten besonders interessant ist
 jedoch der \newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird. Wie
-eingangs erwähnt ist ein linearer Autoencoder sehr ähnlich zur Hauptkomponentenanalyse. Dieser
+eingangs erwähnt ist ein linearer Autoencoder ähnlich zur Hauptkomponentenanalyse. Dieser
 Zusammenhang wird im Folgenden betrachtet.
 
 \subsubsection{Wahl der Architektur}
@@ -436,7 +436,7 @@ verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
 	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^d \left( y_i (1 - y_i)\right)^2 \sum_{j = 1}^D \mat{W}^2_{ij}
 \end{equation}
 effizient berechnet werden \parencite[4]{Rifai.2011}. Für einen Autoencoder mit mehr als einer versteckten Schicht wird die
-Berechnung sehr teuer, was das Trainieren eines tiefen Contractive Autoencoders ohne Tricks wie
+Berechnung teuer, was das Trainieren eines tiefen Contractive Autoencoders ohne Approximationen wie
 beispielsweise das von \textcite{Bengio.2006} erläuterte gierige schichtenweise Vortrainieren
 (engl. \textit{greedy layer-wise pretraining}) unpraktikabel macht. Bei diesem Vorgehen wird ein
 tiefer Autoencoder schichtenweise durch untiefe Autoencoder (drei Schichten) vortrainiert und im

@@ -3,15 +3,15 @@
 \label{ch:Enleitung}
 %% ==============================
 
-Viele interessante Anwendungsgebiete für Machine Learning umfassen eine sehr große Anzahl an
-Merkmalen, wie bei der Analyse von Genausprägungen mit tausenden von Genen \parencite{Parmigiani.2003} oder der Verarbeitung von Bild- oder Videodaten mit sehr vielen Pixeln.
-Gerade bei Bildern oder Videos besteht zum Beispiel in angrenzenden Pixeln sehr viel Redundanz.
-Diese große Anzahl an Merkmalen, das heißt die hohe Dimensionalität der Daten, bereitet vielen
-Algorithmen Probleme -- Probleme, die unter der Ausnutzung der Abhängigkeitsstrukturen
-möglicherweise vermieden werden können. Die mathematischen und statistischen Probleme, die bei
-Datensätzen hoher Dimensionalität auftreten, werden unter dem \newterm{Fluch der Dimensionalität} \parencite{Aggarwal.2001} zusammengefasst. Es treten jedoch nicht nur algorithmische, sondern auch
-praktische Probleme auf, da Datensätze mit sehr vielen Stichproben und zusätzlich hoher Dimension
-eine enorme Speicherkapazität und Rechenleistung benötigen können.
+Viele interessante Anwendungsgebiete für Machine Learning umfassen eine große Anzahl an Merkmalen,
+wie bei der Analyse von Genausprägungen mit tausenden von Genen \parencite{Parmigiani.2003} oder der Verarbeitung von Bild- oder Videodaten mit vielen Pixeln. Gerade
+bei Bildern oder Videos besteht zum Beispiel in angrenzenden Pixeln viel Redundanz. Diese große
+Anzahl an Merkmalen, das heißt die hohe Dimensionalität der Daten, bereitet vielen Algorithmen
+Probleme -- Probleme, die unter der Ausnutzung der Abhängigkeitsstrukturen möglicherweise vermieden
+werden können. Die mathematischen und statistischen Probleme, die bei Datensätzen hoher
+Dimensionalität auftreten, werden unter dem \newterm{Fluch der Dimensionalität} \parencite{Aggarwal.2001} zusammengefasst. Es treten jedoch nicht nur algorithmische, sondern auch
+praktische Probleme auf, da Datensätze mit vielen Stichproben und zusätzlich hoher Dimension eine
+enorme Speicherkapazität und Rechenleistung benötigen können.
 % \footnote{Eine Teilmenge des Datensatzes \href{https://laion.ai/blog/laion-5b/}{LAION-5B} umfasst circa 5,85 Milliarden Text-Bilder-Paare, wobei
 % 	der Datensatz bei einer Bildgröße von $3 \times 384 \times 384$ haben. Dies entspricht einer Dimensionalität
 % 	von 442 368. In dieser Auflösung werden 240 TeraByte Speicherplatz benötigt.}
@@ -32,27 +32,27 @@ die Algorithmen teilweise stabiler, da durch die Dimensionsreduktion unrepräsen
 für die Datenvisualisierung unumgänglich, da hochdimensionale natürliche Datensätze so auf zwei
 oder drei Dimensionen für die Veranschaulichung reduziert werden können.
 
-Über die Zeit wurden deshalb eine Vielzahl von Dimensionsreduktionsmethoden entwickelt; für eine Übersicht wird auf \textcites{Burges.2009}{Sarveniazi.2014}{Sorzano.2014}{Cunningham.2014}{Lee.2007} verwiesen. Die große Auswahl an verschiedensten Methoden macht die Selektion der richtigen Methode für eine spezifische Aufgabe allerdings sehr schwer. \Textcite{vanderMaaten.2009} hat dazu zwölf nichtlineare Methoden untersucht und mit der Hauptkomponentenanalyse verglichen.\rewrite{hier mehr dzau schreiben}
+Über die Zeit wurden deshalb eine Vielzahl von Dimensionsreduktionsmethoden entwickelt; für eine Übersicht wird auf \textcites{Burges.2009}{Sarveniazi.2014}{Sorzano.2014}{Cunningham.2014}{Lee.2007} verwiesen. Die große Auswahl an verschiedensten Methoden macht die Selektion der richtigen Methode für eine spezifische Aufgabe allerdings schwer. \Textcite{vanderMaaten.2009} hat dazu zwölf nichtlineare Methoden untersucht und mit der Hauptkomponentenanalyse verglichen.\rewrite{hier mehr dzau schreiben}
 
-In jüngster Zeit wurden entscheidende Fortschritte in der Spracherkennung mit sehr großen
-Sprachmodellen wie \textit{Whisper} \parencite{Radford.2022} und auf dem Gebiet der \textit{Computer Vision} mit Text-zu-Bilder-Modellen
+In jüngster Zeit wurden entscheidende Fortschritte in der Spracherkennung mit großen Sprachmodellen
+wie \textit{Whisper} \parencite{Radford.2022} und auf dem Gebiet der \textit{Computer Vision} mit Text-zu-Bilder-Modellen
 wie \textit{Stable Diffusion} \parencite{Rombach.2021}. Diese Modelle sind Varianten von neuronalen Netzen und damit
-\enquote{moderne} Machine Learning Methoden. Dabei wird ein sehr großer Datensatz für das
-Trainieren der Modelle verwendet und man erhofft sich, dass diese neuronalen Netze mit ihrer
-Eigenschaft der universalen Approximationsfunktion \parencites[194 -- 197]{Goodfellow.2016}{Hornik.1989} sehr gute Ergebnisse erzielen. Es stellt sich
-also die Frage, ob diese \enquote{modernen} Machine Learning Methoden gegenüber traditionellen und
-vergleichsweise sehr alten statistischen Methoden auf dem Gebiet der Dimensionsreduktion einen
-Vorteil durch die erhöhte Flexibilität erzielen können. Dazu werden drei statistische und zwei
-Machine Learning Methoden genauer betrachtet. Die hier vorgestellten Methoden sind die
-weitverbreitete \newterm{Hauptkomponentenanalyse} (engl. \textit{Principal Component Analysis}
-(PCA)), die \newterm{Kernel PCA} sowie das \newterm{Locally Linear Embedding} als Vertreter der
-statistischen Methoden (\secref{ch:MethodenDerDimRed:statistisch}). Der \newterm{Autoencoder} in
-der klassischen Form und eine Variante davon, der \newterm{Contractive Autoencoder} werden als
-Vertreter der Machine Learning Ansätze (\secref{ch:MethodenDerDimRed:modern}) vorgestellt. Vor
-diesem Hintergrund soll untersucht werden, ob Machine Learning Methoden traditionelle statistische
-Methoden auf dem Gebiet der Dimensionsreduktion übertreffen. Mehrere Veröffentlichungen zur
-Relation zwischen der Hauptkomponentenanalyse und den Autoencodern haben außerdem gezeigt, dass
-diese beiden Methoden unter gewissen Annahmen sehr ähnlich sind \parencites{Baldi.1989}{Bourlard.1988}{Plaut.2018}. Es soll daher empirisch herausgearbeitet werden,
+\enquote{moderne} Machine Learning Methoden. Dabei wird ein großer Datensatz für das Trainieren der
+Modelle verwendet und man erhofft sich, dass diese neuronalen Netze mit ihrer Eigenschaft der
+universalen Approximationsfunktion \parencites[194 -- 197]{Goodfellow.2016}{Hornik.1989} gute Ergebnisse erzielen. Es stellt sich also die
+Frage, ob diese \enquote{modernen} Machine Learning Methoden gegenüber traditionellen und
+vergleichsweise alten statistischen Methoden auf dem Gebiet der Dimensionsreduktion einen Vorteil
+durch die erhöhte Flexibilität erzielen können. Dazu werden drei statistische und zwei Machine
+Learning Methoden genauer betrachtet. Die hier vorgestellten Methoden sind die weitverbreitete
+\newterm{Hauptkomponentenanalyse} (engl. \textit{Principal Component Analysis} (PCA)), die
+\newterm{Kernel PCA} sowie das \newterm{Locally Linear Embedding} als Vertreter der statistischen
+Methoden (\secref{ch:MethodenDerDimRed:statistisch}). Der \newterm{Autoencoder} in der klassischen
+Form und eine Variante davon, der \newterm{Contractive Autoencoder} werden als Vertreter der
+Machine Learning Ansätze (\secref{ch:MethodenDerDimRed:modern}) vorgestellt. Vor diesem Hintergrund
+soll untersucht werden, ob Machine Learning Methoden traditionelle statistische Methoden auf dem
+Gebiet der Dimensionsreduktion übertreffen. Mehrere Veröffentlichungen zur Relation zwischen der
+Hauptkomponentenanalyse und den Autoencodern haben außerdem gezeigt, dass diese beiden Methoden
+unter gewissen Annahmen ähnlich sind \parencites{Baldi.1989}{Bourlard.1988}{Plaut.2018}. Es soll daher empirisch herausgearbeitet werden,
 inwiefern ein Autoencoder mit der Hauptkomponentenanalyse übereinstimmt.
 
 Die Arbeit ist wie folgt aufgebaut: Zuerst wird in \chapref{ch:Dimensionsreduktion} die Grundlage

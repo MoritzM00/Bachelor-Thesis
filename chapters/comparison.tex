@@ -93,7 +93,7 @@ Analog wird die Kontinuität $C(K)$ über $\set{V}_i(K)$ wie folgt definiert
 wobei $r_{\vect{x}}(i, j)$ nun den Rang zwischen den Datenpunkten in der hochdimensionalen Repräsentation bezeichnet \parencite[487]{Venna.2001}. Auch hier gilt $0 \leq C(K) \leq 1$ und höher ist besser. Die Kontinuität
 misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden.
 
-Üblicherweise werden die beiden Kriterien für mehrere Werte der Nachbarschaftsgröße $K$ berechnet und in einer Abbildung dargestellt. So entfällt die etwas willkürliche Wahl einer spezifischen Nachbarschaftsgröße und ermöglicht die Betrachtung von sowohl sehr kleinen als auch größeren Nachbarschaften.
+Üblicherweise werden die beiden Kriterien für mehrere Werte der Nachbarschaftsgröße $K$ berechnet und in einer Abbildung dargestellt. So entfällt die etwas willkürliche Wahl einer spezifischen Nachbarschaftsgröße und ermöglicht die Betrachtung von sowohl kleinen als auch größeren Nachbarschaften.
 % \subsubsection{Die Co-Ranking Matrix}
 % Ein Eintrag $q_{kl}$ der Co-Ranking Matrix $\mat{Q}$ ist die Anzahl der Paare von Datenpunkten $(i,
 % 	j)$, die den Rang $r_{\vect{x}}(i, j) = k$ in der hochdimensionalen und den Rang $r_{\vect{y}}(i,
@@ -119,11 +119,11 @@ Bis jetzt wurde immer angenommen, dass die intrinsische Dimension $d$ der Daten 
 meisten Dimensionsreduktionsmethoden die intrinsische Dimension nicht selbst berechnen. Das
 Schätzen der intrinsischen Dimension ist also ein nicht unwichtiges Teilproblem der
 Dimensionsreduktion, da eine Unterschätzung von $d$ dazu führt, dass relevante Strukturen
-zwangsweise verloren gehen \parencite[1]{Levina.2004}. Erschwert wird dieses Problem durch die Tatsache, dass es sehr viele
-Definitionen der intrinsischen Dimension und damit auch sehr viele unterschiedliche Schätzer gibt.
-Im Folgenden soll ein kurzer Überblick verschafft werden, jedoch geht eine detaillierte Behandlung
-der Schätzung über den Rahmen dieser Arbeit hinaus. Daher wird für einen Überblick und Vergleich
-dieser Schätzer auf \textcites{Campadelli.2015}{Bac.2021}{Verveer.1995} verwiesen.
+zwangsweise verloren gehen \parencite[1]{Levina.2004}. Erschwert wird dieses Problem durch die Tatsache, dass es viele
+Definitionen der intrinsischen Dimension und damit auch viele unterschiedliche Schätzer gibt. Im
+Folgenden soll ein kurzer Überblick verschafft werden, jedoch geht eine detaillierte Behandlung der
+Schätzung über den Rahmen dieser Arbeit hinaus. Daher wird für einen Überblick und Vergleich dieser
+Schätzer auf \textcites{Campadelli.2015}{Bac.2021}{Verveer.1995} verwiesen.
 
 In \secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim} haben wir die \textit{topologische
 	Dimension} kennengelernt, welche sich in der Literatur zur Strukturerkennung durchgesetzt hat \parencite[1]{Campadelli.2015}. Allerdings bringt diese Definition praktische Schwierigkeiten mit sich,
@@ -133,7 +133,8 @@ Arbeit verwendete \newterm{Maximum Likelihood Schätzer} von \textcite{Levina.20
 betrachten die Verteilung der Nachbarschaft eines Punktes $\rvect{x}$ als Funktion der
 intrinsischen Dimension -- üblicherweise innerhalb einer kleinen Kugel um $\rvect{x}$
 \parencite[8]{Campadelli.2015}. Der Maximum Likelihood Schätzer nimmt an, dass die Beobachtungen, die
-in einer solchen Kugel liegen, einem homogenen Poisson-(Zähl-)Prozess folgen
+in einer solchen Kugel liegen, einem homogenen Poisson-(Zähl-)Prozess\unsure{Hier in der Fußnote
+	etwas dazu erzählen} folgen
 \parencite[2]{Levina.2004}. Dieser Prozess hängt von $d$ ab, weshalb mittels der Maximum Likelihood
 Methode ein Schätzwert $\estNormal{d}$ für einen fixen Punkt $\rvect{x}_i$ als
 \begin{equation}
@@ -162,7 +163,7 @@ die in \figref{fig:ArtificialDatasets} dargestellt sind.
 Beide künstlichen Datensätze bestehen aus 5000 Datenpunkten und haben eine extrinsische Dimension von drei und eine intrinsische
 Dimension von zwei. Dies erlaubt eine visuelle Betrachtung der Datensätze und der gefundenen
 latenten Räume, schränkt aber gleichzeitig die Architektur eines (unterbestimmten) Autoencoders
-sehr ein. Künstliche Datensätze sind aber nicht zwangsweise aussagekräftig für die Performance auf echten Datensätzen, weswegen zusätzlich fünf natürliche Datensätze hinzugezogen werden.
+ein. Künstliche Datensätze sind aber nicht zwangsweise aussagekräftig für die Performance auf echten Datensätzen, weswegen zusätzlich fünf natürliche Datensätze hinzugezogen werden.
 
 \subsection{Natürliche Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze:natuerlich}
@@ -173,7 +174,7 @@ Datensätze. Der Nachteil besteht darin, dass die intrinsische Dimension in der 
 zwei liegt und daher der latente Raum nicht visualisiert werden kann. Nichtsdestotrotz liefern die
 Qualitätskriterien hinreichende gute Indizien für die Performance der Methoden. Bei den natürlichen
 Datensätzen wurden größtenteils Bilddatensätze, aber auch ein Datensatz mit Genausprägungen ausgewählt, da diese eine
-sehr hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
+hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
 Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Faces}-Datensatz
 \footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Labeled Faces in the
 	Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der
@@ -312,10 +313,10 @@ Die Qualitätskriterien für den Swiss Roll Datensatz sind in \figref{fig:SwissR
 	\begin{center}
 		\input{\figures/SwissRoll_comparison.pgf}
 	\end{center}
-	\caption[Qualitätskriterien für die Swiss Roll]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab. Die restlichen Methoden unterscheiden sich nicht stark, lediglich bei der Vertrauenswürdigkeit können sich die Kernel PCA und der Contractive Autoencoder etwas nach oben absetzen. Die PCA und der Autoencoder sind hinsichtlich der Kontinuität und des LCMC sehr ähnlich. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für die Swiss Roll]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab. Die restlichen Methoden unterscheiden sich nicht stark, lediglich bei der Vertrauenswürdigkeit können sich die Kernel PCA und der Contractive Autoencoder etwas nach oben absetzen. Die PCA und der Autoencoder sind hinsichtlich der Kontinuität und des LCMC ähnlich. (Eigene Darstellung)}
 	\label{fig:SwissRollMetrics}
 \end{figure}
-und die Qualitätskriterien für den Twin Peaks Datensatz in \figref{fig:TwinPeaksMetrics} abgebildet. Wie dort zu erkennen ist, zeigt Locally Linear Embedding eine sehr starke Performance auf den beiden künstlichen Datensätzen. Der Autoencoder kann sich hinsichtlich des Twin Peaks Datensatzes von den restlichen Methoden abheben. Bei der Swiss Roll ist dies jedoch nicht der Fall. Hier sind die PCA, die Kernel PCA, sowie beide Varianten des Autoencoders relativ ähnlich.
+und die Qualitätskriterien für den Twin Peaks Datensatz in \figref{fig:TwinPeaksMetrics} abgebildet. Wie dort zu erkennen ist, zeigt Locally Linear Embedding eine starke Performance auf den beiden künstlichen Datensätzen. Der Autoencoder kann sich hinsichtlich des Twin Peaks Datensatzes von den restlichen Methoden abheben. Bei der Swiss Roll ist dies jedoch nicht der Fall. Hier sind die PCA, die Kernel PCA, sowie beide Varianten des Autoencoders relativ ähnlich.
 
 Wie eingangs in \subsecref{ch:Vergleich:sec:VerwendeteDatensaetze:kuenstlich} erwähnt, ist die
 Möglichkeit der Visualisierung der latenten Repräsentation ein Vorteil Evaluierung auf künstlichen
@@ -338,17 +339,17 @@ sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
 	\begin{center}
 		\input{\figures/MNIST_comparison.pgf}
 	\end{center}
-	\caption[Qualitätskriterien für MNIST]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST-Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine starke Performance zeigen, da der Datensatz von hoher Qualität ist und eine hohe Stichprobengröße aufweisen kann. Nichtsdestotrotz kann die Hauptkomponentenanalyse nur knapp dahinter sehr gut mithalten und hinsichtlich der Kontinuität sogar übertreffen. Die Kernel PCA und der klassische vollvernetzte Autoencoder schneiden ebenfalls relativ gut ab, jedoch ist die Reduktion der Kernel PCA weniger vertrauenswürdig. Locally Linear Embedding und der Contractive Autoencoder können vor allem auf dem LCMC nicht mithalten. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für MNIST]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST-Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine starke Performance zeigen, da der Datensatz von hoher Qualität ist und eine hohe Stichprobengröße aufweisen kann. Nichtsdestotrotz kann die Hauptkomponentenanalyse nur knapp dahinter gut mithalten und hinsichtlich der Kontinuität sogar übertreffen. Die Kernel PCA und der klassische vollvernetzte Autoencoder schneiden ebenfalls relativ gut ab, jedoch ist die Reduktion der Kernel PCA weniger vertrauenswürdig. Locally Linear Embedding und der Contractive Autoencoder können vor allem auf dem LCMC nicht mithalten. (Eigene Darstellung)}
 	\label{fig:MNISTMetrics}
 \end{figure}
 Für die Olivetti Faces (\figref{fig:OlivettiFacesMetrics}), den FER- (\figref{fig:FER2013Metrics}) und den LFW-Datensatz (\figref{fig:LfwPeopleMetrics})
-schneidet LLE auf allen drei Kriterien relativ gesehen sehr schlecht ab. insbesondere nehmen die
+schneidet LLE auf allen drei Kriterien relativ gesehen schlecht ab. insbesondere nehmen die
 Qualitätskriterien von LLE mit größer werdender Nachbarschaftsgröße $K$ deutlicher ab, als bei den
 restlichen Methoden. Aufgrund der Wahl der Nachbarschaftsgröße von $K=10$ für Locally Linear
 Embedding und der lokalen Eigenschaften macht dies jedoch Sinn. Aus diesem Grund ist die
 Betrachtung einer größeren Nachbarschaft der Qualitätskriterien für LLE benachteiligend, wurde aber
 der Vollständigkeit halber und zu Vergleichszwecken trotzdem mit aufgenommen. Überraschenderweise
-kann die Hauptkomponentenanalyse auf fast allen natürlichen Datensätzen eine sehr gute oder sogar die
+kann die Hauptkomponentenanalyse auf fast allen natürlichen Datensätzen eine gute oder sogar die
 beste relative Performance aufweisen. Auf den vier Bilddatensätzen kann jedoch der Convolutional
 Autoencoder seine Stärken zeigen, insbesondere wenn genügend Trainingsdaten zur Verfügung stehen, was für den MNIST-Datensatz in \figref{fig:MNISTMetrics} zutrifft.
 Ist dies jedoch nicht der Fall, so kann die Performance stark darunter leiden. Dies ist

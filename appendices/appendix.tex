@@ -6,7 +6,8 @@
 
 \section{Autoencoder-Architekturen und Trainingsdetails}
 \label{ch:Appendix:Architektur-Details}
-In diesem Abschnitt werden Details zu den Autoencoder-Architekturen und Details zum Training der Autoencoder erläutert. Zuerst werden die Architekturen der klassischen vollvernetzten Autoencoder (AE), dann die Architekturen der Convolutional Autoencoder (ConvAE) und zuletzt die Architektur der Contractive Autoencoder (CAE) spezifiziert. Anschließend wird der benutzte Optimierer und andere Trainings-Details genannt. Da die Architekturen sehr vom Datensatz abhängen, werden diese in folgender Tabelle nach dem Datensatz gruppiert.
+In diesem Abschnitt werden Details zu den Autoencoder-Architekturen und Details zum Training der Autoencoder erläutert. Zuerst werden die Architekturen der klassischen vollvernetzten Autoencoder (AE), dann die Architekturen der Convolutional Autoencoder (ConvAE) und zuletzt die Architektur der Contractive Autoencoder (CAE) spezifiziert. Anschließend wird der benutzte Optimierer und andere Trainings-Details genannt. Da die Architekturen
+vom Datensatz abhängen, werden diese in folgender Tabelle nach dem Datensatz gruppiert.
 
 \ldots
 
@@ -51,7 +52,7 @@ LFW-atensatz und in \figref{fig:FER2013Metrics} für den FER-Datensatz.
 	\begin{center}
 		\input{\figures/OlivettiFaces_comparison.pgf}
 	\end{center}
-	\caption[Qualitätskriterien für den Olivetti Faces-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Olivetti Faces Datensatz. Hier schneiden alle Varianten der Autoencoder nicht so gut ab, wie es beispielweise auf dem MNIST Datensatz der Fall war. Dies könnte an der deutlich geringeren Stichprobengröße von 400 liegen, wodurch eine Konvergenz der Autoencoder schwieriger wird. Neben den Autoencoder schneidet hier auch LLE für größere Werte von $K$ schlecht ab, kann jedoch bei geringeren Nachbarschaftsgrößen sehr hohe Werte für die Vertrauenswürdigkeit und Kontinuität erreichen. PCA schneidet hinsichtlich allen drei Kriterien für alle Werte von $K$ am besten ab, gefolgt von der Kernel PCA. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den Olivetti Faces-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Olivetti Faces Datensatz. Hier schneiden alle Varianten der Autoencoder nicht so gut ab, wie es beispielweise auf dem MNIST Datensatz der Fall war. Dies könnte an der deutlich geringeren Stichprobengröße von 400 liegen, wodurch eine Konvergenz der Autoencoder schwieriger wird. Neben den Autoencoder schneidet hier auch LLE für größere Werte von $K$ schlecht ab, kann jedoch bei geringeren Nachbarschaftsgrößen hohe Werte für die Vertrauenswürdigkeit und Kontinuität erreichen. PCA schneidet hinsichtlich allen drei Kriterien für alle Werte von $K$ am besten ab, gefolgt von der Kernel PCA. (Eigene Darstellung)}
 	\label{fig:OlivettiFacesMetrics}
 \end{figure}
 
@@ -67,6 +68,6 @@ LFW-atensatz und in \figref{fig:FER2013Metrics} für den FER-Datensatz.
 	\begin{center}
 		\input{\figures/FER2013_comparison.pgf}
 	\end{center}
-	\caption[Qualitätskriterien für den FER-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den FER-Datensatz. Hier ist die Performance des Convolutional Autoencoders und der Hauptkomponentenanalyse nahezu identisch und im Vergleich mit den anderen Methoden am besten. Aber auch der Autoencoder und die Kernel PCA können einen konstant hohen Wert für $T(K)$ und $C(K)$ erreichen. Auch auf diesem Datensatz schneiden LLE und der Contractive Autoencoder mit Abstand am schlechtesten ab. Besonders LLE zeigt hier die Schwäche einer lokalen Erhaltung der Struktur, da die Qualitätskriterien für steigende Werte von $K$ sehr stark abfallen. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den FER-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den FER-Datensatz. Hier ist die Performance des Convolutional Autoencoders und der Hauptkomponentenanalyse nahezu identisch und im Vergleich mit den anderen Methoden am besten. Aber auch der Autoencoder und die Kernel PCA können einen konstant hohen Wert für $T(K)$ und $C(K)$ erreichen. Auch auf diesem Datensatz schneiden LLE und der Contractive Autoencoder mit Abstand am schlechtesten ab. Besonders LLE zeigt hier die Schwäche einer lokalen Erhaltung der Struktur, da die Qualitätskriterien für steigende Werte von $K$ stark abfallen. (Eigene Darstellung)}
 	\label{fig:FER2013Metrics}
 \end{figure}
