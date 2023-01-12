@@ -88,7 +88,7 @@
 %% -------------------------------
 %% |      Globale Settings       |
 %% -------------------------------
-\setcounter{secnumdepth}{2} % Numbering also for \subsections (not subsubsections)
+\setcounter{secnumdepth}{2} % Numbering up to \subsections
 \setcounter{tocdepth}{2}    % Register \subsections in content directory
 
 \setpapersize{A4}
