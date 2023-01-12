@@ -407,11 +407,11 @@ Autoencodern auf unterschiedliche Dimensionen nicht geschachtelt sind.
 
 \begin{figure}[ht]
 	\centering
-	\input{\figures/correlation-matrices.pgf}
-	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer dreischichtiger Autoencoder mit Sigmoid-Encoder und linearem Decoder verwendet wurde, um die Daten auf sieben Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch die Autoencoder besteht Korrelation, wobei der lineare Autoencoder zufälligerweise betragsmäßig größere Korrelationen erzeugt als der nichtlineare Autoencoder.  (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\includegraphics{correlation-matrices.pdf}
+	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc die linken Singulär-Vektoren der Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders, um die Daten auf sieben Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch den Autoencoder besteht Korrelation. Wendet man die Singulärwertszerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, erhält man deutlich weniger Korrelation. Sie konnte aber nicht vollständig eliminiert werden. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Korrelationsmatrizen}
 \end{figure}
-Punkt 1 ist beispielsweise in \figref{fig:Korrelationsmatrizen} zu erkennen. Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer Autoencoder verwendet wurde. Die Korrelationsmatrix der Hauptkomponentenanalyse ist eine Einheitsmatrix, während die Korrelationsmatrizen der durch die Autoencoder gefundenen latenten Repräsentationen von Null verschiedene Werte auf der Nicht-diagonalen aufweisen.
+Punkt 1 ist beispielsweise in \figref{fig:Korrelationsmatrizen} zu erkennen. Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer Autoencoder\rewrite{Hier erklären was man gemacht hat mit SVD} verwendet wurde. Die Korrelationsmatrix der Hauptkomponentenanalyse ist eine Einheitsmatrix, während die Korrelationsmatrizen der durch die Autoencoder gefundenen latenten Repräsentationen von Null verschiedene Werte auf der Nicht-diagonalen aufweisen.
 
 Um die gefundenen Lösungen einer Hauptkomponentenanalyse und von Autoencodern genauer betrachten zu
 können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines dreischichtigen
@@ -423,7 +423,7 @@ Weise kann die \enquote{Arbeitsweise} des Autoencoders anschaulich untersucht we
 \figref{fig:Gewichtsvergleich} setzt dieses Vorgehen auf dem FER-Datensatz um.
 \begin{figure}[ht]
 	\centering
-	\input{\figures/weights-comparison.pgf}
+	\includegraphics{weights-comparison.pdf}
 	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf sieben Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders und \captionc die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}
