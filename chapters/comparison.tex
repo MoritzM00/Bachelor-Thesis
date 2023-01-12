@@ -178,7 +178,7 @@ Datensätzen wurden größtenteils Bilddatensätze, aber auch ein Datensatz mit 
 hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
 Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Faces}-Datensatz
 \footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Labeled Faces in the
-	Wild} (LFW) Datensatz \parencite{GaryB.Huang.2007}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der
+	Wild} (LFW) Datensatz\rewrite{replace with Fashion MNIST} \parencite{GaryB.Huang.2007}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der
 \textit{ICMR}-Datensatz\footnote{\url{https://www.kaggle.com/datasets/shibumohapatra/icmr-data?select=labels.csv}}
 ausgewählt, um die Performance der Dimensionsreduktionsmethoden auf natürlichen Datensätzen zu
 evaluieren. Der weitverbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von
@@ -197,7 +197,7 @@ Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
 	\begin{center}
 		\includegraphics{dataset_samples.pdf}
 	\end{center}
-	\caption[Beispielbilder der natürlichen Datensätze]{Zu sehen sind je vier Beispielbilder der natürlichen Bilddatensätze aus dem Vergleich. \captiona Handgeschriebene Zahlen aus dem MNIST-Datensatz \captionb Beispielbilder aus dem FER-Datensatz \captionc Beispielbilder aus dem LFW-Datensatz \captiond Der Olivetti Faces Datensatz }
+	\caption[Beispielbilder der natürlichen Datensätze]{Zu sehen sind je vier Beispielbilder der natürlichen Bilddatensätze aus dem Vergleich: \captiona Handgeschriebene Zahlen aus dem MNIST-Datensatz \captionb Gesichter mit unterschiedlichen Emotionen aus dem FER-Datensatz \captionc Verschiedene Kleidungsstücke aus dem Fashion MNIST-Datensatz \captiond Bilder der Gesichter unterschiedlicher Personen aus zehn Blickwinkeln (Olivetti Faces-Datensatz)}
 	\label{fig:Dataset_samples}
 \end{figure}
 
@@ -222,6 +222,7 @@ erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 		Swiss Roll     & 3                          & 2                          & 5 000                \\
 		Twin Peaks     & 3                          & 2                          & 5 000                \\
 		MNIST          & 784                        & 15                         & 60 000               \\
+		Fasion MNIST   & 784                        & 18                         & 60 000               \\
 		Olivetti Faces & 4 096                      & 9                          & 400                  \\
 		LFW            & 2 914                      & 21                         & 2370                 \\
 		FER            & 2 304                      & 26                         & 28 709               \\
