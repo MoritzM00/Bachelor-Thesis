@@ -247,10 +247,12 @@ Für die Hauptkomponentenanalyse gibt es neben der Anzahl der zu behaltenden Hau
 Parameter. Die Anzahl der Hauptkomponenten entspricht der intrinsischen Dimension, welche vom
 Datensatz abhängt und für alle Methoden identisch ist. Dies trifft analog auf Kernel PCA und auf
 Locally Linear Embedding zu. Für Autoencoder bestimmt die intrinsische Dimension die Größe der
-Bottleneck-Schicht. Für Kernel PCA wird ein RBF-Kernel (Gauß-Kernel) eingesetzt, wofür ein
-Hyperparameter $\gamma$ gewählt werden kann. Dieser wird Datensatz-spezifisch auf $\gamma =
-	\sfrac{1}{D}$ gesetzt. Für Locally Linear Embedding gibt es zwei Parameter: (1) einen Parameter
-$K$, der die Größe der verwendeten Nachbarschaft kontrolliert und (2) eine
+Bottleneck-Schicht. Für Kernel PCA wird ein Gaußscher Kernel eingesetzt, wofür ein Hyperparameter
+$\sigma$ gewählt werden kann. Die Werte $\sigma \in \{ 0.1, 0.25, 0.75, 1, 2, 5\}$ wurden getestet
+und der beste Durchlauf ausgewählt. Für ICMR und Olivetti Faces lieferten diese Werte sehr
+schlechte Ergebnisse, weswegen auf diesen Datensätzen zusätzlich die Werte $\{ 0.001, 0.0001,
+	0.00001\}$ getestet wurden. Für Locally Linear Embedding gibt es zwei Parameter: (1) einen
+Parameter $K$, der die Größe der verwendeten Nachbarschaft kontrolliert und (2) eine
 Regularisierungs-Konstante $\epsilon$, die auf die Diagonale der lokalen Kovarianzmatrix addiert
 wird.
 
