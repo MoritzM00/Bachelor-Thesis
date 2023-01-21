@@ -30,8 +30,10 @@ ein Überblick über die Stärken und Schwächen der statistischen und der Machi
 geschafft werden. Wie bereits erwähnt, besteht zwischen Autoencodern und der
 Hauptkomponentenanalyse eine enge Verbindung. Neben dem Vergleich der zwei Gruppen wird daher in
 \secref{ch:Vergleich:sec:Resultate:PCA_AE} der Zusammenhang zwischen der Hauptkomponentenanalyse
-und Autoencodern genauer untersucht.\rewrite{Unter Methodik könnte man auch was anderes verstehen.
-	Ein bisschen mehr dazu sagen, wieso diese Vorgehensweise Sinn macht}
+und Autoencodern genauer untersucht. Der Vergleich kann mittels der im
+GitHub-Repository\footnote{\url{www.github.com/MoritzM00/drcomp}} definierten Konfigurationen der
+Methoden und des Trainingsskriptes repliziert werden. \rewrite{Unter Methodik könnte man auch was
+	anderes verstehen. Ein bisschen mehr dazu sagen, wieso diese Vorgehensweise Sinn macht}
 
 \subsection{Qualitätskriterien der Dimensionsreduktion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien}
@@ -44,14 +46,14 @@ Im ausführlichen Benchmark von \textcite{vanderMaaten.2009} wird auf den Genera
 eines 1-Nächste-Nachbar Klassifikators, sowie auf die zwei Kennzahlen
 \newterm{Vertrauenswürdigkeit} (engl. \textit{Trustworthiness}) und \newterm{Kontinuität} (engl.
 \textit{Continuity}) \parencites{Venna.2001}{Venna.2006} gesetzt. Die Vertrauenswürdigkeit und die Kontinuität sind
-rangbasierte Qualitätskriterien und werden auch in diesem Vergleich eingesetzt. Daneben gibt es
+rang-basierte Qualitätskriterien und werden auch in diesem Vergleich eingesetzt. Daneben gibt es
 noch viele weitere rangbasierte Qualitätskriterien, welche einheitlich durch die sogenannte
 \newterm{Co-Ranking Matrix} \parencite[1432]{Lee.2009} ausgedrückt werden können. Ebenso können die Vertrauenswürdigkeit und
 Kontinuität über die Co-Ranking Matrix berechnet werden \parencite[1433]{Lee.2009}. Für eine ausführliche Behandlung dessen wird auf \textcite{Lee.2009}
 verwiesen. In dieser Arbeit werden drei Kriterien verwendet: (1) Die Vertrauenswürdigkeit und (2)
 die Kontinuität einer Dimensionsreduktion, sowie (3) das \newterm{Local Continuity Meta-Criterion}
 (LCMC). Diese werden im Folgenden genauer betrachtet. \nomenclature[Z]{LCMC}{Local Continuity
-	Meta-Criterion}.
+	Meta-Criterion}
 \subsubsection{Vertrauenswürdigkeit und Kontinuität}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien:TC}
 Diese beiden Kennzahlen basieren auf der Idee des Erhalts von Nachbarschaften (engl.
@@ -144,7 +146,7 @@ Methode ein Schätzwert $\estNormal{d}$ für einen fixen Punkt $\rvect{x}_i$ als
 berechnet werden kann \parencite[4]{Levina.2004}. Hierbei ist $K$ die Anzahl der nächste Nachbarn und $T_{K}(\vect{x}_i)$ die
 euklidische Distanz von $\vect{x}_i$ zu seinem $K$-ten Nachbar. Dies ist jedoch nur eine lokale
 Schätzung für einen fixen Punkt $\vect{x}_i$. Um eine globale Schätzung zu erhalten, wird der
-Mittelwert über alle Beobachtungen für mehrere Werte von $K$ gebildet.
+Mittelwert über alle Beobachtungen $\vect{x}_i$ mit $i = 1, \ldots, n$ gebildet.
 \section{Verwendete Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze}
 Es werden sowohl künstliche als auch natürliche Datensätze eingesetzt, um Eigenschaften der
@@ -161,7 +163,7 @@ Zu den künstlichen Datensätzen gehört die weitverbreitete \textit{Swiss Roll}
 	\label{fig:ArtificialDatasets}
 \end{figure}
 die in \figref{fig:ArtificialDatasets} dargestellt sind.
-Beide künstlichen Datensätze bestehen aus 5000 Datenpunkten und haben eine extrinsische Dimension von drei und eine intrinsische
+Beide künstlichen Datensätze bestehen aus 5 000 Datenpunkten und haben eine extrinsische Dimension von drei und eine intrinsische
 Dimension von zwei. Dies erlaubt eine visuelle Betrachtung der Datensätze und der gefundenen
 latenten Räume, schränkt aber gleichzeitig die Architektur eines (unterbestimmten) Autoencoders
 ein. Künstliche Datensätze sind aber nicht zwangsweise aussagekräftig für die Performance auf echten Datensätzen, weswegen zusätzlich fünf natürliche Datensätze hinzugezogen werden.
@@ -237,11 +239,11 @@ Tabelle~\ref{tab:uebersicht-parameter} zu finden. Alle Datensätze wurde vor dem
 Dimensionsreduktionsmethoden standardisiert, das heißt $\mat{X}$ weist einen spaltenweisen
 Erwartungswert von Null und eine spaltenweise Varianz von Eins auf. Für die Evaluierung der
 Methoden wurde aufgrund von Restriktionen der Rechenleistung (insbesondere des Arbeitsspeichers)
-ein Downsampling auf maximal 25 000 Stichproben durchgeführt.\footnote{Die Evaluierung ist aufgrund
+ein Downsampling auf maximal 15 000 Stichproben durchgeführt.\footnote{Die Evaluierung ist aufgrund
 	der Berechnung der Co-Ranking-Matrix speicherintensiv, da diese maximal $(n-1) \times (n-1)$ groß
 	ist und damit quadratisch mit $n$ ansteigt. Um die Qualitätskriterien für den MNIST-Datensatz zu
-	berechnen, werden circa 25 GB Arbeitsspeicher benötigt.} Dies ist allerdings nur für den MNIST- und
-FER-Datensatz von Relevanz. Alle anderen Datensätze haben weniger Stichproben.
+	berechnen, werden für $n=25 000$ circa 25 GB Arbeitsspeicher benötigt.} Dies ist allerdings nur für
+den MNIST- und FER-Datensatz von Relevanz. Alle anderen Datensätze haben weniger Stichproben.
 
 Für die Hauptkomponentenanalyse gibt es neben der Anzahl der zu behaltenden Hauptkomponenten keine
 Parameter. Die Anzahl der Hauptkomponenten entspricht der intrinsischen Dimension, welche vom
@@ -262,12 +264,12 @@ Anzahl an Neuronen pro Schicht und die Wahl der Aktivierungsfunktionen. Daneben 
 weitere Freiheitsgrade für das Trainieren des Autoencoders, welche teilweise vom Datensatz
 abhängen. Diese wurden für alle Autoencoder nahezu identisch gewählt und werden in
 Appendix~\ref{ch:Appendix:Architektur-Details} genauer erläutert. Für beide künstlichen Datensätze
-und für den Olivetti Face Datensatz wird ein dreischichtiger Autoencoder eingesetzt. Für alle
-anderen Datensätze wird ein fünfschichtiger Autoencoder trainiert. Alle vollvernetzten Autoencoder
-und der Contractive Autoencoder verwenden Sigmoid-Aktivierungsfunktionen im Encoder und Decoder.
-Auf Bilddatensätzen wurden zusätzlich Convolutional Autoencoder trainiert, deren Architekturen an
-\textcite[14]{Ghosh.2019} angelehnt und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details}
-spezifiziert sind.
+und für den Olivetti Faces-Datensatz wird ein dreischichtiger\rewrite{das stimmt nicht mehr}
+Autoencoder eingesetzt. Für alle anderen Datensätze wird ein fünfschichtiger Autoencoder trainiert.
+Alle vollvernetzten Autoencoder und der Contractive Autoencoder verwenden
+Sigmoid-Aktivierungsfunktionen im Encoder und Decoder. Auf Bilddatensätzen wurden zusätzlich
+Convolutional Autoencoder trainiert, deren Architekturen an \textcite[14]{Ghosh.2019} angelehnt und
+ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
 
 \begin{table}[ht]
 	\tymax=300pt
@@ -276,7 +278,7 @@ spezifiziert sind.
 		\toprule
 		Methode                            & Parameter                                                            \\ \midrule
 		Hauptkomponentenanalyse (PCA)      & --                                                                   \\ \midrule
-		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\gamma^2))$, $\gamma=\sfrac{1}{D}$ \\ \midrule
+		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\sigma))$, $\sigma=\sfrac{1}{D}$ \\ \midrule
 		Locally Linear Embedding (LLE)     & $K=10$, $\epsilon=1\mathrm{e}{-3}$                                   \\ \midrule
 		Autoencoder (AE)                   & $m \in \{3, 5\}$, Sigmoid-Aktivierungsfunktion \newline (siehe
 		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ \midrule Contractive Autoencoder (CAE) & $m = 3$, $\lambda=1\mathrm{e}{-4}$,
@@ -297,8 +299,7 @@ vorhergehenden \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails} erläuter
 den künstlichen und natürlichen Datensätzen trainiert und hinsichtlich der in
 \secref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} vorgestellten Qualitätskriterien für
 eine Nachbarschaftsgröße von $1 \leq K \leq 100$ evaluiert. Einige der Abbildungen für die
-Qualitätskriterien sind im Appendix \ref{ch:Appendix:Qualitaetskriterien} zu finden.\unsure{vlt
-	eine Tabelle mit Mittelwert von T und C und Maximum von LCMC einfügen für die Übersicht} In
+Qualitätskriterien sind im Appendix \ref{ch:Appendix:Qualitaetskriterien} zu finden. In
 \secref{ch:Vergleich:sec:Resultate:kuenstlich} werden die Ergebnisse auf den künstlichen
 Datensätzen und in \secref{ch:Vergleich:sec:Resultate:natuerlich} die Ergebnisse auf den
 natürlichen Datensätzen diskutiert. Letztlich wird in \secref{ch:Vergleich:sec:Resultate:PCA_AE}
@@ -318,8 +319,8 @@ Die Qualitätskriterien für den Swiss Roll Datensatz sind in \figref{fig:SwissR
 und die Qualitätskriterien für den Twin Peaks Datensatz in \figref{fig:TwinPeaksMetrics} abgebildet. Wie dort zu erkennen ist, zeigt Locally Linear Embedding eine starke Performance auf den beiden künstlichen Datensätzen. Der Autoencoder kann sich hinsichtlich des Twin Peaks Datensatzes von den restlichen Methoden abheben. Bei der Swiss Roll ist dies jedoch nicht der Fall. Hier sind die PCA, die Kernel PCA, sowie beide Varianten des Autoencoders relativ ähnlich.
 
 Wie eingangs in \subsecref{ch:Vergleich:sec:VerwendeteDatensaetze:kuenstlich} erwähnt, ist die
-Möglichkeit der Visualisierung der latenten Repräsentation ein Vorteil Evaluierung auf künstlichen
-Datensätzen. Als Illustration wurden dafür in \figref{fig:SwissRollEmbeddings}
+Möglichkeit der Visualisierung der latenten Repräsentation ein Vorteil der Evaluierung auf
+künstlichen Datensätzen. Als Illustration wurden dafür in \figref{fig:SwissRollEmbeddings}
 \begin{figure}[ht]
 	\centering
 	\includegraphics{SwissRollEmbeddings.pdf}
@@ -350,10 +351,8 @@ Betrachtung einer größeren Nachbarschaft der Qualitätskriterien für LLE bena
 der Vollständigkeit halber und zu Vergleichszwecken trotzdem mit aufgenommen. Überraschenderweise
 kann die Hauptkomponentenanalyse auf fast allen natürlichen Datensätzen eine gute oder sogar die
 beste relative Performance aufweisen. Auf den vier Bilddatensätzen kann jedoch der Convolutional
-Autoencoder seine Stärken zeigen, insbesondere wenn genügend Trainingsdaten zur Verfügung stehen, was für den MNIST-Datensatz in \figref{fig:MNISTMetrics} zutrifft.
-Ist dies jedoch nicht der Fall, so kann die Performance stark darunter leiden. Dies ist
-beispielsweise auf dem Olivetti Faces Datensatz der Fall, wie in \figref{fig:OlivettiFacesMetrics}
-zu erkennen ist. Das Problem einer geringen Menge an Trainingsdaten gilt gleichermaßen für alle
+Autoencoder seine Stärken zeigen, insbesondere wenn genügend Trainingsdaten zur Verfügung stehen. Letzteres trifft für MNIST-Datensatz \figref{fig:MNISTMetrics} zu, nicht jedoch für den Olivetti Faces-Datensatz.
+Auf diesem Datensatz leidet die Performance der Autoencoder generell (siehe z.B. \figref{fig:OlivettiFacesMetrics}). Das Problem einer geringen Menge an Trainingsdaten gilt gleichermaßen für alle
 Varianten von neuronalen Netzen, insbesondere jedoch für vollvernetzte Autoencoder aufgrund der
 hohen Anzahl an Freiheitsgraden im Netz.
 
@@ -373,7 +372,7 @@ Referenz.
 	\caption[Rekonstruktierte MNIST-Zahlen]{Gezeigt sind einige rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch den Convolutional Autoencoder und (5) Rekonstruktion durch den Contractive Autoencoder.}
 	\label{fig:MNIST-reconstructions}
 \end{figure}
-Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Die Rekonstrukionen der Hauptkomponentenanalyse und des Contractive Autoencoders sind visuell nicht überzeugend, da sie deutlich unscharfer sind. Der Convolutional Autoencoder hat auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien ebenfalls am besten abgeschnitten (siehe \figref{fig:MNISTMetrics}). Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte. Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER- oder LFW-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
+Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da einige Zahlen sogar als falsche Zahl rekonstruiert werden. Die Rekonstruktionen der Hauptkomponentenanalyse sind besser, aber visuell ebenfalls nicht überzeugend, da sie deutlich unscharfer sind. Der Convolutional Autoencoder hat auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien am besten abgeschnitten (siehe \figref{fig:MNISTMetrics}). Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte. Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
 
 \subsection{PCA und Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}
@@ -383,8 +382,7 @@ der theoretische Zusammenhang zwischen den beiden Methoden erklärt. Im Anschlus
 Hauptkomponentenanalyse und unterschiedliche Modelle des Autoencoders für einen empirischen
 Vergleich auf dem FER-Datensatz trainiert, wobei aufgrund der sieben unterschiedlichen Emotionen im
 Datensatz eine Reduktion auf sieben Dimensionen durchgeführt wurde. Ein Beispielbild für jede
-Emotion des FER-Datensatzes ist in \figref{fig:FER-Datensatz-Beispiele} dargestellt.\rewrite{FER
-	hat 7 Emotionen. wütend fehlt hier}
+Emotion des FER-Datensatzes ist in \figref{fig:FER-Datensatz-Beispiele} dargestellt.
 
 \begin{figure}[ht]
 	\centering
