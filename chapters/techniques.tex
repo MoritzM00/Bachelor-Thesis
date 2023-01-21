@@ -107,17 +107,18 @@ ausdrücken, wobei $\mat{A} = [\vect{a}_1,\ldots,\vect{a}_k] \in \real^{D \times
 \subsubsection{Erweiterungen}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Erweiterungen}
 Trotz der großen Beliebtheit der Hauptkomponentenanalyse hat diese Methode natürlich auch ihre Nachteile, weswegen zahlreiche Erweiterungen wie zum Beispiel \ldots\addref entwickelt wurden.
-Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenvektorbasis der Kovarianzmatrix inhärent linear ist. Die Hauptkomponentenanalyse ist also in dieser klassischen Form nicht in der Lage, eine nichtlineare Mannigfaltigkeit in den Daten zu erkennen. Deswegen wurde unter anderem eine Generalisierung von PCA von \textcite{Scholkopf.1997} entwickelt, die sogenannte \newterm{Kernel Principal Component Analysis} (kPCA). Diese Methode wird in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA} genauer behandelt.
+Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenvektorbasis der Kovarianzmatrix inhärent linear ist. Die Hauptkomponentenanalyse ist also in dieser klassischen Form nicht in der Lage, eine nichtlineare Mannigfaltigkeit in den Daten zu erkennen. Deswegen wurde unter anderem eine Generalisierung von PCA von \textcite{Scholkopf.1997} entwickelt, die sogenannte \newterm{Kernel Principal Component Analysis} (Kernel PCA). Diese Methode wird in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA} genauer behandelt.
 
 %% ==============================
 \subsection{Kernel Principal Component Analysis}
 \label{ch:MethodenDerDimRed:statistisch:kPCA}
 \nomenclature[Z]{kPCA}{Kernel Principal Component Analysis}
-Wie soeben erwähnt ist die Kernel Principal Components Analysis insofern eine Generalisierung der klassischen Hauptkomponentenanalyse, dass auch nichtlineare Zusammenhänge erkannt werden können.
-Um das zu erreichen, wird sich am sogenannten \newterm{Kernel Trick} bedient, der schon erfolgreich auf \textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde. Dazu wird in
-\subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} die Grundidee dieser Methode erläutert
-und in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise} wird sich mit der konkreten
-Vorgehensweise befasst.
+Die Kernel Principal Components Analysis \parencite{Scholkopf.1997} ist eine nichtlineare Erweiterung der klassischen Hauptkomponentenanalyse
+und kann somit theoretisch nichtlineare Zusammenhänge in den Daten erkennen. Um das zu erreichen,
+wird sich am sogenannten \newterm{Kernel Trick} bedient, der schon erfolgreich auf \textit{Support
+	Vector Machines} \parencite{Boser.1992} angewandt wurde. Im Folgenden wird die Grundidee der Kernel PCA und das Konzept
+eines Kernels genauer erläutert. Daraufhin wird die konkrete Vorgehensweise vorgestellt und
+abschließend wird die
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee}
@@ -149,15 +150,24 @@ Ein Kernel $\kappa$ ist definiert als das Skalarprodukt im Merkmalsraum \parenci
 	\label{eq:kPCA:KernelFunction}
 	\kappa(\vect{x}_i, \vect{x}_j) = \tr{\bm{\phi}(\vect{x}_i)} \bm{\phi}(\vect{x}_j)
 \end{equation}
-und ist damit intuitiv gesehen ein \enquote{Orakel} für die Ähnlichkeit der Daten im Merkmalsraum, weil dies ohne Kenntnis der Koordinaten berechnet werden kann \parencite[71]{ShaweTaylor.2011}. Wie bereits in
-\subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} erwähnt, muss die
+und ist damit intuitiv gesehen ein \enquote{Orakel} für die Ähnlichkeit der Daten im Merkmalsraum, weil dies ohne Kenntnis der Koordinaten berechnet werden kann \parencite[71]{ShaweTaylor.2011}. In der Praxis häufig anzutreffen sind Gaußsche Kernel (auch: Radiale
+Basisfunktionen (RBF))
+\begin{equation}
+	\kappa(\vect{x}_i, \vect{x}_j) = \exp \left(- \frac{\norm{ \vect{x}_i - \vect{x}_j}^2}{2\sigma}\right) \, ,
+\end{equation}
+wobei der Parameter $\sigma > 0$ die Bandbreite des Kernels bestimmt \parencite[296]{ShaweTaylor.2011}. Ein zu kleiner Wert von $\sigma$ führt dazu, dass der Kernel die
+Ähnlichkeit der Punkte unterschätzt. Analog führt ein zu großer Wert der Bandbreite dazu, dass der
+Kernel die Ähnlichkeit überschätzt, d.h. die lokale Struktur wird unter Umständen vernachlässigt.
+Des Weiteren sind polynomiale Funktionen \parencite[292]{ShaweTaylor.2011}
+\begin{equation}
+	\kappa(\vect{x}_i, \vect{x}_j) = (\vect{x}_i \cdot \vect{x}_j)^p
+\end{equation}
+des Grades $p$ eine von vielen möglichen Kernel-Funktionen.
+
+Wie bereits in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} erwähnt, muss die
 Hauptkomponentenanalyse nun in eine Form gebracht werden, in der nur Skalarprodukte von
 $\bm{\phi}(\rvect{x})$ vorkommen. Diese Skalarprodukte können dann gemäß
 \eqref{eq:kPCA:KernelFunction} durch die Kernel-Funktion ersetzt werden.
-
-In der Praxis häufig anzutreffen sind der Gauß-Kernel ...
-
-\unsure{Kernel-Matrix hier definieren?}
 
 \subsubsection{Vorgehensweise}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise}
@@ -186,33 +196,33 @@ die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[
 % \end{equation}
 % berechnet werden.
 
-\subsubsection{Auswahl des Kernels}
+\subsubsection{Praktische Probleme der Kernel PCA}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:AuswahlKF}
 
-Die Performance der Kernel PCA hängt entscheidend von der Wahl des Kernels ab.\rewrite{Das tut sie
-	laut Fabian nicht. Entscheidender ist die Wahl der Parameters des Kernels!} Leider gibt es keine
-Möglichkeit, vorab den besten Kernel für ein spezifisches Problem auszuwählen. Dies ist die größte
-Schwachstelle der Kernel PCA und ein Grund, wieso sich die Kernel PCA nicht so stark in der
-Dimensionsreduktion durchsetzen konnte wie die klassische Hauptkomponentenanalyse. Allgemein umgeht
-man das Problem der manuellen Auswahl eines Kernels für Kernel-Methoden mittels Kreuz-Validierung
-(engl. \textit{Cross-Validation} (CV)). Dabei wird ein Qualitätskriterium festgelegt und die
-Methode mit einer vorab definierten Auswahl an Kernel-Funktionen auf einer Teilmenge des
-Trainingsdatensatzes trainiert und evaluiert. Die Parameter der Methode, die hinsichtlich des
-Qualitätskriteriums am besten abgeschnitten hat, werden dann für das eigentliche Modell übernommen
-und auf dem größeren Trainingsdatensatz trainiert. Dies funktioniert für Klassifikatoren und
-Regressoren wie z.B. die Support Vector Machine gut, da die Wahl der Qualitätskriterien klar ist.
-Für die Dimensionsreduktion ist die Wahl des Qualitätskriteriums nicht so trivial, wie wir später
-in \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} sehen werden.
-
-In der Praxis häufig anzutreffen sind Gaußsche Kernel (auch: Radiale Basisfunktionen (RBF))
-\begin{equation}
-	\kappa(\vect{x}_i, \vect{x}_j) = \exp \left(- \frac{\norm{ \vect{x}_i - \vect{x}_j}^2}{2\sigma}\right) \, ,
-\end{equation}
-wobei der Parameter $\sigma > 0$ die \enquote{Breite} des Kernels bestimmt \parencite[296]{ShaweTaylor.2011}. Außerdem sind polynomiale Funktionen \parencite[292]{ShaweTaylor.2011}
-\begin{equation}
-	\kappa(\vect{x}_i, \vect{x}_j) = (\vect{x}_i \cdot \vect{x}_j)^p
-\end{equation}
-des Grades $p$ eine häufige Wahl des Kernels.
+Ein entscheidender Schwachpunkt der Kernel PCA ist die Selektion der Hyperparameter, d.h. die
+Auswahl des Kernels und die Wahl der Parameter für den Kernel. Besonders problematisch ist, dass
+der Kernel oft sensitiv gegenüber seiner Parameter ist. Im Falle eines Gaußschen Kernels muss ein
+Parameter $\sigma$ gewählt werden, der die Bandbreite des Kernels bestimmt. Die Performance auf
+einem Datensatz hängt also stark von der Wahl der Parameter ab. Allgemein umgeht man das Problem
+der manuellen Auswahl eines Kernels und seiner Parameter für Kernel-Methoden mittels
+unterschiedlicher Varianten von Kreuzvalidierung. Beispielsweise wird ein Qualitätskriterium
+festgelegt und die Methode mit einer vorab definierten Auswahl an Hyperparametern auf einer
+Teilmenge des Datensatzes trainiert und mit einer anderen Teilmenge evaluiert. Die Parameter der
+Methode, die hinsichtlich des Qualitätskriteriums am besten abgeschnitten hat, werden dann für das
+finale Modell übernommen und auf dem vollen Trainingsdatensatz trainiert. Dies funktioniert für
+Klassifikatoren und Regressoren wie z.B. die Support Vector Machine gut, da die Wahl der
+Qualitätskriterien nicht problematisch ist. Für die Dimensionsreduktion ist die Wahl des
+Qualitätskriteriums nicht trivial, wie wir später in
+\subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} sehen werden. Eine Möglichkeit
+wäre die quadratische Abweichung zwischen der ursprünglichen Repräsentation eines Punktes und der
+Rekonstruktion aus seiner niedrigdimensionalen Repräsentation. Die Kernel PCA stellt allerdings
+entgegen der klassischen Hauptkomponentenanalyse keine exakte inverse Transformation zur Verfügung,
+weswegen auf Approximationen zurückgegriffen werden muss. Dieses Problem entspricht dem Finden des
+sogenannten Urbildes (engl. \textit{pre-image}) in Kernel-Methoden \parencite{Kwok.2004}. Mithilfe dieser Approximation könnte eine Kreuzvalidierung über
+Rekonstruktionsfehler durchgeführt werden \parencite[siehe z.B.][]{Alam.2014}. In dieser Arbeit wird auf die Approximation des Urbildes
+verzichtet und stattdessen Qualitätskriterien der Dimensionsreduktion für eine Kreuzvalidierung
+verwendet. Das Vorgehen wird später in \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
+genauer erläutert.
 %% ==============================
 \subsection{Locally Linear Embedding}
 \label{ch:MethodenDerDimRed:statistisch:LLE}
