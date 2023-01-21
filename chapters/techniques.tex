@@ -118,7 +118,7 @@ und kann somit theoretisch nichtlineare Zusammenhänge in den Daten erkennen. Um
 wird sich am sogenannten \newterm{Kernel Trick} bedient, der schon erfolgreich auf \textit{Support
 	Vector Machines} \parencite{Boser.1992} angewandt wurde. Im Folgenden wird die Grundidee der Kernel PCA und das Konzept
 eines Kernels genauer erläutert. Daraufhin wird die konkrete Vorgehensweise vorgestellt und
-abschließend wird die
+abschließend werden praktische Probleme besprochen.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee}
@@ -188,23 +188,22 @@ mit $i = 1, \ldots, n$ zerlegt, womit über den Zusammenhang
 	\label{eq:kPCA:ZusammenhangEigenvektoren}
 	\vect{a}_i = \frac{1}{\sqrt{\lambda_i}} \vect{v}_i
 \end{equation}
-die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[142]{ShaweTaylor.2011}.
-% Letztlich kann die Projektion eines Punktes $\vect{x}$ auf die niedrigdimensionale Repräsentation $\rvect{y}$
-% durch
-% \begin{equation}
-% 	\vect{y} = \sum_{i=1}^n \vect{a}_i \kappa(\vect{x}_i, \vect{x}) 
-% \end{equation}
-% berechnet werden.
+die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[142]{ShaweTaylor.2011}. Letztlich kann die Projektion eines Punktes $\vect{x}$ auf die
+niedrigdimensionale Repräsentation $\rvect{y}$ durch
+\begin{equation}
+	\vect{y} = \sum_{i=1}^n \vect{a}_i \kappa(\vect{x}_i, \vect{x})
+\end{equation}
+berechnet werden.\rewrite{Umschreiben und auf Richtigkeit überprüfen}
 
 \subsubsection{Praktische Probleme der Kernel PCA}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:AuswahlKF}
 
 Ein entscheidender Schwachpunkt der Kernel PCA ist die Selektion der Hyperparameter, d.h. die
-Auswahl des Kernels und die Wahl der Parameter für den Kernel. Besonders problematisch ist, dass
-der Kernel oft sensitiv gegenüber seiner Parameter ist. Im Falle eines Gaußschen Kernels muss ein
-Parameter $\sigma$ gewählt werden, der die Bandbreite des Kernels bestimmt. Die Performance auf
-einem Datensatz hängt also stark von der Wahl der Parameter ab. Allgemein umgeht man das Problem
-der manuellen Auswahl eines Kernels und seiner Parameter für Kernel-Methoden mittels
+Auswahl des Kernels und die Wahl der Parameter für den Kernel. Problematisch ist, dass der Kernel
+oft sensitiv gegenüber seiner Parameter ist. Im Falle eines Gaußschen Kernels muss ein Parameter
+$\sigma$ gewählt werden, der die Bandbreite des Kernels bestimmt. Die Performance auf einem
+Datensatz hängt davon ab, wie passend diese Bandbreite gewählt wurde. Allgemein umgeht man das
+Problem der manuellen Auswahl eines Kernels und seiner Parameter für Kernel-Methoden mittels
 unterschiedlicher Varianten von Kreuzvalidierung. Beispielsweise wird ein Qualitätskriterium
 festgelegt und die Methode mit einer vorab definierten Auswahl an Hyperparametern auf einer
 Teilmenge des Datensatzes trainiert und mit einer anderen Teilmenge evaluiert. Die Parameter der
