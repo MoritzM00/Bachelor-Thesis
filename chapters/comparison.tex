@@ -177,8 +177,7 @@ Qualitätskriterien hinreichende gute Indizien für die Performance der Methoden
 Datensätzen wurden größtenteils Bilddatensätze, aber auch ein Datensatz mit Genausprägungen ausgewählt, da diese eine
 hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
 Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Faces}-Datensatz
-\footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Labeled Faces in the
-	Wild} (LFW) Datensatz\rewrite{replace with Fashion MNIST} \parencite{GaryB.Huang.2007}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der
+\footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Fashion MNIST}-Datensatz \parencite{Xiao.8252017}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der
 \textit{ICMR}-Datensatz\footnote{\url{https://www.kaggle.com/datasets/shibumohapatra/icmr-data?select=labels.csv}}
 ausgewählt, um die Performance der Dimensionsreduktionsmethoden auf natürlichen Datensätzen zu
 evaluieren. Der weitverbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von
@@ -186,13 +185,11 @@ handgeschriebenen Zahlen in der Auflösung $28 \times 28$. Die Anzahl der Pixel 
 extrinsische Dimension beträgt 784. Der \textit{Olivetti Faces}-Datensatz enthält Bilder von
 Gesichtern aus zehn unterschiedlichen Positionen von 40 Personen und ist damit der kleinste
 natürliche Datensatz in diesem Vergleich mit 400 Bildern. Die Bilder haben eine Auflösung von $64
-	\times 64$, was einer extrinsischen Dimension von 4096 entspricht. Der LFW-Datensatz enthält
-insgesamt über 13 000 Bilder von Gesichtern, jedoch wurde hier eine Teilmenge ausgewählt, sodass
-jede Person mindestens 30 mal vorkommt. Dies resultiert in einer Stichprobengröße von 2370. Die
-Bilder haben eine Auflösung von $62 \times 47$ und damit eine extrinsische Dimension von 2914. Der
-FER-Datensatz besteht aus 28 709 Bildern von Gesichtern mit sieben unterschiedlichen Emotionen. Die
-Bilder haben eine Auflösung von $48 \times 48$ und sind damit 2304-dimensional. Beispiele der
-Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
+	\times 64$, was einer extrinsischen Dimension von 4096 entspricht. Der Fashion MNIST-Datensatz
+besteht aus 60 000 Bildern von zehn unterschiedlichen Kleidungsstücken. Die extrinsische Dimension
+ist ebenso wie bei MNIST 784. FER-Datensatz besteht aus 28 709 Bildern von Gesichtern mit sieben
+unterschiedlichen Emotionen. Die Bilder haben eine Auflösung von $48 \times 48$ und sind damit
+2304-dimensional. Beispiele der Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
 \begin{figure}
 	\begin{center}
 		\includegraphics{dataset_samples.pdf}
@@ -203,7 +200,6 @@ Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
 
 \nomenclature[Z]{MNIST}{Modified National Institute of Standards and Technology (Datensatz)}
 \nomenclature[Z]{FER}{Facial Emotion Recognition (Datensatz)}
-\nomenclature[Z]{LFW}{Labeled Faces in the Wild (Datensatz)}
 \nomenclature[Z]{ICMR}{Indian Council of Medical Research (Datensatz)}
 
 Letztlich enthält der ICMR-Datensatz Genausprägungen von 801 Personen, die mit fünf
@@ -224,7 +220,6 @@ erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 		MNIST          & 784                        & 15                         & 60 000               \\
 		Fasion MNIST   & 784                        & 18                         & 60 000               \\
 		Olivetti Faces & 4 096                      & 9                          & 400                  \\
-		LFW            & 2 914                      & 21                         & 2370                 \\
 		FER            & 2 304                      & 26                         & 28 709               \\
 		ICMR           & 20 531                     & 22                         & 801                  \\
 		\bottomrule
@@ -344,7 +339,7 @@ sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
 	\caption[Qualitätskriterien für MNIST]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST-Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine starke Performance zeigen, da der Datensatz von hoher Qualität ist und eine hohe Stichprobengröße aufweisen kann. Nichtsdestotrotz kann die Hauptkomponentenanalyse nur knapp dahinter gut mithalten und hinsichtlich der Kontinuität sogar übertreffen. Die Kernel PCA und der klassische vollvernetzte Autoencoder schneiden ebenfalls relativ gut ab, jedoch ist die Reduktion der Kernel PCA weniger vertrauenswürdig. Locally Linear Embedding und der Contractive Autoencoder können vor allem auf dem LCMC nicht mithalten. (Eigene Darstellung)}
 	\label{fig:MNISTMetrics}
 \end{figure}
-Für die Olivetti Faces (\figref{fig:OlivettiFacesMetrics}), den FER- (\figref{fig:FER2013Metrics}) und den LFW-Datensatz (\figref{fig:LfwPeopleMetrics})
+Für die Olivetti Faces (\figref{fig:OlivettiFacesMetrics}), den FER- (\figref{fig:FER2013Metrics}) und den Fashion MNIST-Datensatz (\figref{fig:FashionMNISTMetrics})
 schneidet LLE auf allen drei Kriterien relativ gesehen schlecht ab. insbesondere nehmen die
 Qualitätskriterien von LLE mit größer werdender Nachbarschaftsgröße $K$ deutlicher ab, als bei den
 restlichen Methoden. Aufgrund der Wahl der Nachbarschaftsgröße von $K=10$ für Locally Linear
