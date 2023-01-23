@@ -447,6 +447,7 @@ formuliert werden, wobei $\mat{W} \in \real^{d \times D}$ und $\mat{\widetilde{W
 \end{equation}
 verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
 \begin{equation}
+	\label{eq:CAE-loss-simple}
 	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^d \left( y_i (1 - y_i)\right)^2 \sum_{j = 1}^D \mat{W}^2_{ij}
 \end{equation}
 effizient berechnet werden \parencite[4]{Rifai.2011}. Für einen Autoencoder mit mehr als einer versteckten Schicht wird die

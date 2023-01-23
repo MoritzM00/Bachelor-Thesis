@@ -1,21 +1,21 @@
-\begin{table}
+\begin{table}[ht]
 	\centering
 	\ra{1.3}
 	\resizebox{\textwidth}{!}{
 		\begin{tabular}{lrrrrrrr}
 			\toprule
-			{}             & \multicolumn{7}{c}{Zeitaufwand in Sekunden}                                                                              \\
-			\cmidrule{2-8} & MNIST                                       & Fashion MNIST & Twin Peaks & Swiss Roll & Olivetti Faces & ICMR   & FER    \\
+			{}             & \multicolumn{7}{c}{Laufzeit in Sekunden}                                                                              \\
+			\cmidrule{2-8} & MNIST                                    & Fashion MNIST & Twin Peaks & Swiss Roll & Olivetti Faces & ICMR   & FER    \\
 			\midrule
-			PCA            & 2,00                                        & 2,54          & 0,01       & 0,00       & 0,35           & 0,78   & 2,51   \\
-			Kernel PCA     & 101,00                                      & 101,72        & 0,62       & 0,59       & 0,03           & 1,01   & 103,17 \\
-			LLE            & 417,41                                      & 447,95        & 0,45       & 0,42       & 0,24           & 1,14   & 426,50 \\
-			AE             & 161,35                                      & 130,24        & 45,32      & 102,34     & 43,02          & 54,51  & 102,26 \\
-			CAE            & 738,29                                      & 687,84        & 37,36      & 2,54       & 2,15           & 109,46 & 314,93 \\
-			ConvAE         & 467,61                                      & 754,83        & -          & -          & 50,20          & -      & 249,64 \\
+			PCA            & 2,00                                     & 2,54          & 0,01       & 0,00       & 0,35           & 0,78   & 2,51   \\
+			Kernel PCA     & 101,00                                   & 101,72        & 0,62       & 0,59       & 0,03           & 1,01   & 103,17 \\
+			LLE            & 417,41                                   & 447,95        & 0,45       & 0,42       & 0,24           & 1,14   & 426,50 \\
+			AE             & 161,35                                   & 130,24        & 45,32      & 102,34     & 43,02          & 54,51  & 102,26 \\
+			CAE            & 738,29                                   & 687,84        & 37,36      & 2,54       & 2,15           & 109,46 & 314,93 \\
+			ConvAE         & 467,61                                   & 754,83        & --         & --         & 50,20          & --     & 249,64 \\
 			\bottomrule
 		\end{tabular}
 	}
-	\caption[Zeitaufwand der Dimensionsreduktionsmethoden in Sekunden.]{Zeitaufwand der einzelnen Dimensionsreduktionsmethoden in Sekunden.}
+	\caption[Laufzeiten der Dimensionsreduktionsmethoden in Sekunden.]{Laufzeiten der einzelnen Dimensionsreduktionsmethoden in Sekunden (niedriger ist besser). Alle statistischen Methoden wurden auf einer Intel Xeon Gold 5315Y CPU mit 3.20 GHz Taktfrequenz und alle Machine Learning Methoden auf einer NVIDIA RTX A4000 Grafikkarte trainiert. PCA weist auf allen Datensätzen, inklusive der etwas größeren Datensätze MNIST und Fashion MNIST, einen kurzen Zeitaufwand von maximal 2,5 Sekunden auf. Die Laufzeiten der anderen beiden statistischen Methoden Kernel PCA und LLE steigen bei Datensätzen mit einer höheren Stichprobengröße stark an. Die längsten Laufzeiten weisen der Convolutional und Contractive Autoencoder auf.}
 	\label{tab:training_times}
 \end{table}
