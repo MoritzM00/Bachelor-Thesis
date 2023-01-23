@@ -1,0 +1,21 @@
+\begin{table}
+	\centering
+	\ra{1.3}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{lrrrrrrr}
+			\toprule
+			{}             & \multicolumn{7}{c}{Zeitaufwand in Sekunden}                                                                              \\
+			\cmidrule{2-8} & MNIST                                       & Fashion MNIST & Twin Peaks & Swiss Roll & Olivetti Faces & ICMR   & FER    \\
+			\midrule
+			PCA            & 2,00                                        & 2,54          & 0,01       & 0,00       & 0,35           & 0,78   & 2,51   \\
+			Kernel PCA     & 101,00                                      & 101,72        & 0,62       & 0,59       & 0,03           & 1,01   & 103,17 \\
+			LLE            & 417,41                                      & 447,95        & 0,45       & 0,42       & 0,24           & 1,14   & 426,50 \\
+			AE             & 161,35                                      & 130,24        & 45,32      & 102,34     & 43,02          & 54,51  & 102,26 \\
+			CAE            & 738,29                                      & 687,84        & 37,36      & 2,54       & 2,15           & 109,46 & 314,93 \\
+			ConvAE         & 467,61                                      & 754,83        & -          & -          & 50,20          & -      & 249,64 \\
+			\bottomrule
+		\end{tabular}
+	}
+	\caption[Zeitaufwand der Dimensionsreduktionsmethoden in Sekunden.]{Zeitaufwand der einzelnen Dimensionsreduktionsmethoden in Sekunden.}
+	\label{tab:training_times}
+\end{table}
