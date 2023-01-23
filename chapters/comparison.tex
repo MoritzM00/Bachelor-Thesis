@@ -374,6 +374,11 @@ Referenz.
 \end{figure}
 Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da einige Zahlen sogar als falsche Zahl rekonstruiert werden. Die Rekonstruktionen der Hauptkomponentenanalyse sind besser, aber visuell ebenfalls nicht überzeugend, da sie deutlich unscharfer sind. Der Convolutional Autoencoder hat auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien am besten abgeschnitten (siehe \figref{fig:MNISTMetrics}). Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte. Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
 
+\begin{table}
+	\centering
+	\input{table.tex}
+\end{table}
+
 \subsection{PCA und Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}
 

@@ -237,11 +237,11 @@ Rekonstruktionsgewichte $W_{ij}$, welche durch Minimierung der Zielfunktion
 	\label{eq:LLE:Zielfunktion}
 	\sum_{i = 1}^n \norm[\Big]{ \vect{x}_i - \sum_{j = 1}^n W_{ij}\vect{x}_j}^2
 \end{equation}
-gefunden werden. Die Minimierung erfolgt unter den folgenden zwei Nebenbedingungen \parencite[2]{Roweis.2000}. Erstens müssen sich alle Zeilen der Gewichtsmatrix $\mat{W}$ zu Eins
-summieren
+gefunden werden. Die Minimierung erfolgt unter den folgenden zwei Nebenbedingungen \parencite[2]{Roweis.2000}. Erstens müssen sich alle Zeilen der Gewichtsmatrix $\mat{W} \in \real^{n
+		\times n}$ zu Eins summieren
 \begin{equation}
 	\label{eq:LLE:ErsteNebenbedingung}
-	\sum_{j = 1}^nW_{ij} = 1 \, , \quad \forall i = 1, \ldots, n
+	\sum_{i = 1}^nW_{ij} = 1 \, , \quad \forall i = 1, \ldots, n
 \end{equation}
 und zweitens sollen Datenpunkte, die keine Nachbarn sind, keinen Einfluss auf die Rekonstruktion haben, das heißt
 \begin{equation}
@@ -271,15 +271,19 @@ Wurden die optimalen Rekonstruktionsgewichte $W_{ij}$, die die Zielfunktion aus
 \begin{equation}
 	\min_{\mat{Y}}\, \Spur(\tr{\mat{Y}} \mat{M} \mat{Y}) \, ,
 \end{equation}
-wobei $\mat{M} = \tr{(\identity_n - \mat{W})} (\identity_n - \mat{W})$. Jedoch ist dieses Optimierungsproblem unterbestimmt, weswegen man für $\mat{Y}$ eine Einheits-Kovarianzmatrix und einen spaltenweisen Mittelwert von Null fordert \parencite[11]{Saul.2000}. Wie \textcite[3 -- 4]{Ghojogh.2020} zeigen, wird das Problem über die
-Eigenwertzerlegung der dünnbesetzten Matrix $\mat{M}$ gelöst: Die Spalten von $\mat{Y}$ entsprechen
-den unteren $d$ Eigenvektoren von $\mat{M}$, wobei das triviale Eigenvektor-Eigenwert-Paar $(\ones,
-	0)$ ausgelassen wird.
+wobei $\mat{M} = \tr{(\identity_n - \mat{W})} (\identity_n - \mat{W})$ und $\Spur(\,\cdot\,)$ die Summe der Diagonalelemente einer Matrix bezeichnet. Jedoch ist dieses Optimierungsproblem unterbestimmt, weswegen man für $\mat{Y}$ eine Einheits-Kovarianzmatrix und einen spaltenweisen Mittelwert von Null fordert \parencite[11]{Saul.2000}. Diese Restriktionen sind erlaubt, da die Zielfunktion in Gleichung
+\eqref{eq:LLE:ZielfunktionY} invariant gegenüber Rotationen und Skalierungen ist \parencite[2326]{Roweis.2000}.
 
-\subsubsection{Erweiterungen}
-\label{ch:MethodenDerDimRed:statistisch:LLE:Erweiterungen}
+Wie \textcite[3 -- 4]{Ghojogh.2020} zeigen, wird das Problem über die Eigenwertzerlegung der
+dünnbesetzten Matrix $\mat{M}$ gelöst: Die Spalten von $\mat{Y}$ entsprechen den unteren $d$
+Eigenvektoren von $\mat{M}$, wobei das triviale Eigenvektor-Eigenwert-Paar $(\ones, 0)$ ausgelassen
+wird. Die ebenen genannten Restriktionen, die das Optimierungsproblem bis auf eine Rotation
+eindeutig machen, lösen die Schwachstelle einer trivialen Lösung in dieser Zielfunktion jedoch
+nicht vollständig. Es kann dazu kommen, dass fast alle niedrigdimensionalen Punkte $\vect{y}_i$ nah
+um den Ursprung liegen und einige \enquote{Stränge} vom Ursprung aus weggehen, um die Restriktion
+der Einheits-Kovarianzmatrix zu erfüllen. Die Restriktionen sind also nicht stark genug, um
+triviale Lösungen vollständig zu umgehen \parencite[vgl.][23]{vanderMaaten.2009}.
 
-\newpage
 %% ==============================
 %% ==============================
 \section{Machine Learning Methoden}
