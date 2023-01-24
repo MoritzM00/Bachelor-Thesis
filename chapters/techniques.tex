@@ -377,12 +377,36 @@ wobei $\lambda \geq 0$ ein \textit{Hyperparameter} ist, der die Stärke der Regu
 Eine Umsetzung dessen ist zum Beispiel der \newterm{Sparse Autoencoder}, der eine dünn besetzte
 (engl. \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, das heißt nur wenige Einträge von
 $\vect{y}$ sind ungleich Null. Für das Lernen von Mannigfaltigkeiten besonders interessant ist
-jedoch der \newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird. Wie
-eingangs erwähnt ist ein linearer Autoencoder ähnlich zur Hauptkomponentenanalyse. Dieser
-Zusammenhang wird im Folgenden betrachtet.
+jedoch der \newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird.
 
 \subsubsection{Wahl der Architektur}
 \label{ch:MethodenDerDimRed:ML:AE:WahlArchitektur}
+
+Die vielen Freiheitsgrade in der Wahl der Architektur machen die Autoencoder flexibel, sind
+zugleich aber auch ein Nachteil dieser Methode. Im Folgenden werden die zu treffenden
+Entscheidungen bei der Wahl der Architektur eines Autoencoders kurz erläutert.
+
+Erstens muss zwischen vollvernetzten und \textit{Convolutional} Schichten werden. Letztere können
+eingesetzt werden, wenn der Input des Autoencoders ein Bild ist. Der Autoencoder wird dann als
+Convolutional Autoencoder (ConvAE) bezeichnet. Der Grund dafür ist der Aufbau dieser
+Schichten.\rewrite{Conv layers erklären} In allen anderen Fällen werden meist vollvernetzte
+Schichten eingesetzt, d.h. jedes Neuron hat eine Verbindung zu jedem Neuron aus der Folgeschicht.
+
+Zweitens muss die Anzahl der Schichten $m$ festgelegt werden, welche für die Symmetrie des Encoders
+und Decoders ungerade sein sollte (aber nicht muss). Häufig wählt man hier $m = 3$ oder $m = 5$, da
+bei größerem $m$ Schwierigkeiten bei der Konvergenz des Autoencoders auftreten. Dies liegt an der
+hohen Anzahl an Verbindungen (Gewichte) im neuronalen Netz, da jedes Neuron mit allen Neuronen aus
+der nachfolgenden Schicht verbunden ist. Bei hochdimensionalen Datensätzen besitzt die
+Input-Schicht zudem viele Neuronen. Dies führt dazu, dass bereits simple dreischichtige Autoencoder
+viele Gewichte haben, wie das folgende Beispiel zeigt. Beträgt die extrinsische Dimension bspw.
+1000 und wählt man $m=3$ und hat die Bottleneck-Schicht 10 Neuronen, dann hat dieser simple
+Autoencoder bereits 20 000 trainierbare Gewichte.\footnote{Genau genommen hat der Encoder $1000
+		\cdot 10 = 10000$ Gewichte und 10 Biases. Der Decoder hat 10000 Gewichte und 1000 Biases. Der
+	Autoencoder hat also insgesamt 20 110 zu trainierende Freiheitsgrade.}
+
+Drittens muss die Anzahl der Neuronen in den versteckten Schichten festgelegt werden. Die Anzahl
+der Neuronen in der ersten und letzten Schicht entspricht immer der Größe des Inputvektors, d.h.
+der extrinsischen Dimension $D$.
 
 % \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
 % \label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}
