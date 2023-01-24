@@ -386,11 +386,25 @@ Die vielen Freiheitsgrade in der Wahl der Architektur machen die Autoencoder fle
 zugleich aber auch ein Nachteil dieser Methode. Im Folgenden werden die zu treffenden
 Entscheidungen bei der Wahl der Architektur eines Autoencoders kurz erläutert.
 
-Erstens muss zwischen vollvernetzten und \textit{Convolutional} Schichten werden. Letztere können
-eingesetzt werden, wenn der Input des Autoencoders ein Bild ist. Der Autoencoder wird dann als
-Convolutional Autoencoder (ConvAE) bezeichnet. Der Grund dafür ist der Aufbau dieser
-Schichten.\rewrite{Conv layers erklären} In allen anderen Fällen werden meist vollvernetzte
-Schichten eingesetzt, d.h. jedes Neuron hat eine Verbindung zu jedem Neuron aus der Folgeschicht.
+Erstens muss zwischen vollvernetzten und faltende (engl. \textit{Convolutional}) Schichten
+entschieden werden. Letztere können eingesetzt werden, wenn der Input des Autoencoders eine
+Gitter-artige Topologie, wie z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}.\footnote{In der Mathematik ist eine diskrete Faltung zweier
+	Funktionen $v$ und $u$ definiert als
+	\begin{equation*}
+		(v * u)(t) = \sum_{\tau = -\infty}^{+\infty} v(t)u(t - \tau) \, .
+	\end{equation*}
+	Intuitiv gesehen wird dabei die Funktion $u$ (genannt: Kernel) gespiegelt und von links nach rechts über die Funktion $v$ \enquote{geschoben} und dabei multipliziert. Die Faltungsoperation in neuronalen Netzen kann in einer ähnlichen Weise interpretiert werden. Jedoch wird dabei das Spiegeln des Kernels teilweise weggelassen \parencite[333]{Goodfellow.2016}. Zudem ist der Kernel auf zweidimensionalen Gittern, wie es bspw. bei
+	Bildern der Fall ist, meist ebenfalls zweidimensional.} Der Autoencoder wird dann als Convolutional
+Autoencoder (ConvAE) bezeichnet. Eine detaillierte Einführung in Convolutional Neural Networks ist
+in \textcite[330 -- 372]{Goodfellow.2016} zu finden. In den anderen Fällen können vollvernetzte
+Schichten eingesetzt werden, d.h. jedes Neuron hat eine Verbindung zu jedem Neuron aus der
+Folgeschicht.In Convolutional Neural Networks ist es üblich, dass nach einer faltenden Schicht eine
+sogenannte \textit{Pooling}-Schicht \parencite[339 -- 345]{Goodfellow.2016} kommt, die die Größe des Inputs zwar verkleinert, dies aber
+\textit{ohne} trainierbare Gewichte tut. In Autoencodern soll die Inputgröße im Encoder ebenfalls
+sukzessive verkleinert werden, allerdings wollen wir lernen, wie man sie verkleinert. Daher wird
+hier anstelle von Pooling-Schichten die Schrittgröße $s$ (engl. \textit{Stride}) in der faltenden
+Schicht auf einen Wert größer Eins gesetzt. Dies bedeutet, dass die Faltungsoperation nur alle $s$
+Pixel angewandt und dadurch die Größe des Inputs verkleinert wird.
 
 Zweitens muss die Anzahl der Schichten $m$ festgelegt werden, welche für die Symmetrie des Encoders
 und Decoders ungerade sein sollte (aber nicht muss). Häufig wählt man hier $m = 3$ oder $m = 5$, da
@@ -399,15 +413,47 @@ hohen Anzahl an Verbindungen (Gewichte) im neuronalen Netz, da jedes Neuron mit 
 der nachfolgenden Schicht verbunden ist. Bei hochdimensionalen Datensätzen besitzt die
 Input-Schicht zudem viele Neuronen. Dies führt dazu, dass bereits simple dreischichtige Autoencoder
 viele Gewichte haben, wie das folgende Beispiel zeigt. Beträgt die extrinsische Dimension bspw.
-1000 und wählt man $m=3$ und hat die Bottleneck-Schicht 10 Neuronen, dann hat dieser simple
+1000 und wählt man $m=3$ und hat die Bottleneck-Schicht zehn Neuronen, dann hat dieser simple
 Autoencoder bereits 20 000 trainierbare Gewichte.\footnote{Genau genommen hat der Encoder $1000
-		\cdot 10 = 10000$ Gewichte und 10 Biases. Der Decoder hat 10000 Gewichte und 1000 Biases. Der
+		\cdot 10 = 10000$ Gewichte und zehn Biases. Der Decoder hat 10000 Gewichte und 1000 Biases. Der
 	Autoencoder hat also insgesamt 20 110 zu trainierende Freiheitsgrade.}
 
 Drittens muss die Anzahl der Neuronen in den versteckten Schichten festgelegt werden. Die Anzahl
-der Neuronen in der ersten und letzten Schicht entspricht immer der Größe des Inputvektors, d.h.
-der extrinsischen Dimension $D$.
+der Neuronen in der ersten und letzten Schicht entspricht der Größe des Inputvektors, d.h. der
+extrinsischen Dimension $D$. Erhöht man die Anzahl der Neuronen in einer versteckten Schicht, so
+erhöht sich die Kapazität des Autoencoders. Daher muss dieser Freiheitsgrad mit Bedacht gewählt
+werden, da es sonst ebenfalls zu Schwierigkeiten in der Optimierung kommen kann.
 
+Viertens muss die Aktivierungsfunktion festgelegt werden. Dabei könnte theoretisch nach jeder
+Schicht eine andere Aktivierungsfunktion eingesetzt werden. Hier wird jedoch angenommen, dass
+dieselbe Funktion für alle Schichten verwendet wird. Wie bereits am Anfang dieses Unterabschnitts
+erwähnt wurde, bestimmt die Aktivierungsfunktion die Nichtlinearität des Autoencoders. Die wohl
+populärsten Aktivierungsfunktionen sind die Sigmoid-Funktion
+\begin{equation}
+	\label{eq:Sigmoid}
+	\operatorname{sigmoid}(x) = \frac{1}{1 + \exp (-x)} \, ,
+\end{equation}
+der \textit{Tangens Hyperbolicus}
+\begin{equation}
+	\label{eq:tanh}
+	\operatorname{tanh}(x) = \frac{\exp(x) - \exp(-x)}{\exp(x) + \exp(-x)}
+\end{equation}
+und die \textit{Rectified Linear Units}
+\begin{equation}
+	\label{eq:ReLU}
+	\operatorname{ReLU}(x) = \max\{0, x\} \, ,
+\end{equation}
+wobei $\exp(\, \cdot \,)$ die Exponentialfunktion darstellt \parencites[191 -- 195]{Goodfellow.2016}[4]{Charte.2018}.
+\begin{figure}
+	\centering
+	\includegraphics{activations.pdf}
+	\caption[Drei weitverbreitete Aktivierungsfunktionen.]{Drei weitverbreitete Aktivierungsfunktionen. \captiona Die Sigmoid-Funktion \captionb der Tangens Hyperbolicus und \captionc die Rectified Linear Units. Eigene Darstellung (angelehnt an \textcite[4]{Charte.2018})}
+	\label{fig:activations}
+\end{figure}
+Die Aktivierungsfunktionen sind grafisch in \figref{fig:activations} dargestellt.
+Obwohl ReLU (\eqref{eq:ReLU}) die standardmäßig empfohlene Aktivierungsfunktion ist \parencite[195]{Goodfellow.2016}, wird für Autoencoder eher die Sigmoid-Funktion (\eqref{eq:Sigmoid})
+verwendet. Dies liegt daran, dass die \textit{Rectified Linear Units} alle negativen Inputs auf
+Null projiziert und damit die Rekonstruktion erschweren könnte \parencite[4]{Charte.2018}.
 % \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
 % \label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}
 
