@@ -32,11 +32,8 @@ Hauptkomponentenanalyse eine enge Verbindung. Neben dem Vergleich der zwei Grupp
 \secref{ch:Vergleich:sec:Resultate:PCA_AE} der Zusammenhang zwischen der Hauptkomponentenanalyse
 und Autoencodern genauer untersucht. Der Vergleich kann mittels der im
 GitHub-Repository\footnote{\url{www.github.com/MoritzM00/drcomp}} definierten Konfigurationen der
-Methoden und des Trainingsskriptes repliziert werden. Die Durchläufe wurden ebenfalls mittels
-\textit{Weights \&
-	Biases}\footnote{\url{https://wandb.ai/moritzm00/drcomp?workspace=user-moritzm00}} aufgezeichnet.
-\rewrite{Unter Methodik könnte man auch was anderes verstehen. Ein bisschen mehr dazu sagen, wieso
-	diese Vorgehensweise Sinn macht}
+Methoden und des Trainingsskriptes repliziert werden. \rewrite{Unter Methodik könnte man auch was
+	anderes verstehen. Ein bisschen mehr dazu sagen, wieso diese Vorgehensweise Sinn macht}
 
 \subsection{Qualitätskriterien der Dimensionsreduktion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien}
@@ -388,7 +385,7 @@ Dazu sind in \tabref{tab:training_times} die Laufzeiten aller Methoden für alle
 aufgelistet.
 
 \input{tables/training_times.tex}
-Die Hauptkomponentenanalyse weist die durschnittlich geringste Laufzeit auf und untermauert die bereits gute Perfomance auf den Qualitätskriterien. Die Laufzeiten von Locally Linear Embedding sind auf kleineren Datensätzen noch kurz, steigen aber mit der Stichprobengröße stark an. Die höchsten Laufzeiten weist der Convolutional Autoencoder auf dem MNIST-Datensatz mit 755 Sekunden oder circa 13 Minuten auf. Der Contractive Autoencoder hat ebenfalls auf den größeren Datensätzen eine hohe Laufzeit. Dies ist unter anderem der allgemeinen Implementierung des kontrahierenden Fehlerterms geschuldet. Eine spezifische Implementierung wie in \eqref{eq:CAE-loss-simple} könnte die Laufzeiten des Contractive Autoencoders noch verbessern, schränken dafür aber die Architektur in diesem Fall auf dreischichtige Autoencoder mit Sigmoid-Aktivierungsfunktionen ein.
+Die Hauptkomponentenanalyse weist die durchschnittlich geringste Laufzeit auf und untermauert die bereits guten Ergebnisse auf den Qualitätskriterien. Die Laufzeiten von Locally Linear Embedding sind auf kleineren Datensätzen noch kurz, steigen aber mit der Stichprobengröße stark an. Die höchsten Laufzeiten weist der Convolutional Autoencoder auf dem MNIST-Datensatz mit 755 Sekunden oder circa 13 Minuten auf. Der Contractive Autoencoder hat ebenfalls auf den größeren Datensätzen eine hohe Laufzeit. Dies ist unter anderem der allgemeinen Implementierung des kontrahierenden Fehlerterms geschuldet. Eine spezifische Implementierung wie in \eqref{eq:CAE-loss-simple} könnte die Laufzeiten des Contractive Autoencoders noch verbessern, schränken dafür aber die Architektur in diesem Fall auf dreischichtige Autoencoder mit Sigmoid-Aktivierungsfunktionen ein.
 
 \subsection{PCA und Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}

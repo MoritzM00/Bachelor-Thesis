@@ -16,6 +16,8 @@
 			\bottomrule
 		\end{tabular}
 	}
-	\caption[Laufzeiten der Dimensionsreduktionsmethoden in Sekunden.]{Laufzeiten der einzelnen Dimensionsreduktionsmethoden in Sekunden (niedriger ist besser). Alle statistischen Methoden wurden auf einer Intel Xeon Gold 5315Y CPU mit 3.20 GHz Taktfrequenz und alle Machine Learning Methoden auf einer NVIDIA RTX A4000 Grafikkarte trainiert. PCA weist auf allen Datensätzen, inklusive der etwas größeren Datensätze MNIST und Fashion MNIST, einen kurzen Zeitaufwand von maximal 2,5 Sekunden auf. Die Laufzeiten der anderen beiden statistischen Methoden Kernel PCA und LLE steigen bei Datensätzen mit einer höheren Stichprobengröße stark an. Die längsten Laufzeiten weisen der Convolutional und Contractive Autoencoder auf.}
+	\caption[Laufzeiten der Dimensionsreduktionsmethoden in Sekunden.]{Laufzeiten der einzelnen Dimensionsreduktionsmethoden in Sekunden (niedriger ist besser). Alle statistischen Methoden wurden auf einer Intel Xeon Gold 5315Y CPU mit 3.20 GHz Taktfrequenz und alle Machine Learning Methoden auf einer NVIDIA RTX A4000 Grafikkarte trainiert. Die einzelnen Durchläufe sind im
+		\textit{Weights \&
+			Biases}-Projekt (\url{https://wandb.ai/moritzm00/drcomp?workspace=user-moritzm00}) zu finden. PCA weist auf allen Datensätzen, inklusive der etwas größeren Datensätze MNIST und Fashion MNIST, eine kurze Laufzeit von maximal 2,5 Sekunden auf. Die Laufzeiten der anderen beiden statistischen Methoden Kernel PCA und LLE steigen bei Datensätzen mit einer höheren Stichprobengröße stark an. Die längsten Laufzeiten weisen der Convolutional und Contractive Autoencoder auf.}
 	\label{tab:training_times}
 \end{table}
