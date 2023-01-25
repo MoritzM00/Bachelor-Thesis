@@ -388,7 +388,7 @@ Entscheidungen bei der Wahl der Architektur eines Autoencoders kurz erläutert.
 
 Erstens muss zwischen vollvernetzten und faltende (engl. \textit{Convolutional}) Schichten
 entschieden werden. Letztere können eingesetzt werden, wenn der Input des Autoencoders eine
-Gitter-artige Topologie, wie z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}.\footnote{In der Mathematik ist eine diskrete Faltung zweier
+gitterartige Topologie, wie z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}.\footnote{In der Mathematik ist eine diskrete Faltung zweier
 	Funktionen $v$ und $u$ definiert als
 	\begin{equation*}
 		(v * u)(t) = \sum_{\tau = -\infty}^{+\infty} v(t)u(t - \tau) \, .
@@ -398,8 +398,8 @@ Gitter-artige Topologie, wie z.B. ein Bild aufweist \parencite[330]{Goodfellow.2
 Autoencoder (ConvAE) bezeichnet. Eine detaillierte Einführung in Convolutional Neural Networks ist
 in \textcite[330 -- 372]{Goodfellow.2016} zu finden. In den anderen Fällen können vollvernetzte
 Schichten eingesetzt werden, d.h. jedes Neuron hat eine Verbindung zu jedem Neuron aus der
-Folgeschicht.In Convolutional Neural Networks ist es üblich, dass nach einer faltenden Schicht eine
-sogenannte \textit{Pooling}-Schicht \parencite[339 -- 345]{Goodfellow.2016} kommt, die die Größe des Inputs zwar verkleinert, dies aber
+Folgeschicht. In Convolutional Neural Networks ist es üblich, dass nach einer faltenden Schicht
+eine sogenannte \textit{Pooling}-Schicht \parencite[339 -- 345]{Goodfellow.2016} kommt, die die Größe des Inputs zwar verkleinert, dies aber
 \textit{ohne} trainierbare Gewichte tut. In Autoencodern soll die Inputgröße im Encoder ebenfalls
 sukzessive verkleinert werden, allerdings wollen wir lernen, wie man sie verkleinert. Daher wird
 hier anstelle von Pooling-Schichten die Schrittgröße $s$ (engl. \textit{Stride}) in der faltenden
@@ -451,8 +451,8 @@ wobei $\exp(\, \cdot \,)$ die Exponentialfunktion darstellt \parencites[191 -- 1
 	\label{fig:activations}
 \end{figure}
 Die Aktivierungsfunktionen sind grafisch in \figref{fig:activations} dargestellt.
-Obwohl ReLU (\eqref{eq:ReLU}) die standardmäßig empfohlene Aktivierungsfunktion ist \parencite[195]{Goodfellow.2016}, wird für Autoencoder eher die Sigmoid-Funktion (\eqref{eq:Sigmoid})
-verwendet. Dies liegt daran, dass die \textit{Rectified Linear Units} alle negativen Inputs auf
+Obwohl ReLU (\eqref{eq:ReLU}) die standardmäßig empfohlene Aktivierungsfunktion ist \parencite[195]{Goodfellow.2016}, wird für Autoencoder die Sigmoid-Funktion (\eqref{eq:Sigmoid})
+empfohlen. Dies liegt daran, dass die \textit{Rectified Linear Units} alle negativen Inputs auf
 Null projiziert und damit die Rekonstruktion erschweren könnte \parencite[4]{Charte.2018}.
 % \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
 % \label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}

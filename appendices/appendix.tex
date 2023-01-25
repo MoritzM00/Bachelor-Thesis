@@ -17,12 +17,12 @@ wird \textit{Adam} eingesetzt, der häufig für das Trainieren neuronaler Netze 
 Optimierern wie \textit{Stochastic Gradient Descent} (SGD) präferiert wird. Die Lernrate $\eta$
 wird mittels eines exponentiellen Verfalls nach jeder Epoche aktualisiert. Dazu wird $\eta$ nach
 jeder Epoche $t = 1, \ldots, t_{\text{max}}$ mit einem Wert $\gamma$ multipliziert. Dieser Wert
-wird für alle Autoencoder auf $\gamma = 0,9$ gesetzt. Die klassischen und Contractive Autoencoder
-werden für maximal 100 Epochen und die Convolutional Autoencoder für maximal 150 Epochen trainiert.
-Das Training wird frühzeitig beendet, wenn sich der Validierungsfehler innerhalb von 20 Epochen
-nicht mehr verbessert. Die Größes eines Batches ist datensatzabhängig nach Stichprobengröße gewählt
-worden und beträgt 32 für Swiss Roll und Twin Peaks, acht für Olivetti Faces und ICMR, 100 für
-MNIST und FER-2013 und 64 für LfwPeople.
+wird für alle Autoencoder auf $\gamma = 0,9$ gesetzt. Der klassische Autoencoder wird für maximal
+100 Epochen, der Contractive Autoencoder für maximal 50 Epochen und die Convolutional Autoencoder
+für maximal 150 Epochen trainiert. Das Training wird frühzeitig beendet, wenn sich der
+Validierungsfehler innerhalb von 20 Epochen nicht mehr verbessert. Die Größes eines Batches ist
+datensatzabhängig nach Stichprobengröße gewählt worden und beträgt 64 für die Swiss Roll und Twin
+Peaks, 32 für Olivetti Faces und ICMR, 128 für MNIST, Fashion MNIST und FER.
 
 \section{Qualitätskriterien für die Datensätze}
 \label{ch:Appendix:Qualitaetskriterien}
@@ -70,4 +70,12 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 	\end{center}
 	\caption[Qualitätskriterien für den FER-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den FER-Datensatz. Hier ist die Performance des Convolutional Autoencoders und der Hauptkomponentenanalyse nahezu identisch und im Vergleich mit den anderen Methoden am besten. Aber auch der Autoencoder und die Kernel PCA können einen konstant hohen Wert für $T(K)$ und $C(K)$ erreichen. Auch auf diesem Datensatz schneiden LLE und der Contractive Autoencoder mit Abstand am schlechtesten ab. Besonders LLE zeigt hier die Schwäche einer lokalen Erhaltung der Struktur, da die Qualitätskriterien für steigende Werte von $K$ stark abfallen. (Eigene Darstellung)}
 	\label{fig:FER2013Metrics}
+\end{figure}
+
+\section{Sonstige Abbildungen}
+
+\begin{figure}
+	\centering
+	\includegraphics{TwinPeaksEmbeddings.pdf}
+	\caption[Latente zweidimensionale Repräsentationen $\mat{Y}$ durch Anwendungen fünf unterschiedlicher Methoden auf dem Twin Peaks-Datensatz.]{Abgebildet sind die latenten zweidimensionalen Repräsentationen $\mat{Y}$ durch Anwendungen fünf unterschiedlicher Methoden auf dem Twin Peaks-Datensatz.}
 \end{figure}

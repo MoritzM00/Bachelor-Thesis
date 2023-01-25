@@ -104,7 +104,7 @@ misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden.
 
 \subsubsection{Local Continuity Meta-Criterion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien:LCMC}
-Das Local Continuity Meta-Criterion (LCMC), entwickelt von \textcite{Chen.2009}, ist ebenso wie die Vertrauenswürdigkeit und Kontinuität ein rang-basiertes Qualitätskriterium. LCMC betrachtet die Überschneidung der $K$-Nachbarschaften in der ursprünglichen und latenten Repräsentation. Nimmt man wieder die $K$-Nachbarschaften aös $M_i(K)$ und $\widetilde{M}_i(K)$ an, das heißt die Indexmengen der $K$-Nachbarschaften in der ursprünglichen beziehungsweise latenten Repräsentation, dann lässt sich das LCMC wie folgt berechnen \parencite[212]{Chen.2009}:
+Das Local Continuity Meta-Criterion (LCMC), entwickelt von \textcite{Chen.2009}, ist ebenso wie die Vertrauenswürdigkeit und Kontinuität ein rang-basiertes Qualitätskriterium. LCMC betrachtet die Überschneidung der $K$-Nachbarschaften in der ursprünglichen und latenten Repräsentation. Nimmt man wieder die $K$-Nachbarschaften als $M_i(K)$ und $\widetilde{M}_i(K)$ an, das heißt die Indexmengen der $K$-Nachbarschaften in der ursprünglichen beziehungsweise latenten Repräsentation, dann lässt sich das LCMC wie folgt berechnen \parencite[212]{Chen.2009}:
 \begin{equation}
 	\label{eq:LCMC}
 	\text{LCMC}(K) = \frac{1}{nK} \sum_{i=1}^{n} \left( \left| \set{M}_i(K) \cap \widetilde{\set{M}}_i(K) \right| \right) - \frac{K}{n - 1} \,,
@@ -325,22 +325,26 @@ Zuerst werden die Resultate auf den beiden künstlichen Datensätzen diskutiert.
 Beide Abbildungen zeigen ein ähnliches Ergebnis: Locally Linear Embedding kann mit der lokalen Erhaltung der Struktur hohe Werte auf allen drei Qualitätskriterien erzielen. Insbesondere hinsichtlich des LCMC kann sich LLE deutlich nach oben absetzen.
 Der Autoencoder zeigt auf dem Swiss Roll-Datensatz die zweithöchste Vertrauenswürdigkeit. PCA, Kernel PCA und der Contractive Autoencoder sind hier deutlich weniger vertrauenswürdig. Bei diesen Methoden werden also nach der Dimensionsreduktion mehr Punkte fälschlicherweise Nachbarn. Auf dem Twin Peaks-Datensatz schneidet neben dem Autoencoder auch die Kernel PCA besser ab. Etwas deutlicher fällt hier die Hauptkomponentenanalyse zurück. Diese Methode hat Schwierigkeiten mit dem hohen Grad an Nichtlinearität in den beiden künstlichen Datensätzen. Der Contractive Autoencoder schneidet auf allen drei Kriterien relativ gesehen am schlechtesten ab. Möglicherweise verhindert der kontrahierende Fehlerterm die Anpassung an die Mannigfaltigkeit mit einer hohen Krümmung wie im Twin Peaks-Datensatz.
 
-Wie eingangs in \subsecref{ch:Vergleich:sec:VerwendeteDatensaetze:kuenstlich} erwähnt, ist die
-Möglichkeit der Visualisierung der latenten Repräsentation ein Vorteil der Evaluierung auf
-künstlichen Datensätzen. Als Illustration wurden dafür in \figref{fig:SwissRollEmbeddings}
+Die Ergebnisse auf den künstlichen Datensätzen können visuell überprüft werden, indem die
+zweidimensionalen transformierten Daten $\mat{Y}$ in einem Scatter-Plot dargestellt werden. Diese
+Möglichkeit der Visualisierung der latenten Repräsentation ist ein Vorteil der Evaluierung auf
+künstlichen Datensätzen. Dies könnte theoretisch auch auf den natürlichen Datensätzen durchgeführt
+werden, allerdings gehen dabei zwangsweise Strukturen verloren, da die intrinsische Dimension auf
+diesen Datensätzen weit über zwei liegt. Als Illustration wurden in
+\figref{fig:SwissRollEmbeddings}
 \begin{figure}[ht]
 	\centering
 	\includegraphics{SwissRollEmbeddings.pdf}
-	\caption[Latente zweidimensionale Repräsentation $\mat{Y}$ fünf unterschiedlicher Methodes des Swiss Roll Datensatzes.]{Abgebildet sind die latenten zweidimensionalen Repräsentationen $\mat{Y}$ fünf unterschiedlicher Methoden des Swiss Roll Datensatzes. Nur Locally Linear Embedding ist in der Lage, die Swiss Roll zu \enquote{entfalten}. Dies ist angesichts der hohen Qualitätskriterien von Locally Linear Embedding und der niedrigeren Qualitätskriterien der restlichen Methoden auf diesem Datensatz stimmig (siehe \figref{fig:SwissRollMetrics}). (Eigene Darstellung)}
+	\caption[Latente zweidimensionale Repräsentationen  $\mat{Y}$ durch Anwendung fünf unterschiedlicher Methoden auf dem Swiss Roll-Datensatzes]{Abgebildet sind die latenten zweidimensionalen Repräsentationen $\mat{Y}$ durch Anwendung fünf unterschiedlicher Methoden auf dem Swiss Roll-Datensatz. Nur Locally Linear Embedding ist in der Lage, die Swiss Roll zu \enquote{entfalten}. Dies ist angesichts der hohen Qualitätskriterien von Locally Linear Embedding und der niedrigeren Qualitätskriterien der restlichen Methoden auf diesem Datensatz stimmig (siehe \figref{fig:SwissRollMetrics}). (Eigene Darstellung)}
 	\label{fig:SwissRollEmbeddings}
 \end{figure}
-die zweidimensionalen latenten Repräsentationen $\mat{Y} \in \real^{n \times 2}$ durch Anwendung der fünf Methoden auf den Swiss Roll Datensatz in einem Scatter-Plot dargestellt. Locally Linear Embedding ist als einzige Methode in der Lage, die Swiss Roll zu \enquote{entfalten}. Dies bestätigt die hohe Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion durch Locally Linear Embedding und die niedrigeren Werte der restlichen Methoden (siehe \figref{fig:SwissRollMetrics}). Die niedrigere Vertrauenswürdigkeit hat insbesondere für die Visualisierung eine große Bedeutung, da dies anzeigt, dass Punkte in der latenten Repräsentation Nachbarn werden, obwohl sie es ursprünglich nicht waren.
+die latenten Repräsentationen $\mat{Y} \in \real^{n \times 2}$ durch Anwendung der fünf Methoden auf den Swiss Roll-Datensatz in einem Scatter-Plot dargestellt. Locally Linear Embedding ist als einzige Methode in der Lage, die Swiss Roll zu \enquote{entfalten}. Dies bestätigt die hohe Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion durch Locally Linear Embedding und die niedrigeren Werte der restlichen Methoden (siehe \figref{fig:SwissRollMetrics}). Die niedrigere Vertrauenswürdigkeit hat insbesondere für die Visualisierung eine große Bedeutung, da dies anzeigt, dass Punkte in der latenten Repräsentation Nachbarn werden, obwohl sie es ursprünglich nicht waren.
 
 \subsection{Resultate auf natürlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:natuerlich}
 
 Die Qualitätskriterien auf den natürlichen Datensätzen zeigen ein etwas anderes Bild, als es bei
-den künstlichen Datensätzen der Fall war. Die starke Performance von Locally Linear Embedding setzt
+den künstlichen Datensätzen der Fall war. Die guten Ergebnisse von Locally Linear Embedding setzt
 sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
 \begin{figure}[ht]
 	\begin{center}
@@ -350,7 +354,7 @@ sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
 	\label{fig:MNISTMetrics}
 \end{figure}
 Für die Olivetti Faces (\figref{fig:OlivettiFacesMetrics}), den FER- (\figref{fig:FER2013Metrics}) und den Fashion MNIST-Datensatz (\figref{fig:FashionMNISTMetrics})
-schneidet LLE auf allen drei Kriterien relativ gesehen schlecht ab. insbesondere nehmen die
+schneidet LLE auf allen drei Kriterien relativ gesehen schlecht ab. Insbesondere nehmen die
 Qualitätskriterien von LLE mit größer werdender Nachbarschaftsgröße $K$ deutlicher ab, als bei den
 restlichen Methoden. Aufgrund der Wahl der Nachbarschaftsgröße von $K=10$ für Locally Linear
 Embedding und der lokalen Eigenschaften macht dies jedoch Sinn. Aus diesem Grund ist die
@@ -358,7 +362,7 @@ Betrachtung einer größeren Nachbarschaft der Qualitätskriterien für LLE bena
 der Vollständigkeit halber und zu Vergleichszwecken trotzdem mit aufgenommen. Überraschenderweise
 kann die Hauptkomponentenanalyse auf fast allen natürlichen Datensätzen eine gute oder sogar die
 beste relative Performance aufweisen. Auf den vier Bilddatensätzen kann jedoch der Convolutional
-Autoencoder seine Stärken zeigen, insbesondere wenn genügend Trainingsdaten zur Verfügung stehen. Letzteres trifft für MNIST-Datensatz \figref{fig:MNISTMetrics} zu, nicht jedoch für den Olivetti Faces-Datensatz.
+Autoencoder seine Stärken zeigen, insbesondere wenn genügend Trainingsdaten zur Verfügung stehen. Letzteres trifft für den MNIST-Datensatz \figref{fig:MNISTMetrics} zu, nicht jedoch für den Olivetti Faces-Datensatz.
 Auf diesem Datensatz leidet die Performance der Autoencoder generell (siehe z.B. \figref{fig:OlivettiFacesMetrics}). Das Problem einer geringen Menge an Trainingsdaten gilt gleichermaßen für alle
 Varianten von neuronalen Netzen, insbesondere jedoch für vollvernetzte Autoencoder aufgrund der
 hohen Anzahl an Freiheitsgraden im Netz.
