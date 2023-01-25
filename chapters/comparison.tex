@@ -227,7 +227,7 @@ erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 		ICMR           & 20 531                     & 22                         & 801                  \\
 		\bottomrule
 	\end{tabular}
-	\caption[Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze]{Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild. Die intrinsische Dimension wurde mit dem Maximum Likelihood Schätzer aus \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} mit einer Nachbarschaftsgröße $K=5$ geschätzt.}
+	\caption[Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze]{Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild. Die intrinsische Dimension wurde mit dem Maximum Likelihood Schätzer aus \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} mit einer Nachbarschaftsgröße $\Kid = 5$ geschätzt.}
 	\label{tab:uebersicht-datensaetze}
 \end{table}
 
@@ -244,7 +244,12 @@ ein Downsampling auf maximal 15 000 Stichproben durchgeführt.\footnote{Die Eval
 	der Berechnung der Co-Ranking-Matrix speicherintensiv, da diese maximal $(n-1) \times (n-1)$ groß
 	ist und damit quadratisch mit $n$ ansteigt. Um die Qualitätskriterien für den MNIST-Datensatz zu
 	berechnen, werden für $n=25 000$ circa 25 GB Arbeitsspeicher benötigt.} Dies ist allerdings nur für
-den MNIST- und FER-Datensatz von Relevanz. Alle anderen Datensätze haben weniger Stichproben.
+den MNIST- und FER-Datensatz von Relevanz. Alle anderen Datensätze haben weniger Stichproben. Um
+die verschiedenen Nachbarschaftsgrößen in Locally Linear Embedding, den Qualitätskriterien und dem
+Schätzer der intrinsischen Dimension auseinanderhalten zu können, wird die Notation $\Klle$ für die
+Nachbarschaftsgröße in Locally Linear Embedding, $\Kqk$ für die Nachbarschaftsgröße in den
+Qualitätskriterien und $\Kid$ für die Nachbarschaftsgröße des Schätzers der intrinsischen Dimension
+eingeführt.
 
 Für die Hauptkomponentenanalyse gibt es neben der Anzahl der zu behaltenden Hauptkomponenten keine
 Parameter. Die Anzahl der Hauptkomponenten entspricht der intrinsischen Dimension, welche vom
@@ -255,11 +260,11 @@ $\sigma$ gewählt werden kann. Die Werte $\sigma \in \{ 0.1, 0.25, 0.75, 1, 2, 5
 und der beste Durchlauf ausgewählt. Für ICMR und Olivetti Faces lieferten diese Werte sehr
 schlechte Ergebnisse, weswegen auf diesen Datensätzen zusätzlich die Werte $\{ 1\mathrm{e}{-3},
 	1\mathrm{e}{-4}, 1\mathrm{e}{-5}\}$ getestet wurden. Für Locally Linear Embedding gibt es zwei
-Parameter: (1) einen Parameter $K$, der die Größe der verwendeten Nachbarschaft kontrolliert und
-(2) eine Regularisierungskonstante $\epsilon$, die auf die Diagonale der lokalen Kovarianzmatrix
-addiert wird. Die Nachbarschaft wurde für die Werte $K \in \{ 5, 7, 10, 12, 15\}$ getestet und der
-beste Durchlauf ausgewählt. die Regularisierungskonstante wurde auf allen Datensätze auf $\epsilon
-	= 1\mathrm{e}{-3}$ gesetzt.
+Parameter: (1) einen Parameter $\Klle$, der die Größe der verwendeten Nachbarschaft kontrolliert
+und (2) eine Regularisierungskonstante $\epsilon$, die auf die Diagonale der lokalen
+Kovarianzmatrix addiert wird. Die Nachbarschaft wurde für die Werte $\Klle \in \{ 5, 7, 10, 12,
+	15\}$ getestet und der beste Durchlauf ausgewählt. die Regularisierungskonstante wurde auf allen
+Datensätze auf $\epsilon = 1\mathrm{e}{-3}$ gesetzt.
 
 Den statistischen Methoden gegenüber haben Autoencoder deutlich mehr Freiheitsgrade, um die
 Architektur zu bestimmen. Die wichtigsten Parameter sind die Anzahl der Schichten $m$, sowie die
@@ -283,14 +288,14 @@ ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
 		Methode                            & Parameter                                                            \\ \midrule
 		PCA      & --                                                                   \\
 		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\sigma))$, $\sigma \in \{\expnum{1}{-5},\expnum{1}{-4}, \expnum{1}{-3}, \expnum{1}{-2}, \expnum{1}{-1}, 0.25, 0.75, 1, 2, 5\}$ \\
-		Locally Linear Embedding     & $K \in \{ 5, 7, 10, 12, 15\}$, $\epsilon=1\mathrm{e}{-3}$                                   \\
+		Locally Linear Embedding     & $\Klle \in \{ 5, 7, 10, 12, 15\}$, $\epsilon=1\mathrm{e}{-3}$                                   \\
 		Autoencoder                  & $m \in \{3, 5, 7\}$, Sigmoid-Aktivierungsfunktion \newline (siehe
 		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\  Contractive Autoencoder & $m \in \{3, 5\}$, $\lambda=1\mathrm{e}{-4}$,
 		Sigmoid-Aktivierungsfunktion (siehe Appendix~\ref{ch:Appendix:Architektur-Details})                       \\
 		Convolutional Autoencoder & $m > 5$, ReLU-Aktivierungsfunktion \newline (siehe
 		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ \bottomrule
 	\end{tabulary}
-	\caption[Übersicht über die verwendeten Parameter der Methoden]{Übersicht über die verwendeten Parameter. Hierbei ist $\kappa$ die Kernel-Funktion, $D$ die extrinsische Dimension des Datensatzes, $K$ die Nachbarschaftsgröße, $\epsilon$ eine Regularisierungskonstante für LLE, $m$ die Anzahl der Schichten im Autoencoder und $\lambda$ eine multiplikative Konstante für den kontrahierenden Fehlerterm des CAE.}
+	\caption[Übersicht über die verwendeten Parameter der Methoden]{Übersicht über die verwendeten Parameter. Hierbei ist $\kappa$ die Kernel-Funktion, $D$ die extrinsische Dimension des Datensatzes, $\Klle$ die Nachbarschaftsgröße, $\epsilon$ eine Regularisierungskonstante für LLE, $m$ die Anzahl der Schichten im Autoencoder und $\lambda$ eine multiplikative Konstante für den kontrahierenden Fehlerterm des CAE.}
 	\label{tab:uebersicht-parameter}
 \end{table}
 \section{Resultate}
@@ -298,11 +303,11 @@ ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
 
 In diesem Abschnitt werden die Resultate des empirischen Vergleichs vorgestellt. Dazu werden die
 Werte der verschiedenen Qualitätskriterien auf den künstlichen und natürlichen Datensätzen in
-Abhängigkeit der Nachbarschaftsgröße $K$ abgebildet. Die verschiedenen Methoden wurden mit den im
-vorhergehenden \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails} erläuterten Parametern auf
-den künstlichen und natürlichen Datensätzen trainiert und hinsichtlich der in
+Abhängigkeit der Nachbarschaftsgröße $\Kqk$ abgebildet. Die verschiedenen Methoden wurden mit den
+im vorhergehenden \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails} erläuterten Parametern
+auf den künstlichen und natürlichen Datensätzen trainiert und hinsichtlich der in
 \secref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} vorgestellten Qualitätskriterien für
-eine Nachbarschaftsgröße von $1 \leq K \leq 100$ evaluiert. Einige der Abbildungen für die
+eine Nachbarschaftsgröße von $1 \leq \Kid \leq 100$ evaluiert. Einige der Abbildungen für die
 Qualitätskriterien sind im Appendix \ref{ch:Appendix:Qualitaetskriterien} zu finden. In
 \secref{ch:Vergleich:sec:Resultate:kuenstlich} werden die Ergebnisse auf den künstlichen
 Datensätzen und in \secref{ch:Vergleich:sec:Resultate:natuerlich} die Ergebnisse auf den
@@ -344,48 +349,25 @@ die latenten Repräsentationen $\mat{Y} \in \real^{n \times 2}$ durch Anwendung 
 \label{ch:Vergleich:sec:Resultate:natuerlich}
 
 Die Qualitätskriterien auf den natürlichen Datensätzen zeigen ein etwas anderes Bild, als es bei
-den künstlichen Datensätzen der Fall war. Die guten Ergebnisse von Locally Linear Embedding setzt
+den künstlichen Datensätzen der Fall war. Die guten Ergebnisse von Locally Linear Embedding setzen
 sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{MNIST_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für MNIST]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST-Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine starke Performance zeigen, da der Datensatz von hoher Qualität ist und eine hohe Stichprobengröße aufweisen kann. Nichtsdestotrotz kann die Hauptkomponentenanalyse nur knapp dahinter gut mithalten und hinsichtlich der Kontinuität sogar übertreffen. Die Kernel PCA und der klassische vollvernetzte Autoencoder schneiden ebenfalls relativ gut ab, jedoch ist die Reduktion der Kernel PCA weniger vertrauenswürdig. Locally Linear Embedding und der Contractive Autoencoder können vor allem auf dem LCMC nicht mithalten. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für MNIST]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST-Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine Stärken zeigen, da der Datensatz von hoher Qualität ist und eine hohe Stichprobengröße aufweisen kann. Nichtsdestotrotz kann die Hauptkomponentenanalyse nur knapp dahinter gut mithalten und hinsichtlich der Kontinuität sogar übertreffen. Die Kernel PCA und der klassische vollvernetzte Autoencoder schneiden ebenfalls relativ gut ab, jedoch ist die Reduktion der Kernel PCA weniger vertrauenswürdig. Locally Linear Embedding und der Contractive Autoencoder können vor allem auf dem LCMC nicht mithalten. (Eigene Darstellung)}
 	\label{fig:MNISTMetrics}
 \end{figure}
-Für die Olivetti Faces (\figref{fig:OlivettiFacesMetrics}), den FER- (\figref{fig:FER2013Metrics}) und den Fashion MNIST-Datensatz (\figref{fig:FashionMNISTMetrics})
-schneidet LLE auf allen drei Kriterien relativ gesehen schlecht ab. Insbesondere nehmen die
-Qualitätskriterien von LLE mit größer werdender Nachbarschaftsgröße $K$ deutlicher ab, als bei den
-restlichen Methoden. Aufgrund der Wahl der Nachbarschaftsgröße von $K=10$ für Locally Linear
-Embedding und der lokalen Eigenschaften macht dies jedoch Sinn. Aus diesem Grund ist die
-Betrachtung einer größeren Nachbarschaft der Qualitätskriterien für LLE benachteiligend, wurde aber
-der Vollständigkeit halber und zu Vergleichszwecken trotzdem mit aufgenommen. Überraschenderweise
+Auf allen natürlichen Datensätzen
+schneidet Locally Linear Embedding hinsichtlich aller drei Kriterien neben dem Contractive Autoencoder relativ gesehen schlecht ab. Insbesondere nehmen die
+Qualitätskriterien von LLE mit größer werdender Nachbarschaftsgröße $\Kqk$ deutlicher ab, als bei den
+restlichen Methoden. Die Parameter $\Klle$ für Locally Linear Embedding wurde jedoch auf kleinere Werte zwischen fünf und 15 gesetzt, weswegen diese Beobachtung logisch erscheint. Überraschenderweise
 kann die Hauptkomponentenanalyse auf fast allen natürlichen Datensätzen eine gute oder sogar die
-beste relative Performance aufweisen. Auf den vier Bilddatensätzen kann jedoch der Convolutional
-Autoencoder seine Stärken zeigen, insbesondere wenn genügend Trainingsdaten zur Verfügung stehen. Letzteres trifft für den MNIST-Datensatz \figref{fig:MNISTMetrics} zu, nicht jedoch für den Olivetti Faces-Datensatz.
-Auf diesem Datensatz leidet die Performance der Autoencoder generell (siehe z.B. \figref{fig:OlivettiFacesMetrics}). Das Problem einer geringen Menge an Trainingsdaten gilt gleichermaßen für alle
+beste relative Performance aufweisen. Ebenso zeigt die Kernel PCA gute Ergebnisse und ist auf dem ICMR- und Olivetti Faces-Datensatz fast identisch zur klassischen Hauptkomponentenanalyse. Auf den vier Bilddatensätzen kann der Convolutional
+Autoencoder seine Stärken zeigen, allerdings nur, wenn genügend Trainingsdaten zur Verfügung stehen. Letzteres trifft unter anderem für den MNIST-Datensatz \figref{fig:MNISTMetrics} zu, nicht jedoch für den Olivetti Faces-Datensatz. Auf dem Olivetti Faces-Datensatz ist das Ergebnis nur minimal besser als das des klassischen Autoencoders. Im direkten Vergleich zur Hauptkomponentenanalyse schneidet der Convolutional Autoencoder hier aber schlechter ab.
+Auf Datensätzen mit einer geringeren Anzahl an Stichproben leidet die Performance der Autoencoder generell (siehe z.B. \figref{fig:OlivettiFacesMetrics}). Das Problem einer geringen Menge an Trainingsdaten gilt gleichermaßen für alle
 Varianten von neuronalen Netzen, insbesondere jedoch für vollvernetzte Autoencoder aufgrund der
-hohen Anzahl an Freiheitsgraden im Netz.
-
-\subsubsection{Vergleich der Rekonstruktionen}
-
-Interessant ist außerdem, wie gut die Dimensionsreduktionsmethoden ein originales Bild wieder
-rekonstruieren können. In diesem Vergleich können allerdings nur die Hauptkomponentenanalyse und
-alle Varianten der Autoencoder für die Rekonstruktion verwendet werden. Kernel PCA und Locally
-Linear Embedding erlauben ohne Approximation keine inverse Transformation aus der latenten
-Repräsentation $\vect{y}$ zurück in eine approximierte ursprüngliche Repräsentation
-$\estNormal{\vect{x}}$. Für die Hauptkomponentenanalyse, den klassischen vollvernetzten
-Autoencoder, den Convolutional Autoencoder und für den Contractive Autoencoder wurde auf dem
-MNIST-Datensatz je ein Beispielbild für eine der Zahlen rekonstruiert und in
-\figref{fig:MNIST-reconstructions} abgebildet. Die erste Zeile besteht aus den Originalbildern als
-Referenz.
-\begin{figure}[ht]
-	\centering
-	\includegraphics{reconstructions_mnist_pca_ae_convae_cae.pdf}
-	\caption[Rekonstruierte MNIST-Zahlen]{Gezeigt sind einige rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch den Convolutional Autoencoder und (5) Rekonstruktion durch den Contractive Autoencoder.}
-	\label{fig:MNIST-reconstructions}
-\end{figure}
-Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da einige Zahlen sogar als falsche Zahl rekonstruiert werden. Die Rekonstruktionen der Hauptkomponentenanalyse sind besser, aber visuell ebenfalls nicht überzeugend, da sie deutlich unscharfer sind. Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte und zeigt auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien eine gute Güte der Dimensionsreduktion (siehe \figref{fig:MNISTMetrics}). Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
+hohen Anzahl an Freiheitsgraden im Netz. Dies zeigt, dass der Convolutional Autoencoder eine valide Alternative zum klassischen Autoencoder ist, falls Bilddaten oder ähnliches in der Dimension reduziert werden sollen und genug Trainingsdaten vorhanden sind. Allerdings muss dabei, wie im Folgenden ersichtlich wird, eine höhere Laufzeit in Kauf genommen werden.
 
 \subsubsection{Vergleich der Laufzeiten}
 
@@ -398,12 +380,33 @@ Die Hauptkomponentenanalyse weist die durchschnittlich geringste Laufzeit auf un
 
 Das manuelle Hyperparameter-Tuning wurde hierbei nicht berücksichtigt. Dies ist ein weiterer
 Vorteil der Hauptkomponentenanalyse, da es hier keine Parameter gibt, die richtig eingestellt
-werden müssen. Insbesondere bei der Kernel PCA mussten viele Werte für den Parameter $\gamma$
+werden müssen. Insbesondere bei der Kernel PCA müssen mehrere Werte für den Parameter $\gamma$
 getestet werden. Aufgrund der relativ niedrigen Laufzeiten der Kernel PCA ist dies jedoch
 vertretbar. Der Zeitaufwand für Hyperparameter-Tuning ist bei Autoencodern wegen der vielen zu
 wählenden Parameter höher. Bei einem Einsatz dieser Methode in der Dimensionsreduktion muss daher
 mit einem hohen Zeitaufwand für manuelles oder automatisiertes Hyperparameter-Tuning gerechnet
 werden. Dies ist ein entscheidender Nachteil der hier vorgestellten Machine Learning Ansätze.
+
+\subsubsection{Vergleich der Rekonstruktionen}
+
+Interessant ist außerdem, wie gut die Dimensionsreduktionsmethoden ein originales Bild wieder
+rekonstruieren können. In diesem Vergleich können allerdings nur die Hauptkomponentenanalyse und
+alle Varianten der Autoencoder für die Rekonstruktion verwendet werden. Kernel PCA und Locally
+Linear Embedding erlauben ohne Approximation keine inverse Transformation aus der latenten
+Repräsentation $\vect{y}$ zurück in eine approximierte ursprüngliche Repräsentation
+$\estNormal{\vect{x}}$. Für die Hauptkomponentenanalyse, den klassischen vollvernetzten
+Autoencoder, den Convolutional Autoencoder und für den Contractive Autoencoder wurde auf dem
+MNIST-Datensatz je ein Beispielbild für eine der Zahlen rekonstruiert und in
+\figref{fig:MNIST-reconstructions} abgebildet. Die erste Zeile besteht aus den Originalbildern als
+Referenz. Dasselbe Vorgehen wurde auch auf dem Twin Peaks-Datensatz durchgeführt und ist in
+\figref{fig:TwinPeaksEmbeddings} zu finden.
+\begin{figure}[ht]
+	\centering
+	\includegraphics{reconstructions_mnist_pca_ae_convae_cae.pdf}
+	\caption[Rekonstruierte MNIST-Zahlen]{Gezeigt sind einige rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch den Convolutional Autoencoder und (5) Rekonstruktion durch den Contractive Autoencoder.}
+	\label{fig:MNIST-reconstructions}
+\end{figure}
+Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da einige Zahlen sogar als falsche Zahl rekonstruiert werden. Die Rekonstruktionen der Hauptkomponentenanalyse sind besser, aber visuell ebenfalls nicht überzeugend, da sie deutlich unscharfer sind. Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte und zeigt auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien eine gute Güte der Dimensionsreduktion (siehe \figref{fig:MNISTMetrics}). Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
 
 \subsection{PCA und Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}
