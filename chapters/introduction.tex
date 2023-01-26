@@ -32,27 +32,43 @@ die Algorithmen teilweise stabiler, da durch die Dimensionsreduktion unrepräsen
 für die Datenvisualisierung unumgänglich, da hochdimensionale natürliche Datensätze so auf zwei
 oder drei Dimensionen für die Veranschaulichung reduziert werden können.
 
-Über die Zeit wurden deshalb eine Vielzahl von Dimensionsreduktionsmethoden entwickelt; für eine Übersicht wird auf \textcites{Burges.2009}{Sarveniazi.2014}{Sorzano.2014}{Cunningham.2014}{Lee.2007} verwiesen. Die große Auswahl an verschiedensten Methoden macht die Selektion der richtigen Methode für eine spezifische Aufgabe allerdings schwer. \Textcite{vanderMaaten.2009} hat dazu zwölf nichtlineare Methoden untersucht und mit der Hauptkomponentenanalyse verglichen.\rewrite{hier mehr dzau schreiben}
+Über die Zeit wurde daher eine Vielzahl von Dimensionsreduktionsmethoden entwickelt \parencite[siehe z.B.][]{Lee.2007} -- die große Auswahl macht die Selektion der richtigen Methode für
+eine spezifische Aufgabe allerdings nicht einfacher. Daher wurden bereits mehrere Anstrengungen
+gemacht, die Stärken und Schwächen einzelner Methoden herauszufinden. Einer der umfassendsten
+Vergleiche von Methoden der Dimensionsreduktion wurde von \Textcite{vanderMaaten.2009}
+durchgeführt. Die Autoren haben zwölf nichtlineare Methoden untersucht und mit der
+Hauptkomponentenanalyse verglichen. Sie kommen zu dem Ergebnis, dass nichtlineare Methoden die
+Hauptkomponentenanalyse auf künstlichen Datensätzen übertreffen können, dies aber bei natürlichen
+Datensätzen generell nicht zutrifft. In der Arbeit von \textcite{RohanPandit.2016} wird dieses
+Ergebnis auf Daten von Proteinstrukturen bestätigt. \Textcite{Gracia.2014} stellen eine Methodik
+vor, die die Methoden nach dem Qualitätsverlust der Dimensionsreduktion evaluiert. Dazu wird eine
+Übersicht über einige Qualitätskriterien gegeben und die Methodik in einem Vergleich von zwölf
+Methoden auf zwölf natürlichen Datensätzen angewandt. Der Fokus liegt hier jedoch mehr auf dem
+Vergleich der unterschiedlichen Qualitätskriteria und der vorgestellten Methodik. Dasselbe trifft
+auf die Arbeit von \textcite{Lee.2009} zu, in der rangbasierte Qualitätskriteria in einem
+einheitlichen Framework zusammengefasst werden. Daneben gibt es noch einige weitere Arbeiten, die
+sich lediglich mit theoretischen Eigenschaften der Methoden befassen und diese nicht empirisch
+miteinander vergleichen \parencites{Cunningham.2014}{Sorzano.2014}{Lee.2007}{Sarveniazi.2014}{Burges.2009b}.
 
-In jüngster Zeit wurden entscheidende Fortschritte in der Spracherkennung mit großen Sprachmodellen
+Die in jüngster Zeit gemachten Fortschritte in der automatischen Spracherkennung mit Sprachmodellen
 wie \textit{Whisper} \parencite{Radford.2022} und auf dem Gebiet der \textit{Computer Vision} mit Text-zu-Bilder-Modellen
-wie \textit{Stable Diffusion} \parencite{Rombach.2021}. Diese Modelle sind Varianten von neuronalen Netzen und damit
-\enquote{moderne} Machine Learning Methoden. Dabei wird ein möglichst großer Datensatz für das
-Trainieren der Modelle verwendet und man erhofft sich, dass diese neuronalen Netze mit ihrer
-Eigenschaft der universalen Approximationsfunktion \parencites[194 -- 197]{Goodfellow.2016}{Hornik.1989} gute Ergebnisse erzielen. Es stellt sich also die
-Frage, ob diese \enquote{modernen} Machine Learning Methoden gegenüber traditionellen und
-vergleichsweise alten statistischen Methoden auf dem Gebiet der Dimensionsreduktion einen Vorteil
-durch die erhöhte Flexibilität erzielen können. Dazu werden drei statistische und zwei Machine
-Learning Methoden genauer betrachtet. Die hier vorgestellten Methoden sind die weitverbreitete
-\newterm{Hauptkomponentenanalyse} (engl. \textit{Principal Component Analysis} (PCA)), die
-\newterm{Kernel PCA} sowie das \newterm{Locally Linear Embedding} als Vertreter der statistischen
-Methoden (\secref{ch:MethodenDerDimRed:statistisch}). Der \newterm{Autoencoder} in der klassischen
-Form und eine Variante davon, der \newterm{Contractive Autoencoder} werden als Vertreter der
-Machine Learning Ansätze (\secref{ch:MethodenDerDimRed:modern}) vorgestellt. Vor diesem Hintergrund
-soll untersucht werden, ob Machine Learning Methoden traditionelle statistische Methoden auf dem
-Gebiet der Dimensionsreduktion übertreffen. Mehrere Veröffentlichungen zur Relation zwischen der
-Hauptkomponentenanalyse und den Autoencodern haben außerdem gezeigt, dass diese beiden Methoden
-unter gewissen Annahmen ähnlich sind \parencites{Baldi.1989}{Bourlard.1988}{Plaut.2018}. Es soll daher empirisch herausgearbeitet werden,
+wie \textit{Stable Diffusion} \parencite{Rombach.2021} haben den Fokus in der Forschung immer mehr Richtung \textit{Deep Learning}
+gerichtet. Diese Modelle sind Varianten von neuronalen Netzen und damit \enquote{moderne} Machine
+Learning Methoden. Dabei wird ein möglichst großer Datensatz für das Trainieren der Modelle
+verwendet und man erhofft sich, dass diese neuronalen Netze mit ihrer Eigenschaft der universalen
+Approximationsfunktion \parencites[194 -- 197]{Goodfellow.2016}{Hornik.1989} gute Ergebnisse erzielen. Fraglich ist, ob diese
+modernen Machine Learning Methoden auch auf dem Gebiet der Dimensionsreduktion die traditionellen
+und vergleichsweise alten statistischen Methoden ersetzen können. Um dieser Frage etwas näher zu
+kommen, werden drei statistische und zwei Machine Learning Methoden genauer betrachtet und in einem
+empirischen Vergleich auf künstlichen und natürlichen Datensätzen gegenübergestellt. Die hier
+vorgestellten Methoden sind die weitverbreitete \newterm{Hauptkomponentenanalyse} (engl.
+\textit{Principal Component Analysis} (PCA)), die \newterm{Kernel PCA} sowie das \newterm{Locally
+	Linear Embedding} als Vertreter der statistischen Methoden
+(\secref{ch:MethodenDerDimRed:statistisch}). Der \newterm{Autoencoder} in der klassischen Form und
+eine Variante davon, der \newterm{Contractive Autoencoder} werden als Vertreter der Machine
+Learning Ansätze (\secref{ch:MethodenDerDimRed:modern}) vorgestellt. Mehrere Veröffentlichungen zur
+Relation zwischen der Hauptkomponentenanalyse und Autoencodern haben außerdem gezeigt, dass diese
+beiden Methoden unter gewissen Annahmen ähnlich sind \parencites{Baldi.1989}{Bourlard.1988}{Plaut.2018}. Es soll daher empirisch herausgearbeitet werden,
 inwiefern ein Autoencoder mit der Hauptkomponentenanalyse übereinstimmt.
 
 Die Arbeit ist wie folgt aufgebaut: Zuerst wird in \chapref{ch:Dimensionsreduktion} die Grundlage
