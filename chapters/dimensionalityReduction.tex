@@ -66,16 +66,17 @@ erklärt werden, weshalb in \figref{fig:Torus} ein Torus dargestellt ist. Dieses
 zweidimensionale Mannigfaltigkeit eingebettet im $\real^D$.
 \begin{figure}[ht]
 	\centering
-	\input{\figures/torus.pgf}
-	\caption[Ein Beispiel für eine zweidimensionale Mannigfaltigkeit: ein Torus]{Gezeigt ist ein Beispiel für eine zweidimensionale Mannigfaltigkeit eingebettet im $\real^3$, der sogenannte Torus. Bewegt man sich entlang der Oberfläche des Torus, so erscheint sie lokal flach und ähnelt damit dem $\real^2$. Aus diesem Grund ist der abgebildete Torus eine 2-Mannigfaltigkeit -- trotz der Tatsache, dass das Objekt als Ganzes nicht in einem zweidimensionalen Raum dargestellt werden kann.}
+	\includegraphics{torus.pdf}
+	\caption[Ein Beispiel für eine zweidimensionale Mannigfaltigkeit: ein Torus]{Gezeigt ist ein Beispiel für eine zweidimensionale Mannigfaltigkeit eingebettet im $\real^3$, der sogenannte Torus. Bewegt man sich entlang der Oberfläche des Torus, so erscheint sie lokal flach und ähnelt damit dem $\real^2$. Aus diesem Grund ist der abgebildete Torus eine 2-Mannigfaltigkeit -- trotz der Tatsache, dass das Objekt als Ganzes nicht in einem zweidimensionalen Raum dargestellt werden kann. Eigene Darstellung\protect\footnotemark}
 	\label{fig:Torus}
 \end{figure}
+\footnotetext{angelehnt an \url{https://scipython.com/book/chapter-7-matplotlib/examples/a-torus/}}
 Lokal erscheint die Oberfläche des Torus flach, das heißt sie ähnelt dem $\real^2$ und nicht dem $\real^3$, in dem sie eingebettet ist. Die intrinsische Dimension im Kontext der Topologie ist also zwei. Eine Karte kann nun informell wie eine Landkarte eines Teils der Oberfläche beschrieben werden. Bewegt man sich entlang
 dieser Oberfläche, so muss die Karte irgendwann gewechselt werden. Dieser Übergang von zwei sich
 überlappenden Karten wird durch den Homöomorphismus $\phi$ formalisiert. Betrachtet man alle Karten
 von allen Teilen der Oberfläche ergibt dies den Atlas des Torus.
 
-Eine Mannigfaltigkeit kann darüberhinaus noch mit weiteren Eigenschaften versehen werden. Dazu
+Eine Mannigfaltigkeit kann darüber hinaus noch mit weiteren Eigenschaften versehen werden. Dazu
 gehören glatte Mannigfaltigkeiten, auf denen Differentialrechnung möglich ist und ein sogenannter
 Tangentialraum definiert werden kann. Außerdem kann zwischen zusammenhängenden und
 nicht-zusammenhängenden Mannigfaltigkeiten unterschieden werden, wobei letztere aus mehreren
