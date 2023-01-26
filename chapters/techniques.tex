@@ -511,10 +511,7 @@ und der Decoder als
 \begin{equation}
 	g(\vect{y}) = s \left( \mat{\widetilde{W}} \vect{y} + \vect{b}_2 \right) = \estNormal{\vect{x}}
 \end{equation}
-formuliert werden, wobei $\mat{W} \in \real^{d \times D}$ und $\mat{\widetilde{W}} \in \real^{D \times d}$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Dies entspricht jeweils einer affinen Transformation gefolgt von einer (nichtlinearen) Aktivierungsfunktion. Gilt außerdem, dass die Gewichte des Encoders und Decoders verbunden sind, das heißt $\mat{\widetilde{W}} = \tr{\mat{W}}$ und wird für die Aktivierungfunkion $s$ die Sigmoid-Funktion
-\begin{equation}
-	\operatorname{sigmoid}(\vect{x}) = \frac{1}{1 + \exp (-\vect{x})}
-\end{equation}
+formuliert werden, wobei $\mat{W} \in \real^{d \times D}$ und $\mat{\widetilde{W}} \in \real^{D \times d}$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Dies entspricht jeweils einer affinen Transformation gefolgt von einer (nichtlinearen) Aktivierungsfunktion. Gilt außerdem, dass die Gewichte des Encoders und Decoders verbunden sind, das heißt $\mat{\widetilde{W}} = \tr{\mat{W}}$ und wird für die Aktivierungfunkion $s$ die Sigmoid-Funktion (\eqref{eq:Sigmoid})
 verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
 \begin{equation}
 	\label{eq:CAE-loss-simple}

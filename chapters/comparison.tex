@@ -20,11 +20,12 @@ insbesondere die Architektur der Autoencoder vorgestellt. Letztlich werden in
 
 Um die statistischen Methoden mit den Machine Learning Ansätzen zu vergleichen, wird die
 Performance der Methoden auf mehreren künstlichen sowie natürlichen Datensätzen mit der
-Vertrauenswürdigkeit, der Kontinuität und dem $\lcmc$-Kriterium gemessen. Diese Kriterien werden
-jeweils für mehrere Nachbarschaftsgrößen berechnet, um eine größere Aussagekraft über die Güte der
-gefundenen niedrigdimensionalen Repräsentation zu erreichen. Die Qualitätskriterien werden in
+\newterm{Vertrauenswürdigkeit}, der \newterm{Kontinuität} und dem \newterm{Local Continuity
+	Meta-Criterion} gemessen. Diese Kriterien werden jeweils für mehrere Nachbarschaftsgrößen
+berechnet, um eine größere Aussagekraft über die Güte der gefundenen niedrigdimensionalen
+Repräsentation zu erreichen. Die Qualitätskriterien werden in
 \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} eingehend erläutert. Für den
-Vergleich werden zwei künstliche und vier natürliche Datensätze verwendet, die in
+Vergleich werden zwei künstliche und fünf natürliche Datensätze verwendet, die in
 \secref{ch:Vergleich:sec:VerwendeteDatensaetze} genauer vorgestellt werden. Insgesamt soll damit
 ein Überblick über die Stärken und Schwächen der statistischen und der Machine Learning Methoden
 geschafft werden. Wie bereits erwähnt, besteht zwischen Autoencodern und der
@@ -37,40 +38,38 @@ Methoden und des Trainingsskriptes repliziert werden. \rewrite{Unter Methodik k�
 
 \subsection{Qualitätskriterien der Dimensionsreduktion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien}
-Wie bereits in \chapref{ch:Dimensionsreduktion} erläutert, hat die Dimensionsreduktion das Ziel einer möglichst \enquote{verlustfreien} Transformation der ursprünglichen Repräsentation in eine latente Repräsentation von geringerer Dimension. Für Autoencoder bedeutet \enquote{verlustfrei} die Minimierung des Rekonstruktionsfehlers wie z.B. die quadratische Abweichung (siehe \eqref{eq:MSE_loss}). Dieser Rekonstruktionsfehler ist jedoch wie \textcite[18]{vanderMaaten.2009} hervorhebt, nicht sehr aussagekräftig für die Güte einer Dimensionsreduktion. Hinzu kommt, dass der Rekonstruktionsfehler nicht für alle Methoden berechnet werden kann, da eine inverse Transformation der niedrigdimensionalen in die ursprüngliche Repräsentation benötigt wird. Damit fällt der Rekonstruktionsfehler als geeignetes Qualitätskriterium heraus. Das immense Forschungsinteresse für Methoden der Dimensionsreduktion hat daher mit der Zeit dafür gesorgt, dass immer mehr Qualitätskriterien entwickelt wurden. \textcite{Gracia.2014} stellen einige Qualitätskriterien vor und vergleichen diese miteinander. Trotzdem gibt es in der Literatur keine eindeutige Kennzahl, die bei einem Vergleich von Dimensionsreduktionsmethoden standardmäßig eingesetzt wird \parencite[vgl.][1 -- 2]{Lee.2009}. Stattdessen bedient man sich mehrerer Kennzahlen, die
+Wie bereits in \chapref{ch:Dimensionsreduktion} erläutert, hat die Dimensionsreduktion das Ziel einer möglichst \enquote{verlustfreien} Transformation der ursprünglichen Repräsentation in eine latente Repräsentation von geringerer Dimension. Für Autoencoder bedeutet \enquote{verlustfrei} die Minimierung des Rekonstruktionsfehlers wie z.B. die quadratische Abweichung (siehe \eqref{eq:MSE_loss}). Dieser Rekonstruktionsfehler ist jedoch wie \textcite[18]{vanderMaaten.2009} hervorhebt, nicht sehr aussagekräftig für die Güte einer Dimensionsreduktion. Hinzu kommt, dass der Rekonstruktionsfehler nicht für alle Methoden berechnet werden kann, da eine inverse Transformation der niedrigdimensionalen in die ursprüngliche Repräsentation benötigt wird. Damit fällt der Rekonstruktionsfehler als geeignetes Qualitätskriterium heraus. Das Forschungsinteresse für Methoden der Dimensionsreduktion hat daher mit der Zeit dafür gesorgt, dass immer mehr Qualitätskriterien entwickelt wurden. \textcite{Gracia.2014} stellen einige Qualitätskriterien vor und vergleichen diese miteinander. Trotzdem gibt es in der Literatur keine eindeutige Kennzahl, die bei einem Vergleich von Dimensionsreduktionsmethoden standardmäßig eingesetzt wird \parencite[vgl.][1 -- 2]{Lee.2009}. Stattdessen bedient man sich mehrerer Kennzahlen, die
 unterschiedliche Dinge bestrafen und versucht so die Stärken und Schwächen einer
 Dimensionsreduktionsmethode zu erkennen \parencite[486]{Venna.2001}. Die im Folgenden vorgestellten Qualitätskriterien versuchen die Güte
 mithilfe von Rängen zu quantifizieren.
 
 Im ausführlichen Benchmark von \textcite{vanderMaaten.2009} wird auf den Generalisierungsfehler
-eines 1-Nächste-Nachbar Klassifikators, sowie auf die zwei Kennzahlen
-\newterm{Vertrauenswürdigkeit} (engl. \textit{Trustworthiness}) und \newterm{Kontinuität} (engl.
-\textit{Continuity}) \parencites{Venna.2001}{Venna.2006} gesetzt. Die Vertrauenswürdigkeit und die Kontinuität sind
+eines 1-Nächste-Nachbar Klassifikators, sowie auf die zwei Kennzahlen Vertrauenswürdigkeit (engl.
+\textit{Trustworthiness}) und Kontinuität (engl. \textit{Continuity}) \parencites{Venna.2001}{Venna.2006} gesetzt. Die Vertrauenswürdigkeit und die Kontinuität sind
 rang-basierte Qualitätskriterien und werden auch in diesem Vergleich eingesetzt. Daneben gibt es
 noch viele weitere rangbasierte Qualitätskriterien, welche einheitlich durch die sogenannte
-\newterm{Co-Ranking Matrix} \parencite[1432]{Lee.2009} ausgedrückt werden können. Ebenso können die Vertrauenswürdigkeit und
-Kontinuität über die Co-Ranking Matrix berechnet werden \parencite[1433]{Lee.2009}. Für eine ausführliche Behandlung dessen wird auf \textcite{Lee.2009}
-verwiesen. In dieser Arbeit werden drei Kriterien verwendet: (1) Die Vertrauenswürdigkeit und (2)
-die Kontinuität einer Dimensionsreduktion, sowie (3) das \newterm{Local Continuity Meta-Criterion}
-(LCMC). Diese werden im Folgenden genauer betrachtet. \nomenclature[Z]{LCMC}{Local Continuity
-	Meta-Criterion}
+\newterm{Co-Ranking Matrix} \parencite[1432]{Lee.2009} ausgedrückt werden können.\rewrite{Co Ranking kurz erklären} Ebenso können
+die Vertrauenswürdigkeit und Kontinuität über die Co-Ranking Matrix berechnet werden \parencite[1433]{Lee.2009}. Nachfolgend werden die in dieser Arbeit verwendeten Kriterien genauer
+erläutert.
+
+\nomenclature[Z]{LCMC}{Local Continuity Meta-Criterion}
+
 \subsubsection{Vertrauenswürdigkeit und Kontinuität}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien:TC}
 Diese beiden Kennzahlen basieren auf der Idee des Erhalts von Nachbarschaften (engl.
 \textit{neighborhood preservation}) einer Dimensionsreduktion. Sie bilden also ab, wie gut die
-lokale Struktur erhalten wird. Eine $K$-Nachbarschaft $\set{M}_i(K)$ eines Punktes $\vect{x}_i$ ist
-definiert als die Menge der Indizes der $K$-nächsten Punkte zu $\vect{x}_i$ ($i = 1, \ldots, n$).
+lokale Struktur erhalten wird. Formal wird dazu eine $K$-Nachbarschaft $\set{M}_i(K)$ eines Punktes $\vect{x}_i$ als die Menge der Indizes der $K$-nächsten Punkte zu $\vect{x}_i$ mit $i = 1, \ldots, n$ definiert.
 Analog kann die $K$-Nachbarschaft $\widetilde{\set{M}}_i(K)$ des dazugehörigen niedrigdimensionalen
 Punktes $\vect{y}_i$ definiert werden. Diese Nachbarschaft wird in einer Dimensionsreduktion
 erhalten, wenn $\set{M}_i(K) = \widetilde{\set{M}}_i(K)$, das heißt die Nachbarschaften bleiben von
 der Dimensionsreduktion unverändert.
 
-Zum einen kann es nun passieren, dass Punkte, die \textit{vor} der Projektion weit weg voneinander
-lagen, \textit{nach} der Projektion aber nah beieinander sind. Mit anderen Worten können Punkte,
-die eigentlich unterschiedlich sind, nun ähnlich erscheinen. Aus diesem Grund sagt man, dass die
-Vertrauenswürdigkeit der Dimensionsreduktion niedrig ist. Zum anderen ist der gegenteilige Fall
-möglich. Nah beieinander liegende Punkte sind nach der Projektion weit weg voneinander. Dies
-reduziert die Kontinuität einer Dimensionsreduktion \parencite[486 -- 487]{Venna.2001}.
+Zum einen kann es nun passieren, dass weitentfernte Punkte nach der Projektion \textit{nah}
+beieinander sind. Mit anderen Worten können Punkte, die eigentlich unterschiedlich sind, nun
+ähnlich erscheinen. Aus diesem Grund sagt man, dass die Vertrauenswürdigkeit der
+Dimensionsreduktion niedrig ist. Zum anderen ist der gegenteilige Fall möglich. Nah
+beieinanderliegende Punkte sind nach der Projektion weit weg voneinander. Dies reduziert die
+Kontinuität einer Dimensionsreduktion \parencite[486 -- 487]{Venna.2001}.
 
 Formal definiert man zusätzlich zu den Nachbarschaftsmengen von oben die beiden Mengen
 $\set{U}_i(K)$ und $\set{V}_i(K)$ wie folgt:
@@ -87,7 +86,7 @@ definiert werden \parencite[487]{Venna.2001}, wobei $r_{\vect{y}}(i, j)$ den Ran
 $\vect{y}_j$ bezeichnet, wenn die Datenpunkte absteigend nach der euklidischen Distanz von
 $\vect{y}_i$ geordnet sind. Der Term vor der Summation skaliert das Qualitätskriterium so, dass $0
 	\leq T(K) \leq 1$ gilt.\footnote{Dies gilt nur für den Fall, dass $K < n/2$ gilt.} Ein Wert von
-$T(K) = 1­$ spricht für eine hohe Vertrauenswürdigkeit.
+$T(K) = 1­$ entspricht einer perfekten Vertrauenswürdigkeit.
 
 Analog wird die Kontinuität $C(K)$ über $\set{V}_i(K)$ wie folgt definiert
 \begin{equation}
@@ -96,7 +95,7 @@ Analog wird die Kontinuität $C(K)$ über $\set{V}_i(K)$ wie folgt definiert
 wobei $r_{\vect{x}}(i, j)$ nun den Rang zwischen den Datenpunkten in der hochdimensionalen Repräsentation bezeichnet \parencite[487]{Venna.2001}. Auch hier gilt $0 \leq C(K) \leq 1$ und höher ist besser. Die Kontinuität
 misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden.
 
-Üblicherweise werden die beiden Kriterien für mehrere Werte der Nachbarschaftsgröße $K$ berechnet und in einer Abbildung dargestellt. So entfällt die etwas willkürliche Wahl einer spezifischen Nachbarschaftsgröße und ermöglicht die Betrachtung von sowohl kleinen als auch größeren Nachbarschaften.
+Üblicherweise werden die beiden Kriterien für mehrere Werte der Nachbarschaftsgröße $K$ berechnet und in einer Abbildung dargestellt. So entfällt die willkürliche Wahl einer spezifischen Nachbarschaftsgröße und ermöglicht die Betrachtung von sowohl kleinen als auch größeren Nachbarschaften.
 % \subsubsection{Die Co-Ranking Matrix}
 % Ein Eintrag $q_{kl}$ der Co-Ranking Matrix $\mat{Q}$ ist die Anzahl der Paare von Datenpunkten $(i,
 % 	j)$, die den Rang $r_{\vect{x}}(i, j) = k$ in der hochdimensionalen und den Rang $r_{\vect{y}}(i,
@@ -104,7 +103,7 @@ misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden.
 
 \subsubsection{Local Continuity Meta-Criterion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien:LCMC}
-Das Local Continuity Meta-Criterion (LCMC), entwickelt von \textcite{Chen.2009}, ist ebenso wie die Vertrauenswürdigkeit und Kontinuität ein rang-basiertes Qualitätskriterium. LCMC betrachtet die Überschneidung der $K$-Nachbarschaften in der ursprünglichen und latenten Repräsentation. Nimmt man wieder die $K$-Nachbarschaften als $M_i(K)$ und $\widetilde{M}_i(K)$ an, das heißt die Indexmengen der $K$-Nachbarschaften in der ursprünglichen beziehungsweise latenten Repräsentation, dann lässt sich das LCMC wie folgt berechnen \parencite[212]{Chen.2009}:
+Das Local Continuity Meta-Criterion (LCMC), entwickelt von \textcite{Chen.2009}, ist ebenso wie die Vertrauenswürdigkeit und Kontinuität ein rang-basiertes Qualitätskriterium. LCMC betrachtet die Überschneidung der $K$-Nachbarschaften in der ursprünglichen und latenten Repräsentation. Nimmt man wieder die $K$-Nachbarschaften als $\set{M}_i(K)$ und $\widetilde{\set{M}}_i(K)$ an, das heißt die Indexmengen der $K$-Nachbarschaften in der ursprünglichen beziehungsweise latenten Repräsentation, dann lässt sich das LCMC wie folgt berechnen \parencite[212]{Chen.2009}:
 \begin{equation}
 	\label{eq:LCMC}
 	\text{LCMC}(K) = \frac{1}{nK} \sum_{i=1}^{n} \left( \left| \set{M}_i(K) \cap \widetilde{\set{M}}_i(K) \right| \right) - \frac{K}{n - 1} \,,
@@ -150,7 +149,7 @@ Mittelwert über alle Beobachtungen $\vect{x}_i$ mit $i = 1, \ldots, n$ gebildet
 \section{Verwendete Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze}
 Es werden sowohl künstliche als auch natürliche Datensätze eingesetzt, um Eigenschaften der
-verschiedenen Methoden miteinander zu vergleichen. Eine Übersicht über die Dimensionen und Stichprobengrößen der verwendeten Datensätze befindet sich in Tabelle \ref{tab:uebersicht-datensaetze}.
+verschiedenen Methoden miteinander zu vergleichen. Eine Übersicht über die Dimensionen und Stichprobengrößen der verwendeten Datensätze befindet sich in Tabelle \ref{tab:uebersicht-datensaetze}. Nachfolgend werden zuerst die künstlichen und dann die natürlichen Datensätze beschrieben.
 
 \subsection{Künstliche Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze:kuenstlich}
@@ -159,7 +158,7 @@ Zu den künstlichen Datensätzen gehört die weitverbreitete \textit{Swiss Roll}
 	\begin{center}
 		\includegraphics{artificial_datasets.pdf}
 	\end{center}
-	\caption[Künstliche Datensätze]{\figleft Die Swiss Roll. Die intrinsische Dimension beträgt zwei, weil die Daten auf einer \enquote{eingerollten Ebene} liegen. Die Dimensionsreduktionsmethoden müssen die Swiss Roll \enquote{entfalten}, um eine zweidimensionale Repräsentation zu erhalten. \figright Der Twin Peaks Datensatz. Dieser besteht aus mehreren spitzen Bergen (\textit{Peaks}), wobei je zwei nach oben und unten zeigen. Auch dieser Datensatz hat eine intrinsische Dimension von zwei. Intuitiv gesehen kann man sich lokal nur nach rechts oder links auf der Mannigfaltigkeit bewegen, d.h. die Twin Peaks sind homöomorph zum $\real^2$.}
+	\caption[Künstliche Datensätze]{\figleft Die Swiss Roll. Die intrinsische Dimension beträgt zwei, da die Daten auf einer \enquote{eingerollten Ebene} liegen. Die Dimensionsreduktionsmethoden müssen die Swiss Roll \enquote{entfalten}, um eine zweidimensionale Repräsentation zu erhalten. \figright Der Twin Peaks Datensatz. Dieser besteht aus mehreren spitzen Bergen (\textit{Peaks}), wobei je zwei nach oben und unten zeigen. Auch dieser Datensatz hat eine intrinsische Dimension von zwei. Intuitiv gesehen kann man sich lokal nur nach rechts oder links auf der Mannigfaltigkeit bewegen, d.h. die Twin Peaks sind homöomorph zum $\real^2$.}
 	\label{fig:ArtificialDatasets}
 \end{figure}
 die in \figref{fig:ArtificialDatasets} dargestellt sind.
@@ -243,13 +242,12 @@ Methoden wurde aufgrund von Restriktionen der Rechenleistung (insbesondere des A
 ein Downsampling auf maximal 15 000 Stichproben durchgeführt.\footnote{Die Evaluierung ist aufgrund
 	der Berechnung der Co-Ranking-Matrix speicherintensiv, da diese maximal $(n-1) \times (n-1)$ groß
 	ist und damit quadratisch mit $n$ ansteigt. Um die Qualitätskriterien für den MNIST-Datensatz zu
-	berechnen, werden für $n=25 000$ circa 25 GB Arbeitsspeicher benötigt.} Dies ist allerdings nur für
-den MNIST- und FER-Datensatz von Relevanz. Alle anderen Datensätze haben weniger Stichproben. Um
-die verschiedenen Nachbarschaftsgrößen in Locally Linear Embedding, den Qualitätskriterien und dem
-Schätzer der intrinsischen Dimension auseinanderhalten zu können, wird die Notation $\Klle$ für die
+	berechnen, werden für $n=25 000$ circa 25 GB Arbeitsspeicher benötigt.} Um die verschiedenen
+Nachbarschaftsgrößen in Locally Linear Embedding, den Qualitätskriterien und dem Schätzer der
+intrinsischen Dimension auseinanderhalten zu können, wird die Notation $\Klle$ für die
 Nachbarschaftsgröße in Locally Linear Embedding, $\Kqk$ für die Nachbarschaftsgröße in den
 Qualitätskriterien und $\Kid$ für die Nachbarschaftsgröße des Schätzers der intrinsischen Dimension
-eingeführt.
+für den restlichen Teil dieser Arbeit eingeführt.
 
 Für die Hauptkomponentenanalyse gibt es neben der Anzahl der zu behaltenden Hauptkomponenten keine
 Parameter. Die Anzahl der Hauptkomponenten entspricht der intrinsischen Dimension, welche vom
@@ -257,14 +255,14 @@ Datensatz abhängt und für alle Methoden identisch ist. Dies trifft analog auf 
 Locally Linear Embedding zu. Für Autoencoder bestimmt die intrinsische Dimension die Größe der
 Bottleneck-Schicht. Für Kernel PCA wird ein Gaußscher Kernel eingesetzt, wofür ein Hyperparameter
 $\sigma$ gewählt werden kann. Die Werte $\sigma \in \{ 0.1, 0.25, 0.75, 1, 2, 5\}$ wurden getestet
-und der beste Durchlauf ausgewählt. Für ICMR und Olivetti Faces lieferten diese Werte sehr
-schlechte Ergebnisse, weswegen auf diesen Datensätzen zusätzlich die Werte $\{ 1\mathrm{e}{-3},
+und der beste Durchlauf ausgewählt. Für ICMR und Olivetti Faces lieferten diese Werte schlechte
+Ergebnisse, weswegen auf diesen Datensätzen zusätzlich die Werte $\{ 1\mathrm{e}{-3},
 	1\mathrm{e}{-4}, 1\mathrm{e}{-5}\}$ getestet wurden. Für Locally Linear Embedding gibt es zwei
 Parameter: (1) einen Parameter $\Klle$, der die Größe der verwendeten Nachbarschaft kontrolliert
 und (2) eine Regularisierungskonstante $\epsilon$, die auf die Diagonale der lokalen
 Kovarianzmatrix addiert wird. Die Nachbarschaft wurde für die Werte $\Klle \in \{ 5, 7, 10, 12,
 	15\}$ getestet und der beste Durchlauf ausgewählt. die Regularisierungskonstante wurde auf allen
-Datensätze auf $\epsilon = 1\mathrm{e}{-3}$ gesetzt.
+Datensätzen auf $\epsilon = 1\mathrm{e}{-3}$ gesetzt.
 
 Den statistischen Methoden gegenüber haben Autoencoder deutlich mehr Freiheitsgrade, um die
 Architektur zu bestimmen. Die wichtigsten Parameter sind die Anzahl der Schichten $m$, sowie die
@@ -307,7 +305,7 @@ Abhängigkeit der Nachbarschaftsgröße $\Kqk$ abgebildet. Die verschiedenen Met
 im vorhergehenden \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails} erläuterten Parametern
 auf den künstlichen und natürlichen Datensätzen trainiert und hinsichtlich der in
 \secref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} vorgestellten Qualitätskriterien für
-eine Nachbarschaftsgröße von $1 \leq \Kid \leq 100$ evaluiert. Einige der Abbildungen für die
+eine Nachbarschaftsgröße von $1 \leq \Kqk \leq 100$ evaluiert. Einige der Abbildungen für die
 Qualitätskriterien sind im Appendix \ref{ch:Appendix:Qualitaetskriterien} zu finden. In
 \secref{ch:Vergleich:sec:Resultate:kuenstlich} werden die Ergebnisse auf den künstlichen
 Datensätzen und in \secref{ch:Vergleich:sec:Resultate:natuerlich} die Ergebnisse auf den
@@ -362,7 +360,7 @@ sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
 Auf allen natürlichen Datensätzen
 schneidet Locally Linear Embedding hinsichtlich aller drei Kriterien neben dem Contractive Autoencoder relativ gesehen schlecht ab. Insbesondere nehmen die
 Qualitätskriterien von Locally Linear Embedding mit größer werdender Nachbarschaftsgröße $\Kqk$ deutlicher ab, als bei den
-restlichen Methoden. Die Parameter $\Klle$ für Locally Linear Embedding wurde jedoch auf kleinere Werte zwischen fünf und 15 gesetzt, weswegen diese Beobachtung logisch erscheint. Die Hauptkomponentenanalyse kann auf fast allen natürlichen Datensätzen eine gute oder sogar die
+restlichen Methoden. Der Parameter $\Klle$ für Locally Linear Embedding wurde jedoch auf kleinere Werte zwischen fünf und 15 gesetzt, weswegen diese Beobachtung logisch erscheint. Die Hauptkomponentenanalyse kann auf fast allen natürlichen Datensätzen eine gute oder sogar die
 beste relative Performance aufweisen. Ebenso zeigt die Kernel PCA gute Ergebnisse und ist auf dem ICMR- und Olivetti Faces-Datensatz fast identisch zur klassischen Hauptkomponentenanalyse. Der klassische Autoencoder kann die Principal Component Analysis auf den Qualitätskriterien nicht mehr übertreffen. Auf den vier Bilddatensätzen kann jedoch der Convolutional
 Autoencoder seine Stärken zeigen, allerdings nur, wenn genügend Trainingsdaten zur Verfügung stehen. Letzteres trifft unter anderem auf den MNIST-Datensatz zu, nicht jedoch auf den Olivetti Faces-Datensatz. Auf dem Olivetti Faces-Datensatz ist das Ergebnis nur minimal besser, als das des klassischen Autoencoders. Im direkten Vergleich zur Hauptkomponentenanalyse schneidet der Convolutional Autoencoder hier aber schlechter ab.
 Auf Datensätzen mit einer geringen Anzahl an Stichproben können Probleme bei der Konvergenz der iterativen Optimierung eines Autoencoders auftreten. Dies wird durch die Performance des vollvernetzten Autoencoders auf dem Olivetti Faces-Datensatz ersichtlich (siehe \figref{fig:OlivettiFacesMetrics}). Insbesondere hinsichtlich des LCMC fällt der Autoencoder nach unten ab. Dies ist ein Nachteil einer iterativen Optimierung der Zielfunktion gegenüber einer Lösung in geschlossener Form.
@@ -401,7 +399,7 @@ wählenden Parameter höher. Bei einem Einsatz dieser Methode in der Dimensionsr
 mit einem hohen Zeitaufwand für manuelles oder automatisiertes Hyperparameter-Tuning gerechnet
 werden. Dies ist ein entscheidender Nachteil der hier vorgestellten Machine Learning Ansätze.
 Allerdings wird das Hyperparameter-Tuning auch für Kernel PCA und Locally Linear Embedding auf
-größeren Datensätzen sehr teuer.
+größeren Datensätzen teuer.
 
 \subsubsection{Vergleich der Rekonstruktionen}
 
@@ -417,7 +415,7 @@ abgebildet. Die erste Zeile besteht aus den Originalbildern als Referenz.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{reconstructions_mnist_pca_ae_convae_cae.pdf}
-	\caption[Rekonstruierte MNIST-Zahlen]{Gezeigt sind einige rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch den Convolutional Autoencoder und (5) Rekonstruktion durch den Contractive Autoencoder.}
+	\caption[Rekonstruierte MNIST-Zahlen]{Gezeigt sind rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch den Convolutional Autoencoder und (5) Rekonstruktion durch den Contractive Autoencoder.}
 	\label{fig:MNIST-reconstructions}
 \end{figure}
 Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da einige Zahlen sogar als falsche Zahl rekonstruiert werden. Die Rekonstruktionen der Hauptkomponentenanalyse sind besser, aber visuell ebenfalls nicht überzeugend, da sie deutlich unscharfer sind. Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte und zeigt auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien eine gute Güte der Dimensionsreduktion (siehe \figref{fig:MNISTMetrics}). Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
