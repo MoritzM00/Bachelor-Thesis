@@ -36,7 +36,7 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 	\begin{center}
 		\includegraphics{TwinPeaks_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für die Twin Peaks]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Twin Peaks Datensatz. Locally Linear Embedding (LLE) schneidet wie bei der Swiss Roll insgesamt am besten ab, dicht gefolgt vom Autoencoder und der Kernel PCA. Lediglich der Contractive Autoencoder (CAE) und PCA fallen auf diesem künstlichen Datensatz etwas zurück, wobei die Vertrauenswürdigkeit der Dimensionsreduktion von PCA deutlich schlechter als bei den restlichen Methoden ist. Dies ist höchstwahrscheinlich der nichtlinearen Mannigfaltigkeit geschuldet, was der linearen Hauptkomponentenanalyse Schwierigkeiten bereitet. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für die Twin Peaks]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Twin Peaks Datensatz. Locally Linear Embedding (LLE) schneidet wie bei der Swiss Roll insgesamt am besten ab, gefolgt von der Kernel PCA und vom Autoencoder. Lediglich der Contractive Autoencoder (CAE) und PCA fallen auf diesem künstlichen Datensatz etwas zurück, wobei die Vertrauenswürdigkeit der Dimensionsreduktion von PCA deutlich schlechter als bei den restlichen Methoden ist. Dies ist wahrscheinlich der nichtlinearen Mannigfaltigkeit geschuldet, was der linearen Hauptkomponentenanalyse Schwierigkeiten bereitet. (Eigene Darstellung)}
 	\label{fig:TwinPeaksMetrics}
 \end{figure}
 
@@ -44,7 +44,7 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 	\begin{center}
 		\includegraphics{ICMR_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für den ICMR-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den ICMR-Datensatz. Dieser Datensatz ist kein Bilddatensatz, weswegen hier der Convolutional Autoencoder nicht eingesetzt werden konnte. Auch hier schneidet die Hauptkomponentenanalyse wieder am besten ab, gefolgt vom vollvernetzten Autoencoder (AE) und der Kernel PCA. Am schlechtesten sind der Contractive Autoencoder und Locally Linear Embedding. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den ICMR-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den ICMR-Datensatz. Dieser Datensatz ist kein Bilddatensatz, weswegen hier der Convolutional Autoencoder nicht eingesetzt werden konnte. Hier schneidet die Hauptkomponentenanalyse am besten ab, gefolgt von der Kernel PCA und vom vollvernetzten Autoencoder. Am schlechtesten sind der Contractive Autoencoder und Locally Linear Embedding, wobei die Qualitätskriterien mit größer werdender Nachbarschaftsgröße $K$ bei LLE deutlicher abfallen. (Eigene Darstellung)}
 	\label{fig:ICMRMetrics}
 \end{figure}
 
@@ -52,7 +52,7 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 	\begin{center}
 		\includegraphics{OlivettiFaces_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für den Olivetti Faces-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Olivetti Faces Datensatz. Hier schneiden alle Varianten der Autoencoder nicht so gut ab, wie es beispielweise auf dem MNIST Datensatz der Fall war. Dies könnte an der deutlich geringeren Stichprobengröße von 400 liegen, wodurch eine Konvergenz der Autoencoder schwieriger wird. Neben den Autoencoder schneidet hier auch LLE für größere Werte von $K$ schlecht ab, kann jedoch bei geringeren Nachbarschaftsgrößen hohe Werte für die Vertrauenswürdigkeit und Kontinuität erreichen. PCA schneidet hinsichtlich allen drei Kriterien für alle Werte von $K$ am besten ab, gefolgt von der Kernel PCA. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den Olivetti Faces-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Olivetti Faces Datensatz. Principal Component Analysis und die nichtlineare Erweiterung Kernel PCA sind auf diesem Datensatz fast identisch und liefern gleichzeitig die besten Ergebnisse auf allen drei Kriterien. Alle Varianten der Autoencoder fallen hier etwas in der Performance ab. Dies könnte an der geringen Stichprobengröße von 400 liegen, wodurch eine Konvergenz der Autoencoder schwieriger wird. Neben den Autoencoder schneidet hier auch LLE für größere Werte von $K$ schlecht ab, kann jedoch bei geringeren Nachbarschaftsgrößen noch gute Werte für die drei Kriterien erreichen. (Eigene Darstellung)}
 	\label{fig:OlivettiFacesMetrics}
 \end{figure}
 
@@ -60,7 +60,7 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 	\begin{center}
 		\includegraphics{FashionMNIST_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für den Fashion MNIST-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Fashion MNIST-Datensatz. Die Kriterien auf diesem Datensatz zeigen ein ähnliches Bild wie auf dem Olivetti Faces Datensatz, jedoch bereitet hier die Stichprobengröße keine Probleme beim Trainieren der Autoencoder. Daher können auch der Autoencoder und der Convolutional Autoencoder wieder eine bessere Performance aufweisen. Trotzdem ist auch hier die Hauptkomponentenanalyse wieder für alle Werte der Nachbarschaftsgröße am besten. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den Fashion MNIST-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Fashion MNIST-Datensatz. Die Kriterien auf diesem Datensatz zeigen ein ähnliches Bild wie auf dem Fashion MNIST-Datensatz, jedoch können die Principal Component Analysis, Kernel Principal Component Analysis und der Autoencoder etwas näher aufschließen. Alle Methoden bis auf Locally Linear Embedding und der Contractive Autoencoder können eine fast perfekte Vertrauenswürdigkeit und Kontinuität erreichen. Hinsichtlich des LCMC schneidet der Convolutional Autoencoder am besten ab, gefolgt vom vollvernetzten Autoencoder, sowie von PCA und Kernel PCA. (Eigene Darstellung)}
 	\label{fig:FashionMNISTMetrics}
 \end{figure}
 
@@ -68,7 +68,7 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 	\begin{center}
 		\includegraphics{FER2013_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für den FER-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den FER-Datensatz. Hier ist die Performance des Convolutional Autoencoders und der Hauptkomponentenanalyse nahezu identisch und im Vergleich mit den anderen Methoden am besten. Aber auch der Autoencoder und die Kernel PCA können einen konstant hohen Wert für $T(K)$ und $C(K)$ erreichen. Auch auf diesem Datensatz schneiden LLE und der Contractive Autoencoder mit Abstand am schlechtesten ab. Besonders LLE zeigt hier die Schwäche einer lokalen Erhaltung der Struktur, da die Qualitätskriterien für steigende Werte von $K$ stark abfallen. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den FER-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den FER-Datensatz. Hier ist die Performance des Convolutional Autoencoders und des vollvernetzten Autoencoders nahezu identisch. Aber auch der Autoencoder und die Kernel PCA können einen konstant hohen Wert für $T(K)$ und $C(K)$ erreichen. Auch auf diesem Datensatz schneiden LLE und der Contractive Autoencoder mit Abstand am schlechtesten ab. Besonders LLE zeigt hier die Schwäche einer lokalen Erhaltung der Struktur, da die Qualitätskriterien für steigende Werte von $K$ stark abfallen. (Eigene Darstellung)}
 	\label{fig:FER2013Metrics}
 \end{figure}
 
@@ -77,6 +77,6 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 \begin{figure}
 	\centering
 	\includegraphics{TwinPeaksEmbeddings.pdf}
-	\caption[Latente zweidimensionale Repräsentationen $\mat{Y}$ durch Anwendungen fünf unterschiedlicher Methoden auf dem Twin Peaks-Datensatz.]{Abgebildet sind die latenten zweidimensionalen Repräsentationen $\mat{Y}$ durch Anwendungen fünf unterschiedlicher Methoden auf dem Twin Peaks-Datensatz.}
+	\caption[Latente zweidimensionale Repräsentationen $\mat{Y}$ durch Anwendungen fünf unterschiedlicher Methoden auf dem Twin Peaks-Datensatz.]{Abgebildet sind die latenten zweidimensionalen Repräsentationen $\mat{Y}$ durch Anwendungen fünf unterschiedlicher Methoden auf dem Twin Peaks-Datensatz. Die von Locally Linear Embedding gefundene latente Repräsentation hat die einzelnen Peaks herabsenken können. Kernel PCA konnte dies im Gegensatz zur linearen Hauptkomponentenanalyse ebenfalls erkennen. Auch die latente Repräsentation des vollvernetzten Autoencoders zeigt diesen Ansatz, verzerrt die Peaks in der Ebene jedoch stärker als es bei LLE oder Kernel PCA der Fall ist. Der Contractive Autoencoder scheint alle Punkte auf die Ränder abzubilden, was die niedrigere Vertrauenswürdigkeit und Kontinuität erklärt.}
 	\label{fig:TwinPeaksEmbeddings}
 \end{figure}
