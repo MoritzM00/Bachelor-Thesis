@@ -86,14 +86,18 @@ definiert werden \parencite[487]{Venna.2001}, wobei $r_{\vect{y}}(i, j)$ den Ran
 $\vect{y}_j$ bezeichnet, wenn die Datenpunkte absteigend nach der euklidischen Distanz von
 $\vect{y}_i$ geordnet sind. Der Term vor der Summation skaliert das Qualitätskriterium so, dass $0
 	\leq T(K) \leq 1$ gilt.\footnote{Dies gilt nur für den Fall, dass $K < n/2$ gilt.} Ein Wert von
-$T(K) = 1­$ entspricht einer perfekten Vertrauenswürdigkeit.
+$T(K) = 1­$ entspricht einer perfekten Vertrauenswürdigkeit. Eine niedrige Vertrauenswürdigkeit
+kann auf ein \enquote{Zusammendrücken} der Mannigfaltigkeit hinweisen, da Punkte nach der
+Transformation näher beieinander liegen, als zuvor.
 
 Analog wird die Kontinuität $C(K)$ über $\set{V}_i(K)$ wie folgt definiert
 \begin{equation}
 	C(K) = 1 - \frac{2}{nK(2n - 3K - 1)} \sum_{i = 1}^{n}\sum_{j \in \set{V}_i(K) } \left( r_{\vect{x}}(i, j) - K \right) \, ,
 \end{equation}
 wobei $r_{\vect{x}}(i, j)$ nun den Rang zwischen den Datenpunkten in der hochdimensionalen Repräsentation bezeichnet \parencite[487]{Venna.2001}. Auch hier gilt $0 \leq C(K) \leq 1$ und höher ist besser. Die Kontinuität
-misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden.
+misst, wie gut die ursprünglichen Nachbarschaften erhalten werden. Eine niedrige Kontinuität kann
+darauf hinweisen, dass die Mannigfaltigkeit gezerrt wurde und dadurch die Punkte nach der
+Transformation weiter weg voneinander liegen.
 
 Üblicherweise werden die beiden Kriterien für mehrere Werte der Nachbarschaftsgröße $K$ berechnet und in einer Abbildung dargestellt. So entfällt die willkürliche Wahl einer spezifischen Nachbarschaftsgröße und ermöglicht die Betrachtung von sowohl kleinen als auch größeren Nachbarschaften.
 % \subsubsection{Die Co-Ranking Matrix}
@@ -103,13 +107,13 @@ misst also, wie gut die ursprünglichen Nachbarschaften erhalten werden.
 
 \subsubsection{Local Continuity Meta-Criterion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien:LCMC}
-Das Local Continuity Meta-Criterion (LCMC), entwickelt von \textcite{Chen.2009}, ist ebenso wie die Vertrauenswürdigkeit und Kontinuität ein rang-basiertes Qualitätskriterium. LCMC betrachtet die Überschneidung der $K$-Nachbarschaften in der ursprünglichen und latenten Repräsentation. Nimmt man wieder die $K$-Nachbarschaften als $\set{M}_i(K)$ und $\widetilde{\set{M}}_i(K)$ an, das heißt die Indexmengen der $K$-Nachbarschaften in der ursprünglichen beziehungsweise latenten Repräsentation, dann lässt sich das LCMC wie folgt berechnen \parencite[212]{Chen.2009}:
+Das Local Continuity Meta-Criterion (LCMC), entwickelt von \textcite{Chen.2009}, ist ebenso wie die Vertrauenswürdigkeit und Kontinuität ein rangbasiertes Qualitätskriterium. LCMC betrachtet die Überschneidung der $K$-Nachbarschaften in der ursprünglichen und latenten Repräsentation. Nimmt man wieder die $K$-Nachbarschaften als $\set{M}_i(K)$ und $\widetilde{\set{M}}_i(K)$ an, das heißt die Indexmengen der $K$-Nachbarschaften in der ursprünglichen beziehungsweise latenten Repräsentation, dann lässt sich das LCMC wie folgt berechnen \parencite[212]{Chen.2009}:
 \begin{equation}
 	\label{eq:LCMC}
-	\text{LCMC}(K) = \frac{1}{nK} \sum_{i=1}^{n} \left( \left| \set{M}_i(K) \cap \widetilde{\set{M}}_i(K) \right| \right) - \frac{K}{n - 1} \,,
+	\text{LCMC}(K) = \frac{1}{nK} \sum_{i=1}^{n} \left( \left| \set{M}_i(K) \cap \widetilde{\set{M}}_i(K) \right| \right) - \frac{K^2}{n - 1} \,,
 \end{equation}
-wobei $­|\cdot|$ die Kardinalität einer Menge und $\set{A} \cap \set{B}$ den Durchschnitt zweier Mengen $\set{A}$ und $\set{B}$ bezeichnet. Der Term vor der Summation skaliert auch dieses Kriterium auf den Wertebereich zwischen Null und Eins, wobei LCMC$(K) = 1$ den besten Wert darstellt. Die durschnittliche Überschneidung der beiden Indexmengen wird wie in \eqref{eq:LCMC} ersichtlich noch um einen additiven Term korrigiert. Dieser Term entspricht dem Erwartungswert einer zufälligen Überschneidung und kann durch eine hypergeometrische Verteilung mit $K$ Defekten aus $n - 1$ modelliert werden \parencite[213]{Chen.2009}. Diese sogenannte Basislinie (engl. \textit{Baseline}) wird mit steigendem
-$K$ größer, so dass das Kriterium für den maximalen Wert der Nachbarschftsgröße $K = n - 1$ den
+wobei $­|\cdot|$ die Kardinalität einer Menge und $\set{A} \cap \set{B}$ den Durchschnitt zweier Mengen $\set{A}$ und $\set{B}$ bezeichnet. Der Term vor der Summation bildet den Mittelwert und skaliert das Kriterium auf den Wertebereich zwischen Null und Eins, wobei LCMC$(K) = 1$ den besten Wert darstellt. Die Überschneidung der beiden Indexmengen wird wie in \eqref{eq:LCMC} ersichtlich noch um einen additiven Term korrigiert. Dieser Term entspricht dem Erwartungswert einer zufälligen Überschneidung und kann durch eine hypergeometrische Verteilung mit $K$ Defekten aus $n - 1$ bei $K$ Ziehungen modelliert werden \parencite[213]{Chen.2009}. Diese sogenannte Basislinie (engl. \textit{Baseline}) wird mit steigendem
+$K$ größer, so dass das Kriterium für den maximalen Wert der Nachbarschaftsgröße $K = n - 1$ den
 Wert Null annimmt. Aus diesem Grund besitzt das LCMC ein wohldefiniertes Maximum. Allerdings sind
 kleinere Werte von $K$ oftmals wichtiger, um beispielsweise die Erhaltung der Struktur einer
 Mannigfaltigkeit zu messen.
