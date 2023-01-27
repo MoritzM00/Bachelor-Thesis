@@ -177,23 +177,32 @@ Die Kovarianzmatrix $\mat{C}$ der (zentrierten) Daten im Merkmalsraum ist defini
 \end{equation}
 wobei $\bm{\phi}(\mat{X}) = \tr{\left[ \bm{\phi}(\vect{x}_1), \ldots, \bm{\phi}(\vect{x}_n) \right]}$ hier elementweise auf die Zeilen von $\mat{X}$ angewandt wird. Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt, ist diese Matrix aber ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
 \begin{align}
-	\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1,\ldots,n} \label{eq:kPCA:KernelMatrix_A} \\
+	\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1}^n \label{eq:kPCA:KernelMatrix_A} \\
 	        & = \bm{\phi}(\mat{X}) \tr{\bm{\phi}(\mat{X})} \label{eq:kPCA:KernelMatrix_B}
 \end{align}
-definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertszerlegung der zentrierten Kernel Matrix liefert mit
-einer entsprechenden Skalierung die Eigenvektoren der Kovarianzmatrix $\mat{C}$. Konkret wird die
-zentrierte $n \times n$ Kernel Matrix in ihre Eigenvektoren $\vect{v_i}$ und Eigenwerte $\lambda_i$
-mit $i = 1, \ldots, n$ zerlegt, womit über den Zusammenhang
+definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertszerlegung der zentrierten Kernel Matrix\footnote{Wir
+	hatten in der klassischen Hauptkomponentenanalyse angenommen, dass die ursprünglichen Daten
+	zentriert sind. Analog wollen wir, dass die Daten im Merkmalsraum $\mathcal{H}$ zentriert sind.
+	Dies können wir implizit durch eine Transformation der Kernel-Matrix erreichen. Dieser Schritt ist
+	jedoch nur für eine Vereinfachung der Berechnungen (der Kovarianzmatrix) notwendig, nicht aber für
+	die Gültigkeit des Verfahrens. Die Zentrierung kann mittels
+	\begin{equation}
+		\widetilde{\mat{K}} = \mat{K} - \frac{1}{n} \ones \tr{\ones} \mat{K} - \frac{1}{n} \mat{K} \ones \tr{\ones} + \frac{1}{n^2} (\tr{\ones} \mat{K} \ones) \ones \tr{\ones}
+	\end{equation}
+	durchgeführt werden \parencite[131]{ShaweTaylor.2011}, wobei $\ones = \tr{(1, \ldots, 1)}$ der Vektor bestehend aus Einsen
+	ist.} liefert mit einer entsprechenden Skalierung die Eigenvektoren der Kovarianzmatrix $\mat{C}$.
+Konkret wird die zentrierte $n \times n$ Kernel Matrix in ihre Eigenvektoren $\vect{v_i}$ und
+Eigenwerte $\lambda_i$ mit $i = 1, \ldots, n$ zerlegt, womit über den Zusammenhang
 \begin{equation}
 	\label{eq:kPCA:ZusammenhangEigenvektoren}
 	\vect{a}_i = \frac{1}{\sqrt{\lambda_i}} \vect{v}_i
 \end{equation}
-die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[142]{ShaweTaylor.2011}. Letztlich kann die Projektion eines Punktes $\vect{x}$ auf die
-niedrigdimensionale Repräsentation $\rvect{y}$ durch
+die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[142]{ShaweTaylor.2011}. Letztlich kann die Projektion eines Punktes $\vect{x}_i$ auf die
+niedrigdimensionale Repräsentation $\rvect{y}_i$ durch
 \begin{equation}
-	\vect{y} = \sum_{i=1}^n \vect{a}_i \kappa(\vect{x}_i, \vect{x})
+	\vect{y}_i = \Big( \sum_{j=1}^n \vect{a}_j^{(l)} \kappa(\vect{x}_i, \vect{x}_j) \Big)_{l=1}^d
 \end{equation}
-berechnet werden.\rewrite{Umschreiben und auf Richtigkeit überprüfen}
+berechnet werden, wobei $\vect{a}_j^{(l)}$ der $l$-te Eintrag in $\vect{a}_j$ ist \parencite[150]{ShaweTaylor.2011}.
 
 \subsubsection{Praktische Probleme der Kernel PCA}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:AuswahlKF}
@@ -203,15 +212,15 @@ Auswahl des Kernels und die Wahl der Parameter für den Kernel. Problematisch is
 oft sensitiv gegenüber seiner Parameter ist. Im Falle eines Gaußschen Kernels muss ein Parameter
 $\sigma$ gewählt werden, der die Bandbreite des Kernels bestimmt. Die Performance auf einem
 Datensatz hängt davon ab, wie passend diese Bandbreite gewählt wurde. Allgemein umgeht man das
-Problem der manuellen Auswahl eines Kernels und seiner Parameter für Kernel-Methoden mittels
-unterschiedlicher Varianten von Kreuzvalidierung. Beispielsweise wird ein Qualitätskriterium
-festgelegt und die Methode mit einer vorab definierten Auswahl an Hyperparametern auf einer
-Teilmenge des Datensatzes trainiert und mit einer anderen Teilmenge evaluiert. Die Parameter der
-Methode, die hinsichtlich des Qualitätskriteriums am besten abgeschnitten hat, werden dann für das
-finale Modell übernommen und auf dem vollen Trainingsdatensatz trainiert. Dies funktioniert für
-Klassifikatoren und Regressoren wie z.B. die Support Vector Machine gut, da die Wahl der
-Qualitätskriterien nicht problematisch ist. Für die Dimensionsreduktion ist die Wahl des
-Qualitätskriteriums nicht trivial, wie wir später in
+Problem der manuellen Auswahl eines Kernels und seiner Parameter für Kernel-Methoden mittels einer
+Gittersuche und kombiniert dies mit Kreuzvalidierung über. Beispielsweise wird ein
+Qualitätskriterium festgelegt und die Methode mit einer vorab definierten Auswahl an Werten der
+Hyperparameter auf einer Teilmenge des Datensatzes trainiert und mit einer anderen Teilmenge
+evaluiert. Die Parameter der Methode, die hinsichtlich des Qualitätskriteriums am besten
+abgeschnitten hat, werden dann für das finale Modell übernommen und auf dem vollen
+Trainingsdatensatz trainiert. Dies funktioniert für Klassifikatoren und Regressoren wie z.B. die
+Support Vector Machine gut, da die Wahl der Qualitätskriterien nicht problematisch ist. Für die
+Dimensionsreduktion ist die Wahl des Qualitätskriteriums nicht trivial, wie wir später in
 \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} sehen werden. Eine Möglichkeit
 wäre die quadratische Abweichung zwischen der ursprünglichen Repräsentation eines Punktes und der
 Rekonstruktion aus seiner niedrigdimensionalen Repräsentation. Die Kernel PCA stellt allerdings
@@ -219,7 +228,7 @@ entgegen der klassischen Hauptkomponentenanalyse keine exakte inverse Transforma
 weswegen auf Approximationen zurückgegriffen werden muss. Dieses Problem entspricht dem Finden des
 sogenannten Urbildes (engl. \textit{pre-image}) in Kernel-Methoden \parencite{Kwok.2004}. Mithilfe dieser Approximation könnte eine Kreuzvalidierung über
 Rekonstruktionsfehler durchgeführt werden \parencite[siehe z.B.][]{Alam.2014}. In dieser Arbeit wird auf die Approximation des Urbildes
-verzichtet und stattdessen Qualitätskriterien der Dimensionsreduktion für eine Kreuzvalidierung
+verzichtet und stattdessen Qualitätskriterien der Dimensionsreduktion für eine Gittersuche
 verwendet. Das Vorgehen wird später in \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
 genauer erläutert.
 %% ==============================
