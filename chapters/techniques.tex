@@ -235,6 +235,13 @@ Rekonstruktionsfehler durchgeführt werden \parencite[siehe z.B.][]{Alam.2014}. 
 verzichtet und stattdessen Qualitätskriterien der Dimensionsreduktion für eine Gittersuche
 verwendet. Das Vorgehen wird später in \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
 genauer erläutert.
+
+Ein weiterer Nachteil der Kernel Principal Component Analysis ist, dass die Größe der Kernel Matrix
+quadratisch in der Stichprobengröße $n$ ansteigt. Dadurch kann diese Matrix auf großen Datensätzen
+möglicherweise nicht vollständig im Hauptspeicher zwischengespeichert werden. Die ohnehin teure
+Operation der Eigenwertszerlegung einer Matrix wird dadurch zusätzlich zum Problem. Für große
+Datensätze wurden daher inkrementelle Versionen der Kernel Principal Component Analysis entwickelt \parencite[siehe z.B.][]{Hallgren.2018}.
+
 %% ==============================
 \subsection{Locally Linear Embedding}
 \label{ch:MethodenDerDimRed:statistisch:LLE}
@@ -304,9 +311,9 @@ triviale Lösungen vollständig zu umgehen \parencite[vgl.][23]{vanderMaaten.200
 %% ==============================
 Nachdem in \secref{ch:MethodenDerDimRed:statistisch} einige statistischen Methoden der
 Dimensionsreduktion näher betrachtet wurden, werden nun zwei ausgewählte Machine Learning Methoden,
-nämlich der \newterm{Autoencoder} in seiner klassischen Form
-(\subsecref{ch:MethodenDerDimRed:ML:AE}) und eine Modifizierung in Form des \newterm{Contractive
-	Autoencoder} (CAE) (\subsecref{ch:MethodenDerDimRed:ML:CAE}) vorgestellt.
+nämlich der \newterm{Autoencoder} in seiner klassischen Form in
+\subsecref{ch:MethodenDerDimRed:ML:AE} und eine Modifizierung in Form des \newterm{Contractive
+	Autoencoder} (CAE) in\subsecref{ch:MethodenDerDimRed:ML:CAE} vorgestellt.
 
 \subsection{Autoencoder}
 \label{ch:MethodenDerDimRed:ML:AE}
