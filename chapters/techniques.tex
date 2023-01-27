@@ -171,28 +171,32 @@ $\bm{\phi}(\rvect{x})$ vorkommen. Diese Skalarprodukte können dann gemäß
 
 \subsubsection{Vorgehensweise}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise}
-Die Kovarianzmatrix $\mat{C}$ der (zentrierten) Daten im Merkmalsraum ist definiert als
+
+Betrachten wir also die Kovarianzmatrix $\mat{C}$ der in den Merkmalsraum projizierten Daten
+$\bm{\phi}(\mat{X}) = \tr{\left[ \bm{\phi}(\vect{x}_1), \ldots, \bm{\phi}(\vect{x}_n) \right]}$. Um
+die Berechnung zu vereinfachen, wird auch hier analog zur klassischen Hauptkomponentenanalyse die
+Zentrierung der Daten im Merkmalsraum angenommen. Damit vereinfacht sich die Berechnung der
+Kovarianzmatrix zu
 \begin{equation}
-	\mat{C} = \frac{1}{n} \tr{\bm{\phi}(\mat{X})} \bm{\phi}(\mat{X}) \, ,
+	\mat{C} = \frac{1}{n} \tr{\bm{\phi}(\mat{X})} \bm{\phi}(\mat{X}) \, .
 \end{equation}
-wobei $\bm{\phi}(\mat{X}) = \tr{\left[ \bm{\phi}(\vect{x}_1), \ldots, \bm{\phi}(\vect{x}_n) \right]}$ hier elementweise auf die Zeilen von $\mat{X}$ angewandt wird. Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt, ist diese Matrix aber ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
+Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt, ist diese Matrix aber ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
 \begin{align}
 	\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1}^n \label{eq:kPCA:KernelMatrix_A} \\
 	        & = \bm{\phi}(\mat{X}) \tr{\bm{\phi}(\mat{X})} \label{eq:kPCA:KernelMatrix_B}
 \end{align}
-definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertszerlegung der zentrierten Kernel Matrix\footnote{Wir
-	hatten in der klassischen Hauptkomponentenanalyse angenommen, dass die ursprünglichen Daten
-	zentriert sind. Analog wollen wir, dass die Daten im Merkmalsraum $\mathcal{H}$ zentriert sind.
-	Dies können wir implizit durch eine Transformation der Kernel-Matrix erreichen. Dieser Schritt ist
-	jedoch nur für eine Vereinfachung der Berechnungen (der Kovarianzmatrix) notwendig, nicht aber für
-	die Gültigkeit des Verfahrens. Die Zentrierung kann mittels
-	\begin{equation}
-		\widetilde{\mat{K}} = \mat{K} - \frac{1}{n} \ones \tr{\ones} \mat{K} - \frac{1}{n} \mat{K} \ones \tr{\ones} + \frac{1}{n^2} (\tr{\ones} \mat{K} \ones) \ones \tr{\ones}
-	\end{equation}
-	durchgeführt werden \parencite[131]{ShaweTaylor.2011}, wobei $\ones = \tr{(1, \ldots, 1)}$ der Vektor bestehend aus Einsen
-	ist.} liefert mit einer entsprechenden Skalierung die Eigenvektoren der Kovarianzmatrix $\mat{C}$.
-Konkret wird die zentrierte $n \times n$ Kernel Matrix in ihre Eigenvektoren $\vect{v_i}$ und
-Eigenwerte $\lambda_i$ mit $i = 1, \ldots, n$ zerlegt, womit über den Zusammenhang
+definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertszerlegung der zentrierten Kernel Matrix liefert mit
+einer entsprechenden Skalierung die Eigenvektoren der Kovarianzmatrix $\mat{C}$. Konkret wird dazu
+die $n \times n$ Kernel-Matrix in einem ersten Schritt mittels
+\begin{equation}
+	\label{eq:KernelCentering}
+	\widetilde{\mat{K}} = \mat{K} - \frac{1}{n} \ones \tr{\ones} \mat{K} - \frac{1}{n} \mat{K} \ones \tr{\ones} + \frac{1}{n^2} (\tr{\ones} \mat{K} \ones) \ones \tr{\ones}
+\end{equation}
+zentriert \parencite[131]{ShaweTaylor.2011}, wobei $\ones = \tr{(1, \ldots, 1)}$ der Vektor bestehend aus Einsen
+ist. Diese Transformation der Kernel-Matrix stellt die Annahme der zentrierten Daten im
+Merkmalsraum implizit sicher. Die zentrierte Kernel-Matrix $\widetilde{\mat{K}}$ wird dann im
+zweiten Schritt in ihre Eigenvektoren $\vect{v_i}$ und Eigenwerte $\lambda_i$ mit $i = 1, \ldots,
+	n$ zerlegt, womit über den Zusammenhang
 \begin{equation}
 	\label{eq:kPCA:ZusammenhangEigenvektoren}
 	\vect{a}_i = \frac{1}{\sqrt{\lambda_i}} \vect{v}_i
