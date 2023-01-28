@@ -59,16 +59,18 @@ sie herleitet, wird in den folgenden zwei Unterabschnitten genauer betrachtet.
 
 \subsubsection{Definition der Hauptkomponenten}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Definition}
-Als Ausgangsbasis wird ein $D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x}_1, \ldots, \rv{x}_D)}$ mit $\Exp[\rvect{x}] = \vect{0}$ angenommen und das Ziel ist es, eine $k$-dimensionale Repräsentation $\rvect{y} = \tr{(\rv{y_1},\ldots,\rv{y}_k)}$ zu erhalten. Idealerweise setzt man $k$ auf die intrinsische Dimension $d$ von $\rvect{x}$, hier soll jedoch nur der Fokus auf die allgemeine Dimensionsreduktion gelegt werden. Wir drücken also $\rvect{y}$ als eine Linearkombination des ursprünglichen hochdimensionalen Vektors $\rvect{x}$ wie folgt aus:
+Als Ausgangsbasis wird ein $D$-dimensionalen Zufallsvektor $\rvect{x} = \tr{(\rv{x}_1, \ldots, \rv{x}_D)}$ mit $\Exp[\rvect{x}] = \vect{0}$ angenommen und das Ziel ist es, eine $k$-dimensionale Repräsentation $\rvect{y} = \tr{(\rv{y_1},\ldots,\rv{y}_d)}$ zu erhalten. Wir drücken $\rvect{y}$ nun als eine Linearkombination des ursprünglichen hochdimensionalen Vektors $\rvect{x}$ wie folgt aus:
 \begin{equation}
 	\rv{y}_i = \tr{\vect{a}_i} \rvect{x} = a_{i1} \rv{x}_1 + \cdots + a_{iD} \rv{x}_D
-	\quad \text{mit } i = 1,\ldots,k \,
+	\quad \text{mit } i = 1,\ldots,d \,
 \end{equation}
-wobei $\vect{a}_i$ die \newterm{Koeffizienten} (auch: Ladungen) der $i$-ten Hauptkomponente sind \parencite[vgl.][2]{Jolliffe.2002}. Die Anzahl $k$ der Hauptkomponenten bestimmt den Grad der
-Dimensionsreduktion, kann jedoch beliebig zwischen $1 \leq k \leq D$ gewählt werden.\footnote{Der
-	Grenzfall $k = D$ wird oft für eine Anonymisierung des Datensatzes mit personenbezogenen Daten
-	verwendet. Beispielsweise kann so bei Finanztransaktionen der Datensatz mithilfe von PCA
-	vorverarbeitet (\textit{Preprocessing}) und erst dann veröffentlicht werden.}
+wobei $\vect{a}_i$ die \newterm{Koeffizienten} (auch: Ladungen) der $i$-ten Hauptkomponente sind \parencite[vgl.][2]{Jolliffe.2002}.
+
+% Die Anzahl $k$ der Hauptkomponenten bestimmt den Grad der
+% Dimensionsreduktion, kann jedoch beliebig zwischen $1 \leq k \leq D$ gewählt werden.\footnote{Der
+% 	Grenzfall $k = D$ wird oft für eine Anonymisierung des Datensatzes mit personenbezogenen Daten
+% 	verwendet. Beispielsweise kann so bei Finanztransaktionen der Datensatz mithilfe von PCA
+% 	vorverarbeitet (\textit{Preprocessing}) und erst dann veröffentlicht werden.}
 
 \subsubsection{Herleitung der Hauptkomponenten}
 \label{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}
@@ -81,14 +83,14 @@ wobei $\mat{\Sigma}$ die Kovarianzmatrix von $\rvect{x}$ ist. Dieses Maximierung
 \begin{equation}
 	\norm{ \vect{a}_1 }^2 = \tr{\vect{a}_1} \vect{a}_1 = 1
 \end{equation}
-zum nun \textit{restringierten} Maximierungsproblem hinzufügt, welches mithilfe des Lagrange-Ansatzes gelöst werden kann. Diese Bedingung führt dazu, dass wir eine orthogonale Transformation\unsure{Zitat hinzufügen oder mehr dazu sagen, ein satz reicht nicht} erhalten. Wie sich heraustellt, ist dieses Maximierungsproblem ein Eigenwertproblem und kann somit effizient gelöst werden \parencite[vgl.][4 -- 6]{Jolliffe.2002}\unsure{Vlt hier die Lagrange Gleichung aufstellen und selber
-	lösen, um zu sehen, dass man bei einem Eigenwertproblem landet}. Man erhält somit die Koeffizienten
-der ersten Hauptkomponente $\vect{a}_1$, welche ein Eigenvektor von $\mat{\Sigma}$ mit zugehörigem
+zum nun \textit{restringierten} Maximierungsproblem hinzufügt, welches mithilfe des Lagrange-Ansatzes gelöst werden kann. Wie sich heraustellt, ist dieses Maximierungsproblem ein Eigenwertproblem und kann somit effizient gelöst werden \parencite[vgl.][4 -- 6]{Jolliffe.2002}\unsure{Vlt hier die Lagrange Gleichung aufstellen und selber
+	lösen, um zu sehen, dass man bei einem Eigenwertproblem landet}. Man erhält die Koeffizienten der
+ersten Hauptkomponente $\vect{a}_1$, welche ein Eigenvektor von $\mat{\Sigma}$ mit zugehörigem
 Eigenwert
 \begin{equation}
 	\lambda_1 = \Var(\tr{\vect{a}_1} \rvect{x})
 \end{equation}
-sind. Man beachte, dass dies gleichzeitig die Zielfunktion unseres Optimierungsproblems (\eqref{eq:PCA-Optimierungsproblem}) ist. Das bedeutet, dass die Koeffizienten der ersten Hauptkomponente dem Eigenvektor mit dem größten zugehörigen Eigenwert entspricht.
+sind. Man beachte, dass dies gleichzeitig die Zielfunktion unseres Optimierungsproblems (\eqref{eq:PCA-Optimierungsproblem}) ist. Das bedeutet, dass die Koeffizienten der ersten Hauptkomponente dem Eigenvektor mit dem größten zugehörigen Eigenwert entspricht.\unsure{das ist etwas verwirrend beschrieben}
 
 Um nun die zweite Hauptkomponente zu erhalten, wird wieder die Varianz mit der
 Einheitsvektor-Nebenbedingung $\norm{\vect{a}_2}$ = 1 maximiert. Zusätzlich muss jedoch gelten,
@@ -105,8 +107,13 @@ ausdrücken, wobei $\mat{A} = [\vect{a}_1,\ldots,\vect{a}_k] \in \real^{D \times
 
 \subsubsection{Erweiterungen}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Erweiterungen}
-Trotz der großen Beliebtheit der Principal Component Analysis hat diese Methode natürlich auch ihre Nachteile, weswegen zahlreiche Erweiterungen wie zum Beispiel \ldots\addref entwickelt wurden.
-Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenvektorbasis der Kovarianzmatrix inhärent linear ist. Die Principal Component Analysis ist also in dieser klassischen Form nicht in der Lage, eine nichtlineare Mannigfaltigkeit in den Daten zu erkennen. Deswegen wurde unter anderem eine Generalisierung von PCA von \textcite{Scholkopf.1997} entwickelt, die sogenannte \newterm{Kernel Principal Component Analysis} (Kernel PCA). Diese Methode wird in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA} genauer behandelt.
+
+Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenvektorbasis der
+Kovarianzmatrix inhärent linear ist. Die Principal Component Analysis ist also in dieser
+klassischen Form nicht in der Lage, eine nichtlineare Mannigfaltigkeit in den Daten zu erkennen.
+Deswegen wurde unter anderem eine Generalisierung von PCA von \textcite{Scholkopf.1997} entwickelt,
+die sogenannte \newterm{Kernel Principal Component Analysis} (Kernel PCA). Diese Methode wird in
+\subsecref{ch:MethodenDerDimRed:statistisch:kPCA} genauer behandelt.
 
 %% ==============================
 \subsection{Kernel Principal Component Analysis}
@@ -134,8 +141,8 @@ erhöht wird. Motiviert wird es dadurch, dass die Daten in $\mathcal{X}$ einen
 linear und damit für lineare Algorithmen wie die Principal Component Analysis erkennbar ist \parencite[vgl.][26]{ShaweTaylor.2011}.
 
 Der entscheidende Punkt ist jedoch, dass man die Abbildung $\bm{\phi}$ nicht explizit berechnet,
-sondern mithilfe einer Kernel-Funktion $\kappa: \mathcal{X} \times \mathcal{X} \rightarrow \real$
-implizit gegeben hat \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Der Kernel Trick ist immer dann anwendbar,
+sondern mithilfe eines sogenannten \newterm{Kernels} $\kappa: \mathcal{X} \times \mathcal{X}
+	\rightarrow \real$ implizit gegeben hat \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Der Kernel Trick ist immer dann anwendbar,
 wenn der Algorithmus so formuliert werden kann, dass $\bm{\phi}$ ausschließlich als Skalarprodukt
 vorkommt. Im Folgenden wird die Vorgehensweise der Kernel PCA kurz erläutert. Allerdings wird für
 eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden auf
@@ -179,12 +186,12 @@ Kovarianzmatrix zu
 \begin{equation}
 	\mat{C} = \frac{1}{n} \tr{\bm{\phi}(\mat{X})} \bm{\phi}(\mat{X}) \, .
 \end{equation}
-Um nun die Principal Component Analysis durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt, ist diese Matrix aber ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
+Um nun die Principal Component Analysis durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt, ist diese Matrix aber ähnlich zur Kernel-Matrix $\mat{K}$, welche über den Kernel $\kappa$ als
 \begin{align}
 	\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1}^n \label{eq:kPCA:KernelMatrix_A} \\
 	        & = \bm{\phi}(\mat{X}) \tr{\bm{\phi}(\mat{X})} \label{eq:kPCA:KernelMatrix_B}
 \end{align}
-definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertszerlegung der zentrierten Kernel Matrix liefert mit
+definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertszerlegung der zentrierten Kernel-Matrix liefert mit
 einer entsprechenden Skalierung die Eigenvektoren der Kovarianzmatrix $\mat{C}$. Konkret wird dazu
 die $n \times n$ Kernel-Matrix in einem ersten Schritt mittels
 \begin{equation}
@@ -216,14 +223,14 @@ oft sensitiv gegenüber seiner Parameter ist. Im Falle eines Gaußschen Kernels 
 $\sigma$ gewählt werden, der die Bandbreite des Kernels bestimmt. Die Performance auf einem
 Datensatz hängt davon ab, wie passend diese Bandbreite gewählt wurde. Allgemein umgeht man das
 Problem der manuellen Auswahl eines Kernels und seiner Parameter für Kernel-Methoden mittels einer
-Gittersuche und kombiniert dies mit Kreuzvalidierung über. Beispielsweise wird ein
-Qualitätskriterium festgelegt und die Methode mit einer vorab definierten Auswahl an Werten der
-Hyperparameter auf einer Teilmenge des Datensatzes trainiert und mit einer anderen Teilmenge
-evaluiert. Die Parameter der Methode, die hinsichtlich des Qualitätskriteriums am besten
-abgeschnitten hat, werden dann für das finale Modell übernommen und auf dem vollen
-Trainingsdatensatz trainiert. Dies funktioniert für Klassifikatoren und Regressoren wie z.B. die
-Support Vector Machine gut, da die Wahl der Qualitätskriterien nicht problematisch ist. Für die
-Dimensionsreduktion ist die Wahl des Qualitätskriteriums nicht trivial, wie wir später in
+Gittersuche und kombiniert dies mit Kreuzvalidierung. Beispielsweise wird ein Qualitätskriterium
+festgelegt und die Methode mit einer vorab definierten Auswahl an Werten der Hyperparameter auf
+einer Teilmenge des Datensatzes trainiert und mit einer anderen Teilmenge evaluiert. Die Parameter
+der Methode, die hinsichtlich des Qualitätskriteriums am besten abgeschnitten hat, werden dann für
+das finale Modell übernommen und auf dem vollen Trainingsdatensatz trainiert. Dies funktioniert für
+Klassifikatoren und Regressoren wie z.B. die Support Vector Machine gut, da die Wahl der
+Qualitätskriterien nicht problematisch ist. Für die Dimensionsreduktion ist die Wahl des
+Qualitätskriteriums nicht trivial, wie wir später in
 \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} sehen werden. Eine Möglichkeit
 wäre die quadratische Abweichung zwischen der ursprünglichen Repräsentation eines Punktes und der
 Rekonstruktion aus seiner niedrigdimensionalen Repräsentation. Die Kernel PCA stellt allerdings
@@ -235,7 +242,7 @@ verzichtet und stattdessen Qualitätskriterien der Dimensionsreduktion für eine
 verwendet. Das Vorgehen wird später in \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
 genauer erläutert.
 
-Ein weiterer Nachteil der Kernel Principal Component Analysis ist, dass die Größe der Kernel Matrix
+Ein weiterer Nachteil der Kernel Principal Component Analysis ist, dass die Größe der Kernel-Matrix
 quadratisch in der Stichprobengröße $n$ ansteigt. Dadurch kann diese Matrix auf großen Datensätzen
 möglicherweise nicht vollständig im Hauptspeicher zwischengespeichert werden. Die ohnehin teure
 Operation der Eigenwertszerlegung einer Matrix wird dadurch zusätzlich zum Problem. Für große
@@ -245,7 +252,7 @@ Datensätze wurden daher inkrementelle Versionen der Kernel Principal Component 
 \subsection{Locally Linear Embedding}
 \label{ch:MethodenDerDimRed:statistisch:LLE}
 \nomenclature[Z]{LLE}{Locally Linear Embedding}
-Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt lokale Eigenschaften der Daten aus und bezieht damit gleichzeitig globale Eigenschaften mit ein. Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die optimale lineare Rekonstruktion durch die Nachbarn eines Datenpunktes bestimmt. Im zweiten Schritt werden dann geometrische Eigenschaften dieser Rekonstruktion ausgenutzt, durch die die niedrigdimensionale Repräsentation abgeleitet werden kann.
+Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt lokale Eigenschaften der Daten aus und bezieht damit gleichzeitig globale Eigenschaften mit ein.\rewrite{erklären wie es global eigenschaften miteinbezieht} Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die optimale lineare Rekonstruktion durch die Nachbarn eines Datenpunktes bestimmt. Im zweiten Schritt werden dann geometrische Eigenschaften dieser Rekonstruktion ausgenutzt, durch die die niedrigdimensionale Repräsentation abgeleitet werden kann.
 
 \subsubsection{Lineare Rekonstruktion durch die Nachbarn}
 \label{ch:MethodenDerDimRed:statistisch:LLE:LineareRekonstruktion}
@@ -260,7 +267,7 @@ gefunden werden. Die Minimierung erfolgt unter den folgenden zwei Nebenbedingung
 		\times n}$ zu Eins summieren
 \begin{equation}
 	\label{eq:LLE:ErsteNebenbedingung}
-	\sum_{i = 1}^nW_{ij} = 1 \, , \quad \forall i = 1, \ldots, n
+	\sum_{j = 1}^nW_{ij} = 1 \, , \quad \forall i = 1, \ldots, n
 \end{equation}
 und zweitens sollen Datenpunkte, die keine Nachbarn sind, keinen Einfluss auf die Rekonstruktion haben, das heißt
 \begin{equation}
@@ -290,7 +297,7 @@ Wurden die optimalen Rekonstruktionsgewichte $W_{ij}$, die die Zielfunktion aus
 \begin{equation}
 	\min_{\mat{Y}}\, \Spur(\tr{\mat{Y}} \mat{M} \mat{Y}) \, ,
 \end{equation}
-wobei $\mat{M} = \tr{(\identity_n - \mat{W})} (\identity_n - \mat{W})$ und $\Spur(\,\cdot\,)$ die Summe der Diagonalelemente einer Matrix bezeichnet. Jedoch ist dieses Optimierungsproblem unterbestimmt, weswegen man für $\mat{Y}$ eine Einheits-Kovarianzmatrix und einen spaltenweisen Mittelwert von Null fordert \parencite[11]{Saul.2000}. Diese Restriktionen sind erlaubt, da die Zielfunktion in Gleichung
+wobei $\mat{M} = \tr{(\identity_n - \mat{W})} (\identity_n - \mat{W})$ und $\Spur(\,\cdot\,)$ die Summe der Diagonalelemente einer Matrix bezeichnet. Jedoch ist dieses Optimierungsproblem unterbestimmt, weswegen man für $\mat{Y}$ eine Einheits-Kovarianzmatrix und einen spaltenweisen Mittelwert von Null fordert \parencite[11]{Saul.2000}. Diese Restriktionen sind erlaubt, da die Zielfunktion in
 \eqref{eq:LLE:ZielfunktionY} invariant gegenüber Rotationen und Skalierungen ist \parencite[2326]{Roweis.2000}.
 
 Wie \textcite[3 -- 4]{Ghojogh.2020} zeigen, wird das Problem über die Eigenwertzerlegung der
@@ -312,7 +319,7 @@ Nachdem in \secref{ch:MethodenDerDimRed:statistisch} einige statistischen Method
 Dimensionsreduktion näher betrachtet wurden, werden nun zwei ausgewählte Machine Learning Methoden,
 nämlich der \newterm{Autoencoder} in seiner klassischen Form in
 \subsecref{ch:MethodenDerDimRed:ML:AE} und eine Modifizierung in Form des \newterm{Contractive
-	Autoencoder} (CAE) in\subsecref{ch:MethodenDerDimRed:ML:CAE} vorgestellt.
+	Autoencoder} (CAE) in \subsecref{ch:MethodenDerDimRed:ML:CAE} vorgestellt.
 
 \subsection{Autoencoder}
 \label{ch:MethodenDerDimRed:ML:AE}
@@ -323,18 +330,18 @@ den Trainingsdaten lernt. Um das sinnvoll zu erreichen, besitzt der Autoencoder 
 \figref{fig:5-layer-Autoencoder} gezeigte symmetrische Architektur. \rewrite{hier eine allgemeinere
 	Darstellung wählen}
 \begin{figure}[ht]
-	\label{fig:5-layer-Autoencoder}
 	\begin{center}
 		\includegraphics[width=\textwidth]{5_layer_AE.pdf}
 		\caption[Schematische Abbildung der Architektur eines Autoencoders]{Gezeigt ist eine schematische Abbildung der Architektur eines (\textit{vollvernetzten}) Autoencoders. Dieser Autoencoder besitzt fünf Schichten, wobei das \textit{Bottleneck} dreidimensional und die \textit{Input}-Dimension zwölf ist. Das bedeutet, dass ein 12-dimensionaler Inputvektor in der Mitte des Autoencoders durch einen dreidimensionalen Vektor kodiert und anschließend wieder dekodiert werden muss, um zu einer möglichst verlustfreien Rekonstruktion zu gelangen. Eigene Darstellung, erstellt mittels \href{https://alexlenail.me/NN-SVG/}{NN-SVG}}
+		\label{fig:5-layer-Autoencoder}
 	\end{center}
 \end{figure}
 Diese besteht in der
 klassischen Form aus einer ungeraden Anzahl an Schichten mit einer \newterm{Bottleneck}-Schicht in
-der Mitte \parencite[2]{Bank.2020}. Diese Schicht wird als \textit{Bottleneck} bezeichnet, da sie nur $d < D$
-besteht und damit die \enquote{kleinste} Stelle im Netzwerk darstellt, durch die der Inputvektor
-kodiert werden muss. In diesem Fall wird der Autoencoder als \newterm{unterbestimmt} (engl.
-\textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}.\footnote{Es gibt demnach auch überbestimmte Autoencoder mit $k > D$
+der Mitte \parencite[2]{Bank.2020}. Diese Schicht wird als \textit{Bottleneck} bezeichnet, da sie nur aus $d < D$
+Neuronen besteht und damit die \enquote{kleinste} Stelle im Netzwerk darstellt, durch die der
+Inputvektor kodiert werden muss. In diesem Fall wird der Autoencoder als \newterm{unterbestimmt}
+(engl. \textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}.\footnote{Es gibt demnach auch überbestimmte Autoencoder mit $k > D$
 	Neuronen in der mittleren Schicht. Diese Variante reduziert die Dimension nicht, sondern erhöht sie \parencite[504]{Goodfellow.2016}.} Damit erzielt die Bottleneck-Schicht die gewünschte
 Dimensionsreduktion des Inputvektors, da der Autoencoder lernen muss, den Inputvektor aus dieser
 niedrigdimensionalen Repräsentation möglichst verlustfrei zu rekonstruieren \parencites[502]{Goodfellow.2016}[2]{Bank.2020}. Die in \figref{fig:5-layer-Autoencoder} gezeigte
@@ -382,10 +389,8 @@ Grund muss ein Autoencoder oftmals regularisiert werden, worauf im Folgenden in
 Um eine sinnvolle Repräsentation $\rvect{y}$ zu erhalten, muss der Autoencoder oftmals
 regularisiert, das heißt eingeschränkt, werden. Ein erstes Beispiel hierfür ist der in
 \figref{fig:5-layer-Autoencoder} gezeigte unterbestimmte Autoencoder, mit dem eine $d$-dimensionale
-Repräsentation in der Mitte forciert wird. Besitzt der Autoencoder jedoch eine zu große Kapazität,
-das heißt es werden zu viele Schichten eingesetzt, dann kann der Autoencoder trotz des Bottlenecks
-eine uninformative niedrigdimensionale Repräsentation lernen, auch wenn das Bottleneck nur
-eindimensional ist. Neben dieser \textit{impliziten} Regularisierung, gibt es deswegen noch einige
+Repräsentation in der Mitte forciert wird. Besitzt der Autoencoder jedoch eine zu große Kapazität, kann der Autoencoder trotz des Bottlenecks
+eine uninformative niedrigdimensionale Repräsentation lernen. Neben dieser \textit{impliziten} Regularisierung, gibt es deswegen noch einige
 weitere \textit{explizite} Regularisierungsmethoden, die zusätzlich zum Rekonstruktionfehler einen
 Bestrafungsterm $\Omega$ zur Zielfunktion $\mathcal{J}$ hinzufügen. Die Zielfunktion lautet dann
 \begin{equation}
@@ -405,7 +410,7 @@ Die vielen Freiheitsgrade in der Wahl der Architektur machen die Autoencoder fle
 zugleich aber auch ein Nachteil dieser Methode. Im Folgenden werden die zu treffenden
 Entscheidungen bei der Wahl der Architektur eines Autoencoders kurz erläutert.
 
-Erstens muss zwischen vollvernetzten und faltende (engl. \textit{Convolutional}) Schichten
+Erstens muss zwischen vollvernetzten und faltenden (engl. \textit{Convolutional}) Schichten
 entschieden werden. Letztere können eingesetzt werden, wenn der Input des Autoencoders eine
 gitterartige Topologie, wie z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}.\footnote{In der Mathematik ist eine diskrete Faltung zweier
 	Funktionen $v$ und $u$ definiert als
@@ -463,7 +468,7 @@ und die \textit{Rectified Linear Units}
 	\operatorname{ReLU}(x) = \max\{0, x\} \, ,
 \end{equation}
 wobei $\exp(\, \cdot \,)$ die Exponentialfunktion darstellt \parencites[191 -- 195]{Goodfellow.2016}[4]{Charte.2018}.
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics{activations.pdf}
 	\caption[Drei weitverbreitete Aktivierungsfunktionen.]{Drei weitverbreitete Aktivierungsfunktionen. \captiona Die Sigmoid-Funktion \captionb der Tangens Hyperbolicus und \captionc die Rectified Linear Units. Eigene Darstellung (angelehnt an \textcite[4]{Charte.2018})}
@@ -499,11 +504,10 @@ Der Contractive Autoencoder \parencite{Rifai.2011} stellt eine Variante des eben
 (\subsecref{ch:MethodenDerDimRed:ML:AE}) dar. Ähnlich wie der Sparse Autoencoder wird die
 Zielfunktion des Autoencoders lediglich um einen zusätzlichen Regularisierungsterm erweitert.
 Dieser zusätzliche Term in der Zielfunktion führt zu einer kontrahierenden Eigenschaft: Ähnliche
-Punkte werden auf eine kleinere Nachbarschaften auf der Mannigfaltigkeit abgebildet und damit
+Punkte werden auf eine kleinere Nachbarschaft auf der Mannigfaltigkeit abgebildet und damit
 \enquote{zusammengezogen}. Dies gilt aber nur \textit{lokal}, das heißt unähnliche Punkte können
-immer noch weit weg auf der Mannigfaltigkeit liegen \parencite[521]{Goodfellow.2016}. Dazu wird wieder in \subsecref{ch:MethodenDerDimRed:CAE:Grundidee}
-auf die Grundidee eingegangen und dann in \subsecref{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm}
-die konkrete Berechnung des Regularisierungsterms vorgestellt.
+immer noch weit weg auf der Mannigfaltigkeit liegen \parencite[521]{Goodfellow.2016}. Dazu wird wieder in einem ersten Schritt die Grundidee erläuert und
+im zweiten Schritt die konkrete Berechnung des Regularisierungsterms vorgestellt.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:CAE:Grundidee}
@@ -521,7 +525,7 @@ Der Regularisierungsterm ist, wie wir in \subsecref{ch:MethodenDerDimRed:ML:CAE:
 
 \subsubsection{Berechnung des Regularisierungsterms}
 \label{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm}
-Der Regularisierungsterm ist wie eben erwähnt für einen Autoencoder mit nur einer versteckten Schicht leicht zu berechen. Der Encoder
+Der Regularisierungsterm ist wie eben erwähnt für einen Autoencoder mit nur einer versteckten Schicht leicht zu berechnen. Der Encoder
 kann in diesem Fall als
 \begin{equation}
 	f(\vect{x}) = s \left( \mat{W} \vect{x} + \vect{b}_1 \right) = \vect{y}
@@ -530,7 +534,7 @@ und der Decoder als
 \begin{equation}
 	g(\vect{y}) = s \left( \mat{\widetilde{W}} \vect{y} + \vect{b}_2 \right) = \estNormal{\vect{x}}
 \end{equation}
-formuliert werden, wobei $\mat{W} \in \real^{d \times D}$ und $\mat{\widetilde{W}} \in \real^{D \times d}$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Dies entspricht jeweils einer affinen Transformation gefolgt von einer (nichtlinearen) Aktivierungsfunktion. Gilt außerdem, dass die Gewichte des Encoders und Decoders verbunden sind, das heißt $\mat{\widetilde{W}} = \tr{\mat{W}}$ und wird für die Aktivierungfunkion $s$ die Sigmoid-Funktion (\eqref{eq:Sigmoid})
+formuliert werden, wobei $\mat{W} \in \real^{d \times D}$ und $\mat{\widetilde{W}} \in \real^{D \times d}$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Dies entspricht jeweils einer affinen Transformation gefolgt von einer (nichtlinearen) Aktivierungsfunktion. Gilt außerdem, dass die Gewichte des Encoders und Decoders verbunden sind, das heißt $\mat{\widetilde{W}} = \tr{\mat{W}}$ und wird für die Aktivierungsfunkion $s$ die Sigmoid-Funktion (\eqref{eq:Sigmoid})
 verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
 \begin{equation}
 	\label{eq:CAE-loss-simple}
