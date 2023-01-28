@@ -11,9 +11,9 @@ natürlichen Datensätzen verglichen. Dazu wird in \secref{ch:Vergleich:sec:Meth
 Methodik des Vergleichs eingegangen, indem die Schätzung der intrinsischen Dimension und die
 eingesetzten Qualitätskriterien erläutert werden. Außerdem werden in
 \secref{ch:Vergleich:sec:VerwendeteDatensaetze} die verwendeten Datensätze und in
-\secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails} die Parameterwahl der Methoden und
-insbesondere die Architektur der Autoencoder vorgestellt. Letztlich werden in
-\secref{ch:Vergleich:sec:Resultate} die Resultate des empirischen Vergleichs diskutiert.
+\secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails} die Parameterwahl der Methoden vorgestellt.
+Letztlich werden in \secref{ch:Vergleich:sec:Resultate} die Resultate des empirischen Vergleichs
+diskutiert.
 
 \section{Methodik}
 \label{ch:Vergleich:sec:Methodik}
@@ -28,8 +28,7 @@ Repräsentation zu erreichen. Die Qualitätskriterien werden in
 Vergleich werden zwei künstliche und fünf natürliche Datensätze verwendet, die in
 \secref{ch:Vergleich:sec:VerwendeteDatensaetze} genauer vorgestellt werden. Insgesamt soll damit
 ein Überblick über die Stärken und Schwächen der statistischen und der Machine Learning Methoden
-geschafft werden. Wie bereits erwähnt, besteht zwischen Autoencodern und der Principal Component
-Analysis eine enge Verbindung. Neben dem Vergleich der zwei Gruppen wird daher in
+verschafft werden. Neben dem Vergleich der zwei Gruppen wird in
 \secref{ch:Vergleich:sec:Resultate:PCA_AE} der Zusammenhang zwischen der Principal Component
 Analysis und Autoencodern genauer untersucht. Der Vergleich kann mittels der im
 GitHub-Repository\footnote{\url{www.github.com/MoritzM00/drcomp}} definierten Konfigurationen der
@@ -46,7 +45,7 @@ mithilfe von Rängen zu quantifizieren.
 Im ausführlichen Benchmark von \textcite{vanderMaaten.2009} wird auf den Generalisierungsfehler
 eines 1-Nächste-Nachbar Klassifikators, sowie auf die zwei Kennzahlen Vertrauenswürdigkeit (engl.
 \textit{Trustworthiness}) und Kontinuität (engl. \textit{Continuity}) \parencites{Venna.2001}{Venna.2006} gesetzt. Die Vertrauenswürdigkeit und die Kontinuität sind
-rang-basierte Qualitätskriterien und werden auch in diesem Vergleich eingesetzt. Daneben gibt es
+rangbasierte Qualitätskriterien und werden auch in diesem Vergleich eingesetzt. Daneben gibt es
 noch viele weitere rangbasierte Qualitätskriterien, welche einheitlich durch die sogenannte
 \newterm{Co-Ranking Matrix} \parencite[1432]{Lee.2009} ausgedrückt werden können.\rewrite{Co Ranking kurz erklären} Ebenso können
 die Vertrauenswürdigkeit und Kontinuität über die Co-Ranking Matrix berechnet werden \parencite[1433]{Lee.2009}. Nachfolgend werden die in dieser Arbeit verwendeten Kriterien genauer
@@ -77,7 +76,7 @@ $\set{U}_i(K)$ und $\set{V}_i(K)$ wie folgt:
 	\set{U}_i(K) =  \left\{ j \in \N \mid j \notin \set{M}_i(K) \land j \in \widetilde{\set{M}}_i(K) \right\} \, , \\
 	\set{V}_i(K) =  \left\{ j \in \N \mid j \in \set{M}_i(K) \land j \notin \widetilde{\set{M}}_i(K) \right\} \, .
 \end{gather}
-Diese beiden Mengen bilden lediglich die zwei intuitiv besprochenen Fälle im vorherigen Absatz mathematisch ab. Hierbei entspricht $\set{U}_i(K)$ dem ersten und $\set{V}_i(K)$ dem zweiten Fall.
+Diese beiden Mengen\unsure{die Definitionen nur im Text?} bilden lediglich die zwei intuitiv besprochenen Fälle im vorherigen Absatz mathematisch ab. Hierbei entspricht $\set{U}_i(K)$ dem ersten und $\set{V}_i(K)$ dem zweiten Fall.
 Damit kann die Vertrauenswürdigkeit $T(K)$ als
 \begin{equation}
 	T(K) = 1 - \frac{2}{nK(2n - 3K - 1)} \sum_{i = 1}^{n}\sum_{j \in \set{U}_i(K) } \left( r­_{\vect{y}}(i, j) - K \right)
@@ -162,24 +161,17 @@ Zu den künstlichen Datensätzen gehört die weitverbreitete \textit{Swiss Roll}
 	\begin{center}
 		\includegraphics{artificial_datasets.pdf}
 	\end{center}
-	\caption[Künstliche Datensätze]{\figleft Die Swiss Roll. Die intrinsische Dimension beträgt zwei, da die Daten auf einer \enquote{eingerollten Ebene} liegen. Die Dimensionsreduktionsmethoden müssen die Swiss Roll \enquote{entfalten}, um eine zweidimensionale Repräsentation zu erhalten. \figright Der Twin Peaks Datensatz. Dieser besteht aus mehreren spitzen Bergen (\textit{Peaks}), wobei je zwei nach oben und unten zeigen. Auch dieser Datensatz hat eine intrinsische Dimension von zwei. Intuitiv gesehen kann man sich lokal nur nach rechts oder links auf der Mannigfaltigkeit bewegen, d.h. die Twin Peaks sind homöomorph zum $\real^2$.}
+	\caption[Künstliche Datensätze]{\figleft Die Swiss Roll. Die intrinsische Dimension beträgt zwei, da die Daten auf einer \enquote{eingerollten Ebene} liegen. Die Dimensionsreduktionsmethoden müssen die Swiss Roll \enquote{entfalten}, um eine zweidimensionale Repräsentation zu erhalten. \figright Der Twin Peaks Datensatz. Dieser besteht aus vier spitzen Bergen (\textit{Peaks}), wobei je zwei nach oben und unten zeigen. Auch dieser Datensatz hat eine intrinsische Dimension von zwei. Intuitiv gesehen kann man sich lokal nur nach rechts oder links auf der Mannigfaltigkeit bewegen, d.h. die Twin Peaks sind homöomorph zum $\real^2$. Beide 2-Mannigfaltigkeiten sind glatt und zusammenhängend.}
 	\label{fig:ArtificialDatasets}
 \end{figure}
 die in \figref{fig:ArtificialDatasets} dargestellt sind.
 Beide künstlichen Datensätze bestehen aus 5 000 Datenpunkten und haben eine extrinsische Dimension von drei und eine intrinsische
-Dimension von zwei. Dies erlaubt eine visuelle Betrachtung der Datensätze und der gefundenen
-latenten Räume, schränkt aber gleichzeitig die Architektur eines (unterbestimmten) Autoencoders
-ein. Künstliche Datensätze sind aber nicht zwangsweise aussagekräftig für die Performance auf echten Datensätzen, weswegen zusätzlich fünf natürliche Datensätze hinzugezogen werden.
+Dimension von zwei. Die Swiss Roll muss von den Dimensionsreduktionsmethoden \enquote{entfaltet} werden, da die Datenpunkte auf einer eingerollten Ebene liegen. Somit könnte die Swiss Roll in einem zweidimensionalen Raum dargestellt werden. Der Twin Peaks-Datensatz besteht aus vier spitzen Bergen, wobei je zwei nach oben und unten zeigen. Die intrinsische Dimension ist auch hier zwei, aber die Dimensionsreduktionsmethoden müssen die Berge sozusagen \enquote{plattdrücken}, um eine zweidimensionale Repräsentation zu erhalten. Der Vorteil einer Evaluierung auf künstlichen Datensätzen ist die visuelle Betrachtung der Datensätze und der gefundenen
+latenten Räume der Methoden. Es kann also visuell überprüft werden, ob die Dimensionsreduktionsmethoden eine sinnvolle niedrigdimensionale Repräsentation lernen. Theoretisch könnte dies auch auf natürlichen Datensätzen durchgeführt werden, allerdings ist hier die intrinsische Dimension in der Regel weit über zwei. Bei einer Reduktion auf zwei oder drei Dimensionen würden also zwangsweise Strukturen in den Daten verloren gehen. Künstliche Datensätze sind allerdings nicht zwangsweise aussagekräftig für die Performance auf echten Datensätzen, da diese komplexere Strukturen wie z.B. mehrere nicht-verbundene Untermannigfaltigkeiten aufweisen können. Deswegen wurden zusätzlich fünf natürliche Datensätze zur Evaluierung der Methoden hinzugezogen.
 
 \subsection{Natürliche Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze:natuerlich}
-Natürliche
-Datensätze weisen laut empirischen Ergebnissen \addref oft komplexe nichtlineare Zusammenhänge
-auf und sind daher für die Dimensionsreduktion anspruchsvoller als kleine, künstlich generierte
-Datensätze. Der Nachteil besteht darin, dass die intrinsische Dimension in der Regel deutlich über
-zwei liegt und daher der latente Raum nicht visualisiert werden kann. Nichtsdestotrotz liefern die
-Qualitätskriterien hinreichende gute Indizien für die Performance der Methoden. Bei den natürlichen
-Datensätzen wurden größtenteils Bilddatensätze, aber auch ein Datensatz mit Genausprägungen ausgewählt, da diese eine
+Im Folgenden werden die im Vergleich eingesetzten natürlichen Datensätze vorgestellt. Es wurden überwiegend Bilddatensätze, aber auch ein Datensatz mit Genausprägungen ausgewählt, da diese eine
 hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
 Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Faces}-Datensatz
 \footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Fashion MNIST}-Datensatz \parencite{Xiao.8252017}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der
@@ -303,14 +295,14 @@ ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
 \section{Resultate}
 \label{ch:Vergleich:sec:Resultate}
 
-In diesem Abschnitt werden die Resultate des empirischen Vergleichs vorgestellt. Dazu werden die
-Werte der verschiedenen Qualitätskriterien auf den künstlichen und natürlichen Datensätzen in
-Abhängigkeit der Nachbarschaftsgröße $\Kqk$ abgebildet. Die verschiedenen Methoden wurden mit den
-im vorhergehenden \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails} erläuterten Parametern
-auf den künstlichen und natürlichen Datensätzen trainiert und hinsichtlich der in
+In diesem Abschnitt werden die Resultate des empirischen Vergleichs vorgestellt. Die verschiedenen
+Methoden wurden mit den im vorhergehenden \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
+erläuterten Parametern auf den künstlichen und natürlichen Datensätzen trainiert\footnote{Die
+	einzelnen Durchläufe wurden mittels \textit{Weights \& Biases} aufgezeichnet und sind im
+	\textit{drcomp}-Projekt zu finden
+	(\url{https://wandb.ai/moritzm00/drcomp?workspace=user-moritzm00}).} und hinsichtlich der in
 \secref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} vorgestellten Qualitätskriterien für
-eine Nachbarschaftsgröße von $1 \leq \Kqk \leq 100$ evaluiert. Einige der Abbildungen für die
-Qualitätskriterien sind im Appendix \ref{ch:Appendix:Qualitaetskriterien} zu finden. In
+eine Nachbarschaftsgröße von $1 \leq \Kqk \leq 100$ evaluiert. In
 \secref{ch:Vergleich:sec:Resultate:kuenstlich} werden die Ergebnisse auf den künstlichen
 Datensätzen und in \secref{ch:Vergleich:sec:Resultate:natuerlich} die Ergebnisse auf den
 natürlichen Datensätzen diskutiert. Letztlich wird in \secref{ch:Vergleich:sec:Resultate:PCA_AE}
@@ -326,7 +318,7 @@ Zuerst werden die Resultate auf den beiden künstlichen Datensätzen diskutiert.
 	\begin{center}
 		\includegraphics{SwissRoll_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für die Swiss Roll]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab, gefolgt vom klassischen Autoencoder. Die restlichen Methoden fallen insbesondere hinsichtlich der Vertrauenswürdigkeit und des LCMC nach unten ab. Der Autoencoder zeigt hier den Vorteil durch die Flexibilität in der Architektur gegenüber der linearen Principal Component Analysis, welche mehr Schwierigkeiten mit dieser nichtlineare Mannigfaltigkeit hat. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für die Swiss Roll]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab, gefolgt vom klassischen Autoencoder. Die restlichen Methoden fallen insbesondere hinsichtlich der Vertrauenswürdigkeit und des LCMC nach unten ab. Der Autoencoder zeigt hier den Vorteil durch die Flexibilität in der Architektur gegenüber der linearen Principal Component Analysis, welche mehr Schwierigkeiten mit dieser nichtlinearen Mannigfaltigkeit hat. (Eigene Darstellung)}
 	\label{fig:SwissRollMetrics}
 \end{figure}
 Beide Abbildungen zeigen ein ähnliches Ergebnis: Locally Linear Embedding kann mit der lokalen Erhaltung der Struktur hohe Werte auf allen drei Qualitätskriterien erzielen. Insbesondere hinsichtlich des LCMC kann sich LLE deutlich nach oben absetzen.
@@ -346,7 +338,7 @@ diesen Datensätzen weit über zwei liegt. Als Illustration wurden in
 	\label{fig:SwissRollEmbeddings}
 \end{figure}
 die latenten Repräsentationen $\mat{Y} \in \real^{n \times 2}$ durch Anwendung der fünf Methoden auf den Swiss Roll-Datensatz in einem Scatter-Plot dargestellt. Dasselbe Vorgehen wurde auch auf dem Twin Peaks-Datensatz durchgeführt und ist in
-\figref{fig:TwinPeaksEmbeddings} zu finden. Locally Linear Embedding ist als einzige Methode in der Lage, die Swiss Roll zu \enquote{entfalten}. Dies bestätigt die hohe Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion durch Locally Linear Embedding und die niedrigeren Werte der restlichen Methoden (siehe \figref{fig:SwissRollMetrics}). Die niedrigere Vertrauenswürdigkeit hat insbesondere für die Visualisierung eine große Bedeutung, da dies anzeigt, dass Punkte in der latenten Repräsentation Nachbarn werden, obwohl sie es ursprünglich nicht waren.
+\figref{fig:TwinPeaksEmbeddings} zu finden. Locally Linear Embedding ist als einzige Methode in der Lage, die Swiss Roll zu \enquote{entfalten}. Dies bestätigt die hohe Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion durch Locally Linear Embedding und die niedrigeren Werte der restlichen Methoden (siehe \figref{fig:SwissRollMetrics}). Die niedrigere Vertrauenswürdigkeit hat insbesondere für die Visualisierung eine große Bedeutung, da dies anzeigt, dass Punkte in der latenten Repräsentation Nachbarn werden, obwohl sie es ursprünglich nicht waren.\rewrite{mehr dazushreiben, was Kernel PCA und der Autoencoder hier veranstalten}
 
 \subsection{Resultate auf natürlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:natuerlich}
