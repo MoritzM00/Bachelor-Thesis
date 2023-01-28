@@ -12,12 +12,12 @@ Fortschritt gemacht haben. Deshalb wird von der üblichen Unterteilung (siehe
 in dieser Arbeit in statistische Methoden und Machine Learning Ansätze unterteilt, um diese später
 in \chapref{ch:Vergleich} gegenüberstellen zu können. Statistische Methoden haben eine solide
 theoretische Fundierung und sind meist etablierte Algorithmen auf einem jeweiligen Gebiet, wie es
-zum Beispiel mit der Hauptkomponentenanalyse (\subsecref{ch:MethodenDerDimRed:statistisch:PCA}) der
-Fall ist. Machine Learning Methoden hingegen versuchen mithilfe einer großen Menge an
-Trainingsdaten eine Funktion oder Verteilung zu lernen und damit auf neue, ungesehene Daten zu
-generaliseren. Da hier oft nicht-konvexe Zielfunktionen mittels mathematischer
-Optimierungsfunktionen optimiert werden, kann meistens keine Optimalitätsgarantie bewiesen werden.
-Neuronale Netze sind hierfür ein Paradebeispiel und werden deshalb in
+zum Beispiel mit der Principal Component Analysis
+(\subsecref{ch:MethodenDerDimRed:statistisch:PCA}) der Fall ist. Machine Learning Methoden hingegen
+versuchen mithilfe einer großen Menge an Trainingsdaten eine Funktion oder Verteilung zu lernen und
+damit auf neue, ungesehene Daten zu generaliseren. Da hier oft nicht-konvexe Zielfunktionen mittels
+mathematischer Optimierungsfunktionen optimiert werden, kann meistens keine Optimalitätsgarantie
+bewiesen werden. Neuronale Netze sind hierfür ein Paradebeispiel und werden deshalb in
 \secref{ch:MethodenDerDimRed:modern} eingehend behandelt.
 
 Nachdem die Motivation und Idee in \chapref{ch:Enleitung}, sowie die Terminologie und mathematische
@@ -31,29 +31,29 @@ Algorithmen, die hier nicht behandelt werden können, wurden bereits in
 \label{ch:MethodenDerDimRed:statistisch}
 
 Zu den statistischen Methoden, die in dieser Arbeit vorgestellt werden, gehören die
-\newterm{Hauptkomponentenanalyse} (PCA) in \subsecref{ch:MethodenDerDimRed:statistisch:PCA} sowie
-die nichtlineare Erweiterung der Hauptkomponentenanalyse, die \newterm{Kernel Principal Component
-	Analysis} (Kernel PCA) (\subsecref{ch:MethodenDerDimRed:statistisch:kPCA}). Außerdem wird das
-\newterm{Locally Linear Embedding} (LLE) in \subsecref{ch:MethodenDerDimRed:statistisch:LLE} als
-Vertreter der statistischen Methoden genauer behandelt.
+\newterm{Principal Component Analysis} (PCA) in \subsecref{ch:MethodenDerDimRed:statistisch:PCA}
+sowie die nichtlineare Erweiterung der Principal Component Analysis, die \newterm{Kernel Principal
+	Component Analysis} (Kernel PCA) (\subsecref{ch:MethodenDerDimRed:statistisch:kPCA}). Außerdem wird
+das \newterm{Locally Linear Embedding} (LLE) in \subsecref{ch:MethodenDerDimRed:statistisch:LLE}
+als Vertreter der statistischen Methoden genauer behandelt.
 
 %% ==============================
 \subsection{Principal Component Analysis}
 \label{ch:MethodenDerDimRed:statistisch:PCA}
 \nomenclature[Z]{PCA}{Principal Component Analysis}
 
-Die Hauptkomponentenanalyse ist \textit{die} Methode der Dimensionsreduktion und wurde erstmals von
-\textcite{Pearson.1901} und \textcite{Hotelling.1933} entwickelt. Trotz des mittlerweile relativ
-hohen Alters ist die Hauptkomponentenanalyse immer noch aufgrund der simplen Anwendbarkeit oft die
-erste Wahl einer Dimensionsreduktionsmethode. Im Folgenden möchte ich kurz auf die zentrale Idee
-und Motivation (\ref{ch:MethodenDerDimRed:statistisch:PCA:Grundidee}) der Hauptkomponentenanalyse,
-sowie die mathematische Herleitung der sogenannten \newterm{Hauptkomponenten} (Unterabschnitte
-\ref{ch:MethodenDerDimRed:statistisch:PCA:Definition} und
-\ref{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}) eingehen.
+Die Principal Component Analysis ist \textit{die} Methode der Dimensionsreduktion und wurde
+erstmals von \textcite{Pearson.1901} und \textcite{Hotelling.1933} entwickelt. Trotz des
+mittlerweile relativ hohen Alters ist die Principal Component Analysis immer noch aufgrund der
+simplen Anwendbarkeit oft die erste Wahl einer Dimensionsreduktionsmethode. Im Folgenden möchte ich
+kurz auf die zentrale Idee und Motivation (\ref{ch:MethodenDerDimRed:statistisch:PCA:Grundidee})
+der Principal Component Analysis, sowie die mathematische Herleitung der sogenannten
+\newterm{Hauptkomponenten} (Unterabschnitte \ref{ch:MethodenDerDimRed:statistisch:PCA:Definition}
+und \ref{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}) eingehen.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Grundidee}
-Die zentrale Idee der Hauptkomponentenanalyse ist die Transformation des Koordinatensystems in einer möglichst \textit{verlustfreien} Art und Weise. Verlustfrei bedeutet im Kontext der Hauptkomponentenanalyse, dass möglichst viel Variation in den Daten erhalten bleiben soll \parencite[vgl.][1]{Jolliffe.2002}. Das Ziel ist also, die Richtungen der größten Varianz in den Daten
+Die zentrale Idee der Principal Component Analysis ist die Transformation des Koordinatensystems in einer möglichst \textit{verlustfreien} Art und Weise. Verlustfrei bedeutet im Kontext der Principal Component Analysis, dass möglichst viel Variation in den Daten erhalten bleiben soll \parencite[vgl.][1]{Jolliffe.2002}. Das Ziel ist also, die Richtungen der größten Varianz in den Daten
 zu finden, da diese den höchsten Informationsgehalt besitzen. Daher wird sukzessive die Varianz der
 im Folgenden definierten Hauptkomponenten maximiert. Was diese Hauptkomponenten sind und wie man
 sie herleitet, wird in den folgenden zwei Unterabschnitten genauer betrachtet.
@@ -106,17 +106,17 @@ ausdrücken, wobei $\mat{A} = [\vect{a}_1,\ldots,\vect{a}_k] \in \real^{D \times
 
 \subsubsection{Erweiterungen}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Erweiterungen}
-Trotz der großen Beliebtheit der Hauptkomponentenanalyse hat diese Methode natürlich auch ihre Nachteile, weswegen zahlreiche Erweiterungen wie zum Beispiel \ldots\addref entwickelt wurden.
-Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenvektorbasis der Kovarianzmatrix inhärent linear ist. Die Hauptkomponentenanalyse ist also in dieser klassischen Form nicht in der Lage, eine nichtlineare Mannigfaltigkeit in den Daten zu erkennen. Deswegen wurde unter anderem eine Generalisierung von PCA von \textcite{Scholkopf.1997} entwickelt, die sogenannte \newterm{Kernel Principal Component Analysis} (Kernel PCA). Diese Methode wird in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA} genauer behandelt.
+Trotz der großen Beliebtheit der Principal Component Analysis hat diese Methode natürlich auch ihre Nachteile, weswegen zahlreiche Erweiterungen wie zum Beispiel \ldots\addref entwickelt wurden.
+Ein Schwachpunkt von PCA ist, dass die orthogonale Transformation auf die Eigenvektorbasis der Kovarianzmatrix inhärent linear ist. Die Principal Component Analysis ist also in dieser klassischen Form nicht in der Lage, eine nichtlineare Mannigfaltigkeit in den Daten zu erkennen. Deswegen wurde unter anderem eine Generalisierung von PCA von \textcite{Scholkopf.1997} entwickelt, die sogenannte \newterm{Kernel Principal Component Analysis} (Kernel PCA). Diese Methode wird in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA} genauer behandelt.
 
 %% ==============================
 \subsection{Kernel Principal Component Analysis}
 \label{ch:MethodenDerDimRed:statistisch:kPCA}
 \nomenclature[Z]{kPCA}{Kernel Principal Component Analysis}
-Die Kernel Principal Components Analysis \parencite{Scholkopf.1997} ist eine nichtlineare Erweiterung der klassischen Hauptkomponentenanalyse
-und kann somit theoretisch nichtlineare Zusammenhänge in den Daten erkennen. Um das zu erreichen,
-wird sich am sogenannten \newterm{Kernel Trick} bedient, der schon erfolgreich auf \textit{Support
-	Vector Machines} \parencite{Boser.1992} angewandt wurde. Im Folgenden wird die Grundidee der Kernel PCA und das Konzept
+Die Kernel Principal Components Analysis \parencite{Scholkopf.1997} ist eine nichtlineare Erweiterung der klassischen Principal Component
+Analysis und kann somit theoretisch nichtlineare Zusammenhänge in den Daten erkennen. Um das zu
+erreichen, wird sich am sogenannten \newterm{Kernel Trick} bedient, der schon erfolgreich auf
+\textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde. Im Folgenden wird die Grundidee der Kernel PCA und das Konzept
 eines Kernels genauer erläutert. Daraufhin wird die konkrete Vorgehensweise vorgestellt und
 abschließend werden praktische Probleme besprochen.
 
@@ -127,12 +127,12 @@ Die Grundidee der Kernel PCA ist es, die Daten mithilfe einer Funktion $\bm{\phi
 Vektorraum $\mathcal{H}$ abzubilden, der nichtlinear mit dem Ursprungsraum $\mathcal{X}$ verbunden
 ist. Der Raum $\mathcal{H}$ wird in diesem Kontext auch Merkmalsraum (engl. \textit{feature space})
 genannt und kann potentiell sehr hochdimensional sein. Nach der Transformation wird die
-traditionelle Hauptkomponentenanalyse durchgeführt, um damit die niedrigdimensionale Repräsentation
-$\rvect{y}$ zu erhalten. Dieses Vorgehen erscheint auf den ersten Blick kontraintuitiv, da durch
-den \enquote{Umweg} über die Abbildung $\bm{\phi}$ die Dimension zuerst erhöht wird. Motiviert wird
-es dadurch, dass die Daten in $\mathcal{X}$ einen \textit{nichtlinearen} Zusammenhang aufweisen
-können, während in $\mathcal{H}$ der Zusammenhang linear und damit für lineare Algorithmen wie die
-Hauptkomponentenanalyse erkennbar ist \parencite[vgl.][26]{ShaweTaylor.2011}.
+traditionelle Principal Component Analysis durchgeführt, um damit die niedrigdimensionale
+Repräsentation $\rvect{y}$ zu erhalten. Dieses Vorgehen erscheint auf den ersten Blick
+kontraintuitiv, da durch den \enquote{Umweg} über die Abbildung $\bm{\phi}$ die Dimension zuerst
+erhöht wird. Motiviert wird es dadurch, dass die Daten in $\mathcal{X}$ einen
+\textit{nichtlinearen} Zusammenhang aufweisen können, während in $\mathcal{H}$ der Zusammenhang
+linear und damit für lineare Algorithmen wie die Principal Component Analysis erkennbar ist \parencite[vgl.][26]{ShaweTaylor.2011}.
 
 Der entscheidende Punkt ist jedoch, dass man die Abbildung $\bm{\phi}$ nicht explizit berechnet,
 sondern mithilfe einer Kernel-Funktion $\kappa: \mathcal{X} \times \mathcal{X} \rightarrow \real$
@@ -165,7 +165,7 @@ Des Weiteren sind polynomiale Funktionen \parencite[292]{ShaweTaylor.2011}
 des Grades $p$ eine von vielen möglichen Kernel-Funktionen.
 
 Wie bereits in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} erwähnt, muss die
-Hauptkomponentenanalyse nun in eine Form gebracht werden, in der nur Skalarprodukte von
+Principal Component Analysis nun in eine Form gebracht werden, in der nur Skalarprodukte von
 $\bm{\phi}(\rvect{x})$ vorkommen. Diese Skalarprodukte können dann gemäß
 \eqref{eq:kPCA:KernelFunction} durch die Kernel-Funktion ersetzt werden.
 
@@ -174,13 +174,13 @@ $\bm{\phi}(\rvect{x})$ vorkommen. Diese Skalarprodukte können dann gemäß
 
 Betrachten wir also die Kovarianzmatrix $\mat{C}$ der in den Merkmalsraum projizierten Daten
 $\bm{\phi}(\mat{X}) = \tr{\left[ \bm{\phi}(\vect{x}_1), \ldots, \bm{\phi}(\vect{x}_n) \right]}$. Um
-die Berechnung zu vereinfachen, wird auch hier analog zur klassischen Hauptkomponentenanalyse die
-Zentrierung der Daten im Merkmalsraum angenommen. Damit vereinfacht sich die Berechnung der
+die Berechnung zu vereinfachen, wird auch hier analog zur klassischen Principal Component Analysis
+die Zentrierung der Daten im Merkmalsraum angenommen. Damit vereinfacht sich die Berechnung der
 Kovarianzmatrix zu
 \begin{equation}
 	\mat{C} = \frac{1}{n} \tr{\bm{\phi}(\mat{X})} \bm{\phi}(\mat{X}) \, .
 \end{equation}
-Um nun die Hauptkomponentenanalyse durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt, ist diese Matrix aber ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
+Um nun die Principal Component Analysis durchführen zu können, müssten die Eigenvektoren dieser Matrix bestimmt werden. Dies ist jedoch nicht möglich, da die Abbildung $\bm{\phi}$ unbekannt ist. Wie sich herausstellt, ist diese Matrix aber ähnlich zur sogenannten \textit{Kernel Matrix} $\mat{K}$, welche über den Kernel $\kappa$ als
 \begin{align}
 	\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1}^n \label{eq:kPCA:KernelMatrix_A} \\
 	        & = \bm{\phi}(\mat{X}) \tr{\bm{\phi}(\mat{X})} \label{eq:kPCA:KernelMatrix_B}
@@ -228,9 +228,9 @@ Dimensionsreduktion ist die Wahl des Qualitätskriteriums nicht trivial, wie wir
 \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} sehen werden. Eine Möglichkeit
 wäre die quadratische Abweichung zwischen der ursprünglichen Repräsentation eines Punktes und der
 Rekonstruktion aus seiner niedrigdimensionalen Repräsentation. Die Kernel PCA stellt allerdings
-entgegen der klassischen Hauptkomponentenanalyse keine exakte inverse Transformation zur Verfügung,
-weswegen auf Approximationen zurückgegriffen werden muss. Dieses Problem entspricht dem Finden des
-sogenannten Urbildes (engl. \textit{pre-image}) in Kernel-Methoden \parencite{Kwok.2004}. Mithilfe dieser Approximation könnte eine Kreuzvalidierung über
+entgegen der klassischen Principal Component Analysis keine exakte inverse Transformation zur
+Verfügung, weswegen auf Approximationen zurückgegriffen werden muss. Dieses Problem entspricht dem
+Finden des sogenannten Urbildes (engl. \textit{pre-image}) in Kernel-Methoden \parencite{Kwok.2004}. Mithilfe dieser Approximation könnte eine Kreuzvalidierung über
 Rekonstruktionsfehler durchgeführt werden \parencite[siehe z.B.][]{Alam.2014}. In dieser Arbeit wird auf die Approximation des Urbildes
 verzichtet und stattdessen Qualitätskriterien der Dimensionsreduktion für eine Gittersuche
 verwendet. Das Vorgehen wird später in \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
@@ -349,7 +349,7 @@ werden soll.
 
 Die Nichtlinearität eines Autoencoders wird durch die Auswahl der Aktivierungsfunktionen bestimmt.
 Werden ausschließlich lineare Funktionen verwendet, resultiert dies in einem linearen Autoencoder,
-welcher ähnlich zur Hauptkomponentenanalyse ist. Dies wird in
+welcher ähnlich zur Principal Component Analysis ist. Dies wird in
 \subsecref{ch:Vergleich:sec:Resultate:PCA_AE} noch genauer betrachtet. In den meisten Fällen werden
 jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt, um einen nichtlinearen Zusammenhang zu
 lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Charte.2018}.
@@ -474,7 +474,7 @@ Die Aktivierungsfunktionen sind grafisch in \figref{fig:activations} dargestellt
 Obwohl ReLU (\eqref{eq:ReLU}) die standardmäßig empfohlene Aktivierungsfunktion ist \parencite[195]{Goodfellow.2016}, wird für Autoencoder die Sigmoid-Funktion (\eqref{eq:Sigmoid})
 empfohlen. Dies liegt daran, dass die \textit{Rectified Linear Units} alle negativen Inputs auf
 Null projiziert und damit die Rekonstruktion erschweren könnte \parencite[4]{Charte.2018}.
-% \subsubsection{Verhältnis zur Hauptkomponentenanalyse}
+% \subsubsection{Verhältnis zur Principal Component Analysis}
 % \label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}
 
 %Um den Zusammenhang zwischen der PCA und dem Autoencoder zu verdeutlichen,

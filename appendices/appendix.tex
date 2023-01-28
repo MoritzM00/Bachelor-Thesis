@@ -36,7 +36,7 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 	\begin{center}
 		\includegraphics{TwinPeaks_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für die Twin Peaks]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Twin Peaks Datensatz. Locally Linear Embedding (LLE) schneidet wie bei der Swiss Roll insgesamt am besten ab, gefolgt von der Kernel PCA und vom Autoencoder. Lediglich der Contractive Autoencoder (CAE) und PCA fallen auf diesem künstlichen Datensatz etwas zurück, wobei die Vertrauenswürdigkeit der Dimensionsreduktion von PCA deutlich schlechter als bei den restlichen Methoden ist. Dies ist wahrscheinlich der nichtlinearen Mannigfaltigkeit geschuldet, was der linearen Hauptkomponentenanalyse Schwierigkeiten bereitet. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für die Twin Peaks]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Twin Peaks Datensatz. Locally Linear Embedding (LLE) schneidet wie bei der Swiss Roll insgesamt am besten ab, gefolgt von der Kernel PCA und vom Autoencoder. Lediglich der Contractive Autoencoder (CAE) und PCA fallen auf diesem künstlichen Datensatz etwas zurück, wobei die Vertrauenswürdigkeit der Dimensionsreduktion von PCA deutlich schlechter als bei den restlichen Methoden ist. Dies ist wahrscheinlich der nichtlinearen Mannigfaltigkeit geschuldet, was der linearen Principal Component Analysis Schwierigkeiten bereitet. (Eigene Darstellung)}
 	\label{fig:TwinPeaksMetrics}
 \end{figure}
 
@@ -44,7 +44,7 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 	\begin{center}
 		\includegraphics{ICMR_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für den ICMR-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den ICMR-Datensatz. Dieser Datensatz ist kein Bilddatensatz, weswegen hier der Convolutional Autoencoder nicht eingesetzt werden konnte. Hier schneidet die Hauptkomponentenanalyse am besten ab, gefolgt von der Kernel PCA und vom vollvernetzten Autoencoder. Am schlechtesten sind der Contractive Autoencoder und Locally Linear Embedding, wobei die Qualitätskriterien mit größer werdender Nachbarschaftsgröße $K$ bei LLE deutlicher abfallen. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den ICMR-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den ICMR-Datensatz. Dieser Datensatz ist kein Bilddatensatz, weswegen hier der Convolutional Autoencoder nicht eingesetzt werden konnte. Hier schneidet die Principal Component Analysis am besten ab, gefolgt von der Kernel PCA und vom vollvernetzten Autoencoder. Am schlechtesten sind der Contractive Autoencoder und Locally Linear Embedding, wobei die Qualitätskriterien mit größer werdender Nachbarschaftsgröße $K$ bei LLE deutlicher abfallen. (Eigene Darstellung)}
 	\label{fig:ICMRMetrics}
 \end{figure}
 
@@ -77,6 +77,6 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 \begin{figure}
 	\centering
 	\includegraphics{TwinPeaksEmbeddings.pdf}
-	\caption[Latente zweidimensionale Repräsentationen $\mat{Y}$ durch Anwendungen fünf unterschiedlicher Methoden auf dem Twin Peaks-Datensatz.]{Abgebildet sind die latenten zweidimensionalen Repräsentationen $\mat{Y}$ durch Anwendungen fünf unterschiedlicher Methoden auf dem Twin Peaks-Datensatz. Die von Locally Linear Embedding gefundene latente Repräsentation hat die einzelnen Peaks herabsenken können. Kernel PCA konnte dies im Gegensatz zur linearen Hauptkomponentenanalyse ebenfalls erkennen. Auch die latente Repräsentation des vollvernetzten Autoencoders zeigt diesen Ansatz, verzerrt die Peaks in der Ebene jedoch stärker als es bei LLE oder Kernel PCA der Fall ist. Der Contractive Autoencoder scheint alle Punkte auf die Ränder abzubilden, was die niedrigere Vertrauenswürdigkeit und Kontinuität erklärt.}
+	\caption[Latente zweidimensionale Repräsentationen $\mat{Y}$ durch Anwendungen fünf unterschiedlicher Methoden auf dem Twin Peaks-Datensatz.]{Abgebildet sind die latenten zweidimensionalen Repräsentationen $\mat{Y}$ durch Anwendungen fünf unterschiedlicher Methoden auf dem Twin Peaks-Datensatz. Die von Locally Linear Embedding gefundene latente Repräsentation hat die einzelnen Peaks herabsenken können. Kernel PCA konnte dies im Gegensatz zur linearen Principal Component Analysis ebenfalls erkennen. Auch die latente Repräsentation des vollvernetzten Autoencoders zeigt diesen Ansatz, verzerrt die Peaks in der Ebene jedoch stärker als es bei LLE oder Kernel PCA der Fall ist. Der Contractive Autoencoder scheint alle Punkte auf die Ränder abzubilden, was die niedrigere Vertrauenswürdigkeit und Kontinuität erklärt.}
 	\label{fig:TwinPeaksEmbeddings}
 \end{figure}

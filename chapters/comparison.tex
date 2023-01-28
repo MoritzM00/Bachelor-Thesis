@@ -28,10 +28,10 @@ Repräsentation zu erreichen. Die Qualitätskriterien werden in
 Vergleich werden zwei künstliche und fünf natürliche Datensätze verwendet, die in
 \secref{ch:Vergleich:sec:VerwendeteDatensaetze} genauer vorgestellt werden. Insgesamt soll damit
 ein Überblick über die Stärken und Schwächen der statistischen und der Machine Learning Methoden
-geschafft werden. Wie bereits erwähnt, besteht zwischen Autoencodern und der
-Hauptkomponentenanalyse eine enge Verbindung. Neben dem Vergleich der zwei Gruppen wird daher in
-\secref{ch:Vergleich:sec:Resultate:PCA_AE} der Zusammenhang zwischen der Hauptkomponentenanalyse
-und Autoencodern genauer untersucht. Der Vergleich kann mittels der im
+geschafft werden. Wie bereits erwähnt, besteht zwischen Autoencodern und der Principal Component
+Analysis eine enge Verbindung. Neben dem Vergleich der zwei Gruppen wird daher in
+\secref{ch:Vergleich:sec:Resultate:PCA_AE} der Zusammenhang zwischen der Principal Component
+Analysis und Autoencodern genauer untersucht. Der Vergleich kann mittels der im
 GitHub-Repository\footnote{\url{www.github.com/MoritzM00/drcomp}} definierten Konfigurationen der
 Methoden und des Trainingsskriptes repliziert werden. \rewrite{Unter Methodik könnte man auch was
 	anderes verstehen. Ein bisschen mehr dazu sagen, wieso diese Vorgehensweise Sinn macht}
@@ -253,8 +253,8 @@ Nachbarschaftsgröße in Locally Linear Embedding, $\Kqk$ für die Nachbarschaft
 Qualitätskriterien und $\Kid$ für die Nachbarschaftsgröße des Schätzers der intrinsischen Dimension
 für den restlichen Teil dieser Arbeit eingeführt.
 
-Für die Hauptkomponentenanalyse gibt es neben der Anzahl der zu behaltenden Hauptkomponenten keine
-Parameter. Die Anzahl der Hauptkomponenten entspricht der intrinsischen Dimension, welche vom
+Für die Principal Component Analysis gibt es neben der Anzahl der zu behaltenden Hauptkomponenten
+keine Parameter. Die Anzahl der Hauptkomponenten entspricht der intrinsischen Dimension, welche vom
 Datensatz abhängt und für alle Methoden identisch ist. Dies trifft analog auf Kernel PCA und auf
 Locally Linear Embedding zu. Für Autoencoder bestimmt die intrinsische Dimension die Größe der
 Bottleneck-Schicht. Für Kernel PCA wird ein Gaußscher Kernel eingesetzt, wofür ein Hyperparameter
@@ -314,7 +314,7 @@ Qualitätskriterien sind im Appendix \ref{ch:Appendix:Qualitaetskriterien} zu fi
 \secref{ch:Vergleich:sec:Resultate:kuenstlich} werden die Ergebnisse auf den künstlichen
 Datensätzen und in \secref{ch:Vergleich:sec:Resultate:natuerlich} die Ergebnisse auf den
 natürlichen Datensätzen diskutiert. Letztlich wird in \secref{ch:Vergleich:sec:Resultate:PCA_AE}
-der Zusammenhang zwischen der Hauptkomponentenanalyse und Autoencodern empirisch untersucht.
+der Zusammenhang zwischen der Principal Component Analysis und Autoencodern empirisch untersucht.
 
 \subsection{Resultate auf künstlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:kuenstlich}
@@ -326,11 +326,11 @@ Zuerst werden die Resultate auf den beiden künstlichen Datensätzen diskutiert.
 	\begin{center}
 		\includegraphics{SwissRoll_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für die Swiss Roll]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab, gefolgt vom klassischen Autoencoder. Die restlichen Methoden fallen insbesondere hinsichtlich der Vertrauenswürdigkeit und des LCMC nach unten ab. Der Autoencoder zeigt hier den Vorteil durch die Flexibilität in der Architektur gegenüber der linearen Hauptkomponentenanalyse, welche mehr Schwierigkeiten mit dieser nichtlineare Mannigfaltigkeit hat. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für die Swiss Roll]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab, gefolgt vom klassischen Autoencoder. Die restlichen Methoden fallen insbesondere hinsichtlich der Vertrauenswürdigkeit und des LCMC nach unten ab. Der Autoencoder zeigt hier den Vorteil durch die Flexibilität in der Architektur gegenüber der linearen Principal Component Analysis, welche mehr Schwierigkeiten mit dieser nichtlineare Mannigfaltigkeit hat. (Eigene Darstellung)}
 	\label{fig:SwissRollMetrics}
 \end{figure}
 Beide Abbildungen zeigen ein ähnliches Ergebnis: Locally Linear Embedding kann mit der lokalen Erhaltung der Struktur hohe Werte auf allen drei Qualitätskriterien erzielen. Insbesondere hinsichtlich des LCMC kann sich LLE deutlich nach oben absetzen.
-Der Autoencoder zeigt auf dem Swiss Roll-Datensatz die zweithöchste Vertrauenswürdigkeit. PCA, Kernel PCA und der Contractive Autoencoder sind hier deutlich weniger vertrauenswürdig. Bei diesen Methoden werden also nach der Dimensionsreduktion mehr Punkte fälschlicherweise Nachbarn. Auf dem Twin Peaks-Datensatz schneidet neben dem Autoencoder auch die Kernel PCA besser ab. Etwas deutlicher fällt hier die Hauptkomponentenanalyse zurück. Diese Methode hat Schwierigkeiten mit dem hohen Grad an Nichtlinearität in den beiden künstlichen Datensätzen. Der Contractive Autoencoder schneidet auf allen drei Kriterien relativ gesehen am schlechtesten ab. Möglicherweise verhindert der kontrahierende Fehlerterm die Anpassung an die Mannigfaltigkeit mit einer hohen Krümmung wie im Twin Peaks-Datensatz.
+Der Autoencoder zeigt auf dem Swiss Roll-Datensatz die zweithöchste Vertrauenswürdigkeit. PCA, Kernel PCA und der Contractive Autoencoder sind hier deutlich weniger vertrauenswürdig. Bei diesen Methoden werden also nach der Dimensionsreduktion mehr Punkte fälschlicherweise Nachbarn. Auf dem Twin Peaks-Datensatz schneidet neben dem Autoencoder auch die Kernel PCA besser ab. Etwas deutlicher fällt hier die Principal Component Analysis zurück. Diese Methode hat Schwierigkeiten mit dem hohen Grad an Nichtlinearität in den beiden künstlichen Datensätzen. Der Contractive Autoencoder schneidet auf allen drei Kriterien relativ gesehen am schlechtesten ab. Möglicherweise verhindert der kontrahierende Fehlerterm die Anpassung an die Mannigfaltigkeit mit einer hohen Krümmung wie im Twin Peaks-Datensatz.
 
 Die Ergebnisse auf den künstlichen Datensätzen können visuell überprüft werden, indem die
 zweidimensionalen transformierten Daten $\mat{Y}$ in einem Scatter-Plot dargestellt werden. Diese
@@ -364,9 +364,9 @@ sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
 Auf allen natürlichen Datensätzen
 schneidet Locally Linear Embedding hinsichtlich aller drei Kriterien neben dem Contractive Autoencoder relativ gesehen schlecht ab. Insbesondere nehmen die
 Qualitätskriterien von Locally Linear Embedding mit größer werdender Nachbarschaftsgröße $\Kqk$ deutlicher ab, als bei den
-restlichen Methoden. Der Parameter $\Klle$ für Locally Linear Embedding wurde jedoch auf kleinere Werte zwischen fünf und 15 gesetzt, weswegen diese Beobachtung logisch erscheint. Die Hauptkomponentenanalyse kann auf fast allen natürlichen Datensätzen eine gute oder sogar die
-beste relative Performance aufweisen. Ebenso zeigt die Kernel PCA gute Ergebnisse und ist auf dem ICMR- und Olivetti Faces-Datensatz fast identisch zur klassischen Hauptkomponentenanalyse. Der klassische Autoencoder kann die Principal Component Analysis auf den Qualitätskriterien nicht mehr übertreffen. Auf den vier Bilddatensätzen kann jedoch der Convolutional
-Autoencoder seine Stärken zeigen, allerdings nur, wenn genügend Trainingsdaten zur Verfügung stehen. Letzteres trifft unter anderem auf den MNIST-Datensatz zu, nicht jedoch auf den Olivetti Faces-Datensatz. Auf dem Olivetti Faces-Datensatz ist das Ergebnis nur minimal besser, als das des klassischen Autoencoders. Im direkten Vergleich zur Hauptkomponentenanalyse schneidet der Convolutional Autoencoder hier aber schlechter ab.
+restlichen Methoden. Der Parameter $\Klle$ für Locally Linear Embedding wurde jedoch auf kleinere Werte zwischen fünf und 15 gesetzt, weswegen diese Beobachtung logisch erscheint. Die Principal Component Analysis kann auf fast allen natürlichen Datensätzen eine gute oder sogar die
+beste relative Performance aufweisen. Ebenso zeigt die Kernel PCA gute Ergebnisse und ist auf dem ICMR- und Olivetti Faces-Datensatz fast identisch zur klassischen Principal Component Analysis. Der klassische Autoencoder kann die Principal Component Analysis auf den Qualitätskriterien nicht mehr übertreffen. Auf den vier Bilddatensätzen kann jedoch der Convolutional
+Autoencoder seine Stärken zeigen, allerdings nur, wenn genügend Trainingsdaten zur Verfügung stehen. Letzteres trifft unter anderem auf den MNIST-Datensatz zu, nicht jedoch auf den Olivetti Faces-Datensatz. Auf dem Olivetti Faces-Datensatz ist das Ergebnis nur minimal besser, als das des klassischen Autoencoders. Im direkten Vergleich zur Principal Component Analysis schneidet der Convolutional Autoencoder hier aber schlechter ab.
 Auf Datensätzen mit einer geringen Anzahl an Stichproben können Probleme bei der Konvergenz der iterativen Optimierung eines Autoencoders auftreten. Dies wird durch die Performance des vollvernetzten Autoencoders auf dem Olivetti Faces-Datensatz ersichtlich (siehe \figref{fig:OlivettiFacesMetrics}). Insbesondere hinsichtlich des LCMC fällt der Autoencoder nach unten ab. Dies ist ein Nachteil einer iterativen Optimierung der Zielfunktion gegenüber einer Lösung in geschlossener Form.
 
 Die Resultate auf den Bilddatensätzen zeigen jedoch, dass der Convolutional Autoencoder eine valide
@@ -381,7 +381,7 @@ Dazu sind in \tabref{tab:training_times} die Laufzeiten aller Methoden für alle
 aufgelistet.
 
 \input{tables/training_times.tex}
-Die Hauptkomponentenanalyse weist die durchschnittlich geringste Laufzeit auf und untermauert die bereits guten Ergebnisse auf den Qualitätskriterien. Die Laufzeiten von Locally Linear Embedding sind auf kleineren Datensätzen noch kurz, steigen aber mit der Stichprobengröße stark an. Gleiches trifft auf Kernel Principal Component Analysis zu. Der Grund dafür ist, dass Locally Linear Embedding ein dünnbesetztes Eigenwertproblem der $n \times n$-Matrix $\mat{M}$ (\eqref{eq:LLE:ZielfunktionY}) lösen muss. Die Laufzeit dieser Operation steigt quadratisch mit $n$ an, was für große Stichproben schnell kostspielig wird \parencite[9]{Saul.2000}. Locally Linear Embedding wurde aus diesem Grund mit maximal 20 000
+Die Principal Component Analysis weist die durchschnittlich geringste Laufzeit auf und untermauert die bereits guten Ergebnisse auf den Qualitätskriterien. Die Laufzeiten von Locally Linear Embedding sind auf kleineren Datensätzen noch kurz, steigen aber mit der Stichprobengröße stark an. Gleiches trifft auf Kernel Principal Component Analysis zu. Der Grund dafür ist, dass Locally Linear Embedding ein dünnbesetztes Eigenwertproblem der $n \times n$-Matrix $\mat{M}$ (\eqref{eq:LLE:ZielfunktionY}) lösen muss. Die Laufzeit dieser Operation steigt quadratisch mit $n$ an, was für große Stichproben schnell kostspielig wird \parencite[9]{Saul.2000}. Locally Linear Embedding wurde aus diesem Grund mit maximal 20 000
 Stichproben trainiert. Bei Kernel PCA musste aufgrund der Eigenwertzerlegung der $n \times
 	n$-Kernel-Matrix ebenfalls ein Downsampling durchgeführt werden, falls die Stichprobengröße 15 000
 übersteigt.
@@ -395,7 +395,7 @@ schränkt dafür aber die Architektur in diesem Fall auf dreischichtige Autoenco
 Sigmoid-Aktivierungsfunktionen ein.
 
 Das manuelle Hyperparameter-Tuning wurde hierbei nicht berücksichtigt. Dies ist ein weiterer
-Vorteil der Hauptkomponentenanalyse, da es hier keine Parameter gibt, die richtig eingestellt
+Vorteil der Principal Component Analysis, da es hier keine Parameter gibt, die richtig eingestellt
 werden müssen. Insbesondere bei der Kernel PCA müssen mehrere Werte für den Parameter $\gamma$
 getestet werden. Aufgrund der relativ niedrigen Laufzeiten der Kernel PCA ist dies jedoch
 vertretbar. Der Zeitaufwand für Hyperparameter-Tuning ist bei Autoencodern wegen der vielen zu
@@ -408,11 +408,11 @@ größeren Datensätzen teuer.
 \subsubsection{Vergleich der Rekonstruktionen}
 
 Interessant ist außerdem, wie gut die Dimensionsreduktionsmethoden ein originales Bild wieder
-rekonstruieren können. In diesem Vergleich können allerdings nur die Hauptkomponentenanalyse und
-alle Varianten der Autoencoder für die Rekonstruktion verwendet werden. Kernel PCA und Locally
+rekonstruieren können. In diesem Vergleich können allerdings nur die Principal Component Analysis
+und alle Varianten der Autoencoder für die Rekonstruktion verwendet werden. Kernel PCA und Locally
 Linear Embedding erlauben ohne Approximation keine inverse Transformation aus der latenten
 Repräsentation $\vect{y}$ zurück in eine approximierte ursprüngliche Repräsentation
-$\estNormal{\vect{x}}$. Für die Hauptkomponentenanalyse, den vollvernetzten Autoencoder, den
+$\estNormal{\vect{x}}$. Für die Principal Component Analysis, den vollvernetzten Autoencoder, den
 Convolutional Autoencoder und für den Contractive Autoencoder wurde auf dem MNIST-Datensatz je ein
 Beispielbild für eine der Zahlen rekonstruiert und in \figref{fig:MNIST-reconstructions}
 abgebildet. Die erste Zeile besteht aus den Originalbildern als Referenz.
@@ -422,14 +422,14 @@ abgebildet. Die erste Zeile besteht aus den Originalbildern als Referenz.
 	\caption[Rekonstruierte MNIST-Zahlen]{Gezeigt sind rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch den Convolutional Autoencoder und (5) Rekonstruktion durch den Contractive Autoencoder.}
 	\label{fig:MNIST-reconstructions}
 \end{figure}
-Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da einige Zahlen sogar als falsche Zahl rekonstruiert werden. Die Rekonstruktionen der Hauptkomponentenanalyse sind besser, aber visuell ebenfalls nicht überzeugend, da sie deutlich unscharfer sind. Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte und zeigt auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien eine gute Güte der Dimensionsreduktion (siehe \figref{fig:MNISTMetrics}). Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
+Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da einige Zahlen sogar als falsche Zahl rekonstruiert werden. Die Rekonstruktionen der Principal Component Analysis sind besser, aber visuell ebenfalls nicht überzeugend, da sie deutlich unscharfer sind. Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte und zeigt auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien eine gute Güte der Dimensionsreduktion (siehe \figref{fig:MNISTMetrics}). Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
 
 \subsection{PCA und Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}
 
-In diesem Abschnitt wird die Hauptkomponentenanalyse mit Autoencodern verglichen. Dazu wird zuerst
-der theoretische Zusammenhang zwischen den beiden Methoden erklärt. Im Anschluss wird die
-Hauptkomponentenanalyse und unterschiedliche Modelle des Autoencoders für einen empirischen
+In diesem Abschnitt wird die Principal Component Analysis mit Autoencodern verglichen. Dazu wird
+zuerst der theoretische Zusammenhang zwischen den beiden Methoden erklärt. Im Anschluss wird die
+Principal Component Analysis und unterschiedliche Modelle des Autoencoders für einen empirischen
 Vergleich auf dem FER-Datensatz trainiert, wobei aufgrund der sieben unterschiedlichen Emotionen im
 Datensatz eine Reduktion auf sieben Dimensionen durchgeführt wurde. Ein Beispielbild für jede
 Emotion des FER-Datensatzes ist in \figref{fig:FER-Datensatz-Beispiele} dargestellt.
@@ -454,23 +454,23 @@ Autoencodern auf unterschiedliche Dimensionen nicht geschachtelt sind.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{correlation-matrices.pdf}
-	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc die linken Singulär-Vektoren der Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders, um die Daten auf sieben Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Hauptkomponentenanalyse ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch den Autoencoder besteht Korrelation. Wendet man die Singulärwertszerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, erhält man deutlich weniger Korrelation. Sie konnte aber nicht vollständig eliminiert werden. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Principal Component Analysis, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc die linken Singulär-Vektoren der Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders, um die Daten auf sieben Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Principal Component Analysis ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch den Autoencoder besteht Korrelation. Wendet man die Singulärwertszerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, erhält man deutlich weniger Korrelation. Sie konnte aber nicht vollständig eliminiert werden. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Korrelationsmatrizen}
 \end{figure}
-Punkt 1 ist beispielsweise in \figref{fig:Korrelationsmatrizen} zu erkennen. Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Hauptkomponentenanalyse, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer Autoencoder\rewrite{Hier erklären was man gemacht hat mit SVD} verwendet wurde. Die Korrelationsmatrix der Hauptkomponentenanalyse ist eine Einheitsmatrix, während die Korrelationsmatrizen der durch die Autoencoder gefundenen latenten Repräsentationen von Null verschiedene Werte auf der Nicht-diagonalen aufweisen.
+Punkt 1 ist beispielsweise in \figref{fig:Korrelationsmatrizen} zu erkennen. Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Principal Component Analysis, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer Autoencoder\rewrite{Hier erklären was man gemacht hat mit SVD} verwendet wurde. Die Korrelationsmatrix der Principal Component Analysis ist eine Einheitsmatrix, während die Korrelationsmatrizen der durch die Autoencoder gefundenen latenten Repräsentationen von Null verschiedene Werte auf der Nicht-diagonalen aufweisen.
 
-Um die gefundenen Lösungen einer Hauptkomponentenanalyse und von Autoencodern genauer betrachten zu
-können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines dreischichtigen
-Autoencoders verglichen werden. Im Falle eines dreischichtigen Autoencoders sind die Gewichte des
-Encoders eine Matrix $\mat{W}_1 \in \real^{d \times D}$ und die Gewichte des Decoders eine Matrix
-$\mat{W}_2 \in \real^{D \times d}$. Auf Bilddatensätzen können diese Matrizen so umgeformt werden,
-dass sich für jede Zeile von $\mat{W}_1$ oder Spalte von $\mat{W}_2$ ein Bild ergibt. Auf diese
-Weise kann die \enquote{Arbeitsweise} des Autoencoders anschaulich untersucht werden.
-\figref{fig:Gewichtsvergleich} setzt dieses Vorgehen auf dem FER-Datensatz um.
+Um die gefundenen Lösungen einer Principal Component Analysis und von Autoencodern genauer
+betrachten zu können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines
+dreischichtigen Autoencoders verglichen werden. Im Falle eines dreischichtigen Autoencoders sind
+die Gewichte des Encoders eine Matrix $\mat{W}_1 \in \real^{d \times D}$ und die Gewichte des
+Decoders eine Matrix $\mat{W}_2 \in \real^{D \times d}$. Auf Bilddatensätzen können diese Matrizen
+so umgeformt werden, dass sich für jede Zeile von $\mat{W}_1$ oder Spalte von $\mat{W}_2$ ein Bild
+ergibt. Auf diese Weise kann die \enquote{Arbeitsweise} des Autoencoders anschaulich untersucht
+werden. \figref{fig:Gewichtsvergleich} setzt dieses Vorgehen auf dem FER-Datensatz um.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{weights-comparison.pdf}
-	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf sieben Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Hauptkomponentenanalyse, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders und \captionc die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf sieben Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Principal Component Analysis, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders und \captionc die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}
 Hierbei ist in \captiona die Ladungsmatrix von PCA, in \captionb die Gewichtsmatrix $\mat{W}_2$ eines linearen dreischichtigen Autoencoders und in \captionc die Gewichtsmatrix $\mat{W}_2$ eines nichtlinearen Autoencoders dargestellt. Wie zu erkennen ist, sind

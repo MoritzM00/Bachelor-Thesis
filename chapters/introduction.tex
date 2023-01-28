@@ -4,11 +4,12 @@
 %% ==============================
 
 Viele interessante Anwendungsgebiete für Machine Learning umfassen eine große Anzahl an Merkmalen,
-wie bei der Analyse von Genausprägungen mit tausenden von Genen \parencite{Parmigiani.2003} oder der Verarbeitung von Bild- oder Videodaten mit vielen Pixeln. Gerade
-bei Bildern oder Videos besteht zum Beispiel in angrenzenden Pixeln viel Redundanz. Diese große
-Anzahl an Merkmalen, das heißt die hohe Dimensionalität der Daten, bereitet vielen Algorithmen
-Probleme -- Probleme, die unter der Ausnutzung der Abhängigkeitsstrukturen möglicherweise vermieden
-werden können. Die mathematischen und statistischen Probleme, die bei Datensätzen hoher
+wie bei der Analyse von Genausprägungen mit tausenden von Genen \parencite[siehe z.B.][]{Parmigiani.2003} oder der Verarbeitung von Bild- oder Videodaten mit vielen
+Pixeln. Gerade bei Bildern oder Videos besteht zum Beispiel in angrenzenden Pixeln viel Redundanz.
+Diese große Anzahl an Merkmalen, das heißt die hohe Dimensionalität der Daten, bereitet vielen
+Algorithmen Probleme -- Probleme, die unter der Ausnutzung der Abhängigkeitsstrukturen
+möglicherweise vermieden werden können.\rewrite{Umschreiben. Was ist eine Dimensionalität
+	anschaulich?} Die mathematischen und statistischen Probleme, die bei Datensätzen hoher
 Dimensionalität auftreten, werden unter dem \newterm{Fluch der Dimensionalität} \parencite{Aggarwal.2001} zusammengefasst. Es treten jedoch nicht nur algorithmische, sondern auch
 praktische Probleme auf, da Datensätze mit vielen Stichproben und zusätzlich hoher Dimension eine
 enorme Speicherkapazität und Rechenleistung benötigen können.
@@ -36,9 +37,9 @@ oder drei Dimensionen für die Veranschaulichung reduziert werden können.
 eine spezifische Aufgabe allerdings nicht einfacher. Daher wurden bereits mehrere Anstrengungen
 gemacht, die Stärken und Schwächen einzelner Methoden herauszufinden. Einer der umfassendsten
 Vergleiche von Methoden der Dimensionsreduktion wurde von \Textcite{vanderMaaten.2009}
-durchgeführt. Die Autoren haben zwölf nichtlineare Methoden untersucht und mit der
-Hauptkomponentenanalyse verglichen. Sie kommen zu dem Ergebnis, dass nichtlineare Methoden die
-Hauptkomponentenanalyse auf künstlichen Datensätzen übertreffen können, dies aber bei natürlichen
+durchgeführt. Die Autoren haben zwölf nichtlineare Methoden untersucht und mit der Principal
+Component Analysis verglichen. Sie kommen zu dem Ergebnis, dass nichtlineare Methoden die Principal
+Component Analysis auf künstlichen Datensätzen übertreffen können, dies aber bei natürlichen
 Datensätzen generell nicht zutrifft. In der Arbeit von \textcite{RohanPandit.2016} wird dieses
 Ergebnis auf Daten von Proteinstrukturen bestätigt. \Textcite{Gracia.2014} stellen eine Methodik
 vor, die die Methoden nach dem Qualitätsverlust der Dimensionsreduktion evaluiert. Dazu wird eine
@@ -61,15 +62,15 @@ modernen Machine Learning Methoden auch auf dem Gebiet der Dimensionsreduktion d
 und vergleichsweise alten statistischen Methoden ersetzen können. Um dieser Frage etwas näher zu
 kommen, werden drei statistische und zwei Machine Learning Methoden genauer betrachtet und in einem
 empirischen Vergleich auf künstlichen und natürlichen Datensätzen gegenübergestellt. Die hier
-vorgestellten Methoden sind die weitverbreitete \newterm{Hauptkomponentenanalyse} (engl.
-\textit{Principal Component Analysis} (PCA)), die \newterm{Kernel PCA} sowie das \newterm{Locally
-	Linear Embedding} als Vertreter der statistischen Methoden
-(\secref{ch:MethodenDerDimRed:statistisch}). Der \newterm{Autoencoder} in der klassischen Form und
-eine Variante davon, der \newterm{Contractive Autoencoder} werden als Vertreter der Machine
-Learning Ansätze (\secref{ch:MethodenDerDimRed:modern}) vorgestellt. Mehrere Veröffentlichungen zur
-Relation zwischen der Hauptkomponentenanalyse und Autoencodern haben außerdem gezeigt, dass diese
+vorgestellten Methoden sind die weitverbreitete \newterm{Principal Component Analysis}, die
+\newterm{Kernel Principal Component Analysis} sowie das \newterm{Locally Linear Embedding} als
+Vertreter der statistischen Methoden (\secref{ch:MethodenDerDimRed:statistisch}). Der
+\newterm{Autoencoder} in der klassischen Form und eine Variante davon, der \newterm{Contractive
+	Autoencoder} werden als Vertreter der Machine Learning Ansätze
+(\secref{ch:MethodenDerDimRed:modern}) vorgestellt. Mehrere Veröffentlichungen zur Relation
+zwischen der Principal Component Analysis und Autoencodern haben außerdem gezeigt, dass diese
 beiden Methoden unter gewissen Annahmen ähnlich sind \parencites{Baldi.1989}{Bourlard.1988}{Plaut.2018}. Es soll daher empirisch herausgearbeitet werden,
-inwiefern ein Autoencoder mit der Hauptkomponentenanalyse übereinstimmt.
+inwiefern ein Autoencoder mit der Principal Component Analysis übereinstimmt.
 
 Die Arbeit ist wie folgt aufgebaut: Zuerst wird in \chapref{ch:Dimensionsreduktion} die Grundlage
 für das Verständnis der Dimensionsreduktionsmethoden gelegt, sowie wichtige Begrifflichkeiten
