@@ -1,0 +1,16 @@
+\begin{table}[ht]
+	\tymax=400pt
+	\tymin=300pt
+	\centering
+	\ra{1.3}
+	\begin{tabulary}{\textwidth}{lLL}
+		\toprule
+		{} & \multicolumn{2}{c}{Encoder-Architektur} \\ \cmidrule{2-3} & Olivetti Faces & FER                                                             \\ \midrule
+		AE      & A & A \\ \midrule
+		CAE & A       & A  \\ \midrule
+		ConvAE & \input{tables/architectures/MNIST_ConvAE.tex} & \input{tables/architectures/FashionMNIST_ConvAE.tex}
+		\\ \bottomrule
+	\end{tabulary}
+	\caption[Die Architektur des Encoders der Autoencoder für den MNIST und Fashion MNIST-Datensatz]{Die Architektur des Encoders der Autoencoder für den MNIST und Fashion MNIST-Datensatz. Die Architektur des Decoders ist symmetrisch zum Encoder.}
+	\label{tab:uebersicht-autoencoder-small}
+\end{table}
