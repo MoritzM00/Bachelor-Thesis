@@ -7,22 +7,21 @@
 \section{Autoencoder-Architekturen und Trainingsdetails}
 \label{ch:Appendix:Architektur-Details}
 In diesem Abschnitt werden Details zu den Autoencoder-Architekturen und Details zum Training der Autoencoder erläutert. Zuerst werden die Architekturen der klassischen vollvernetzten Autoencoder (AE), dann die Architekturen der Convolutional Autoencoder (ConvAE) und zuletzt die Architektur der Contractive Autoencoder (CAE) spezifiziert. Anschließend wird der benutzte Optimierer und andere Trainings-Details genannt. Da die Architekturen
-vom Datensatz abhängen, werden diese in den folgenden Tabellen nach dem Datensatz gruppiert. Dabei steht $\text{FC}_{x}$ für eine vollvernetzte Schicht mit $x$ Neuronen. BN steht für \textit{Batch Normalization} \parencite{Ioffe.2112015} und wird in vollvernetzten Autoencoder und Convolutional Autoencoder
-eingesetzt, da die Autoencoder mit Batch Normalization hinsichtlich der Qualitätskriterien besser
-abschnitten haben als ohne. $\text{Conv}_n$ steht für eine Convolutional Schicht mit $n$ Filter.
-Die Schrittgröße wurde für alle Convolutional Schichten auf zwei gesetzt. In einem Convolutional
+vom Datensatz abhängen, werden diese in den folgenden Tabellen nach dem Datensatz gruppiert. Dabei steht $\text{FC}_{x}$ für eine vollvernetzte Schicht mit $x$ Neuronen. BN steht für \textit{Batch Normalization} \parencite{Ioffe.2015} und wird in vollvernetzten Autoencoder und Convolutional Autoencoder eingesetzt,
+da die Autoencoder mit Batch Normalization hinsichtlich der Qualitätskriterien besser abschnitten
+haben als ohne. $\text{Conv}_n$ steht für eine Convolutional Schicht mit $n$ Filter. Die
+Schrittgröße wurde für alle Convolutional Schichten auf zwei gesetzt. In einem Convolutional
 Autoencoder werden im Decoder Convolutional Schichten gegen Transposed Convolutional Schichten \parencite[siehe][]{Zeiler.2010} ausgetauscht. Die Schrittgröße wurde für alle Convolutional Schichten
 auf zwei gesetzt.
 
 \tabref{tab:uebersicht-autoencoder-non-image} enthält die Encoder-Architekturen der vollvernetzten und Contractive Autoencoder auf dem Swiss Roll-, Twin Peaks- und ICMR-Datensatz.
-\input{tables/non_image_architectures.tex} Der Convolutional Autoencoder ist auf diesen Datensätzen nicht anwendbar und daher nicht in der Tabelle aufzufinden. Die Architekturen auf den Bilddatensätzen wurden in zwei weiteren Tabellen aufgelistet. Die Architekturen für MNIST und Fashion MNIST sind in \tabref{tab:uebersicht-autoencoder-mnist} und für die kleineren Bilddatensätze Olivetti Faces und FER in \tabref{tab:uebersicht-autoencoder-small}.
-
-\input{tables/image_architectures.tex}
+\input{tables/non_image_architectures.tex} Der Convolutional Autoencoder ist auf diesen Datensätzen nicht anwendbar und daher nicht in der Tabelle aufzufinden. Die Architekturen auf den Bilddatensätzen sind in zwei weiteren Tabellen aufgelistet. Die Architekturen für MNIST und Fashion MNIST sind in \tabref{tab:uebersicht-autoencoder-mnist}
+\input{tables/image_architectures.tex} und für die kleineren Bilddatensätze Olivetti Faces und FER in \tabref{tab:uebersicht-autoencoder-small}.
 \input{tables/small_image_datasets_architectures.tex}
 
-Alle Autoencoder werden mit dem \textit{PyTorch}-Framework implementiert, wobei \textit{Skorch} für
-die Kompatibilität mit anderen \textit{Scikit-Learn} Algorithmen eingesetzt wird. Als Optimierer
-wird \textit{Adam} eingesetzt, der häufig für das Trainieren neuronaler Netze gegenüber anderen
+Alle Autoencoder benutzen das \textit{PyTorch}-Framework, wobei \textit{Skorch} für die
+Kompatibilität mit anderen \textit{Scikit-Learn} Algorithmen eingesetzt wird. Als Optimierer wird
+\textit{Adam} verwendet, der häufig für das Trainieren neuronaler Netze gegenüber anderen
 Optimierern wie \textit{Stochastic Gradient Descent} (SGD) präferiert wird. Die Lernrate $\eta$
 wird mittels eines exponentiellen Verfalls nach jeder Epoche aktualisiert. Dazu wird $\eta$ nach
 jeder Epoche $t = 1, \ldots, t_{\text{max}}$ mit einem Wert $\gamma$ multipliziert. Dieser Wert
