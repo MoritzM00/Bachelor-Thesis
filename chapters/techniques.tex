@@ -15,10 +15,10 @@ theoretische Fundierung und sind meist etablierte Algorithmen auf einem jeweilig
 zum Beispiel mit der Principal Component Analysis
 (\subsecref{ch:MethodenDerDimRed:statistisch:PCA}) der Fall ist. Machine Learning Methoden hingegen
 versuchen mithilfe einer großen Menge an Trainingsdaten eine Funktion oder Verteilung zu lernen und
-damit auf neue, ungesehene Daten zu generaliseren. Da hier oft nicht-konvexe Zielfunktionen mittels
-mathematischer Optimierungsfunktionen optimiert werden, kann meistens keine Optimalitätsgarantie
-bewiesen werden. Neuronale Netze sind hierfür ein Paradebeispiel und werden deshalb in
-\secref{ch:MethodenDerDimRed:modern} eingehend behandelt.
+damit auf neue, ungesehene Daten zu generalisieren. Da hier oft nicht-konvexe Zielfunktionen
+mittels mathematischer Optimierungsfunktionen optimiert werden, kann meistens keine
+Optimalitätsgarantie bewiesen werden. Neuronale Netze sind hierfür ein Paradebeispiel und werden
+deshalb in \secref{ch:MethodenDerDimRed:modern} eingehend behandelt.
 
 Nachdem die Motivation und Idee in \chapref{ch:Enleitung}, sowie die Terminologie und mathematische
 Fundierung für die Dimensionsreduktion in \chapref{ch:Dimensionsreduktion} besprochen wurde, können
@@ -32,10 +32,10 @@ Algorithmen, die hier nicht behandelt werden können, wurden bereits in
 
 Zu den statistischen Methoden, die in dieser Arbeit vorgestellt werden, gehören die
 \newterm{Principal Component Analysis} (PCA) in \subsecref{ch:MethodenDerDimRed:statistisch:PCA}
-sowie die nichtlineare Erweiterung der Principal Component Analysis, die \newterm{Kernel Principal
-	Component Analysis} (Kernel PCA) (\subsecref{ch:MethodenDerDimRed:statistisch:kPCA}). Außerdem wird
-das \newterm{Locally Linear Embedding} (LLE) in \subsecref{ch:MethodenDerDimRed:statistisch:LLE}
-als Vertreter der statistischen Methoden genauer behandelt.
+und die nichtlineare Erweiterung \newterm{Kernel Principal Component Analysis} (Kernel PCA)
+(\subsecref{ch:MethodenDerDimRed:statistisch:kPCA}). Außerdem wird das \newterm{Locally Linear
+	Embedding} (LLE) in \subsecref{ch:MethodenDerDimRed:statistisch:LLE} als Vertreter der
+statistischen Methoden genauer behandelt.
 
 %% ==============================
 \subsection{Principal Component Analysis}
@@ -45,11 +45,10 @@ als Vertreter der statistischen Methoden genauer behandelt.
 Die Principal Component Analysis ist \textit{die} Methode der Dimensionsreduktion und wurde
 erstmals von \textcite{Pearson.1901} und \textcite{Hotelling.1933} entwickelt. Trotz des
 mittlerweile relativ hohen Alters ist die Principal Component Analysis immer noch aufgrund der
-simplen Anwendbarkeit oft die erste Wahl einer Dimensionsreduktionsmethode. Im Folgenden möchte ich
-kurz auf die zentrale Idee und Motivation (\ref{ch:MethodenDerDimRed:statistisch:PCA:Grundidee})
-der Principal Component Analysis, sowie die mathematische Herleitung der sogenannten
-\newterm{Hauptkomponenten} (Unterabschnitte \ref{ch:MethodenDerDimRed:statistisch:PCA:Definition}
-und \ref{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}) eingehen.
+simplen Anwendbarkeit oft die erste Wahl einer Dimensionsreduktionsmethode. Im Folgenden wird auf
+die zentrale Idee und Motivation der Principal Component Analysis, sowie die mathematischen
+Herleitung der sogenannten \newterm{Hauptkomponenten} (engl. \textit{principal components})
+eingegangen.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Grundidee}

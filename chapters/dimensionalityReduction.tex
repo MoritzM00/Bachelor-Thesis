@@ -8,11 +8,12 @@ eine niedrigdimensionale, sogenannte \newterm{latente} Repräsentation, wobei m�
 Information über die Daten verloren gehen soll \parencite[2]{Lee.2007}. Dies ist darin begründet, dass Daten oft nur künstlich hochdimensional, also
 \textit{redundant} sind. Dies bedeutet, dass die Daten effizienter über eine kleinere Menge von
 Merkmalen $y_1,\ldots,y_d$ ausgedrückt werden kann, als über die ursprüngliche Repräsentation durch
-die Merkmale $x_1,\ldots,x_D$ mit $d < D$. Hierbei bezeichnet $D$ die \newterm{extrinsische
-	Dimension} des zugehörigen Ursprungsraumes $\mathcal{X}$ (welcher üblicherweise dem $\real^D$
-entspricht) und $d$ bezeichnet die \newterm{intrinsische Dimension} der Daten. Die intrinsische
-Dimension wird teilweise auch als latente Dimension bezeichnet und beschreibt die minimale Anzahl
-an Merkmalsvariablen $y_i$, die für die Generierung der Daten benötigt werden \parencite[47]{Lee.2007}. Die intrinsische Dimension kann neben dieser intuitiven Sichtweise auch über
+die Merkmale $x_1,\ldots,x_D$ mit $d < D$ und oft $d \ll D$. Hierbei bezeichnet $D$ die
+\newterm{extrinsische Dimension} des zugehörigen Ursprungsraumes $\mathcal{X}$ (welcher
+üblicherweise dem $\real^D$ entspricht) und $d$ bezeichnet die \newterm{intrinsische Dimension} der
+Daten. Die intrinsische Dimension wird teilweise auch als latente Dimension bezeichnet und
+beschreibt die minimale Anzahl an Merkmalsvariablen $y_i$, die für die Generierung der Daten
+benötigt werden \parencite[47]{Lee.2007}. Die intrinsische Dimension kann neben dieser intuitiven Sichtweise auch über
 topologische Überlegungen der zugrundeliegenden Verteilung der Daten definiert werden. Diese Idee
 wird in \secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim} durch das Konzept von
 Mannigfaltigkeiten erläutert.
@@ -31,7 +32,7 @@ Nachdem nun die grundlegende Terminologie und das Ziel der Dimensionsreduktion g
 werden im Folgenden einige weitere wichtige Ideen und Konzepte erläutert. Dazu wird in
 \secref{ch:Dimensionsreduktion:FluchDerDim} der Fluch der Dimensionalität sowie in
 \secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim} die Idee von Mannigfaltigkeiten und
-der intrinsischen Dimension behandelt. Letztlich werden nn \secref{ch:Dimensionsreduktion:Ansaetze}
+der intrinsischen Dimension behandelt. Letztlich werden in \secref{ch:Dimensionsreduktion:Ansaetze}
 kurz verschiedene Möglichkeiten der Einordnung von Dimensionsreduktionsmethoden vorgestellt.
 
 \section{Der Fluch der Dimensionalität}
@@ -50,9 +51,11 @@ Wie eingangs besprochen wird bei hochdimensionalen Daten oft von Redundanz oder
 Abhängigkeitsstrukturen in den Merkmalen ausgegangen. Eng damit verbunden ist die Idee, dass Daten
 auf einer sogenannten \newterm{Mannigfaltigkeit} (engl. \textit{manifold}) liegen.
 Dimensionsreduktionsmethoden, die auf dieser Idee basieren, gehören zu einem wichtigen Teilgebiet
-der Dimensionreduktion: dem Erlernen von Mannigfaltigkeiten \parencite{Cayton.2005}. Motiviert werden diese Ansätze durch die Hypothese, dass reale
-hochdimensionale Daten in vielen Fällen auf einer in diesem hochdimensionalen Raum
-\textit{eingebetteten} Mannigfaltigkeit $\mathcal{M}$ der Dimensionalität $d$ < $D$ liegen \parencite[vgl.][1]{Cayton.2005}. In diesem Abschnitt wird ein kurzer Überblick über den abstrakten
+der Dimensionreduktion: dem Erlernen von Mannigfaltigkeiten \parencite{Cayton.2005}. Ein Vertreter dieser Methoden ist Locally Linear Embedding, das in
+\subsecref{ch:MethodenDerDimRed:statistisch:LLE} noch eingehend behandelt wird. Motiviert werden
+diese Ansätze durch die Hypothese, dass reale hochdimensionale Daten in vielen Fällen auf einer in
+diesem hochdimensionalen Raum \textit{eingebetteten} Mannigfaltigkeit $\mathcal{M}$ der
+Dimensionalität $d$ < $D$ liegen \parencite[vgl.][1]{Cayton.2005}. In diesem Abschnitt wird ein kurzer Überblick über den abstrakten
 Begriff einer Mannigfaltigkeit gegeben, wodurch ein geometrischer Bezug der intrinsischen Dimension
 hergestellt werden kann.
 
@@ -91,7 +94,7 @@ verwiesen.
 
 \section{Einordnungen von Dimensionsreduktionsmethoden}
 \label{ch:Dimensionsreduktion:Ansaetze}
-Methoden der Dimensionsreduktion können auf unterschiedlichste Weise in Kategorien eingeteilt werden. Die in dieser Arbeit verwendete Kategorisierung weicht von den üblichen Kategorisierungen ab, da der Fokus hier auf dem Vergleich statistischer Methoden und modernerer Machine Learning Methoden liegt. Für einen Überblick und zur besseren Einschätzung werden in diesem Abschnitt kurz die gängigsten Kategorisierungsmöglichkeiten vorgestellt. Dazu gehört die Unterteilung in (i) lineare und nichtlineare Methoden, (ii) konvexe und nicht-konvexe Methoden, sowie (iii) Distanz- und Topologie-erhaltende Methoden.
+Methoden der Dimensionsreduktion können auf unterschiedlichste Weise in Kategorien eingeteilt werden. Die in dieser Arbeit verwendete Kategorisierung weicht von den üblichen Kategorisierungen ab, da der Fokus hier auf dem Vergleich statistischer Methoden und Machine Learning Methoden liegt. Für einen Überblick und zur besseren Einschätzung werden in diesem Abschnitt kurz die gängigsten Kategorisierungsmöglichkeiten vorgestellt. Dazu gehört die Unterteilung in (i) lineare und nichtlineare Methoden, (ii) konvexe und nicht-konvexe Methoden, sowie (iii) Distanz- und Topologie-erhaltende Methoden.
 
 Eine simple und weitverbreitete Unterteilung ist die in lineare und nichtlineare Methoden. Während
 lineare Methoden wie die Principal Component Analysis
@@ -99,9 +102,9 @@ lineare Methoden wie die Principal Component Analysis
 können, sind nichtlineare Methoden in dieser Hinsicht deutlich flexibler. Zu letzteren gehören
 beispielsweise die Kernel PCA (\secref{ch:MethodenDerDimRed:statistisch:kPCA}) und die Autoencoder
 (\secref{ch:MethodenDerDimRed:ML:AE}), welche eine bestimmte Klasse von neuronalen Netzen
-darstellen.
+darstellen.\rewrite{lies sich nicht gut}
 
-\textbf{Konvexe} Methoden optimieren eine Zielfunktion, bei der jedes lokale Optimum gleichzeitig das globale Optimum ist. Die Optimierung ist daher leichter, jedoch sind die möglichen Zielfunktionen auch deutlich eingeschränkter. \textbf{Nicht-konvexe} Methoden wie der Autoencoder, das Sammon Mapping oder das Manifold Charting\addref optimieren nicht-konvexe Zielfunktionen und können damit bei der Optimierung in suboptimalen lokalen Extrempunkten \enquote{steckenbleiben}. Die Optimierung erfolgt meist mittels des Gradientenabstiegsverfahrens (engl. \textit{gradient descent}) oder anderen mathmatischen Optimierungsverfahren \parencite[siehe z.B.][]{Guler.2010}.
+\textbf{Konvexe} Methoden optimieren eine Zielfunktion, bei der jedes lokale Optimum gleichzeitig das globale Optimum ist. Die Optimierung ist daher leichter, jedoch sind die möglichen Zielfunktionen auch deutlich eingeschränkter. \textbf{Nicht-konvexe} Methoden wie der Autoencoder optimieren nicht-konvexe Zielfunktionen und können damit bei der Optimierung in suboptimalen lokalen Extrempunkten \enquote{steckenbleiben}. Die Optimierung erfolgt meist mittels des Gradientenabstiegsverfahrens (engl. \textit{gradient descent}) oder anderen mathmatischen Optimierungsverfahren \parencite[siehe z.B.][]{Guler.2010}.
 
 \textbf{Distanz-basierte Methoden} versuchen die paarweisen Distanzen in den Daten zu erhalten, womit die zugrundeliegende Struktur erhalten werden soll \parencite[3]{Gracia.2014}. Vertreter dieser Kategorie sind die (klassische) Multidimensionale
 Skalierung \parencites{Kruskal.1964}{Cox.2008}, das Sammon Mapping \addref und die Curvilinear Component Analysis
