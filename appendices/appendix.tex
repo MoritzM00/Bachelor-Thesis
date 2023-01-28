@@ -9,7 +9,9 @@
 In diesem Abschnitt werden Details zu den Autoencoder-Architekturen und Details zum Training der Autoencoder erläutert. Zuerst werden die Architekturen der klassischen vollvernetzten Autoencoder (AE), dann die Architekturen der Convolutional Autoencoder (ConvAE) und zuletzt die Architektur der Contractive Autoencoder (CAE) spezifiziert. Anschließend wird der benutzte Optimierer und andere Trainings-Details genannt. Da die Architekturen
 vom Datensatz abhängen, werden diese in folgender Tabelle nach dem Datensatz gruppiert.
 
-\input{tables/convae_architectures.tex}
+\input{tables/non_image_architectures.tex}
+
+\input{tables/image_architectures.tex}
 
 Alle Autoencoder werden mit dem \textit{PyTorch}-Framework implementiert, wobei \textit{Skorch} für
 die Kompatibilität mit anderen \textit{Scikit-Learn} Algorithmen eingesetzt wird. Als Optimierer

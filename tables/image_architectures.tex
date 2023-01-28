@@ -1,15 +1,16 @@
 \begin{table}[ht]
 	\tymax=400pt
-	\tymin=200pt
+	\tymin=300pt
 	\centering
 	\ra{1.3}
-	\begin{tabulary}{\textwidth}{lLLLLLLL}
+	\begin{tabulary}{\textwidth}{lLL}
 		\toprule
-		{} & \multicolumn{3}{c}{Encoder-Architektur} \\ \cmidrule{2-4} & Swiss Roll & Twin Peaks & ICMR                                                             \\ \midrule
-		AE      & \input{tables/architectures/SwissRoll_AE.tex} & \input{tables/architectures/TwinPeaks_AE.tex} & \input{tables/architectures/ICMR_AE.tex}          \\ \midrule
-		CAE & \input{tables/architectures/SwissRoll_CAE.tex}      & \input{tables/architectures/TwinPeaks_CAE.tex} & \input{tables/architectures/ICMR_CAE.tex}
+		{} & \multicolumn{2}{c}{Encoder-Architektur} \\ \cmidrule{2-3} & MNIST & Fashion MNIST                                                             \\ \midrule
+		AE      & A & A \\ \midrule
+		CAE & A       & A  \\ \midrule
+		ConvAE & \input{tables/architectures/MNIST_ConvAE.tex} & \input{tables/architectures/FashionMNIST_ConvAE.tex}
 		\\ \bottomrule
 	\end{tabulary}
-	\caption[Die Architektur des Encoders des vollvernetzten und Contractive Autoencoders für den Swiss Roll-, Twin Peaks- und ICMR-Datensatz]{Die Architektur des Encoders des vollvernetzten und Contractive Autoencoders für den Swiss Roll-, Twin Peaks- und ICMR-Datensatz. Die Architektur des Decoders ist symmetrisch zum Encoder. $\text{FC}_{x}$ steht für eine vollvernetzte Schicht mit $x$ Neuronen. BN steht für \textit{Batch Normalization}.}
+	\caption[Die Architektur des Encoders der Autoencoder für den MNIST und Fashion MNIST-Datensatz]{Die Architektur des Encoders der Autoencoder für den MNIST und Fashion MNIST-Datensatz. Die Architektur des Decoders ist symmetrisch zum Encoder. In einem Convolutional Autoencoder werden im Decoder Convolutional Schichten gegen Transpose Convolutional Schichten ausgetauscht. $\text{FC}_{x}$ steht für eine vollvernetzte Schicht mit $x$ Neuronen. BN steht für \textit{Batch Normalization}. $\text{Conv}_n$ steht für eine Convolutional Schicht mit $n$ Filter. Die Kernel-Größe der Convolutional Schichten beträgt $3 \times 3$ und die Schrittgröße ist zwei.}
 	\label{tab:uebersicht-autoencoder}
 \end{table}
