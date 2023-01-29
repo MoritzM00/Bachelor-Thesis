@@ -138,10 +138,17 @@ Arbeit verwendete \newterm{Maximum Likelihood Schätzer} von \textcite{Levina.20
 betrachten die Verteilung der Nachbarschaft eines Punktes $\rvect{x}$ als Funktion der
 intrinsischen Dimension -- üblicherweise innerhalb einer kleinen Kugel um $\rvect{x}$
 \parencite[8]{Campadelli.2015}. Der Maximum Likelihood Schätzer nimmt an, dass die Beobachtungen, die
-in einer solchen Kugel liegen, einem homogenen Poisson-(Zähl-)Prozess\unsure{Hier in der Fußnote
-	etwas dazu erzählen} folgen
-\parencite[2]{Levina.2004}. Dieser Prozess hängt von $d$ ab, weshalb mittels der Maximum Likelihood
-Methode ein Schätzwert $\estNormal{d}$ für einen fixen Punkt $\rvect{x}_i$ als
+in einer solchen Kugel liegen, einem homogenen Poisson-(Zähl-)Prozess\footnote{Ein
+Poisson-Zählprozess ist eine Folge von Zufallsvariablen $\{ N(t) \}_{t \geq 0}$, wobei $N(t) \sim
+	\text{Poisson}(\lambda t)$ eine Poisson-verteilte Zufallsvariable ist, die den Wert zum
+\textit{Zeitpunkt} $t$ modelliert \parencite[105 -- 117]{Jones.2018}. Dieser Prozess kann dazu benutzt werden, zufällig auftretende
+Ereignisse über einen Zeitraum hinweg oder wie hier die Anzahl der Nachbarn eines Punktes zu
+zählen.} folgen
+\parencite[2]{Levina.2004}.\footnote{Genau genommen, wird zuerst ein inhomogener Binomial-Prozess
+	angenommen, der die Punkte mit Distanz kleiner $t$ zählt (bei fixem $\vect{x}$). Dieser Prozess
+	wird dann durch einen homogenen Poisson-Prozess approximiert.} Dieser Prozess hängt von $d$ ab,
+weshalb mittels der Maximum Likelihood Methode ein Schätzwert $\estNormal{d}$ für einen fixen Punkt
+$\rvect{x}_i$ als
 \begin{equation}
 	\estNormal{d}_K(\vect{x}_i) = \left( \frac{1}{K - 1} \sum_{j=1}^{K - 1} \log \frac{T_K(\vect{x}_i)}{T_j(\vect{x}_i)} \right)^{-1}
 \end{equation}
@@ -416,32 +423,62 @@ abgebildet. Die erste Zeile besteht aus den Originalbildern als Referenz.
 \end{figure}
 Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da einige Zahlen sogar als falsche Zahl rekonstruiert werden. Die Rekonstruktionen der Principal Component Analysis sind besser, aber visuell ebenfalls nicht überzeugend, da sie deutlich unscharfer sind. Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte und zeigt auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien eine gute Güte der Dimensionsreduktion (siehe \figref{fig:MNISTMetrics}). Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, so dass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
 
-\subsection{PCA und Autoencoder}
+\subsection{Principal Component Analysis vs. Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}
 
 In diesem Abschnitt wird die Principal Component Analysis mit Autoencodern verglichen. Dazu wird
-zuerst der theoretische Zusammenhang zwischen den beiden Methoden erklärt. Im Anschluss wird die
-Principal Component Analysis und unterschiedliche Modelle des Autoencoders für einen empirischen
-Vergleich auf dem FER-Datensatz trainiert, wobei aufgrund der sieben unterschiedlichen Emotionen im
-Datensatz eine Reduktion auf sieben Dimensionen durchgeführt wurde. Ein Beispielbild für jede
-Emotion des FER-Datensatzes ist in \figref{fig:FER-Datensatz-Beispiele} dargestellt.
+der theoretische Zusammenhang zwischen den beiden Methoden erklärt und durch empirische Experimente
+verdeutlicht.
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics{fer2013-images.pdf}
-	\caption[Beispielbilder des FER-Datensatzes]{Abgebildet ist je ein Bild für eine der sieben Emotionen im FER-Datensatz.}
-	\label{fig:FER-Datensatz-Beispiele}
-\end{figure}
+% Im Anschluss wird die
+% Principal Component Analysis und unterschiedliche Modelle des Autoencoders für einen empirischen
+% Vergleich auf dem FER-Datensatz trainiert, wobei aufgrund der sieben unterschiedlichen Emotionen im
+% Datensatz eine Reduktion auf sieben Dimensionen durchgeführt wurde. Ein Beispielbild für jede
+% Emotion des FER-Datensatzes ist in \figref{fig:FER-Datensatz-Beispiele} dargestellt.
 
-\textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y} = f(\vect{x})$ (siehe \secref{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}) eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten $\tr{\mat{A}}\vect{x}$ der PCA (siehe \secref{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}) ist: Die Gewichte eines linearen Autoencoders, der den quadrierten Fehler (\eqref{eq:AE_objectiveFunction}) minimiert, spannen den gleichen Unterraum auf, wie die Ladungsmatrix $\mat{A}$. Dies gilt sogar dann, wenn im Encoder eines dreischichtigen Autoencoders Sigmoid-Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die latente Repräsentation $\mat{Y}$
+% \begin{figure}[ht]
+% 	\centering
+% 	\includegraphics{fer2013-images.pdf}
+% 	\caption[Beispielbilder des FER-Datensatzes]{Abgebildet ist je ein Bild für eine der sieben Emotionen im FER-Datensatz.}
+% 	\label{fig:FER-Datensatz-Beispiele}
+% \end{figure}
+
+\textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y} = f(\vect{x})$ eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten $\tr{\mat{A}}\vect{x}$ einer Principal Component Analysis ist: Die Gewichte eines linearen Autoencoders, der den quadrierten Fehler (\eqref{eq:AE_objectiveFunction}) minimiert, spannen einen äquivalenten Unterraum wie Ladungsmatrix $\mat{A}$ auf.
+Dies gilt sogar dann, wenn im Encoder eines dreischichtigen Autoencoders Sigmoid-Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die latente Repräsentation $\mat{Y}$
 eines linearen Autoencoders mit der von PCA wie folgt \parencite[3]{Plaut.2018}: (1) Die Kovarianzmatrix von $\mat{Y}$ ist nicht diagonal, das heißt die
 latente Repräsentation ist nicht unkorreliert.\footnote{Äquivalent dazu ist die Korrelationsmatrix
 	von $\mat{Y}$, welche lediglich eine skalierte Kovarianzmatrix darstellt, keine Einheitsmatrix.}
-(2) Die transformierten Daten $\mat{Y}$ sind nicht nach absteigender Varianz sortiert. (3) Hat man
-einen Encoder $f: \real^D \rightarrow \real^{k_1}$ und möchte man einen Vektor $\vect{x} \in
-	\real^D$ auf nur $k_2$ Dimensionen mit $k_2 < k_1$ reduzieren, so können nicht einfach die ersten
-$k_2$ Koordinaten von $f(\vect{x})$ verwendet werden. Das bedeutet, dass die Lösungen von
-Autoencodern auf unterschiedliche Dimensionen nicht geschachtelt sind.
+(2) Die Spalten von $\mat{Y}$ sind nicht nach absteigender Varianz sortiert. (3) Hat man einen
+Encoder $f: \real^D \rightarrow \real^{k_1}$ und möchte man einen Vektor $\vect{x} \in \real^D$ auf
+nur $k_2$ Dimensionen mit $k_2 < k_1$ reduzieren, so können nicht einfach die ersten $k_2$
+Koordinaten von $f(\vect{x})$ verwendet werden. Das bedeutet, dass die Lösungen von Autoencodern
+auf unterschiedliche Dimensionen nicht geschachtelt sind.
+
+Es wurden jedoch bereits Verfahren entwickelt, mit denen diese Eigenschaften wiederhergestellt oder
+von Beginn an sichergestellt werden können. Das Vorgehen von \textcite{Plaut.2018} rekonstruiert
+mittels eines linearen dreischichtigen Autoencoders die Eigenvektorbasis der Kovarianzmatrix bis
+hin zu einer orthogonalen Transformation. Die Autoren behaupten, dass durch eine
+Singulärwertszerlegung der Decoder-Gewichtsmatrix $\mat{W}_2$, d.h. die Zerlegung in
+\begin{equation}
+	\mat{W}_2 = \mat{U} \mat{\Sigma} \tr{\mat{V}}
+\end{equation}
+die Hauptkomponenten bis hin zu einer orthogonalen Transformation erlangen kann \parencite[4]{Plaut.2018}.\footnote{Die Singulärwertszerlegung ist eine Verallgemeinerung der
+	Eigenwertszerlegung für nicht-quadratische Matrizen, wie es hier mit $\mat{W}_2 \in \real^{D \times
+			d}$ der Fall ist. $\mat{U}$ und $\mat{V}$ sind orthogonale Matrizen, die aus den Links-
+	beziehungsweise Rechts-Singulärvektoren bestehen. Die Matrix $\mat{\Sigma}$ ist eine Diagonalmatrix
+	mit den Singulärwerten. Die Eigenwerte einer quadratischen Matrix entsprechen gerade den
+	quadrierten Singulärwerten.} Dabei sind die Links-Singulärvektoren, d.h. die Spalten von $\mat{U}$,
+die gesuchten Vektoren.
+
+Allerdings wurde dies nicht formal bewiesen, sondern nur in empirischen Ergebnissen festgestellt.
+Eine Re-Implementierung des beschriebenen Vorgehens schlägt fehl, wenn ein
+\textit{nicht-regularisierter} Autoencoder verwendet wird. Diese Beobachtung wurde in der Arbeit
+von \textcite{Kunin.2019} zur Landschaft der Fehlerfunktion eines linearen Autoencoders bestätigt
+und formal nachgewiesen. Damit ein linearer dreischichtiger Autoencoder die Richtungen der
+Hauptkomponenten lernen kann, muss ein Regularisierungsterm zur Zielfunktion des Autoencoders
+hinzufügt werden, der die Größe der Gewichte bestraft. Die Art dieses Regularisierungsterms macht
+jedoch ebenfalls einen Unterschied: Beispielsweise kann hier die quadrierte Frobeniusnorm der
+Gewichte verwendet werden.
 
 \begin{figure}[ht]
 	\centering
