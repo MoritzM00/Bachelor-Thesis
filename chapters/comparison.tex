@@ -186,14 +186,14 @@ Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \
 ausgewählt, um die Performance der Dimensionsreduktionsmethoden auf natürlichen Datensätzen zu
 evaluieren. Der weitverbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von
 handgeschriebenen Zahlen in der Auflösung $28 \times 28$. Die Anzahl der Pixel und damit die
-extrinsische Dimension beträgt 784. Der \textit{Olivetti Faces}-Datensatz enthält Bilder von
-Gesichtern aus zehn unterschiedlichen Positionen von 40 Personen und ist damit der kleinste
-natürliche Datensatz in diesem Vergleich mit 400 Bildern. Die Bilder haben eine Auflösung von $64
-	\times 64$, was einer extrinsischen Dimension von 4096 entspricht. Der Fashion MNIST-Datensatz
-besteht aus 60 000 Bildern von zehn unterschiedlichen Kleidungsstücken. Die extrinsische Dimension
-ist ebenso wie bei MNIST 784. FER-Datensatz besteht aus 28 709 Bildern von Gesichtern mit sieben
-unterschiedlichen Emotionen. Die Bilder haben eine Auflösung von $48 \times 48$ und sind damit
-2304-dimensional. Beispiele der Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
+extrinsische Dimension beträgt 784. Der Olivetti Faces-Datensatz enthält Bilder von Gesichtern aus
+zehn unterschiedlichen Positionen von 40 Personen und ist damit der kleinste natürliche Datensatz
+in diesem Vergleich mit 400 Bildern. Die Bilder haben eine Auflösung von $64 \times 64$, was einer
+extrinsischen Dimension von 4096 entspricht. Der Fashion MNIST-Datensatz besteht aus 60 000 Bildern
+von zehn unterschiedlichen Kleidungsstücken. Die extrinsische Dimension ist ebenso wie bei MNIST
+784. FER-Datensatz besteht aus 28 709 Bildern von Gesichtern mit sieben unterschiedlichen
+Emotionen. Die Bilder haben eine Auflösung von $48 \times 48$ und sind damit 2304-dimensional.
+Beispiele der Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
 \begin{figure}
 	\begin{center}
 		\includegraphics{dataset_samples.pdf}
@@ -223,7 +223,7 @@ erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 		Swiss Roll     & 3                          & 2                          & 5 000                \\
 		Twin Peaks     & 3                          & 2                          & 5 000                \\
 		MNIST          & 784                        & 15                         & 60 000               \\
-		Fasion MNIST   & 784                        & 18                         & 60 000               \\
+		Fashion MNIST  & 784                        & 18                         & 60 000               \\
 		Olivetti Faces & 4 096                      & 9                          & 400                  \\
 		FER            & 2 304                      & 26                         & 28 709               \\
 		ICMR           & 20 531                     & 22                         & 801                  \\
@@ -260,25 +260,18 @@ Bottleneck-Schicht. Für Kernel PCA wird ein Gaußscher Kernel eingesetzt, wofü
 $\sigma$ gewählt werden kann. Die Werte $\sigma \in \{ 0.1, 0.25, 0.75, 1, 2, 5\}$ wurden getestet
 und der beste Durchlauf ausgewählt. Für ICMR und Olivetti Faces lieferten diese Werte schlechte
 Ergebnisse, weswegen auf diesen Datensätzen zusätzlich die Werte $\{ 1\mathrm{e}{-3},
-	1\mathrm{e}{-4}, 1\mathrm{e}{-5}\}$ getestet wurden. Für Locally Linear Embedding gibt es zwei
-Parameter: (1) einen Parameter $\Klle$, der die Größe der verwendeten Nachbarschaft kontrolliert
-und (2) eine Regularisierungskonstante $\epsilon$, die auf die Diagonale der lokalen
-Kovarianzmatrix addiert wird. Die Nachbarschaft wurde für die Werte $\Klle \in \{ 5, 7, 10, 12,
-	15\}$ getestet und der beste Durchlauf ausgewählt. die Regularisierungskonstante wurde auf allen
-Datensätzen auf $\epsilon = 1\mathrm{e}{-3}$ gesetzt.
+	1\mathrm{e}{-4}, 1\mathrm{e}{-5}\}$ getestet wurden. Für Locally Linear Embedding gibt es nur einen
+Parameter $\Klle$, der die Größe der verwendeten Nachbarschaft kontrolliert. Die Werte $\Klle \in
+	\{ 5, 7, 10, 12, 15\}$ wurden getestet und der beste Durchlauf ausgewählt.
 
 Den statistischen Methoden gegenüber haben Autoencoder deutlich mehr Freiheitsgrade, um die
 Architektur zu bestimmen. Die wichtigsten Parameter sind die Anzahl der Schichten $m$, sowie die
 Anzahl an Neuronen pro Schicht und die Wahl der Aktivierungsfunktionen. Daneben gibt es noch viele
-weitere Freiheitsgrade für das Trainieren des Autoencoders, welche teilweise vom Datensatz
-abhängen. Diese wurden für alle Autoencoder nahezu identisch gewählt und werden in
-Appendix~\ref{ch:Appendix:Architektur-Details} genauer erläutert. Für beide künstlichen Datensätze
-und für den Olivetti Faces-Datensatz wird ein dreischichtiger\rewrite{das stimmt nicht mehr}
-Autoencoder eingesetzt. Für alle anderen Datensätze wird ein fünfschichtiger Autoencoder trainiert.
-Alle vollvernetzten Autoencoder und der Contractive Autoencoder verwenden
-Sigmoid-Aktivierungsfunktionen im Encoder und Decoder. Auf Bilddatensätzen wurden zusätzlich
-Convolutional Autoencoder trainiert, deren Architekturen an \textcite[14]{Ghosh.2019} angelehnt und
-ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
+weitere Freiheitsgrade beim Trainieren des Autoencoders, welche teilweise vom Datensatz abhängen.
+Die Architekturen und weitere Trainingsdetails werden in
+Appendix~\ref{ch:Appendix:Architektur-Details} genauer erläutert. Auf Bilddatensätzen wurden
+zusätzlich Convolutional Autoencoder trainiert, deren Architekturen an \textcite[14]{Ghosh.2019}
+angelehnt und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
 
 \begin{table}[ht]
 	\tymax=300pt
@@ -289,7 +282,7 @@ ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
 		Methode                            & Parameter                                                            \\ \midrule
 		PCA      & --                                                                   \\
 		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\sigma))$, $\sigma \in \{\expnum{1}{-5},\expnum{1}{-4}, \expnum{1}{-3}, \expnum{1}{-2}, \expnum{1}{-1}, 0.25, 0.75, 1, 2, 5\}$ \\
-		Locally Linear Embedding     & $\Klle \in \{ 5, 7, 10, 12, 15\}$, $\epsilon=1\mathrm{e}{-3}$                                   \\
+		Locally Linear Embedding     & $\Klle \in \{ 5, 7, 10, 12, 15\}$,                      \\
 		Autoencoder                  & $m \in \{3, 5, 7\}$, Sigmoid-Aktivierungsfunktion \newline (siehe
 		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\  Contractive Autoencoder & $m \in \{3, 5\}$, $\lambda=1\mathrm{e}{-4}$,
 		Sigmoid-Aktivierungsfunktion (siehe Appendix~\ref{ch:Appendix:Architektur-Details})                       \\
