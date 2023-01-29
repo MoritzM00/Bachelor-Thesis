@@ -198,7 +198,7 @@ Beispiele der Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
 	\begin{center}
 		\includegraphics{dataset_samples.pdf}
 	\end{center}
-	\caption[Beispielbilder der natürlichen Datensätze]{Zu sehen sind je vier Beispielbilder der natürlichen Bilddatensätze aus dem Vergleich: \captiona Handgeschriebene Zahlen aus dem MNIST-Datensatz \captionb Gesichter mit unterschiedlichen Emotionen aus dem FER-Datensatz \captionc Verschiedene Kleidungsstücke aus dem Fashion MNIST-Datensatz \captiond Bilder der Gesichter unterschiedlicher Personen aus zehn Blickwinkeln (Olivetti Faces-Datensatz)}
+	\caption[Beispielbilder der natürlichen Datensätze]{Zu sehen sind Beispielbilder der natürlichen Bilddatensätze aus dem Vergleich: \captiona Handgeschriebene Zahlen aus dem MNIST-Datensatz \captionb Gesichter mit unterschiedlichen Emotionen aus dem FER-Datensatz \captionc Verschiedene Kleidungsstücke aus dem Fashion MNIST-Datensatz \captiond Bilder der Gesichter unterschiedlicher Personen aus zehn Blickwinkeln (Olivetti Faces-Datensatz)}
 	\label{fig:Dataset_samples}
 \end{figure}
 
@@ -289,7 +289,7 @@ angelehnt und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezif
 		Convolutional Autoencoder & $m > 5$, ReLU-Aktivierungsfunktion \newline (siehe
 		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\ \bottomrule
 	\end{tabulary}
-	\caption[Übersicht über die verwendeten Parameter der Methoden]{Übersicht über die verwendeten Parameter. Hierbei ist $\kappa$ die Kernel-Funktion, $D$ die extrinsische Dimension des Datensatzes, $\Klle$ die Nachbarschaftsgröße, $\epsilon$ eine Regularisierungskonstante für LLE, $m$ die Anzahl der Schichten im Autoencoder und $\lambda$ eine multiplikative Konstante für den kontrahierenden Fehlerterm des CAE.}
+	\caption[Übersicht über die verwendeten Parameter der Methoden]{Übersicht über die verwendeten Parameter. Hierbei ist $\kappa$ die Kernel-Funktion, $\Klle$ die Nachbarschaftsgröße, $m$ die Anzahl der Schichten im Autoencoder und $\lambda$ eine multiplikative Konstante für den kontrahierenden Fehlerterm des CAE.}
 	\label{tab:uebersicht-parameter}
 \end{table}
 \section{Resultate}
@@ -436,6 +436,8 @@ verdeutlicht.
 % 	\label{fig:FER-Datensatz-Beispiele}
 % \end{figure}
 
+\subsubsection{Theoretischer Zusammenhang}
+
 \textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y} = f(\vect{x})$ eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten $\tr{\mat{A}}\vect{x}$ einer Principal Component Analysis ist: Die Gewichte eines linearen Autoencoders, der den quadrierten Fehler (\eqref{eq:AE_objectiveFunction}) minimiert, spannen einen äquivalenten Unterraum wie Ladungsmatrix $\mat{A}$ auf.
 Dies gilt sogar dann, wenn im Encoder eines dreischichtigen Autoencoders Sigmoid-Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die latente Repräsentation $\mat{Y}$
 eines linearen Autoencoders mit der von PCA wie folgt \parencite[3]{Plaut.2018}: (1) Die Kovarianzmatrix von $\mat{Y}$ ist nicht diagonal, das heißt die
@@ -453,12 +455,13 @@ mittels eines linearen dreischichtigen Autoencoders die Eigenvektorbasis der Kov
 hin zu einer orthogonalen Transformation. Die Autoren behaupten, dass durch eine
 Singulärwertszerlegung der Decoder-Gewichtsmatrix $\mat{W}_2$, d.h. die Zerlegung in
 \begin{equation}
-	\mat{W}_2 = \mat{U} \mat{\Sigma} \tr{\mat{V}}
+	\label{eq:SVD}
+	\mat{W}_2 = \mat{U} \mat{\Psi} \tr{\mat{V}}
 \end{equation}
 die Hauptkomponenten bis hin zu einer orthogonalen Transformation erlangen kann \parencite[4]{Plaut.2018}.\footnote{Die Singulärwertszerlegung ist eine Verallgemeinerung der
 	Eigenwertszerlegung für nicht-quadratische Matrizen, wie es hier mit $\mat{W}_2 \in \real^{D \times
 			d}$ der Fall ist. $\mat{U}$ und $\mat{V}$ sind orthogonale Matrizen, die aus den Links-
-	beziehungsweise Rechts-Singulärvektoren bestehen. Die Matrix $\mat{\Sigma}$ ist eine Diagonalmatrix
+	beziehungsweise Rechts-Singulärvektoren bestehen. Die Matrix $\mat{\Psi}$ ist eine Diagonalmatrix
 	mit den Singulärwerten. Die Eigenwerte einer quadratischen Matrix entsprechen gerade den
 	quadrierten Singulärwerten.} Dabei sind die Links-Singulärvektoren, d.h. die Spalten von $\mat{U}$,
 die gesuchten Vektoren.
@@ -469,19 +472,23 @@ Eine Re-Implementierung des beschriebenen Vorgehens schlägt fehl, wenn ein
 von \textcite{Kunin.2019} zur Landschaft der Fehlerfunktion eines linearen Autoencoders bestätigt
 und formal nachgewiesen. Damit ein linearer dreischichtiger Autoencoder die Richtungen der
 Hauptkomponenten lernen kann, muss ein Regularisierungsterm zur Zielfunktion des Autoencoders
-hinzufügt werden, der die Größe der Gewichte bestraft. Die Art dieses Regularisierungsterms macht
-jedoch ebenfalls einen Unterschied: Beispielsweise kann hier die quadrierte Frobeniusnorm der
-Gewichte verwendet werden.
+hinzufügt werden, der die Größe der Gewichte bestraft. Die häufigste Form dieses sogenannten
+textit{weight decay} ist die Summe der Frobeniusnorm der Gewichtsmatrizen.
 
+\subsubsection{Visualisierung der Zusammenhänge}
+
+Die eben beschriebenen Punkte (1) und (2) werden im folgenden zur Verdeutlichung der
+Zusammenhängevisualisiert. Dazu wird zuerst die Korrelation der transformierten Daten und
+anschließend werden die gefundenen Gewichte der Methoden genauer analysiert. Punkt 1 aus dem
+theoretischen Zusammenhang wird in \figref{fig:Korrelationsmatrizen} deutlich.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{correlation-matrices.pdf}
-	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von vier Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Principal Component Analysis, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc die linken Singulär-Vektoren der Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders, um die Daten auf sieben Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Principal Component Analysis ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch den Autoencoder besteht Korrelation. Wendet man die Singulärwertszerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, erhält man deutlich weniger Korrelation. Sie konnte aber nicht vollständig eliminiert werden. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von drei Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Principal Component Analysis, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders mit \textit{weight decay}, um die Daten auf neun Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Principal Component Analysis ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch den Autoencoder besteht Korrelation. Wendet man die Singulärwertszerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, erhält man deutlich weniger Korrelation. Sie konnte aber nicht vollständig eliminiert werden. (Eigene Darstellung)}
 	\label{fig:Korrelationsmatrizen}
-\end{figure}
-Punkt 1 ist beispielsweise in \figref{fig:Korrelationsmatrizen} zu erkennen. Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Principal Component Analysis, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc ein nichtlinearer Autoencoder\rewrite{Hier erklären was man gemacht hat mit SVD} verwendet wurde. Die Korrelationsmatrix der Principal Component Analysis ist eine Einheitsmatrix, während die Korrelationsmatrizen der durch die Autoencoder gefundenen latenten Repräsentationen von Null verschiedene Werte auf der Nicht-diagonalen aufweisen.
+\end{figure} Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Principal Component Analysis, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Korrelationsmatrix bei der Principal Component Analysis ist wie erwartet eine Einheitsmatrix. Die latente Repräsentation des linearen Autoencoders besitzt dagegen noch deutlich miteinander korrelierte Merkmale. Die Korrelation bei Transformation durch die Links-Singulärvektoren der Decoder-Gewichtsmatrix konnte hingegen fast vollständig eliminiert werden.
 
-Um die gefundenen Lösungen einer Principal Component Analysis und von Autoencodern genauer
+Um nun die gefundenen Lösungen einer Principal Component Analysis und von Autoencodern genauer
 betrachten zu können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines
 dreischichtigen Autoencoders verglichen werden. Im Falle eines dreischichtigen Autoencoders sind
 die Gewichte des Encoders eine Matrix $\mat{W}_1 \in \real^{d \times D}$ und die Gewichte des
@@ -492,9 +499,7 @@ werden. \figref{fig:Gewichtsvergleich} setzt dieses Vorgehen auf dem FER-Datensa
 \begin{figure}[ht]
 	\centering
 	\includegraphics{weights-comparison.pdf}
-	\caption[Die Gewichtsmatrizen von ausgewählten Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf sieben Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Principal Component Analysis, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders und \captionc die Decoder-Gewichtsmatrix eines nichtlinearen dreischichtigen Autoencoders, wobei der Encoder eine Sigmoid-Aktivierungsfunktion einsetzt und der Decoder linear ist. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Die Gewichtsmatrizen von drei Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf neun Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Principal Component Analysis, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders (ohne Regularisierung) und \captionc die Links-Singulärvektoren $\mat{U}$ nach Anwendung einer Singulärwertszerlegung (\eqref{eq:SVD}) auf der Gewichtsmatrix $\mat{W}_2$ eines linearen Autoencoders mit \textit{weight decay}. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}
-Hierbei ist in \captiona die Ladungsmatrix von PCA, in \captionb die Gewichtsmatrix $\mat{W}_2$ eines linearen dreischichtigen Autoencoders und in \captionc die Gewichtsmatrix $\mat{W}_2$ eines nichtlinearen Autoencoders dargestellt. Wie zu erkennen ist, sind
-die Gewichte des linearen Autoencoders bis auf das Vorzeichen sehr ähnlich zur Ladungsmatrix von
-PCA.
+Hierbei ist in \captiona die Ladungsmatrix von PCA, in \captionb die Gewichtsmatrix $\mat{W}_2$ eines linearen dreischichtigen Autoencoders und in \captionc die Links-Singulärvektoren $\mat{U}$ nach Anwendung einer Singulärwertszerlegung (\eqref{eq:SVD}) auf der Gewichtsmatrix $\mat{W}_2$ eines linearen Autoencoders mit \textit{weight decay} dargestellt. Die Gewichte des linearen Autoencoders zeigen bereits eine Ähnlichkeit zu der Ladungsmatrix $\mat{A}$ der Principal Component Analysis, jedoch sind einige Unterschiede erkennbar. Nach Anwendung der im theoretischen Zusammenhang beschriebenen Methode, sind die Gewichte bis auf das Zeichen fast identisch zu der Ladungsmatrix $\mat{A}$.
