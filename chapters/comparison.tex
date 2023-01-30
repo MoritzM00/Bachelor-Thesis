@@ -458,13 +458,12 @@ Singulärwertszerlegung der Decoder-Gewichtsmatrix $\mat{W}_2$, d.h. die Zerlegu
 	\label{eq:SVD}
 	\mat{W}_2 = \mat{U} \mat{\Psi} \tr{\mat{V}}
 \end{equation}
-die Hauptkomponenten bis hin zu einer orthogonalen Transformation erlangen kann \parencite[4]{Plaut.2018}.\footnote{Die Singulärwertszerlegung ist eine Verallgemeinerung der
+die Hauptkomponenten bis hin zu einer orthogonalen Transformation erlangt werden können \parencite[4]{Plaut.2018}.\footnote{Die Singulärwertszerlegung ist eine Verallgemeinerung der
 	Eigenwertszerlegung für nicht-quadratische Matrizen, wie es hier mit $\mat{W}_2 \in \real^{D \times
 			d}$ der Fall ist. $\mat{U}$ und $\mat{V}$ sind orthogonale Matrizen, die aus den Links-
 	beziehungsweise Rechts-Singulärvektoren bestehen. Die Matrix $\mat{\Psi}$ ist eine Diagonalmatrix
-	mit den Singulärwerten. Die Eigenwerte einer quadratischen Matrix entsprechen gerade den
-	quadrierten Singulärwerten.} Dabei sind die Links-Singulärvektoren, d.h. die Spalten von $\mat{U}$,
-die gesuchten Vektoren.
+	mit den Singulärwerten \parencite[44 -- 45]{Goodfellow.2016}. } Dabei sind die Links-Singulärvektoren, d.h. die Spalten von
+$\mat{U}$, die gesuchten Vektoren.
 
 Allerdings wurde dies nicht formal bewiesen, sondern nur in empirischen Ergebnissen festgestellt.
 Eine Re-Implementierung des beschriebenen Vorgehens schlägt fehl, wenn ein
@@ -472,15 +471,15 @@ Eine Re-Implementierung des beschriebenen Vorgehens schlägt fehl, wenn ein
 von \textcite{Kunin.2019} zur Landschaft der Fehlerfunktion eines linearen Autoencoders bestätigt
 und formal nachgewiesen. Damit ein linearer dreischichtiger Autoencoder die Richtungen der
 Hauptkomponenten lernen kann, muss ein Regularisierungsterm zur Zielfunktion des Autoencoders
-hinzufügt werden, der die Größe der Gewichte bestraft. Die häufigste Form dieses sogenannten
-textit{weight decay} ist die Summe der Frobeniusnorm der Gewichtsmatrizen.
+hinzufügt werden, der die Größe der Gewichte bestraft (siehe Regularisierung in
+\secref{ch:MethodenDerDimRed:ML:AE}).
 
 \subsubsection{Visualisierung der Zusammenhänge}
 
-Die eben beschriebenen Punkte (1) und (2) werden im folgenden zur Verdeutlichung der
-Zusammenhängevisualisiert. Dazu wird zuerst die Korrelation der transformierten Daten und
-anschließend werden die gefundenen Gewichte der Methoden genauer analysiert. Punkt 1 aus dem
-theoretischen Zusammenhang wird in \figref{fig:Korrelationsmatrizen} deutlich.
+Die eben beschriebenen Punkte (1) und (2) werden im folgenden zur Verdeutlichung der Zusammenhänge
+visualisiert. Dazu wird zuerst die Korrelation der transformierten Daten und anschließend werden
+die gefundenen Gewichte der Methoden genauer analysiert. Punkt 1 aus dem theoretischen Zusammenhang
+wird in \figref{fig:Korrelationsmatrizen} deutlich.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{correlation-matrices.pdf}
