@@ -1,0 +1,52 @@
+\def\a{3}  % width of trapezium
+\def\b{.9} % small height of trapezium
+\def\c{2}  % tall height of trapezium
+\tikzset
+{
+myTrapezium/.pic =
+	{
+		\draw [fill=gray!30] (0,0) -- (0,\b) -- (\a,\c) -- (\a,-\c) -- (0,-\b) -- cycle ;
+		\coordinate (-center) at (\a/2,0);
+		\coordinate (-out) at (\a,0);
+	},
+myArrows/.style=
+{
+line width=2mm,
+black,
+-{Triangle[length=3mm,width=5mm]},
+shorten >=2pt,
+shorten <=2pt,
+}
+}
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		[
+			node distance=1mm, % space between drawn parts
+			every node/.style={align=center},
+		]
+
+		\node (middleThing)
+		[
+			draw,
+			fill=gray!10,
+			%minimum width=1cm,
+			minimum height=2*\b cm, font=\tiny, ]
+		%{\begin{tabular}{r}-0.2 \\ -0.1 \\ 0.1 \\ 0.4 \\ -0.3 \\ 1.1\end{tabular}};
+		{$\vect{y} \in \real^d$};
+		\pic (right)[right=of middleThing.east] {myTrapezium} ;
+		\pic (left)[left=of middleThing.west, rotate=180] {myTrapezium} ;
+		\node at (right-center) {Decoder} ;
+		\node at (left-center) {Encoder};
+		\node at (right-center) {Decoder} ;
+
+		\def\d{.9}
+		\coordinate (u) at (\d,0);
+		\draw [myArrows] (right-out) -- ++(u) node [anchor=west] {Output $\estNormal{\vect{x}} \in \real^D$};
+		\draw [myArrows] ($(left-out)-(u)$) node [anchor=east] {Input $\vect{x} \in \real^D$} -- ++(u) ;
+
+	\end{tikzpicture}
+	\caption[Schematische Architektur eines Autoencoders]{Schematische Architektur eines Autoencoders. Der Inputvektor $\vect{x} \in \real^D$ wird durch den Encoder in eine niedrigdimensionale Repräsentation $\vect{y} \in \real^d$ kodiert. Der Decoder nimmt diese niedrigdimensionale Repräsentation und liefert ein Outputvektor $\estNormal{\vect{x}}$, der möglichst dem ursprünglichen Vektor $\vect{x}$ entspricht, d.h. es soll $\estNormal{\vect{x}} \approx \vect{x}$ gelten. Eigene Darstellung\protect\footnotemark}
+	\label{fig:SchematischerAutoencoder}
+\end{figure}
+\footnotetext{angelehnt an Folie 15 aus \url{https://nlp.stanford.edu/projects/nmt/Luong-Cho-Manning-NMT-ACL2016-v4.pdf}}

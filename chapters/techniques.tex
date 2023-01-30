@@ -327,31 +327,20 @@ nämlich der \newterm{Autoencoder} in seiner klassischen Form in
 
 Der Autoencoder ist ein neuronales Netzwerk, das die Rekonstruktion des Inputvektors $\vect{x}$ aus
 den Trainingsdaten lernt. Um das sinnvoll zu erreichen, besitzt der Autoencoder eine wie in
-\figref{fig:5-layer-Autoencoder} gezeigte symmetrische Architektur. \rewrite{hier eine allgemeinere
-	Darstellung wählen}
-\begin{figure}[ht]
-	\begin{center}
-		\includegraphics[width=\textwidth]{5_layer_AE.pdf}
-		\caption[Schematische Abbildung der Architektur eines Autoencoders]{Gezeigt ist eine schematische Abbildung der Architektur eines (\textit{vollvernetzten}) Autoencoders. Dieser Autoencoder besitzt fünf Schichten, wobei das \textit{Bottleneck} dreidimensional und die \textit{Input}-Dimension zwölf ist. Das bedeutet, dass ein 12-dimensionaler Inputvektor in der Mitte des Autoencoders durch einen dreidimensionalen Vektor kodiert und anschließend wieder dekodiert werden muss, um zu einer möglichst verlustfreien Rekonstruktion zu gelangen. Eigene Darstellung, erstellt mittels \href{https://alexlenail.me/NN-SVG/}{NN-SVG}}
-		\label{fig:5-layer-Autoencoder}
-	\end{center}
-\end{figure}
-Diese besteht in der
-klassischen Form aus einer ungeraden Anzahl an Schichten mit einer \newterm{Bottleneck}-Schicht in
-der Mitte \parencite[2]{Bank.2020}. Diese Schicht wird als \textit{Bottleneck} bezeichnet, da sie nur aus $d < D$
+\figref{fig:SchematischerAutoencoder} gezeigte symmetrische Architektur.
+
+\input{\figures/autoencoder-architecture.tex}
+
+Dabei kann der Encoder und Decoder unterschiedliche Architekturen annehmen -- die eines neuronalen
+Netzes ist allerdings die häufigste und auch hier verwendete Variante. Diese besteht in der
+klassischen Form aus einer ungeraden Anzahl an vollvernetzten Schichten mit einer
+\newterm{Bottleneck}-Schicht in der Mitte \parencite[2]{Bank.2020}. Diese Schicht wird als \textit{Bottleneck} bezeichnet, da sie nur aus $d < D$
 Neuronen besteht und damit die \enquote{kleinste} Stelle im Netzwerk darstellt, durch die der
 Inputvektor kodiert werden muss. In diesem Fall wird der Autoencoder als \newterm{unterbestimmt}
-(engl. \textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}.\footnote{Es gibt demnach auch überbestimmte Autoencoder mit $k > D$
-	Neuronen in der mittleren Schicht. Diese Variante reduziert die Dimension nicht, sondern erhöht sie \parencite[504]{Goodfellow.2016}.} Damit erzielt die Bottleneck-Schicht die gewünschte
-Dimensionsreduktion des Inputvektors, da der Autoencoder lernen muss, den Inputvektor aus dieser
-niedrigdimensionalen Repräsentation möglichst verlustfrei zu rekonstruieren \parencites[502]{Goodfellow.2016}[2]{Bank.2020}. Die in \figref{fig:5-layer-Autoencoder} gezeigte
-Architektur eines klassischen vollvernetzten Autoencoders besteht aus fünf Schichten und einem
-dreidimensionalem Bottleneck. Nehmen wir nun wieder an, dass wir einen $D$-dimensionalen
-Inputvektor $\rvect{x}$ haben (in diesem Beispiel ist $D = 12$), dann muss der Autoencoder lernen,
-$\rvect{x}$ zu kodieren, wobei in der Mitte des Autoencoders die niedrigdimensionale Repräsentation
-$\rvect{y}$ gelernt wird. In \figref{fig:5-layer-Autoencoder} ist $d = 3$. Dies bedeutet, dass
-durch den Autoencoder eine um den Faktor 4 reduzierte niedrigdimensionale Repräsentation gelernt
-werden soll.
+(engl. \textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}.
+%  Es gibt demnach auch \newterm{überbestimmte} Autoencoder mit $k > D$
+% 	Neuronen in der mittleren Schicht. Diese Variante reduziert die Dimension nicht, sondern erhöht sie \parencite[504]{Goodfellow.2016}. 
+Damit erzielt die Bottleneck-Schicht die gewünschte Dimensionsreduktion des Inputvektors \parencites[502]{Goodfellow.2016}[2]{Bank.2020}.\rewrite{umschreiben}
 
 Die Nichtlinearität eines Autoencoders wird durch die Auswahl der Aktivierungsfunktionen bestimmt.
 Werden ausschließlich lineare Funktionen verwendet, resultiert dies in einem linearen Autoencoder,
@@ -366,7 +355,7 @@ Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum ein
 \begin{equation}
 	\estNormal{\rvect{x}} = g(f(\rvect{x})) \approx \rvect{x} \, ,
 \end{equation}
-wobei $\estNormal{\vect{x}}$ die Rekontruktion des Autoencoders bezeichnet.
+wobei $\estNormal{\vect{x}}$ die Rekonstruktion des Autoencoders bezeichnet.
 Dazu minimiert der Autoencoder einen \newterm{Rekonstruktionsfehler} $L(\vect{x}, \vect{\estNormal{x}})$, der eine Ungleichheit zwischen dem Input- und Outputvektor bestraft. Hier wird meistens die quadratische Abweichung der beiden Vektoren verwendet, das heißt
 \begin{equation}
 	\label{eq:MSE_loss}
@@ -388,15 +377,15 @@ Grund muss ein Autoencoder oftmals regularisiert werden, worauf im Folgenden in
 \label{ch:MethodenDerDimRed:ML:AE:Regularisierung}
 Um eine sinnvolle Repräsentation $\rvect{y}$ zu erhalten, muss der Autoencoder oftmals
 regularisiert, das heißt eingeschränkt, werden. Ein erstes Beispiel hierfür ist der in
-\figref{fig:5-layer-Autoencoder} gezeigte unterbestimmte Autoencoder, mit dem eine $d$-dimensionale
+\figref{fig:SchematischerAutoencoder} gezeigte unterbestimmte Autoencoder, mit dem eine $d$-dimensionale
 Repräsentation in der Mitte forciert wird. Besitzt der Autoencoder jedoch eine zu große Kapazität, kann der Autoencoder trotz des Bottlenecks
 eine uninformative niedrigdimensionale Repräsentation lernen. Neben dieser \textit{impliziten} Regularisierung, gibt es deswegen noch einige
-weitere \textit{explizite} Regularisierungsmethoden, die zusätzlich zum Rekonstruktionfehler einen
+weitere \textit{explizite} Regularisierungsmethoden, die zusätzlich zum Rekonstruktionsfehler einen
 Bestrafungsterm $\Omega$ zur Zielfunktion $\mathcal{J}$ hinzufügen. Die Zielfunktion lautet dann
 \begin{equation}
 	\mathcal{J}_{\text{AE+reg}} = \frac{1}{n} \sum_{i = 1}^{n} \left( L(\vect{x}_i, \estNormal{\vect{x}}_i) + \lambda \Omega \right) \, ,
 \end{equation}
-wobei $\lambda \geq 0$ ein \textit{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den Rekonstruktionfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden, was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch also eine informativere niedrigdimensionale Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
+wobei $\lambda \geq 0$ ein \textit{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den Rekonstruktionsfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden, was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch also eine informativere niedrigdimensionale Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
 
 Eine Umsetzung dessen ist zum Beispiel der \newterm{Sparse Autoencoder}, der eine dünn besetzte
 (engl. \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, das heißt nur wenige Einträge von
@@ -500,13 +489,13 @@ Null projiziert und damit die Rekonstruktion erschweren könnte \parencite[4]{Ch
 \label{ch:MethodenDerDimRed:ML:CAE}
 \nomenclature[Z]{CAE}{Contractive Autoencoder}
 
-Der Contractive Autoencoder \parencite{Rifai.2011} stellt eine Variante des eben vorgestellten klassichen Autoencoders
+Der Contractive Autoencoder \parencite{Rifai.2011} stellt eine Variante des eben vorgestellten klassischen Autoencoders
 (\subsecref{ch:MethodenDerDimRed:ML:AE}) dar. Ähnlich wie der Sparse Autoencoder wird die
 Zielfunktion des Autoencoders lediglich um einen zusätzlichen Regularisierungsterm erweitert.
 Dieser zusätzliche Term in der Zielfunktion führt zu einer kontrahierenden Eigenschaft: Ähnliche
 Punkte werden auf eine kleinere Nachbarschaft auf der Mannigfaltigkeit abgebildet und damit
 \enquote{zusammengezogen}. Dies gilt aber nur \textit{lokal}, das heißt unähnliche Punkte können
-immer noch weit weg auf der Mannigfaltigkeit liegen \parencite[521]{Goodfellow.2016}. Dazu wird wieder in einem ersten Schritt die Grundidee erläuert und
+immer noch weit weg auf der Mannigfaltigkeit liegen \parencite[521]{Goodfellow.2016}. Dazu wird wieder in einem ersten Schritt die Grundidee erläutert und
 im zweiten Schritt die konkrete Berechnung des Regularisierungsterms vorgestellt.
 
 \subsubsection{Grundidee}
@@ -521,7 +510,7 @@ Frobeniusnorm der Jacobi-Matrix $\mat{J}$ des Encoders $f$ erzielt werden \paren
 	\Omega(\vect{y}) = \norm[\big]{\mat{J}_f(\vect{x})}_F^2 =  \norm[\Big]{ \frac{\partial f(\vect{x})}{\partial \vect{x}} }^2_F \, ,
 \end{equation}
 was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Intuitiv gesehen werden so lokale Nachbarschaften auf \textit{kleinere} Nachbarschaften in der niedrigdimensionalen Repräsentation abgebildet, das heißt der Autoencoder wirkt kontrahierend.
-Der Regularisierungsterm ist, wie wir in \subsecref{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm} sehen werden, für einen dreischichtigen Autoencoder leicht zu berechnen, nicht aber für einen tiefen Autoencoder. Dies stellt ein praktisches Problem dar, welches allerdings über ein schichtenweises vortrainieren teilweise umgangen werden werden kann \parencite[vgl.][522]{Goodfellow.2016}.
+Der Regularisierungsterm ist, wie wir in \subsecref{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm} sehen werden, für einen dreischichtigen Autoencoder leicht zu berechnen, nicht aber für einen tiefen Autoencoder. Dies stellt ein praktisches Problem dar, welches allerdings über ein schichtenweises Vortrainieren teilweise umgangen werden werden kann \parencite[vgl.][522]{Goodfellow.2016}.
 
 \subsubsection{Berechnung des Regularisierungsterms}
 \label{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm}
