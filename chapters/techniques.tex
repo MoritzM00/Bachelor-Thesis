@@ -351,7 +351,14 @@ lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Cha
 
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}
-Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^d$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ codiert und zum anderen den \newterm{Decoder} $g: \real^d \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Das Ziel des Autoencoders ist es, den Inputvektor zu rekonstruieren
+Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^d$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ codiert und zum anderen den \newterm{Decoder} $g: \real^d \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Ein einfacher dreischichtiger vollvernetzter Autoencoder mittels
+\begin{gather}
+	\label{eq:dreischichtigerAE}
+	f(\vect{x}) = s(\mat{W}_1 \vect{x} + \vect{b}_1) = \vect{y} \\
+	g(f(\vect{x})) = s(\mat{W}_2 \vect{y} + \vect{b}_2) = \estNormal{\vect{x}}
+\end{gather}
+formalisiert werden, wobei $s$ Aktivierungsfunktion bezeichnet, $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{d \times D}$ die Gewichte und $\vect{b}_i$ mit $i = 1,2$ die Bias-Vektoren des Netzwerks sind. Dies entspricht je einer affinen Transformation gefolgt von einer Nichtlinearität. Die Aktivierungsfunktion wird später bei der Wahl der Architektur eines Autoencoders noch genauer erläutert.
+Das Ziel des Autoencoders ist es, den Inputvektor zu rekonstruieren
 \begin{equation}
 	\estNormal{\rvect{x}} = g(f(\rvect{x})) \approx \rvect{x} \, ,
 \end{equation}
@@ -381,16 +388,25 @@ regularisiert, das heißt eingeschränkt, werden. Ein erstes Beispiel hierfür i
 Repräsentation in der Mitte forciert wird. Besitzt der Autoencoder jedoch eine zu große Kapazität, kann der Autoencoder trotz des Bottlenecks
 eine uninformative niedrigdimensionale Repräsentation lernen. Neben dieser \textit{impliziten} Regularisierung, gibt es deswegen noch einige
 weitere \textit{explizite} Regularisierungsmethoden, die zusätzlich zum Rekonstruktionsfehler einen
-Bestrafungsterm $\Omega$ zur Zielfunktion $\mathcal{J}$ hinzufügen. Die Zielfunktion lautet dann
+Bestrafungsterm $\Omega(\bm{\theta})$ zur Zielfunktion $\mathcal{J}$ hinzufügen. Hierbei bezeichnet $\bm{\theta}$ die Parameter im Netzwerk, d.h. die Gewichte und Biases (siehe \eqref{eq:dreischichtigerAE}). Die Zielfunktion lautet dann
 \begin{equation}
-	\mathcal{J}_{\text{AE+reg}} = \frac{1}{n} \sum_{i = 1}^{n} \left( L(\vect{x}_i, \estNormal{\vect{x}}_i) + \lambda \Omega \right) \, ,
+	\mathcal{J}_{\text{AE+reg}} = \frac{1}{n} \sum_{i = 1}^{n}  L(\vect{x}_i, \estNormal{\vect{x}}_i) + \lambda \Omega(\bm{\theta}) \, ,
 \end{equation}
 wobei $\lambda \geq 0$ ein \textit{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den Rekonstruktionsfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden, was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch also eine informativere niedrigdimensionale Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
 
-Eine Umsetzung dessen ist zum Beispiel der \newterm{Sparse Autoencoder}, der eine dünn besetzte
-(engl. \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, das heißt nur wenige Einträge von
-$\vect{y}$ sind ungleich Null. Für das Lernen von Mannigfaltigkeiten besonders interessant ist
-jedoch der \newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird.
+Eine Umsetzung dessen ist der \newterm{Sparse Autoencoder}, der eine dünnbesetzte (engl.
+\textit{sparse}) Repräsentation $\vect{y}$ erzwingt, d.h. nur wenige Einträge von $\vect{y}$ sind
+ungleich Null. Eine weitere oft eingesetzte Regularisierung für neuronale Netze ist das sogenannte
+\newterm{weight decay}, das die Größe der Gewichte im Netzwerk bestraft. Der Regularisierungsterm
+entspricht bspw. im Falle eines dreischichtigen Autoencoders (siehe \eqref{eq:dreischichtigerAE})
+\begin{equation}
+	\label{eq:WeightDecay}
+	\Omega(\bm{\theta}) = \norm{\mat{W}_1}^2_F + \norm{\mat{W}_2}^2_F \, ,
+\end{equation}
+wobei $\norm{\,\cdot\,}_F$ die Frobeniusnorm bezeichnet \parencite[1]{Kunin.2019}. Diese Regularisierung wird später im Vergleich von Autoencodern zur
+Principal Component Analysis in \subsecref{ch:Vergleich:sec:Resultate:PCA_AE} noch von Bedeutung
+sein. Für das Lernen von Mannigfaltigkeiten besonders interessant ist jedoch der
+\newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird.
 
 \subsubsection{Wahl der Architektur}
 \label{ch:MethodenDerDimRed:ML:AE:WahlArchitektur}
@@ -415,9 +431,9 @@ Folgeschicht. In Convolutional Neural Networks ist es üblich, dass nach einer f
 eine sogenannte \textit{Pooling}-Schicht \parencite[339 -- 345]{Goodfellow.2016} kommt, die die Größe des Inputs zwar verkleinert, dies aber
 \textit{ohne} trainierbare Gewichte tut. In Autoencodern soll die Inputgröße im Encoder ebenfalls
 sukzessive verkleinert werden, allerdings wollen wir lernen, wie man sie verkleinert. Daher wird
-hier anstelle von Pooling-Schichten die Schrittgröße $s$ (engl. \textit{Stride}) in der faltenden
-Schicht auf einen Wert größer Eins gesetzt. Dies bedeutet, dass die Faltungsoperation nur alle $s$
-Pixel angewandt und dadurch die Größe des Inputs verkleinert wird.
+hier anstelle von Pooling-Schichten die Schrittgröße (engl. \textit{Stride}) in der faltenden
+Schicht auf einen Wert größer Eins gesetzt. Dies bedeutet, dass bei der Faltungsoperation Pixel
+ausgelassen werden und dadurch die Größe des Inputs verkleinert wird.
 
 Zweitens muss die Anzahl der Schichten $m$ festgelegt werden, welche für die Symmetrie des Encoders
 und Decoders ungerade sein sollte (aber nicht muss). Häufig wählt man hier $m = 3$ oder $m = 5$, da
@@ -514,20 +530,11 @@ Der Regularisierungsterm ist, wie wir in \subsecref{ch:MethodenDerDimRed:ML:CAE:
 
 \subsubsection{Berechnung des Regularisierungsterms}
 \label{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm}
-Der Regularisierungsterm ist wie eben erwähnt für einen Autoencoder mit nur einer versteckten Schicht leicht zu berechnen. Der Encoder
-kann in diesem Fall als
-\begin{equation}
-	f(\vect{x}) = s \left( \mat{W} \vect{x} + \vect{b}_1 \right) = \vect{y}
-\end{equation}
-und der Decoder als
-\begin{equation}
-	g(\vect{y}) = s \left( \mat{\widetilde{W}} \vect{y} + \vect{b}_2 \right) = \estNormal{\vect{x}}
-\end{equation}
-formuliert werden, wobei $\mat{W} \in \real^{d \times D}$ und $\mat{\widetilde{W}} \in \real^{D \times d}$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Dies entspricht jeweils einer affinen Transformation gefolgt von einer (nichtlinearen) Aktivierungsfunktion. Gilt außerdem, dass die Gewichte des Encoders und Decoders verbunden sind, das heißt $\mat{\widetilde{W}} = \tr{\mat{W}}$ und wird für die Aktivierungsfunkion $s$ die Sigmoid-Funktion (\eqref{eq:Sigmoid})
+Der Regularisierungsterm ist wie eben erwähnt für einen Autoencoder mit nur einer versteckten Schicht, d.h. für einen dreischichtigen Autoencoder, leicht zu berechnen. Bei der mathematischen Formulierung der Autoencoder wurde bereits in \eqref{eq:dreischichtigerAE} die explizite Form des Encoders und Decoders eingeführt. Nimmt man nun an, dass die Gewichte verbunden sind, d.h. $\mat{W}_2 = \tr{\mat{W}_1}$ und wird für die Aktivierungsfunkion $s$ die Sigmoid-Funktion (\eqref{eq:Sigmoid})
 verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
 \begin{equation}
 	\label{eq:CAE-loss-simple}
-	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^d \left( y_i (1 - y_i)\right)^2 \sum_{j = 1}^D \mat{W}^2_{ij}
+	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^d \left( y_i (1 - y_i)\right)^2 \sum_{j = 1}^D (\mat{W}_1^2)_{ij}
 \end{equation}
 effizient berechnet werden \parencite[4]{Rifai.2011}. Für einen Autoencoder mit mehr als einer versteckten Schicht wird die
 Berechnung teuer, was das Trainieren eines tiefen Contractive Autoencoders ohne Approximationen wie
