@@ -245,6 +245,11 @@ verzichtet und stattdessen Qualitätskriterien der Dimensionsreduktion für eine
 verwendet. Das Vorgehen wird später in \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
 genauer erläutert.
 
+Darüber hinaus ist es möglich die Kernel-Matrix mitzulernen, wie es bspw. in \textit{Semidefinite
+	Embedding} \parencite{Weinberger.2004b} der Fall ist. Damit entfällt die Wahl eines passendes Kernels und seiner
+Parameter komplett, allerdings muss dafür eine teure Semidefinite Programmierung (SDP) gelöst
+werden.
+
 Ein weiterer Nachteil der Kernel Principal Component Analysis ist, dass die Größe der Kernel-Matrix
 quadratisch in der Stichprobengröße $n$ ansteigt. Dadurch kann diese Matrix auf großen Datensätzen
 möglicherweise nicht vollständig im Hauptspeicher zwischengespeichert werden. Die ohnehin teure
@@ -345,27 +350,27 @@ Inputvektor kodiert werden muss. In diesem Fall wird der Autoencoder als \newter
 % 	Neuronen in der mittleren Schicht. Diese Variante reduziert die Dimension nicht, sondern erhöht sie \parencite[504]{Goodfellow.2016}. 
 Damit erzielt die Bottleneck-Schicht die gewünschte Dimensionsreduktion des Inputvektors \parencites[502]{Goodfellow.2016}[2]{Bank.2020}.\rewrite{umschreiben}
 
-Die Nichtlinearität eines Autoencoders wird durch die Auswahl der Aktivierungsfunktionen bestimmt.
-Werden ausschließlich lineare Funktionen verwendet, resultiert dies in einem linearen Autoencoder,
-welcher ähnlich zur Principal Component Analysis ist. Dies wird in
-\subsecref{ch:Vergleich:sec:Resultate:PCA_AE} noch genauer betrachtet. In den meisten Fällen werden
-jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt, um einen nichtlinearen Zusammenhang zu
-lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Charte.2018}.
-
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}
-Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^d$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ codiert und zum anderen den \newterm{Decoder} $g: \real^d \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Ein einfacher dreischichtiger vollvernetzter Autoencoder mittels
+Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^d$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ kodiert und zum anderen den \newterm{Decoder} $g: \real^d \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Ein dreischichtiger, vollvernetzter Autoencoder kann mittels
 \begin{gather}
 	\label{eq:dreischichtigerAE}
 	f(\vect{x}) = s(\mat{W}_1 \vect{x} + \vect{b}_1) = \vect{y} \\
 	g(f(\vect{x})) = s(\mat{W}_2 \vect{y} + \vect{b}_2) = \estNormal{\vect{x}}
 \end{gather}
-formalisiert werden, wobei $s$ Aktivierungsfunktion bezeichnet, $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{d \times D}$ die Gewichte und $\vect{b}_i$ mit $i = 1,2$ die Bias-Vektoren des Netzwerks sind. Dies entspricht je einer affinen Transformation gefolgt von einer Nichtlinearität. Die Aktivierungsfunktion wird später bei der Wahl der Architektur eines Autoencoders noch genauer erläutert.
-Das Ziel des Autoencoders ist es, den Inputvektor zu rekonstruieren
+formalisiert werden, wobei $s$ die Aktivierungsfunktion bezeichnet, $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{d \times D}$ die Gewichte und $\vect{b}_i$ mit $i = 1,2$ die Bias-Vektoren des Netzwerks sind. Dies entspricht je einer affinen Transformation gefolgt von einer Aktivierungsfunktion. Die Nichtlinearität eines Autoencoders wird durch die Auswahl dieser Aktivierungsfunktionen bestimmt.
+Werden ausschließlich lineare Funktionen verwendet, resultiert dies in einem linearen Autoencoder,
+welcher ähnlich zur Principal Component Analysis ist. Dies wird in
+\subsecref{ch:Vergleich:sec:Resultate:PCA_AE} noch genauer betrachtet. In den meisten Fällen werden
+jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt, um einen nichtlinearen Zusammenhang zu
+lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Charte.2018}. Die Aktivierungsfunktion wird später bei der Wahl der Architektur eines
+Autoencoders noch genauer erläutert.
+
+Das Ziel des Autoencoders ist es, den Inputvektor zu rekonstruieren, d.h. es soll
 \begin{equation}
-	\estNormal{\rvect{x}} = g(f(\rvect{x})) \approx \rvect{x} \, ,
+	\estNormal{\rvect{x}} = g(f(\rvect{x})) \approx \rvect{x}
 \end{equation}
-wobei $\estNormal{\vect{x}}$ die Rekonstruktion des Autoencoders bezeichnet.
+gelten, wobei $\estNormal{\vect{x}}$ die Rekonstruktion des Autoencoders bezeichnet.
 Dazu minimiert der Autoencoder einen \newterm{Rekonstruktionsfehler} $L(\vect{x}, \vect{\estNormal{x}})$, der eine Ungleichheit zwischen dem Input- und Outputvektor bestraft. Hier wird meistens die quadratische Abweichung der beiden Vektoren verwendet, das heißt
 \begin{equation}
 	\label{eq:MSE_loss}
@@ -419,8 +424,8 @@ zugleich aber auch ein Nachteil dieser Methode. Im Folgenden werden die zu treff
 Entscheidungen bei der Wahl der Architektur eines Autoencoders kurz erläutert.
 
 Erstens muss zwischen vollvernetzten und faltenden (engl. \textit{Convolutional}) Schichten
-entschieden werden. Letztere können eingesetzt werden, wenn der Input des Autoencoders eine
-gitterartige Topologie, wie z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}.\footnote{In der Mathematik ist eine diskrete Faltung zweier
+entschieden werden.\rewrite{Conv Layers anders erklären} Letztere können eingesetzt werden, wenn
+der Input des Autoencoders eine gitterartige Topologie, wie z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}.\footnote{In der Mathematik ist eine diskrete Faltung zweier
 	Funktionen $v$ und $u$ definiert als
 	\begin{equation*}
 		(v * u)(t) = \sum_{\tau = -\infty}^{+\infty} v(t)u(t - \tau) \, .
@@ -483,9 +488,11 @@ wobei $\exp(\, \cdot \,)$ die Exponentialfunktion darstellt \parencites[191 -- 1
 	\label{fig:activations}
 \end{figure}
 Die Aktivierungsfunktionen sind grafisch in \figref{fig:activations} dargestellt.
-Obwohl ReLU (\eqref{eq:ReLU}) die standardmäßig empfohlene Aktivierungsfunktion ist \parencite[195]{Goodfellow.2016}, wird für Autoencoder die Sigmoid-Funktion (\eqref{eq:Sigmoid})
+Obwohl ReLU (\eqref{eq:ReLU}) die mittlerweile für neuronale Netze standardmäßig empfohlene Aktivierungsfunktion ist \parencite[195]{Goodfellow.2016}, wird für Autoencoder die Sigmoid-Funktion (\eqref{eq:Sigmoid})
 empfohlen. Dies liegt daran, dass die \textit{Rectified Linear Units} alle negativen Inputs auf
-Null projiziert und damit die Rekonstruktion erschweren könnte \parencite[4]{Charte.2018}.
+Null projiziert und damit die Rekonstruktion erschweren könnte \parencite[4]{Charte.2018}. Ein Nachteil der Sigmoid- und Tanh-Funktion ist allerdings der Wertebereich
+$[0, 1]$, auf den diese beiden Funktionen projizieren. Dies kann die Rekonstruktion ebenfalls
+behindern.
 % \subsubsection{Verhältnis zur Principal Component Analysis}
 % \label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}
 
@@ -514,8 +521,9 @@ Zielfunktion des Autoencoders lediglich um einen zusätzlichen Regularisierungst
 Dieser zusätzliche Term in der Zielfunktion führt zu einer kontrahierenden Eigenschaft: Ähnliche
 Punkte werden auf eine kleinere Nachbarschaft auf der Mannigfaltigkeit abgebildet und damit
 \enquote{zusammengezogen}. Dies gilt aber nur \textit{lokal}, das heißt unähnliche Punkte können
-immer noch weit weg auf der Mannigfaltigkeit liegen \parencite[521]{Goodfellow.2016}. Dazu wird wieder in einem ersten Schritt die Grundidee erläutert und
-im zweiten Schritt die konkrete Berechnung des Regularisierungsterms vorgestellt.
+immer noch weit weg auf der Mannigfaltigkeit liegen \parencite[521]{Goodfellow.2016}. Im Folgenden wird in einem ersten Schritt die Grundidee des
+Contractive Autoencoders erläutert und im zweiten Schritt die konkrete Berechnung des
+Regularisierungsterms für einen dreischichtigen Auotencoder vorgestellt.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:CAE:Grundidee}
@@ -529,7 +537,7 @@ Frobeniusnorm der Jacobi-Matrix $\mat{J}$ des Encoders $f$ erzielt werden \paren
 	\Omega(\vect{y}) = \norm[\big]{\mat{J}_f(\vect{x})}_F^2 =  \norm[\Big]{ \frac{\partial f(\vect{x})}{\partial \vect{x}} }^2_F \, ,
 \end{equation}
 was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Intuitiv gesehen werden so lokale Nachbarschaften auf \textit{kleinere} Nachbarschaften in der niedrigdimensionalen Repräsentation abgebildet, das heißt der Autoencoder wirkt kontrahierend.
-Der Regularisierungsterm ist, wie wir in \subsecref{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm} sehen werden, für einen dreischichtigen Autoencoder leicht zu berechnen, nicht aber für einen tiefen Autoencoder. Dies stellt ein praktisches Problem dar, welches allerdings über ein schichtenweises Vortrainieren teilweise umgangen werden werden kann \parencite[vgl.][522]{Goodfellow.2016}.
+Der Regularisierungsterm ist für einen dreischichtigen Autoencoder leicht zu berechnen, nicht aber für einen tiefen Autoencoder. Dies stellt ein praktisches Problem dar, welches allerdings über ein schichtenweises Vortrainieren teilweise umgangen werden werden kann \parencite[vgl.][522]{Goodfellow.2016}.
 
 \subsubsection{Berechnung des Regularisierungsterms}
 \label{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm}
@@ -546,4 +554,4 @@ beispielsweise das von \textcite{Bengio.2006} erläuterte gierige schichtenweise
 tiefer Autoencoder schichtenweise durch untiefe Autoencoder (drei Schichten) vortrainiert und im
 letzten Schritt erfolgt eine Feinabstimmung des kompletten Netzwerks \parencite[522]{Goodfellow.2016}. Dieses Vorgehen kann analog auch für klassische Autoencoder verwendet
 werden, um eine gute Initialisierung der Gewichte zu erreichen und damit suboptimale lokale Minima
-der Zielfunktion zu umgehen \parencite[509]{Goodfellow.2016}.
+der Zielfunktion zu umgehen \parencite[509]{Goodfellow.2016}.\unsure{Wieso ist der CAE gut für das Lernen von Mannigfaltigkeiten?}

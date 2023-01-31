@@ -181,7 +181,7 @@ latenten Räume der Methoden. Es kann also visuell überprüft werden, ob die Di
 Im Folgenden werden die im Vergleich eingesetzten natürlichen Datensätze vorgestellt. Es wurden überwiegend Bilddatensätze, aber auch ein Datensatz mit Genausprägungen ausgewählt, da diese eine
 hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
 Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \textit{Olivetti Faces}-Datensatz
-\footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Fashion MNIST}-Datensatz \parencite{Xiao.8252017}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der
+\footnote{\url{https://cam-orl.co.uk/facedatabase.html}}, (3) der \textit{Fashion MNIST}-Datensatz \parencite{Xiao.2017}, (4) der \textit{Facial Emotion Recognition} (FER) Datensatz \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) der
 \textit{ICMR}-Datensatz\footnote{\url{https://www.kaggle.com/datasets/shibumohapatra/icmr-data?select=labels.csv}}
 ausgewählt, um die Performance der Dimensionsreduktionsmethoden auf natürlichen Datensätzen zu
 evaluieren. Der weitverbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von
@@ -216,20 +216,20 @@ erläuterten Maximum Likelihood Schätzers für den jeweiligen Datensatz.
 
 \begin{table}[]
 	\centering
-	\ra{1.2}
+	\ra{1.3}
 	\begin{tabular}{@{}lrrr@{}}
 		\toprule
-		Datensatz      & extrinsische Dimension $D$ & intrinsische Dimension $d$ & Stichprobengröße $n$ \\ \midrule
-		Swiss Roll     & 3                          & 2                          & 5 000                \\
-		Twin Peaks     & 3                          & 2                          & 5 000                \\
-		MNIST          & 784                        & 15                         & 60 000               \\
-		Fashion MNIST  & 784                        & 18                         & 60 000               \\
-		Olivetti Faces & 4 096                      & 9                          & 400                  \\
-		FER            & 2 304                      & 26                         & 28 709               \\
-		ICMR           & 20 531                     & 22                         & 801                  \\
+		Datensatz      & $D$    & $d$ & $n$    \\ \midrule
+		Swiss Roll     & 3      & 2   & 5 000  \\
+		Twin Peaks     & 3      & 2   & 5 000  \\
+		MNIST          & 784    & 15  & 60 000 \\
+		Fashion MNIST  & 784    & 18  & 60 000 \\
+		Olivetti Faces & 4 096  & 9   & 400    \\
+		FER            & 2 304  & 26  & 28 709 \\
+		ICMR           & 20 531 & 22  & 801    \\
 		\bottomrule
 	\end{tabular}
-	\caption[Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze]{Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild. Die intrinsische Dimension wurde mit dem Maximum Likelihood Schätzer aus \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} mit einer Nachbarschaftsgröße $\Kid = 5$ geschätzt.}
+	\caption[Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengrößen der in diesem Vergleich verwendeten Datensätze]{Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild. Die intrinsische Dimension wurde mit dem Maximum Likelihood Schätzer aus \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} mit einer Nachbarschaftsgröße $\Kid = 5$ geschätzt.}
 	\label{tab:uebersicht-datensaetze}
 \end{table}
 
@@ -337,8 +337,19 @@ diesen Datensätzen weit über zwei liegt. Als Illustration wurden in
 	\caption[Latente zweidimensionale Repräsentationen  $\mat{Y}$ durch Anwendung fünf unterschiedlicher Methoden auf dem Swiss Roll-Datensatzes]{Abgebildet sind die latenten zweidimensionalen Repräsentationen $\mat{Y}$ durch Anwendung fünf unterschiedlicher Methoden auf dem Swiss Roll-Datensatz. Nur Locally Linear Embedding ist in der Lage, die Swiss Roll zu \enquote{entfalten}. Dies ist angesichts der hohen Qualitätskriterien von Locally Linear Embedding und der niedrigeren Qualitätskriterien der restlichen Methoden auf diesem Datensatz stimmig (siehe \figref{fig:SwissRollMetrics}). (Eigene Darstellung)}
 	\label{fig:SwissRollEmbeddings}
 \end{figure}
-die latenten Repräsentationen $\mat{Y} \in \real^{n \times 2}$ durch Anwendung der fünf Methoden auf den Swiss Roll-Datensatz in einem Scatter-Plot dargestellt. Dasselbe Vorgehen wurde auch auf dem Twin Peaks-Datensatz durchgeführt und ist in
-\figref{fig:TwinPeaksEmbeddings} zu finden. Locally Linear Embedding ist als einzige Methode in der Lage, die Swiss Roll zu \enquote{entfalten}. Dies bestätigt die hohe Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion durch Locally Linear Embedding und die niedrigeren Werte der restlichen Methoden (siehe \figref{fig:SwissRollMetrics}). Die niedrigere Vertrauenswürdigkeit hat insbesondere für die Visualisierung eine große Bedeutung, da dies anzeigt, dass Punkte in der latenten Repräsentation Nachbarn werden, obwohl sie es ursprünglich nicht waren.\rewrite{mehr dazushreiben, was Kernel PCA und der Autoencoder hier veranstalten}
+die latenten Repräsentationen $\mat{Y} \in \real^{n \times 2}$ durch Anwendung der fünf Methoden auf den Swiss Roll-Datensatz in einem Scatter-Plot dargestellt.
+% Dasselbe Vorgehen wurde auch auf dem Twin Peaks-Datensatz durchgeführt und ist in
+% \figref{fig:TwinPeaksEmbeddings} zu finden. 
+Locally Linear Embedding ist als einzige Methode in der Lage, die Swiss Roll zu
+\enquote{entfalten}. Dies bestätigt die hohe Vertrauenswürdigkeit und Kontinuität der
+Dimensionsreduktion durch Locally Linear Embedding und die niedrigeren Werte der restlichen
+Methoden (siehe \figref{fig:SwissRollMetrics}). Die niedrigere Vertrauenswürdigkeit hat
+insbesondere für die Visualisierung eine große Bedeutung, da dies anzeigt, dass Punkte in der
+latenten Repräsentation Nachbarn werden, obwohl sie es ursprünglich nicht waren. Nur der
+Autoencoder kann ebenfalls eine höhere Vertrauenswürdigkeit erzielen, da die Swiss Roll teilweise
+entfaltet werden kann. Die inneren Punkte werden allerdings näher zueinander gezerrt, was die
+Kontinuität dieser Dimensionsreduktion reduziert. Sowohl die klassische Principal Component
+Analysis, als auch die Kernel-Variante dessen ist nicht in der Lage, die Swiss Roll zu entfalten.
 
 \subsection{Resultate auf natürlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:natuerlich}
