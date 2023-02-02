@@ -502,7 +502,7 @@ bestraft (siehe Regularisierung in \secref{ch:MethodenDerDimRed:ML:AE}).
 
 Der eben beschriebene Zusammenhang wird im Folgenden zur Verdeutlichung visualisiert. Dazu wird
 zuerst die Korrelation der transformierten Daten und anschließend werden die gefundenen Gewichte
-der Methoden genauer analysiert. Punkt 1 aus dem theoretischen Zusammenhang wird in
+der Methoden genauer analysiert. Punkt (1) aus dem theoretischen Zusammenhang wird in
 \figref{fig:Korrelationsmatrizen} deutlich.
 \begin{figure}[ht]
 	\centering
@@ -513,16 +513,32 @@ der Methoden genauer analysiert. Punkt 1 aus dem theoretischen Zusammenhang wird
 
 Um nun die gefundenen Lösungen einer Principal Component Analysis und von Autoencodern genauer
 betrachten zu können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines
-dreischichtigen Autoencoders verglichen werden. Im Falle eines dreischichtigen Autoencoders sind
-die Gewichte des Encoders eine Matrix $\mat{W}_1 \in \real^{d \times D}$ und die Gewichte des
-Decoders eine Matrix $\mat{W}_2 \in \real^{D \times d}$. Auf Bilddatensätzen können diese Matrizen
-so umgeformt werden, dass sich für jede Zeile von $\mat{W}_1$ oder Spalte von $\mat{W}_2$ ein Bild
-ergibt. Auf diese Weise kann die \enquote{Arbeitsweise} des Autoencoders anschaulich untersucht
-werden. \figref{fig:Gewichtsvergleich} setzt dieses Vorgehen auf dem FER-Datensatz um.
+dreischichtigen Autoencoders verglichen werden. Auf Bilddatensätzen können diese Matrizen so
+umgeformt werden, dass sich für jede Zeile von $\mat{W}_1$ oder Spalte von $\mat{W}_2$ ein Bild
+ergibt. \figref{fig:Gewichtsvergleich} setzt dieses Vorgehen auf dem FER-Datensatz um.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{weights-comparison.pdf}
 	\caption[Die Gewichtsmatrizen von drei Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf neun Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Principal Component Analysis, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders (ohne Regularisierung) und \captionc die Links-Singulärvektoren $\mat{U}$ nach Anwendung einer Singulärwertszerlegung (\eqref{eq:SVD}) auf der Gewichtsmatrix $\mat{W}_2$ eines linearen Autoencoders mit \textit{weight decay}. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}
-Hierbei ist in \captiona die Ladungsmatrix von PCA, in \captionb die Gewichtsmatrix $\mat{W}_2$ eines linearen dreischichtigen Autoencoders und in \captionc die Links-Singulärvektoren $\mat{U}$ nach Anwendung einer Singulärwertszerlegung (\eqref{eq:SVD}) auf der Gewichtsmatrix $\mat{W}_2$ eines linearen Autoencoders mit \textit{weight decay} dargestellt. Die Gewichte des linearen Autoencoders zeigen bereits eine Ähnlichkeit zu der Ladungsmatrix $\mat{A}$ der Principal Component Analysis, jedoch sind einige Unterschiede erkennbar. Nach Anwendung der im theoretischen Zusammenhang beschriebenen Methode, sind die Gewichte bis auf das Vorzeichen fast identisch zu der Ladungsmatrix $\mat{A}$.
+Hierbei ist in \captiona die Ladungsmatrix von PCA, in \captionb die Gewichtsmatrix $\mat{W}_2$ eines linearen dreischichtigen Autoencoders und in \captionc die ersten $d$ Links-Singulärvektoren der Decoder-Gewichtsmatrix $\mat{W}_2$ eines linearen Autoencoders mit \textit{weight decay} dargestellt. Die Gewichte des linearen Autoencoders zeigen bereits eine Ähnlichkeit zu der Ladungsmatrix $\mat{A}$ der Principal Component Analysis, jedoch sind einige Unterschiede erkennbar. Die Links-Singulärvektoren der Decoder-Gewichtsmatrix sind bis auf das Vorzeichen fast identisch zu der Ladungsmatrix $\mat{A}$.
+
+\subsubsection{Hinzunahme von Nichtlinearität}
+
+Bei der Hinzunahme von Nichtlinearität zum dreischichtigen Autoencoder, gehen die beschriebenen
+Zusammenhänge verloren. Dazu wurden drei dreischichtige Autoencoder mit unterschiedlichen
+Aktivierungsfunktionen auf dem MNIST-Datensatz trainiert:
+\begin{enumerate}
+	\item ein linearer Autoencoder
+	\item ein Autoencoder mit Sigmoid-Aktivierungsfunktion im Encoder und einem linearem Decoder
+	\item ein nichtlinearer Autoencoder, d.h. sowohl Encoder als auch Decoder verwenden eine
+	      Sigmoid-Aktivierungsfunktion
+\end{enumerate}
+Damit die latenten Repräsentationen visualisiert werden können, wurde intrinsische Dimension auf zwei gesetzt.
+
+\begin{figure}
+	\centering
+	\includegraphics{autoencoders-nonlinearity.pdf}
+	\caption[Latente Repräsentationen von PCA und drei Autoencoder mit unterschiedlichen Aktivierungsfunktionen]{Zweidimensionale latente Repräsentationen von PCA und drei Autoencodern mit unterschiedlichen Aktivierungsfunktionen auf dem MNIST-Datensatz. }
+\end{figure}
