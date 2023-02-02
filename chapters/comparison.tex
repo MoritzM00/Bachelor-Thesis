@@ -527,18 +527,15 @@ Hierbei ist in \captiona die Ladungsmatrix von PCA, in \captionb die Gewichtsmat
 \subsubsection{Hinzunahme von Nichtlinearität}
 
 Bei der Hinzunahme von Nichtlinearität zum dreischichtigen Autoencoder, gehen die beschriebenen
-Zusammenhänge verloren. Dazu wurden drei dreischichtige Autoencoder mit unterschiedlichen
-Aktivierungsfunktionen auf dem MNIST-Datensatz trainiert:
-\begin{enumerate}
-	\item ein linearer Autoencoder
-	\item ein Autoencoder mit Sigmoid-Aktivierungsfunktion im Encoder und einem linearem Decoder
-	\item ein nichtlinearer Autoencoder, d.h. sowohl Encoder als auch Decoder verwenden eine
-	      Sigmoid-Aktivierungsfunktion
-\end{enumerate}
-Damit die latenten Repräsentationen visualisiert werden können, wurde intrinsische Dimension auf zwei gesetzt.
-
-\begin{figure}
+Zusammenhänge verloren. Dazu wurden mehrere dreischichtige Autoencoder mit unterschiedlichen
+Aktivierungsfunktionen auf dem MNIST-Datensatz trainiert, wobei schrittweise Nichtlinearität
+hinzugefügt wird. Mithilfe dieser Autoencoder wurde dann die latente Repräsentation $\mat{Y}$ für
+den MNIST-Datensatz berechnet und in \figref{fig:Autoencoder-Nichtlinearitaet} dargestellt. Für
+Visualisierungszwecke wurde die intrinsische Dimension dabei auf zwei gesetzt.
+\begin{figure}[ht]
 	\centering
 	\includegraphics{autoencoders-nonlinearity.pdf}
-	\caption[Latente Repräsentationen von PCA und drei Autoencoder mit unterschiedlichen Aktivierungsfunktionen]{Zweidimensionale latente Repräsentationen von PCA und drei Autoencodern mit unterschiedlichen Aktivierungsfunktionen auf dem MNIST-Datensatz. }
+	\caption[Latente Repräsentationen von PCA und drei Autoencoder mit unterschiedlichen Aktivierungsfunktionen]{Dargestellt sind die latenten Repräsentationen $\mat{Y}$ einer \captiona Principal Component Analysis und mehrerer dreischichtiger Autoencoder mit \captionb linearen Aktivierungsfunktionen, \captionc Sigmoid-Aktivierung im Encoder und linearem Decoder und \captiond Sigmoid-Aktivierungen im Encoder und Decoder. Alle Autoencoder wurden mit \textit{weight decay} ($\lambda = \expnum{1}{-6}$) trainiert.}
+	\label{fig:Autoencoder-Nichtlinearitaet}
 \end{figure}
+Als Referenz ist in \captiona die latente Repräsentation der Principal Component Analysis abgebildet. Wie bereits im theoretischen Zusammenhang erklärt, lernt ein linearer Autoencoder mit \textit{weight decay} die Richtungen der Hauptkomponenten bis hin zu einer orthogonalen Transformation. Vergleicht man \captiona mit \captionb ist dies in der Tat der Fall. Ist der Encoder nichtlinear, so besteht immer noch eine große Ähnlichkeit zu der von PCA gefundenen latenten Repräsentation. Dies stimmt mit der von \textcite{Bourlard.1988} gemachten formalen Beobachtung überein. Ist der Decoder ebenfalls nichtlinear, so weicht die gefundene Repräsentation deutlich von der Principal Component Analysis und anderer (teilweise) linearer Autoencoder ab.
