@@ -12,16 +12,16 @@ Jahren Methoden wie Locally Linear Embedding aus einem Teilgebiet der Dimensions
 Erlernen von Mannigfaltigkeiten, zu wichtigen Vertretern der Dimensionsreduktion. Erfolge im
 Bereich des modernen Machine Learnings mit Deep Learning haben dazu geführt, dass auch diese
 Methoden auf dem Bereich der Dimensionsreduktion angewandt und weiterentwickelt wurden. Eine
-prominente Methode ist der Autoencoder und seine vielen Varianten mit unterschiedlichsten
-Regularisierungsmethoden. Es stellt sich jedoch die Frage, inwiefern diese moderneren Machine
-Learning Ansätze gegenüber etablierten statistischen Verfahren abschneiden. Aus diesem Grund wurden
-in einem empirischen Vergleich drei Vertreter der statistischen Methoden den zwei Machine Learning
-Ansätzen gegenübergestellt und sowohl auf künstlichen als auch natürlichen Datensätzen evaluiert.
-Die hier eingesetzten statischen Methoden zeigen die Vorteile von Zielfunktionen, deren Optimum
-durch geschlossene Form berechnet werden kann. Auf Datensätzen mit geringer Stichprobengröße ist
-dies meist einer iterativen Optimierung überlegen. Insbesondere bei neuronalen Netzen wie den
+prominente Methode ist dabei der Autoencoder. Es stellt sich jedoch die Frage, ob diese modernen
+Machine Learning Ansätze auch auf dem Bereich der Dimensionsreduktion etablierte statistische
+Verfahren ablösen könnten. Aus diesem Grund wurden in einem empirischen Vergleich drei Vertreter
+der statistischen Methoden den zwei Machine Learning Ansätzen gegenübergestellt und sowohl auf
+künstlichen als auch natürlichen Datensätzen mithilfe dreier Qualitätskriterien evaluiert. Die hier
+eingesetzten statischen Methoden zeigen die Vorteile von Zielfunktionen, deren Optimum durch
+geschlossene Form berechnet werden kann. Auf Datensätzen mit geringer Stichprobengröße ist dies
+meist einer iterativen Optimierung überlegen. Insbesondere bei neuronalen Netzen wie den
 Autoencodern ist ein kleiner Datensatz problematisch, da aufgrund der hohen Anzahl an
-Freiheitsgraden die Optimierung deutlich instabiler ist. Andererseits skalieren die Machine
+Freiheitsgraden die Optimierung deutlich instabiler ist. Andererseits skalieren dadurch die Machine
 Learning Methoden auch besser auf größere Datensätze. Hier kommen die statischen Methoden wie die
 Kernel Principal Component Analysis und Locally Linear Embedding wegen ihrer hohen Zeit- und auch
 Speicherkomplexität schnell an ihre Grenzen. Dies macht bereits auf mittelgroßen Datensätzen wie
@@ -37,8 +37,11 @@ statistischen Methoden, insbesondere der Kernel Principal Component Analysis zu.
 Component Analysis umgeht diese Problematik komplett, da keine Hyperparameter gewählt werden
 müssen. Gleichzeitig schneidet diese Methode auf vielen natürlichen Datensätzen relativ gesehen am
 besten ab, was die Vorteile einer Flexibilität und insbesondere der Nichtlinearität infrage stellt.
-Auf künstlichen Datensätzen konnte die Principal Component Analysis mangels der Fähigkeit,
-nichtlineare Mannigfaltigkeiten zu entdecken, durch nichtlineare Methoden outperformt werden.
+Auf künstlichen Datensätzen kann die Principal Component Analysis jedoch mangels der Fähigkeit,
+nichtlineare Mannigfaltigkeiten zu entdecken, durch Autoencoder outperformed werden. Auf diesen
+künstlichen Datensätzen ist Locally Linear Embedding auch einem Autoencoder deutlich überlegen. Die
+Performance von Locally Linear Embedding auf natürlichen Datensätzen ist hingegen weniger
+überzeugend.
 
 \idea{statistisch
 
