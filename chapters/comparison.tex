@@ -434,23 +434,10 @@ In diesem Abschnitt wird die Principal Component Analysis mit Autoencodern vergl
 der theoretische Zusammenhang zwischen den beiden Methoden erklärt und durch empirische Experimente
 verdeutlicht.
 
-% Im Anschluss wird die
-% Principal Component Analysis und unterschiedliche Modelle des Autoencoders für einen empirischen
-% Vergleich auf dem FER-Datensatz trainiert, wobei aufgrund der sieben unterschiedlichen Emotionen im
-% Datensatz eine Reduktion auf sieben Dimensionen durchgeführt wurde. Ein Beispielbild für jede
-% Emotion des FER-Datensatzes ist in \figref{fig:FER-Datensatz-Beispiele} dargestellt.
-
-% \begin{figure}[ht]
-% 	\centering
-% 	\includegraphics{fer2013-images.pdf}
-% 	\caption[Beispielbilder des FER-Datensatzes]{Abgebildet ist je ein Bild für eine der sieben Emotionen im FER-Datensatz.}
-% 	\label{fig:FER-Datensatz-Beispiele}
-% \end{figure}
-
 \subsubsection{Theoretischer Zusammenhang}
 
 \textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y} = f(\vect{x})$ eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten $\tr{\mat{A}}\vect{x}$ einer Principal Component Analysis ist. Im Falle eines dreischichtigen Autoencoders sind, wie bereits in \eqref{eq:dreischichtigerAE} erklärt wurde, die Gewichte des Encoders eine Matrix $\mat{W}_1 \in \real^{d \times D}$ und die Gewichte des
-Decoders eine Matrix $\mat{W}_2 \in \real^{D \times d}$. Es kann nun gezeigt werden, dass sich die Zielfunktion eines solchen dreischichtigen Autoencoders mit linearen Aktivierungsfunktionen (LAE) auf die Form
+Decoders eine Matrix $\mat{W}_2 \in \real^{D \times d}$. Für den Rest dieses Abschnitts werden daher ausschließlich dreischichtige Autoencoder betrachtet. Es kann nun gezeigt werden, dass sich die Zielfunktion eines solchen Autoencoders mit linearen Aktivierungsfunktionen (LAE) auf die Form
 \begin{equation}
 	\mathcal{J}_{\text{LAE}} = \norm{\mat{X} - \mat{W}_2\mat{W}_1\mat{X}}_F^2
 \end{equation}
@@ -461,11 +448,9 @@ eine invertierbare Matrix $\mat{G}$ äquivalent umformuliert werden kann zu \par
 \begin{equation}
 	\mathcal{J}_{\text{LAE}} = \norm{\mat{X} - (\mat{W}_2\mat{G}^{-1}) (\mat{G} \mat{W}_1)\mat{X}}_F^2 \, .
 \end{equation}
-
 Die Gewichte eines linearen Autoencoders, der den quadrierten Fehler
 (\eqref{eq:AE_objectiveFunction}) minimiert, spannen also einen äquivalenten Unterraum wie
-Ladungsmatrix $\mat{A}$ auf. Dies gilt sogar dann, wenn im Encoder eines dreischichtigen
-Autoencoders Sigmoid-Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die latente Repräsentation $\mat{Y}$
+Ladungsmatrix $\mat{A}$ auf. Dies gilt sogar dann, wenn im Encoder Sigmoid-Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die latente Repräsentation $\mat{Y}$
 eines linearen Autoencoders mit der von PCA wie folgt \parencite[3]{Plaut.2018}: (1) Die Kovarianzmatrix von $\mat{Y}$ ist nicht diagonal, das heißt die
 latente Repräsentation ist nicht unkorreliert.\footnote{Äquivalent dazu ist die Korrelationsmatrix
 	von $\mat{Y}$, welche lediglich eine skalierte Kovarianzmatrix darstellt, keine Einheitsmatrix.}
@@ -477,9 +462,9 @@ auf unterschiedliche Dimensionen nicht geschachtelt sind.
 
 Es wurden jedoch bereits Verfahren entwickelt, mit denen diese Eigenschaften wiederhergestellt oder
 von Beginn an sichergestellt werden können. Das Vorgehen von \textcite{Plaut.2018} rekonstruiert
-mittels eines linearen dreischichtigen Autoencoders die Eigenvektorbasis der Kovarianzmatrix bis
-hin zu einer orthogonalen Transformation. Die Autoren behaupten, dass durch eine
-Singulärwertszerlegung der Decoder-Gewichtsmatrix $\mat{W}_2$, d.h. die Zerlegung in
+mittels eines linearen Autoencoders die Eigenvektorbasis der Kovarianzmatrix bis hin zu einer
+orthogonalen Transformation. Die Autoren behaupten, dass durch eine Singulärwertszerlegung der
+Decoder-Gewichtsmatrix $\mat{W}_2$, d.h. die Zerlegung in
 \begin{equation}
 	\label{eq:SVD}
 	\mat{W}_2 = \mat{U} \mat{\Psi} \tr{\mat{V}}
@@ -494,51 +479,36 @@ bewiesen, sondern nur in empirischen Ergebnissen festgestellt. Eine Re-Implement
 beschriebenen Vorgehens schlägt fehl, wenn ein linearer Autoencoder ohne \textit{weight decay}
 verwendet wird. Diese Beobachtung wurde in der Arbeit von \textcite{Kunin.2019} zur Landschaft der
 Fehlerfunktion eines linearen Autoencoders bestätigt und formal nachgewiesen. Damit ein linearer
-dreischichtiger Autoencoder die Richtungen der Hauptkomponenten lernen kann, muss ein
-Regularisierungsterm zur Zielfunktion des Autoencoders hinzufügt werden, der die Größe der Gewichte
-bestraft (siehe Regularisierung in \secref{ch:MethodenDerDimRed:ML:AE}).
+Autoencoder die Richtungen der Hauptkomponenten lernen kann, muss ein Regularisierungsterm zur
+Zielfunktion des Autoencoders hinzufügt werden, der die Größe der Gewichte bestraft (siehe
+Regularisierung in \secref{ch:MethodenDerDimRed:ML:AE}).
 
 \subsubsection{Visualisierung der Zusammenhänge}
 
 Der eben beschriebene Zusammenhang wird im Folgenden zur Verdeutlichung visualisiert. Dazu wird
 zuerst die Korrelation der transformierten Daten und anschließend werden die gefundenen Gewichte
 der Methoden genauer analysiert. Punkt (1) aus dem theoretischen Zusammenhang wird in
-\figref{fig:Korrelationsmatrizen} deutlich.
+\figref{fig:Kovarianzmatrizen} deutlich.
 \begin{figure}[ht]
 	\centering
-	\includegraphics{correlation-matrices.pdf}
-	\caption[Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von drei Methoden]{Hier sind die Korrelationsmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz abgebildet, wobei in \captiona die Principal Component Analysis, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Korrelationsmatrix bei Transformation mittels der Principal Component Analysis ist per Konstruktion eine Einheitsmatrix, das heißt es besteht keine Korrelation in $\mat{Y}$. Bei Transformation durch den Autoencoder besteht Korrelation. Wendet man die Singulärwertszerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, erhält man deutlich weniger Korrelation. Sie konnte aber nicht vollständig eliminiert werden. (Eigene Darstellung)}
-	\label{fig:Korrelationsmatrizen}
-\end{figure} Dargestellt sind die Korrelationsmatrizen der transformierten Daten, wobei in \captiona die Principal Component Analysis, in \captionb ein linearer dreischichtiger Autoencoder und in \captionc die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Korrelationsmatrix bei der Principal Component Analysis ist wie erwartet eine Einheitsmatrix. Die latente Repräsentation des linearen Autoencoders besitzt dagegen noch deutlich miteinander korrelierte Merkmale. Die Korrelation bei Transformation durch die Links-Singulärvektoren der Decoder-Gewichtsmatrix konnte hingegen fast vollständig eliminiert werden.
+	\includegraphics{covariance-matrices.pdf}
+	\caption[Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von drei Methoden]{Die Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz, wobei in \captiona die Principal Component Analysis und die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei Transformation mittels der Principal Component Analysis ist per Konstruktion eine Diagonalmatrix mit absteigend sortierten Varianzen, das heißt es besteht keine Korrelation in $\mat{Y}$. Wendet man die Singulärwertszerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, so erhält man ohne \textit{weight decay} keine Diagonalmatrix. Wurde hingegen \textit{weight decay} verwendet, so ist die Kovarianzmatrix eine Diagonalmatrix. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\label{fig:Kovarianzmatrizen}
+\end{figure} Dargestellt sind die Kovarianzmatrizen der transformierten Daten, wobei in \captiona die Principal Component Analysis und jeweils die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei der Principal Component Analysis ist wie erwartet eine Diagonalmatrix mit absteigend sortieren Varianzen auf der Diagonalen. Die von \textcite{Plaut.2018} vorgeschlagene Methode wurde in \captionb und \captionc angewandt. Hierbei bestimmt jedoch die Verwendung von \textit{weight decay} die Orthogonalität der latenten Repräsentation. Wird keine Regularisierung verwendet, so besteht Korrelation in $\mat{Y}$. Im Gegensatz dazu konnte die Korrelation fast vollständig eliminiert werden, wenn \textit{weight decay} verwendet wird.
 
 Um nun die gefundenen Lösungen einer Principal Component Analysis und von Autoencodern genauer
-betrachten zu können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines
-dreischichtigen Autoencoders verglichen werden. Auf Bilddatensätzen können diese Matrizen so
-umgeformt werden, dass sich für jede Zeile von $\mat{W}_1$ oder Spalte von $\mat{W}_2$ ein Bild
-ergibt. \figref{fig:Gewichtsvergleich} setzt dieses Vorgehen auf dem FER-Datensatz um.
+betrachten zu können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines Autoencoders
+verglichen werden. Auf Bilddatensätzen können diese Matrizen so umgeformt werden, dass sich für
+jede Zeile von $\mat{W}_1$ oder Spalte von $\mat{W}_2$ ein Bild ergibt.
+\figref{fig:Gewichtsvergleich} setzt dieses Vorgehen auf dem FER-Datensatz um.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{weights-comparison.pdf}
-	\caption[Die Gewichtsmatrizen von drei Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf neun Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Principal Component Analysis, \captionb die Decoder-Gewichtsmatrix eines linearen dreischichtigen Autoencoders (ohne Regularisierung) und \captionc die Links-Singulärvektoren $\mat{U}$ nach Anwendung einer Singulärwertszerlegung (\eqref{eq:SVD}) auf der Gewichtsmatrix $\mat{W}_2$ eines linearen Autoencoders mit \textit{weight decay}. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Die Gewichtsmatrizen von drei Methoden auf dem FER-Datensatz]{Gezeigt sind die Gewichtsmatrizen von drei Methoden bei einer Reduktion des FER-Datensatzes auf neun Dimensionen. Ein einzelnes Bild entspricht einer Spalte der Ladungs- beziehungsweise Gewichtsmatrix, welche in die Größe des Bildes umgeformt wurde. \captiona Die Ladungsmatrix $\mat{A}$ der Principal Component Analysis. \captionb Die Decoder-Gewichtsmatrix eines linearen Autoencoders ohne \textit{weight decay}. \captionc Die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb mit \textit{weight decay}. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Gewichtsvergleich}
 \end{figure}
-Hierbei ist in \captiona die Ladungsmatrix von PCA, in \captionb die Gewichtsmatrix $\mat{W}_2$ eines linearen dreischichtigen Autoencoders und in \captionc die ersten $d$ Links-Singulärvektoren der Decoder-Gewichtsmatrix $\mat{W}_2$ eines linearen Autoencoders mit \textit{weight decay} dargestellt. Die Gewichte des linearen Autoencoders zeigen bereits eine Ähnlichkeit zu der Ladungsmatrix $\mat{A}$ der Principal Component Analysis, jedoch sind einige Unterschiede erkennbar. Die Links-Singulärvektoren der Decoder-Gewichtsmatrix sind bis auf das Vorzeichen fast identisch zu der Ladungsmatrix $\mat{A}$.
-
-\subsubsection{Hinzunahme von Nichtlinearität}
-
-Bei der Hinzunahme von Nichtlinearität zum Autoencoder, gehen die beschriebenen Zusammenhänge
-verloren. Dazu wurden mehrere dreischichtige Autoencoder mit unterschiedlichen
-Aktivierungsfunktionen auf dem MNIST-Datensatz trainiert, wobei schrittweise Nichtlinearität
-hinzugefügt wird. Mithilfe dieser Autoencoder wurde dann die latente Repräsentation $\mat{Y}$ für
-den MNIST-Datensatz berechnet und in \figref{fig:Autoencoder-Nichtlinearitaet} dargestellt. Für
-Visualisierungszwecke wurde die intrinsische Dimension dabei auf zwei gesetzt.
-\begin{figure}[ht]
-	\centering
-	\includegraphics{autoencoders-nonlinearity.pdf}
-	\caption[Latente Repräsentationen von PCA und drei Autoencoder mit unterschiedlichen Aktivierungsfunktionen]{Dargestellt sind die latenten Repräsentationen $\mat{Y}$ einer \captiona Principal Component Analysis und mehrerer dreischichtiger Autoencoder mit \captionb linearen Aktivierungsfunktionen, \captionc Sigmoid-Aktivierung im Encoder und linearem Decoder und \captiond Sigmoid-Aktivierungen im Encoder und Decoder. Alle Autoencoder wurden mit \textit{weight decay} ($\lambda = \expnum{1}{-6}$) trainiert.}
-	\label{fig:Autoencoder-Nichtlinearitaet}
-\end{figure}
-Als Referenz ist in \captiona die latente Repräsentation der Principal Component Analysis abgebildet. Wie bereits im theoretischen Zusammenhang erklärt, lernt ein linearer Autoencoder mit \textit{weight decay} die Richtungen der Hauptkomponenten bis hin zu einer orthogonalen Transformation. Vergleicht man \figref{fig:Autoencoder-Nichtlinearitaet} \captiona mit \captionb ist dies in der Tat der Fall. Ist der Encoder nichtlinear, so besteht immer noch eine große Ähnlichkeit zu der von PCA gefundenen latenten Repräsentation. Dies stimmt mit der von \textcite{Bourlard.1988} gemachten formalen Beobachtung überein. Ist der Decoder ebenfalls nichtlinear, so weicht die gefundene Repräsentation deutlich von der Repräsentation der Principal Component Analysis und anderer (teilweise) linearer Autoencoder ab.
+Hierbei sind in \figref{fig:Gewichtsvergleich} \captiona die Ladungsmatrix von PCA, in \captionb die Decoder-Gewichtsmatrix eines linearen Autoencoders und in \captionc die ersten $d$ Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders mit \textit{weight decay} dargestellt.
+Die Gewichte des linearen Autoencoders zeigen bereits eine Ähnlichkeit zu der Ladungsmatrix $\mat{A}$ der Principal Component Analysis, jedoch sind einige Unterschiede erkennbar. Die Links-Singulärvektoren der Decoder-Gewichtsmatrix sind bis auf das Vorzeichen fast identisch zur Ladungsmatrix $\mat{A}$.
 
 Zusammenfassend bedeutet dies, dass ein dreischichtiger Autoencoder mit linearen
 Aktivierungsfunktionen eine sehr ähnliche latente Repräsentation wie die Principal Component
@@ -547,3 +517,19 @@ Lösung des Autoencoders. Damit kann für sehr große Datensätze ein alternativ
 des Autoencoders verwendet werden, um die Richtungen der Hauptkomponenten zu lernen. Dabei umgeht
 man die Eigenwertszerlegung der $D \times D$-Kovarianzmatrix der Daten, indem nur die
 Singulärwertszerlegung der $D \times d$-Gewichtsmatrix $\mat{W}_2$ berechnet werden muss.
+
+\subsubsection{Hinzunahme von Nichtlinearität}
+
+Im Folgenden wird untersucht, inwiefern die Hinzunahme von Nichtlinearität die latente
+Repräsentation eines Autoencoders beeinflusst. Dazu wurden mehrere dreischichtige Autoencoder mit
+unterschiedlichen Aktivierungsfunktionen auf dem MNIST-Datensatz trainiert, wobei schrittweise
+Nichtlinearität hinzugefügt wird. Mithilfe dieser Autoencoder wurde dann die latente Repräsentation
+$\mat{Y}$ für den MNIST-Datensatz berechnet und in \figref{fig:Autoencoder-Nichtlinearitaet}
+dargestellt. Für Visualisierungszwecke wurde die intrinsische Dimension dabei auf zwei gesetzt.
+\begin{figure}[ht]
+	\centering
+	\includegraphics{autoencoders-nonlinearity.pdf}
+	\caption[Latente Repräsentationen von PCA und drei Autoencoder mit unterschiedlichen Aktivierungsfunktionen]{Dargestellt sind die latenten Repräsentationen $\mat{Y}$ einer \captiona Principal Component Analysis und mehrerer Autoencoder mit \captionb linearen Aktivierungsfunktionen, \captionc Sigmoid-Aktivierung im Encoder und linearem Decoder und \captiond Sigmoid-Aktivierungen im Encoder und Decoder. Alle Autoencoder wurden mit \textit{weight decay} ($\lambda = \expnum{1}{-6}$) trainiert.}
+	\label{fig:Autoencoder-Nichtlinearitaet}
+\end{figure}
+Als Referenz ist in \captiona die latente Repräsentation der Principal Component Analysis abgebildet. Wie bereits im theoretischen Zusammenhang erklärt, lernt ein linearer Autoencoder mit \textit{weight decay} die Richtungen der Hauptkomponenten bis hin zu einer orthogonalen Transformation. Vergleicht man \figref{fig:Autoencoder-Nichtlinearitaet} \captiona mit \captionb ist dies in der Tat der Fall. Ist der Encoder nichtlinear, so besteht immer noch eine große Ähnlichkeit zu der von PCA gefundenen latenten Repräsentation. Dies stimmt mit der von \textcite{Bourlard.1988} gemachten formalen Beobachtung überein. Ist der Decoder ebenfalls nichtlinear, so weicht die gefundene Repräsentation deutlich von der Repräsentation der Principal Component Analysis und anderer (teilweise) linearer Autoencoder ab. Bei der Hinzunahme von Nichtlinearität zum Autoencoder, gehen die beschriebenen Zusammenhänge also erst vollständig verloren, wenn sowohl der Encoder als auch Decoder nichtlinear sind.
