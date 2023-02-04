@@ -55,7 +55,8 @@ eingegangen.
 Die zentrale Idee der Principal Component Analysis ist die Transformation des Koordinatensystems in einer möglichst \textit{verlustfreien} Art und Weise. Verlustfrei bedeutet im Kontext der Principal Component Analysis, dass möglichst viel Variation in den Daten erhalten bleiben soll \parencite[vgl.][1]{Jolliffe.2002}. Das Ziel ist also, die Richtungen der größten Varianz in den Daten
 zu finden, da diese den höchsten Informationsgehalt besitzen. Daher wird sukzessive die Varianz der
 im Folgenden definierten Hauptkomponenten maximiert. Was diese Hauptkomponenten sind und wie man
-sie herleitet, wird im folgenden Unterabschnitt genauer betrachtet.
+sie herleitet, wird im folgenden Unterabschnitt genauer betrachtet.\rewrite{die Grundidee
+	ausführlicher beschreiben}
 
 \subsubsection{Herleitung der Hauptkomponenten}
 \label{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}
@@ -554,4 +555,4 @@ beispielsweise das von \textcite{Bengio.2006} erläuterte gierige schichtenweise
 tiefer Autoencoder schichtenweise durch untiefe Autoencoder (drei Schichten) vortrainiert und im
 letzten Schritt erfolgt eine Feinabstimmung des kompletten Netzwerks \parencite[522]{Goodfellow.2016}. Dieses Vorgehen kann analog auch für klassische Autoencoder verwendet
 werden, um eine gute Initialisierung der Gewichte zu erreichen und damit suboptimale lokale Minima
-der Zielfunktion zu umgehen \parencite[509]{Goodfellow.2016}.\unsure{Wieso ist der CAE gut für das Lernen von Mannigfaltigkeiten?}
+der Zielfunktion zu umgehen \parencite[509]{Goodfellow.2016}.
