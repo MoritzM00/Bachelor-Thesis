@@ -28,7 +28,7 @@ jeder Epoche $t = 1, \ldots, t_{\text{max}}$ mit einem Wert $\gamma$ multiplizie
 wird für alle Autoencoder auf $\gamma = \num{0,9}$ gesetzt. Der klassische Autoencoder wird für
 maximal 100 Epochen, der Contractive Autoencoder für maximal 50 Epochen und die Convolutional
 Autoencoder für maximal 150 Epochen trainiert. Das Training wird frühzeitig beendet, wenn sich der
-Validierungsfehler innerhalb von 20 Epochen nicht mehr verbessert. Die Größes eines Batches ist
+Validierungsfehler innerhalb von 20 Epochen nicht mehr verbessert. Die Größe eines Batches ist
 datensatzabhängig nach Stichprobengröße gewählt worden und beträgt 64 für die Swiss Roll und Twin
 Peaks, 32 für Olivetti Faces und ICMR, sowie 128 für MNIST, Fashion MNIST und FER.
 
@@ -44,7 +44,7 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 	\begin{center}
 		\includegraphics{TwinPeaks_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für die Twin Peaks]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Twin Peaks Datensatz. Locally Linear Embedding (LLE) schneidet wie bei der Swiss Roll insgesamt am besten ab, gefolgt von der Kernel PCA und vom Autoencoder. Lediglich der Contractive Autoencoder (CAE) und PCA fallen auf diesem künstlichen Datensatz etwas zurück, wobei die Vertrauenswürdigkeit der Dimensionsreduktion von PCA deutlich schlechter als bei den restlichen Methoden ist. Dies ist wahrscheinlich der nichtlinearen Mannigfaltigkeit geschuldet, was der linearen Principal Component Analysis Schwierigkeiten bereitet. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den Twin Peaks-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Twin Peaks-Datensatz. Locally Linear Embedding (LLE) schneidet wie bei der Swiss Roll insgesamt am besten ab, gefolgt von der Kernel PCA und vom Autoencoder. Lediglich der Contractive Autoencoder (CAE) und PCA fallen auf diesem künstlichen Datensatz etwas zurück, wobei die Vertrauenswürdigkeit der Dimensionsreduktion von PCA deutlich schlechter als bei den restlichen Methoden ist. Dies ist wahrscheinlich der nichtlinearen Mannigfaltigkeit geschuldet, was der linearen Principal Component Analysis Schwierigkeiten bereitet. (Eigene Darstellung)}
 	\label{fig:TwinPeaksMetrics}
 \end{figure}
 
