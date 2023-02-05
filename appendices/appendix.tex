@@ -25,9 +25,9 @@ Kompatibilität mit anderen \textit{Scikit-Learn} Algorithmen eingesetzt wird. A
 Optimierern wie \textit{Stochastic Gradient Descent} (SGD) präferiert wird. Die Lernrate $\eta$
 wird mittels eines exponentiellen Verfalls nach jeder Epoche aktualisiert. Dazu wird $\eta$ nach
 jeder Epoche $t = 1, \ldots, t_{\text{max}}$ mit einem Wert $\gamma$ multipliziert. Dieser Wert
-wird für alle Autoencoder auf $\gamma = 0,9$ gesetzt. Der klassische Autoencoder wird für maximal
-100 Epochen, der Contractive Autoencoder für maximal 50 Epochen und die Convolutional Autoencoder
-für maximal 150 Epochen trainiert. Das Training wird frühzeitig beendet, wenn sich der
+wird für alle Autoencoder auf $\gamma = \num{0,9}$ gesetzt. Der klassische Autoencoder wird für
+maximal 100 Epochen, der Contractive Autoencoder für maximal 50 Epochen und die Convolutional
+Autoencoder für maximal 150 Epochen trainiert. Das Training wird frühzeitig beendet, wenn sich der
 Validierungsfehler innerhalb von 20 Epochen nicht mehr verbessert. Die Größes eines Batches ist
 datensatzabhängig nach Stichprobengröße gewählt worden und beträgt 64 für die Swiss Roll und Twin
 Peaks, 32 für Olivetti Faces und ICMR, sowie 128 für MNIST, Fashion MNIST und FER.
