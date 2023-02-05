@@ -30,14 +30,14 @@ Vergleich werden zwei künstliche und fünf natürliche Datensätze verwendet, d
 ein Überblick über die Stärken und Schwächen der statistischen und der Machine Learning Methoden
 verschafft werden. Neben dem Vergleich der zwei Gruppen wird in
 \secref{ch:Vergleich:sec:Resultate:PCA_AE} der Zusammenhang zwischen der Principal Component
-Analysis und Autoencodern genauer untersucht. Der Vergleich kann mittels der im
+Analysis und Autoencoder genauer untersucht. Der Vergleich kann mittels der im
 GitHub-Repository\footnote{\url{www.github.com/MoritzM00/drcomp}} definierten Konfigurationen der
 Methoden und des Trainingsskriptes repliziert werden. \rewrite{Unter Methodik könnte man auch was
 	anderes verstehen. Ein bisschen mehr dazu sagen, wieso diese Vorgehensweise Sinn macht}
 
 \subsection{Qualitätskriterien der Dimensionsreduktion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien}
-Wie bereits in \chapref{ch:Dimensionsreduktion} erläutert, hat die Dimensionsreduktion das Ziel einer möglichst \enquote{verlustfreien} Transformation der ursprünglichen Repräsentation in eine latente Repräsentation von geringerer Dimension. Für Autoencoder bedeutet \enquote{verlustfrei} die Minimierung des Rekonstruktionsfehlers wie z.B. die quadratische Abweichung (siehe \eqref{eq:MSE_loss}). Dieser Rekonstruktionsfehler ist jedoch wie \textcite[18]{vanderMaaten.2009} hervorhebt, nicht sehr aussagekräftig für die Güte einer Dimensionsreduktion. Hinzu kommt, dass der Rekonstruktionsfehler nicht für alle Methoden berechnet werden kann, da eine inverse Transformation der niedrigdimensionalen in die ursprüngliche Repräsentation benötigt wird. Damit fällt der Rekonstruktionsfehler als geeignetes Qualitätskriterium heraus. Das Forschungsinteresse für Methoden der Dimensionsreduktion hat daher mit der Zeit dafür gesorgt, dass immer mehr Qualitätskriterien entwickelt wurden. \textcite{Gracia.2014} stellen einige Qualitätskriterien vor und vergleichen diese miteinander. Trotzdem gibt es in der Literatur keine eindeutige Kennzahl, die bei einem Vergleich von Dimensionsreduktionsmethoden standardmäßig eingesetzt wird \parencite[vgl.][1 -- 2]{Lee.2009}. Stattdessen bedient man sich mehrerer Kennzahlen, die
+Wie bereits in \chapref{ch:Dimensionsreduktion} erläutert, hat die Dimensionsreduktion das Ziel einer möglichst \enquote{verlustfreien} Transformation der ursprünglichen Repräsentation in eine latente Repräsentation von geringerer Dimension. Für Autoencoder bedeutet \enquote{verlustfrei} die Minimierung des Rekonstruktionsfehlers wie z.B. die quadratische Abweichung (siehe \eqref{eq:MSE_loss}). Dieser Rekonstruktionsfehler ist jedoch wie \textcite[18]{vanderMaaten.2009} hervorhebt, nicht besonders aussagekräftig für die Güte einer Dimensionsreduktion. Hinzu kommt, dass der Rekonstruktionsfehler nicht für alle Methoden berechnet werden kann, da eine inverse Transformation der niedrigdimensionalen in die ursprüngliche Repräsentation benötigt wird. Damit fällt der Rekonstruktionsfehler als geeignetes Qualitätskriterium heraus. Das Forschungsinteresse für Methoden der Dimensionsreduktion hat daher mit der Zeit dafür gesorgt, dass immer mehr Qualitätskriterien entwickelt wurden. \textcite{Gracia.2014} stellen einige Qualitätskriterien vor und vergleichen diese miteinander. Trotzdem gibt es in der Literatur keine eindeutige Kennzahl, die bei einem Vergleich von Dimensionsreduktionsmethoden standardmäßig eingesetzt wird \parencite[vgl.][1 -- 2]{Lee.2009}. Stattdessen bedient man sich mehrerer Kennzahlen, die
 unterschiedliche Dinge bestrafen und versucht so die Stärken und Schwächen einer
 Dimensionsreduktionsmethode zu erkennen \parencite[486]{Venna.2001}. Die im Folgenden vorgestellten Qualitätskriterien versuchen die Güte
 mithilfe von Rängen zu quantifizieren.
@@ -46,47 +46,47 @@ Im ausführlichen Benchmark von \textcite{vanderMaaten.2009} wird auf den Genera
 eines 1-Nächste-Nachbar Klassifikators, sowie auf die zwei Kennzahlen Vertrauenswürdigkeit (engl.
 \textit{Trustworthiness}) und Kontinuität (engl. \textit{Continuity}) \parencites{Venna.2001}{Venna.2006} gesetzt. Die Vertrauenswürdigkeit und die Kontinuität sind
 rangbasierte Qualitätskriterien und werden auch in diesem Vergleich eingesetzt. Daneben gibt es
-noch viele weitere rangbasierte Qualitätskriterien, welche einheitlich durch die sogenannte
-\newterm{Co-Ranking Matrix} \parencite[1432]{Lee.2009} ausgedrückt werden können.\rewrite{Co Ranking kurz erklären} Ebenso können
-die Vertrauenswürdigkeit und Kontinuität über die Co-Ranking Matrix berechnet werden \parencite[1433]{Lee.2009}. Nachfolgend werden die in dieser Arbeit verwendeten Kriterien genauer
-erläutert.
+noch weitere rangbasierte Qualitätskriterien, welche einheitlich durch die sogenannte
+\newterm{Co-Ranking-Matrix} \parencite[1432]{Lee.2009} ausgedrückt werden können.\footnote{ Ein Eintrag $q_{kl}$ der Co-Ranking
+	Matrix $\mat{Q}$ ist die Anzahl der Paare von Datenpunkten $(i, j)$, die den Rang $r_{\vect{x}}(i,
+		j) = k$ in der hochdimensionalen und den Rang $r_{\vect{y}}(i, j) = l$ in der niedrigdimensionalen
+	Repräsentation haben. Eine ideale Co-Ranking-Matrix ist eine Diagonalmatrix, da in diesem Fall kein
+	Datenpunkt seinen Rang bezüglich eines anderen Punktes geändert hat \parencite[1432]{Lee.2009}. } Ebenso können die im Folgenden betrachteten Qualitätskriterien über die
+Co-Ranking-Matrix berechnet werden.
 
 \nomenclature[Z]{LCMC}{Local Continuity Meta-Criterion}
 
 \subsubsection{Vertrauenswürdigkeit und Kontinuität}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien:TC}
-Diese beiden Kennzahlen basieren auf der Idee des Erhalts von Nachbarschaften (engl.
+Diese beiden Qualitätskriterien basieren auf der Idee des Erhalts von Nachbarschaften (engl.
 \textit{neighborhood preservation}) einer Dimensionsreduktion. Sie bilden also ab, wie gut die
 lokale Struktur erhalten wird. Formal wird dazu eine $K$-Nachbarschaft $\set{M}_i(K)$ eines Punktes $\vect{x}_i$ als die Menge der Indizes der $K$-nächsten Punkte zu $\vect{x}_i$ mit $i = 1, \ldots, n$ definiert.
 Analog kann die $K$-Nachbarschaft $\widetilde{\set{M}}_i(K)$ des dazugehörigen niedrigdimensionalen
 Punktes $\vect{y}_i$ definiert werden. Diese Nachbarschaft wird in einer Dimensionsreduktion
 erhalten, wenn $\set{M}_i(K) = \widetilde{\set{M}}_i(K)$, das heißt die Nachbarschaften bleiben von
-der Dimensionsreduktion unverändert.
-
-Zum einen kann es nun passieren, dass weitentfernte Punkte nach der Projektion \textit{nah}
+der Dimensionsreduktion unverändert. Zum einen kann es nun passieren, dass weit entfernte Punkte nach der Projektion \textit{nah}
 beieinander sind. Mit anderen Worten können Punkte, die eigentlich unterschiedlich sind, nun
 ähnlich erscheinen. Aus diesem Grund sagt man, dass die Vertrauenswürdigkeit der
-Dimensionsreduktion niedrig ist. Zum anderen ist der gegenteilige Fall möglich. Nah
-beieinanderliegende Punkte sind nach der Projektion weit weg voneinander. Dies reduziert die
-Kontinuität einer Dimensionsreduktion \parencite[486 -- 487]{Venna.2001}.
+Dimensionsreduktion niedrig ist. Dieser Fall wird über die Menge $\set{U}_i(K)$ formal wie folgt definiert:
+\begin{equation}
+	\set{U}_i(K) =  \left\{ j \in \N \mid j \notin \set{M}_i(K) \land j \in \widetilde{\set{M}}_i(K) \right\} \, .
+\end{equation}
 
-Formal definiert man zusätzlich zu den Nachbarschaftsmengen von oben die beiden Mengen
-$\set{U}_i(K)$ und $\set{V}_i(K)$ wie folgt:
-\begin{gather}
-	\set{U}_i(K) =  \left\{ j \in \N \mid j \notin \set{M}_i(K) \land j \in \widetilde{\set{M}}_i(K) \right\} \, , \\
-	\set{V}_i(K) =  \left\{ j \in \N \mid j \in \set{M}_i(K) \land j \notin \widetilde{\set{M}}_i(K) \right\} \, .
-\end{gather}
-Diese beiden Mengen\unsure{die Definitionen nur im Text?} bilden lediglich die zwei intuitiv besprochenen Fälle im vorherigen Absatz mathematisch ab. Hierbei entspricht $\set{U}_i(K)$ dem ersten und $\set{V}_i(K)$ dem zweiten Fall.
-Damit kann die Vertrauenswürdigkeit $T(K)$ als
+Zum anderen ist der gegenteilige Fall möglich. Nah beieinanderliegende Punkte sind nach der
+Projektion weit weg voneinander. Dies reduziert die Kontinuität einer Dimensionsreduktion \parencite[486 -- 487]{Venna.2001} und wird formal über die Menge $\set{V}_i(K)$ als
+\begin{equation}
+	\set{V}_i(K) =  \left\{ j \in \N \mid j \in \set{M}_i(K) \land j \notin \widetilde{\set{M}}_i(K) \right\}
+\end{equation}
+definiert. Mithilfe dieser beiden Mengen können nun die beiden Qualitätskriterien wie folgt berechnet werden. Dabei wird die Vertrauenswürdigkeit $T(K)$ über die Menge $\set{U}_i(K)$ mittels
 \begin{equation}
 	T(K) = 1 - \frac{2}{nK(2n - 3K - 1)} \sum_{i = 1}^{n}\sum_{j \in \set{U}_i(K) } \left( r­_{\vect{y}}(i, j) - K \right)
 \end{equation}
-definiert werden \parencite[487]{Venna.2001}, wobei $r_{\vect{y}}(i, j)$ den Rang von des niedrigdimensionalen Vektors
-$\vect{y}_j$ bezeichnet, wenn die Datenpunkte absteigend nach der euklidischen Distanz von
+berechnet \parencite[487]{Venna.2001}. Hierbei bezeichnet $r_{\vect{y}}(i, j)$ den Rang des niedrigdimensionalen
+Vektors $\vect{y}_j$, wenn die Datenpunkte absteigend nach der euklidischen Distanz von
 $\vect{y}_i$ geordnet sind. Der Term vor der Summation skaliert das Qualitätskriterium so, dass $0
 	\leq T(K) \leq 1$ gilt.\footnote{Dies gilt nur für den Fall, dass $K < n/2$ gilt.} Ein Wert von
 $T(K) = 1­$ entspricht einer perfekten Vertrauenswürdigkeit. Eine niedrige Vertrauenswürdigkeit
-kann auf ein \enquote{Zusammendrücken} der Mannigfaltigkeit hinweisen, da Punkte nach der
+kann auf ein \enquote{Zusammenziehen} der Mannigfaltigkeit hinweisen, da Punkte nach der
 Transformation näher beieinander liegen, als zuvor.
 
 Analog wird die Kontinuität $C(K)$ über $\set{V}_i(K)$ wie folgt definiert
@@ -98,7 +98,7 @@ misst, wie gut die ursprünglichen Nachbarschaften erhalten werden. Eine niedrig
 darauf hinweisen, dass die Mannigfaltigkeit gezerrt wurde und dadurch die Punkte nach der
 Transformation weiter weg voneinander liegen.
 
-Üblicherweise werden die beiden Kriterien für mehrere Werte der Nachbarschaftsgröße $K$ berechnet und in einer Abbildung dargestellt. So entfällt die willkürliche Wahl einer spezifischen Nachbarschaftsgröße und ermöglicht die Betrachtung von sowohl kleinen als auch größeren Nachbarschaften.
+Üblicherweise werden die beiden Kriterien für mehrere Werte der Nachbarschaftsgröße $K$ berechnet. So entfällt die willkürliche Wahl einer spezifischen Nachbarschaftsgröße und ermöglicht die Betrachtung von sowohl kleinen als auch größeren Nachbarschaften.
 % \subsubsection{Die Co-Ranking Matrix}
 % Ein Eintrag $q_{kl}$ der Co-Ranking Matrix $\mat{Q}$ ist die Anzahl der Paare von Datenpunkten $(i,
 % 	j)$, die den Rang $r_{\vect{x}}(i, j) = k$ in der hochdimensionalen und den Rang $r_{\vect{y}}(i,
@@ -511,11 +511,11 @@ Hierbei sind in \figref{fig:Gewichtsvergleich} \captiona die Ladungsmatrix von P
 Die Gewichte des linearen Autoencoders zeigen bereits eine Ähnlichkeit zu der Ladungsmatrix $\mat{A}$ der Principal Component Analysis, jedoch sind einige Unterschiede erkennbar. Die Links-Singulärvektoren der Decoder-Gewichtsmatrix sind bis auf das Vorzeichen fast identisch zur Ladungsmatrix $\mat{A}$.
 
 Zusammenfassend bedeutet dies, dass ein dreischichtiger Autoencoder mit linearen
-Aktivierungsfunktionen eine sehr ähnliche latente Repräsentation wie die Principal Component
-Analysis lernt. Eine Regularisierung der Gewichte begünstigt dabei Orthogonalität in der gefundenen
-Lösung des Autoencoders. Damit kann für sehr große Datensätze ein alternativer Algorithmus mithilfe
-des Autoencoders verwendet werden, um die Richtungen der Hauptkomponenten zu lernen. Dabei umgeht
-man die Eigenwertszerlegung der $D \times D$-Kovarianzmatrix der Daten, indem nur die
+Aktivierungsfunktionen eine ähnliche latente Repräsentation wie die Principal Component Analysis
+lernt. Eine Regularisierung der Gewichte begünstigt dabei Orthogonalität in der gefundenen Lösung
+des Autoencoders. Damit kann für sehr große Datensätze ein alternativer Algorithmus mithilfe des
+Autoencoders verwendet werden, um die Richtungen der Hauptkomponenten zu lernen. Dabei umgeht man
+die Eigenwertszerlegung der $D \times D$-Kovarianzmatrix der Daten, indem nur die
 Singulärwertszerlegung der $D \times d$-Gewichtsmatrix $\mat{W}_2$ berechnet werden muss.
 
 \subsubsection{Hinzunahme von Nichtlinearität}
