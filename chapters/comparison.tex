@@ -256,10 +256,10 @@ Locally Linear Embedding zu. Für Autoencoder bestimmt die intrinsische Dimensio
 Bottleneck-Schicht. Für Kernel PCA wird ein Gaußscher Kernel eingesetzt, wofür ein Hyperparameter
 $\sigma$ gewählt werden kann. Die Werte $\sigma \in \{ 0.1, 0.25, 0.75, 1, 2, 5\}$ wurden getestet
 und der beste Durchlauf ausgewählt. Für ICMR und Olivetti Faces lieferten diese Werte schlechte
-Ergebnisse, weswegen auf diesen Datensätzen zusätzlich die Werte $\{ 1\mathrm{e}{-3},
-	1\mathrm{e}{-4}, 1\mathrm{e}{-5}\}$ getestet wurden. Für Locally Linear Embedding gibt es nur einen
-Parameter $\Klle$, der die Größe der verwendeten Nachbarschaft kontrolliert. Die Werte $\Klle \in
-	\{ 5, 7, 10, 12, 15\}$ wurden getestet und der beste Durchlauf ausgewählt.
+Ergebnisse, weswegen auf diesen Datensätzen zusätzlich die Werte \numlist{e-5;e-4;e-3;e-2;e-1}
+getestet wurden. Für Locally Linear Embedding gibt es nur einen Parameter $\Klle$, der die Größe
+der verwendeten Nachbarschaft kontrolliert. Die Werte $\Klle \in \{ 5, 7, 10, 12, 15\}$ wurden
+getestet und der beste Durchlauf ausgewählt.
 
 Den statistischen Methoden gegenüber haben Autoencoder deutlich mehr Freiheitsgrade, um die
 Architektur zu bestimmen. Die wichtigsten Parameter sind die Anzahl der Schichten $m$, sowie die
@@ -278,7 +278,7 @@ angelehnt und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezif
 		\toprule
 		Methode                            & Parameter                                                            \\ \midrule
 		PCA      & --                                                                   \\
-		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\sigma))$, $\sigma \in \{\expnum{1}{-5},\expnum{1}{-4}, \expnum{1}{-3}, \expnum{1}{-2}, \expnum{1}{-1}, 0.25, 0.75, 1, 2, 5\}$ \\
+		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\sigma))$, $\sigma \in \{\num{e-5},\num{e-4}, \num{e-3}, \num{e-2}, \num{e-1}, 0.25, 0.75, 1, 2, 5\}$ \\
 		Locally Linear Embedding     & $\Klle \in \{ 5, 7, 10, 12, 15\}$,                      \\
 		Autoencoder                  & $m \in \{3, 5, 7\}$, Sigmoid-Aktivierungsfunktion \newline (siehe
 		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\  Contractive Autoencoder & $m \in \{3, 5\}$, $\lambda=1\mathrm{e}{-4}$,
@@ -526,7 +526,7 @@ dargestellt. Für Visualisierungszwecke wurde die intrinsische Dimension dabei a
 \begin{figure}[ht]
 	\centering
 	\includegraphics{autoencoders-nonlinearity.pdf}
-	\caption[Latente Repräsentationen von PCA und drei Autoencoder mit unterschiedlichen Aktivierungsfunktionen]{Dargestellt sind die latenten Repräsentationen $\mat{Y}$ einer \captiona Principal Component Analysis und mehrerer Autoencoder mit \captionb linearen Aktivierungsfunktionen, \captionc Sigmoid-Aktivierung im Encoder und linearem Decoder und \captiond Sigmoid-Aktivierungen im Encoder und Decoder. Alle Autoencoder wurden mit \textit{weight decay} ($\lambda = \expnum{1}{-6}$) trainiert.}
+	\caption[Latente Repräsentationen von PCA und drei Autoencoder mit unterschiedlichen Aktivierungsfunktionen]{Dargestellt sind die latenten Repräsentationen $\mat{Y}$ einer \captiona Principal Component Analysis und mehrerer Autoencoder mit \captionb linearen Aktivierungsfunktionen, \captionc Sigmoid-Aktivierung im Encoder und linearem Decoder und \captiond Sigmoid-Aktivierungen im Encoder und Decoder. Alle Autoencoder wurden mit \textit{weight decay} ($\lambda = \num{e-6}$) trainiert.}
 	\label{fig:Autoencoder-Nichtlinearitaet}
 \end{figure}
 Als Referenz ist in \captiona die latente Repräsentation der Principal Component Analysis abgebildet. Wie bereits im theoretischen Zusammenhang erklärt, lernt ein linearer Autoencoder mit \textit{weight decay} die Richtungen der Hauptkomponenten bis hin zu einer orthogonalen Transformation. Vergleicht man \figref{fig:Autoencoder-Nichtlinearitaet} \captiona mit \captionb ist dies in der Tat der Fall. Ist der Encoder nichtlinear, so besteht immer noch eine große Ähnlichkeit zu der von PCA gefundenen latenten Repräsentation. Dies stimmt mit der von \textcite{Bourlard.1988} gemachten formalen Beobachtung überein. Ist der Decoder ebenfalls nichtlinear, so weicht die gefundene Repräsentation deutlich von der Repräsentation der Principal Component Analysis und anderer (teilweise) linearer Autoencoder ab. Bei der Hinzunahme von Nichtlinearität zum Autoencoder, gehen die beschriebenen Zusammenhänge also erst vollständig verloren, wenn sowohl der Encoder als auch Decoder nichtlinear sind.
