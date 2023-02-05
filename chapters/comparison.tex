@@ -99,10 +99,6 @@ darauf hinweisen, dass die Mannigfaltigkeit gezerrt wurde und dadurch die Punkte
 Transformation weiter weg voneinander liegen.
 
 Üblicherweise werden die beiden Kriterien für mehrere Werte der Nachbarschaftsgröße $K$ berechnet. So entfällt die willkürliche Wahl einer spezifischen Nachbarschaftsgröße und ermöglicht die Betrachtung von sowohl kleinen als auch größeren Nachbarschaften.
-% \subsubsection{Die Co-Ranking Matrix}
-% Ein Eintrag $q_{kl}$ der Co-Ranking Matrix $\mat{Q}$ ist die Anzahl der Paare von Datenpunkten $(i,
-% 	j)$, die den Rang $r_{\vect{x}}(i, j) = k$ in der hochdimensionalen und den Rang $r_{\vect{y}}(i,
-% 	j) = l$ in der niedrigdimensionalen Repräsentation haben.
 
 \subsubsection{Local Continuity Meta-Criterion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien:LCMC}
@@ -186,6 +182,13 @@ Konkret wurde (1) der \textit{MNIST}-Datensatz \parencite{LeCun.2010}, (2) der \
 ausgewählt, um die Performance der Dimensionsreduktionsmethoden auf natürlichen Datensätzen zu
 evaluieren. Der weitverbreitete MNIST-Datensatz besteht aus 60 000 Grauton-Bildern von
 handgeschriebenen Zahlen in der Auflösung $28 \times 28$. Die Anzahl der Pixel und damit die
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics{dataset_samples.pdf}
+	\end{center}
+	\caption[Beispielbilder der natürlichen Datensätze]{Zu sehen sind Beispielbilder der natürlichen Bilddatensätze aus dem Vergleich: \captiona Handgeschriebene Zahlen aus dem MNIST-Datensatz \captionb Gesichter mit unterschiedlichen Emotionen aus dem FER-Datensatz \captionc Verschiedene Kleidungsstücke aus dem Fashion MNIST-Datensatz \captiond Bilder der Gesichter unterschiedlicher Personen aus zehn Blickwinkeln (Olivetti Faces-Datensatz)}
+	\label{fig:Dataset_samples}
+\end{figure}
 extrinsische Dimension beträgt 784. Der Olivetti Faces-Datensatz enthält Bilder von Gesichtern aus
 zehn unterschiedlichen Positionen von 40 Personen und ist damit der kleinste natürliche Datensatz
 in diesem Vergleich mit 400 Bildern. Die Bilder haben eine Auflösung von $64 \times 64$, was einer
@@ -194,13 +197,6 @@ von zehn unterschiedlichen Kleidungsstücken. Die extrinsische Dimension ist ebe
 784. FER-Datensatz besteht aus 28 709 Bildern von Gesichtern mit sieben unterschiedlichen
 Emotionen. Die Bilder haben eine Auflösung von $48 \times 48$ und sind damit 2304-dimensional.
 Beispiele der Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
-\begin{figure}
-	\begin{center}
-		\includegraphics{dataset_samples.pdf}
-	\end{center}
-	\caption[Beispielbilder der natürlichen Datensätze]{Zu sehen sind Beispielbilder der natürlichen Bilddatensätze aus dem Vergleich: \captiona Handgeschriebene Zahlen aus dem MNIST-Datensatz \captionb Gesichter mit unterschiedlichen Emotionen aus dem FER-Datensatz \captionc Verschiedene Kleidungsstücke aus dem Fashion MNIST-Datensatz \captiond Bilder der Gesichter unterschiedlicher Personen aus zehn Blickwinkeln (Olivetti Faces-Datensatz)}
-	\label{fig:Dataset_samples}
-\end{figure}
 
 \nomenclature[Z]{MNIST}{Modified National Institute of Standards and Technology (Datensatz)}
 \nomenclature[Z]{FER}{Facial Emotion Recognition (Datensatz)}
