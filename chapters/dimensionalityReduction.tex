@@ -38,11 +38,37 @@ kurz verschiedene Möglichkeiten der Einordnung von Dimensionsreduktionsmethoden
 \section{Der Fluch der Dimensionalität}
 \label{ch:Dimensionsreduktion:FluchDerDim}
 
-Sehr hochdimensionale Räume weisen einige Phänomene auf, die in niedrigdimensionalen Räumen nicht
-anzutreffen sind. Diese Phänomene bereiten statistische und algorithmische Probleme und werden
-unter dem Fluch der Dimensionalität (engl. \textit{Curse of Dimensionality}) zusammengefasst.
-Hauptsächlich meint man damit aber die Konzentration von Normen und das Phänomen der leeren Räume.
-\ldots
+Der Term Fluch der Dimensionalität (engl. \textit{Curse of Dimensionality}) wurde von
+\textcite{Bellman.1957} im Kontext der dynamischen Programming hervorgebracht und ist seitdem zu
+einem Sammelbegriff für die statistischen Probleme und Herausforderungen in hochdimensionalen
+Räumen geworden. Diese hochdimensionalen Räume weisen Phänomene auf, die in niedrigeren Dimensionen
+nicht anzutreffen sind. Die zwei Phänomene, die hauptsächlich den Begriff Fluch der Dimensionalität
+prägen, sind das \newterm{Phänomen der leeren Räume} und die \newterm{Konzentration von Normen} \parencite[6 -- 9]{Lee.2007}. Im Folgenden werden die zwei Phänomene kurz erläutert.
+
+Die Konzentration von Normen führt dazu, dass Distanzmaße wie die euklidische Norm in hohen
+Dimensionen ihre Bedeutung verlieren. Man beobachtet, dass mit steigender Dimension $D$ alle Punkte
+mehr oder weniger gleich weit weg voneinander liegen und sich die Verteilung der Normen daher
+konzentriert. Aufgrund dessen wird die Interpretation der $K$ nächsten Nachbarn fragwürdig, weshalb
+insbesondere die Performance von Clustering-Algorithmen wie z.B. K-Means in hohen Dimensionen stark
+abfällt. \textcite{Aggarwal.2001} untersuchen diesen Effekt für unterschiedliche Distanzmaße wie
+der $L_1$-, $L_2-$ oder allgemein der $L_p$-Norm und stellen dabei fest, dass die Aussagekraft
+einer $L_p$-Norm in höheren Dimensionen für große $p$ schneller abnimmt als z.B. für $p = 2$.
+
+Des Weiteren tritt das Phänomen der leeren Räume auf. Hier stellt man fest, dass hochdimensionale
+Räume dünn besetzt sind, da das Volumen im Raum exponentiell mit der Dimension $D$ ansteigt. Möchte
+man daher eine Schätzung einer Funktion zu einem gewissen Genauigkeitsgrad durchführen, so steigt
+die Anzahl der dazu benötigten Datenpunkte exponentiell mit $D$ an \parencite[6]{Lee.2007}. Dieses Phänomen führt zu interessanten Beobachtungen, wie z.B. das Verhältnis
+des Volumens einer Hypersphäre und eines Hyperwürfels im $\real^D$: Dazu betrachtet man eine
+Hypersphäre mit Radius $r$ und den Hyperwürfel, der die Sphäre umschließt, d.h. die Kantenlänge
+entspricht dem Durchmesser $2r$ der Sphäre. Das Verhältnis des Volumens dieser Sphäre zum Volumen
+des Würfels konvergiert für $D \rightarrow \infty$ gegen Null. Das bedeutet, dass das Volumen der
+Sphäre mit steigendem $D$ vernachlässigbar wird und sich das Volumen im Raum in den Ecken
+konzentriert \parencite[6 -- 7]{Lee.2007}.
+
+Zusammenfassend besteht der Fluch der Dimensionalität also darin, dass die Performance von
+Klassifikatoren und Regressoren in hochdimensionalen Räumen aufgrund von Schwierigkeiten in der
+Distanzmessung und aufgrund der dünn besetzten Räume degradiert und die Gefahr des Overfittings
+höher ist.
 
 \section{Mannigfaltigkeiten und intrinsische Dimension}
 \label{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim}
