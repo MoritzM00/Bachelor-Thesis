@@ -7,8 +7,8 @@ Die Dimensionsreduktion hat im Kern das Ziel der Abbildung eines hochdimensional
 eine niedrigdimensionale, sogenannte \newterm{latente} Repräsentation, wobei möglichst wenig
 Information über die Daten verloren gehen soll \parencite[2]{Lee.2007}. Dies ist darin begründet, dass Daten oft nur künstlich hochdimensional, also
 \textit{redundant} sind. Dies bedeutet, dass die Daten effizienter über eine kleinere Menge von
-Merkmalen $y_1,\ldots,y_d$ ausgedrückt werden kann, als über die ursprüngliche Repräsentation durch
-die Merkmale $x_1,\ldots,x_D$ mit $d < D$ und oft $d \ll D$. Hierbei bezeichnet $D$ die
+Merkmalen $y_1,\ldots,y_d$ ausgedrückt werden können, als über die ursprüngliche Repräsentation
+durch die Merkmale $x_1,\ldots,x_D$ mit $d < D$ und oft $d \ll D$. Hierbei bezeichnet $D$ die
 \newterm{extrinsische Dimension} des zugehörigen Ursprungsraumes $\mathcal{X}$ (welcher
 üblicherweise dem $\real^D$ entspricht) und $d$ bezeichnet die \newterm{intrinsische Dimension} der
 Daten. Die intrinsische Dimension wird teilweise auch als latente Dimension bezeichnet und
@@ -51,14 +51,14 @@ mehr oder weniger gleich weit weg voneinander liegen und sich die Verteilung der
 konzentriert. Aufgrund dessen wird die Interpretation der $K$ nächsten Nachbarn fragwürdig, weshalb
 insbesondere die Performance von Clustering-Algorithmen wie z.B. K-Means in hohen Dimensionen stark
 abfällt. \textcite{Aggarwal.2001} untersuchen diesen Effekt für unterschiedliche Distanzmaße wie
-der $L_1$-, $L_2-$ oder allgemein der $L_p$-Norm und stellen dabei fest, dass die Aussagekraft
+der $L_1$-, $L_2$- oder allgemein der $L_p$-Norm und stellen dabei fest, dass die Aussagekraft
 einer $L_p$-Norm in höheren Dimensionen für große $p$ schneller abnimmt als z.B. für $p = 2$.
 
 Des Weiteren tritt das Phänomen der leeren Räume auf. Hier stellt man fest, dass hochdimensionale
 Räume dünn besetzt sind, da das Volumen im Raum exponentiell mit der Dimension $D$ ansteigt. Möchte
 man daher eine Schätzung einer Funktion zu einem gewissen Genauigkeitsgrad durchführen, so steigt
 die Anzahl der dazu benötigten Datenpunkte exponentiell mit $D$ an \parencite[6]{Lee.2007}. Dieses Phänomen führt zu interessanten Beobachtungen, wie z.B. das Verhältnis
-des Volumens einer Hypersphäre und eines Hyperwürfels im $\real^D$: Dazu betrachtet man eine
+des Volumens einer Hypersphäre und eines Hyperwürfels im $\real^D$ zeigt. Dazu betrachtet man eine
 Hypersphäre mit Radius $r$ und den Hyperwürfel, der die Sphäre umschließt, d.h. die Kantenlänge
 entspricht dem Durchmesser $2r$ der Sphäre. Das Verhältnis des Volumens dieser Sphäre zum Volumen
 des Würfels konvergiert für $D \rightarrow \infty$ gegen Null. Das bedeutet, dass das Volumen der
@@ -92,7 +92,7 @@ ist. Hierbei ist $B_\epsilon(\vect{z})$ ein Ball mit Radius $\epsilon > 0$ um $\
 Abbildung $\phi$ heißt \textit{Karte} und die Gesamtheit aller Karten ergibt den \textit{Atlas} von
 $\mathcal{M}$ \parencite[4]{Cayton.2005}. Intuitiv können diese Begriffe besser anhand eines anschaulichen Beispiels
 erklärt werden, weshalb in \figref{fig:Torus} ein Torus dargestellt ist. Dieses Objekt ist eine
-zweidimensionale Mannigfaltigkeit eingebettet im $\real^D$.
+zweidimensionale Mannigfaltigkeit eingebettet im $\real^3$.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{torus.pdf}
@@ -136,7 +136,7 @@ darstellen.\rewrite{lies sich nicht gut}
 Skalierung \parencites{Kruskal.1964}{Cox.2008}, das Sammon Mapping \addref und die Curvilinear Component Analysis
 \addref. Hierbei muss eine Distanz jedoch nicht die euklidische Distanz zwischen zwei Punkten sein.
 Beispielweise ist die \newterm{geodätische Distanz} als die Distanz entlang der Mannigfaltigkeit
-definiert, auf der die Punkte liegen. Mit dem Hintergrundwissen zu Mannigfaltigkeiten wird jedoch
+definiert, auf der die Punkte liegen. Mit dem Hintergrundwissen zu Mannigfaltigkeiten wird
 deutlich, dass euklidische Distanzen vor allem bei nichtlinearen Mannigfaltigkeiten mit einer hohen
 Krümmung irreführend sein können. Die geodätische Distanz wirkt diesem Problem entgegen, ist aber
 nicht immer leicht zu berechnen. Daneben gibt es \textbf{Topologie-erhaltende Methoden}, die
@@ -152,11 +152,11 @@ Dimensionsreduktion für die Merkmalsextrahierung eingesetzt werden \parencite[3
 und dann den eigentlichen Schätzer (Klassifikator oder Regressor) auf den neuen Merkmalen zu
 trainieren. Insgesamt erhofft man sich durch eine Merkmalsextrahierung, dass der Klassifikator
 (oder Regressor) durch robuster gegenüber Rauschen (engl. \textit{noise}) ist und eine ähnliche
-oder bessere Performance bezüglich gewählter Gütemaße aufweist.\unsure{Evtl das hier ganz
-	rausnehmen}
+oder bessere Performance bezüglich gewählter Gütemaße aufweist.\unsure{Evtl das in die Einleitung
+	einbauen?}
 
 Wie wir in der Einleitung in \chapref{ch:Enleitung} gesehen haben, gibt es viele Gründe, wieso man
-eine Reduktion der Dimension eines Datensatzes erreichen möchte. Unter anderem können so große
+eine Reduktion der Dimension eines Datensatzes erreichen möchte. Unter anderem können große
 Datenmengen effizienter gespeichert werden, ohne dabei einen zu großen Informationsverlust zu
 erleiden. Deswegen ist das Gebiet der Dimensionsreduktion ein immer noch aktuelles Forschungsthema
 mit einer großen Bandbreite an unterschiedlichen Methoden, wie in wir in
