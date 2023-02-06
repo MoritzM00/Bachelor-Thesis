@@ -85,9 +85,10 @@ wobei $\mat{\Sigma}$ die Kovarianzmatrix von $\rvect{x}$ ist. Dieses Maximierung
 	\label{eq:PCA-Normierung-Vektor}
 	\norm{ \vect{a}_1 }^2 = \tr{\vect{a}_1} \vect{a}_1 = 1
 \end{equation}
-zum nun \textit{restringierten} Maximierungsproblem hinzufügt. Dieses Problem kann mithilfe des Lagrange-Ansatzes gelöst werden. Es stellt sich heraus, dass sich das Problem auf ein Eigenwertproblem reduziert, d.h. $\vect{a}_1$ muss ein Eigenvektor der Kovarianzmatrix $\mat{\Sigma}$ sein \parencite[vgl.][4 -- 6]{Jolliffe.2002}. Diese $D \times D$-Matrix hat jedoch bis zu $D$ Eigenvektoren.
-Betrachtet man nun erneut die zu maximierende Zielfunktion in \eqref{eq:PCA-Optimierungsproblem}
-unter der Kenntnis, dass $\vect{a}_1$ ein Eigenvektor von $\mat{\Sigma}$ ist, dann erhält man
+zum nun \textit{restringierten} Maximierungsproblem hinzufügt. Dieses Problem kann mithilfe des Lagrange-Ansatzes gelöst werden. Es stellt sich heraus, dass sich das Problem auf ein Eigenwertproblem reduziert, d.h. $\vect{a}_1$ muss ein Eigenvektor der Kovarianzmatrix $\mat{\Sigma}$ sein \parencite[vgl.][4 -- 6]{Jolliffe.2002}. Die $D \times D$-Matrix $\mat{\Sigma}$ hat jedoch $D$
+Eigenvektoren. Um herauszufinden, welcher davon zur ersten Hauptkomponente gehört, betrachtet man
+erneut die zu maximierende Zielfunktion in \eqref{eq:PCA-Optimierungsproblem} unter der Kenntnis,
+dass $\vect{a}_1$ ein Eigenvektor von $\mat{\Sigma}$ ist. Man erhält somit
 \begin{equation}
 	\tr{\vect{a}_1} \mat{\Sigma} \vect{a}_1 = \tr{\vect{a}_1} \lambda \vect{a}_1 = \lambda \tr{\vect{a}_1} \vect{a}_1 = \lambda \, ,
 \end{equation}
@@ -107,7 +108,7 @@ Generell lässt sich zeigen, dass die Koeffizienten der $i$-ten Hauptkomponente 
 \begin{equation}
 	\rvect{y} = \tr{\mat{A}} \rvect{x}
 \end{equation}
-ausdrücken, wobei $\mat{A} = [\vect{a}_1,\ldots,\vect{a}_d] \in \real^{D \times d}$ die Matrix der Eigenvektoren als Spaltenvektoren ist.
+ausdrücken, wobei $\mat{A} = [\vect{a}_1,\ldots,\vect{a}_d] \in \real^{D \times d}$ die Matrix der Eigenvektoren als Spaltenvektoren ist und die Eigenvektoren nach absteigendem zugehörigen Eigenwert sortiert sind, d.h. $\lambda_1 > \lambda_2 > \cdots > \lambda_d$.
 
 \subsubsection{Erweiterungen}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Erweiterungen}
@@ -247,7 +248,7 @@ verwendet. Das Vorgehen wird später in \secref{ch:Vergleich:sec:ParameterwahlTr
 genauer erläutert.
 
 Darüber hinaus ist es möglich die Kernel-Matrix mitzulernen, wie es bspw. in \textit{Semidefinite
-	Embedding} \parencite{Weinberger.2004b} der Fall ist. Damit entfällt die Wahl eines passendes Kernels und seiner
+	Embedding} \parencite{Weinberger.2004b} der Fall ist. Damit entfällt die Wahl eines passenden Kernels und seiner
 Parameter komplett, allerdings muss dafür eine teure Semidefinite Programmierung (SDP) gelöst
 werden.
 
@@ -307,10 +308,10 @@ Wurden die optimalen Rekonstruktionsgewichte $W_{ij}$, die die Zielfunktion aus
 	\min_{\mat{Y}}\, \Spur(\tr{\mat{Y}} \mat{M} \mat{Y}) \, ,
 \end{equation}
 wobei $\mat{M} = \tr{(\identity_n - \mat{W})} (\identity_n - \mat{W})$ und $\Spur(\,\cdot\,)$ die Summe der Diagonalelemente einer Matrix bezeichnet. Jedoch ist dieses Optimierungsproblem unterbestimmt, weswegen man für $\mat{Y}$ eine Einheits-Kovarianzmatrix und einen spaltenweisen Mittelwert von Null fordert \parencite[11]{Saul.2000}. Diese Restriktionen sind erlaubt, da die Zielfunktion in
-\eqref{eq:LLE:ZielfunktionY} invariant gegenüber Rotationen und Skalierungen ist \parencite[2326]{Roweis.2000}.
+\eqref{eq:LLE:ZielfunktionY} invariant gegenüber Translationen und Skalierungen ist \parencite[2326]{Roweis.2000}.
 
-Wie \textcite[3 -- 4]{Ghojogh.2020} zeigen, wird das Problem über die Eigenwertzerlegung der
-dünnbesetzten Matrix $\mat{M}$ gelöst: Die Spalten von $\mat{Y}$ entsprechen den unteren $d$
+Wie \textcite[3 -- 4]{Ghojogh.2020} zeigen, wird das Problem über die Eigenwertzerlegung der dünn
+besetzten Matrix $\mat{M}$ gelöst: Die Spalten von $\mat{Y}$ entsprechen den unteren $d$
 Eigenvektoren von $\mat{M}$, wobei das triviale Eigenvektor-Eigenwert-Paar $(\ones, 0)$ ausgelassen
 wird. Die ebenen genannten Restriktionen, die das Optimierungsproblem bis auf eine Rotation
 eindeutig machen, lösen die Schwachstelle einer trivialen Lösung in dieser Zielfunktion jedoch
@@ -340,9 +341,9 @@ den Trainingsdaten lernt. Um das sinnvoll zu erreichen, besitzt der Autoencoder 
 
 \input{\figures/autoencoder-architecture.tex}
 
-Dabei kann der Encoder und Decoder unterschiedliche Architekturen annehmen -- die eines neuronalen
-Netzes ist allerdings die häufigste und auch hier verwendete Variante. Diese besteht in der
-klassischen Form aus einer ungeraden Anzahl an vollvernetzten Schichten mit einer
+Dabei können der Encoder und Decoder unterschiedliche Architekturen annehmen -- die eines
+neuronalen Netzes ist allerdings die häufigste und auch hier verwendete Variante. Diese besteht in
+der klassischen Form aus einer ungeraden Anzahl an vollvernetzten Schichten mit einer
 \newterm{Bottleneck}-Schicht in der Mitte \parencite[2]{Bank.2020}. Diese Schicht wird als \textit{Bottleneck} bezeichnet, da sie nur aus $d < D$
 Neuronen besteht und damit die \enquote{kleinste} Stelle im Netzwerk darstellt, durch die der
 Inputvektor kodiert werden muss. In diesem Fall wird der Autoencoder als \newterm{unterbestimmt}
@@ -359,13 +360,13 @@ Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum ein
 	f(\vect{x}) = s(\mat{W}_1 \vect{x} + \vect{b}_1) = \vect{y} \\
 	g(f(\vect{x})) = s(\mat{W}_2 \vect{y} + \vect{b}_2) = \estNormal{\vect{x}}
 \end{gather}
-formalisiert werden, wobei $s$ die Aktivierungsfunktion bezeichnet, $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{d \times D}$ die Gewichte und $\vect{b}_i$ mit $i = 1,2$ die Bias-Vektoren des Netzwerks sind. Dies entspricht je einer affinen Transformation gefolgt von einer Aktivierungsfunktion. Die Nichtlinearität eines Autoencoders wird durch die Auswahl dieser Aktivierungsfunktionen bestimmt.
+formalisiert werden, wobei $s$ die Aktivierungsfunktion bezeichnet, $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{D \times d}$ die Gewichte und $\vect{b}_i$ mit $i = 1,2$ die Bias-Vektoren des Netzwerks sind. Dies entspricht je einer affinen Transformation gefolgt von einer Aktivierungsfunktion. Die Nichtlinearität eines Autoencoders wird durch die Auswahl dieser Aktivierungsfunktionen bestimmt.
 Werden ausschließlich lineare Funktionen verwendet, resultiert dies in einem linearen Autoencoder,
 welcher ähnlich zur Principal Component Analysis ist. Dies wird in
 \subsecref{ch:Vergleich:sec:Resultate:PCA_AE} noch genauer betrachtet. In den meisten Fällen werden
 jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt, um einen nichtlinearen Zusammenhang zu
-lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Charte.2018}. Die Aktivierungsfunktion wird später bei der Wahl der Architektur eines
-Autoencoders noch genauer erläutert.
+lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Charte.2018}. Auf die Aktivierungsfunktion wird später bei der Wahl der Architektur eines
+Autoencoders noch genauer eingegangen.
 
 Das Ziel des Autoencoders ist es, den Inputvektor zu rekonstruieren, d.h. es soll
 \begin{equation}
@@ -401,9 +402,9 @@ Bestrafungsterm $\Omega(\bm{\theta})$ zur Zielfunktion $\mathcal{J}$ hinzufügen
 \begin{equation}
 	\mathcal{J}_{\text{AE+reg}} = \frac{1}{n} \sum_{i = 1}^{n}  L(\vect{x}_i, \estNormal{\vect{x}}_i) + \lambda \Omega(\bm{\theta}) \, ,
 \end{equation}
-wobei $\lambda \geq 0$ ein \textit{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den Rekonstruktionsfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden, was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch also eine informativere niedrigdimensionale Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
+wobei $\lambda \geq 0$ ein \newterm{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den Rekonstruktionsfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden, was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch also eine informativere niedrigdimensionale Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
 
-Eine Umsetzung dessen ist der \newterm{Sparse Autoencoder}, der eine dünnbesetzte (engl.
+Eine Umsetzung dessen ist der \newterm{Sparse Autoencoder}, der eine dünn besetzte (engl.
 \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, d.h. nur wenige Einträge von $\vect{y}$ sind
 ungleich Null. Eine weitere oft eingesetzte Regularisierung für neuronale Netze ist das sogenannte
 \newterm{weight decay}, das die Größe der Gewichte im Netzwerk bestraft. Der Regularisierungsterm
@@ -442,7 +443,8 @@ eine sogenannte \textit{Pooling}-Schicht \parencite[339 -- 345]{Goodfellow.2016}
 sukzessive verkleinert werden, allerdings wollen wir lernen, wie man sie verkleinert. Daher wird
 hier anstelle von Pooling-Schichten die Schrittgröße (engl. \textit{Stride}) in der faltenden
 Schicht auf einen Wert größer Eins gesetzt. Dies bedeutet, dass bei der Faltungsoperation Pixel
-ausgelassen werden und dadurch die Größe des Inputs verkleinert wird.
+ausgelassen werden und dadurch die Größe des Inputs verkleinert wird.\unsure{das hier zu der
+	schrittweite vlt in den Appendix verschieben}
 
 Zweitens muss die Anzahl der Schichten $m$ festgelegt werden, welche für die Symmetrie des Encoders
 und Decoders ungerade sein sollte (aber nicht muss). Häufig wählt man hier $m = 3$ oder $m = 5$, da
@@ -452,9 +454,9 @@ der nachfolgenden Schicht verbunden ist. Bei hochdimensionalen Datensätzen besi
 Input-Schicht zudem viele Neuronen. Dies führt dazu, dass bereits simple dreischichtige Autoencoder
 viele Gewichte haben, wie das folgende Beispiel zeigt. Beträgt die extrinsische Dimension bspw.
 1000 und wählt man $m=3$ und hat die Bottleneck-Schicht zehn Neuronen, dann hat dieser simple
-Autoencoder bereits 20 000 trainierbare Gewichte.\footnote{Genau genommen hat der Encoder $1000
-		\cdot 10 = 10000$ Gewichte und zehn Biases. Der Decoder hat 10000 Gewichte und 1000 Biases. Der
-	Autoencoder hat also insgesamt 20 110 zu trainierende Freiheitsgrade.}
+Autoencoder bereits \num{20000} trainierbare Gewichte.\footnote{Genau genommen hat der Encoder
+	$1000 \cdot 10 = \num{10000}$ Gewichte und zehn Biases. Der Decoder hat \num{10000} Gewichte und
+	\num{1000} Biases. Der Autoencoder hat also insgesamt \num{20110} zu trainierende Freiheitsgrade.}
 
 Drittens muss die Anzahl der Neuronen in den versteckten Schichten festgelegt werden. Die Anzahl
 der Neuronen in der ersten und letzten Schicht entspricht der Größe des Inputvektors, d.h. der

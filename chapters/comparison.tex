@@ -129,10 +129,10 @@ Schätzer auf \textcites{Campadelli.2015}{Bac.2021}{Verveer.1995} verwiesen.
 In \secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim} haben wir die \textit{topologische
 	Dimension} kennengelernt, welche sich in der Literatur zur Strukturerkennung durchgesetzt hat \parencite[1]{Campadelli.2015}. Allerdings bringt diese Definition praktische Schwierigkeiten mit sich,
 weswegen die meisten Schätzer der intrinsischen Dimension auf der damit verwandten
-\textit{fraktalen Dimension} wie zum Beispiel der Schätzer der Korrelationsdimension \parencite{Camastra.2002} basieren. Daneben gibt es noch Nächste-Nachbar-basierte Schätzer \parencite[1]{Campadelli.2015}. Zu dieser Kategorie gehört auch der weitverbreitete und in dieser
-Arbeit verwendete \newterm{Maximum Likelihood Schätzer} von \textcite{Levina.2004}. Diese Schätzer
-betrachten die Verteilung der Nachbarschaft eines Punktes $\rvect{x}$ als Funktion der
-intrinsischen Dimension -- üblicherweise innerhalb einer kleinen Kugel um $\rvect{x}$
+\textit{fraktalen Dimension} wie zum Beispiel der Schätzer der Korrelationsdimension \parencite{Camastra.2002} basieren. Daneben gibt es noch Nächste-Nachbar-basierte Schätzer \parencite[1]{Campadelli.2015}. Zu dieser Kategorie gehört auch der in dieser Arbeit verwendete
+\newterm{Maximum Likelihood Schätzer} von \textcite{Levina.2004}. Diese Schätzer betrachten die
+Verteilung der Nachbarschaft eines Punktes $\rvect{x}$ als Funktion der intrinsischen Dimension --
+üblicherweise innerhalb einer kleinen Kugel um $\rvect{x}$
 \parencite[8]{Campadelli.2015}. Der Maximum Likelihood Schätzer nimmt an, dass die Beobachtungen, die
 in einer solchen Kugel liegen, einem homogenen Poisson-(Zähl-)Prozess\footnote{Ein
 Poisson-Zählprozess ist eine Folge von Zufallsvariablen $\{ N(t) \}_{t \geq 0}$, wobei $N(t) \sim
@@ -194,7 +194,7 @@ zehn unterschiedlichen Positionen von 40 Personen und ist damit der kleinste nat
 in diesem Vergleich mit 400 Bildern. Die Bilder haben eine Auflösung von $64 \times 64$, was einer
 extrinsischen Dimension von \num{4096} entspricht. Der Fashion MNIST-Datensatz besteht aus \num{60000} Bildern
 von zehn unterschiedlichen Kleidungsstücken. Die extrinsische Dimension ist ebenso wie bei MNIST
-784. FER-Datensatz besteht aus 28 709 Bildern von Gesichtern mit sieben unterschiedlichen
+784. FER-Datensatz besteht aus \num{28 709} Bildern von Gesichtern mit sieben unterschiedlichen
 Emotionen. Die Bilder haben eine Auflösung von $48 \times 48$ und sind damit \num{2304}-dimensional.
 Beispiele der Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
 
@@ -235,7 +235,7 @@ Likelihood Schätzers für den jeweiligen Datensatz.
 
 In diesem Abschnitt werden die gewählten (Hyper-)Parameter und Details des Trainierens der
 Dimensionsreduktionsmethoden vorgestellt. Eine Übersicht ist in
-Tabelle~\ref{tab:uebersicht-parameter} zu finden. Alle Datensätze wurde vor dem Anwenden der
+Tabelle~\ref{tab:uebersicht-parameter} zu finden. Alle Datensätze wurden vor dem Anwenden der
 Dimensionsreduktionsmethoden standardisiert, das heißt $\mat{X}$ weist einen spaltenweisen
 Erwartungswert von Null und eine spaltenweise Varianz von Eins auf. Für die Evaluierung der
 Methoden wurde aufgrund von Restriktionen der Rechenleistung (insbesondere des Arbeitsspeichers)
@@ -346,7 +346,7 @@ latenten Repräsentation Nachbarn werden, obwohl sie es ursprünglich nicht ware
 Autoencoder kann ebenfalls eine höhere Vertrauenswürdigkeit erzielen, da die Swiss Roll teilweise
 entfaltet werden kann. Die inneren Punkte werden allerdings näher zueinander gezerrt, was die
 Kontinuität dieser Dimensionsreduktion reduziert. Sowohl die klassische Principal Component
-Analysis, als auch die Kernel-Variante dessen ist nicht in der Lage, die Swiss Roll zu entfalten.
+Analysis, als auch die Kernel-Variante sind nicht in der Lage, die Swiss Roll zu entfalten.
 
 \subsection{Resultate auf natürlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:natuerlich}
@@ -381,7 +381,7 @@ Dazu sind in \tabref{tab:training_times} die Laufzeiten aller Methoden für alle
 aufgelistet.
 
 \input{tables/training_times.tex}
-Die Principal Component Analysis weist die durchschnittlich geringste Laufzeit auf und untermauert die bereits guten Ergebnisse auf den Qualitätskriterien. Die Laufzeiten von Locally Linear Embedding sind auf kleineren Datensätzen noch kurz, steigen aber mit der Stichprobengröße stark an. Gleiches trifft auf Kernel Principal Component Analysis zu. Der Grund dafür ist, dass Locally Linear Embedding ein dünnbesetztes Eigenwertproblem der $n \times n$-Matrix $\mat{M}$ (\eqref{eq:LLE:ZielfunktionY}) lösen muss. Die Laufzeit dieser Operation steigt quadratisch mit $n$ an, was für große Stichproben schnell kostspielig wird \parencite[9]{Saul.2000}. Locally Linear Embedding wurde aus diesem Grund mit maximal \num{20000}
+Die Principal Component Analysis weist die durchschnittlich geringste Laufzeit auf und untermauert die bereits guten Ergebnisse auf den Qualitätskriterien. Die Laufzeiten von Locally Linear Embedding sind auf kleineren Datensätzen noch kurz, steigen aber mit der Stichprobengröße stark an. Gleiches trifft auf Kernel Principal Component Analysis zu. Der Grund dafür ist, dass Locally Linear Embedding ein dünn besetztes Eigenwertproblem der $n \times n$-Matrix $\mat{M}$ (\eqref{eq:LLE:ZielfunktionY}) lösen muss. Die Laufzeit dieser Operation steigt quadratisch mit $n$ an, was für große Stichproben schnell kostspielig wird \parencite[9]{Saul.2000}. Locally Linear Embedding wurde aus diesem Grund mit maximal \num{20000}
 Stichproben trainiert. Bei Kernel PCA musste aufgrund der Eigenwertzerlegung der $n \times
 	n$-Kernel-Matrix ebenfalls ein Downsampling durchgeführt werden, falls die Stichprobengröße
 \num{15000} übersteigt.
@@ -396,7 +396,7 @@ Sigmoid-Aktivierungsfunktionen ein.
 
 Das manuelle Hyperparameter-Tuning wurde hierbei nicht berücksichtigt. Dies ist ein weiterer
 Vorteil der Principal Component Analysis, da es hier keine Parameter gibt, die richtig eingestellt
-werden müssen. Insbesondere bei der Kernel PCA müssen mehrere Werte für den Parameter $\gamma$
+werden müssen. Insbesondere bei der Kernel PCA müssen mehrere Werte für den Parameter $\sigma$
 getestet werden. Aufgrund der relativ niedrigen Laufzeiten der Kernel PCA ist dies jedoch
 vertretbar. Der Zeitaufwand für Hyperparameter-Tuning ist bei Autoencodern wegen der vielen zu
 wählenden Parameter höher. Bei einem Einsatz dieser Methode in der Dimensionsreduktion muss daher
@@ -529,4 +529,4 @@ dargestellt. Für Visualisierungszwecke wurde die intrinsische Dimension dabei a
 	\caption[Latente Repräsentationen von PCA und drei Autoencoder mit unterschiedlichen Aktivierungsfunktionen]{Dargestellt sind die latenten Repräsentationen $\mat{Y}$ einer \captiona Principal Component Analysis und mehrerer Autoencoder mit \captionb linearen Aktivierungsfunktionen, \captionc Sigmoid-Aktivierung im Encoder und linearem Decoder und \captiond Sigmoid-Aktivierungen im Encoder und Decoder. Alle Autoencoder wurden mit \textit{weight decay} ($\lambda = \num{e-6}$) trainiert.}
 	\label{fig:Autoencoder-Nichtlinearitaet}
 \end{figure}
-Als Referenz ist in \captiona die latente Repräsentation der Principal Component Analysis abgebildet. Wie bereits im theoretischen Zusammenhang erklärt, lernt ein linearer Autoencoder mit \textit{weight decay} die Richtungen der Hauptkomponenten bis hin zu einer orthogonalen Transformation. Vergleicht man \figref{fig:Autoencoder-Nichtlinearitaet} \captiona mit \captionb ist dies in der Tat der Fall. Ist der Encoder nichtlinear, so besteht immer noch eine große Ähnlichkeit zu der von PCA gefundenen latenten Repräsentation. Dies stimmt mit der von \textcite{Bourlard.1988} gemachten formalen Beobachtung überein. Ist der Decoder ebenfalls nichtlinear, so weicht die gefundene Repräsentation deutlich von der Repräsentation der Principal Component Analysis und anderer (teilweise) linearer Autoencoder ab. Bei der Hinzunahme von Nichtlinearität zum Autoencoder, gehen die beschriebenen Zusammenhänge also erst vollständig verloren, wenn sowohl der Encoder als auch Decoder nichtlinear sind.
+Als Referenz ist in \captiona die latente Repräsentation der Principal Component Analysis abgebildet. Wie bereits im theoretischen Zusammenhang erklärt, lernt ein linearer Autoencoder mit \textit{weight decay} die Richtungen der Hauptkomponenten bis hin zu einer orthogonalen Transformation. Vergleicht man \figref{fig:Autoencoder-Nichtlinearitaet} \captiona mit \captionb ist dies in der Tat der Fall. Ist der Encoder nichtlinear, so besteht immer noch eine große Ähnlichkeit zu der von PCA gefundenen latenten Repräsentation. Dies stimmt mit der von \textcite{Bourlard.1988} gemachten formalen Beobachtung überein. Ist der Decoder ebenfalls nichtlinear, so weicht die gefundene Repräsentation deutlich von der Repräsentation der Principal Component Analysis und anderer (teilweise) linearer Autoencoder ab. Bei der Hinzunahme von Nichtlinearität zum Autoencoder, gehen die beschriebenen Zusammenhänge also erst vollständig verloren, wenn sowohl Encoder als auch Decoder nichtlinear sind.
