@@ -3,19 +3,40 @@
 \label{ch:Enleitung}
 %% ==============================
 
-Viele interessante Anwendungsgebiete für Machine Learning umfassen eine große Anzahl an Merkmalen,
-wie bei der Analyse von Genausprägungen mit tausenden von Genen \parencite[siehe z.B.][]{Parmigiani.2003} oder der Verarbeitung von Bild- oder Videodaten mit vielen
-Pixeln. Gerade bei Bildern oder Videos besteht zum Beispiel in angrenzenden Pixeln viel Redundanz.
-Diese große Anzahl an Merkmalen, das heißt die hohe Dimensionalität der Daten, bereitet vielen
-Algorithmen Probleme -- Probleme, die unter der Ausnutzung der Abhängigkeitsstrukturen
-möglicherweise vermieden werden können.\rewrite{Umschreiben. Was ist eine Dimensionalität
-	anschaulich?} Die mathematischen und statistischen Probleme, die bei Datensätzen hoher
-Dimensionalität auftreten, werden unter dem \newterm{Fluch der Dimensionalität} \parencite{Bellman.1957} zusammengefasst. Es treten jedoch nicht nur algorithmische, sondern auch
+Die Analyse von hochdimensionalen Daten wie z.B. die Analyse von Gendaten mit Ausprägungen von
+tausenden Genen \parencite[siehe z.B.][]{Parmigiani.2003} oder der Analyse von Bilddaten wird von statistischen
+Schwierigkeiten im Zusammenhang mit der hohen Dimension begleitet. Anschaulich entspricht eine
+Dimension dabei im Kontext der Gendaten gerade einer Ausprägung eines Genes. Da diese Datensätze
+meist aufwärts von \num{10000} Genen umfassen, kann eine Stichprobe als ein
+\num{10000}-dimensionaler Vektor mit Genausprägungen beschrieben werden. Bei derartig hohen
+Dimension treten Probleme mit der Bestimmung der Ähnlichkeit zweier Vektoren auf, da u.a.
+Distanzmaße nahezu bedeutungslos werden. Diese Herausforderungen von Daten hoher Dimensionalität
+werden umgangssprachlich unter dem Begriff \newterm{Fluch der Dimensionalität} \parencite{Bellman.1957} zusammengefasst. Neben diesen statistischen Problemen treten aber auch
 praktische Probleme auf, da Datensätze mit vielen Stichproben und zusätzlich hoher Dimension eine
-enorme Speicherkapazität und Rechenleistung benötigen können.
-% \footnote{Eine Teilmenge des Datensatzes \href{https://laion.ai/blog/laion-5b/}{LAION-5B} umfasst circa 5,85 Milliarden Text-Bilder-Paare, wobei
-% 	der Datensatz bei einer Bildgröße von $3 \times 384 \times 384$ haben. Dies entspricht einer Dimensionalität
-% 	von 442 368. In dieser Auflösung werden 240 TeraByte Speicherplatz benötigt.}
+enorme Speicherkapazität und Rechenleistung benötigen können und damit zum Problem herkömmlicher
+Rechner werden.
+% \footnote{Eine englischsprachige Teilmenge des Datensatzes \href{https://laion.ai/blog/laion-5b/}{LAION-5B} umfasst circa 5,85 Milliarden Text-Bilder-Paare, wobei
+% der Datensatz bei einer Bildgröße von $3 \times 384 \times 384$ haben. Dies entspricht einer Dimensionalität
+% von 442 368. In dieser Auflösung werden 240 TeraByte Speicherplatz benötigt.}
+
+Möglicherweise sind jedoch nur eine deutlich geringere Anzahl an \newterm{Merkmalen} (z.B. Gene)
+relevant für die Analyse, da Redundanz im Informationsgehalt der ursprünglichen Repräsentation
+besteht. Bei Bilddaten ist dies bspw. in angrenzenden Pixeln der Fall, da sich hier die Intensität
+eines Pixels oft nur an wenigen Stellen im Bild ändert. Die Idee der Dimensionsreduktion ist es
+daher, eine neue sog. \newterm{latente Repräsentation} der Daten zu finden, die möglichst viel
+Information erhält und Redundanz eliminiert. Damit kann ein hochdimensionaler Vektor auf einen
+Vektor von niedrigerer Dimension reduziert werden, womit sowohl die benötige Speicher- als auch
+Rechenkapazität verringert und der Fluch der Dimensionalität abgeschwächt wird, ohne einen großen
+Informationsverlust zu erleiden. Neben der Transformation auf neue Merkmale kann auch lediglich
+eine Selektion der ursprünglichen Merkmale durchgeführt werden. Dieser Fall gehört zu einem
+Teilgebiet der Merkmalsextraktion und wird in dieser Arbeit nicht weiter behandelt. Die
+Dimensionsreduktion kann ebenfalls als ein Werkzeug der Merkmalsextraktion aufgefasst werden \parencite[3]{Guyon.2006b}. In dieser Sichtweise wird die Dimensionsreduktion als ein
+Vorverarbeitungsschritt eingesetzt, wobei anschließend der eigentliche Schätzer (z.B. ein
+Klassifikator) auf der latenten Repräsentation trainiert wird. Insgesamt erhofft man sich durch
+eine vorhergehende Extraktion der relevanten Merkmale einen Schätzer, der robuster gegenüber
+Rauschen ist und weniger zu \newterm{Overfitting} neigt \parencites[siehe]{Plastria.2008}{MustafaAbdulSalam.2021}, d.h. besser auf ungesehene Daten
+generalisiert.
+
 % Ein Teil dieses Datensatzes wurde
 % für das Trainieren von Stable Diffusion \addref verwendet. Dies ist ein \textit{latent diffusion model} oder mit anderen Worten:
 % Stable Diffusion arbeitet nicht in der hochdimensionalen Auflösung sondern in der latenten
@@ -23,33 +44,22 @@ enorme Speicherkapazität und Rechenleistung benötigen können.
 % effiziente Trainieren auf einem solch großen Datensatz überhaupt erst möglich. Auch wenn LAION-5B
 % ein extrem großer Datensatz ist, so sind auch schon kleinere Datensätze ein Problem für
 % herkömmliche Rechner aufgrund von Beschränkungen des Arbeitsspeichers und der Rechenleistung.
-Diesen und noch einigen anderen Problemen versucht die Dimensionsreduktion entgegenzuwirken, indem
-der Datensatz auf eine kleinere Dimension abgebildet wird. Man erhofft sich, dass der
-Informationsgehalt der Daten nach der Transformation immer noch hoch ist und damit die Redundanz
-reduziert wurde. Häufig wird die Dimensionsreduktion als ein Vorverabeitungsschritt eingesetzt,
-woraufhin dann der eigentliche Klassifikator oder Regressor trainiert wird. In diesen Fällen sind
-die Algorithmen teilweise stabiler, da durch die Dimensionsreduktion unrepräsentative Merkmale
-(\textit{noise}) entfernt wurden und somit die Gefahr des \textit{Overfitting} geringer ist \parencites[siehe]{Plastria.2008}{MustafaAbdulSalam.2021}. Die Dimensionsreduktion ist darüber hinaus
-für die Datenvisualisierung unumgänglich, da hochdimensionale natürliche Datensätze so auf zwei
-oder drei Dimensionen für die Veranschaulichung reduziert werden können.
 
-Über die Zeit wurde daher eine Vielzahl von Dimensionsreduktionsmethoden entwickelt \parencite[siehe z.B.][]{Lee.2007} -- die große Auswahl macht die Selektion der richtigen Methode für
-eine spezifische Aufgabe allerdings nicht einfacher. Daher wurden bereits mehrere Anstrengungen
-gemacht, die Stärken und Schwächen einzelner Methoden herauszufinden. Einer der umfassendsten
-Vergleiche von Methoden der Dimensionsreduktion wurde von \Textcite{vanderMaaten.2009}
-durchgeführt. Die Autoren haben zwölf nichtlineare Methoden untersucht und mit der Principal
-Component Analysis verglichen. Sie kommen zu dem Ergebnis, dass nichtlineare Methoden die Principal
-Component Analysis auf künstlichen Datensätzen übertreffen können, dies aber bei natürlichen
-Datensätzen generell nicht zutrifft. In der Arbeit von \textcite{RohanPandit.2016} wird dieses
-Ergebnis auf Daten von Proteinstrukturen bestätigt. \Textcite{Gracia.2014} stellen eine Methodik
-vor, die die Methoden nach dem Qualitätsverlust der Dimensionsreduktion evaluiert. Dazu wird eine
-Übersicht über einige Qualitätskriterien gegeben und die Methodik in einem Vergleich von zwölf
-Methoden auf zwölf natürlichen Datensätzen angewandt. Der Fokus liegt hier jedoch mehr auf dem
-Vergleich der unterschiedlichen Qualitätskriterien und der vorgestellten Methodik. Dasselbe trifft
-auf die Arbeit von \textcite{Lee.2009} zu, in der rangbasierte Qualitätskriterien in einem
-einheitlichen Framework zusammengefasst werden. Daneben gibt es noch einige weitere Arbeiten, die
-sich lediglich mit theoretischen Eigenschaften der Methoden befassen und diese nicht empirisch
-miteinander vergleichen \parencites{Cunningham.2014}{Sorzano.2014}{Lee.2007}{Sarveniazi.2014}{Burges.2009b}.
+Über die Zeit wurden daher eine Vielzahl von Dimensionsreduktionsmethoden entwickelt \parencite[siehe z.B.][]{Lee.2007} -- die große Auswahl macht die Selektion der richtigen Methode für
+eine spezifische Aufgabe allerdings nicht einfacher. Einer der umfassendsten Vergleiche von
+Methoden der Dimensionsreduktion wurde von \Textcite{vanderMaaten.2009} durchgeführt. Die Autoren
+untersuchen zwölf nichtlineare Methoden und vergleichen diese mit der Principal Component Analysis.
+Sie kommen zu dem Ergebnis, dass nichtlineare Methoden die Principal Component Analysis auf
+künstlichen Datensätzen übertreffen können, dies aber bei natürlichen Datensätzen generell nicht
+zutrifft. In der Arbeit von \textcite{RohanPandit.2016} wird dieses Ergebnis auf Daten von
+Proteinstrukturen bestätigt. \Textcite{Gracia.2014} stellen eine Methodik vor, die die Methoden
+nach dem Qualitätsverlust der Dimensionsreduktion evaluiert. Dazu wird eine Übersicht über einige
+Qualitätskriterien gegeben und die Methodik in einem Vergleich von zwölf Methoden auf zwölf
+natürlichen Datensätzen angewandt. Der Fokus liegt hier jedoch mehr auf dem Vergleich der
+unterschiedlichen Qualitätskriterien und der vorgestellten Methodik. Dasselbe trifft auf die Arbeit
+von \textcite{Lee.2009} zu, in der rangbasierte Qualitätskriterien in einem einheitlichen Framework
+zusammengefasst werden. Daneben gibt es noch einige weitere Arbeiten, die sich lediglich mit
+theoretischen Eigenschaften der Methoden befassen und diese nicht empirisch miteinander vergleichen \parencites{Cunningham.2014}{Sorzano.2014}{Lee.2007}{Sarveniazi.2014}{Burges.2009b}.
 
 Die in jüngster Zeit gemachten Fortschritte in der automatischen Spracherkennung mit Sprachmodellen
 wie \textit{Whisper} \parencite{Radford.2022} und auf dem Gebiet der \textit{Computer Vision} mit Text-zu-Bilder-Modellen
