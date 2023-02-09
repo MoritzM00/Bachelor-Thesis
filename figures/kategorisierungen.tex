@@ -1,0 +1,40 @@
+% code adapted from https://tex.stackexchange.com/questions/255159/help-on-drawing-a-tree-in-latex?rq=1
+\tikzset{
+	my node/.style={
+			draw=gray,
+			inner color=gray!5,
+			outer color=gray!10,
+			thick,
+			minimum width=1cm,
+			rounded corners=3,
+			text height=1.5ex,
+			text depth=0ex,
+		}
+}
+\begin{figure}[h]
+	\centering
+	\begin{forest}
+		for tree={%
+		my node,
+		l sep+=5pt,
+		grow'=south,
+		edge={gray, thick},
+		parent anchor=south,
+		child anchor=north,
+		if n children=0{tier=last}{},
+		if={isodd(n_children())}{
+				for children={
+						if={equal(n,(n_children("!u")+1)/2)}{calign with current}{}
+					}
+			}{}
+		}
+		[Dimensionsreduktion, s sep=15mm,
+		[Machine Learning
+					[CAE] [AE]]
+			[Statistik
+					[LLE] [Kernel PCA] [PCA]]
+		]
+	\end{forest}
+	\caption[Kategorisierung der Dimensionsreduktionsmethoden]{Die hier verwendete Kategorisierung der fünf Methoden.}
+	\label{fig:Kategorisierung}
+\end{figure}

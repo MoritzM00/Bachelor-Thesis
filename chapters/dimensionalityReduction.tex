@@ -130,7 +130,20 @@ verwiesen.
 
 \section{Einordnungen von Dimensionsreduktionsmethoden}
 \label{ch:Dimensionsreduktion:Ansaetze}
-Methoden der Dimensionsreduktion können auf unterschiedlichste Weise in Kategorien eingeteilt werden. Die in dieser Arbeit verwendete Kategorisierung weicht von den üblichen Kategorisierungen ab, da der Fokus hier auf dem Vergleich statistischer Methoden und Machine Learning Methoden liegt. Für einen Überblick und zur besseren Einschätzung werden in diesem Abschnitt kurz die gängigsten Kategorisierungsmöglichkeiten vorgestellt. Dazu gehört die Unterteilung in (i) lineare und nichtlineare Methoden, (ii) konvexe und nicht-konvexe Methoden, sowie (iii) Distanz- und Topologie-erhaltende Methoden.
+Methoden der Dimensionsreduktion können auf unterschiedliche Weisen in Kategorien eingeteilt werden. Die in dieser Arbeit verwendete Kategorisierung ist in \figref{fig:Kategorisierung} dargestellt und weicht von anderen Taxonomien ab, da der Fokus hier auf dem Vergleich statistischer Methoden und Machine Learning Ansätzen liegt.
+\input{\figures/kategorisierungen.tex}
+
+Statistische Methoden haben eine solide theoretische Fundierung und sind meist etablierte
+Algorithmen auf einem jeweiligen Gebiet, wie es zum Beispiel mit der Principal Component Analysis
+(\subsecref{ch:MethodenDerDimRed:statistisch:PCA}) der Fall ist. Moderne Machine Learning Methoden
+basieren auf neuronalen Netzen und versuchen, aus einer großen Menge an Trainingsdaten eine
+Approximation der gesuchten Funktion zu lernen. Autoencoder sind hierfür ein Paradebeispiel und
+werden deshalb in \secref{ch:MethodenDerDimRed:modern} eingehend behandelt.
+
+Für einen Überblick und zur besseren Einschätzung werden in diesem Abschnitt kurz gängige
+Kategorisierungsmöglichkeiten vorgestellt. Dazu gehört die Unterteilung in (i) lineare und
+nichtlineare Methoden, (ii) konvexe und nicht-konvexe Methoden, sowie (iii) Distanz- und
+Topologie-erhaltende Methoden.
 
 Eine simple und weitverbreitete Unterteilung ist die in lineare und nichtlineare Methoden. Während
 lineare Methoden wie die Principal Component Analysis
