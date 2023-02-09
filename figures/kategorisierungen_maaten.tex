@@ -30,12 +30,11 @@
 			}{}
 		}
 		[Dimensionsreduktion, s sep=15mm,
-		[Machine Learning
-					[CAE] [AE]]
-			[Statistik
-					[LLE] [Kernel PCA] [PCA]]
+		[Konvex
+			[nicht-vollwertige EWZ [LLE]] [vollwertige EWZ [Kernel PCA] [PCA]]]
+		[Nicht-konvex
+		[CAE] [AE]]
 		]
 	\end{forest}
-	\caption[Kategorisierung der Dimensionsreduktionsmethoden]{Die hier verwendete Kategorisierung der fünf Methoden.}
-	\label{fig:Kategorisierung}
+	\caption[Alternative Kategorisierung der Dimensionsreduktionsmethoden]{Ein Auszug aus der Kategorisierung nach \textcite{vanderMaaten.2009}. Eine vollwertige Eigenwertszerlegung (EWZ) zerlegt eine (dichte) Matrix in ihre Eigenwerte und -vektoren. Eine nicht-vollwertige Eigenwertszerlegung meint die Zerlegung einer dünn besetzten Matrix \parencite[3,7]{vanderMaaten.2009}.} \label{fig:KategorisierungMaaten}
 \end{figure}

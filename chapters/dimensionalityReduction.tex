@@ -128,7 +128,7 @@ formale Definition wird an dieser Stelle jedoch verzichtet. Für eine mathematis
 Definition der hier genannten Begriffe aus der Topologie wird auf \textcites{Lee.2011}{Lee.2012}
 verwiesen.
 
-\section{Einordnungen von Dimensionsreduktionsmethoden}
+\section{Einordnung der Dimensionsreduktionsmethoden}
 \label{ch:Dimensionsreduktion:Ansaetze}
 Methoden der Dimensionsreduktion können auf unterschiedliche Weisen in Kategorien eingeteilt werden. Die in dieser Arbeit verwendete Kategorisierung ist in \figref{fig:Kategorisierung} dargestellt und weicht von anderen Taxonomien ab, da der Fokus hier auf dem Vergleich statistischer Methoden und Machine Learning Ansätzen liegt.
 \input{\figures/kategorisierungen.tex}
@@ -140,42 +140,45 @@ basieren auf neuronalen Netzen und versuchen, aus einer großen Menge an Trainin
 Approximation der gesuchten Funktion zu lernen. Autoencoder sind hierfür ein Paradebeispiel und
 werden deshalb in \secref{ch:MethodenDerDimRed:modern} eingehend behandelt.
 
-Für einen Überblick und zur besseren Einschätzung werden in diesem Abschnitt kurz gängige
-Kategorisierungsmöglichkeiten vorgestellt. Dazu gehört die Unterteilung in (i) lineare und
-nichtlineare Methoden, (ii) konvexe und nicht-konvexe Methoden, sowie (iii) Distanz- und
-Topologie-erhaltende Methoden.
+Für einen Überblick und zur besseren Einschätzung werden in diesem Abschnitt weitere gängige
+Kategorisierungsmöglichkeiten vorgestellt. Die von \textcite{vanderMaaten.2009} verwendete
+Taxonomie ist in \figref{fig:KategorisierungMaaten}
+abgebildet.\input{\figures/kategorisierungen_maaten.tex} Hier werden die
+Dimensionsreduktionsmethoden zunächst in konvexe und nicht-konvexe Methoden eingeordnet.
+\textbf{Konvexe} Methoden optimieren eine Zielfunktion, bei der jedes lokale Optimum gleichzeitig
+das globale Optimum ist. Die Optimierung ist daher leichter, jedoch sind die möglichen
+Zielfunktionen auch deutlich eingeschränkter. Die Lösung dieser Zielfunktionen reduziert sich
+meistens auf ein Eigenwertsproblem, weswegen die konvexen Methoden weiter in Methoden mit einer
+vollwertigen und nicht-vollwertigen Eigenwertszerlegung (EWZ)eingegliedert werden können \parencite[3]{vanderMaaten.2009}. \textbf{Nicht-konvexe} Methoden wie der Autoencoder optimieren
+nicht-konvexe Zielfunktionen und können damit bei der Optimierung in suboptimalen lokalen
+Extrempunkten \enquote{steckenbleiben}. Die Optimierung erfolgt meist mittels des
+Gradientenabstiegsverfahrens (engl. \textit{gradient descent}) oder anderer mathmatischer
+Optimierungsverfahren \parencite[siehe z.B.][]{Guler.2010}.
 
-Eine simple und weitverbreitete Unterteilung ist die in lineare und nichtlineare Methoden. Während
-lineare Methoden wie die Principal Component Analysis
-(\secref{ch:MethodenDerDimRed:statistisch:PCA}) nur lineare Zusammenhänge in den Daten erkennen
-können, sind nichtlineare Methoden in dieser Hinsicht deutlich flexibler. Zu letzteren gehören
-beispielsweise die Kernel PCA (\secref{ch:MethodenDerDimRed:statistisch:kPCA}) und die Autoencoder
-(\secref{ch:MethodenDerDimRed:ML:AE}), welche eine bestimmte Klasse von neuronalen Netzen
-darstellen.\rewrite{lies sich nicht gut}
+% \textbf{Distanz-basierte Methoden} versuchen die paarweisen Distanzen in den Daten zu erhalten, womit die zugrundeliegende Struktur erhalten werden soll \parencite[3]{Gracia.2014}. Vertreter dieser Kategorie sind die (klassische) Multidimensionale
+% Skalierung \parencites{Kruskal.1964}{Cox.2008}, das Sammon Mapping \addref und die Curvilinear Component Analysis
+% \addref. Hierbei muss eine Distanz jedoch nicht die euklidische Distanz zwischen zwei Punkten sein.
+% Beispielweise ist die \newterm{geodätische Distanz} als die Distanz entlang der Mannigfaltigkeit
+% definiert, auf der die Punkte liegen. Mit dem Hintergrundwissen zu Mannigfaltigkeiten wird
+% deutlich, dass euklidische Distanzen vor allem bei nichtlinearen Mannigfaltigkeiten mit einer hohen
+% Krümmung irreführend sein können. Die geodätische Distanz wirkt diesem Problem entgegen, ist aber
+% nicht immer leicht zu berechnen. Daneben gibt es \textbf{Topologie-erhaltende Methoden}, die
+% gezielt die Topologie der Mannigfaltigkeit erhalten wollen und dies durch geometrische Überlegungen
+% erzielen \parencite[4]{Gracia.2014}. Zu dieser Kategorie gehört beispielsweise das Locally Linear Embedding
+% (\secref{ch:MethodenDerDimRed:statistisch:LLE}), die Self-Organizing Map \parencite{Kohonen.1990} oder die Uniform Manifold Approximation and Projection (UMAP) \parencite{McInnes.2018}.
 
-\textbf{Konvexe} Methoden optimieren eine Zielfunktion, bei der jedes lokale Optimum gleichzeitig das globale Optimum ist. Die Optimierung ist daher leichter, jedoch sind die möglichen Zielfunktionen auch deutlich eingeschränkter. \textbf{Nicht-konvexe} Methoden wie der Autoencoder optimieren nicht-konvexe Zielfunktionen und können damit bei der Optimierung in suboptimalen lokalen Extrempunkten \enquote{steckenbleiben}. Die Optimierung erfolgt meist mittels des Gradientenabstiegsverfahrens (engl. \textit{gradient descent}) oder anderen mathmatischen Optimierungsverfahren \parencite[siehe z.B.][]{Guler.2010}.
+Neben den in dieser Arbeit vorgestellten Methoden gibt es noch viele weitere Algorithmen. In der
+Kategorie der nicht-konvexen Methoden sind dabei das \textit{Sammon Mapping} \parencite{Sammon.1969} und eine weitere Variante von neuronalen Netzen, den \textit{Self-Organizing
+	Maps} \parencite{Kohonen.1990} zu nennen. Eine weitere wichtige konvexe Methode ist das
+\textit{Multidimensional Scaling} \parencites{Kruskal.1964}{Cox.2008}, welches in der klassischen Form im Ergebnis jedoch sehr ähnlich
+zur Principal Component Analysis ist. Des Weiteren sind in dieser Kategorie noch \textit{Isomap} \parencite{Tenenbaum.2000} und Erweiterungen von Locally Linear Embedding wie \textit{Hessian Locally
+	Linear Embedding} \parencite{Donoho.2003} oder \textit{Local Tangent Space Alignment} \parencite{Zhang.2002} zu nennen. \textit{Maximum Variance Unfolding} \parencite{Weinberger.2006}, auch bekannt als \textit{Semidefinite Embedding}, erweitert die Kernel
+Principal Component Analysis, indem die Kernel-Matrix gelernt wird.
 
-\textbf{Distanz-basierte Methoden} versuchen die paarweisen Distanzen in den Daten zu erhalten, womit die zugrundeliegende Struktur erhalten werden soll \parencite[3]{Gracia.2014}. Vertreter dieser Kategorie sind die (klassische) Multidimensionale
-Skalierung \parencites{Kruskal.1964}{Cox.2008}, das Sammon Mapping \addref und die Curvilinear Component Analysis
-\addref. Hierbei muss eine Distanz jedoch nicht die euklidische Distanz zwischen zwei Punkten sein.
-Beispielweise ist die \newterm{geodätische Distanz} als die Distanz entlang der Mannigfaltigkeit
-definiert, auf der die Punkte liegen. Mit dem Hintergrundwissen zu Mannigfaltigkeiten wird
-deutlich, dass euklidische Distanzen vor allem bei nichtlinearen Mannigfaltigkeiten mit einer hohen
-Krümmung irreführend sein können. Die geodätische Distanz wirkt diesem Problem entgegen, ist aber
-nicht immer leicht zu berechnen. Daneben gibt es \textbf{Topologie-erhaltende Methoden}, die
-gezielt die Topologie der Mannigfaltigkeit erhalten wollen und dies durch geometrische Überlegungen
-erzielen \parencite[4]{Gracia.2014}. Zu dieser Kategorie gehört beispielsweise das Locally Linear Embedding
-(\secref{ch:MethodenDerDimRed:statistisch:LLE}), die Self-Organizing Map \parencite{Kohonen.1990} oder die Uniform Manifold Approximation and Projection (UMAP) \parencite{McInnes.2018}.
-
-Andere Algorithmen, die in dieser Arbeit nicht vorgestellt werden können sind unter anderem Isomap \parencite{Tenenbaum.2000}, Maximum Variance Unfolding (MVU) \parencite{Weinberger.2006} und Erweiterungen von Locally Linear Embedding wie Hessian LLE \parencite{Donoho.2003} oder Local Tangent Space Alignment (LTSA) \parencite{Zhang.2002}.
-
-Wie wir in der Einleitung in \chapref{ch:Enleitung} gesehen haben, gibt es viele Gründe, wieso man
-eine Reduktion der Dimension eines Datensatzes erreichen möchte. Unter anderem können große
-Datenmengen effizienter gespeichert werden, ohne dabei einen zu großen Informationsverlust zu
-erleiden. Deswegen ist das Gebiet der Dimensionsreduktion ein immer noch aktuelles Forschungsthema
-mit einer großen Bandbreite an unterschiedlichen Methoden, wie in wir in
-\secref{ch:Dimensionsreduktion:Ansaetze} gesehen haben. Dem Anwender kann es mitunter schwerfallen,
-den richtigen Algorithmus auszuwählen, da es laut dem dem \newterm{No Free Lunch Theorem} \parencite{Wolpert.1997} keinen \enquote{besten} Algorithmus für jede Situation gibt. Im nächsten
-Schritt (\chapref{ch:MethodenDerDimRed}) werden einige dieser Algorithmen vorgestellt, die dann in
-\chapref{ch:Vergleich} miteinander verglichen werden, um dem Anwender einen Anhaltspunkt für die
-Auswahl einer Dimensionsreduktionsmethode zu geben.
+Wie zu erkennen ist, gibt es eine große Auswahl an verschieden Methoden der Dimensionsreduktion.
+Nach dem \newterm{No Free Lunch Theorem} \parencite{Wolpert.1997} gibt es jedoch keinen \enquote{besten} Algorithmus für jede Situation,
+weswegen eine Methode domänenspezifisch ausgewählt werden muss. Zur Reduktion von Speicher- und
+Rechenkapazitäten und aufgrund des Fluchs der Dimensionalität kann dies trotzdem vorteilhaft sein.
+Mit dem Hintergrundwissen zu wichtigen Konzepten wie der Mannigfaltigkeit und der intrinsischen
+Dimension (\secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim}) können im Folgenden die
+einzelnen Methoden vorgestellt werden.
