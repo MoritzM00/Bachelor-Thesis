@@ -43,10 +43,12 @@ Der Term \enquote{Fluch der Dimensionalität} (engl. \textit{Curse of Dimensiona
 einem Sammelbegriff für die statistischen Probleme und Herausforderungen in hochdimensionalen
 Räumen geworden. Diese Räume weisen Phänomene auf, die in niedrigeren Dimensionen nicht anzutreffen
 sind. Die zwei Phänomene, die den Begriff dabei hauptsächlich prägen, sind das \newterm{Phänomen
-	der leeren Räume} und die \newterm{Konzentration von Normen} \parencite[6 -- 9]{Lee.2007}. Im Folgenden werden die zwei Phänomene kurz erläutert.
+	der leeren Räume} und die \newterm{Konzentration des Maßes} \parencite[6 -- 9]{Lee.2007}. Im Folgenden werden die zwei Phänomene kurz erläutert.
 
-% Die Konzentration von Normen geht auf das mathematische Gebiet der Konzentrationsungleichungen zurück und bezeichnet die Beobachtung, dass sich die Norm eines Vektors
-% $\vect{x} \in \real^D$ um den Mittelwert der Verteilung der Normen konzentriert.
+Die Konzentration des Maßes (engl. \textit{concentration of measure}) \parencite{Ledoux.2001} ist eine eigenständige mathematische Theorie und befasst sich mit
+Konzentrationsungleichungen. Im Kontext des Fluchs der Dimensionalität bezeichnet man damit die
+Beobachtung, dass sich die Norm eines Vektors $\vect{x} \in \real^D$ um den Mittelwert der
+Verteilung der Normen konzentriert und nahezu konstant ist.
 % Dies folgt aus dem Zentralen Grenzwertsatz, der besagt, dass eine Summe von unabhängigen und identisch verteilten Zufallsvariablen (approximativ) normalverteilt ist. Betrachtet man den Vektor $\vect{x}$ als einen Zufallsvektor, wobei jede Komponente unabhängig und identisch verteilt ist, kann man den Zentralen Grenzwertsatz auf auf die euklidische Norm
 % \begin{equation}
 % 	\norm{\vect{x}}^2 = x_1^2 + x_2^2 + \cdots + x_D^2
@@ -105,10 +107,9 @@ zweidimensionale Mannigfaltigkeit eingebettet im $\real^3$.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{torus.pdf}
-	\caption[Ein Beispiel für eine zweidimensionale Mannigfaltigkeit: ein Torus]{Gezeigt ist ein Beispiel für eine zweidimensionale Mannigfaltigkeit eingebettet im $\real^3$, der sogenannte Torus. Bewegt man sich entlang der Oberfläche des Torus, so erscheint sie lokal flach und ähnelt damit dem $\real^2$. Aus diesem Grund ist der abgebildete Torus eine 2-Mannigfaltigkeit -- trotz der Tatsache, dass das Objekt als Ganzes nicht in einem zweidimensionalen Raum dargestellt werden kann. Eigene Darstellung\protect\footnotemark}
+	\caption[Ein Beispiel für eine zweidimensionale Mannigfaltigkeit: ein Torus]{Gezeigt ist ein Beispiel für eine zweidimensionale Mannigfaltigkeit eingebettet im $\real^3$, der sogenannte Torus. Bewegt man sich entlang der Oberfläche des Torus, so erscheint sie lokal flach und ähnelt damit dem $\real^2$. Aus diesem Grund ist der abgebildete Torus eine 2-Mannigfaltigkeit -- trotz der Tatsache, dass das Objekt als Ganzes nicht in einem zweidimensionalen Raum dargestellt werden kann. Eigene Darstellung (angelehnt an \textcite[350]{Hill.2020})}
 	\label{fig:Torus}
 \end{figure}
-\footnotetext{angelehnt an \url{https://scipython.com/book/chapter-7-matplotlib/examples/a-torus/}}
 Lokal erscheint die Oberfläche des Torus flach, das heißt sie ähnelt dem $\real^2$ und nicht dem $\real^3$, in dem sie eingebettet ist. Die intrinsische Dimension im Kontext der Topologie ist also zwei. Eine Karte kann nun informell wie eine Landkarte eines Teils der Oberfläche beschrieben werden. Bewegt man sich entlang
 dieser Oberfläche, so muss die Karte irgendwann gewechselt werden. Dieser Übergang von zwei sich
 überlappenden Karten wird durch den Homöomorphismus $\phi$ formalisiert. Betrachtet man alle Karten
