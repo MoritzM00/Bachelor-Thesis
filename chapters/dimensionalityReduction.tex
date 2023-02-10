@@ -41,14 +41,13 @@ kurz verschiedene Möglichkeiten der Einordnung von Dimensionsreduktionsmethoden
 Der Term \enquote{Fluch der Dimensionalität} (engl. \textit{Curse of Dimensionality}) wurde von
 \textcite{Bellman.1957} im Kontext der dynamischen Programmierung hervorgebracht und ist seitdem zu
 einem Sammelbegriff für die statistischen Probleme und Herausforderungen in hochdimensionalen
-Räumen geworden. Diese hochdimensionalen Räume weisen Phänomene auf, die in niedrigeren Dimensionen
-nicht anzutreffen sind. Die zwei Phänomene, die den Begriff hauptsächlich prägen, sind das
-\newterm{Phänomen der leeren Räume} und die \newterm{Konzentration von Normen} \parencite[6 -- 9]{Lee.2007}. Im Folgenden werden die zwei Phänomene kurz erläutert.
+Räumen geworden. Diese Räume weisen Phänomene auf, die in niedrigeren Dimensionen nicht anzutreffen
+sind. Die zwei Phänomene, die den Begriff dabei hauptsächlich prägen, sind das \newterm{Phänomen
+	der leeren Räume} und die \newterm{Konzentration von Normen} \parencite[6 -- 9]{Lee.2007}. Im Folgenden werden die zwei Phänomene kurz erläutert.
 
-Mit der Konzentration von Normen bezeichnet man die Beobachtung, dass sich die Norm eines Vektors
-$\vect{x} \in \real^D$ um den Mittelwert der Verteilung der Normen konzentriert.
-
-% Dies folgt aus dem Zentralen Grenzwertsatz \addref, der besagt, dass eine Summe von unabhängigen und identisch verteilten Zufallsvariablen (approximativ) normalverteilt ist. Betrachtet man den Vektor $\vect{x}$ als einen Zufallsvektor, wobei jede Komponente unabhängig und identisch verteilt ist, kann man den Zentralen Grenzwertsatz auf auf die euklidische Norm
+% Die Konzentration von Normen geht auf das mathematische Gebiet der Konzentrationsungleichungen zurück und bezeichnet die Beobachtung, dass sich die Norm eines Vektors
+% $\vect{x} \in \real^D$ um den Mittelwert der Verteilung der Normen konzentriert.
+% Dies folgt aus dem Zentralen Grenzwertsatz, der besagt, dass eine Summe von unabhängigen und identisch verteilten Zufallsvariablen (approximativ) normalverteilt ist. Betrachtet man den Vektor $\vect{x}$ als einen Zufallsvektor, wobei jede Komponente unabhängig und identisch verteilt ist, kann man den Zentralen Grenzwertsatz auf auf die euklidische Norm
 % \begin{equation}
 % 	\norm{\vect{x}}^2 = x_1^2 + x_2^2 + \cdots + x_D^2
 % \end{equation}
@@ -149,7 +148,7 @@ Dimensionsreduktionsmethoden zunächst in konvexe und nicht-konvexe Methoden ein
 das globale Optimum ist. Die Optimierung ist daher leichter, jedoch sind die möglichen
 Zielfunktionen auch deutlich eingeschränkter. Die Lösung dieser Zielfunktionen reduziert sich
 meistens auf ein Eigenwertsproblem, weswegen die konvexen Methoden weiter in Methoden mit einer
-vollwertigen und nicht-vollwertigen Eigenwertszerlegung (EWZ)eingegliedert werden können \parencite[3]{vanderMaaten.2009}. \textbf{Nicht-konvexe} Methoden wie der Autoencoder optimieren
+vollwertigen und nicht-vollwertigen Eigenwertzerlegung (EWZ)eingegliedert werden können \parencite[3]{vanderMaaten.2009}. \textbf{Nicht-konvexe} Methoden wie der Autoencoder optimieren
 nicht-konvexe Zielfunktionen und können damit bei der Optimierung in suboptimalen lokalen
 Extrempunkten \enquote{steckenbleiben}. Die Optimierung erfolgt meist mittels des
 Gradientenabstiegsverfahrens (engl. \textit{gradient descent}) oder anderer mathmatischer

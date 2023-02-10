@@ -460,14 +460,14 @@ auf unterschiedliche Dimensionen nicht geschachtelt sind.
 Es wurden jedoch bereits Verfahren entwickelt, mit denen diese Eigenschaften wiederhergestellt oder
 von Beginn an sichergestellt werden können. Das Vorgehen von \textcite{Plaut.2018} rekonstruiert
 mittels eines linearen Autoencoders die Eigenvektorbasis der Kovarianzmatrix bis hin zu einer
-orthogonalen Transformation. Die Autoren behaupten, dass durch eine Singulärwertszerlegung der
+orthogonalen Transformation. Die Autoren behaupten, dass durch eine Singulärwertzerlegung der
 Decoder-Gewichtsmatrix $\mat{W}_2$, d.h. die Zerlegung in
 \begin{equation}
 	\label{eq:SVD}
 	\mat{W}_2 = \mat{U} \mat{\Psi} \tr{\mat{V}}
 \end{equation}
-die Hauptkomponenten bis hin zu einer orthogonalen Transformation erlangt werden können \parencite[4]{Plaut.2018}.\footnote{Die Singulärwertszerlegung ist eine Verallgemeinerung der
-	Eigenwertszerlegung für nicht-quadratische Matrizen, wie es hier mit $\mat{W}_2 \in \real^{D \times
+die Hauptkomponenten bis hin zu einer orthogonalen Transformation erlangt werden können \parencite[4]{Plaut.2018}.\footnote{Die Singulärwertzerlegung ist eine Verallgemeinerung der
+	Eigenwertzerlegung für nicht-quadratische Matrizen, wie es hier mit $\mat{W}_2 \in \real^{D \times
 			d}$ der Fall ist. $\mat{U}$ und $\mat{V}$ sind orthogonale Matrizen, die aus den Links-
 	beziehungsweise Rechts-Singulärvektoren bestehen. Die Matrix $\mat{\Psi}$ ist eine Diagonalmatrix
 	mit den Singulärwerten \parencite[44 -- 45]{Goodfellow.2016}. } Dabei sind die ersten $d$ Links-Singulärvektoren, d.h. die
@@ -489,7 +489,7 @@ der Methoden genauer analysiert. Punkt (1) aus dem theoretischen Zusammenhang wi
 \begin{figure}[ht]
 	\centering
 	\includegraphics{covariance-matrices.pdf}
-	\caption[Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von drei Methoden]{Die Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz, wobei in \captiona die Principal Component Analysis und die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei Transformation mittels der Principal Component Analysis ist per Konstruktion eine Diagonalmatrix mit absteigend sortierten Varianzen, das heißt es besteht keine Korrelation in $\mat{Y}$. Wendet man die Singulärwertszerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, so erhält man ohne \textit{weight decay} keine Diagonalmatrix. Wurde hingegen \textit{weight decay} verwendet, so ist die Kovarianzmatrix eine Diagonalmatrix. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von drei Methoden]{Die Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz, wobei in \captiona die Principal Component Analysis und die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei Transformation mittels der Principal Component Analysis ist per Konstruktion eine Diagonalmatrix mit absteigend sortierten Varianzen, das heißt es besteht keine Korrelation in $\mat{Y}$. Wendet man die Singulärwertzerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, so erhält man ohne \textit{weight decay} keine Diagonalmatrix. Wurde hingegen \textit{weight decay} verwendet, so ist die Kovarianzmatrix eine Diagonalmatrix. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Kovarianzmatrizen}
 \end{figure} Dargestellt sind die Kovarianzmatrizen der transformierten Daten, wobei in \captiona die Principal Component Analysis und jeweils die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei der Principal Component Analysis ist wie erwartet eine Diagonalmatrix mit absteigend sortieren Varianzen auf der Diagonalen. Die von \textcite{Plaut.2018} vorgeschlagene Methode wurde in \captionb und \captionc angewandt. Hierbei bestimmt jedoch die Verwendung von \textit{weight decay} die Orthogonalität der latenten Repräsentation. Wird keine Regularisierung verwendet, so besteht Korrelation in $\mat{Y}$. Im Gegensatz dazu konnte die Korrelation fast vollständig eliminiert werden, wenn \textit{weight decay} verwendet wird.
 
@@ -512,8 +512,8 @@ Aktivierungsfunktionen eine ähnliche latente Repräsentation wie die Principal 
 lernt. Eine Regularisierung der Gewichte begünstigt dabei Orthogonalität in der gefundenen Lösung
 des Autoencoders. Damit kann für sehr große Datensätze ein alternativer Algorithmus mithilfe des
 Autoencoders verwendet werden, um die Richtungen der Hauptkomponenten zu lernen. Dabei umgeht man
-die Eigenwertszerlegung der $D \times D$-Kovarianzmatrix der Daten, indem nur die
-Singulärwertszerlegung der $D \times d$-Gewichtsmatrix $\mat{W}_2$ berechnet werden muss.
+die Eigenwertzerlegung der $D \times D$-Kovarianzmatrix der Daten, indem nur die
+Singulärwertzerlegung der $D \times d$-Gewichtsmatrix $\mat{W}_2$ berechnet werden muss.
 
 \subsubsection{Hinzunahme von Nichtlinearität}
 

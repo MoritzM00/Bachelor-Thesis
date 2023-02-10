@@ -188,7 +188,7 @@ Um nun die Principal Component Analysis durchführen zu können, müssten die Ei
 	\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1}^n \label{eq:kPCA:KernelMatrix_A} \\
 	        & = \bm{\phi}(\mat{X}) \tr{\bm{\phi}(\mat{X})} \label{eq:kPCA:KernelMatrix_B}
 \end{align}
-definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertszerlegung der zentrierten Kernel-Matrix liefert mit
+definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertzerlegung der zentrierten Kernel-Matrix liefert mit
 einer entsprechenden Skalierung die Eigenvektoren der Kovarianzmatrix $\mat{C}$. Konkret wird dazu
 die $n \times n$ Kernel-Matrix in einem ersten Schritt mittels
 \begin{equation}
@@ -247,7 +247,7 @@ werden.
 Ein weiterer Nachteil der Kernel Principal Component Analysis ist, dass die Größe der Kernel-Matrix
 quadratisch in der Stichprobengröße $n$ ansteigt. Dadurch kann diese Matrix auf großen Datensätzen
 möglicherweise nicht vollständig im Hauptspeicher zwischengespeichert werden. Die ohnehin teure
-Operation der Eigenwertszerlegung einer Matrix wird dadurch zusätzlich zum Problem. Für große
+Operation der Eigenwertzerlegung einer Matrix wird dadurch zusätzlich zum Problem. Für große
 Datensätze wurden daher inkrementelle Versionen der Kernel Principal Component Analysis entwickelt \parencite[siehe z.B.][]{Hallgren.2018}.
 
 %% ==============================
