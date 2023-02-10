@@ -39,25 +39,33 @@ Component Analysis mangels der Fähigkeit, nichtlineare Mannigfaltigkeiten zu en
 Autoencoder outperformed werden. Auf diesen künstlichen Datensätzen ist Locally Linear Embedding
 jedoch auch einem Autoencoder deutlich überlegen. Die Performance von Locally Linear Embedding auf
 natürlichen Datensätzen ist hingegen weniger überzeugend, da die zugrundeliegende Mannigfaltigkeit
-möglicherweise deutlich komplexer ist und weniger gute Eigenschaften aufweist.
+möglicherweise deutlich komplexer ist und weniger gute Eigenschaften aufweist. Die Kernel Principal
+Component Analysis konnte durch den vermeintlichen Vorteil der Nichtlinearität ebenfalls nicht
+überzeugen. Auf vielen Datensätzen schnitt diese Methode fast identisch ab, wie die klassische
+Principal Component Analysis. Hinzu kommt, dass das Hyperparameter-Tuning bei dieser Methode
+aufwendig ist. In diesem Vergleich wurde allerdings nur der Gaußsche Kernel verwendet. In künftigen
+Arbeiten könnte noch eine größere Auswahl an Kernel untersucht werden. Des Weiteren wurden bei
+Autoencoder meistens Sigmoid- und bei Convolutional Autoencoder ReLU-Aktivierungsfunktionen
+eingesetzt. Hier könnten ebenfalls noch einige weitere Aktivierungsfunktionen hinsichtlich ihrer
+Relevanz für die Dimensionsreduktion evaluiert werden.
 
 Darüber hinaus wurde der Zusammenhang eines linearen Autoencoders mit der Principal Component
 Analysis untersucht. Man stellt hierbei fest, dass ein dreischichtiger Autoencoder mit linearen
 Aktivierungsfunktionen einen Unterraum des durch die Koeffizienten der Hauptkomponenten
 aufgespannten Raumes lernt. Regularisiert man den Autoencoder mittels \textit{weight decay}, so
-können mittels einer Singulärwertzerlegung der Decoder-Matrix die Richtungen der Hauptkomponenten
+können mithilfe einer Singulärwertzerlegung der Decoder-Matrix die Richtungen der Hauptkomponenten
 bis hin zu einer orthogonalen Transformation gelernt werden. So kann ein skalierbarer Algorithmus
 als Alternative zur PCA für Datensätze, die nicht als Ganzes in den Hauptspeicher passen,
 eingesetzt werden. Allerdings existieren auch inkrementelle Versionen von PCA, sodass die Anwendung
-dieses Ansatzes wahrscheinlich von theoretischer und nicht praktischer Natur bleibt. Nimmt man
-Nichtlinearität zum Autoencoder hinzu, so geht die Ähnlichkeit zur PCA im Falle eines
-dreischichtigen Autoencoders erst verloren, wenn sowohl Encoder als auch Decoder nichtlinear sind.
+dieses Ansatzes wahrscheinlich eher theoretischer Natur bleibt. Nimmt man Nichtlinearität zum
+Autoencoder hinzu, so geht die Ähnlichkeit zur PCA im Falle eines dreischichtigen Autoencoders erst
+verloren, wenn sowohl Encoder als auch Decoder nichtlinear sind.
 
 Zusammenfassend ist die Frage \textit{Old but gold?} also berechtigt. Insbesondere die Principal
 Component Analysis wird wahrscheinlich nicht ohne weiteres durch moderne Machine Learning Ansätze
-abgelöst. Das gute Abschneiden auf den Qualitätskriterien zusammen mit den Vorteilen in der
-Laufzeit und Parameterwahl macht die Principal Component Analysis nicht ohne Grund zur ersten Wahl
-vieler Anwender. Auf kleineren Datensätzen kann es jedoch sinnvoll sein, auch nichtlineare
+abgelöst. Das gute Abschneiden hinsichtlich der Qualitätskriterien zusammen mit den Vorteilen in
+der Laufzeit und Parameterwahl macht die Principal Component Analysis nicht ohne Grund zur ersten
+Wahl vieler Anwender. Auf kleineren Datensätzen kann es jedoch sinnvoll sein, auch nichtlineare
 statistische Methoden wie Locally Linear Embedding zu verwenden. Die Machine Learning Methoden sind
 aufgrund ihrer Skalierbarkeit insbesondere auf großen Datensätzen interessant, da hier einige
 statistische Methoden hinsichtlich des Speicher- und Rechenaufwands an ihre Grenzen kommen. Nimmt
@@ -65,12 +73,3 @@ man den hohen Aufwand des Hyperparameter-Tunings und der generell relativ hohen 
 Autoencoder in Kauf, so sind die Stärken der Flexibilität gerade auf Bilddatensätzen nicht zu
 vernachlässigen. In vielen Fällen rechtfertigt die marginale Outperformance gegenüber statistischen
 Methoden diesen Aufwand jedoch nicht.
-
-Die Kernel Principal Component Analysis konnte durch den vermeintlichen Vorteil der Nichtlinearität
-ebenfalls nicht überzeugen. Auf vielen Datensätzen schnitt diese Methode fast identisch ab, wie die
-klassische Principal Component Analysis. Hinzu kommt, dass das Hyperparameter-Tuning bei dieser
-Methode aufwendig ist. In diesem Vergleich wurde allerdings nur der Gaußsche Kernel verwendet. In
-künftigen Arbeiten könnte noch eine größere Auswahl an Kernel untersucht werden. Des Weiteren
-wurden bei Autoencoder meistens Sigmoid- und bei Convolutional Autoencoder
-ReLU-Aktivierungsfunktionen eingesetzt. Hier könnten ebenfalls noch einige weitere
-Aktivierungsfunktionen hinsichtlich ihrer Relevanz für die Dimensionsreduktion evaluiert werden.
