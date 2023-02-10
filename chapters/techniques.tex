@@ -426,26 +426,18 @@ der Input des Autoencoders eine gitterartige Topologie, wie z.B. ein Bild aufwei
 Autoencoder (ConvAE) bezeichnet. Eine detaillierte Einführung in Convolutional Neural Networks ist
 in \textcite[330 -- 372]{Goodfellow.2016} zu finden. In den anderen Fällen können vollvernetzte
 Schichten eingesetzt werden, d.h. jedes Neuron hat eine Verbindung zu jedem Neuron aus der
-Folgeschicht. In Convolutional Neural Networks ist es üblich, dass nach einer faltenden Schicht
-eine sogenannte \textit{Pooling}-Schicht \parencite[339 -- 345]{Goodfellow.2016} kommt, die die Größe des Inputs zwar verkleinert, dies aber
-\textit{ohne} trainierbare Gewichte tut. In Autoencodern soll die Inputgröße im Encoder ebenfalls
-sukzessive verkleinert werden, allerdings wollen wir lernen, wie man sie verkleinert. Daher wird
-hier anstelle von Pooling-Schichten die Schrittgröße (engl. \textit{Stride}) in der faltenden
-Schicht auf einen Wert größer Eins gesetzt. Dies bedeutet, dass bei der Faltungsoperation Pixel
-ausgelassen werden und dadurch die Größe des Inputs verkleinert wird.\unsure{das hier zu der
-	schrittweite vlt in den Appendix verschieben}
-
-Zweitens muss die Anzahl der Schichten $m$ festgelegt werden, welche für die Symmetrie des Encoders
-und Decoders ungerade sein sollte (aber nicht muss). Häufig wählt man hier $m = 3$ oder $m = 5$, da
-bei größerem $m$ Schwierigkeiten bei der Konvergenz des Autoencoders auftreten. Dies liegt an der
-hohen Anzahl an Verbindungen (Gewichte) im neuronalen Netz, da jedes Neuron mit allen Neuronen aus
-der nachfolgenden Schicht verbunden ist. Bei hochdimensionalen Datensätzen besitzt die
-Input-Schicht zudem viele Neuronen. Dies führt dazu, dass bereits simple dreischichtige Autoencoder
-viele Gewichte haben, wie das folgende Beispiel zeigt. Beträgt die extrinsische Dimension bspw.
-1000 und wählt man $m=3$ und hat die Bottleneck-Schicht zehn Neuronen, dann hat dieser simple
-Autoencoder bereits \num{20000} trainierbare Gewichte.\footnote{Genau genommen hat der Encoder
-	$1000 \cdot 10 = \num{10000}$ Gewichte und zehn Biases. Der Decoder hat \num{10000} Gewichte und
-	\num{1000} Biases. Der Autoencoder hat also insgesamt \num{20110} zu trainierende Freiheitsgrade.}
+Folgeschicht. Zweitens muss die Anzahl der Schichten $m$ festgelegt werden, welche für die
+Symmetrie des Encoders und Decoders ungerade sein sollte (aber nicht muss). Häufig wählt man hier
+$m = 3$ oder $m = 5$, da bei größerem $m$ Schwierigkeiten bei der Konvergenz des Autoencoders
+auftreten. Dies liegt an der hohen Anzahl an Verbindungen (Gewichte) im neuronalen Netz, da jedes
+Neuron mit allen Neuronen aus der nachfolgenden Schicht verbunden ist. Bei hochdimensionalen
+Datensätzen besitzt die Input-Schicht zudem viele Neuronen. Dies führt dazu, dass bereits simple
+dreischichtige Autoencoder viele Gewichte haben, wie das folgende Beispiel zeigt. Beträgt die
+extrinsische Dimension bspw. 1000 und wählt man $m=3$ und hat die Bottleneck-Schicht zehn Neuronen,
+dann hat dieser simple Autoencoder bereits \num{20000} trainierbare Gewichte.\footnote{Genau
+	genommen hat der Encoder $1000 \cdot 10 = \num{10000}$ Gewichte und zehn Biases. Der Decoder hat
+	\num{10000} Gewichte und \num{1000} Biases. Der Autoencoder hat also insgesamt \num{20110} zu
+	trainierende Freiheitsgrade.}
 
 Drittens muss die Anzahl der Neuronen in den versteckten Schichten festgelegt werden. Die Anzahl
 der Neuronen in der ersten und letzten Schicht entspricht der Größe des Inputvektors, d.h. der

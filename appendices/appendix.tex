@@ -9,10 +9,16 @@
 In diesem Abschnitt werden Details zu den Autoencoder-Architekturen und Details zum Training der Autoencoder erläutert. Zuerst werden die Architekturen der klassischen vollvernetzten Autoencoder (AE), dann die Architekturen der Convolutional Autoencoder (ConvAE) und zuletzt die Architektur der Contractive Autoencoder (CAE) spezifiziert. Anschließend wird der benutzte Optimierer und andere Trainings-Details genannt. Da die Architekturen
 vom Datensatz abhängen, werden diese in den folgenden Tabellen nach dem Datensatz gruppiert. Dabei steht $\text{FC}_{x}$ für eine vollvernetzte Schicht mit $x$ Neuronen. BN steht für \textit{Batch Normalization} \parencite{Ioffe.2015} und wird in vollvernetzten Autoencoder und Convolutional Autoencoder eingesetzt,
 da die Autoencoder mit Batch Normalization hinsichtlich der Qualitätskriterien besser abschnitten
-haben als ohne. $\text{Conv}_n$ steht für eine Convolutional Schicht mit $n$ Filter. Die
-Schrittgröße wurde für alle Convolutional Schichten auf zwei gesetzt. In einem Convolutional
-Autoencoder werden im Decoder Convolutional Schichten gegen Transposed Convolutional Schichten \parencite[siehe][]{Zeiler.2010} ausgetauscht. Die Schrittgröße wurde für alle Convolutional Schichten
-auf zwei gesetzt.
+haben als ohne. $\text{Conv}_n$ steht für eine Convolutional Schicht mit $n$ Filter. In
+Convolutional Neural Networks ist es üblich, dass nach einer faltenden Schicht eine sogenannte
+\textit{Pooling}-Schicht \parencite[339 -- 345]{Goodfellow.2016} kommt, die die Größe des Inputs zwar verkleinert, dies aber
+\textit{ohne} trainierbare Gewichte tut. In Autoencodern soll die Inputgröße im Encoder ebenfalls
+sukzessive verkleinert werden, allerdings wollen wir lernen, wie man sie verkleinert. Daher wird
+hier anstelle von Pooling-Schichten die Schrittgröße (engl. \textit{Stride}) in der faltenden
+Schicht auf einen Wert größer Eins gesetzt. Dies bedeutet, dass bei der Faltungsoperation Pixel
+ausgelassen werden und dadurch die Größe des Inputs verkleinert wird. Die Schrittgröße wurde daher
+für alle Convolutional Schichten auf zwei gesetzt. In einem Convolutional Autoencoder werden im
+Decoder Convolutional Schichten gegen Transposed Convolutional Schichten \parencite[siehe][]{Zeiler.2010} ausgetauscht.
 
 \tabref{tab:uebersicht-autoencoder-non-image} enthält die Encoder-Architekturen der vollvernetzten und Contractive Autoencoder auf dem Swiss Roll-, Twin Peaks- und ICMR-Datensatz.
 \input{tables/non_image_architectures.tex}Der Convolutional Autoencoder ist auf diesen Datensätzen nicht anwendbar und daher nicht in der Tabelle aufzufinden. Die Architekturen auf den Bilddatensätzen sind in zwei weiteren Tabellen aufgelistet. Die Architekturen für MNIST und Fashion MNIST sind in \tabref{tab:uebersicht-autoencoder-mnist}
