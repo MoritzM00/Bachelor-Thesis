@@ -4,15 +4,15 @@
 	\resizebox{\textwidth}{!}{
 		\begin{tabular}{lSSSSSSS}
 			\toprule
-			\multirow{2}[2]{*}{Methode} & \multicolumn{7}{c}{Laufzeit in Sekunden}                                                                                                                 \\
-			\cmidrule{2-8}              & {MNIST}                                  & {Fashion MNIST}  & {Twin Peaks}    & {Swiss Roll}     & {Olivetti Faces} & {ICMR}          & {FER}            \\
+			\multirow{2}[2]{*}{Methode} & \multicolumn{7}{c}{Laufzeit in Sekunden}                                                                                                                \\
+			\cmidrule{2-8}              & {MNIST}                                  & {Fashion MNIST}  & {Twin Peaks}    & {Swiss Roll}     & {ORL}           & {ICMR}          & {FER}            \\
 			\midrule
-			PCA                         & 2,00                                     & 2,54             & 0,01            & 0,00             & 0,35             & 0,78            & 2,51             \\
-			Kernel PCA                  & 101,00                                   & 101,72           & 0,62            & 0,59             & 0,03             & 1,01            & 103,17           \\
-			LLE                         & 417,41                                   & 447,95           & 0,45            & 0,42             & 0,24             & 1,14            & \bfseries 426,50 \\
-			AE                          & 161,35                                   & 121,14           & \bfseries 45,32 & \bfseries 102,34 & 43,02            & 54,51           & 102,26           \\
-			CAE                         & 403,74                                   & 641,00           & 30,04           & 22,68            & 5,76             & \bfseries 93,06 & 361,72           \\
-			ConvAE                      & \bfseries 467,61                         & \bfseries 754,83 & {--}            & {--}             & \bfseries 50,20  & {--}            & 249,64           \\
+			PCA                         & 2,00                                     & 2,54             & 0,01            & 0,00             & 0,35            & 0,78            & 2,51             \\
+			Kernel PCA                  & 101,00                                   & 101,72           & 0,62            & 0,59             & 0,03            & 1,01            & 103,17           \\
+			LLE                         & 417,41                                   & 447,95           & 0,45            & 0,42             & 0,24            & 1,14            & \bfseries 426,50 \\
+			AE                          & 161,35                                   & 121,14           & \bfseries 45,32 & \bfseries 102,34 & 43,02           & 54,51           & 102,26           \\
+			CAE                         & 403,74                                   & 641,00           & 30,04           & 22,68            & 5,76            & \bfseries 93,06 & 361,72           \\
+			ConvAE                      & \bfseries 467,61                         & \bfseries 754,83 & {--}            & {--}             & \bfseries 50,20 & {--}            & 249,64           \\
 			\bottomrule
 		\end{tabular}
 	}

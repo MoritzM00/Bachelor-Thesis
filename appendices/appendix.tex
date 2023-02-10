@@ -22,7 +22,7 @@ Decoder Convolutional Schichten gegen Transposed Convolutional Schichten \parenc
 
 \tabref{tab:uebersicht-autoencoder-non-image} enthält die Encoder-Architekturen der vollvernetzten und Contractive Autoencoder auf dem Swiss Roll-, Twin Peaks- und ICMR-Datensatz.
 \input{tables/non_image_architectures.tex}Der Convolutional Autoencoder ist auf diesen Datensätzen nicht anwendbar und daher nicht in der Tabelle aufzufinden. Die Architekturen auf den Bilddatensätzen sind in zwei weiteren Tabellen aufgelistet. Die Architekturen für MNIST und Fashion MNIST sind in \tabref{tab:uebersicht-autoencoder-mnist}
-\input{tables/image_architectures.tex} und für die kleineren Bilddatensätze Olivetti Faces und FER in \tabref{tab:uebersicht-autoencoder-small}.
+\input{tables/image_architectures.tex} und für die kleineren Bilddatensätze ORL und FER in \tabref{tab:uebersicht-autoencoder-small}.
 \input{tables/small_image_datasets_architectures.tex}
 
 Alle Autoencoder benutzen das \textit{PyTorch}-Framework, wobei \textit{Skorch} für die
@@ -36,7 +36,7 @@ maximal 100 Epochen, der Contractive Autoencoder für maximal 50 Epochen und die
 Autoencoder für maximal 150 Epochen trainiert. Das Training wird frühzeitig beendet, wenn sich der
 Validierungsfehler innerhalb von 20 Epochen nicht mehr verbessert. Die Größe eines Batches ist
 datensatzabhängig nach Stichprobengröße gewählt worden und beträgt 64 für die Swiss Roll und Twin
-Peaks, 32 für Olivetti Faces und ICMR, sowie 128 für MNIST, Fashion MNIST und FER.
+Peaks, 32 für ORL und ICMR, sowie 128 für MNIST, Fashion MNIST und FER.
 
 \section{Qualitätskriterien für die Datensätze}
 \label{ch:Appendix:Qualitaetskriterien}
@@ -44,8 +44,8 @@ Peaks, 32 für Olivetti Faces und ICMR, sowie 128 für MNIST, Fashion MNIST und 
 In diesem Abschnitt werden die Abbildungen der Qualitätskriterien für die restlichen Datensätze
 gesammelt. In \figref{fig:TwinPeaksMetrics} sind die Qualitätskriterien für die Twin Peaks, in
 \figref{fig:ICMRMetrics} die Qualitätskriterien für ICMR, in \figref{fig:OlivettiFacesMetrics} die
-Qualitätskriterien für den Olivetti Faces Datensatz, in \figref{fig:FashionMNISTMetrics} für den
-Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensatz.
+Qualitätskriterien für den ORL Datensatz, in \figref{fig:FashionMNISTMetrics} für den Fashion
+MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensatz.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{TwinPeaks_comparison.pdf}
@@ -66,7 +66,7 @@ Fashion MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensat
 	\begin{center}
 		\includegraphics{OlivettiFaces_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für den Olivetti Faces-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Olivetti Faces Datensatz. Principal Component Analysis und die nichtlineare Erweiterung Kernel PCA sind auf diesem Datensatz fast identisch und liefern gleichzeitig die besten Ergebnisse auf allen drei Kriterien. Alle Varianten der Autoencoder fallen hier etwas in der Performance ab. Dies könnte an der geringen Stichprobengröße von 400 liegen, wodurch eine Konvergenz der Autoencoder schwieriger wird. Neben den Autoencoder schneidet hier auch LLE für größere Werte von $K$ schlecht ab, kann jedoch bei geringeren Nachbarschaftsgrößen noch gute Werte für die drei Kriterien erreichen. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den ORL-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den ORL Datensatz. Principal Component Analysis und die nichtlineare Erweiterung Kernel PCA sind auf diesem Datensatz fast identisch und liefern gleichzeitig die besten Ergebnisse auf allen drei Kriterien. Alle Varianten der Autoencoder fallen hier etwas in der Performance ab. Dies könnte an der geringen Stichprobengröße von 400 liegen, wodurch eine Konvergenz der Autoencoder schwieriger wird. Neben den Autoencoder schneidet hier auch LLE für größere Werte von $K$ schlecht ab, kann jedoch bei geringeren Nachbarschaftsgrößen noch gute Werte für die drei Kriterien erreichen. (Eigene Darstellung)}
 	\label{fig:OlivettiFacesMetrics}
 \end{figure}
 
