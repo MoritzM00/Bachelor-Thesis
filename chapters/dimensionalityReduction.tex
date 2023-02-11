@@ -38,30 +38,26 @@ kurz verschiedene Möglichkeiten der Einordnung von Dimensionsreduktionsmethoden
 \label{ch:Dimensionsreduktion:FluchDerDim}
 
 Der Term \enquote{Fluch der Dimensionalität} (engl. \textit{Curse of Dimensionality}) wurde von
-\textcite{Bellman.1957} im Kontext der dynamischen Programmierung hervorgebracht und ist seitdem zu
-einem Sammelbegriff für die statistischen Probleme und Herausforderungen in hochdimensionalen
-Räumen geworden. Diese Räume weisen Phänomene auf, die in niedrigeren Dimensionen nicht anzutreffen
-sind. Die zwei Phänomene, die den Begriff dabei hauptsächlich prägen, sind das \newterm{Phänomen
-	der leeren Räume} und die \newterm{Konzentration des Maßes} \parencite[6 -- 9]{Lee.2007}. Im Folgenden werden die zwei Phänomene kurz erläutert.
+\textcite{Bellman.1961} im Kontext der Optimierung von Funktionen über hochdimensionale Suchräume
+hervorgebracht und ist seitdem zu einem Sammelbegriff für die statistischen Probleme und
+Herausforderungen in hochdimensionalen Räumen geworden. Diese Räume weisen unintuitive Phänomene
+auf, die in niedrigeren Dimension wie z.B. zwei nicht anzutreffen sind. Die zwei Phänomene, die den
+Begriff dabei hauptsächlich prägen, sind das \newterm{Phänomen der leeren Räume} und das
+\newterm{Konzentrationsphänomen} \parencite[6 -- 9]{Lee.2007}. Im Folgenden werden die zwei Phänomene kurz erläutert.
 
-Die Konzentration des Maßes (engl. \textit{concentration of measure}) \parencite{Ledoux.2001} ist eine eigenständige mathematische Theorie und befasst sich mit
-Konzentrationsungleichungen. Im Kontext des Fluchs der Dimensionalität bezeichnet man damit die
-Beobachtung, dass sich die Norm eines Vektors $\vect{x} \in \real^D$ um den Mittelwert der
-Verteilung der Normen konzentriert und nahezu konstant ist.
-% Dies folgt aus dem Zentralen Grenzwertsatz, der besagt, dass eine Summe von unabhängigen und identisch verteilten Zufallsvariablen (approximativ) normalverteilt ist. Betrachtet man den Vektor $\vect{x}$ als einen Zufallsvektor, wobei jede Komponente unabhängig und identisch verteilt ist, kann man den Zentralen Grenzwertsatz auf auf die euklidische Norm
-% \begin{equation}
-% 	\norm{\vect{x}}^2 = x_1^2 + x_2^2 + \cdots + x_D^2
-% \end{equation}
-% anwenden: Die Verteilung der Norm konvergiert für $D \rightarrow \infty$ also gegen eine Normalverteilung
-
-Dies führt dazu, dass Distanzmaße wie die euklidische Norm in hohen Dimensionen ihre Bedeutung
-verlieren. Man beobachtet, dass mit steigender Dimension $D$ alle Punkte mehr oder weniger gleich
-weit weg vom Ursprung liegen und sich die Verteilung der Normen daher konzentriert. Aufgrund dessen
-wird die Interpretation der $K$ nächsten Nachbarn fragwürdig, weshalb insbesondere die Performance
-von Clustering-Algorithmen wie z.B. K-Means in hohen Dimensionen stark abfällt.
-\textcite{Aggarwal.2001} untersuchen diesen Effekt für unterschiedliche Distanzmaße wie der $L_1$-,
-$L_2$- oder allgemein der $L_p$-Norm und stellen dabei fest, dass die Aussagekraft einer $L_p$-Norm
-in höheren Dimensionen für große $p$ schneller abnimmt als z.B. für $p = 2$.
+Das Konzentrationsphänomen ist auch bekannt als die Konzentration des Maßes (engl.
+\textit{concentration of measure}), wobei dahinter eine eigenständige mathematische Theorie steht,
+die sich mit Konzentrationsungleichungen befasst \parencite{Ledoux.2001}. Im Kontext des Fluchs der Dimensionalität ist dabei insbesondere die
+Konzentration der Normen von Relevanz \parencites[siehe z.B.][]{Kumari.2017}{Verleysen.2005}. Hier kann das Problem des nächsten Nachbarns
+betrachtet werden, d.h. zu einem gegebenen Anfragepunkt soll der Punkt mit der kleinsten Distanz
+zum Anfragepunkt gefunden werden \parencite[217]{Beyer.1999}. Man stellt fest, dass dies in hochdimensionalen Räumen nicht mehr
+effizient gelöst und das Problem sogar bedeutungslos werden kann, wie von \textcite{Beyer.1999}
+gezeigt wurde: Die Distanz eines Anfragepunktes zum nächsten Nachbarn stimmt bei steigender
+Dimension in Wahrscheinlichkeit mit der Distanz zu dem entferntesten Nachbarn überein. Die Norm
+verliert in hohen Dimensionen also an Aussagekraft. \textcite{Aggarwal.2001} untersuchen diesen
+Effekt für unterschiedliche Distanzmaße wie der $L_1$-, $L_2$- oder allgemein der $L_p$-Norm und
+stellen dabei fest, dass die Aussagekraft einer $L_p$-Norm in höheren Dimensionen für große $p$
+schneller abnimmt als z.B. für $p = 2$.
 
 Des Weiteren tritt das Phänomen der leeren Räume auf. Hier stellt man fest, dass hochdimensionale
 Räume dünn besetzt sind, da das Volumen im Raum exponentiell mit der Dimension $D$ ansteigt. Möchte
@@ -72,13 +68,6 @@ Hypersphäre mit Radius $r$ und den Hyperwürfel, der die Sphäre umschließt, d
 entspricht dem Durchmesser $2r$ der Sphäre. Das Verhältnis des Volumens dieser Sphäre zum Volumen
 des Würfels konvergiert für $D \rightarrow \infty$ gegen Null. Das bedeutet, dass das Volumen in
 den Ecken konzentriert \parencite[6 -- 7]{Lee.2007} und damit die meisten Punkte weit weg vom Ursprung liegen.
-
-Zusammenfassend besteht der Fluch der Dimensionalität also darin, dass die Performance von
-Klassifikatoren und Regressoren in hochdimensionalen Räumen aufgrund von Schwierigkeiten in der
-Distanzmessung und aufgrund der dünn besetzten Räume degradiert und die Gefahr des Overfittings
-höher ist. Die Dimensionsreduktion ist nun neben dem verwandten Gebiet der Merkmalsextrahierung ein
-Werkzeug, um die statistischen und algorithmischen Probleme in hochdimensionalen Räumen zu
-reduzieren, indem
 
 \section{Mannigfaltigkeiten und intrinsische Dimension}
 \label{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim}
