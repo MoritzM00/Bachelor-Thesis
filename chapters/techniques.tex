@@ -332,13 +332,10 @@ nämlich der \newterm{Autoencoder} in seiner klassischen Form in
 Der Autoencoder ist ein neuronales Netzwerk, das die Rekonstruktion des Inputvektors $\vect{x}$ aus
 den Trainingsdaten lernt. Um das sinnvoll zu erreichen, besitzt der Autoencoder eine wie in
 \figref{fig:SchematischerAutoencoder} gezeigte symmetrische Architektur.
-
-\input{\figures/autoencoder-architecture.tex}
-
-Dabei können der Encoder und Decoder unterschiedliche Architekturen annehmen -- die eines
-neuronalen Netzes ist allerdings die häufigste und auch hier verwendete Variante. Diese besteht in
-der klassischen Form aus einer ungeraden Anzahl an vollvernetzten Schichten mit einer
-\newterm{Bottleneck}-Schicht in der Mitte \parencite[2]{Bank.2020}. Diese Schicht wird als \textit{Bottleneck} bezeichnet, da sie nur aus $d < D$
+\input{\figures/autoencoder-architecture.tex} Dabei können der Encoder und Decoder unterschiedliche
+Architekturen annehmen -- die eines neuronalen Netzes ist allerdings die häufigste und auch hier
+verwendete Variante. Diese besteht in der klassischen Form aus einer ungeraden Anzahl an
+vollvernetzten Schichten mit einer \newterm{Bottleneck}-Schicht in der Mitte \parencite[2]{Bank.2020}. Diese Schicht wird als \textit{Bottleneck} bezeichnet, da sie nur aus $d < D$
 Neuronen besteht und damit die \enquote{kleinste} Stelle im Netzwerk darstellt, durch die der
 Inputvektor kodiert werden muss. In diesem Fall wird der Autoencoder als \newterm{unterbestimmt}
 (engl. \textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}.

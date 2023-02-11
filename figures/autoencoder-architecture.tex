@@ -46,7 +46,6 @@ shorten <=2pt,
 		\draw [myArrows] ($(left-out)-(u)$) node [anchor=east] {Input $\vect{x} \in \real^D$} -- ++(u) ;
 
 	\end{tikzpicture}
-	\caption[Schematische Architektur eines Autoencoders]{Schematische Architektur eines Autoencoders. Der Inputvektor $\vect{x} \in \real^D$ wird durch den Encoder in eine niedrigdimensionale Repräsentation $\vect{y} \in \real^d$ kodiert. Der Decoder nimmt diese niedrigdimensionale Repräsentation und liefert ein Outputvektor $\estNormal{\vect{x}}$, der möglichst dem ursprünglichen Vektor $\vect{x}$ entspricht, d.h. es soll $\estNormal{\vect{x}} \approx \vect{x}$ gelten. Eigene Darstellung\protect\footnotemark}
+	\caption[Schematische Architektur eines Autoencoders]{Schematische Architektur eines Autoencoders. Der Inputvektor $\vect{x} \in \real^D$ wird durch den Encoder in eine niedrigdimensionale Repräsentation $\vect{y} \in \real^d$ kodiert. Der Decoder nimmt diese niedrigdimensionale Repräsentation und liefert ein Outputvektor $\estNormal{\vect{x}}$, der möglichst dem ursprünglichen Vektor $\vect{x}$ entspricht, d.h. es soll $\estNormal{\vect{x}} \approx \vect{x}$ gelten. Eigene Darstellung, angelehnt an \textcite[15]{Luong.2016}}
 	\label{fig:SchematischerAutoencoder}
 \end{figure}
-\footnotetext{angelehnt an Folie 15 aus \url{https://nlp.stanford.edu/projects/nmt/Luong-Cho-Manning-NMT-ACL2016-v4.pdf}}
