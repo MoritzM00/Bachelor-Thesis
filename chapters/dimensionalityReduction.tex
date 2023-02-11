@@ -41,8 +41,8 @@ Der Term \enquote{Fluch der Dimensionalität} (engl. \textit{Curse of Dimensiona
 \textcite{Bellman.1961} im Kontext der Optimierung von Funktionen über hochdimensionale Suchräume
 hervorgebracht und ist seitdem zu einem Sammelbegriff für die statistischen Probleme und
 Herausforderungen in hochdimensionalen Räumen geworden. Diese Räume weisen unintuitive Phänomene
-auf, die in niedrigeren Dimension wie z.B. zwei nicht anzutreffen sind. Die zwei Phänomene, die den
-Begriff dabei hauptsächlich prägen, sind das \newterm{Phänomen der leeren Räume} und das
+auf, die in niedrigeren Dimension nicht anzutreffen sind. Die zwei Phänomene, die den Begriff dabei
+hauptsächlich prägen, sind das \newterm{Phänomen der leeren Räume} und das
 \newterm{Konzentrationsphänomen} \parencite[6 -- 9]{Lee.2007}. Im Folgenden werden die zwei Phänomene kurz erläutert.
 
 Das Konzentrationsphänomen ist auch bekannt als die Konzentration des Maßes (engl.
@@ -62,12 +62,12 @@ schneller abnimmt als z.B. für $p = 2$.
 Des Weiteren tritt das Phänomen der leeren Räume auf. Hier stellt man fest, dass hochdimensionale
 Räume dünn besetzt sind, da das Volumen im Raum exponentiell mit der Dimension $D$ ansteigt. Möchte
 man daher eine Schätzung einer Funktion zu einem gewissen Genauigkeitsgrad durchführen, so steigt
-die Anzahl der dazu benötigten Datenpunkte exponentiell mit $D$ an \parencite[6]{Lee.2007}. Dieses Phänomen führt zu interessanten Beobachtungen, wie z.B. das Verhältnis
-des Volumens einer Hypersphäre und eines Hyperwürfels im $\real^D$ zeigt. Dazu betrachtet man eine
-Hypersphäre mit Radius $r$ und den Hyperwürfel, der die Sphäre umschließt, d.h. die Kantenlänge
-entspricht dem Durchmesser $2r$ der Sphäre. Das Verhältnis des Volumens dieser Sphäre zum Volumen
-des Würfels konvergiert für $D \rightarrow \infty$ gegen Null. Das bedeutet, dass das Volumen in
-den Ecken konzentriert \parencite[6 -- 7]{Lee.2007} und damit die meisten Punkte weit weg vom Ursprung liegen.
+die Anzahl der dazu benötigten Datenpunkte exponentiell mit $D$ an \parencite[6]{Lee.2007}. Dieses Phänomen führt auch zu interessanten Beobachtungen, wie z.B. das
+Verhältnis des Volumens einer Hypersphäre und eines Hyperwürfels im $\real^D$ zeigt. Dazu
+betrachtet man eine Hypersphäre mit Radius $r$ und den Hyperwürfel, der die Sphäre umschließt, d.h.
+die Kantenlänge entspricht dem Durchmesser $2r$ der Sphäre. Das Verhältnis des Volumens dieser
+Sphäre zum Volumen des Würfels konvergiert für $D \rightarrow \infty$ gegen Null. Das bedeutet,
+dass sich das Volumen in den Ecken konzentriert \parencite[6 -- 7]{Lee.2007} und damit die meisten Punkte weit weg vom Ursprung liegen.
 
 \section{Mannigfaltigkeiten und intrinsische Dimension}
 \label{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim}
@@ -131,16 +131,17 @@ basieren auf neuronalen Netzen und versuchen, aus einer großen Menge an Trainin
 Approximation der gesuchten Funktion zu lernen. Autoencoder sind hierfür ein Paradebeispiel und
 werden deshalb in \secref{ch:MethodenDerDimRed:modern} eingehend behandelt.
 
-Für einen Überblick und zur besseren Einschätzung werden in diesem Abschnitt weitere gängige
-Kategorisierungsmöglichkeiten vorgestellt. Die von \textcite{vanderMaaten.2009} verwendete
-Taxonomie ist in \figref{fig:KategorisierungMaaten}
-abgebildet.\input{\figures/kategorisierungen_maaten.tex}Hier werden die
-Dimensionsreduktionsmethoden zunächst in konvexe und nicht-konvexe Methoden eingeordnet.
-\textbf{Konvexe} Methoden optimieren eine Zielfunktion, bei der jedes lokale Optimum gleichzeitig
-das globale Optimum ist. Die Optimierung ist daher leichter, allerdings sind die möglichen
-Zielfunktionen auch deutlich eingeschränkter. Die Lösung dieser Zielfunktionen reduziert sich
-meistens auf ein Eigenwertproblem, weswegen die konvexen Methoden weiter in Methoden mit einer
-vollwertigen und nicht-vollwertigen Eigenwertzerlegung (EWZ) eingegliedert werden können \parencite[3]{vanderMaaten.2009}. \textbf{Nicht-konvexe} Methoden wie der Autoencoder optimieren
+Für einen Überblick und zur besseren Einschätzung wird in diesem Abschnitt ein Auszug der von
+\textcite{vanderMaaten.2009} vorgeschlagenen Taxonomie
+erläutert.\input{\figures/kategorisierungen_maaten.tex}
+
+Wie in \figref{fig:KategorisierungMaaten} dargestellt, werden hier die Dimensionsreduktionsmethoden
+zunächst in konvexe und nicht-konvexe Methoden eingeordnet. \textbf{Konvexe} Methoden optimieren
+eine Zielfunktion, bei der jedes lokale Optimum gleichzeitig das globale Optimum ist. Die
+Optimierung ist daher leichter, allerdings sind die möglichen Zielfunktionen auch deutlich
+eingeschränkter. Die Lösung dieser Zielfunktionen reduziert sich hier meistens auf ein
+Eigenwertproblem, weswegen die konvexen Methoden weiter in Methoden mit einer vollwertigen und
+nicht-vollwertigen Eigenwertzerlegung (EWZ) eingegliedert werden können \parencite[3]{vanderMaaten.2009}. \textbf{Nicht-konvexe} Methoden wie der Autoencoder optimieren
 nicht-konvexe Zielfunktionen und können damit bei der Optimierung in suboptimalen lokalen
 Extrempunkten \enquote{steckenbleiben}. Die Optimierung erfolgt meist mittels des
 Gradientenabstiegsverfahrens (engl. \textit{gradient descent}) oder anderer mathematischer
@@ -158,8 +159,9 @@ Optimierungsverfahren \parencite[siehe z.B.][]{Guler.2010}.
 % erzielen \parencite[4]{Gracia.2014}. Zu dieser Kategorie gehört beispielsweise das Locally Linear Embedding
 % (\secref{ch:MethodenDerDimRed:statistisch:LLE}), die Self-Organizing Map \parencite{Kohonen.1990} oder die Uniform Manifold Approximation and Projection (UMAP) \parencite{McInnes.2018}.
 
-Neben den in dieser Arbeit vorgestellten Methoden gibt es noch viele weitere Algorithmen. In der
-Kategorie der nicht-konvexen Methoden sind dabei das \textit{Sammon Mapping} \parencite{Sammon.1969} und eine weitere Variante von neuronalen Netzen, den \textit{Self-Organizing
+Neben den in dieser Arbeit vorgestellten Methoden gibt es noch viele weitere
+Dimensionsreduktionsmethoden. In der Kategorie der nicht-konvexen Methoden sind dabei das
+\textit{Sammon Mapping} \parencite{Sammon.1969} und eine weitere Variante von neuronalen Netzen, den \textit{Self-Organizing
 	Maps} \parencite{Kohonen.1990} zu nennen. Eine weitere wichtige konvexe Methode ist das
 \textit{Multidimensional Scaling} \parencites{Kruskal.1964}{Cox.2008}, welches in der klassischen Form im Ergebnis sehr ähnlich zur
 Principal Component Analysis ist. Des Weiteren sind in dieser Kategorie noch \textit{Isomap} \parencite{Tenenbaum.2000} und Erweiterungen von Locally Linear Embedding wie \textit{Hessian Locally

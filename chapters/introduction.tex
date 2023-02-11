@@ -5,9 +5,9 @@
 
 Die Analyse von hochdimensionalen Daten wie z.B. die Analyse von Gendaten mit Ausprägungen von
 tausenden Genen \parencite[siehe z.B.][]{Parmigiani.2003} oder der Analyse von Bilddaten wird von statistischen
-Schwierigkeiten im Zusammenhang mit der hohen Dimension begleitet. Anschaulich entspricht eine
-Dimension dabei im Kontext der Gendaten gerade einer Ausprägung eines Genes. Da diese Datensätze
-meist aufwärts von \num{10000} Genen umfassen, kann eine Stichprobe als ein
+Schwierigkeiten im Zusammenhang mit der hohen Dimensionalität der Daten begleitet. Anschaulich
+entspricht eine Dimension dabei im Kontext der Gendaten gerade einer Ausprägung eines Genes. Da
+diese Datensätze meist aufwärts von \num{10000} Genen umfassen, kann eine Stichprobe als ein
 \num{10000}-dimensionaler Vektor mit Genausprägungen beschrieben werden. Bei derartig hohen
 Dimension treten Probleme mit der Bestimmung der Ähnlichkeit zweier Vektoren auf, da u.a.
 Distanzmaße nahezu bedeutungslos werden. Diese Herausforderungen von Daten hoher Dimensionalität
@@ -74,11 +74,10 @@ empirischen Vergleich auf künstlichen und natürlichen Datensätzen gegenüberg
 vorgestellten Methoden sind die weitverbreitete \newterm{Principal Component Analysis}, die
 \newterm{Kernel Principal Component Analysis} sowie das \newterm{Locally Linear Embedding} als
 Vertreter der statistischen Methoden (\secref{ch:MethodenDerDimRed:statistisch}). Der
-\newterm{Autoencoder} in der klassischen Form und eine Variante davon, der \newterm{Contractive
-	Autoencoder} werden als Vertreter der Machine Learning Ansätze
-(\secref{ch:MethodenDerDimRed:modern}) vorgestellt. Mehrere Veröffentlichungen zur Relation
-zwischen der Principal Component Analysis und Autoencodern haben außerdem gezeigt, dass diese
-beiden Methoden unter gewissen Annahmen ähnlich sind \parencites{Baldi.1989}{Bourlard.1988}{Plaut.2018}. Es soll daher empirisch herausgearbeitet werden,
+\newterm{Autoencoder} und eine Variante in Form des \newterm{Contractive Autoencoders} werden als
+Vertreter der Machine Learning Ansätze (\secref{ch:MethodenDerDimRed:modern}) vorgestellt. Darüber
+hinaus haben mehrere Veröffentlichungen zur Relation der Principal Component Analysis und
+Autoencodern gezeigt, dass diese beiden Methoden unter gewissen Annahmen ähnlich sind \parencites{Baldi.1989}{Bourlard.1988}{Plaut.2018}. Es soll daher empirisch herausgearbeitet werden,
 inwiefern ein Autoencoder mit der Principal Component Analysis übereinstimmt.
 
 Die Arbeit ist wie folgt aufgebaut: Zuerst wird in \chapref{ch:Dimensionsreduktion} die Grundlage

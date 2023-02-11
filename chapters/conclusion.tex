@@ -8,46 +8,46 @@ benötigten Rechen- und Speicherkapazitäten. Zusätzlich wird den unvorteilhaft
 hochdimensionalen Räumen entgegengewirkt und irrelevante Merkmale in den Daten entfernt. Aus diesen
 Gründen wurden eine Vielzahl an Methoden entwickelt, die in ihrer Natur nicht unterschiedlicher
 sein könnten. Neben klassischen Methoden wie der Principal Component Analysis wurden in den letzten
-Jahren Methoden wie Locally Linear Embedding aus einem Teilgebiet der Dimensionsreduktion, dem
-Erlernen von Mannigfaltigkeiten, zu wichtigen Vertretern der Dimensionsreduktion. Erfolge im
-Bereich des modernen Machine Learnings mit Deep Learning haben dazu geführt, dass auch diese
-Methoden auf dem Bereich der Dimensionsreduktion angewandt und weiterentwickelt wurden. Eine
-prominente Methode ist dabei der Autoencoder. Es stellt sich jedoch die Frage, ob diese modernen
-Machine Learning Ansätze auch auf dem Bereich der Dimensionsreduktion etablierte statistische
-Verfahren ablösen könnten. Aus diesem Grund wurden in einem empirischen Vergleich drei Vertreter
-der statistischen Methoden den zwei Machine Learning Ansätzen gegenübergestellt und sowohl auf
-künstlichen als auch natürlichen Datensätzen mithilfe dreier Qualitätskriterien evaluiert. Die hier
-eingesetzten statischen Methoden zeigen die Vorteile von Zielfunktionen, deren Optimum durch
-geschlossene Form berechnet werden kann. Auf Datensätzen mit geringer Stichprobengröße ist dies
-meist einer iterativen Optimierung überlegen. Insbesondere bei neuronalen Netzen wie den
-Autoencodern ist ein kleiner Datensatz problematisch, da aufgrund der hohen Anzahl an
-Freiheitsgraden die Optimierung deutlich instabiler ist. Andererseits skalieren dadurch die Machine
-Learning Methoden auch besser auf größere Datensätze. Hier kommen die statistischen Methoden wie
-die Kernel Principal Component Analysis und Locally Linear Embedding wegen ihrer hohen Zeit- und
-auch Speicherkomplexität schnell an ihre Grenzen. Dies macht bereits auf mittelgroßen Datensätzen
-wie MNIST und Fashion MNIST mit \num{60000} Stichproben ein Downsampling erforderlich. Ein weiterer
-Vorteil der Machine Learning Ansätze ist die hohe Flexibilität in der Architektur. So kann mittels
-des Convolutional Autoencoders die Struktur von Bildern oder ähnlichen gitterartigen Topologien
-ausgenutzt werden. Allerdings ist dieses hohe Maß an Flexibilität zugleich auch ein Nachteil, da
-die vielen Hyperparameter eine zeitaufwendige Feinadjustierung notwendig machen. Allerdings trifft
-dies auch schon auf die wenigen Hyperparameter der statistischen Methoden, insbesondere der Kernel
-Principal Component Analysis zu. Die Principal Component Analysis umgeht diese Problematik
-komplett, da keine Hyperparameter gewählt werden müssen. Gleichzeitig schneidet diese Methode auf
-vielen natürlichen Datensätzen relativ gesehen am besten ab, was die Vorteile einer Flexibilität
-und insbesondere der Nichtlinearität infrage stellt. Auf künstlichen Datensätzen kann die Principal
-Component Analysis mangels der Fähigkeit, nichtlineare Mannigfaltigkeiten zu entdecken, durch
-Autoencoder outperformed werden. Auf diesen künstlichen Datensätzen ist Locally Linear Embedding
-jedoch auch einem Autoencoder deutlich überlegen. Die Performance von Locally Linear Embedding auf
-natürlichen Datensätzen ist hingegen weniger überzeugend, da die zugrundeliegende Mannigfaltigkeit
+Jahren Methoden wie Locally Linear Embedding aus dem Teilgebiet des Erlernens von
+Mannigfaltigkeiten zu wichtigen Vertretern der Dimensionsreduktion. Erfolge im Bereich des modernen
+Machine Learnings mit Deep Learning haben dazu geführt, dass auch diese Methoden auf dem Bereich
+der Dimensionsreduktion angewandt und weiterentwickelt wurden. Eine prominente Methode ist dabei
+der Autoencoder. Es stellt sich jedoch die Frage, ob diese modernen Machine Learning Ansätze auch
+auf dem Bereich der Dimensionsreduktion etablierte statistische Verfahren ablösen könnten. Aus
+diesem Grund wurden in einem empirischen Vergleich drei Vertreter der statistischen Methoden den
+zwei Machine Learning Ansätzen gegenübergestellt und sowohl auf künstlichen als auch natürlichen
+Datensätzen mithilfe dreier Qualitätskriterien evaluiert. Die hier eingesetzten statischen Methoden
+zeigen die Vorteile von Zielfunktionen, deren Optimum durch geschlossene Form berechnet werden
+kann. Auf Datensätzen mit geringer Stichprobengröße ist dies meist einer iterativen Optimierung
+überlegen. Insbesondere bei neuronalen Netzen wie den Autoencodern ist ein kleiner Datensatz
+problematisch, da aufgrund der hohen Anzahl an Freiheitsgraden die Optimierung deutlich instabiler
+ist. Andererseits skalieren dadurch die Machine Learning Methoden auch besser auf größere
+Datensätze. Hier kommen die statistischen Methoden wie die Kernel Principal Component Analysis und
+Locally Linear Embedding wegen ihrer hohen Zeit- und auch Speicherkomplexität schnell an ihre
+Grenzen. Dies macht bereits auf mittelgroßen Datensätzen wie MNIST und Fashion MNIST mit
+\num{60000} Stichproben ein Downsampling erforderlich. Ein weiterer Vorteil der Machine Learning
+Ansätze ist die hohe Flexibilität in der Architektur. So kann mittels des Convolutional
+Autoencoders die Struktur von Bildern oder ähnlichen gitterartigen Topologien ausgenutzt werden.
+Allerdings ist dieses hohe Maß an Flexibilität zugleich auch ein Nachteil, da die vielen
+Hyperparameter eine zeitaufwendige Feinadjustierung notwendig machen. Allerdings trifft dies auch
+schon auf die wenigen Hyperparameter der statistischen Methoden, insbesondere der Kernel Principal
+Component Analysis zu. Die Principal Component Analysis umgeht diese Problematik komplett, da keine
+Hyperparameter gewählt werden müssen. Gleichzeitig schneidet diese Methode auf vielen natürlichen
+Datensätzen relativ gesehen am besten ab, was die Vorteile einer Flexibilität und insbesondere der
+Nichtlinearität infrage stellt. Auf künstlichen Datensätzen kann die Principal Component Analysis
+mangels der Fähigkeit, nichtlineare Mannigfaltigkeiten zu entdecken, durch Autoencoder outperformed
+werden. Auf diesen künstlichen Datensätzen ist Locally Linear Embedding jedoch auch einem
+Autoencoder deutlich überlegen. Die Performance von Locally Linear Embedding auf natürlichen
+Datensätzen ist hingegen weniger überzeugend, da die zugrundeliegende Mannigfaltigkeit
 möglicherweise deutlich komplexer ist und weniger gute Eigenschaften aufweist. Die Kernel Principal
 Component Analysis konnte durch den vermeintlichen Vorteil der Nichtlinearität ebenfalls nicht
 überzeugen. Auf vielen Datensätzen schnitt diese Methode fast identisch ab, wie die klassische
 Principal Component Analysis. Hinzu kommt, dass das Hyperparameter-Tuning bei dieser Methode
 aufwendig ist. In diesem Vergleich wurde allerdings nur der Gaußsche Kernel verwendet. In künftigen
-Arbeiten könnte noch eine größere Auswahl an Kernel untersucht werden. Des Weiteren wurden bei
-Autoencoder meistens Sigmoid- und bei Convolutional Autoencoder ReLU-Aktivierungsfunktionen
-eingesetzt. Hier könnten ebenfalls noch einige weitere Aktivierungsfunktionen hinsichtlich ihrer
-Relevanz für die Dimensionsreduktion evaluiert werden.
+Arbeiten könnte noch eine größere Auswahl an Kernel-Funktionen untersucht werden. Des Weiteren
+wurden bei Autoencoder meistens Sigmoid- und bei Convolutional Autoencoder
+ReLU-Aktivierungsfunktionen eingesetzt. Hier könnten ebenfalls noch einige weitere
+Aktivierungsfunktionen hinsichtlich ihrer Relevanz für die Dimensionsreduktion evaluiert werden.
 
 Darüber hinaus wurde der Zusammenhang eines linearen Autoencoders mit der Principal Component
 Analysis untersucht. Man stellt hierbei fest, dass ein dreischichtiger Autoencoder mit linearen
@@ -55,9 +55,9 @@ Aktivierungsfunktionen einen Unterraum des durch die Koeffizienten der Hauptkomp
 aufgespannten Raumes lernt. Regularisiert man den Autoencoder mittels \textit{weight decay}, so
 können mithilfe einer Singulärwertzerlegung der Decoder-Matrix die Richtungen der Hauptkomponenten
 bis hin zu einer orthogonalen Transformation gelernt werden. So kann ein skalierbarer Algorithmus
-als Alternative zur PCA für Datensätze, die nicht als Ganzes in den Hauptspeicher passen,
-eingesetzt werden. Allerdings existieren auch inkrementelle Versionen von PCA, sodass die Anwendung
-dieses Ansatzes wahrscheinlich eher theoretischer Natur bleibt. Nimmt man Nichtlinearität zum
+als Alternative zur PCA z.B. für Datensätze, die nicht als Ganzes in den Hauptspeicher passen,
+eingesetzt werden. Allerdings existieren auch inkrementelle Versionen von PCA, sodass die Relevanz
+dieses Ansatzes wahrscheinlich eher von theoretischer Natur bleibt. Nimmt man Nichtlinearität zum
 Autoencoder hinzu, so geht die Ähnlichkeit zur PCA im Falle eines dreischichtigen Autoencoders erst
 verloren, wenn sowohl Encoder als auch Decoder nichtlinear sind.
 
