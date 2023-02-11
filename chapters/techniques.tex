@@ -22,7 +22,7 @@ Ansätze in \secref{ch:MethodenDerDimRed:modern} erläutert.
 Zu den statistischen Methoden, die in dieser Arbeit vorgestellt werden, gehören die
 \newterm{Principal Component Analysis} (PCA) in \subsecref{ch:MethodenDerDimRed:statistisch:PCA}
 und die nichtlineare Erweiterung \newterm{Kernel Principal Component Analysis} (Kernel PCA)
-(\subsecref{ch:MethodenDerDimRed:statistisch:kPCA}). Außerdem wird das \newterm{Locally Linear
+(\subsecref{ch:MethodenDerDimRed:statistisch:kPCA}). Außerdem wird \newterm{Locally Linear
 	Embedding} (LLE) in \subsecref{ch:MethodenDerDimRed:statistisch:LLE} als Vertreter der
 statistischen Methoden genauer behandelt.
 
@@ -34,18 +34,21 @@ statistischen Methoden genauer behandelt.
 Die Principal Component Analysis ist \textit{die} Methode der Dimensionsreduktion und wurde
 erstmals von \textcite{Pearson.1901} und \textcite{Hotelling.1933} entwickelt. Trotz des
 mittlerweile relativ hohen Alters ist die Principal Component Analysis immer noch aufgrund der
-simplen Anwendbarkeit oft die erste Wahl einer Dimensionsreduktionsmethode. Im Folgenden wird auf
-die zentrale Idee und Motivation der Principal Component Analysis, sowie die mathematischen
-Herleitung der sogenannten \newterm{Hauptkomponenten} (engl. \textit{principal components})
-eingegangen.
+simplen Anwendbarkeit oft eine erste Wahl für die Dimensionsreduktion. Im Folgenden wird auf die
+zentrale Idee und Motivation der Principal Component Analysis, sowie die mathematische Herleitung
+der sogenannten \newterm{Hauptkomponenten} (engl. \textit{principal components}) eingegangen.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Grundidee}
-Die zentrale Idee der Principal Component Analysis ist die Transformation des Koordinatensystems in einer möglichst \textit{verlustfreien} Art und Weise. Verlustfrei bedeutet im Kontext der Principal Component Analysis, dass möglichst viel Variation in den Daten erhalten bleiben soll \parencite[vgl.][1]{Jolliffe.2002}. Das Ziel ist also, die Richtungen der größten Varianz in den Daten
-zu finden, da diese den höchsten Informationsgehalt besitzen. Daher wird sukzessive die Varianz der
-im Folgenden definierten Hauptkomponenten maximiert. Was diese Hauptkomponenten sind und wie man
-sie herleitet, wird im folgenden Unterabschnitt genauer betrachtet.\rewrite{die Grundidee
-	ausführlicher beschreiben}
+Die zentrale Idee der Principal Component Analysis ist die Transformation des Koordinatensystems in einer möglichst \textit{verlustfreien} Art und Weise. Verlustfrei bedeutet im Kontext der Principal Component Analysis, dass möglichst viel Variation in den Daten erhalten bleiben soll \parencite[vgl.][1]{Jolliffe.2002}. Das Ziel ist es also, die Richtungen der größten Varianz in den
+Daten zu finden, da diese den höchsten Informationsgehalt besitzen. Daher wird sukzessive die
+Varianz der im Folgenden definierten Hauptkomponenten maximiert. Dies führt dazu, dass die erste
+Hauptkomponente die Richtung der größten Varianz abbildet, die zweite Hauptkomponente die Richtung
+der zweitgrößten Varianz und so weiter, d.h. die weiteren Hauptkomponenten bilden sukzessive
+weniger Varianz der ursprünglichen Variablen ab. Um nun die Dimension von $D$ auf $d$ zu
+reduzieren, werden die Richtungen der größten Varianz, d.h. die ersten $d$ Hauptkomponenten
+ausgewählt. Die Definition und Herleitung dieser Hauptkomponenten wird im nachfolgenden
+Unterabschnitt genauer betrachtet.
 
 \subsubsection{Herleitung der Hauptkomponenten}
 \label{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}
@@ -58,8 +61,10 @@ nun als eine Linearkombination des ursprünglichen Vektors $\rvect{x}$ wie folgt
 	\rv{y}_i = \tr{\vect{a}_i} \rvect{x} = a_{i1} \rv{x}_1 + \cdots + a_{iD} \rv{x}_D
 	\quad \text{mit } i = 1,\ldots,d \,
 \end{equation}
-wobei $\vect{a}_i$ die \newterm{Koeffizienten} (auch: Ladungen) der $i$-ten Hauptkomponente sind \parencite[vgl.][2]{Jolliffe.2002}. Durch diese $d$ Gleichungen erhalten wir die neuen transformierten
-Merkmale $y_1, \ldots, y_d$.
+wobei $\vect{a}_i$ die \newterm{Koeffizienten} (auch: Ladungen) der $i$-ten Hauptkomponente $y_i$ sind \parencite[vgl.][2]{Jolliffe.2002}.\footnote{Wie \textcite[6]{Jolliffe.2002} hervorhebt, sollte der
+	Begriff \enquote{Hauptkomponente} für die transformierten Variablen $y_1, \ldots, y_d$ und nicht
+	für die Koeffizienten $a_1, \ldots, a_d$ verwendet werden, um Verwirrung zu vermeiden.} Durch diese
+$d$ Gleichungen erhalten wir die neuen transformierten Merkmale $y_1, \ldots, y_d$.
 
 Betrachtet wird nun zunächst lediglich die \textit{erste} Hauptkomponente $\tr{\vect{a}_1}
 	\rvect{x}$. Wie zu Beginn erwähnt, soll möglichst viel Variation von der ursprünglichen
@@ -79,15 +84,15 @@ Eigenvektoren. Um herauszufinden, welcher davon zur ersten Hauptkomponente gehö
 erneut die zu maximierende Zielfunktion in \eqref{eq:PCA-Optimierungsproblem} unter der Kenntnis,
 dass $\vect{a}_1$ ein Eigenvektor von $\mat{\Sigma}$ ist. Man erhält somit
 \begin{equation}
-	\tr{\vect{a}_1} \mat{\Sigma} \vect{a}_1 = \tr{\vect{a}_1} \lambda \vect{a}_1 = \lambda \tr{\vect{a}_1} \vect{a}_1 = \lambda \, ,
+	\tr{\vect{a}_1} \mat{\Sigma} \vect{a}_1 = \tr{\vect{a}_1} \lambda_1 \vect{a}_1 = \lambda_1 \tr{\vect{a}_1} \vect{a}_1 = \lambda_1 \, ,
 \end{equation}
-wobei im ersten Schritt die Eigenvektor-Eigenschaft und im letzten Schritt die Normierung des Vektors (\eqref{eq:PCA-Normierung-Vektor}) ausgenutzt wurde \parencite[5]{Jolliffe.2002}. Die Zielfunktion entspricht also gerade dem Eigenwert des Vektors
-$\vect{a}_1$. Daher wissen wir wegen der Maximierung der Varianz der ersten Hauptkomponente, dass
-der Vektor $\vect{a}_1$ der Eigenvektor mit dem größten zugehörigen Eigenwert sein muss.
+wobei im ersten Schritt die Eigenvektor-Eigenschaft und im letzten Schritt die Normierung des Vektors (\eqref{eq:PCA-Normierung-Vektor}) ausgenutzt wurde \parencite[5]{Jolliffe.2002}. Die Zielfunktion entspricht also gerade dem Eigenwert $\lambda_1$ des
+Vektors $\vect{a}_1$. Daher wissen wir wegen der Maximierung der Varianz der ersten
+Hauptkomponente, dass $\vect{a}_1$ der Eigenvektor mit dem größten zugehörigen Eigenwert sein muss.
 
 Um nun die zweite Hauptkomponente zu erhalten, wird wieder die Varianz unter der Nebenbedingung
 $\norm{\vect{a}_2}^2 = 1$ maximiert. Zusätzlich muss jedoch gelten, dass die zweite Hauptkomponente
-zur Ersten \textit{unkorreliert} ist \parencite[5]{Jolliffe.2002}, das heißt
+zur Ersten unkorreliert ist \parencite[5]{Jolliffe.2002}, das heißt
 \begin{equation}
 	\label{eq:PCA-unkorreliertheit}
 	\Cov(\tr{\vect{a}_1}\rvect{x}, \tr{\vect{a}_2}\rvect{x}) \overset{!}{=} 0 \, .
@@ -97,7 +102,7 @@ Generell lässt sich zeigen, dass die Koeffizienten der $i$-ten Hauptkomponente 
 \begin{equation}
 	\rvect{y} = \tr{\mat{A}} \rvect{x}
 \end{equation}
-ausdrücken, wobei $\mat{A} = [\vect{a}_1,\ldots,\vect{a}_d] \in \real^{D \times d}$ die Matrix der Eigenvektoren als Spaltenvektoren ist und die Eigenvektoren nach absteigendem zugehörigen Eigenwert sortiert sind, d.h. $\lambda_1 > \lambda_2 > \cdots > \lambda_d$.
+ausdrücken, wobei $\mat{A} = [\vect{a}_1,\ldots,\vect{a}_d] \in \real^{D \times d}$ die (Ladungs-)Matrix der Eigenvektoren als Spaltenvektoren ist und die Eigenvektoren nach absteigendem zugehörigen Eigenwert sortiert sind, d.h. $\lambda_1 > \lambda_2 > \cdots > \lambda_d$.
 
 \subsubsection{Erweiterungen}
 \label{ch:MethodenDerDimRed:statistisch:PCA:Erweiterungen}
@@ -134,13 +139,13 @@ erhöht wird. Motiviert wird es dadurch, dass die Daten in $\mathcal{X}$ einen
 \textit{nichtlinearen} Zusammenhang aufweisen können, während in $\mathcal{H}$ der Zusammenhang
 linear und damit für lineare Algorithmen wie die Principal Component Analysis erkennbar ist \parencite[vgl.][26]{ShaweTaylor.2011}.
 
-Der entscheidende Punkt ist jedoch, dass man die Abbildung $\bm{\phi}$ nicht explizit berechnet,
-sondern mithilfe eines sogenannten \newterm{Kernels} $\kappa: \mathcal{X} \times \mathcal{X}
-	\rightarrow \real$ implizit gegeben hat \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Der Kernel Trick ist immer dann anwendbar,
-wenn der Algorithmus so formuliert werden kann, dass $\bm{\phi}$ ausschließlich als Skalarprodukt
-vorkommt. Im Folgenden wird die Vorgehensweise der Kernel PCA kurz erläutert. Allerdings wird für
-eine eingehendere Behandlung des Kernel Tricks und anderer Kernel-Methoden auf
-\textcite{ShaweTaylor.2011} verwiesen.
+Der entscheidende Punkt ist, dass man die Abbildung $\bm{\phi}$ nicht explizit berechnet, sondern
+mithilfe eines \newterm{Kernels} $\kappa: \mathcal{X} \times \mathcal{X} \rightarrow \real$
+implizit gegeben hat \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Der Kernel Trick ist immer dann anwendbar,
+wenn der Algorithmus so umformuliert werden kann, dass $\bm{\phi}$ ausschließlich als Skalarprodukt
+vorkommt. Im Folgenden wird nach der Definition des Kernels die Vorgehensweise der Kernel PCA
+genauer erläutert. Allerdings wird für eine eingehendere Behandlung des Kernel Tricks und anderer
+Kernel-Methoden auf \textcite{ShaweTaylor.2011} verwiesen.
 
 \subsubsection{Der Kernel}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:KernelFunktion}
@@ -212,19 +217,19 @@ berechnet werden, wobei $\vect{a}_j^{(l)}$ der $l$-te Eintrag in $\vect{a}_j$ is
 \label{ch:MethodenDerDimRed:statistisch:kPCA:AuswahlKF}
 
 Ein entscheidender Schwachpunkt der Kernel PCA ist die Selektion der Hyperparameter, d.h. die
-Auswahl des Kernels und die Wahl der Parameter für den Kernel. Problematisch ist, dass der Kernel
-oft sensitiv gegenüber seiner Parameter ist. Im Falle eines Gaußschen Kernels muss ein Parameter
-$\sigma$ gewählt werden, der die Bandbreite des Kernels bestimmt. Die Performance auf einem
-Datensatz hängt davon ab, wie passend diese Bandbreite gewählt wurde. Allgemein umgeht man das
-Problem der manuellen Auswahl eines Kernels und seiner Parameter für Kernel-Methoden mittels einer
-Gittersuche und kombiniert dies mit Kreuzvalidierung. Beispielsweise wird ein Qualitätskriterium
-festgelegt und die Methode mit einer vorab definierten Auswahl an Werten der Hyperparameter auf
-einer Teilmenge des Datensatzes trainiert und mit einer anderen Teilmenge evaluiert. Die Parameter
-der Methode, die hinsichtlich des Qualitätskriteriums am besten abgeschnitten hat, werden dann für
-das finale Modell übernommen und auf dem vollen Trainingsdatensatz trainiert. Dies funktioniert für
-Klassifikatoren und Regressoren wie z.B. die Support Vector Machine gut, da die Wahl der
-Qualitätskriterien nicht problematisch ist. Für die Dimensionsreduktion ist die Wahl des
-Qualitätskriteriums nicht trivial, wie wir später in
+Auswahl des Kernels und die Wahl der Parameter für den Kernel. Problematisch ist ebenfalls, dass
+der Kernel oft sensitiv gegenüber seiner Parameter ist. Im Falle eines Gaußschen Kernels muss ein
+Parameter $\sigma$ gewählt werden, der die Bandbreite des Kernels bestimmt. Die Performance auf
+einem Datensatz hängt davon ab, wie passend diese Bandbreite gewählt wurde. Allgemein umgeht man
+das Problem der manuellen Auswahl eines Kernels und seiner Parameter für Kernel-Methoden mittels
+einer Gittersuche und kombiniert dies mit Kreuzvalidierung. Beispielsweise wird ein
+Qualitätskriterium festgelegt und die Methode mit einer vorab definierten Auswahl an Werten der
+Hyperparameter auf einer Teilmenge des Datensatzes trainiert und mit einer anderen Teilmenge
+evaluiert. Die Parameter der Methode, die hinsichtlich des Qualitätskriteriums am besten
+abgeschnitten hat, werden dann für das finale Modell übernommen und auf dem vollen
+Trainingsdatensatz trainiert. Dies funktioniert für Klassifikatoren und Regressoren wie z.B. die
+Support Vector Machine gut, da die Wahl der Qualitätskriterien nicht problematisch ist. Für die
+Dimensionsreduktion ist die Wahl des Qualitätskriteriums nicht trivial, wie wir später in
 \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} sehen werden. Eine Möglichkeit
 wäre die quadratische Abweichung zwischen der ursprünglichen Repräsentation eines Punktes und der
 Rekonstruktion aus seiner niedrigdimensionalen Repräsentation. Die Kernel PCA stellt allerdings
@@ -302,12 +307,12 @@ wobei $\mat{M} = \tr{(\identity_n - \mat{W})} (\identity_n - \mat{W})$ und $\Spu
 Wie \textcite[3 -- 4]{Ghojogh.2020} zeigen, wird das Problem über die Eigenwertzerlegung der dünn
 besetzten Matrix $\mat{M}$ gelöst: Die Spalten von $\mat{Y}$ entsprechen den unteren $d$
 Eigenvektoren von $\mat{M}$, wobei das triviale Eigenvektor-Eigenwert-Paar $(\ones, 0)$ ausgelassen
-wird. Die ebenen genannten Restriktionen, die das Optimierungsproblem bis auf eine Rotation
-eindeutig machen, lösen die Schwachstelle einer trivialen Lösung in dieser Zielfunktion jedoch
-nicht vollständig. Es kann dazu kommen, dass fast alle niedrigdimensionalen Punkte $\vect{y}_i$ nah
-um den Ursprung liegen und einige \enquote{Stränge} vom Ursprung aus weggehen, um die Restriktion
-der Einheits-Kovarianzmatrix zu erfüllen. Die Restriktionen sind also nicht stark genug, um
-triviale Lösungen vollständig zu umgehen \parencite[vgl.][23]{vanderMaaten.2009}.
+wird. Die eben genannten Restriktionen, die das Optimierungsproblem bis auf eine Rotation eindeutig
+machen, lösen die Schwachstelle einer trivialen Lösung in dieser Zielfunktion jedoch nicht
+vollständig. Es kann dazu kommen, dass fast alle niedrigdimensionalen Punkte $\vect{y}_i$ nah um
+den Ursprung liegen und einige \enquote{Stränge} vom Ursprung aus weggehen, um die Restriktion der
+Einheits-Kovarianzmatrix zu erfüllen. Die Restriktionen sind also nicht stark genug, um triviale
+Lösungen vollständig zu umgehen \parencite[vgl.][23]{vanderMaaten.2009}.
 
 %% ==============================
 %% ==============================
@@ -339,7 +344,7 @@ Inputvektor kodiert werden muss. In diesem Fall wird der Autoencoder als \newter
 (engl. \textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}.
 %  Es gibt demnach auch \newterm{überbestimmte} Autoencoder mit $k > D$
 % 	Neuronen in der mittleren Schicht. Diese Variante reduziert die Dimension nicht, sondern erhöht sie \parencite[504]{Goodfellow.2016}. 
-Damit erzielt die Bottleneck-Schicht die gewünschte Dimensionsreduktion des Inputvektors \parencites[502]{Goodfellow.2016}[2]{Bank.2020}.\rewrite{umschreiben}
+Damit erzielt die Bottleneck-Schicht die gewünschte Dimensionsreduktion des Inputvektors \parencites[502]{Goodfellow.2016}[2]{Bank.2020}.
 
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}
@@ -376,18 +381,21 @@ minimiert, ist dann beispielsweise der Mittelwert über die Fehlerfunktion in de
 Die Gefahr dabei ist, dass der Autoencoder bei zu großer Kapazität einfach die Identitätsfunktion
 ohne sinnvolle Repräsentation lernt. Dies ist zum Beispiel der Fall, wenn zu viele Schichten
 eingesetzt werden. Aus diesem
-Grund muss ein Autoencoder oftmals regularisiert werden, worauf im Folgenden in
-\subsecref{ch:MethodenDerDimRed:ML:AE:Regularisierung} eingegangen wird.
+Grund muss ein Autoencoder oftmals regularisiert werden, worauf im Folgenden eingegangen wird.
 
 \subsubsection{Regularisierung}
 \label{ch:MethodenDerDimRed:ML:AE:Regularisierung}
-Um eine sinnvolle Repräsentation $\rvect{y}$ zu erhalten, muss der Autoencoder oftmals
-regularisiert, das heißt eingeschränkt, werden. Ein erstes Beispiel hierfür ist der in
-\figref{fig:SchematischerAutoencoder} gezeigte unterbestimmte Autoencoder, mit dem eine $d$-dimensionale
-Repräsentation in der Mitte forciert wird. Besitzt der Autoencoder jedoch eine zu große Kapazität, kann der Autoencoder trotz des Bottlenecks
-eine uninformative niedrigdimensionale Repräsentation lernen. Neben dieser \textit{impliziten} Regularisierung, gibt es deswegen noch einige
-weitere \textit{explizite} Regularisierungsmethoden, die zusätzlich zum Rekonstruktionsfehler einen
-Bestrafungsterm $\Omega(\bm{\theta})$ zur Zielfunktion $\mathcal{J}$ hinzufügen. Hierbei bezeichnet $\bm{\theta}$ die Parameter im Netzwerk, d.h. die Gewichte und Biases (siehe \eqref{eq:dreischichtigerAE}). Die Zielfunktion lautet dann
+Bei neuronalen Netzen ist die Regularisierung aufgrund der vielen zu trainierende Freiheitsgrade eine gängige Praxis, um die Gefahr des Overfittings zu reduzieren \parencite[228]{Goodfellow.2016}. Dasselbe kann im Kontext der Dimensionsreduktion angewendet werden,
+indem das Netz derart eingeschränkt wird, dass eine möglichst sinnvolle Repräsentation $\rvect{y}$
+gelernt wird. Ein erstes Beispiel hierfür ist bereits der in \figref{fig:SchematischerAutoencoder}
+gezeigte unterbestimmte Autoencoder, mit dem eine $d$-dimensionale Repräsentation in der Mitte
+forciert wird. Besitzt der Autoencoder jedoch eine zu große Kapazität, kann der Autoencoder trotz
+des Bottlenecks eine uninformative niedrigdimensionale Repräsentation lernen. Neben dieser
+\textit{impliziten} Regularisierung, gibt es deswegen noch einige weitere \textit{explizite}
+Regularisierungsmethoden, die zusätzlich zum Rekonstruktionsfehler einen Bestrafungsterm
+$\Omega(\bm{\theta})$ zur Zielfunktion $\mathcal{J}$ hinzufügen. Hierbei bezeichnet $\bm{\theta}$
+die Parameter im Netzwerk, d.h. die Gewichte und Biases (siehe \eqref{eq:dreischichtigerAE}). Die
+Zielfunktion lautet dann
 \begin{equation}
 	\mathcal{J}_{\text{AE+reg}} = \frac{1}{n} \sum_{i = 1}^{n}  L(\vect{x}_i, \estNormal{\vect{x}}_i) + \lambda \Omega(\bm{\theta}) \, ,
 \end{equation}
@@ -414,25 +422,30 @@ Die vielen Freiheitsgrade in der Wahl der Architektur machen die Autoencoder fle
 zugleich aber auch ein Nachteil dieser Methode. Im Folgenden werden die zu treffenden
 Entscheidungen bei der Wahl der Architektur eines Autoencoders kurz erläutert.
 
-Erstens muss zwischen vollvernetzten und faltenden (engl. \textit{Convolutional}) Schichten
-entschieden werden.\rewrite{Conv Layers anders erklären} Letztere können eingesetzt werden, wenn
-der Input des Autoencoders eine gitterartige Topologie, wie z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}.\footnote{In der Mathematik ist eine diskrete Faltung zweier
-	Funktionen $v$ und $u$ definiert als
-	\begin{equation*}
-		(v * u)(t) = \sum_{\tau = -\infty}^{+\infty} v(t)u(t - \tau) \, .
-	\end{equation*}
-	Intuitiv gesehen wird dabei die Funktion $u$ (genannt: Kernel) gespiegelt und von links nach rechts über die Funktion $v$ \enquote{geschoben} und dabei multipliziert. Die Faltungsoperation in neuronalen Netzen kann in einer ähnlichen Weise interpretiert werden. Jedoch wird dabei das Spiegeln des Kernels teilweise weggelassen \parencite[333]{Goodfellow.2016}. Zudem ist der Kernel auf zweidimensionalen Gittern, wie es bspw. bei
-	Bildern der Fall ist, meist ebenfalls zweidimensional.} Der Autoencoder wird dann als Convolutional
-Autoencoder (ConvAE) bezeichnet. Eine detaillierte Einführung in Convolutional Neural Networks ist
-in \textcite[330 -- 372]{Goodfellow.2016} zu finden. In den anderen Fällen können vollvernetzte
-Schichten eingesetzt werden, d.h. jedes Neuron hat eine Verbindung zu jedem Neuron aus der
-Folgeschicht. Zweitens muss die Anzahl der Schichten $m$ festgelegt werden, welche für die
-Symmetrie des Encoders und Decoders ungerade sein sollte (aber nicht muss). Häufig wählt man hier
-$m = 3$ oder $m = 5$, da bei größerem $m$ Schwierigkeiten bei der Konvergenz des Autoencoders
-auftreten. Dies liegt an der hohen Anzahl an Verbindungen (Gewichte) im neuronalen Netz, da jedes
-Neuron mit allen Neuronen aus der nachfolgenden Schicht verbunden ist. Bei hochdimensionalen
-Datensätzen besitzt die Input-Schicht zudem viele Neuronen. Dies führt dazu, dass bereits simple
-dreischichtige Autoencoder viele Gewichte haben, wie das folgende Beispiel zeigt. Beträgt die
+Erstens muss zwischen vollvernetzten und \textit{Convolutional} Schichten entschieden werden.
+Letztere können eingesetzt werden, wenn der Input des Autoencoders eine gitterartige Topologie, wie
+z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}.
+% \footnote{In der Mathematik ist eine diskrete Faltung zweier
+% 	Funktionen $v$ und $u$ definiert als
+% 	\begin{equation*}
+% 		(v * u)(t) = \sum_{\tau = -\infty}^{+\infty} v(t)u(t - \tau) \, .
+% 	\end{equation*}
+% 	Intuitiv gesehen wird dabei die Funktion $u$ (genannt: Kernel) gespiegelt und von links nach rechts über die Funktion $v$ \enquote{geschoben} und dabei multipliziert. Die Faltungsoperation in neuronalen Netzen kann in einer ähnlichen Weise interpretiert werden. Jedoch wird dabei das Spiegeln des Kernels teilweise weggelassen \parencite[333]{Goodfellow.2016}. Zudem ist der Kernel auf zweidimensionalen Gittern, wie es bspw. bei
+% 	Bildern der Fall ist, meist ebenfalls zweidimensional.} 
+Der Autoencoder wird dann als Convolutional Autoencoder (ConvAE) bezeichnet. Im Kontext von Bildern
+wird dabei ein kleines Fenster (genannt: Kernel), meist der Größe $3 \times 3$ oder $5 \times 5$,
+über das Bild \enquote{geschoben} und die überlappenden Punkte miteinander multipliziert und
+aufsummiert \parencite[333]{Goodfellow.2016}. In dieser Weise werden die Gewichte im Netzwerk geteilt und die
+lokale Struktur des Bildes besser miteinbezogen. Für eine detaillierte Einführung in Convolutional
+Neural Networks wird auf die Ausführungen in \textcite[330 -- 372]{Goodfellow.2016} verwiesen. In
+den anderen Fällen können vollvernetzte Schichten eingesetzt werden, d.h. jedes Neuron hat eine
+Verbindung zu jedem Neuron aus der Folgeschicht. Zweitens muss die Anzahl der Schichten $m$
+festgelegt werden, welche für die Symmetrie des Encoders und Decoders ungerade sein sollte (aber
+nicht muss). Häufig wählt man hier $m = 3$ oder $m = 5$, da bei größerem $m$ Schwierigkeiten bei
+der Konvergenz des Autoencoders auftreten. Dies liegt an der hohen Anzahl an Verbindungen
+(Gewichte) im neuronalen Netz, da jedes Neuron mit allen Neuronen aus der nachfolgenden Schicht
+verbunden ist. Bei hochdimensionalen Datensätzen besitzt die Input-Schicht zudem viele Neuronen.
+Dies führt dazu, dass bereits simple dreischichtige Autoencoder viele Gewichte haben: Beträgt die
 extrinsische Dimension bspw. 1000 und wählt man $m=3$ und hat die Bottleneck-Schicht zehn Neuronen,
 dann hat dieser simple Autoencoder bereits \num{20000} trainierbare Gewichte.\footnote{Genau
 	genommen hat der Encoder $1000 \cdot 10 = \num{10000}$ Gewichte und zehn Biases. Der Decoder hat
@@ -447,9 +460,9 @@ werden, da es sonst ebenfalls zu Schwierigkeiten in der Optimierung kommen kann.
 
 Viertens muss die Aktivierungsfunktion festgelegt werden. Dabei könnte theoretisch nach jeder
 Schicht eine andere Aktivierungsfunktion eingesetzt werden. Hier wird jedoch angenommen, dass
-dieselbe Funktion für alle Schichten verwendet wird. Wie bereits am Anfang dieses Unterabschnitts
-erwähnt wurde, bestimmt die Aktivierungsfunktion die Nichtlinearität des Autoencoders. Die wohl
-populärsten Aktivierungsfunktionen sind die Sigmoid-Funktion
+dieselbe Funktion für alle Schichten verwendet wird. Wie eingangs erwähnt, bestimmt die
+Aktivierungsfunktion die Nichtlinearität des Autoencoders. Die wohl populärsten
+Aktivierungsfunktionen sind die (logistische) Sigmoid-Funktion
 \begin{equation}
 	\label{eq:Sigmoid}
 	\operatorname{sigmoid}(x) = \frac{1}{1 + \exp (-x)} \, ,
@@ -477,24 +490,6 @@ empfohlen. Dies liegt daran, dass die \textit{Rectified Linear Units} alle negat
 Null projiziert und damit die Rekonstruktion erschweren könnte \parencite[4]{Charte.2018}. Ein Nachteil der Sigmoid- und Tanh-Funktion ist allerdings der Wertebereich
 $[0, 1]$, auf den diese beiden Funktionen projizieren. Dies kann die Rekonstruktion ebenfalls
 behindern.
-% \subsubsection{Verhältnis zur Principal Component Analysis}
-% \label{ch:MethodenDerDimRed:ML:AE:VerhaeltnisPCA}
-
-%Um den Zusammenhang zwischen der PCA und dem Autoencoder zu verdeutlichen,
-% wird im Folgenden ein einfacher linearer Autoencoder mit drei Schichten betrachtet. Der Encoder
-% kann somit als
-% \begin{equation}
-% 	f(\vect{x}) = \mat{W}_1 \vect{x} + \vect{b}_1 = \vect{y}
-% \end{equation}
-% und der Decoder als
-% \begin{equation}
-% 	g(\vect{y}) = \mat{W}_2 \vect{y} + \vect{b}_2 = \estNormal{\vect{x}}
-% \end{equation}
-% formuliert werden, wobei $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{D \times d}$ die Gewichtsmatrizen und $\vect{b}_i$ die Bias-Vektoren des Autoencoders sind ($i = 1, 2$). Liegt eine Stichprobe in der Datenmatrix $\mat{X} \in \real^{n \times D}$ vor und minimiert der Autoencoder den mittleren quadratischen Fehler (\eqref{eq:MSE_loss}), dann löst dies\rewrite{das ganze hier bringt mir irgendwie nichts}
-% \begin{equation}
-% 	\min \norm{ \mat{X} - \tr{ \left( \mat{W}_2( \mat{W}_1 \tr{\mat{X}} + \vect{b}_1 \tr{\ones_n}) + \vect{b}_2 \tr{\ones_n}  \right) } }^2_F
-% \end{equation}\rewrite{oben die Gewichtsmatrizen transponieren, dann muss ich nicht die Daten transponieren}
-% wobei $\ones_D = \tr{(1, \ldots, 1)} \in \real^D$ der Vektor mit Einsen und $\norm{\,\cdot\,}_F$ die Frobenius-Norm ist \parencite[3]{Plaut.2018}.
 \subsection{Contractive Autoencoder}
 \label{ch:MethodenDerDimRed:ML:CAE}
 \nomenclature[Z]{CAE}{Contractive Autoencoder}
@@ -512,7 +507,8 @@ Regularisierungsterms für einen dreischichtigen Auotencoder vorgestellt.
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:CAE:Grundidee}
 Die Idee ist
-es, die \textit{Sensitivität} des Autoencoders für den Input zu bestrafen. Das bedeutet, dass bei
+es, die \textit{Sensitivität} des Autoencoders für den Input zu bestrafen.\rewrite{Die Motivation dahinter besser erläutern: WIESO will man die sensitit
+	bestrafen?} Das bedeutet, dass bei
 kleinen Änderungen des Inputs $\vect{x}$ die Kodierung $f(\vect{x})$ ebenfalls nur minimal geändert
 werden soll. Dies entspricht einer kleinen ersten Ableitung und kann über die (quadrierte)
 Frobeniusnorm der Jacobi-Matrix $\mat{J}$ des Encoders $f$ erzielt werden \parencites[2]{Rifai.2011}[521]{Goodfellow.2016}. Der Regularisierungsterm lautet damit
