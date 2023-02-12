@@ -256,11 +256,15 @@ Datensätze wurden daher inkrementelle Versionen der Kernel Principal Component 
 \subsection{Locally Linear Embedding}
 \label{ch:MethodenDerDimRed:statistisch:LLE}
 \nomenclature[Z]{LLE}{Locally Linear Embedding}
-Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, nutzt lokale Eigenschaften der Daten aus und bezieht damit gleichzeitig globale Eigenschaften mit ein.\rewrite{erklären wie es global eigenschaften miteinbezieht} Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die optimale lineare Rekonstruktion durch die Nachbarn eines Datenpunktes bestimmt. Im zweiten Schritt werden dann geometrische Eigenschaften dieser Rekonstruktion ausgenutzt, durch die die niedrigdimensionale Repräsentation abgeleitet werden kann.
+Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, versucht die lokale und globale Struktur einer Mannigfaltigkeit durch die kollektive Analyse von überlappenden Nachbarschaften zu erhalten. Die Idee ist, dass durch die Analyse von lokalen Nachbarschaften die lokale Struktur erhalten werden kann, vorausgesetzt, die Daten liegen auf einer lokal linearen Mannigfaltigkeit. Theoretisch können dann aufgrund der Überlappungen der Nachbarschaften globale Eigenschaften implizit miteinbezogen werden \parencite[2325]{Roweis.2000}. Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die
+optimale lineare Rekonstruktion durch die Nachbarn eines Datenpunktes bestimmt. Im zweiten Schritt
+werden geometrische Eigenschaften dieser Rekonstruktion ausgenutzt, durch die die
+niedrigdimensionale Repräsentation abgeleitet werden kann. Diese beiden Schritte werden in den
+folgenden zwei Unterabschnitten genauer betrachtet.
 
 \subsubsection{Lineare Rekonstruktion durch die Nachbarn}
 \label{ch:MethodenDerDimRed:statistisch:LLE:LineareRekonstruktion}
-LLE nimmt an, dass die ursprünglichen Daten auf einer $d$-dimensionalen glatten Mannigfaltigkeit im $\real^D$ eingebettet sind und dass diese Mannigfaltigkeit auf kleinen Stücken (engl. \textit{patches}) approximativ linear ist. Daher kann ein hochdimensionaler Vektor $\vect{x}_i$ mit $i = 1,\ldots,n$ durch eine Linearkombination seiner Nachbarn
+LLE nimmt an, dass die ursprünglichen Daten auf einer $d$-dimensionalen glatten Mannigfaltigkeit im $\real^D$ eingebettet sind und dass diese Mannigfaltigkeit auf kleinen Stücken (engl. \textit{patches}) approximativ linear ist. Daher kann ein ursprünglicher Datenpunkt $\vect{x}_i$ mit $i = 1,\ldots,n$ durch eine Linearkombination seiner Nachbarn
 ausgedrückt werden \parencite[2323]{Roweis.2000}. Die Koeffizienten dieser Linearkombination sind die sogenannten
 Rekonstruktionsgewichte $W_{ij}$, welche durch Minimierung der Zielfunktion
 \begin{equation}
