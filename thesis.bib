@@ -703,6 +703,17 @@ Courville, Aaron (VerfasserIn)},
 }
 
 
+@proceedings{Gunopulos.2011,
+ year = {2011},
+ title = {Machine Learning and Knowledge Discovery in Databases},
+ publisher = {{Springer Berlin Heidelberg}},
+ isbn = {978-3-642-23783-6},
+ editor = {Gunopulos, Dimitrios and Hofmann, Thomas and Malerba, Donato and Vazirgiannis, Michalis},
+ abstract = {},
+ location = {Berlin, Heidelberg}
+}
+
+
 @collection{Guyon.2006,
  year = {2006},
  title = {Feature Extraction: Foundations and Applications},
@@ -1416,7 +1427,7 @@ is the dimension of
 }
 
 
-@incollection{Rifai.2011,
+@incollection{Rifai.2011a,
  author = {Rifai, Salah and Vincent, Pascal and Muller, Xavier and Glorot, Xavier and Bengio, Yoshua},
  title = {Contractive Auto-Encoders: Explicit Invariance during Feature Extraction},
  pages = {833--840},
@@ -1427,6 +1438,21 @@ is the dimension of
  abstract = {We present in this paper a novel approach for training deterministic auto-encoders. We show that by adding a well chosen penalty term to the classical reconstruction cost function, we can achieve results that equal or surpass those attained by other regularized auto-encoders as well as denoising auto-encoders on a range of datasets. This penalty term corresponds to the Frobenius norm of the Jacobian matrix of the encoder activations with respect to the input. We show that this penalty term results in a localized space contraction which in turn yields robust features on the activation layer. Furthermore, we show how this penalty term is related to both regularized auto-encoders and denoising auto-encoders and how it can be seen as a link between deterministic and non-deterministic auto-encoders. We find empirically that this penalty helps to carve a representation that better captures the local directions of variation dictated by the data, corresponding to a lower-dimensional non-linear manifold, while being more invariant to the vast majority of directions orthogonal to the manifold. Finally, we show that by using the learned features to initialize a MLP, we achieve state of the art classification error on a range of datasets, surpassing other methods of pretraining.},
  location = {Madison},
  booksubtitle = {Bellevue, Washington, USA, June 28 - July 2,2011}
+}
+
+
+@inproceedings{Rifai.2011b,
+ author = {Rifai, Salah and Mesnil, Gr{\'e}goire and Vincent, Pascal and Muller, Xavier and Bengio, Yoshua and Dauphin, Yann and Glorot, Xavier},
+ title = {Higher Order Contractive Auto-Encoder},
+ pages = {645--660},
+ bookpagination = {page},
+ publisher = {{Springer Berlin Heidelberg}},
+ isbn = {978-3-642-23783-6},
+ editor = {Gunopulos, Dimitrios and Hofmann, Thomas and Malerba, Donato and Vazirgiannis, Michalis},
+ booktitle = {Machine Learning and Knowledge Discovery in Databases},
+ year = {2011},
+ abstract = {We propose a novel regularizer when training an auto-encoder for unsupervised feature extraction. We explicitly encourage the latent representation to contract the input space by regularizing the norm of the Jacobian (analytically) and the Hessian (stochastically) of the encoder's output with respect to its input, at the training points. While the penalty on the Jacobian's norm ensures robustness to tiny corruption of samples in the input space, constraining the norm of the Hessian extends this robustness when moving further away from the sample. From a manifold learning perspective, balancing this regularization with the auto-encoder's reconstruction objective yields a representation that varies most when moving along the data manifold in input space, and is most insensitive in directions orthogonal to the manifold. The second order regularization, using the Hessian, penalizes curvature, and thus favors smooth manifold. We show that our proposed technique, while remaining computationally efficient, yields representations that are significantly better suited for initializing deep architectures than previously proposed approaches, beating state-of-the-art performance on a number of datasets.},
+ location = {Berlin, Heidelberg}
 }
 
 

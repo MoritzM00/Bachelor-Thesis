@@ -427,7 +427,7 @@ entspricht bspw. im Falle eines dreischichtigen Autoencoders (siehe \eqref{eq:dr
 wobei $\norm{\,\cdot\,}_F$ die Frobeniusnorm bezeichnet \parencite[1]{Kunin.2019}. Diese Regularisierung wird später im Vergleich von Autoencodern zur
 Principal Component Analysis in \subsecref{ch:Vergleich:sec:Resultate:PCA_AE} noch von Bedeutung
 sein. Für das Lernen von Mannigfaltigkeiten besonders interessant ist jedoch der
-\newterm{Contractive Autoencoder} \parencite{Rifai.2011}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird.
+\newterm{Contractive Autoencoder} \parencite{Rifai.2011a}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird.
 
 \subsubsection{Wahl der Architektur}
 \label{ch:MethodenDerDimRed:ML:AE:WahlArchitektur}
@@ -508,29 +508,29 @@ behindern.
 \label{ch:MethodenDerDimRed:ML:CAE}
 \nomenclature[Z]{CAE}{Contractive Autoencoder}
 
-Der Contractive Autoencoder \parencite{Rifai.2011} stellt eine Variante des eben vorgestellten klassischen Autoencoders
+Der Contractive Autoencoder \parencite{Rifai.2011a} stellt eine Variante des eben vorgestellten klassischen Autoencoders
 (\subsecref{ch:MethodenDerDimRed:ML:AE}) dar. Ähnlich wie der Sparse Autoencoder wird die
 Zielfunktion des Autoencoders lediglich um einen zusätzlichen Regularisierungsterm erweitert.
 Dieser zusätzliche Term in der Zielfunktion führt zu einer kontrahierenden Eigenschaft: Ähnliche
-Punkte werden auf eine kleinere Nachbarschaft auf der Mannigfaltigkeit abgebildet und damit
-\enquote{zusammengezogen}. Dies gilt aber nur \textit{lokal}, das heißt unähnliche Punkte können
-immer noch weit weg auf der Mannigfaltigkeit liegen \parencite[521]{Goodfellow.2016}. Im Folgenden wird in einem ersten Schritt die Grundidee des
+Punkte werden auf eine kleinere Nachbarschaft auf der Mannigfaltigkeit abgebildet. Dies gilt aber
+nur \textit{lokal}, das heißt unähnliche Punkte können immer noch weit weg auf der Mannigfaltigkeit
+liegen \parencite[521]{Goodfellow.2016}. Im Folgenden wird in einem ersten Schritt die Grundidee des
 Contractive Autoencoders erläutert und im zweiten Schritt die konkrete Berechnung des
 Regularisierungsterms für einen dreischichtigen Autoencoder vorgestellt.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:CAE:Grundidee}
-Die Idee ist
-es, die \textit{Sensitivität} des Autoencoders für den Input zu bestrafen.
-Das bedeutet, dass bei
-kleinen Änderungen des Inputs $\vect{x}$ die Kodierung $f(\vect{x})$ ebenfalls nur minimal geändert
-werden soll. Dies entspricht einer kleinen ersten Ableitung und kann über die (quadrierte)
-Frobeniusnorm der Jacobi-Matrix $\mat{J}$ des Encoders $f$ erzielt werden \parencites[2]{Rifai.2011}[521]{Goodfellow.2016}. Der Regularisierungsterm lautet damit
+
+Die Idee ist es, die \textit{Sensitivität} des Autoencoders für den Input zu bestrafen, um damit
+eine robustere latente Repräsentation zu erhalten. Das bedeutet, dass bei kleinen Änderungen des
+Inputs $\vect{x}$ die Kodierung $f(\vect{x})$ ebenfalls nur minimal geändert werden soll. Dies
+entspricht einer kleinen ersten Ableitung und kann über die (quadrierte) Frobeniusnorm der
+Jacobi-Matrix $\mat{J}$ des Encoders $f$ erzielt werden \parencites[2]{Rifai.2011a}[521]{Goodfellow.2016}. Der Regularisierungsterm lautet damit
 \begin{equation}
 	\label{eq:CAE-Regularisierung}
 	\Omega(\vect{y}) = \norm[\big]{\mat{J}_f(\vect{x})}_F^2 =  \norm[\Big]{ \frac{\partial f(\vect{x})}{\partial \vect{x}} }^2_F \, ,
 \end{equation}
-was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Intuitiv gesehen werden so lokale Nachbarschaften auf \textit{kleinere} Nachbarschaften in der niedrigdimensionalen Repräsentation abgebildet, das heißt der Autoencoder wirkt kontrahierend. Motiviert wird dies durch die lokal relevanten Richtungen auf einer Mannigfaltigkeit. Die Richtungen, die orthogonal zur Mannigfaltigkeit sind, sollten weniger Einfluss auf die Rekonstruktion haben. Durch die Bestrafung der Sensitivität muss der Autoencoder theoretisch mehr Fokus auf die lokal relevanten Richtungen, d.h. die Richtungen mit viel Variation entlang der Mannigfaltigkeit legen \parencite[1]{Rifai.2011}.
+was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Wird angenommen, dass die Daten auf einer $d$-dimensionalen Mannigfaltigkeit liegen, so kann der Regularisierungsterm wie folgt geometrisch interpretiert werden. Da Regularisierungsterm dafür sorgt, dass der Autoencoder die Kodierung bei einer kleinen Änderung des Inputs nur wenig ändert, d.h. $f(\vect{x})$ soll möglichst konstant sein. Allerdings muss der Autoencoder auch den Rekonstruktionsfehler minimieren, sodass nicht alle Richtungen bei einer Änderung kontrahieren werden dürfen. Diese zwei entgegengesetzten Kräfte kann der Autoencoder gleichzeitig am besten balancieren, wenn die Richtungen parallel zur Mannigfaltigkeit für die stärkste Änderung in der Kodierung verantwortlich sind. In diesen \enquote{lokal relevanten} Richtungen wirkt der Contractive Autoencoder also nicht kontrahierend und die Richtungen, die orthogonal zur Mannigfaltigkeit liegen, werden am stärksten kontrahiert \parencites[1]{Rifai.2011a}[649 -- 650]{Rifai.2011b}.
 
 Der Regularisierungsterm ist für einen dreischichtigen Autoencoder effizient zu berechnen, nicht
 aber für einen tiefen Autoencoder. Dies stellt ein praktisches Problem dar, welches allerdings über
@@ -539,12 +539,12 @@ ein schichtenweises Vortrainieren teilweise umgangen werden werden kann \parenci
 \subsubsection{Berechnung des Regularisierungsterms}
 \label{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm}
 Im Folgenden wird die konkrete Berechnung des Regularisierungsterms (\eqref{eq:CAE-Regularisierung}) für einen dreischichtigen Autoencoder aufgezeigt. Wie eben erwähnt, ist die Berechnung in diesem Fall effizient möglich. Bei der mathematischen Formulierung der Autoencoder wurde bereits in \eqref{eq:dreischichtigerAE} die explizite Form des Encoders und Decoders eingeführt. Nimmt man nun an, dass die Gewichte verbunden sind, d.h. $\mat{W}_2 = \tr{\mat{W}_1}$ und wird für die Aktivierungsfunkion $s$ die Sigmoid-Funktion (\eqref{eq:Sigmoid})
-verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
+verwendet, so kann die Frobeniusnorm der Jacobi-Matrix am Punkt $\vect{x}$ mittels
 \begin{equation}
 	\label{eq:CAE-loss-simple}
 	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^d \left( y_i (1 - y_i)\right)^2 \sum_{j = 1}^D (\mat{W}_1^2)_{ij}
 \end{equation}
-effizient berechnet werden \parencite[4]{Rifai.2011}. Für einen Autoencoder mit mehr als einer versteckten Schicht wird die
+effizient berechnet werden \parencite[4]{Rifai.2011a}. Für einen Autoencoder mit mehr als einer versteckten Schicht wird die
 Berechnung teuer, was das Trainieren eines tiefen Contractive Autoencoders ohne Approximationen wie
 beispielsweise das von \textcite{Bengio.2006} erläuterte gierige schichtenweise Vortrainieren
 (engl. \textit{greedy layer-wise pretraining}) unpraktikabel macht. Bei diesem Vorgehen wird ein
