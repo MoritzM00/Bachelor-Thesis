@@ -333,23 +333,36 @@ nämlich der \newterm{Autoencoder} in seiner klassischen Form in
 \label{ch:MethodenDerDimRed:ML:AE}
 \nomenclature[Z]{AE}{Autoencoder}
 
-Der Autoencoder ist ein neuronales Netzwerk, das die Rekonstruktion des Inputvektors $\vect{x}$ aus
-den Trainingsdaten lernt. Um das sinnvoll zu erreichen, besitzt der Autoencoder eine wie in
+Die Idee des Autoencoders wurde schon relativ früh unter dem Begriff eines \textit{Autoassociative
+	Neural Networks} aufgrund der engen Relation zur Principal Component Analysis untersucht \parencites{Kramer.1991}{Kramer.1992}{Bourlard.1988}. Seitdem hat sich vermehrt der Begriff
+\enquote{Autoencoder} durchgesetzt und die Architektur wurde auch auf andere Gebiete erweitert. So
+ist im Bereich der generativen neuronalen Netze vor allem der Variational Autoencoder \parencite{Kingma.2013} zu einem prominenten Vertreter geworden. Im Folgenden wird die Grundidee des
+Autoencoders beschrieben, woraufhin die mathematische Formulierung und Möglichkeiten der
+Regularisierung aufgezeigt werden. Abschließend wird die Wahl der Architektur eines Autoencoders
+besprochen.
+
+\subsubsection{Grundidee}
+Die Grundidee eines Autoencoders ist das Lernen der Rekonstruktion eines Inputvektors $\vect{x}$
+aus den Trainingsdaten. Um das sinnvoll zu erreichen, besitzt der Autoencoder eine wie in
 \figref{fig:SchematischerAutoencoder} gezeigte symmetrische Architektur.
-\input{\figures/autoencoder-architecture.tex} Dabei können der Encoder und Decoder unterschiedliche
-Architekturen annehmen -- die eines neuronalen Netzes ist allerdings die häufigste und auch hier
-verwendete Variante. Diese besteht in der klassischen Form aus einer ungeraden Anzahl an
-vollvernetzten Schichten mit einer \newterm{Bottleneck}-Schicht in der Mitte \parencite[2]{Bank.2020}. Diese Schicht wird als \textit{Bottleneck} bezeichnet, da sie nur aus $d < D$
+\input{\figures/autoencoder-architecture.tex}
+
+Diese besteht in der klassischen Form aus einem neuronalen Netz mit einer ungeraden Anzahl an
+Schichten, sodass in der Mitte eine \newterm{Bottleneck}-Schicht definiert werden kann \parencite[2]{Bank.2020}. Diese Schicht wird als \textit{Bottleneck} bezeichnet, da sie nur aus $d < D$
 Neuronen besteht und damit die \enquote{kleinste} Stelle im Netzwerk darstellt, durch die der
 Inputvektor kodiert werden muss. In diesem Fall wird der Autoencoder als \newterm{unterbestimmt}
-(engl. \textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}.
-%  Es gibt demnach auch \newterm{überbestimmte} Autoencoder mit $k > D$
-% 	Neuronen in der mittleren Schicht. Diese Variante reduziert die Dimension nicht, sondern erhöht sie \parencite[504]{Goodfellow.2016}. 
-Damit erzielt die Bottleneck-Schicht die gewünschte Dimensionsreduktion des Inputvektors \parencites[502]{Goodfellow.2016}[2]{Bank.2020}.
+(engl. \textit{undercomplete}) bezeichnet \parencite[503]{Goodfellow.2016}. Wie in \figref{fig:SchematischerAutoencoder} dargestellt, wird der
+Autoencoder nun in zwei Teile untergliedert: Die Schichten, die zum Bottleneck hinführen, werden
+als Encoder aufgefasst. Die Schichten, die vom Bottleneck wegführen werden als Decoder bezeichnet.
+Der Encoder verkleinert sukzessive die Dimension des Inputvektors bis schließlich in der Mitte die
+kleinste Stelle im Netz erreicht ist. Hier kann die latente Repräsentation $\vect{y}$ extrahiert
+werden. Der Decoder vergrößert nun sukzessive die Dimension wieder, um eine Approximation
+$\estNormal{\vect x}$ des ursprünglichen Vektors zu erhalten. Nachfolgend wird diese
+Untergliederung präziser formuliert.
 
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}
-Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^d$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ kodiert und zum anderen den \newterm{Decoder} $g: \real^d \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Ein dreischichtiger, vollvernetzter Autoencoder kann mittels
+Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^d$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ kodiert und zum anderen den \newterm{Decoder} $g: \real^d \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Ein dreischichtiger, vollvernetzter Autoencoder kann also mittels
 \begin{gather}
 	\label{eq:dreischichtigerAE}
 	f(\vect{x}) = s(\mat{W}_1 \vect{x} + \vect{b}_1) = \vect{y} \\
