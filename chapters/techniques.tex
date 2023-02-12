@@ -516,13 +516,13 @@ Punkte werden auf eine kleinere Nachbarschaft auf der Mannigfaltigkeit abgebilde
 \enquote{zusammengezogen}. Dies gilt aber nur \textit{lokal}, das heißt unähnliche Punkte können
 immer noch weit weg auf der Mannigfaltigkeit liegen \parencite[521]{Goodfellow.2016}. Im Folgenden wird in einem ersten Schritt die Grundidee des
 Contractive Autoencoders erläutert und im zweiten Schritt die konkrete Berechnung des
-Regularisierungsterms für einen dreischichtigen Auotencoder vorgestellt.
+Regularisierungsterms für einen dreischichtigen Autoencoder vorgestellt.
 
 \subsubsection{Grundidee}
 \label{ch:MethodenDerDimRed:CAE:Grundidee}
 Die Idee ist
-es, die \textit{Sensitivität} des Autoencoders für den Input zu bestrafen.\rewrite{Die Motivation dahinter besser erläutern: WIESO will man die sensitit
-	bestrafen?} Das bedeutet, dass bei
+es, die \textit{Sensitivität} des Autoencoders für den Input zu bestrafen.
+Das bedeutet, dass bei
 kleinen Änderungen des Inputs $\vect{x}$ die Kodierung $f(\vect{x})$ ebenfalls nur minimal geändert
 werden soll. Dies entspricht einer kleinen ersten Ableitung und kann über die (quadrierte)
 Frobeniusnorm der Jacobi-Matrix $\mat{J}$ des Encoders $f$ erzielt werden \parencites[2]{Rifai.2011}[521]{Goodfellow.2016}. Der Regularisierungsterm lautet damit
@@ -530,12 +530,15 @@ Frobeniusnorm der Jacobi-Matrix $\mat{J}$ des Encoders $f$ erzielt werden \paren
 	\label{eq:CAE-Regularisierung}
 	\Omega(\vect{y}) = \norm[\big]{\mat{J}_f(\vect{x})}_F^2 =  \norm[\Big]{ \frac{\partial f(\vect{x})}{\partial \vect{x}} }^2_F \, ,
 \end{equation}
-was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Intuitiv gesehen werden so lokale Nachbarschaften auf \textit{kleinere} Nachbarschaften in der niedrigdimensionalen Repräsentation abgebildet, das heißt der Autoencoder wirkt kontrahierend.
-Der Regularisierungsterm ist für einen dreischichtigen Autoencoder leicht zu berechnen, nicht aber für einen tiefen Autoencoder. Dies stellt ein praktisches Problem dar, welches allerdings über ein schichtenweises Vortrainieren teilweise umgangen werden werden kann \parencite[vgl.][522]{Goodfellow.2016}.
+was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Intuitiv gesehen werden so lokale Nachbarschaften auf \textit{kleinere} Nachbarschaften in der niedrigdimensionalen Repräsentation abgebildet, das heißt der Autoencoder wirkt kontrahierend. Motiviert wird dies durch die lokal relevanten Richtungen auf einer Mannigfaltigkeit. Die Richtungen, die orthogonal zur Mannigfaltigkeit sind, sollten weniger Einfluss auf die Rekonstruktion haben. Durch die Bestrafung der Sensitivität muss der Autoencoder theoretisch mehr Fokus auf die lokal relevanten Richtungen, d.h. die Richtungen mit viel Variation entlang der Mannigfaltigkeit legen \parencite[1]{Rifai.2011}.
+
+Der Regularisierungsterm ist für einen dreischichtigen Autoencoder effizient zu berechnen, nicht
+aber für einen tiefen Autoencoder. Dies stellt ein praktisches Problem dar, welches allerdings über
+ein schichtenweises Vortrainieren teilweise umgangen werden werden kann \parencite[vgl.][522]{Goodfellow.2016}.
 
 \subsubsection{Berechnung des Regularisierungsterms}
 \label{ch:MethodenDerDimRed:ML:CAE:BerechnungRegTerm}
-Der Regularisierungsterm ist wie eben erwähnt für einen Autoencoder mit nur einer versteckten Schicht, d.h. für einen dreischichtigen Autoencoder, leicht zu berechnen. Bei der mathematischen Formulierung der Autoencoder wurde bereits in \eqref{eq:dreischichtigerAE} die explizite Form des Encoders und Decoders eingeführt. Nimmt man nun an, dass die Gewichte verbunden sind, d.h. $\mat{W}_2 = \tr{\mat{W}_1}$ und wird für die Aktivierungsfunkion $s$ die Sigmoid-Funktion (\eqref{eq:Sigmoid})
+Im Folgenden wird die konkrete Berechnung des Regularisierungsterms (\eqref{eq:CAE-Regularisierung}) für einen dreischichtigen Autoencoder aufgezeigt. Wie eben erwähnt, ist die Berechnung in diesem Fall effizient möglich. Bei der mathematischen Formulierung der Autoencoder wurde bereits in \eqref{eq:dreischichtigerAE} die explizite Form des Encoders und Decoders eingeführt. Nimmt man nun an, dass die Gewichte verbunden sind, d.h. $\mat{W}_2 = \tr{\mat{W}_1}$ und wird für die Aktivierungsfunkion $s$ die Sigmoid-Funktion (\eqref{eq:Sigmoid})
 verwendet, so kann die Frobeniusnorm der Jacobi-Matrix mittels
 \begin{equation}
 	\label{eq:CAE-loss-simple}
