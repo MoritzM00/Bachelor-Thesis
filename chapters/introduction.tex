@@ -3,18 +3,18 @@
 \label{ch:Enleitung}
 %% ==============================
 
-Die Analyse von hochdimensionalen Daten wie z.B. die Analyse von Gendaten mit Ausprägungen von
-tausenden Genen \parencite[siehe z.B.][]{Parmigiani.2003} oder der Analyse von Bilddaten wird von statistischen
-Schwierigkeiten im Zusammenhang mit der hohen Dimensionalität der Daten begleitet. Anschaulich
-entspricht eine Dimension dabei im Kontext der Gendaten gerade einer Ausprägung eines Genes. Da
-diese Datensätze meist aufwärts von \num{10000} Genen umfassen, kann eine Stichprobe als ein
-\num{10000}-dimensionaler Vektor mit Genausprägungen beschrieben werden. Bei derartig hohen
+Die Analyse hochdimensionaler Daten wie z.B. die Analyse von Gendaten mit Ausprägungen von
+tausenden Genen \parencite[siehe z.B.][]{Parmigiani.2003} oder der Analyse von Bilddaten ist geprägt von statistischen
+Schwierigkeiten im Zusammenhang mit der hohen Dimensionalität der Daten. Anschaulich entspricht
+eine Dimension dabei im Kontext der Gendaten gerade einer Ausprägung eines Genes. Da diese
+Datensätze meist aufwärts von \num{10000} Genen umfassen, kann eine Stichprobe als ein
+\num{10000}-dimensionaler Vektor mit Genausprägungen beschrieben werden. Bei einer derartig hohen
 Dimension treten Probleme mit der Bestimmung der Ähnlichkeit zweier Vektoren auf, da u.a.
 Distanzmaße nahezu bedeutungslos werden. Diese Herausforderungen von Daten hoher Dimensionalität
 werden umgangssprachlich unter dem Begriff \newterm{Fluch der Dimensionalität} \parencite{Bellman.1961} zusammengefasst. Neben diesen statistischen Problemen treten aber auch
-praktische Probleme auf, da Datensätze mit vielen Stichproben und zusätzlich hoher Dimension eine
-enorme Speicherkapazität und Rechenleistung benötigen können und damit zum Problem herkömmlicher
-Rechner werden.
+praktische Probleme auf, da Datensätze mit vielen Stichproben und zusätzlich hoher Dimension unter
+Umständen eine enorme Speicherkapazität und Rechenleistung benötigen und damit zum Problem
+herkömmlicher Rechner werden.
 % \footnote{Eine englischsprachige Teilmenge des Datensatzes \href{https://laion.ai/blog/laion-5b/}{LAION-5B} umfasst circa 5,85 Milliarden Text-Bilder-Paare, wobei
 % der Datensatz bei einer Bildgröße von $3 \times 384 \times 384$ haben. Dies entspricht einer Dimensionalität
 % von 442 368. In dieser Auflösung werden 240 TeraByte Speicherplatz benötigt.}
@@ -25,7 +25,7 @@ besteht. Bei Bilddaten ist dies bspw. in angrenzenden Pixeln der Fall, da sich h
 der Pixel oft nur an wenigen Stellen im Bild ändert. Die Idee der Dimensionsreduktion ist es daher,
 eine neue sog. \newterm{latente Repräsentation} der Daten zu finden, die möglichst viel Information
 erhält und dabei Redundanz eliminiert. Damit kann ein hochdimensionaler Vektor auf einen Vektor von
-niedrigerer Dimension reduziert werden, womit sowohl die benötige Speicher- als auch
+niedrigerer Dimension reduziert werden, womit sowohl die benötigte Speicher- als auch
 Rechenkapazität verringert und der Fluch der Dimensionalität abgeschwächt wird. Neben der
 Transformation auf neue Merkmale kann auch lediglich eine Selektion der ursprünglichen Merkmale
 durchgeführt werden. Dieser Fall gehört zu einem Teilgebiet der Merkmalsextraktion \parencite{Guyon.2006} und wird in dieser Arbeit nicht weiter behandelt. Die Dimensionsreduktion kann
@@ -47,7 +47,7 @@ generalisiert.
 Über die Zeit wurden daher eine Vielzahl von Dimensionsreduktionsmethoden entwickelt \parencite[siehe z.B.][]{Lee.2007} -- die große Auswahl macht die Selektion der richtigen Methode für
 eine spezifische Aufgabe allerdings nicht einfacher. Einer der umfassendsten Vergleiche von
 Methoden der Dimensionsreduktion wurde von \Textcite{vanderMaaten.2009} durchgeführt. Die Autoren
-untersuchen zwölf nichtlineare Methoden und vergleichen diese mit der Principal Component Analysis.
+untersuchten zwölf nichtlineare Methoden und verglichen diese mit der Principal Component Analysis.
 Sie kommen zu dem Ergebnis, dass nichtlineare Methoden die Principal Component Analysis auf
 künstlichen Datensätzen übertreffen können, dies aber bei natürlichen Datensätzen generell nicht
 zutrifft. In der Arbeit von \textcite{RohanPandit.2016} wird dieses Ergebnis auf Daten von
