@@ -351,7 +351,7 @@ Analysis, als auch die Kernel-Variante sind nicht in der Lage, die Swiss Roll zu
 
 Die Qualitätskriterien auf den natürlichen Datensätzen zeigen ein etwas anderes Bild, als es bei
 den künstlichen Datensätzen der Fall war. Die guten Ergebnisse von Locally Linear Embedding setzen
-sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
+sich nicht auf den natürlichen Datensätzen fort.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{MNIST_comparison.pdf}
@@ -359,12 +359,12 @@ sich nicht auf den natürlichen hochdimensionalen Datensätzen fort.
 	\caption[Qualitätskriterien für MNIST]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den MNIST-Datensatz. Auf diesem Datensatz kann der der domänenspezifische Convolutional Autoencoder (ConvAE) seine Stärken zeigen, da der Datensatz von hoher Qualität ist und viele Trainingsdaten zur Verfügung stehen. Principal Component Analysis, sowie Kernel PCA und der klassische Autoencoder schneiden ähnlich ab, d.h. die Nichtlinearität der letzteren beiden Methoden kann hier keine nennenswerte Verbesserungen hervorbringen. Locally Linear Embedding und der Contractive Autoencoder können auf allen drei Qualitätskriterien nicht mit den anderen Methoden mithalten. (Eigene Darstellung)}
 	\label{fig:MNISTMetrics}
 \end{figure}
-Auf allen natürlichen Datensätzen
+Hier
 schneidet Locally Linear Embedding hinsichtlich aller drei Kriterien neben dem Contractive Autoencoder relativ gesehen schlecht ab. Insbesondere nehmen die
 Qualitätskriterien von Locally Linear Embedding mit größer werdender Nachbarschaftsgröße $\Kqk$ deutlicher ab, als bei den
 restlichen Methoden. Der Parameter $\Klle$ für Locally Linear Embedding wurde jedoch auf kleinere Werte zwischen fünf und 15 gesetzt, weswegen diese Beobachtung logisch erscheint. Die Principal Component Analysis kann auf fast allen natürlichen Datensätzen eine gute oder sogar die
-beste relative Performance aufweisen. Ebenso zeigt die Kernel PCA gute Ergebnisse und ist auf dem ICMR- und ORL-Datensatz fast identisch zur klassischen Principal Component Analysis. Der klassische Autoencoder kann die Principal Component Analysis auf den Qualitätskriterien nicht mehr übertreffen. Auf den vier Bilddatensätzen kann jedoch der Convolutional
-Autoencoder seine Stärken zeigen, allerdings nur, wenn genügend Trainingsdaten zur Verfügung stehen. Letzteres trifft unter anderem auf den MNIST-Datensatz zu, nicht jedoch auf den ORL-Datensatz. Auf diesem Datensatz ist das Ergebnis nur minimal besser, als das des klassischen Autoencoders. Im direkten Vergleich zur Principal Component Analysis schneidet der Convolutional Autoencoder hier aber schlechter ab.
+beste relative Performance aufweisen. Ebenso zeigt die Kernel PCA gute Ergebnisse und ist auf dem ICMR- und ORL-Datensatz fast identisch zur klassischen Principal Component Analysis. Der klassische Autoencoder kann die Principal Component Analysis auf den Qualitätskriterien nicht mehr übertreffen. Auf den Bilddatensätzen kann der Convolutional
+Autoencoder seine Stärken zeigen, falls genügend Trainingsdaten zur Verfügung stehen. Letzteres trifft unter anderem auf den MNIST-Datensatz zu, nicht jedoch auf den ORL-Datensatz. Auf diesem Datensatz ist das Ergebnis nur minimal besser, als das des klassischen Autoencoders. Im direkten Vergleich zur Principal Component Analysis schneidet der Convolutional Autoencoder hier aber schlechter ab.
 Auf Datensätzen mit einer geringen Anzahl an Stichproben können Probleme bei der Konvergenz der iterativen Optimierung eines Autoencoders auftreten. Dies wird durch die Performance des vollvernetzten Autoencoders auf dem ORL-Datensatz ersichtlich (siehe \figref{fig:OlivettiFacesMetrics}). Insbesondere hinsichtlich des LCMC fällt der Autoencoder nach unten ab. Dies ist ein Nachteil einer iterativen Optimierung der Zielfunktion gegenüber einer Lösung in geschlossener Form.
 
 Die Resultate auf den Bilddatensätzen zeigen jedoch, dass der Convolutional Autoencoder eine valide
@@ -413,14 +413,16 @@ Repräsentation $\vect{y}$ zurück in eine approximierte ursprüngliche Repräse
 $\estNormal{\vect{x}}$. Für die Principal Component Analysis, den vollvernetzten Autoencoder, den
 Convolutional Autoencoder und für den Contractive Autoencoder wurde auf dem MNIST-Datensatz je ein
 Beispielbild für eine der Zahlen rekonstruiert und in \figref{fig:MNIST-reconstructions}
-abgebildet. Die erste Zeile besteht aus den Originalbildern als Referenz.
+dargestellt. Die erste Zeile besteht aus den Originalbildern als Referenz.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{reconstructions_mnist_pca_ae_convae_cae.pdf}
-	\caption[Rekonstruierte MNIST-Zahlen]{Gezeigt sind rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch den Convolutional Autoencoder und (5) Rekonstruktion durch den Contractive Autoencoder.}
+	\caption[Rekonstruierte MNIST-Zahlen]{Gezeigt sind rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch einen Convolutional Autoencoder und (5) Rekonstruktion durch einen Contractive Autoencoder.}
 	\label{fig:MNIST-reconstructions}
 \end{figure}
-Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da einige Zahlen sogar als falsche Zahl rekonstruiert werden. Die Rekonstruktionen der Principal Component Analysis sind besser, aber visuell ebenfalls nicht überzeugend, da sie deutlich unscharfer sind. Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte und zeigt auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien eine gute Güte der Dimensionsreduktion (siehe \figref{fig:MNISTMetrics}). Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, sodass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
+Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da einige Zahlen sogar als falsche Zahl rekonstruiert werden. Die Rekonstruktionen der Principal Component Analysis sind besser, aber visuell ebenfalls nicht überzeugend, da sie deutlich unscharfer sind. Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte und zeigt auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien eine hohe Güte der Dimensionsreduktion (siehe \figref{fig:MNISTMetrics}). Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, sodass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
+
+\idea{Zusammenfassung der Resultate?}
 
 \subsection{Principal Component Analysis vs. Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}
@@ -436,7 +438,7 @@ Decoders eine Matrix $\mat{W}_2 \in \real^{D \times d}$. Für den Rest dieses Ab
 \begin{equation}
 	\mathcal{J}_{\text{LAE}} = \norm{\mat{X} - \mat{W}_2\mat{W}_1\mat{X}}_F^2
 \end{equation}
-reduziert \parencite[292]{Bourlard.1988}. Das Eckhart-Young-Mirsky-Theorem \parencite{Eckart.1936} sagt nun aus, dass das optimale $\mat{W} = \mat{W}_2 \mat{W}_1$ auf die
+reduziert, falls $\mat{X}$ zentriert ist \parencites[Appendix A]{Kunin.2019}[292 -- 293]{Bourlard.1988}. Das Eckhart-Young-Mirsky-Theorem \parencite{Eckart.1936} sagt nun aus, dass das optimale $\mat{W} = \mat{W}_2 \mat{W}_1$ auf die
 Eigenvektorbasis der Kovarianzmatrix von $\mat{X}$ projiziert \parencite[vgl.][1]{Kunin.2019}. Ein linearer Autoencoder ohne Regularisierung der Gewichte
 (\textit{weight decay}) lernt allerdings nur einen Unterraum davon, da diese Zielfunktion durch
 eine invertierbare Matrix $\mat{G}$ äquivalent umformuliert werden kann zu \parencite[1]{Kunin.2019}
@@ -444,16 +446,15 @@ eine invertierbare Matrix $\mat{G}$ äquivalent umformuliert werden kann zu \par
 	\mathcal{J}_{\text{LAE}} = \norm{\mat{X} - (\mat{W}_2\mat{G}^{-1}) (\mat{G} \mat{W}_1)\mat{X}}_F^2 \, .
 \end{equation}
 Die Gewichte eines linearen Autoencoders, der den quadrierten Fehler
-(\eqref{eq:AE_objectiveFunction}) minimiert, spannen also einen äquivalenten Unterraum wie
+(\eqref{eq:AE_objectiveFunction}) minimiert, spannen also einen äquivalenten Unterraum wie die
 Ladungsmatrix $\mat{A}$ auf. Dies gilt sogar dann, wenn im Encoder Sigmoid-Aktivierungsfunktionen verwendet werden \parencite[291, 293]{Bourlard.1988}. Jedoch unterscheidet sich die latente Repräsentation $\mat{Y}$
 eines linearen Autoencoders mit der von PCA wie folgt \parencite[3]{Plaut.2018}: (1) Die Kovarianzmatrix von $\mat{Y}$ ist nicht diagonal, das heißt die
-latente Repräsentation ist nicht unkorreliert.\footnote{Äquivalent dazu ist die Korrelationsmatrix
-	von $\mat{Y}$, welche lediglich eine skalierte Kovarianzmatrix darstellt, keine Einheitsmatrix.}
-(2) Die Spalten von $\mat{Y}$ sind nicht nach absteigender Varianz sortiert. (3) Hat man einen
-Encoder $f: \real^D \rightarrow \real^{k_1}$ und möchte man einen Vektor $\vect{x} \in \real^D$ auf
-nur $k_2$ Dimensionen mit $k_2 < k_1$ reduzieren, so können nicht einfach die ersten $k_2$
-Koordinaten von $f(\vect{x})$ verwendet werden. Das bedeutet, dass die Lösungen von Autoencodern
-auf unterschiedliche Dimensionen nicht geschachtelt sind.
+latente Repräsentation ist nicht unkorreliert. (2) Die Spalten von $\mat{Y}$ sind nicht nach
+absteigender Varianz sortiert. (3) Hat man einen Encoder $f: \real^D \rightarrow \real^{k_1}$ und
+möchte man einen Vektor $\vect{x} \in \real^D$ auf nur $k_2$ Dimensionen mit $k_2 < k_1$
+reduzieren, so können nicht einfach die ersten $k_2$ Koordinaten von $f(\vect{x})$ verwendet
+werden. Das bedeutet, dass die Lösungen von Autoencodern auf unterschiedliche Dimensionen nicht
+geschachtelt sind.
 
 Es wurden jedoch bereits Verfahren entwickelt, mit denen diese Eigenschaften wiederhergestellt oder
 von Beginn an sichergestellt werden können. Das Vorgehen von \textcite{Plaut.2018} rekonstruiert
@@ -476,7 +477,7 @@ verwendet wird. Diese Beobachtung wurde in der Arbeit von \textcite{Kunin.2019} 
 Fehlerfunktion eines linearen Autoencoders bestätigt und formal nachgewiesen. Damit ein linearer
 Autoencoder die Richtungen der Hauptkomponenten lernen kann, muss ein Regularisierungsterm zur
 Zielfunktion des Autoencoders hinzufügt werden, der die Größe der Gewichte bestraft (siehe
-Regularisierung in \secref{ch:MethodenDerDimRed:ML:AE}).
+Regularisierung in \secref{ch:MethodenDerDimRed:ML:AE}).\unsure{wieso?}
 
 \subsubsection{Visualisierung der Zusammenhänge}
 
@@ -491,11 +492,11 @@ der Methoden genauer analysiert. Punkt (1) aus dem theoretischen Zusammenhang wi
 	\label{fig:Kovarianzmatrizen}
 \end{figure} Dargestellt sind die Kovarianzmatrizen der transformierten Daten, wobei in \captiona die Principal Component Analysis und jeweils die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei der Principal Component Analysis ist wie erwartet eine Diagonalmatrix mit absteigend sortieren Varianzen auf der Diagonalen. Die von \textcite{Plaut.2018} vorgeschlagene Methode wurde in \captionb und \captionc angewandt. Hierbei bestimmt jedoch die Verwendung von \textit{weight decay} die Orthogonalität der latenten Repräsentation. Wird keine Regularisierung verwendet, so besteht Korrelation in $\mat{Y}$. Im Gegensatz dazu konnte die Korrelation fast vollständig eliminiert werden, wenn \textit{weight decay} verwendet wird.
 
-Um nun die gefundenen Lösungen einer Principal Component Analysis und von Autoencodern genauer
-betrachten zu können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines Autoencoders
-verglichen werden. Auf Bilddatensätzen können diese Matrizen so umgeformt werden, dass sich für
-jede Zeile von $\mat{W}_1$ oder Spalte von $\mat{W}_2$ ein Bild ergibt.
-\figref{fig:Gewichtsvergleich} setzt dieses Vorgehen auf dem FER-Datensatz um.
+Um nun die gefundenen Lösungen der Principal Component Analysis und Autoencodern genauer betrachten
+zu können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines Autoencoders verglichen
+werden. Auf Bilddatensätzen können diese Matrizen so umgeformt werden, dass sich für jede Zeile von
+$\mat{W}_1$ oder Spalte von $\mat{W}_2$ ein Bild ergibt. \figref{fig:Gewichtsvergleich} setzt
+dieses Vorgehen auf dem FER-Datensatz um.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{weights-comparison.pdf}
