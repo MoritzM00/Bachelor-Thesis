@@ -174,18 +174,18 @@ Zu den künstlichen Datensätzen gehören die weitverbreitete \textit{Swiss Roll
 die in \figref{fig:ArtificialDatasets} dargestellt sind.
 Beide künstlichen Datensätze bestehen aus \num{5000} Datenpunkten und haben eine extrinsische Dimension von drei und eine intrinsische
 Dimension von zwei. Die Swiss Roll muss von den Dimensionsreduktionsmethoden \enquote{entfaltet} werden, da die Datenpunkte auf einer eingerollten Ebene liegen. Somit könnte die Swiss Roll in einem zweidimensionalen Raum dargestellt werden. Der Twin Peaks-Datensatz besteht aus vier spitzen Bergen, wobei je zwei nach oben und unten zeigen. Die intrinsische Dimension ist auch hier zwei, aber die Dimensionsreduktionsmethoden müssen die Berge sozusagen \enquote{plattdrücken}, um eine zweidimensionale Repräsentation zu erhalten. Der Vorteil einer Evaluierung auf künstlichen Datensätzen ist die visuelle Betrachtung der Datensätze und der gefundenen
-latenten Räume der Methoden. Es kann also visuell überprüft werden, ob die Dimensionsreduktionsmethoden eine sinnvolle niedrigdimensionale Repräsentation lernen. Theoretisch könnte dies auch auf natürlichen Datensätzen durchgeführt werden, allerdings ist hier die intrinsische Dimension in der Regel weit über zwei. Bei einer Reduktion auf zwei oder drei Dimensionen würden also Strukturen in den Daten verloren gehen. Künstliche Datensätze sind allerdings nicht zwangsweise aussagekräftig für die Performance auf echten Datensätzen, da diese komplexere Strukturen wie z.B. eine nicht-zusammenhängende Mannigfaltigkeiten aufweisen können. Deswegen wurden zusätzlich fünf natürliche Datensätze zur Evaluierung der Methoden hinzugezogen.
+latenten Räume der Methoden. Es kann also visuell überprüft werden, ob die Dimensionsreduktionsmethoden eine sinnvolle niedrigdimensionale Repräsentation lernen. Theoretisch könnte dies auch auf natürlichen Datensätzen durchgeführt werden, allerdings ist hier die intrinsische Dimension in der Regel weit über zwei. Bei einer Reduktion auf zwei oder drei Dimensionen würden also Strukturen in den Daten verloren gehen. Künstliche Datensätze sind allerdings nicht zwangsweise aussagekräftig für die Performance auf echten Datensätzen, da diese komplexere Strukturen wie z.B. eine nicht-zusammenhängende Mannigfaltigkeiten aufweisen können. Deswegen wurden zusätzlich die folgenden fünf natürlichen Datensätze zur Evaluierung der Methoden hinzugezogen.
 
 \subsection{Natürliche Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze:natuerlich}
 Im Folgenden werden die im Vergleich eingesetzten natürlichen Datensätze vorgestellt. Es wurden überwiegend Bilddatensätze, aber auch ein Datensatz mit Genausprägungen ausgewählt, da diese eine
 hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut geeignet sind.
-Konkret wurden die folgenden Datensätze ausgewählt: (1) \textit{MNIST} \parencite{LeCun.2010}, (2) \textit{Olivetti Research Ltd} (ORL)
-\parencite{Samaria.1994}, (3) \textit{Fashion MNIST} \parencite{Xiao.2017}, (4) \textit{Facial Emotion Recognition} (FER) \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) \textit{Indian Council of
+Konkret wurden die folgenden Datensätze ausgewählt: (1) \textbf{MNIST} \parencite{LeCun.2010}, (2) \textbf{Olivetti Research Ltd} (ORL)
+\parencite{Samaria.1994}, (3) \textbf{Fashion MNIST} \parencite{Xiao.2017}, (4) \textbf{Facial Emotion Recognition} (FER) \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) \textbf{Indian Council of
 	Medical Research} (ICMR) \parencite{Mohapatra.2022}.
 
 Der weitverbreitete MNIST-Datensatz besteht aus \num{60000} Grauton-Bildern von handgeschriebenen
-Zahlen in der Auflösung $28 \times 28$. Die Anzahl der Pixel und damit die
+Zahlen in der Auflösung $28 \times 28$. Die Anzahl der Pixel entspricht der
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics{dataset_samples.pdf}
@@ -193,25 +193,25 @@ Zahlen in der Auflösung $28 \times 28$. Die Anzahl der Pixel und damit die
 	\caption[Beispielbilder der natürlichen Datensätze]{Zu sehen sind Beispielbilder der natürlichen Bilddatensätze aus dem Vergleich: \captiona Handgeschriebene Zahlen aus dem MNIST-Datensatz \captionb Gesichter mit unterschiedlichen Emotionen aus dem FER-Datensatz \captionc Verschiedene Kleidungsstücke aus dem Fashion MNIST-Datensatz \captiond Bilder der Gesichter unterschiedlicher Personen aus zehn Blickwinkeln (ORL-Datensatz)}
 	\label{fig:Dataset_samples}
 \end{figure}
-extrinsische Dimension beträgt 784. Der ORL-Datensatz enthält Bilder von Gesichtern aus
-zehn unterschiedlichen Positionen von 40 Personen und ist damit der kleinste natürliche Datensatz
-in diesem Vergleich mit 400 Bildern. Die Bilder haben eine Auflösung von $64 \times 64$, was einer
+extrinsischen Dimension und beträgt 784. Der ORL-Datensatz enthält Bilder von Gesichtern aus
+zehn unterschiedlichen Positionen von 40 Personen und daher mit insgesamt 400 Bildern  der kleinste natürliche Datensatz
+in diesem Vergleich. Die Bilder haben eine Auflösung von $64 \times 64$, was einer
 extrinsischen Dimension von \num{4096} entspricht. Der Fashion MNIST-Datensatz besteht aus \num{60000} Bildern
 von zehn unterschiedlichen Kleidungsstücken. Die extrinsische Dimension ist ebenso wie bei MNIST
 784. Der FER-Datensatz besteht aus \num{28 709} Bildern von Gesichtern mit sieben unterschiedlichen
 Emotionen. Die Bilder haben eine Auflösung von $48 \times 48$ und sind damit \num{2304}-dimensional.
-Beispiele der Bild-Datensätze sind in \figref{fig:Dataset_samples} zu finden.
+Beispiele der Bilddatensätze sind in \figref{fig:Dataset_samples} zu finden.
 
 \nomenclature[Z]{MNIST}{Modified National Institute of Standards and Technology (Datensatz)}
 \nomenclature[Z]{FER}{Facial Emotion Recognition (Datensatz)}
 \nomenclature[Z]{ICMR}{Indian Council of Medical Research (Datensatz)}
 
 Letztlich enthält der ICMR-Datensatz Genausprägungen von 801 Personen, die mit fünf
-unterschiedlichen Arten von Krebs diagnostiziert wurden. Der Datensatz enthält Genausprägungen von
-über \num{20000} Genen, womit dieser Datensatz die höchste extrinsische Dimension im Vergleich
-besitzt. In Tabelle \ref{tab:uebersicht-datensaetze} sind die extrinsischen und intrinsischen
-Dimensionen, sowie die Stichprobengrößen der Datensätze zusammengefasst. Die intrinsischen
-Dimensionen sind die Schätzungen des in
+unterschiedlichen Arten von Krebs diagnostiziert wurden. Für jede Person sind Genausprägungen von
+über \num{20000} Genen vorhanden, womit dieser Datensatz die höchste extrinsische Dimension im
+Vergleich besitzt. In Tabelle \ref{tab:uebersicht-datensaetze} sind die extrinsischen und
+intrinsischen Dimensionen, sowie die Stichprobengrößen der Datensätze zusammengefasst. Die
+intrinsischen Dimensionen sind die Schätzungen des in
 \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} erläuterten Maximum
 Likelihood Schätzers für den jeweiligen Datensatz.
 
@@ -234,42 +234,39 @@ Likelihood Schätzers für den jeweiligen Datensatz.
 	\label{tab:uebersicht-datensaetze}
 \end{table}
 
-\section{Trainingsdetails und Parameterwahl}
+\section{Parameterwahl und Trainingsdetails}
 \label{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
 
-In diesem Abschnitt werden die gewählten (Hyper-)Parameter und Details des Trainierens der
-Dimensionsreduktionsmethoden vorgestellt. Eine Übersicht ist in
-Tabelle~\ref{tab:uebersicht-parameter} zu finden. Alle Datensätze wurden vor dem Anwenden der
-Dimensionsreduktionsmethoden standardisiert, das heißt $\mat{X}$ weist einen spaltenweisen
-Erwartungswert von Null und eine spaltenweise Varianz von Eins auf. Für die Evaluierung der
-Methoden wurde aufgrund von Restriktionen der Rechenleistung (insbesondere des Arbeitsspeichers)
-ein Downsampling auf maximal \num{15000} Stichproben durchgeführt.\footnote{Die Evaluierung ist
-	aufgrund der Berechnung der Co-Ranking-Matrix speicherintensiv, da diese maximal $(n-1) \times
-		(n-1)$ groß ist und damit quadratisch mit $n$ ansteigt. Um die Qualitätskriterien für den
-	MNIST-Datensatz zu berechnen, werden für $n=\num{25000}$ circa 25 GB Arbeitsspeicher benötigt.} Um
-die verschiedenen Nachbarschaftsgrößen in Locally Linear Embedding, den Qualitätskriterien und dem
-Schätzer der intrinsischen Dimension auseinanderhalten zu können, wird die Notation $\Klle$ für die
-Nachbarschaftsgröße in Locally Linear Embedding, $\Kqk$ für die Nachbarschaftsgröße in den
+In diesem Abschnitt werden die gewählten (Hyper-)Parameter und Trainingsdetails erklärt. Eine
+Übersicht ist in Tabelle~\ref{tab:uebersicht-parameter} zu finden. Alle Datensätze wurden vor dem
+Anwenden der Dimensionsreduktionsmethoden standardisiert, das heißt $\mat{X}$ weist einen
+spaltenweisen Erwartungswert von Null und eine spaltenweise Varianz von Eins auf. Für die
+Evaluierung der Methoden wurde aufgrund von Restriktionen der Rechenleistung (insbesondere des
+Arbeitsspeichers) ein Downsampling auf maximal \num{15000} Stichproben durchgeführt.\footnote{Die
+	Evaluierung ist aufgrund der Berechnung der Co-Ranking-Matrix speicherintensiv, da diese maximal
+	$(n-1) \times (n-1)$ groß ist und damit quadratisch mit $n$ ansteigt. Um die Qualitätskriterien für
+	den MNIST-Datensatz zu berechnen, werden für $n=\num{25000}$ circa 25 GB Arbeitsspeicher benötigt.}
+Um die verschiedenen Nachbarschaftsgrößen in Locally Linear Embedding, den Qualitätskriterien und
+dem Schätzer der intrinsischen Dimension auseinanderhalten zu können, wird die Notation $\Klle$ für
+die Nachbarschaftsgröße in Locally Linear Embedding, $\Kqk$ für die Nachbarschaftsgröße in den
 Qualitätskriterien und $\Kid$ für die Nachbarschaftsgröße des Schätzers der intrinsischen Dimension
 für den restlichen Teil dieser Arbeit eingeführt.
 
 Für die Principal Component Analysis gibt es neben der Anzahl der zu behaltenden Hauptkomponenten
 keine Parameter. Die Anzahl der Hauptkomponenten entspricht der intrinsischen Dimension, welche vom
-Datensatz abhängt und für alle Methoden identisch ist. Dies trifft analog auf Kernel PCA und auf
-Locally Linear Embedding zu. Für Autoencoder bestimmt die intrinsische Dimension die Größe der
-Bottleneck-Schicht. Für Kernel PCA wird ein Gaußscher Kernel eingesetzt, wofür ein Hyperparameter
-$\sigma$ gewählt werden kann. Die Werte $\sigma \in \{ 0.1, 0.25, 0.75, 1, 2, 5\}$ wurden getestet
-und der beste Durchlauf ausgewählt. Für ICMR und ORL lieferten diese Werte schlechte Ergebnisse,
-weswegen auf diesen Datensätzen zusätzlich die Werte \numlist{e-5;e-4;e-3;e-2;e-1} getestet wurden.
-Für Locally Linear Embedding gibt es nur einen Parameter $\Klle$, der die Größe der verwendeten
-Nachbarschaft kontrolliert. Die Werte $\Klle \in \{ 5, 7, 10, 12, 15\}$ wurden getestet und der
-beste Durchlauf ausgewählt.
+Datensatz abhängt und für alle Methoden identisch ist. Bei der Kernel PCA wird ein Gaußscher Kernel
+eingesetzt, wofür ein Hyperparameter $\sigma$ gewählt werden kann. Die Werte $\sigma \in \{ 0.1,
+	0.25, 0.75, 1, 2, 5\}$ wurden getestet und der beste Durchlauf ausgewählt. Für ICMR und ORL
+lieferten diese Werte schlechte Ergebnisse, weswegen auf diesen Datensätzen zusätzlich die Werte
+\numlist{e-5;e-4;e-3;e-2;e-1} getestet wurden. Für Locally Linear Embedding gibt es nur einen
+Parameter $\Klle$, der die Größe der verwendeten Nachbarschaft kontrolliert. Die Werte $\Klle \in
+	\{ 5, 7, 10, 12, 15\}$ wurden getestet und der beste Durchlauf ausgewählt.
 
-Den statistischen Methoden gegenüber haben Autoencoder deutlich mehr Freiheitsgrade, um die
+Gegenüber den statistischen Methoden haben Autoencoder deutlich mehr Freiheitsgrade, um die
 Architektur zu bestimmen. Die wichtigsten Parameter sind die Anzahl der Schichten $m$, sowie die
 Anzahl an Neuronen pro Schicht und die Wahl der Aktivierungsfunktionen. Daneben gibt es noch viele
 weitere Freiheitsgrade beim Trainieren des Autoencoders, welche teilweise vom Datensatz abhängen.
-Die Architekturen und weitere Trainingsdetails werden in
+Die Architekturen und weitere Trainingsdetails für Autoencoder werden in
 Appendix~\ref{ch:Appendix:Architektur-Details} genauer erläutert. Auf Bilddatensätzen wurden
 zusätzlich Convolutional Autoencoder trainiert, deren Architekturen an \textcite[14]{Ghosh.2019}
 angelehnt und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezifiziert sind.
@@ -307,14 +304,15 @@ eine Nachbarschaftsgröße von $1 \leq \Kqk \leq 100$ evaluiert. In
 \secref{ch:Vergleich:sec:Resultate:kuenstlich} werden die Ergebnisse auf den künstlichen
 Datensätzen und in \secref{ch:Vergleich:sec:Resultate:natuerlich} die Ergebnisse auf den
 natürlichen Datensätzen diskutiert. Letztlich wird in \secref{ch:Vergleich:sec:Resultate:PCA_AE}
-der Zusammenhang zwischen der Principal Component Analysis und Autoencodern empirisch untersucht.
+der Zusammenhang zwischen der Principal Component Analysis und Autoencodern theoretisch und
+empirisch untersucht.
 
 \subsection{Resultate auf künstlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:kuenstlich}
 
-Zuerst werden die Resultate auf den beiden künstlichen Datensätzen diskutiert. Dabei sind in
-\figref{fig:SwissRollMetrics} die drei Qualitätskriterien für die Swiss Roll und im Appendix in
-\figref{fig:TwinPeaksMetrics} für den Twin Peaks-Datensatz abgebildet.
+Zuerst werden die Resultate auf den beiden künstlichen Datensätzen diskutiert. Dabei sind die drei
+Qualitätskriterien für die Swiss Roll in \figref{fig:SwissRollMetrics} und für den Twin
+Peaks-Datensatz in \figref{fig:TwinPeaksMetrics} dargestellt.
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics{SwissRoll_comparison.pdf}
@@ -326,12 +324,8 @@ Beide Abbildungen zeigen ein ähnliches Ergebnis: Locally Linear Embedding kann 
 Der Autoencoder zeigt auf dem Swiss Roll-Datensatz die zweithöchste Vertrauenswürdigkeit. PCA, Kernel PCA und der Contractive Autoencoder sind hier deutlich weniger vertrauenswürdig. Bei diesen Methoden werden also nach der Dimensionsreduktion mehr Punkte fälschlicherweise Nachbarn. Auf dem Twin Peaks-Datensatz schneidet neben dem Autoencoder auch die Kernel PCA besser ab. Etwas deutlicher fällt hier die Principal Component Analysis zurück. Diese Methode hat Schwierigkeiten mit dem hohen Grad an Nichtlinearität in den beiden künstlichen Datensätzen. Der Contractive Autoencoder schneidet auf allen drei Kriterien relativ gesehen am schlechtesten ab. Möglicherweise verhindert der kontrahierende Fehlerterm die Anpassung an die Mannigfaltigkeit mit einer hohen Krümmung wie im Twin Peaks-Datensatz.
 
 Die Ergebnisse auf den künstlichen Datensätzen können visuell überprüft werden, indem die
-zweidimensionalen transformierten Daten $\mat{Y}$ in einem Scatter-Plot dargestellt werden. Diese
-Möglichkeit der Visualisierung der latenten Repräsentation ist ein Vorteil der Evaluierung auf
-künstlichen Datensätzen. Dies könnte theoretisch auch auf den natürlichen Datensätzen durchgeführt
-werden, allerdings gehen dabei zwangsweise Strukturen verloren, da die intrinsische Dimension auf
-diesen Datensätzen weit über zwei liegt. Als Illustration wurden in
-\figref{fig:SwissRollEmbeddings}
+transformierten Daten $\mat{Y}$ in einem Scatter-Plot dargestellt werden. Als Illustration wurden
+dafür in \figref{fig:SwissRollEmbeddings}
 \begin{figure}[ht]
 	\centering
 	\includegraphics{SwissRollEmbeddings.pdf}
