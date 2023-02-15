@@ -467,6 +467,7 @@ Eigenvektorbasis der Kovarianzmatrix von $\mat{X}$ projiziert \parencite[vgl.][1
 (\textit{weight decay}) lernt allerdings nur einen Unterraum davon, da diese Zielfunktion durch
 eine invertierbare Matrix $\mat{G}$ äquivalent umformuliert werden kann zu \parencite[1]{Kunin.2019}
 \begin{equation}
+	\label{eq:PCA_AE_Unterraum_Inverse}
 	\mathcal{J}_{\text{LAE}} = \norm{\mat{X} - (\mat{W}_2\mat{G}^{-1}) (\mat{G} \mat{W}_1)\mat{X}}_F^2 \, .
 \end{equation}
 Die Gewichte eines linearen Autoencoders, der den quadrierten Fehler
@@ -494,27 +495,31 @@ die Hauptkomponenten bis hin zu einer orthogonalen Transformation erlangt werden
 			d}$ der Fall ist. $\mat{U}$ und $\mat{V}$ sind orthogonale Matrizen, die aus den Links-
 	beziehungsweise Rechts-Singulärvektoren bestehen. Die Matrix $\mat{\Psi}$ ist eine Diagonalmatrix
 	mit den Singulärwerten \parencite[44 -- 45]{Goodfellow.2016}. } Dabei sind die ersten $d$ Links-Singulärvektoren, d.h. die
-ersten $d$ Spalten von $\mat{U}$, die gesuchten Vektoren. Allerdings wurde dies nicht formal
-bewiesen, sondern nur in empirischen Ergebnissen festgestellt. Eine Re-Implementierung des
-beschriebenen Vorgehens schlägt fehl, wenn ein linearer Autoencoder ohne \textit{weight decay}
-verwendet wird. Diese Beobachtung wurde in der Arbeit von \textcite{Kunin.2019} zur Landschaft der
-Fehlerfunktion eines linearen Autoencoders bestätigt und formal nachgewiesen. Damit ein linearer
-Autoencoder die Richtungen der Hauptkomponenten lernen kann, muss ein Regularisierungsterm zur
-Zielfunktion des Autoencoders hinzufügt werden, der die Größe der Gewichte bestraft (siehe
-Regularisierung in \secref{ch:MethodenDerDimRed:ML:AE}).\unsure{wieso?}
+ersten $d$ Spalten von $\mat{U}$, die gesuchten Vektoren.\footnote{Es können ebenfalls die
+	Rechts-Singulärvektoren der Encoder-Matrix $\mat{W}_1$ verwendet werden \parencite[4]{Plaut.2018}.} Allerdings wurde dies nicht formal bewiesen, sondern nur in empirischen
+Ergebnissen festgestellt. Eine Re-Implementierung des beschriebenen Vorgehens schlägt fehl, wenn
+ein linearer Autoencoder ohne \textit{weight decay} verwendet wird. Diese Beobachtung wurde in der
+Arbeit von \textcite{Kunin.2019} zur Landschaft der Fehlerfunktion eines linearen Autoencoders
+bestätigt und formal nachgewiesen. Damit ein linearer Autoencoder die Richtungen der
+Hauptkomponenten lernen kann, muss ein Regularisierungsterm zur Zielfunktion des Autoencoders
+hinzufügt werden, der die Größe der Gewichte bestraft (siehe Regularisierung in
+\secref{ch:MethodenDerDimRed:ML:AE}). Die Regularisierung der Gewichte bezweckt, dass die die
+Zielfunktion des linearen Autoencoders nicht mehr invariant gegenüber der in
+\eqref{eq:PCA_AE_Unterraum_Inverse} gezeigten Transformation mittels einer invertierbaren Matrix
+ist. Dies macht die Links-Singulärvektoren der Decoder-Matrix wohldefiniert \parencite[3]{Kunin.2019}.
 
 \subsubsection{Visualisierung der Zusammenhänge}
 
 Der eben beschriebene Zusammenhang wird im Folgenden zur Verdeutlichung visualisiert. Dazu wird
 zuerst die Korrelation der transformierten Daten und anschließend werden die gefundenen Gewichte
-der Methoden genauer analysiert. Punkt (1) aus dem theoretischen Zusammenhang wird in
+der Methoden genauer analysiert. Punkt (1) und (2) aus dem theoretischen Zusammenhang wird in
 \figref{fig:Kovarianzmatrizen} deutlich.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{covariance-matrices.pdf}
 	\caption[Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von drei Methoden]{Die Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz, wobei in \captiona die Principal Component Analysis und die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei Transformation mittels der Principal Component Analysis ist per Konstruktion eine Diagonalmatrix mit absteigend sortierten Varianzen, das heißt es besteht keine Korrelation in $\mat{Y}$. Wendet man die Singulärwertzerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, so erhält man ohne \textit{weight decay} keine Diagonalmatrix. Wurde hingegen \textit{weight decay} verwendet, so ist die Kovarianzmatrix eine Diagonalmatrix. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Kovarianzmatrizen}
-\end{figure} Dargestellt sind die Kovarianzmatrizen der transformierten Daten, wobei in \captiona die Principal Component Analysis und jeweils die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei der Principal Component Analysis ist wie erwartet eine Diagonalmatrix mit absteigend sortieren Varianzen auf der Diagonalen. Die von \textcite{Plaut.2018} vorgeschlagene Methode wurde in \captionb und \captionc angewandt. Hierbei bestimmt jedoch die Verwendung von \textit{weight decay} die Orthogonalität der latenten Repräsentation. Wird keine Regularisierung verwendet, so besteht Korrelation in $\mat{Y}$. Im Gegensatz dazu konnte die Korrelation fast vollständig eliminiert werden, wenn \textit{weight decay} verwendet wird.
+\end{figure} Dargestellt sind die Kovarianzmatrizen der transformierten Daten, wobei in \captiona die Principal Component Analysis und jeweils die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei der Principal Component Analysis ist wie erwartet eine Diagonalmatrix mit absteigend sortieren Varianzen auf der Diagonalen. Die von \textcite{Plaut.2018} vorgeschlagene Methode wurde in \captionb und \captionc angewandt. Hierbei bestimmt jedoch die Verwendung von \textit{weight decay} die Orthogonalität der latenten Repräsentation. Wird keine Regularisierung verwendet, so besteht Korrelation in $\mat{Y}$. Im Gegensatz dazu konnte die Korrelation fast vollständig eliminiert und damit Punkt (1) wiederhergestellt werden, wenn \textit{weight decay} verwendet wird. Außerdem kann durch die Methoden von \textcite{Plaut.2018} die absteigende Sortierung nach den Varianzen (Punkt (2)) wiederhergestellt werden.
 
 Um nun die gefundenen Lösungen der Principal Component Analysis und Autoencodern genauer betrachten
 zu können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines Autoencoders verglichen
