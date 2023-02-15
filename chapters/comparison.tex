@@ -12,8 +12,12 @@ Methodik des Vergleichs eingegangen, indem die Schätzung der intrinsischen Dime
 eingesetzten Qualitätskriterien erläutert werden. Außerdem werden in
 \secref{ch:Vergleich:sec:VerwendeteDatensaetze} die verwendeten Datensätze und in
 \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails} die Parameterwahl der Methoden vorgestellt.
-Letztlich werden in \secref{ch:Vergleich:sec:Resultate} die Resultate des empirischen Vergleichs
-diskutiert.\rewrite{genauer}
+Abschließend werden in \secref{ch:Vergleich:sec:Resultate} die Resultate des Vergleichs der zwei
+Gruppen diskutiert. Neben dem Vergleich der Gruppen wird in
+\secref{ch:Vergleich:sec:Resultate:PCA_AE} der Zusammenhang zwischen der Principal Component
+Analysis und Autoencodern theoretisch und empirisch untersucht. Der Vergleich kann mittels der im
+GitHub-Repository\footnote{\url{www.github.com/MoritzM00/drcomp}} definierten Konfigurationen der
+Methoden und des Trainingsskriptes repliziert werden.
 
 \section{Methodik}
 \label{ch:Vergleich:sec:Methodik}
@@ -21,19 +25,20 @@ diskutiert.\rewrite{genauer}
 Um die statistischen Methoden mit den Machine Learning Ansätzen zu vergleichen, wird die
 Performance der Methoden auf mehreren künstlichen sowie natürlichen Datensätzen mit der
 \newterm{Vertrauenswürdigkeit}, der \newterm{Kontinuität} und dem \newterm{Local Continuity
-	Meta-Criterion} gemessen. Diese Kriterien werden jeweils für mehrere Nachbarschaftsgrößen
-berechnet, um eine größere Aussagekraft über die Güte der gefundenen niedrigdimensionalen
-Repräsentation zu erreichen. Die Qualitätskriterien werden in
-\subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} eingehend erläutert. Für den
-Vergleich werden zwei künstliche und fünf natürliche Datensätze verwendet, die in
-\secref{ch:Vergleich:sec:VerwendeteDatensaetze} genauer vorgestellt werden. Insgesamt soll damit
-ein Überblick über die Stärken und Schwächen der statistischen und der Machine Learning Methoden
-verschafft werden. Neben dem Vergleich der zwei Gruppen wird in
-\secref{ch:Vergleich:sec:Resultate:PCA_AE} der Zusammenhang zwischen der Principal Component
-Analysis und Autoencodern genauer untersucht. Der Vergleich kann mittels der im
-GitHub-Repository\footnote{\url{www.github.com/MoritzM00/drcomp}} definierten Konfigurationen der
-Methoden und des Trainingsskriptes repliziert werden. \rewrite{Unter Methodik könnte man auch was
-	anderes verstehen. Ein bisschen mehr dazu sagen, wieso diese Vorgehensweise Sinn macht}
+	Meta-Criterion} gemessen. Diese Kriterien messen die lokale Strukturerhaltung aus unterschiedlichen
+Sichtweisen und werden jeweils für mehrere Nachbarschaftsgrößen berechnet, um eine größere
+Aussagekraft über die Güte der gefundenen niedrigdimensionalen Repräsentation zu erreichen. Die
+Qualitätskriterien werden in \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} noch
+eingehend erläutert. Neben der Evaluierung hinsichtlich der Qualitätskriterien wird der
+Rechenaufwand und die Güte von Rekonstruktionen eines ursprünglichen Datenpunktes für relevante
+Methoden besprochen. Der Vergleich wird auf insgesamt sieben Datensätzen durchgeführt, wobei zwei
+künstliche und fünf natürliche Datensätze verwendet werden. Diese werden in
+\secref{ch:Vergleich:sec:VerwendeteDatensaetze} genauer vorgestellt. Die intrinsische Dimension ist
+für die künstlichen Datensätze bekannt, muss aber für die natürlichen Datensätze geschätzt werden.
+Das Schätzen der intrinsischen Dimension wird daher in
+\subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} erklärt. Insgesamt soll
+damit ein Überblick über die Stärken und Schwächen der statistischen und der Machine Learning
+Methoden verschafft werden.
 
 \subsection{Qualitätskriterien der Dimensionsreduktion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien}
@@ -50,8 +55,7 @@ noch weitere rangbasierte Qualitätskriterien, welche einheitlich durch die soge
 	Matrix $\mat{Q}$ ist die Anzahl der Paare von Datenpunkten $(i, j)$, die den Rang $r_{\vect{x}}(i,
 		j) = k$ in der hochdimensionalen und den Rang $r_{\vect{y}}(i, j) = l$ in der niedrigdimensionalen
 	Repräsentation haben. Eine ideale Co-Ranking-Matrix ist eine Diagonalmatrix, da in diesem Fall kein
-	Datenpunkt seinen Rang bezüglich eines anderen Punktes geändert hat \parencite[1432]{Lee.2009}. } Ebenso können die im Folgenden betrachteten Qualitätskriterien über die
-Co-Ranking-Matrix berechnet werden.
+	Datenpunkt seinen Rang bezüglich eines anderen Punktes geändert hat \parencite[1432]{Lee.2009}.} Im Folgenden werden die drei verwendeten Qualitätskriterien erläutert.
 
 \nomenclature[Z]{LCMC}{Local Continuity Meta-Criterion}
 
