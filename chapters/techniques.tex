@@ -141,11 +141,9 @@ linear und damit für lineare Algorithmen wie die Principal Component Analysis e
 
 Der entscheidende Punkt ist, dass man die Abbildung $\bm{\phi}$ nicht explizit berechnet, sondern
 mithilfe eines \newterm{Kernels} $\kappa: \mathcal{X} \times \mathcal{X} \rightarrow \real$
-implizit gegeben hat \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Der Kernel Trick ist immer dann anwendbar,
-wenn der Algorithmus so umformuliert werden kann, dass $\bm{\phi}$ ausschließlich als Skalarprodukt
-vorkommt. Im Folgenden wird nach der Definition des Kernels die Vorgehensweise der Kernel PCA
-genauer erläutert. Allerdings wird für eine eingehendere Behandlung des Kernel Tricks und anderer
-Kernel-Methoden auf \textcite{ShaweTaylor.2011} verwiesen.
+implizit gegeben hat \parencites[586 -- 588]{Bishop.2006}[583]{Scholkopf.1997}. Im Folgenden wird nach der Definition des
+Kernels die Vorgehensweise der Kernel PCA genauer erläutert. Allerdings wird für eine eingehendere
+Behandlung des Kernel Tricks und anderer Kernel-Methoden auf \textcite{ShaweTaylor.2011} verwiesen.
 
 \subsubsection{Der Kernel}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:KernelFunktion}
@@ -162,17 +160,16 @@ Basisfunktionen (RBF))
 \end{equation}
 wobei der Parameter $\sigma > 0$ die Bandbreite des Kernels bestimmt \parencite[296]{ShaweTaylor.2011}. Ein zu kleiner Wert von $\sigma$ führt dazu, dass der Kernel die
 Ähnlichkeit der Punkte unterschätzt. Analog führt ein zu großer Wert der Bandbreite dazu, dass der
-Kernel die Ähnlichkeit überschätzt, d.h. die lokale Struktur wird unter Umständen vernachlässigt.
-Des Weiteren sind polynomiale Funktionen \parencite[292]{ShaweTaylor.2011}
+Kernel die Ähnlichkeit überschätzt, d.h. die lokale Struktur wird unter Umständen
+vernachlässigt.\addref Des Weiteren sind polynomiale Funktionen \parencite[292]{ShaweTaylor.2011}
 \begin{equation}
 	\kappa(\vect{x}_i, \vect{x}_j) = (\vect{x}_i \cdot \vect{x}_j)^p
 \end{equation}
 des Grades $p$ eine von vielen möglichen Kernel-Funktionen.
 
-Wie bereits in \subsecref{ch:MethodenDerDimRed:statistisch:kPCA:Grundidee} erwähnt, muss die
-Principal Component Analysis nun in eine Form gebracht werden, in der nur Skalarprodukte von
-$\bm{\phi}(\rvect{x})$ vorkommen. Diese Skalarprodukte können dann gemäß
-\eqref{eq:kPCA:KernelFunction} durch die Kernel-Funktion ersetzt werden.
+Der Kernel Trick besteht nun darin, den Algorithmus so umzuformen, dass $\bm{\phi}$ ausschließlich
+als Skalarprodukt vorkommt. Diese Skalarprodukte können dann gemäß \eqref{eq:kPCA:KernelFunction}
+durch die Kernel-Funktion ersetzt werden.
 
 \subsubsection{Vorgehensweise}
 \label{ch:MethodenDerDimRed:statistisch:kPCA:Vorgehensweise}
@@ -222,7 +219,7 @@ der Kernel oft sensitiv gegenüber seiner Parameter ist. Im Falle eines Gaußsch
 Parameter $\sigma$ gewählt werden, der die Bandbreite des Kernels bestimmt. Die Performance auf
 einem Datensatz hängt davon ab, wie passend diese Bandbreite gewählt wurde. Allgemein umgeht man
 das Problem der manuellen Auswahl eines Kernels und seiner Parameter für Kernel-Methoden mittels
-einer Gittersuche und kombiniert dies mit Kreuzvalidierung. Beispielsweise wird ein
+einer Gittersuche und kombiniert dies mit Kreuzvalidierung.\addref Beispielsweise wird ein
 Qualitätskriterium festgelegt und die Methode mit einer vorab definierten Auswahl an Werten der
 Hyperparameter auf einer Teilmenge des Datensatzes trainiert und mit einer anderen Teilmenge
 evaluiert. Die Parameter der Methode, die hinsichtlich des Qualitätskriteriums am besten
@@ -235,7 +232,7 @@ wäre die quadratische Abweichung zwischen der ursprünglichen Repräsentation e
 Rekonstruktion aus seiner niedrigdimensionalen Repräsentation. Die Kernel PCA stellt allerdings
 entgegen der klassischen Principal Component Analysis keine exakte inverse Transformation zur
 Verfügung, weswegen auf Approximationen zurückgegriffen werden muss. Dieses Problem entspricht dem
-Finden des sogenannten Urbildes (engl. \textit{pre-image}) in Kernel-Methoden \parencite{Kwok.2004}. Mithilfe dieser Approximation könnte eine Kreuzvalidierung über
+Finden des sogenannten Urbildes (engl. \textit{pre-image}) in Kernel-Methoden \parencite{Kwok.2004}. Mithilfe dieser Approximation könnte eine Kreuzvalidierung über den
 Rekonstruktionsfehler durchgeführt werden \parencite[siehe z.B.][]{Alam.2014}. In dieser Arbeit wird auf die Approximation des Urbildes
 verzichtet und stattdessen Qualitätskriterien der Dimensionsreduktion für eine Gittersuche
 verwendet. Das Vorgehen wird später in \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
@@ -256,7 +253,7 @@ Datensätze wurden daher inkrementelle Versionen der Kernel Principal Component 
 \subsection{Locally Linear Embedding}
 \label{ch:MethodenDerDimRed:statistisch:LLE}
 \nomenclature[Z]{LLE}{Locally Linear Embedding}
-Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, versucht die lokale und globale Struktur einer Mannigfaltigkeit durch die kollektive Analyse von überlappenden Nachbarschaften zu erhalten. Die Idee ist, dass durch die Analyse von lokalen Nachbarschaften die lokale Struktur erhalten werden kann, vorausgesetzt, die Daten liegen auf einer lokal linearen Mannigfaltigkeit. Theoretisch können dann aufgrund der Überlappungen der Nachbarschaften globale Eigenschaften implizit miteinbezogen werden \parencite[2325]{Roweis.2000}. Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die
+Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, versucht die lokale Struktur einer Mannigfaltigkeit durch die kollektive Analyse von überlappenden Nachbarschaften zu erhalten. Die Idee ist, dass durch die Analyse von Nachbarschaften die lokale Struktur erhalten werden kann, vorausgesetzt, die Daten liegen auf einer lokal linearen Mannigfaltigkeit. Theoretisch können dann aufgrund der Überlappungen der Nachbarschaften globale Eigenschaften implizit miteinbezogen werden \parencite[2325]{Roweis.2000}. Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die
 optimale lineare Rekonstruktion durch die Nachbarn eines Datenpunktes bestimmt. Im zweiten Schritt
 werden geometrische Eigenschaften dieser Rekonstruktion ausgenutzt, durch die die
 niedrigdimensionale Repräsentation abgeleitet werden kann. Diese beiden Schritte werden in den
@@ -417,9 +414,10 @@ wobei $\lambda \geq 0$ ein \newterm{Hyperparameter} ist, der die Stärke der Reg
 
 Eine Umsetzung dessen ist der \newterm{Sparse Autoencoder}, der eine dünn besetzte (engl.
 \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, d.h. nur wenige Einträge von $\vect{y}$ sind
-ungleich Null. Eine weitere oft eingesetzte Regularisierung für neuronale Netze ist das sogenannte
-\newterm{weight decay}, das die Größe der Gewichte im Netzwerk bestraft. Der Regularisierungsterm
-entspricht bspw. im Falle eines dreischichtigen Autoencoders (siehe \eqref{eq:dreischichtigerAE})
+ungleich Null \parencite[505]{Goodfellow.2016}. Eine weitere oft eingesetzte Regularisierung für neuronale Netze ist
+das sogenannte \newterm{weight decay}, das die Größe der Gewichte im Netzwerk bestraft. Der
+Regularisierungsterm entspricht bspw. im Falle eines dreischichtigen Autoencoders (siehe
+\eqref{eq:dreischichtigerAE})
 \begin{equation}
 	\label{eq:WeightDecay}
 	\Omega(\bm{\theta}) = \norm{\mat{W}_1}^2_F + \norm{\mat{W}_2}^2_F \, ,
@@ -530,7 +528,7 @@ Jacobi-Matrix $\mat{J}$ des Encoders $f$ erzielt werden \parencites[2]{Rifai.201
 	\label{eq:CAE-Regularisierung}
 	\Omega(\vect{y}) = \norm[\big]{\mat{J}_f(\vect{x})}_F^2 =  \norm[\Big]{ \frac{\partial f(\vect{x})}{\partial \vect{x}} }^2_F \, ,
 \end{equation}
-was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Wird angenommen, dass die Daten auf einer $d$-dimensionalen Mannigfaltigkeit liegen, so kann der Regularisierungsterm wie folgt geometrisch interpretiert werden. Einerseits sorgt der Regularisierungsterm dafür, dass der Autoencoder die Kodierung bei einer kleinen Änderung des Inputs nur wenig ändert, d.h. $f(\vect{x})$ soll möglichst konstant sein. Andererseits muss der Autoencoder auch den Rekonstruktionsfehler minimieren, sodass nicht alle Richtungen bei einer Änderung kontrahieren werden dürfen. Diese zwei entgegengesetzten Kräfte kann der Autoencoder gleichzeitig am besten balancieren, wenn die Richtungen parallel zur Mannigfaltigkeit für die stärkste Änderung in der Kodierung verantwortlich sind. In diesen \enquote{lokal relevanten} Richtungen wirkt der Contractive Autoencoder also nicht kontrahierend und die Richtungen, die orthogonal zur Mannigfaltigkeit liegen, werden am stärksten kontrahiert \parencites[1]{Rifai.2011a}[649 -- 650]{Rifai.2011b}.
+was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Wird angenommen, dass die Daten auf einer $d$-dimensionalen Mannigfaltigkeit liegen, so kann der Regularisierungsterm wie folgt geometrisch interpretiert werden. Einerseits sorgt der Regularisierungsterm dafür, dass der Autoencoder die Kodierung bei einer kleinen Änderung des Inputs nur wenig ändert, d.h. $f(\vect{x})$ soll möglichst konstant sein. Andererseits muss der Autoencoder auch den Rekonstruktionsfehler minimieren, sodass nicht alle Richtungen bei einer Änderung kontrahiert werden dürfen. Diese zwei entgegengesetzten Kräfte kann der Autoencoder gleichzeitig am besten balancieren, wenn die Richtungen parallel zur Mannigfaltigkeit für die stärkste Änderung in der Kodierung verantwortlich sind. In diesen \enquote{lokal relevanten} Richtungen wirkt der Contractive Autoencoder also weniger kontrahierend und die Richtungen, die orthogonal zur Mannigfaltigkeit liegen, werden am stärksten kontrahiert \parencites[1]{Rifai.2011a}[649 -- 650]{Rifai.2011b}.
 
 Der Regularisierungsterm ist für einen dreischichtigen Autoencoder effizient zu berechnen, nicht
 aber für einen tiefen Autoencoder. Dies stellt ein praktisches Problem dar, welches allerdings über
