@@ -325,7 +325,7 @@ Peaks-Datensatz in \figref{fig:TwinPeaksMetrics} dargestellt.
 	\label{fig:SwissRollMetrics}
 \end{figure}
 Beide Abbildungen zeigen ein ähnliches Ergebnis: Locally Linear Embedding kann mit der lokalen Erhaltung der Struktur hohe Werte auf allen drei Qualitätskriterien erzielen. Insbesondere hinsichtlich des LCMC kann sich LLE deutlich nach oben absetzen.
-Der Autoencoder zeigt auf dem Swiss Roll-Datensatz die zweithöchste Vertrauenswürdigkeit. PCA, Kernel PCA und der Contractive Autoencoder sind hier deutlich weniger vertrauenswürdig. Bei diesen Methoden werden also nach der Dimensionsreduktion mehr Punkte fälschlicherweise Nachbarn. Auf dem Twin Peaks-Datensatz schneidet neben dem Autoencoder auch die Kernel PCA besser ab. Etwas deutlicher fällt hier die Principal Component Analysis zurück. Diese Methode hat Schwierigkeiten mit dem hohen Grad an Nichtlinearität in den beiden künstlichen Datensätzen. Der Contractive Autoencoder schneidet auf allen drei Kriterien relativ gesehen am schlechtesten ab. Möglicherweise verhindert der kontrahierende Fehlerterm die Anpassung an die Mannigfaltigkeit mit einer hohen Krümmung wie im Twin Peaks-Datensatz.
+Der Autoencoder zeigt auf dem Swiss Roll-Datensatz die zweithöchste Vertrauenswürdigkeit. PCA, Kernel PCA und der Contractive Autoencoder sind hier deutlich weniger vertrauenswürdig. Bei diesen Methoden werden also nach der Dimensionsreduktion mehr Punkte fälschlicherweise Nachbarn. Auf dem Twin Peaks-Datensatz schneidet neben dem Autoencoder auch die Kernel PCA besser ab. Etwas deutlicher fällt hier die Principal Component Analysis zurück. Diese Methode hat Schwierigkeiten mit dem hohen Grad an Nichtlinearität in den beiden künstlichen Datensätzen. Der Contractive Autoencoder schneidet auf zwei von drei Kriterien relativ gesehen am schlechtesten ab. Möglicherweise verhindert der kontrahierende Fehlerterm die Anpassung an eine Mannigfaltigkeit mit einer hohen Krümmung wie im Twin Peaks-Datensatz.
 
 Die Ergebnisse auf den künstlichen Datensätzen können visuell überprüft werden, indem die
 transformierten Daten $\mat{Y}$ in einem Scatter-Plot dargestellt werden. Als Illustration wurden
@@ -348,7 +348,10 @@ latenten Repräsentation Nachbarn werden, obwohl sie es ursprünglich nicht ware
 Autoencoder kann ebenfalls eine höhere Vertrauenswürdigkeit erzielen, da die Swiss Roll teilweise
 entfaltet werden kann. Die inneren Punkte werden allerdings näher zueinander gezerrt, was die
 Kontinuität dieser Dimensionsreduktion reduziert. Sowohl die klassische Principal Component
-Analysis, als auch die Kernel-Variante sind nicht in der Lage, die Swiss Roll zu entfalten.
+Analysis, als auch die Kernel-Variante sind nicht in der Lage, die Swiss Roll zu entfalten. Hier
+ist außerdem zu kennen, wie der kontrahierende Fehlerterm die Sigmoid-Aktivierungsfunktion zum
+Saturieren bringt: Die transformierten Punkte tendieren entweder zur Null oder zur Eins, d.h. der
+Grenzen des Wertebereichs. In die Mitte werden hingegen weniger Punkte projiziert.
 
 \subsection{Resultate auf natürlichen Datensätzen}
 \label{ch:Vergleich:sec:Resultate:natuerlich}
@@ -424,9 +427,26 @@ dargestellt. Die erste Zeile besteht aus den Originalbildern als Referenz.
 	\caption[Rekonstruierte MNIST-Zahlen]{Gezeigt sind rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch einen Convolutional Autoencoder und (5) Rekonstruktion durch einen Contractive Autoencoder.}
 	\label{fig:MNIST-reconstructions}
 \end{figure}
-Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da einige Zahlen sogar als falsche Zahl rekonstruiert werden. Die Rekonstruktionen der Principal Component Analysis sind besser, aber visuell ebenfalls nicht überzeugend, da sie deutlich unscharfer sind. Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr als 10 Schichten hat über zwölf Millionen trainierbare Gewichte und zeigt auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien eine hohe Güte der Dimensionsreduktion (siehe \figref{fig:MNISTMetrics}). Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, sodass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Beispielsweise ist der FER-Datensatz deutlich komplexer als MNIST mit einer geringeren Anzahl an Trainingsdaten. Auf diesen Datensätzen ist die Rekonstruktion des Convolutional Autoencoders nicht mehr so gut wie auf dem MNIST-Datensatz.
+Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da die Zahlen miteinander vermischt und unscharf werden. Die vom kontrahierenden Fehlerterm geforderte robustere latente Repräsentation führt dazu, dass die Punkte ähnlicher zueinander sind. Dies erschwert also sichtbar die Rekonstruktion eines ursprünglichen Bildes. Die Rekonstruktionen der Principal Component Analysis sind besser, aber visuell ebenfalls nicht überzeugend, da sie unscharf sind. Der hier eingesetzte tiefe Convolutional Autoencoder mit mehr insgesamt 11 Schichten hat über zwölf Millionen trainierbare Gewichte und zeigt auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien eine hohe Güte der Dimensionsreduktion (siehe \figref{fig:MNISTMetrics}). Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, sodass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Im direkten Vergleich zum vollvernetzten Autoencoder, der sieben Schichten und nur etwas mehr als zwei Millionen Gewichte hat, zeigt dies, dass eine höhere Anzahl an Schichten im Netz tatsächlich einen Vorteil erbringen kann. Dies gilt solange, bis das Netz aufgrund der vielen Gewichte zu früh in suboptimalen lokalen Minima steckenbleibt. Dies ist für vollvernetzte Autoencoder in diesem Vergleich bei mehr als 7 Schichten der Fall gewesen. Der Convolutional Autoencoder erleichtert die Optimierung, da die einzelnen Convolutional Schichten durch das Teilen der Gewichte bereits weniger zu trainierende Gewichte besitzen.
 
-\idea{Zusammenfassung der Resultate?}
+Insgesamt kann festgestellt werden, dass Locally Linear Embedding auf künstlichen Datensätzen
+überzeugende Ergebnisse aufweisen kann, die sich aber nicht auf natürlichen Datensätzen fortsetzen.
+Hinsichtlich der natürlichen Datensätze schneidet die Principal Component Analysis auf allen drei
+Kriterien gut ab und kann sogar teilweise sogar die beste Performance unter den Methoden erzielen.
+Gleichzeitig hat diese Methode die kürzesten Laufzeiten und benötigt kein Hyperparameter-Tuning.
+Dies spricht trotz des hohen Alters für die Principal Component Analysis. Die nichtlineare
+Erweiterung durch den Einsatz des Kernel Tricks kann hingegen auf vielen Datensätzen keine
+nennenswerte Verbesserung erbringen. Durch den hohen Aufwand im Hyperparameter-Tuning macht dies
+die Kernel PCA zumindest in diesem Vergleich unattraktiv. Der vollvernetzte Autoencoder schneidet
+durchweg auf allen Datensätzen gut ab und kann die Principal Component Analysis auf den
+nichtlinearen künstlichen Datensätzen outperformen. Letzteres trifft hingegen nicht auf die
+natürlichen Datensätze zu. Der Contractive Autoencoder ist aufgrund der relativ schlechten
+Ergebnisse hinsichtlich der Qualitätskriterien keine überzeugende Option, wenn man zusätzlich bspw.
+die Vorteile der Principal Component Analysis berücksichtigt. Auf Bilddatensätzen stellt der
+Convolutional Autoencoder insbesondere hinsichtlich der Rekonstruktion, aber auch der
+Qualitätskriterien und der erleichterten Optimierung eine gute Alternative zum vollvernetzen
+Autoencoder und zu den statistischen Methoden dar. Im Folgenden wird der Zusammenhang zwischen
+Autoencodern und der Principal Component Analysis untersucht.
 
 \subsection{Principal Component Analysis vs. Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}
