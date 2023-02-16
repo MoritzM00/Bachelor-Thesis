@@ -283,7 +283,7 @@ angelehnt und ebenfalls in Appendix~\ref{ch:Appendix:Architektur-Details} spezif
 		\toprule
 		Methode                            & Parameter                                                            \\ \midrule
 		PCA      & --                                                                   \\
-		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\sigma))$, $\sigma \in \{\num{e-5},\num{e-4}, \num{e-3}, \num{e-2}, \num{e-1}, 0.25, 0.75, 1, 2, 5\}$ \\
+		Kernel PCA                         & $\kappa(\vect{x}_1, \vect{x}_2) = \exp(- \norm{\vect{x}_1 - \vect{x}_2}^2/(2\sigma^2))$, $\sigma \in \{\num{e-5},\num{e-4}, \num{e-3}, \num{e-2}, \num{e-1}, 0.25, 0.75, 1, 2, 5\}$ \\
 		Locally Linear Embedding     & $\Klle \in \{ 5, 7, 10, 12, 15\}$,                      \\
 		Autoencoder                  & $m \in \{3, 5, 7\}$, Sigmoid-Aktivierungsfunktion \newline (siehe
 		Appendix~\ref{ch:Appendix:Architektur-Details})                                                           \\  Contractive Autoencoder & $m \in \{3, 5\}$, $\lambda=1\mathrm{e}{-4}$,

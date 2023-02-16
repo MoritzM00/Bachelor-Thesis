@@ -19,7 +19,7 @@ herkömmlicher Rechner werden.
 % der Datensatz bei einer Bildgröße von $3 \times 384 \times 384$ haben. Dies entspricht einer Dimensionalität
 % von 442 368. In dieser Auflösung werden 240 TeraByte Speicherplatz benötigt.}
 
-Möglicherweise sind jedoch nur eine deutlich geringere Anzahl an \newterm{Merkmalen} (z.B. Gene)
+Möglicherweise ist jedoch nur eine deutlich geringere Anzahl an \newterm{Merkmalen} (z.B. Gene)
 relevant für die Analyse, da Redundanz im Informationsgehalt der ursprünglichen Repräsentation
 besteht. Bei Bilddaten ist dies bspw. in angrenzenden Pixeln der Fall, da sich hier die Intensität
 der Pixel oft nur an wenigen Stellen im Bild ändert. Die Idee der Dimensionsreduktion ist es daher,
@@ -47,16 +47,16 @@ generalisiert.
 Über die Zeit wurden daher eine Vielzahl von Dimensionsreduktionsmethoden entwickelt \parencite[siehe z.B.][]{Lee.2007} -- die große Auswahl macht die Selektion der richtigen Methode für
 eine spezifische Aufgabe allerdings nicht einfacher. Einer der umfassendsten Vergleiche von
 Methoden der Dimensionsreduktion wurde von \Textcite{vanderMaaten.2009} durchgeführt. Die Autoren
-untersuchten zwölf nichtlineare Methoden und verglichen diese mit der Principal Component Analysis.
-Sie kommen zu dem Ergebnis, dass nichtlineare Methoden die Principal Component Analysis auf
-künstlichen Datensätzen übertreffen können, dies aber bei natürlichen Datensätzen generell nicht
-zutrifft. In der Arbeit von \textcite{RohanPandit.2016} wird dieses Ergebnis auf Daten von
+haben zwölf nichtlineare Methoden untersucht und diese mit der Principal Component Analysis
+verglichen. Sie kommen zu dem Ergebnis, dass nichtlineare Methoden die Principal Component Analysis
+auf künstlichen Datensätzen übertreffen können, dies aber bei natürlichen Datensätzen generell
+nicht zutrifft. In der Arbeit von \textcite{RohanPandit.2016} wurde dieses Ergebnis auf Daten von
 Proteinstrukturen bestätigt. \Textcite{Gracia.2014} stellen eine Methodik vor, die die Methoden
 nach dem Qualitätsverlust der Dimensionsreduktion evaluiert. Dazu wird eine Übersicht über einige
 Qualitätskriterien gegeben und die Methodik in einem Vergleich von zwölf Methoden auf zwölf
-natürlichen Datensätzen angewandt. Der Fokus liegt hier jedoch mehr auf dem Vergleich der
-unterschiedlichen Qualitätskriterien und der vorgestellten Methodik. Dasselbe trifft auf die Arbeit
-von \textcite{Lee.2009} zu, in der rangbasierte Qualitätskriterien in einem einheitlichen Framework
+Datensätzen angewandt. Der Fokus liegt jedoch mehr auf dem Vergleich der unterschiedlichen
+Qualitätskriterien und der vorgestellten Methodik. Dasselbe trifft auf die Arbeit von
+\textcite{Lee.2009} zu, in der rangbasierte Qualitätskriterien in einem einheitlichen Framework
 zusammengefasst werden. Daneben gibt es noch einige weitere Arbeiten, die sich lediglich mit
 theoretischen Eigenschaften der Methoden befassen und diese nicht empirisch miteinander vergleichen \parencites{Cunningham.2014}{Sorzano.2014}{Lee.2007}{Sarveniazi.2014}{Burges.2009b}.
 
@@ -72,7 +72,7 @@ und vergleichsweise alten statistischen Methoden ersetzen können. Um dieser Fra
 kommen, werden drei statistische und zwei Machine Learning Methoden genauer betrachtet und in einem
 empirischen Vergleich auf künstlichen und natürlichen Datensätzen gegenübergestellt. Die hier
 vorgestellten Methoden sind die weitverbreitete \newterm{Principal Component Analysis}, die
-\newterm{Kernel Principal Component Analysis} sowie das \newterm{Locally Linear Embedding} als
+\newterm{Kernel Principal Component Analysis} sowie \newterm{Locally Linear Embedding} als
 Vertreter der statistischen Methoden (\secref{ch:MethodenDerDimRed:statistisch}). Der
 \newterm{Autoencoder} und eine Variante in Form des \newterm{Contractive Autoencoders} werden als
 Vertreter der Machine Learning Ansätze (\secref{ch:MethodenDerDimRed:modern}) vorgestellt. Darüber

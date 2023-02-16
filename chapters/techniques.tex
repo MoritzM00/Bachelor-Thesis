@@ -156,12 +156,12 @@ Ein Kernel $\kappa$ ist definiert als das Skalarprodukt im Merkmalsraum \parenci
 und ist damit intuitiv gesehen ein \enquote{Orakel} für die Ähnlichkeit der Daten im Merkmalsraum, weil dies ohne Kenntnis der Koordinaten berechnet werden kann \parencite[71]{ShaweTaylor.2011}. In der Praxis häufig anzutreffen sind Gaußsche Kernel (auch: Radiale
 Basisfunktionen (RBF))
 \begin{equation}
-	\kappa(\vect{x}_i, \vect{x}_j) = \exp \left(- \frac{\norm{ \vect{x}_i - \vect{x}_j}^2}{2\sigma}\right) \, ,
+	\kappa(\vect{x}_i, \vect{x}_j) = \exp \left(- \frac{\norm{ \vect{x}_i - \vect{x}_j}^2}{2\sigma^2}\right) \, ,
 \end{equation}
-wobei der Parameter $\sigma > 0$ die Bandbreite des Kernels bestimmt \parencite[296]{ShaweTaylor.2011}. Ein zu kleiner Wert von $\sigma$ führt dazu, dass der Kernel die
-Ähnlichkeit der Punkte unterschätzt. Analog führt ein zu großer Wert der Bandbreite dazu, dass der
-Kernel die Ähnlichkeit überschätzt, d.h. die lokale Struktur wird unter Umständen
-vernachlässigt.\addref Des Weiteren sind polynomiale Funktionen \parencite[292]{ShaweTaylor.2011}
+wobei der Parameter $\sigma > 0$ die Bandbreite des Kernels bestimmt \parencite[296]{ShaweTaylor.2011}. Ein zu großer Wert von $\sigma$ führt dazu, dass der Kernel fast
+konstant wird und somit die lokale Struktur nicht mehr passend berücksichtigen kann. Ein zu kleiner
+Wert führt zur Überschätzung der Ähnlichkeit von ähnlichen Punkten und zur Unterschätzung bei
+unähnlichen Punkten, d.h. der Kernel passt sich zu sehr an die Daten an (Overfitting) \parencite[296 -- 297]{ShaweTaylor.2011}. Des Weiteren sind polynomiale Funktionen \parencite[292]{ShaweTaylor.2011}
 \begin{equation}
 	\kappa(\vect{x}_i, \vect{x}_j) = (\vect{x}_i \cdot \vect{x}_j)^p
 \end{equation}
@@ -360,11 +360,11 @@ Untergliederung präziser formuliert.
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}
 Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^d$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ kodiert und zum anderen den \newterm{Decoder} $g: \real^d \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Ein dreischichtiger, vollvernetzter Autoencoder kann also mittels
-\begin{gather}
+\begin{align}
 	\label{eq:dreischichtigerAE}
-	f(\vect{x}) = s(\mat{W}_1 \vect{x} + \vect{b}_1) = \vect{y} \\
-	g(f(\vect{x})) = s(\mat{W}_2 \vect{y} + \vect{b}_2) = \estNormal{\vect{x}}
-\end{gather}
+	f(\vect{x})    & = s(\mat{W}_1 \vect{x} + \vect{b}_1) = \vect{y}             \\
+	g(f(\vect{x})) & = s(\mat{W}_2 \vect{y} + \vect{b}_2) = \estNormal{\vect{x}}
+\end{align}
 formalisiert werden, wobei $s$ die Aktivierungsfunktion bezeichnet, $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{D \times d}$ die Gewichte und $\vect{b}_i$ mit $i = 1,2$ die Bias-Vektoren des Netzwerks sind. Dies entspricht je einer affinen Transformation gefolgt von einer Aktivierungsfunktion. Die Nichtlinearität eines Autoencoders wird durch die Auswahl dieser Aktivierungsfunktionen bestimmt.
 Werden ausschließlich lineare Funktionen verwendet, resultiert dies in einem linearen Autoencoder,
 welcher ähnlich zur Principal Component Analysis ist. Dies wird in

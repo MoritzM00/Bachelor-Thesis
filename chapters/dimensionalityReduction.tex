@@ -31,8 +31,8 @@ Nachdem nun die grundlegende Terminologie und das Ziel der Dimensionsreduktion g
 werden im Folgenden einige weitere wichtige Ideen und Konzepte erläutert. Dazu wird in
 \secref{ch:Dimensionsreduktion:FluchDerDim} der Fluch der Dimensionalität sowie in
 \secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim} die Idee von Mannigfaltigkeiten und
-der intrinsischen Dimension behandelt. Letztlich werden in \secref{ch:Dimensionsreduktion:Ansaetze}
-kurz verschiedene Möglichkeiten der Einordnung von Dimensionsreduktionsmethoden vorgestellt.
+der intrinsischen Dimension behandelt. Letztlich wird in \secref{ch:Dimensionsreduktion:Ansaetze}
+die Einordnung von Dimensionsreduktionsmethoden besprochen.
 
 \section{Der Fluch der Dimensionalität}
 \label{ch:Dimensionsreduktion:FluchDerDim}
@@ -98,8 +98,7 @@ zweidimensionale Mannigfaltigkeit eingebettet im $\real^3$.
 	\caption[Ein Beispiel für eine zweidimensionale Mannigfaltigkeit: ein Torus]{Gezeigt ist ein Beispiel für eine zweidimensionale Mannigfaltigkeit eingebettet im $\real^3$, der sogenannte Torus. Bewegt man sich entlang der Oberfläche des Torus, so erscheint sie lokal flach und ähnelt damit dem $\real^2$. Aus diesem Grund ist der abgebildete Torus eine 2-Mannigfaltigkeit -- trotz der Tatsache, dass das Objekt als Ganzes nicht in einem zweidimensionalen Raum dargestellt werden kann. Eigene Darstellung (angelehnt an \textcite[350]{Hill.2020})}
 	\label{fig:Torus}
 \end{figure}
-Lokal erscheint die Oberfläche des Torus flach, das heißt sie ähnelt dem $\real^2$ und nicht dem $\real^3$, in dem sie eingebettet ist. Die intrinsische Dimension im Kontext der Topologie ist also zwei. Eine Karte kann nun informell wie eine Landkarte eines Teils der Oberfläche beschrieben werden. Bewegt man sich entlang
-dieser Oberfläche, so muss die Karte irgendwann gewechselt werden. Dieser Übergang von zwei sich
+Lokal erscheint die Oberfläche des Torus flach, das heißt sie ähnelt dem $\real^2$ und nicht dem $\real^3$, in dem sie eingebettet ist. Die intrinsische Dimension im Kontext der Topologie ist also zwei. Eine Karte kann nun informell wie eine \enquote{Landkarte} eines Teils der Oberfläche des Torus beschrieben werden. Beim Bewegen entlang der Oberfläche kommt es irgendwann zu einem Übergang von zwei Karten. Dieser Übergang von zwei sich
 überlappenden Karten wird durch den Homöomorphismus $\varphi$ formalisiert. Betrachtet man alle Karten
 von allen Teilen der Oberfläche ergibt dies den Atlas des Torus \parencite[4, 12]{Lee.2012}. Beim Erlernen von Mannigfaltigkeiten geht es nun darum, die latente
 Repräsentation $\vect{y}_1, \ldots, \vect{y}_n$ zu finden, für die $\vect{y}_i =
@@ -166,12 +165,14 @@ Dimensionsreduktionsmethoden. In der Kategorie der nicht-konvexen Methoden sind 
 \textit{Multidimensional Scaling} \parencites{Kruskal.1964}{Cox.2008}, welches in der klassischen Form im Ergebnis sehr ähnlich zur
 Principal Component Analysis ist. Des Weiteren sind in dieser Kategorie noch \textit{Isomap} \parencite{Tenenbaum.2000} und Erweiterungen von Locally Linear Embedding wie \textit{Hessian Locally
 	Linear Embedding} \parencite{Donoho.2003} oder \textit{Local Tangent Space Alignment} \parencite{Zhang.2002} zu nennen. \textit{Maximum Variance Unfolding} \parencite{Weinberger.2006}, auch bekannt als \textit{Semidefinite Embedding}, erweitert die Kernel
-Principal Component Analysis, indem die Kernel-Matrix gelernt wird.
+Principal Component Analysis, indem die Kernel-Matrix gelernt wird. Wenn die Dimensionsreduktion
+lediglich für die Visualisierung, d.h. für die Reduktion auf zwei oder drei Dimensionen verwendet
+wird, sind außerdem \textit{t-distributed Stochastic Neighbor Embedding} \parencite{vanderMaaten.2008} und \textit{Uniform Manifold Approximation and Projection} \parencite{McInnes.2018} vielverwendete Methoden.
 
 Wie zu erkennen ist, gibt es eine große Auswahl an verschiedenen Methoden der Dimensionsreduktion.
 Nach dem \newterm{No Free Lunch Theorem} \parencite{Wolpert.1997} gibt es aber keinen \enquote{besten} Algorithmus für jede Situation, weswegen
 eine Methode domänenspezifisch ausgewählt werden muss. Zur Reduktion von Speicher- und
-Rechenkapazitäten und aufgrund des Fluchs der Dimensionalität kann der Aufwand trotzdem sinnvoll
+Rechenanforderungen und aufgrund des Fluchs der Dimensionalität kann der Aufwand trotzdem sinnvoll
 sein. Mit dem Hintergrundwissen zu wichtigen Konzepten wie der Mannigfaltigkeit und der
 intrinsischen Dimension (\secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim}) können im
 Folgenden die einzelnen Methoden vorgestellt werden.
