@@ -219,16 +219,12 @@ der Kernel oft sensitiv gegenüber seiner Parameter ist. Im Falle eines Gaußsch
 Parameter $\sigma$ gewählt werden, der die Bandbreite des Kernels bestimmt. Die Performance auf
 einem Datensatz hängt davon ab, wie passend diese Bandbreite gewählt wurde. Allgemein umgeht man
 das Problem der manuellen Auswahl eines Kernels und seiner Parameter für Kernel-Methoden mittels
-einer Gittersuche und kombiniert dies mit Kreuzvalidierung.\addref Beispielsweise wird ein
-Qualitätskriterium festgelegt und die Methode mit einer vorab definierten Auswahl an Werten der
-Hyperparameter auf einer Teilmenge des Datensatzes trainiert und mit einer anderen Teilmenge
-evaluiert. Die Parameter der Methode, die hinsichtlich des Qualitätskriteriums am besten
-abgeschnitten hat, werden dann für das finale Modell übernommen und auf dem vollen
-Trainingsdatensatz trainiert. Dies funktioniert für Klassifikatoren und Regressoren wie z.B. die
-Support Vector Machine gut, da die Wahl der Qualitätskriterien nicht problematisch ist. Für die
-Dimensionsreduktion ist die Wahl des Qualitätskriteriums nicht trivial, wie wir später in
-\subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} sehen werden. Eine Möglichkeit
-wäre die quadratische Abweichung zwischen der ursprünglichen Repräsentation eines Punktes und der
+einer Gittersuche und kombiniert dies mit Kreuzvalidierung \parencite[1]{Alam.2014}. Dabei wird ein Qualitätskriterium festgelegt und die Methode mit einer vorab
+definierten Auswahl an Werten der Hyperparameter auf einer Teilmenge des Datensatzes trainiert und
+mit einer anderen Teilmenge evaluiert. Die Parameter der Methode, die hinsichtlich des
+Qualitätskriteriums am besten abgeschnitten hat, werden dann für das finale Modell übernommen und
+auf dem vollen Trainingsdatensatz trainiert. Eine Möglichkeit für ein Qualitätskriterium wäre die
+quadratische Abweichung zwischen der ursprünglichen Repräsentation eines Punktes und der
 Rekonstruktion aus seiner niedrigdimensionalen Repräsentation. Die Kernel PCA stellt allerdings
 entgegen der klassischen Principal Component Analysis keine exakte inverse Transformation zur
 Verfügung, weswegen auf Approximationen zurückgegriffen werden muss. Dieses Problem entspricht dem
