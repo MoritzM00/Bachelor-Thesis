@@ -392,7 +392,7 @@ Grund muss ein Autoencoder oftmals regularisiert werden, worauf im Folgenden ein
 
 \subsubsection{Regularisierung}
 \label{ch:MethodenDerDimRed:ML:AE:Regularisierung}
-Bei neuronalen Netzen ist die Regularisierung aufgrund der vielen zu trainierende Freiheitsgrade eine gängige Praxis, um die Gefahr des Overfittings zu reduzieren \parencite[228]{Goodfellow.2016}. Dasselbe kann im Kontext der Dimensionsreduktion angewendet werden,
+Bei neuronalen Netzen ist die Regularisierung aufgrund der vielen zu trainierenden Freiheitsgrade eine gängige Praxis, um die Gefahr des Overfittings zu reduzieren \parencite[228]{Goodfellow.2016}. Dasselbe kann im Kontext der Dimensionsreduktion angewendet werden,
 indem das Netz derart eingeschränkt wird, dass eine möglichst sinnvolle Repräsentation $\rvect{y}$
 gelernt wird. Ein erstes Beispiel hierfür ist bereits der in \figref{fig:SchematischerAutoencoder}
 gezeigte unterbestimmte Autoencoder, mit dem eine $d$-dimensionale Repräsentation in der Mitte
@@ -429,7 +429,7 @@ Die vielen Freiheitsgrade in der Wahl der Architektur machen die Autoencoder fle
 zugleich aber auch ein Nachteil dieser Methode. Im Folgenden werden die zu treffenden
 Entscheidungen bei der Wahl der Architektur eines Autoencoders kurz erläutert.
 
-Erstens muss zwischen vollvernetzten und \textit{Convolutional} Schichten entschieden werden.
+Einerseits muss zwischen vollvernetzten und \textit{Convolutional} Schichten entschieden werden.
 Letztere können eingesetzt werden, wenn der Input des Autoencoders eine gitterartige Topologie, wie
 z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}.
 % \footnote{In der Mathematik ist eine diskrete Faltung zweier
@@ -446,26 +446,27 @@ aufsummiert \parencite[333]{Goodfellow.2016}. In dieser Weise werden die Gewicht
 lokale Struktur des Bildes besser miteinbezogen. Für eine detaillierte Einführung in Convolutional
 Neural Networks wird auf die Ausführungen in \textcite[330 -- 372]{Goodfellow.2016} verwiesen. In
 den anderen Fällen können vollvernetzte Schichten eingesetzt werden, d.h. jedes Neuron hat eine
-Verbindung zu jedem Neuron aus der Folgeschicht. Zweitens muss die Anzahl der Schichten $m$
-festgelegt werden, welche für die Symmetrie des Encoders und Decoders ungerade sein sollte (aber
-nicht muss). Häufig wählt man hier $m = 3$ oder $m = 5$, da bei größerem $m$ Schwierigkeiten bei
-der Konvergenz des Autoencoders auftreten. Dies liegt an der hohen Anzahl an Verbindungen
-(Gewichte) im neuronalen Netz, da jedes Neuron mit allen Neuronen aus der nachfolgenden Schicht
-verbunden ist. Bei hochdimensionalen Datensätzen besitzt die Input-Schicht zudem viele Neuronen.
-Dies führt dazu, dass bereits simple dreischichtige Autoencoder viele Gewichte haben: Beträgt die
-extrinsische Dimension bspw. 1000 und wählt man $m=3$ und hat die Bottleneck-Schicht zehn Neuronen,
-dann hat dieser simple Autoencoder bereits \num{20000} trainierbare Gewichte.\footnote{Genau
-	genommen hat der Encoder $1000 \cdot 10 = \num{10000}$ Gewichte und zehn Biases. Der Decoder hat
-	\num{10000} Gewichte und \num{1000} Biases. Der Autoencoder hat also insgesamt \num{20110} zu
-	trainierende Freiheitsgrade.}
+Verbindung zu jedem Neuron aus der Folgeschicht.
 
-Drittens muss die Anzahl der Neuronen in den versteckten Schichten festgelegt werden. Die Anzahl
-der Neuronen in der ersten und letzten Schicht entspricht der Größe des Inputvektors, d.h. der
-extrinsischen Dimension $D$. Erhöht man die Anzahl der Neuronen in einer versteckten Schicht, so
-erhöht sich die Kapazität des Autoencoders. Daher muss dieser Freiheitsgrad mit Bedacht gewählt
+Andererseits muss die Anzahl der Schichten $m$ festgelegt werden, welche für die Symmetrie des
+Encoders und Decoders ungerade sein sollte (aber nicht muss). Häufig wählt man hier $m = 3$ oder $m
+	= 5$, da bei größerem $m$ Schwierigkeiten bei der Konvergenz des Autoencoders auftreten. Dies liegt
+an der hohen Anzahl an Verbindungen (Gewichte) im neuronalen Netz, da jedes Neuron mit allen
+Neuronen aus der nachfolgenden Schicht verbunden ist. Bei hochdimensionalen Datensätzen besitzt die
+Input-Schicht zudem viele Neuronen. Dies führt dazu, dass bereits simple dreischichtige Autoencoder
+viele Gewichte haben: Beträgt die extrinsische Dimension bspw. 1000 und wählt man $m=3$ und hat die
+Bottleneck-Schicht zehn Neuronen, dann hat dieser simple Autoencoder bereits \num{20000}
+trainierbare Gewichte.\footnote{Genau genommen hat der Encoder $1000 \cdot 10 = \num{10000}$
+	Gewichte und zehn Biases. Der Decoder hat \num{10000} Gewichte und \num{1000} Biases. Der
+	Autoencoder hat also insgesamt \num{20110} zu trainierende Freiheitsgrade.}
+
+Darüber hinaus muss die Anzahl der Neuronen in den versteckten Schichten festgelegt werden. Die
+Anzahl der Neuronen in der ersten und letzten Schicht entspricht der Größe des Inputvektors, d.h.
+der extrinsischen Dimension $D$. Erhöht man die Anzahl der Neuronen in einer versteckten Schicht,
+so erhöht sich die Kapazität des Autoencoders. Daher muss dieser Freiheitsgrad mit Bedacht gewählt
 werden, da es sonst ebenfalls zu Schwierigkeiten in der Optimierung kommen kann.
 
-Viertens muss die Aktivierungsfunktion festgelegt werden. Dabei könnte theoretisch nach jeder
+Abschließend muss die Aktivierungsfunktion festgelegt werden. Dabei könnte theoretisch nach jeder
 Schicht eine andere Aktivierungsfunktion eingesetzt werden. Hier wird jedoch angenommen, dass
 dieselbe Funktion für alle Schichten verwendet wird. Wie eingangs erwähnt, bestimmt die
 Aktivierungsfunktion die Nichtlinearität des Autoencoders. Die wohl populärsten
