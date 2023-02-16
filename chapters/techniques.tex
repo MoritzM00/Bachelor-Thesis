@@ -204,7 +204,7 @@ zweiten Schritt in ihre Eigenvektoren $\vect{v_i}$ und Eigenwerte $\lambda_i$ mi
 	\vect{a}_i = \frac{1}{\sqrt{\lambda_i}} \vect{v}_i
 \end{equation}
 die Eigenvektoren $\vect{a}_i$ von $\mat{C}$ bestimmt werden können \parencite[142]{ShaweTaylor.2011}. Letztlich kann die Projektion eines Punktes $\vect{x}_i$ auf die
-niedrigdimensionale Repräsentation $\rvect{y}_i$ durch
+latente Repräsentation $\rvect{y}_i$ durch
 \begin{equation}
 	\vect{y}_i = \Bigg( \sum_{j=1}^n \vect{a}_j^{(l)} \kappa(\vect{x}_i, \vect{x}_j) \Bigg)_{l=1}^d
 \end{equation}
@@ -251,9 +251,9 @@ Datensätze wurden daher inkrementelle Versionen der Kernel Principal Component 
 \nomenclature[Z]{LLE}{Locally Linear Embedding}
 Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, versucht die lokale Struktur einer Mannigfaltigkeit durch die kollektive Analyse von überlappenden Nachbarschaften zu erhalten. Die Idee ist, dass durch die Analyse von Nachbarschaften die lokale Struktur erhalten werden kann, vorausgesetzt, die Daten liegen auf einer lokal linearen Mannigfaltigkeit. Theoretisch können dann aufgrund der Überlappungen der Nachbarschaften globale Eigenschaften implizit miteinbezogen werden \parencite[2325]{Roweis.2000}. Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die
 optimale lineare Rekonstruktion durch die Nachbarn eines Datenpunktes bestimmt. Im zweiten Schritt
-werden geometrische Eigenschaften dieser Rekonstruktion ausgenutzt, durch die die
-niedrigdimensionale Repräsentation abgeleitet werden kann. Diese beiden Schritte werden in den
-folgenden zwei Unterabschnitten genauer betrachtet.
+werden geometrische Eigenschaften dieser Rekonstruktion ausgenutzt, durch die die latente
+Repräsentation abgeleitet werden kann. Diese beiden Schritte werden in den folgenden zwei
+Unterabschnitten genauer betrachtet.
 
 \subsubsection{Lineare Rekonstruktion durch die Nachbarn}
 \label{ch:MethodenDerDimRed:statistisch:LLE:LineareRekonstruktion}
@@ -289,7 +289,7 @@ Des Weiteren sind die Gewichtsmatrizen, die dieses Optimierungsproblem lösen, i
 \subsubsection{Finden der niedrigdimensionalen Repräsentation}
 \label{ch:MethodenDerDimRed:statistisch:LLE:FindenDerRepr}
 Wurden die optimalen Rekonstruktionsgewichte $W_{ij}$, die die Zielfunktion aus
-\eqref{eq:LLE:Zielfunktion} unter den genannten Nebenbedingungen minimieren, gefunden, so kann in einem zweiten Schritt die niedrigdimensionale Repräsentation $\vect{y}$ hergeleitet werden. Dazu werden die Eigenschaften der Gewichtsmatrix $\mat{W}$ ausgenutzt. Nimmt man wie eingangs erwähnt die Einbettung der Daten auf einer $d$-Mannigfaltigkeit an, dann gibt es eine Abbildung eines Punktes $\vect{x}$ auf die niedrigdimensionale Repräsentation $\vect{y}$. Diese Abbildung besteht aus einer Translation, Rotation und Skalierung -- genau die Eigenschaften gegenüber den die Gewichtsmatrix invariant ist. Man benutzt also dieselben Gewichte $W_{ij}$, die auch für die Rekonstruktion der ursprünglichen Repräsentation genutzt wurden, und löst mit fixem $W_{ij}$ das folgende Optimierungsproblem, um die latente Repräsentation zu finden \parencite[2324]{Roweis.2000}:
+\eqref{eq:LLE:Zielfunktion} unter den genannten Nebenbedingungen minimieren, gefunden, so kann in einem zweiten Schritt die latente Repräsentation $\vect{y}$ hergeleitet werden. Dazu werden die Eigenschaften der Gewichtsmatrix $\mat{W}$ ausgenutzt. Nimmt man wie eingangs erwähnt die Einbettung der Daten auf einer $d$-Mannigfaltigkeit an, dann gibt es eine Abbildung eines Punktes $\vect{x}$ auf die latente Repräsentation $\vect{y}$. Diese Abbildung besteht aus einer Translation, Rotation und Skalierung -- genau die Eigenschaften gegenüber den die Gewichtsmatrix invariant ist. Man benutzt also dieselben Gewichte $W_{ij}$, die auch für die Rekonstruktion der ursprünglichen Repräsentation genutzt wurden, und löst mit fixem $W_{ij}$ das folgende Optimierungsproblem, um die latente Repräsentation zu finden \parencite[2324]{Roweis.2000}:
 \begin{equation}
 	\label{eq:LLE:ZielfunktionY}
 	\min_{\mat{Y}}\, \sum_{i = 1}^n \norm[\Big]{\vect{y}_i - \sum_{j = 1}^n W_{ij}\vect{y}_j}^2 \, .
@@ -355,7 +355,7 @@ Untergliederung präziser formuliert.
 
 \subsubsection{Mathematische Formulierung}
 \label{ch:MethodenDerDimRed:ML:AE:MathematischeFormulierung}
-Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^d$, der den Inputvektor in die niedrigdimensionale Repräsentation $\rvect{y} = f(\rvect{x})$ kodiert und zum anderen den \newterm{Decoder} $g: \real^d \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Ein dreischichtiger, vollvernetzter Autoencoder kann also mittels
+Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum einen den sogenannten \newterm{Encoder} $f: \real^D \rightarrow \real^d$, der den Inputvektor in die latente Repräsentation $\rvect{y} = f(\rvect{x})$ kodiert und zum anderen den \newterm{Decoder} $g: \real^d \rightarrow \real^D$, der diese Repräsentation wieder in den Inputvektor dekodiert. Ein dreischichtiger, vollvernetzter Autoencoder kann also mittels
 \begin{align}
 	\label{eq:dreischichtigerAE}
 	f(\vect{x})    & = s(\mat{W}_1 \vect{x} + \vect{b}_1) = \vect{y}             \\
@@ -397,12 +397,11 @@ indem das Netz derart eingeschränkt wird, dass eine möglichst sinnvolle Reprä
 gelernt wird. Ein erstes Beispiel hierfür ist bereits der in \figref{fig:SchematischerAutoencoder}
 gezeigte unterbestimmte Autoencoder, mit dem eine $d$-dimensionale Repräsentation in der Mitte
 forciert wird. Besitzt der Autoencoder jedoch eine zu große Kapazität, kann der Autoencoder trotz
-des Bottlenecks eine uninformative niedrigdimensionale Repräsentation lernen. Neben dieser
-\textit{impliziten} Regularisierung, gibt es deswegen noch einige weitere \textit{explizite}
-Regularisierungsmethoden, die zusätzlich zum Rekonstruktionsfehler einen Bestrafungsterm
-$\Omega(\bm{\theta})$ zur Zielfunktion $\mathcal{J}$ hinzufügen. Hierbei bezeichnet $\bm{\theta}$
-die Parameter im Netzwerk, d.h. die Gewichte und Biases (siehe \eqref{eq:dreischichtigerAE}). Die
-Zielfunktion lautet dann
+des Bottlenecks eine uninformative latente Repräsentation lernen. Neben dieser \textit{impliziten}
+Regularisierung, gibt es deswegen noch einige weitere \textit{explizite} Regularisierungsmethoden,
+die zusätzlich zum Rekonstruktionsfehler einen Bestrafungsterm $\Omega(\bm{\theta})$ zur
+Zielfunktion $\mathcal{J}$ hinzufügen. Hierbei bezeichnet $\bm{\theta}$ die Parameter im Netzwerk,
+d.h. die Gewichte und Biases (siehe \eqref{eq:dreischichtigerAE}). Die Zielfunktion lautet dann
 \begin{equation}
 	\mathcal{J}_{\text{AE+reg}} = \frac{1}{n} \sum_{i = 1}^{n}  L(\vect{x}_i, \estNormal{\vect{x}}_i) + \lambda \Omega(\bm{\theta}) \, ,
 \end{equation}
