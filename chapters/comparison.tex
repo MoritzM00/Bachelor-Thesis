@@ -145,11 +145,9 @@ Verteilung der Nachbarschaft eines Punktes $\rvect{x}$ als Funktion der intrinsi
 
 Konkret modelliert der Maximum Likelihood Schätzer von \textcite{Levina.2004} die Anzahl der
 Beobachtungen, die in einer solchen Kugel liegen für einen fixen Punkt $\vect{x}$ zunächst mittels
-des Prozesses
-\begin{equation}
-	\{ N(t, \vect{x}), 0 \leq t \leq R \} \, ,
-\end{equation}
-wobei $R$ den maximalen Radius der Kugel um den fixierten Punkt angibt. $N(t, \vect{x})$ zählt nun die Beobachtungen, die eine Distanz kleiner gleich $t$ von $\vect{x}$ haben \parencite[3]{Levina.2004}. Dieser inhomogene Binomial-Prozess kann durch einen Poisson-Prozess
+des Prozesses $\{ N(t, \vect{x}), 0 \leq t \leq R \}$, wobei $R$ den maximalen Radius der Kugel um
+den fixierten Punkt angibt. $N(t, \vect{x})$ zählt nun die Beobachtungen, die eine Distanz kleiner
+gleich $t$ von $\vect{x}$ haben \parencite[3]{Levina.2004}. Dieser inhomogene Binomial-Prozess kann durch einen Poisson-Prozess
 approximiert werden, dessen Ankunftsrate von der intrinsischen Dimension $d$ abhängt. Mittels der
 Maximum Likelihood Methode kann daher ein Schätzwert $\estNormal{d}_R(\vect{x})$ in Abhängigkeit
 des maximalen Radius $R$ oder äquivalent ein Schätzwert $\estNormal{d}_K(\vect{x})$ für eine Anzahl
