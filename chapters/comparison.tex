@@ -141,25 +141,26 @@ weswegen die meisten Schätzer der intrinsischen Dimension auf der damit verwand
 \newterm{Maximum Likelihood Schätzer} von \textcite{Levina.2004}. Diese Schätzer betrachten die
 Verteilung der Nachbarschaft eines Punktes $\rvect{x}$ als Funktion der intrinsischen Dimension --
 üblicherweise innerhalb einer kleinen Kugel um $\rvect{x}$
-\parencite[8]{Campadelli.2015}. Der Maximum Likelihood Schätzer nimmt an, dass die Beobachtungen, die
-in einer solchen Kugel liegen, approximativ einem homogenen Poisson-(Zähl-)Prozess\unsure{die
-	Definition eines Zählprozesses nochmal überprüfen}\footnote{Ein Poisson-Zählprozess ist eine Folge
-von Zufallsvariablen $\{ N(t) \}_{t \geq 0}$, wobei $N(t) \sim \text{Poisson}(\lambda t)$ eine
-Poisson-verteilte Zufallsvariable ist, die den Wert zum \textit{Zeitpunkt} $t$ modelliert \parencite[105 -- 117]{Jones.2018}. Dieser Prozess kann dazu benutzt werden, zufällig auftretende
-Ereignisse über einen Zeitraum hinweg zu zählen.} folgen
-\parencite[2]{Levina.2004}.
-% \footnote{Genau genommen, wird zuerst ein inhomogener Binomial-Prozess
-% 	angenommen, der die Punkte mit Distanz kleiner $t$ zählt (bei fixem $\vect{x}$). Dieser Prozess
-% 	wird dann durch einen homogenen Poisson-Prozess approximiert.}
-Dieser Prozess hängt von $d$ ab, weshalb mittels der Maximum Likelihood Methode ein Schätzwert
-$\estNormal{d}$ für einen fixen Punkt $\rvect{x}_i$ als
+\parencite[8]{Campadelli.2015}.
+
+Konkret modelliert der Maximum Likelihood Schätzer von \textcite{Levina.2004} die Anzahl der
+Beobachtungen, die in einer solchen Kugel liegen für einen fixen Punkt $\vect{x}$ zunächst mittels
+des Prozesses
 \begin{equation}
-	\estNormal{d}_K(\vect{x}_i) = \left( \frac{1}{K - 1} \sum_{j=1}^{K - 1} \log \frac{T_K(\vect{x}_i)}{T_j(\vect{x}_i)} \right)^{-1}
+	\{ N(t, \vect{x}), 0 \leq t \leq R \} \, ,
 \end{equation}
-berechnet werden kann \parencite[4]{Levina.2004}. Hierbei ist $K$ die Anzahl der nächste Nachbarn und $T_{K}(\vect{x}_i)$ die
-euklidische Distanz von $\vect{x}_i$ zu seinem $K$-ten Nachbar. Dies ist jedoch nur eine lokale
-Schätzung für einen fixen Punkt $\vect{x}_i$. Um eine globale Schätzung zu erhalten, wird der
-Mittelwert über alle Beobachtungen $\vect{x}_i$ mit $i = 1, \ldots, n$ gebildet.
+wobei $R$ den maximalen Radius der Kugel um den fixierten Punkt angibt. $N(t, \vect{x})$ zählt nun die Beobachtungen, die eine Distanz kleiner gleich $t$ von $\vect{x}$ haben \parencite[3]{Levina.2004}. Dieser inhomogene Binomial-Prozess kann durch einen Poisson-Prozess
+approximiert werden, dessen Ankunftsrate von der intrinsischen Dimension $d$ abhängt. Mittels der
+Maximum Likelihood Methode kann daher ein Schätzwert $\estNormal{d}_R(\vect{x})$ in Abhängigkeit
+des maximalen Radius $R$ oder äquivalent ein Schätzwert $\estNormal{d}_K(\vect{x})$ für eine Anzahl
+$K$ an Nachbarn durch
+\begin{equation}
+	\estNormal{d}_K(\vect{x}) = \left( \frac{1}{K - 1} \sum_{j=1}^{K - 1} \log \frac{T_K(\vect{x})}{T_j(\vect{x})} \right)^{-1}
+\end{equation}
+ermittelt werden \parencite[3 -- 4]{Levina.2004}. Hierbei bezeichnet $T_{K}(\vect{x})$ die euklidische Distanz von
+$\vect{x}$ zu seinem $K$-ten Nachbar. Dies ist jedoch nur eine lokale Schätzung für einen fixen
+Punkt $\vect{x}$. Um eine globale Schätzung zu erhalten, wird der Mittelwert über alle
+Beobachtungen $\vect{x}_i$ mit $i = 1, \ldots, n$ gebildet.
 \section{Verwendete Datensätze}
 \label{ch:Vergleich:sec:VerwendeteDatensaetze}
 Es werden sowohl künstliche als auch natürliche Datensätze eingesetzt, um Eigenschaften der
