@@ -431,18 +431,10 @@ Entscheidungen bei der Wahl der Architektur eines Autoencoders kurz erläutert.
 
 Einerseits muss zwischen vollvernetzten und \textit{Convolutional} Schichten entschieden werden.
 Letztere können eingesetzt werden, wenn der Input des Autoencoders eine gitterartige Topologie, wie
-z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}.
-% \footnote{In der Mathematik ist eine diskrete Faltung zweier
-% 	Funktionen $v$ und $u$ definiert als
-% 	\begin{equation*}
-% 		(v * u)(t) = \sum_{\tau = -\infty}^{+\infty} v(t)u(t - \tau) \, .
-% 	\end{equation*}
-% 	Intuitiv gesehen wird dabei die Funktion $u$ (genannt: Kernel) gespiegelt und von links nach rechts über die Funktion $v$ \enquote{geschoben} und dabei multipliziert. Die Faltungsoperation in neuronalen Netzen kann in einer ähnlichen Weise interpretiert werden. Jedoch wird dabei das Spiegeln des Kernels teilweise weggelassen \parencite[333]{Goodfellow.2016}. Zudem ist der Kernel auf zweidimensionalen Gittern, wie es bspw. bei
-% 	Bildern der Fall ist, meist ebenfalls zweidimensional.} 
-Der Autoencoder wird dann als Convolutional Autoencoder (ConvAE) bezeichnet. Im Kontext von Bildern
-wird dabei ein kleines Fenster (genannt: Kernel), meist der Größe $3 \times 3$ oder $5 \times 5$,
-über das Bild \enquote{geschoben} und die überlappenden Punkte miteinander multipliziert und
-aufsummiert \parencite[333]{Goodfellow.2016}. In dieser Weise werden die Gewichte im Netzwerk geteilt und die
+z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}. Der Autoencoder wird dann als Convolutional Autoencoder (ConvAE)
+bezeichnet. Im Kontext von Bildern wird dabei ein kleines Fenster (genannt: Kernel), meist der
+Größe $3 \times 3$ oder $5 \times 5$, über das Bild \enquote{geschoben} und die überlappenden
+Punkte miteinander multipliziert und aufsummiert \parencite[333]{Goodfellow.2016}. In dieser Weise werden die Gewichte im Netzwerk geteilt und die
 lokale Struktur des Bildes besser miteinbezogen. Für eine detaillierte Einführung in Convolutional
 Neural Networks wird auf die Ausführungen in \textcite[330 -- 372]{Goodfellow.2016} verwiesen. In
 den anderen Fällen können vollvernetzte Schichten eingesetzt werden, d.h. jedes Neuron hat eine
