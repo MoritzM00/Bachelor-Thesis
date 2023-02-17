@@ -26,8 +26,7 @@
 %% 
 \usepackage{url}
 \usepackage{graphicx}
-\usepackage{pgf}
-\DeclareGraphicsExtensions{.pgf,.pdf,.png,.jpg}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \newcommand{\figures}{figures}
 \graphicspath{{./figures/}} %Use curly braces for each path to add and don't forget trailing slash '/'
 % \usepackage{epstopdf} %Nice to automatically convert eps figures to pdf format  (from inkscape, etc)
@@ -35,7 +34,7 @@
 \addbibresource{thesis.bib}
 \usepackage{booktabs}
 
-\usepackage[german,colorinlistoftodos,textsize=scriptsize]{todonotes}
+\usepackage[german,colorinlistoftodos,textsize=scriptsize,disable]{todonotes}
 \newcommand{\addref}{\todo[color=red!40]{Add reference.}}
 \newcommand{\rewrite}[1]{\todo[color=green!40]{#1}}
 \newcommand{\unsure}[1]{\todo[color=blue!40]{#1}}

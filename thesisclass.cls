@@ -39,15 +39,10 @@
 % for more sophisticated algorithm listings
 
 \usepackage{hyperref}
-% hyperref config for online version
-%\usepackage[colorlinks=false,linkbordercolor=white]{hyperref}
-%\usepackage[colorlinks]{hyperref}
-
-% hyperref config for paper version
-%\usepackage[hidelinks]{hyperref}
 \usepackage{xcolor}
 \hypersetup{
-    colorlinks,
+    hidelinks, % uncomment for paper version
+    %colorlinks, % uncomment for online version
     linkcolor={red!50!black},
     citecolor={blue!50!black},
     urlcolor={blue!80!black}
