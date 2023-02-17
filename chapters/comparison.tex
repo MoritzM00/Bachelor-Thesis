@@ -374,7 +374,7 @@ beste relative Performance aufweisen. Ebenso zeigt die Kernel PCA gute Ergebniss
 Autoencoder seine Stärken zeigen, falls genügend Trainingsdaten zur Verfügung stehen. Letzteres trifft unter anderem auf den MNIST-Datensatz zu, nicht aber auf den ORL-Datensatz. Auf diesem Datensatz ist das Ergebnis nur minimal besser, als das des klassischen Autoencoders. Im direkten Vergleich zur Principal Component Analysis schneiden beide Autoencoder hier aber schlechter ab.
 Auf Datensätzen mit einer geringen Anzahl an Stichproben können Probleme bei der Konvergenz der iterativen Optimierung eines Autoencoders auftreten. Dies wird durch die Performance des vollvernetzten Autoencoders auf dem ORL-Datensatz ersichtlich (siehe \figref{fig:OlivettiFacesMetrics}). Insbesondere hinsichtlich des LCMC fällt der Autoencoder nach unten ab. Dies ist ein Nachteil einer iterativen Optimierung der Zielfunktion gegenüber einer Lösung in geschlossener Form.
 
-Die Resultate auf den Bilddatensätzen zeigen jedoch, dass der Convolutional Autoencoder eine valide
+Die Resultate auf den Bilddatensätzen zeigen, dass der Convolutional Autoencoder eine valide
 Alternative zum klassischen Autoencoder ist, falls Bilddaten oder ähnliches in der Dimension
 reduziert werden sollen und genug Trainingsdaten vorhanden sind. Allerdings muss dabei, wie im
 Folgenden ersichtlich wird, eine höhere Laufzeit in Kauf genommen werden.
@@ -533,8 +533,7 @@ dieses Vorgehen auf dem FER-Datensatz um.
 	\label{fig:Gewichtsvergleich}
 \end{figure}
 Hierbei ist in \figref{fig:Gewichtsvergleich} \captiona die Ladungsmatrix von PCA, in \captionb die Decoder-Gewichtsmatrix eines linearen Autoencoders und in \captionc die ersten $d$ Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders mit \textit{weight decay} dargestellt.
-Die Gewichte des linearen Autoencoders zeigen bereits eine Ähnlichkeit zur Ladungsmatrix $\mat{A}$ der Principal Component Analysis, jedoch sind einige Unterschiede erkennbar. Die Links-Singulärvektoren der Decoder-Gewichtsmatrix sind bis auf das Vorzeichen fast identisch zur Ladungsmatrix $\mat{A}$.
-\idea{Anordnung der Bilder in b) und c) hervorheben}
+Die Gewichte des linearen Autoencoders zeigen bereits eine Ähnlichkeit zur Ladungsmatrix $\mat{A}$ der Principal Component Analysis, jedoch sind einige Unterschiede erkennbar. Insbesondere ist keine Ähnlichkeit der Anordnung der Bilder erkennbar, da die latente Repräsentation des Autoencoders nicht nach absteigender Varianz sortiert ist. Die Links-Singulärvektoren der Decoder-Gewichtsmatrix in \captionc sind hingegen bis auf das Vorzeichen fast identisch zur Ladungsmatrix $\mat{A}$. Auch ist die Anordnung bis auf zwei Vertauschungen identisch zu \captiona.
 
 Zusammenfassend bedeutet dies, dass ein dreischichtiger Autoencoder mit linearen
 Aktivierungsfunktionen eine ähnliche latente Repräsentation wie die Principal Component Analysis
@@ -551,7 +550,7 @@ Repräsentation eines Autoencoders beeinflusst. Dazu wurden mehrere dreischichti
 unterschiedlichen Aktivierungsfunktionen auf dem MNIST-Datensatz trainiert, wobei schrittweise
 Nichtlinearität hinzugefügt wird. Mithilfe dieser Autoencoder wurde dann die latente Repräsentation
 $\mat{Y}$ für den MNIST-Datensatz berechnet und in \figref{fig:Autoencoder-Nichtlinearitaet}
-dargestellt. Für Zwecke der Visualisierung wurde die intrinsische Dimension dabei auf zwei gesetzt.
+dargestellt. Für die Visualisierung wurde die intrinsische Dimension dabei auf zwei gesetzt.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{autoencoders-nonlinearity.pdf}
