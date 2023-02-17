@@ -364,7 +364,7 @@ Mathematisch gesehen versucht der Autoencoder zwei Funktionen zu lernen. Zum ein
 formalisiert werden, wobei $s$ die Aktivierungsfunktion bezeichnet, $\mat{W}_1 \in \real^{d \times D}$ und $\mat{W}_2 \in \real^{D \times d}$ die Gewichte und $\vect{b}_i$ mit $i = 1,2$ die Bias-Vektoren des Netzwerks sind. Dies entspricht je einer affinen Transformation gefolgt von einer Aktivierungsfunktion. Die Nichtlinearität eines Autoencoders wird durch die Auswahl dieser Aktivierungsfunktionen bestimmt.
 Werden ausschließlich lineare Funktionen verwendet, resultiert dies in einem linearen Autoencoder,
 welcher ähnlich zur Principal Component Analysis ist. Dies wird in
-\subsecref{ch:Vergleich:sec:Resultate:PCA_AE} noch genauer betrachtet. In den meisten Fällen werden
+\secref{ch:Vergleich:sec:Resultate:PCA_AE} noch genauer betrachtet. In den meisten Fällen werden
 jedoch \textit{Sigmoid}-Aktivierungsfunktionen eingesetzt, um einen nichtlinearen Zusammenhang zu
 lernen und damit die Flexibilität der Architektur auszunutzen \parencite[4]{Charte.2018}. Auf die Aktivierungsfunktion wird später bei der Wahl der Architektur eines
 Autoencoders noch genauer eingegangen.
@@ -418,9 +418,9 @@ Regularisierungsterm entspricht bspw. im Falle eines dreischichtigen Autoencoder
 	\Omega(\bm{\theta}) = \norm{\mat{W}_1}^2_F + \norm{\mat{W}_2}^2_F \, ,
 \end{equation}
 wobei $\norm{\,\cdot\,}_F$ die Frobeniusnorm bezeichnet \parencite[1]{Kunin.2019}. Diese Regularisierung wird später im Vergleich von Autoencodern zur
-Principal Component Analysis in \subsecref{ch:Vergleich:sec:Resultate:PCA_AE} noch von Bedeutung
-sein. Für das Lernen von Mannigfaltigkeiten besonders interessant ist jedoch der
-\newterm{Contractive Autoencoder} \parencite{Rifai.2011a}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird.
+Principal Component Analysis in \secref{ch:Vergleich:sec:Resultate:PCA_AE} noch von Bedeutung sein.
+Für das Lernen von Mannigfaltigkeiten besonders interessant ist jedoch der \newterm{Contractive
+	Autoencoder} \parencite{Rifai.2011a}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird.
 
 \subsubsection{Wahl der Architektur}
 \label{ch:MethodenDerDimRed:ML:AE:WahlArchitektur}

@@ -448,14 +448,14 @@ Qualitätskriterien und der erleichterten Optimierung eine gute Alternative zum 
 Autoencoder und zu den statistischen Methoden dar. Im Folgenden wird der Zusammenhang zwischen
 Autoencodern und der Principal Component Analysis untersucht.
 
-\subsection{Principal Component Analysis vs. Autoencoder}
+\section{Principal Component Analysis vs. Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}
 
 In diesem Abschnitt wird die Principal Component Analysis mit Autoencodern verglichen. Dazu wird
 der theoretische Zusammenhang zwischen den beiden Methoden erklärt und durch empirische Experimente
 verdeutlicht.
 
-\subsubsection{Theoretischer Zusammenhang}
+\subsection{Theoretischer Zusammenhang}
 
 \textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y} = f(\vect{x})$ eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten $\tr{\mat{A}}\vect{x}$ einer Principal Component Analysis ist. Konkret wurden dabei dreischichtige Autoencoder betrachtet, d.h. die Gewichte des Encoders sind eine Matrix $\mat{W}_1 \in \real^{d \times D}$ und die Gewichte des
 Decoders eine Matrix $\mat{W}_2 \in \real^{D \times d}$ (siehe \eqref{eq:dreischichtigerAE}). Für den Rest dieses Abschnitts werden daher ausschließlich dreischichtige Autoencoder betrachtet. Es kann nun gezeigt werden, dass sich die Zielfunktion eines solchen Autoencoders mit linearen Aktivierungsfunktionen (LAE) auf die Form
@@ -508,7 +508,7 @@ Zielfunktion des linearen Autoencoders nicht mehr invariant gegenüber der in
 \eqref{eq:PCA_AE_Unterraum_Inverse} gezeigten Transformation mittels einer invertierbaren Matrix
 ist. Dies macht die Links-Singulärvektoren der Decoder-Matrix wohldefiniert \parencite[3]{Kunin.2019}.
 
-\subsubsection{Visualisierung der Zusammenhänge}
+\subsection{Visualisierung der Zusammenhänge}
 
 Der eben beschriebene Zusammenhang wird im Folgenden zur Verdeutlichung visualisiert. Dazu wird
 zuerst die Korrelation der transformierten Daten und anschließend werden die gefundenen Gewichte
@@ -543,7 +543,7 @@ Autoencoders eingesetzt werden, um die Richtungen der Hauptkomponenten zu lernen
 die Eigenwertzerlegung der $D \times D$-Kovarianzmatrix der Daten, indem nur die
 Singulärwertzerlegung der $D \times d$-Gewichtsmatrix $\mat{W}_2$ berechnet werden muss.
 
-\subsubsection{Hinzunahme von Nichtlinearität}
+\subsection{Hinzunahme von Nichtlinearität}
 
 Im Folgenden wird untersucht, inwiefern die Hinzunahme von Nichtlinearität die latente
 Repräsentation eines Autoencoders beeinflusst. Dazu wurden mehrere dreischichtige Autoencoder mit
