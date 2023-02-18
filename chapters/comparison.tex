@@ -13,11 +13,9 @@ eingesetzten Qualitätskriterien erläutert werden. Außerdem werden in
 \secref{ch:Vergleich:sec:VerwendeteDatensaetze} die verwendeten Datensätze und in
 \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails} die Parameterwahl der Methoden vorgestellt.
 Abschließend werden in \secref{ch:Vergleich:sec:Resultate} die Resultate des Vergleichs der zwei
-Gruppen diskutiert. Neben dem Vergleich der Gruppen wird in
-\secref{ch:Vergleich:sec:Resultate:PCA_AE} der Zusammenhang zwischen der Principal Component
-Analysis und Autoencodern theoretisch und empirisch untersucht. Der Vergleich kann mittels der im
-GitHub-Repository\footnote{\url{www.github.com/MoritzM00/drcomp}} definierten Konfigurationen der
-Methoden und des Trainingsskriptes repliziert werden.
+Gruppen diskutiert. Abschließend wird in \secref{ch:Vergleich:sec:Resultate:PCA_AE} der
+Zusammenhang zwischen der Principal Component Analysis und Autoencodern theoretisch und empirisch
+untersucht.
 
 \section{Methodik}
 \label{ch:Vergleich:sec:Methodik}
@@ -31,14 +29,20 @@ Aussagekraft über die Güte der gefundenen niedrigdimensionalen Repräsentation
 Qualitätskriterien werden in \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} noch
 eingehend erläutert. Neben der Evaluierung hinsichtlich der Qualitätskriterien wird der
 Rechenaufwand und die Güte von Rekonstruktionen eines ursprünglichen Datenpunktes für relevante
-Methoden besprochen. Der Vergleich wird auf insgesamt sieben Datensätzen durchgeführt, wobei zwei
-künstliche und fünf natürliche Datensätze verwendet werden. Diese werden in
-\secref{ch:Vergleich:sec:VerwendeteDatensaetze} genauer vorgestellt. Die intrinsische Dimension ist
-für die künstlichen Datensätze bekannt, muss aber für die natürlichen Datensätze geschätzt werden.
-Das Schätzen der intrinsischen Dimension wird daher in
-\subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} erklärt. Insgesamt soll
-damit ein Überblick über die Stärken und Schwächen der statistischen und der Machine Learning
-Methoden verschafft werden.
+Methoden besprochen.
+
+Der Vergleich wird auf insgesamt sieben Datensätzen durchgeführt, wobei zwei künstliche und fünf
+natürliche Datensätze verwendet werden. Diese werden in
+\secref{ch:Vergleich:sec:VerwendeteDatensaetze} genauer vorgestellt. Auf Bilddatensätzen wird
+zusätzlich der bei der Wahl der Architektur in \secref{ch:MethodenDerDimRed:ML:AE} erwähnte
+Convolutional Autoencoder als sechste Methode in den Vergleich mit aufgenommen. Die intrinsische
+Dimension ist für die künstlichen Datensätze bekannt, muss aber für die natürlichen Datensätze
+geschätzt werden. Das Schätzen der intrinsischen Dimension wird daher in
+\subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} erklärt. Der Vergleich
+kann mittels der im GitHub-Repository\footnote{\url{www.github.com/MoritzM00/drcomp}} definierten
+Konfigurationen der Methoden und des Trainingsskriptes repliziert werden. Insgesamt soll damit ein
+Überblick über die Stärken und Schwächen der statistischen und der Machine Learning Methoden
+verschafft werden.
 
 \subsection{Qualitätskriterien der Dimensionsreduktion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien}
