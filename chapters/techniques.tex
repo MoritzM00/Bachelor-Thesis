@@ -160,8 +160,8 @@ Basisfunktionen (RBF))
 \end{equation}
 wobei der Parameter $\sigma > 0$ die Bandbreite des Kernels bestimmt \parencite[296]{ShaweTaylor.2011}. Ein zu großer Wert von $\sigma$ führt dazu, dass der Kernel fast
 konstant wird und somit die lokale Struktur nicht mehr passend berücksichtigen kann. Ein zu kleiner
-Wert führt zur Überschätzung der Ähnlichkeit von ähnlichen Punkten und zur Unterschätzung bei
-unähnlichen Punkten, d.h. der Kernel passt sich zu sehr an die Daten an (Overfitting) \parencite[296 -- 297]{ShaweTaylor.2011}. Des Weiteren sind polynomiale Funktionen \parencite[292]{ShaweTaylor.2011}
+Wert führt zur Über- oder Unterschätzung der Ähnlichkeit zweier Punkte, d.h. der Kernel passt sich
+zu sehr an die Daten an (Overfitting) \parencite[296 -- 297]{ShaweTaylor.2011}. Des Weiteren sind polynomiale Funktionen \parencite[292]{ShaweTaylor.2011}
 \begin{equation}
 	\kappa(\vect{x}_i, \vect{x}_j) = (\vect{x}_i \cdot \vect{x}_j)^p
 \end{equation}
@@ -487,9 +487,8 @@ wobei $\exp(\, \cdot \,)$ die Exponentialfunktion darstellt \parencites[191 -- 1
 Die Aktivierungsfunktionen sind grafisch in \figref{fig:activations} dargestellt.
 Obwohl ReLU (\eqref{eq:ReLU}) die mittlerweile für neuronale Netze standardmäßig empfohlene Aktivierungsfunktion ist \parencite[195]{Goodfellow.2016}, wird für Autoencoder die Sigmoid-Funktion (\eqref{eq:Sigmoid})
 empfohlen. Dies liegt daran, dass die \textit{Rectified Linear Units} alle negativen Inputs auf
-Null projiziert und damit die Rekonstruktion erschweren könnte \parencite[4]{Charte.2018}. Ein Nachteil der Sigmoid- und Tanh-Funktion ist allerdings der Wertebereich
-$[0, 1]$, auf den diese beiden Funktionen projizieren. Dies kann die Rekonstruktion ebenfalls
-behindern.
+Null projiziert und damit die Rekonstruktion erschweren könnte \parencite[4]{Charte.2018}. Ein möglicher Nachteil der Sigmoid-Funktion ist allerdings der Wertebereich
+$[0, 1]$, was eine Rekonstruktion ebenfalls behindern könnte.
 \subsection{Contractive Autoencoder}
 \label{ch:MethodenDerDimRed:ML:CAE}
 \nomenclature[Z]{CAE}{Contractive Autoencoder}
@@ -528,7 +527,7 @@ Im Folgenden wird die konkrete Berechnung des Regularisierungsterms (\eqref{eq:C
 verwendet, so kann die Frobeniusnorm der Jacobi-Matrix am Punkt $\vect{x}$ mittels
 \begin{equation}
 	\label{eq:CAE-loss-simple}
-	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^d \left( y_i (1 - y_i)\right)^2 \sum_{j = 1}^D (\mat{W}_1^2)_{ij}
+	\norm[\big]{\mat{J}_f(\vect{x})}_F^2 = \sum_{i = 1}^d \left( y^{(i)} \left( 1 - y^{(i)} \right) \right)^2 \sum_{j = 1}^D \big(\mat{W}_1^2\big)_{ij}
 \end{equation}
 effizient berechnet werden \parencite[4]{Rifai.2011a}. Für einen Autoencoder mit mehr als einer versteckten Schicht wird die
 Berechnung teuer, was das Trainieren eines tiefen Contractive Autoencoders ohne Approximationen wie

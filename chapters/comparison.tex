@@ -443,8 +443,8 @@ Ergebnisse hinsichtlich der Qualitätskriterien keine überzeugende Option, wenn
 die Vorteile der Principal Component Analysis berücksichtigt. Auf Bilddatensätzen stellt der
 Convolutional Autoencoder insbesondere hinsichtlich der Rekonstruktion, aber auch der
 Qualitätskriterien und der erleichterten Optimierung eine gute Alternative zum vollvernetzen
-Autoencoder und zu den statistischen Methoden dar. Im Folgenden wird der Zusammenhang zwischen
-Autoencodern und der Principal Component Analysis untersucht.
+Autoencoder und zu den statistischen Methoden dar. Abschließend wird im Folgenden der Zusammenhang
+zwischen Autoencodern und der Principal Component Analysis untersucht.
 
 \section{Principal Component Analysis vs. Autoencoder}
 \label{ch:Vergleich:sec:Resultate:PCA_AE}
@@ -455,7 +455,7 @@ verdeutlicht.
 
 \subsection{Theoretischer Zusammenhang}
 
-\textcites{Baldi.1989}{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y} = f(\vect{x})$ eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten $\tr{\mat{A}}\vect{x}$ einer Principal Component Analysis ist. Konkret wurden dabei dreischichtige Autoencoder betrachtet, d.h. die Gewichte des Encoders sind eine Matrix $\mat{W}_1 \in \real^{d \times D}$ und die Gewichte des
+\textcite{Bourlard.1988} haben gezeigt, dass die Kodierung $\vect{y} = f(\vect{x})$ eines linearen Autoencoders äquivalent -- aber nicht identisch -- zu den Hauptkomponenten $\tr{\mat{A}}\vect{x}$ einer Principal Component Analysis ist. Konkret wurden dabei dreischichtige Autoencoder betrachtet, d.h. die Gewichte des Encoders sind eine Matrix $\mat{W}_1 \in \real^{d \times D}$ und die Gewichte des
 Decoders eine Matrix $\mat{W}_2 \in \real^{D \times d}$ (siehe \eqref{eq:dreischichtigerAE}). Für den Rest dieses Abschnitts werden daher ausschließlich dreischichtige Autoencoder betrachtet. Es kann nun gezeigt werden, dass sich die Zielfunktion eines solchen Autoencoders mit linearen Aktivierungsfunktionen (LAE) auf die Form
 \begin{equation}
 	\mathcal{J}_{\text{LAE}} = \norm{\mat{X} - \mat{W}_2\mat{W}_1\mat{X}}_F^2
@@ -463,7 +463,7 @@ Decoders eine Matrix $\mat{W}_2 \in \real^{D \times d}$ (siehe \eqref{eq:dreisch
 reduziert, falls $\mat{X}$ zentriert ist \parencites[Appendix A]{Kunin.2019}[292 -- 293]{Bourlard.1988}. Das Eckhart-Young-Mirsky-Theorem \parencite{Eckart.1936} sagt nun aus, dass das optimale $\mat{W} = \mat{W}_2 \mat{W}_1$ auf die
 Eigenvektorbasis der Kovarianzmatrix von $\mat{X}$ projiziert \parencite[vgl.][1]{Kunin.2019}. Ein linearer Autoencoder ohne Regularisierung der Gewichte
 (\textit{weight decay}) lernt allerdings nur einen Unterraum davon, da diese Zielfunktion durch
-eine invertierbare Matrix $\mat{G}$ äquivalent umformuliert werden kann zu \parencite[1]{Kunin.2019}
+eine invertierbare Matrix $\mat{G} \in \real^{d \times d}$ äquivalent umformuliert werden kann zu \parencite[1]{Kunin.2019}
 \begin{equation}
 	\label{eq:PCA_AE_Unterraum_Inverse}
 	\mathcal{J}_{\text{LAE}} = \norm{\mat{X} - (\mat{W}_2\mat{G}^{-1}) (\mat{G} \mat{W}_1)\mat{X}}_F^2 \, .
@@ -495,10 +495,10 @@ die Hauptkomponenten bis hin zu einer orthogonalen Transformation erlangt werden
 	mit den Singulärwerten \parencite[44 -- 45]{Goodfellow.2016}. } Dabei sind die ersten $d$ Links-Singulärvektoren, d.h. die
 ersten $d$ Spalten von $\mat{U}$, die gesuchten Vektoren.\footnote{Es können ebenfalls die
 	Rechts-Singulärvektoren der Encoder-Matrix $\mat{W}_1$ verwendet werden \parencite[4]{Plaut.2018}.} Allerdings wurde dies nicht formal bewiesen, sondern nur in empirischen
-Ergebnissen festgestellt. Eine Re-Implementierung des beschriebenen Vorgehens schlägt fehl, wenn
-ein linearer Autoencoder ohne \textit{weight decay} verwendet wird. Diese Beobachtung wurde in der
-Arbeit von \textcite{Kunin.2019} zur Landschaft der Fehlerfunktion eines linearen Autoencoders
-bestätigt und formal nachgewiesen. Damit ein linearer Autoencoder die Richtungen der
+Ergebnissen festgestellt. Eine Re-Implementierung des beschriebenen Vorgehens schlägt meistens
+fehl, wenn ein linearer Autoencoder ohne \textit{weight decay} verwendet wird. Diese Beobachtung
+wurde in der Arbeit von \textcite{Kunin.2019} zur Landschaft der Fehlerfunktion eines linearen
+Autoencoders bestätigt und formal nachgewiesen. Damit ein linearer Autoencoder die Richtungen der
 Hauptkomponenten lernen kann, muss ein Regularisierungsterm zur Zielfunktion des Autoencoders
 hinzugefügt werden, der die Größe der Gewichte bestraft (siehe Regularisierung in
 \secref{ch:MethodenDerDimRed:ML:AE}). Die Regularisierung der Gewichte bezweckt, dass die die
