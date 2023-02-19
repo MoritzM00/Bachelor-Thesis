@@ -541,14 +541,15 @@ dieses Vorgehen auf dem FER-Datensatz um.
 Hierbei ist in \figref{fig:Gewichtsvergleich} \captiona die Ladungsmatrix von PCA, in \captionb die Decoder-Gewichtsmatrix eines linearen Autoencoders und in \captionc die ersten $d$ Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders mit \textit{weight decay} dargestellt.
 Die Gewichte des linearen Autoencoders zeigen bereits eine Ähnlichkeit zur Ladungsmatrix $\mat{A}$ der Principal Component Analysis, jedoch sind einige Unterschiede erkennbar. Insbesondere ist keine Ähnlichkeit der Anordnung der Bilder erkennbar, da die latente Repräsentation des Autoencoders nicht nach absteigender Varianz sortiert ist. Die Links-Singulärvektoren der Decoder-Gewichtsmatrix in \captionc sind hingegen bis auf das Vorzeichen fast identisch zur Ladungsmatrix $\mat{A}$. Auch ist die Anordnung bis auf zwei Vertauschungen identisch zu \captiona.
 
-\subsection{Hinzunahme von Nichtlinearität}
+\subsubsection{Hinzunahme von Nichtlinearität}
 
 Im Folgenden wird untersucht, inwiefern die Hinzunahme von Nichtlinearität die latente
-Repräsentation eines Autoencoders beeinflusst. Dazu wurden mehrere dreischichtige Autoencoder mit
-unterschiedlichen Aktivierungsfunktionen auf dem MNIST-Datensatz trainiert, wobei schrittweise
-Nichtlinearität hinzugefügt wird. Mithilfe dieser Autoencoder wurde dann die latente Repräsentation
-$\mat{Y}$ für den MNIST-Datensatz berechnet und in \figref{fig:Autoencoder-Nichtlinearitaet}
-dargestellt. Für die Visualisierung wurde die intrinsische Dimension dabei auf zwei gesetzt.
+Repräsentation eines Autoencoders und damit den Zusammenhang zur Principal Component Analysis
+beeinflusst. Dazu wurden mehrere dreischichtige Autoencoder mit unterschiedlichen
+Aktivierungsfunktionen auf dem MNIST-Datensatz trainiert, wobei schrittweise Nichtlinearität
+hinzugefügt wird. Mithilfe dieser Autoencoder wurde dann die latente Repräsentation $\mat{Y}$ für
+den MNIST-Datensatz berechnet und in \figref{fig:Autoencoder-Nichtlinearitaet} dargestellt. Für die
+Visualisierung wurde die intrinsische Dimension dabei auf zwei gesetzt.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{autoencoders-nonlinearity.pdf}
