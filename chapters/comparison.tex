@@ -12,8 +12,8 @@ Methodik des Vergleichs eingegangen, indem die Schätzung der intrinsischen Dime
 eingesetzten Qualitätskriterien erläutert werden. Außerdem werden in
 \secref{ch:Vergleich:sec:VerwendeteDatensaetze} die verwendeten Datensätze und in
 \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails} die Parameterwahl der Methoden vorgestellt.
-Abschließend werden in \secref{ch:Vergleich:sec:Resultate} die Resultate des Vergleichs der zwei
-Gruppen diskutiert. Abschließend wird in \secref{ch:Vergleich:sec:Resultate:PCA_AE} der
+Nachfolgend werden in \secref{ch:Vergleich:sec:Resultate} die Resultate des Vergleichs der zwei
+Gruppen diskutiert und abschließend wird in \secref{ch:Vergleich:sec:Resultate:PCA_AE} der
 Zusammenhang zwischen der Principal Component Analysis und Autoencodern theoretisch und empirisch
 untersucht.
 
@@ -244,14 +244,14 @@ Likelihood Schätzers für den jeweiligen Datensatz.
 \label{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
 
 In diesem Abschnitt werden die gewählten (Hyper-)Parameter und Trainingsdetails erklärt. Eine
-Übersicht ist dazu in Tabelle~\ref{tab:uebersicht-parameter} zu finden. Alle Datensätze wurden vor
-dem Anwenden der Dimensionsreduktionsmethoden standardisiert, das heißt $\mat{X}$ weist einen
-spaltenweisen Erwartungswert von Null und eine spaltenweise Varianz von Eins auf. Anschließend
-werden die Methoden auf dem Datensatz trainiert, wobei hier bei Locally Linear Embedding und Kernel
-PCA wegen Rechenanforderungen eine kleinere zufällige Teilmenge (Downsampling) für die Berechnung
-verwendet musste. Für die Evaluierung der Methoden wurde aufgrund von Restriktionen der
-Rechenleistung (insbesondere des Arbeitsspeichers) ein Downsampling auf maximal \num{15000}
-Stichproben durchgeführt.\footnote{Die Evaluierung ist aufgrund der Berechnung der
+Übersicht zu den Parametern ist in Tabelle~\ref{tab:uebersicht-parameter} zu finden. Alle
+Datensätze wurden vor dem Anwenden der Dimensionsreduktionsmethoden standardisiert, das heißt
+$\mat{X}$ weist einen spaltenweisen Erwartungswert von Null und eine spaltenweise Varianz von Eins
+auf. Anschließend werden die Methoden auf dem Datensatz trainiert, wobei hier bei Locally Linear
+Embedding und Kernel PCA wegen Rechenanforderungen eine kleinere zufällige Teilmenge (Downsampling)
+für die Berechnung verwendet musste. Für die Evaluierung der Methoden wurde aufgrund von
+Restriktionen der Rechenleistung (insbesondere des Arbeitsspeichers) ein Downsampling auf maximal
+\num{15000} Stichproben durchgeführt.\footnote{Die Evaluierung ist aufgrund der Berechnung der
 	Co-Ranking-Matrix speicherintensiv, da diese maximal $(n-1) \times (n-1)$ groß ist und damit
 	quadratisch mit $n$ ansteigt. Um die Qualitätskriterien für den MNIST-Datensatz zu berechnen,
 	werden für $n=\num{25000}$ circa 25 GB Arbeitsspeicher benötigt.}
@@ -353,7 +353,7 @@ Autoencoder kann ebenfalls eine höhere Vertrauenswürdigkeit erzielen, da die S
 entfaltet werden kann. Die inneren Punkte werden allerdings näher zueinander gezerrt, was die
 Kontinuität dieser Dimensionsreduktion reduziert. Sowohl die klassische Principal Component
 Analysis, als auch die Kernel-Variante sind nicht in der Lage, die Swiss Roll zu entfalten. Hier
-ist außerdem zu kennen, was der kontrahierende Fehlerterm bei einer Sigmoid-Aktivierungsfunktion
+ist außerdem zu erkennen, was der kontrahierende Fehlerterm bei einer Sigmoid-Aktivierungsfunktion
 erwirken kann: Die transformierten Punkte tendieren entweder zur Null oder zur Eins, d.h. zu den
 Grenzen des Wertebereichs. In die Mitte werden hingegen weniger Punkte projiziert.
 
@@ -406,7 +406,7 @@ Das manuelle Hyperparameter-Tuning wurde in den Laufzeiten nicht berücksichtigt
 weiterer Vorteil der Principal Component Analysis, da es hier keine Parameter gibt, die richtig
 eingestellt werden müssen. Insbesondere bei der Kernel PCA müssen mehrere Werte für den Parameter
 $\sigma$ getestet werden. Da aber nur ein einziger Parameter für den Kernel adjustiert werden muss,
-ist dies jedoch vertretbar. Der Zeitaufwand für Hyperparameter-Tuning ist bei Autoencodern wegen
+ist dies zeitlich vertretbar. Der Zeitaufwand für Hyperparameter-Tuning ist bei Autoencodern wegen
 der vielen zu wählenden Parameter höher. Bei einem Einsatz dieser Methode in der
 Dimensionsreduktion muss daher mit einem hohen Zeitaufwand für manuelles oder automatisiertes
 Hyperparameter-Tuning gerechnet werden. Dies ist ein entscheidender Nachteil der hier vorgestellten
@@ -507,7 +507,7 @@ wurde in der Arbeit von \textcite{Kunin.2019} zur Landschaft der Fehlerfunktion 
 Autoencoders bestätigt und formal nachgewiesen. Damit ein linearer Autoencoder die Richtungen der
 Hauptkomponenten lernen kann, muss ein Regularisierungsterm zur Zielfunktion des Autoencoders
 hinzugefügt werden, der die Größe der Gewichte bestraft (siehe Regularisierung in
-\secref{ch:MethodenDerDimRed:ML:AE}). Die Regularisierung der Gewichte bezweckt, dass die die
+\secref{ch:MethodenDerDimRed:ML:AE}). Die Regularisierung der Gewichte bezweckt, dass die
 Zielfunktion des linearen Autoencoders nicht mehr invariant gegenüber der in
 \eqref{eq:PCA_AE_Unterraum_Inverse} gezeigten Transformation mittels einer invertierbaren Matrix
 ist. Dies macht die Links-Singulärvektoren der Decoder-Matrix wohldefiniert \parencite[3]{Kunin.2019}.
@@ -518,7 +518,7 @@ Der eben beschriebene Zusammenhang wird im Folgenden zur Verdeutlichung visualis
 zuerst die Kovarianzmatrix der transformierten Daten und anschließend werden die gefundenen
 Gewichte der Methoden genauer analysiert.
 
-Um das Vorgehen von \textcite{Plaut.2018} zu überprüfen, sind in \figref{fig:Kovarianzmatrizen} die
+Um das Vorgehen von \textcite{Plaut.2018} zu überprüfen, sind in \figref{fig:Kovarianzmatrizen}
 \begin{figure}[ht]
 	\centering
 	\includegraphics{covariance-matrices.pdf}
