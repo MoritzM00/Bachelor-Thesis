@@ -97,7 +97,7 @@ zur Ersten unkorreliert ist \parencite[5]{Jolliffe.2002}, das heißt
 	\label{eq:PCA-unkorreliertheit}
 	\Cov(\tr{\vect{a}_1}\rvect{x}, \tr{\vect{a}_2}\rvect{x}) \overset{!}{=} 0 \, .
 \end{equation}
-Auch dieses Optimierungsproblem ist ein Eigenwertproblem und man erhält, dass die Koeffizienten $\vect{a}_2$ der zweiten Hauptkomponente der Eigenvektor mit dem zweitgrößten Eigenwert von $\mat{\Sigma}$ ist.\footnote{Die Bedingung, dass die zweite Hauptkomponente zur Ersten unkorreliert (orthogonal) sein muss, ist wie sich durch simple Umformungen von \eqref{eq:PCA-unkorreliertheit} zeigen lässt, äquivalent zur Orthogonalität der beiden Vektoren $\vect{a}_1$ und $\vect{a}_2$. Da diese Vektoren Eigenvektoren sind und die Eigenvektoren jeder symmetrischen Matrix zwangsweise orthogonal sind, ändert diese Nebenbedingung das Ergebnis des Optimierungsproblems nicht.}
+Auch dieses Optimierungsproblem ist ein Eigenwertproblem und man erhält, dass die Koeffizienten $\vect{a}_2$ der zweiten Hauptkomponente der Eigenvektor mit dem zweitgrößten Eigenwert von $\mat{\Sigma}$ ist.\footnote{Die Bedingung, dass die zweite Hauptkomponente zur Ersten unkorreliert (orthogonal) sein muss, ist, wie sich durch simple Umformungen von \eqref{eq:PCA-unkorreliertheit} zeigen lässt, äquivalent zur Orthogonalität der beiden Vektoren $\vect{a}_1$ und $\vect{a}_2$. Da diese Vektoren Eigenvektoren sind und die Eigenvektoren jeder symmetrischen Matrix zwangsweise orthogonal sind, ändert diese Nebenbedingung das Ergebnis des Optimierungsproblems nicht.}
 Generell lässt sich zeigen, dass die Koeffizienten der $i$-ten Hauptkomponente dem Eigenvektor mit dem $i$-ten nach der Größe geordneten Eigenwert entspricht \parencite[6]{Jolliffe.2002}. Aus diesem Grund lassen sich die Hauptkomponenten kompakt durch
 \begin{equation}
 	\rvect{y} = \tr{\mat{A}} \rvect{x}
@@ -120,7 +120,7 @@ die sogenannte \newterm{Kernel Principal Component Analysis} (Kernel PCA). Diese
 \nomenclature[Z]{kPCA}{Kernel Principal Component Analysis}
 Die Kernel Principal Components Analysis \parencite{Scholkopf.1997} ist eine nichtlineare Erweiterung der klassischen Principal Component
 Analysis und kann somit theoretisch nichtlineare Zusammenhänge in den Daten erkennen. Um das zu
-erreichen, wird sich am sogenannten \newterm{Kernel Trick} bedient, der schon erfolgreich auf
+erreichen, wird der sogenannten \newterm{Kernel Trick} verwendet, der auch schon erfolgreich auf
 \textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde. Im Folgenden wird die Grundidee der Kernel PCA und das Konzept
 eines Kernels genauer erläutert. Daraufhin wird die konkrete Vorgehensweise vorgestellt und
 abschließend werden praktische Probleme besprochen.
@@ -234,10 +234,8 @@ verzichtet und stattdessen Qualitätskriterien der Dimensionsreduktion für eine
 verwendet. Das Vorgehen wird später in \secref{ch:Vergleich:sec:ParameterwahlTrainingsdetails}
 genauer erläutert.
 
-Darüber hinaus ist es möglich die Kernel-Matrix mitzulernen, wie es bspw. in \textit{Semidefinite
-	Embedding} \parencite{Weinberger.2004b} der Fall ist. Damit entfällt die Wahl eines passenden Kernels und seiner
-Parameter komplett, allerdings muss dafür eine teure Semidefinite Programmierung (SDP) gelöst
-werden.
+Darüber hinaus ist es möglich, die Kernel-Matrix mitzulernen \parencite[siehe z.B.]{Weinberger.2004b}. Damit entfällt die Wahl eines passenden Kernels und seiner
+Parameter komplett, allerdings muss dafür eine Semidefinite Programmierung (SDP) gelöst werden.
 
 Ein weiterer Nachteil der Kernel Principal Component Analysis ist, dass die Größe der Kernel-Matrix
 quadratisch in der Stichprobengröße $n$ ansteigt. Dadurch kann diese Matrix auf großen Datensätzen
@@ -289,7 +287,7 @@ Des Weiteren sind die Gewichtsmatrizen, die dieses Optimierungsproblem lösen, i
 \subsubsection{Finden der niedrigdimensionalen Repräsentation}
 \label{ch:MethodenDerDimRed:statistisch:LLE:FindenDerRepr}
 Wurden die optimalen Rekonstruktionsgewichte $W_{ij}$, die die Zielfunktion aus
-\eqref{eq:LLE:Zielfunktion} unter den genannten Nebenbedingungen minimieren, gefunden, so kann in einem zweiten Schritt die latente Repräsentation $\vect{y}$ hergeleitet werden. Dazu werden die Eigenschaften der Gewichtsmatrix $\mat{W}$ ausgenutzt. Nimmt man wie eingangs erwähnt die Einbettung der Daten auf einer $d$-Mannigfaltigkeit an, dann gibt es eine Abbildung eines Punktes $\vect{x}$ auf die latente Repräsentation $\vect{y}$. Diese Abbildung besteht aus einer Translation, Rotation und Skalierung -- genau die Eigenschaften gegenüber den die Gewichtsmatrix invariant ist. Man benutzt also dieselben Gewichte $W_{ij}$, die auch für die Rekonstruktion der ursprünglichen Repräsentation genutzt wurden, und löst mit fixem $W_{ij}$ das folgende Optimierungsproblem, um die latente Repräsentation zu finden \parencite[2324]{Roweis.2000}:
+\eqref{eq:LLE:Zielfunktion} unter den genannten Nebenbedingungen minimieren, gefunden, so kann in einem zweiten Schritt die latente Repräsentation $\vect{y}$ hergeleitet werden. Dazu werden die Eigenschaften der Gewichtsmatrix $\mat{W}$ ausgenutzt. Nimmt man wie eingangs erwähnt die Einbettung der Daten auf einer $d$-Mannigfaltigkeit an, dann gibt es eine Abbildung eines Punktes $\vect{x}$ auf die latente Repräsentation $\vect{y}$. Diese Abbildung besteht aus einer Translation, Rotation und Skalierung -- genau die Eigenschaften gegenüber denen die Gewichtsmatrix invariant ist. Man benutzt also dieselben Gewichte $W_{ij}$, die auch für die Rekonstruktion der ursprünglichen Repräsentation genutzt wurden, und löst mit fixem $W_{ij}$ das folgende Optimierungsproblem, um die latente Repräsentation zu finden \parencite[2324]{Roweis.2000}:
 \begin{equation}
 	\label{eq:LLE:ZielfunktionY}
 	\min_{\mat{Y}}\, \sum_{i = 1}^n \norm[\Big]{\vect{y}_i - \sum_{j = 1}^n W_{ij}\vect{y}_j}^2 \, .
@@ -316,7 +314,7 @@ Lösungen vollständig zu umgehen \parencite[vgl.][23]{vanderMaaten.2009}.
 \section{Machine Learning Methoden}
 \label{ch:MethodenDerDimRed:modern}
 %% ==============================
-Nachdem in \secref{ch:MethodenDerDimRed:statistisch} einige statistischen Methoden der
+Nachdem in \secref{ch:MethodenDerDimRed:statistisch} einige statistische Methoden der
 Dimensionsreduktion näher betrachtet wurden, werden nun zwei ausgewählte Machine Learning Methoden,
 nämlich der \newterm{Autoencoder} in seiner klassischen Form in
 \subsecref{ch:MethodenDerDimRed:ML:AE} und eine Modifizierung in Form des \newterm{Contractive
@@ -326,8 +324,8 @@ nämlich der \newterm{Autoencoder} in seiner klassischen Form in
 \label{ch:MethodenDerDimRed:ML:AE}
 \nomenclature[Z]{AE}{Autoencoder}
 
-Die Idee des Autoencoders wurde schon relativ früh unter dem Begriff eines \textit{Autoassociative
-	Neural Networks} aufgrund der engen Relation zur Principal Component Analysis untersucht \parencites{Kramer.1991}{Kramer.1992}{Bourlard.1988}. Seitdem hat sich vermehrt der Begriff
+Aufgrund der engen Relation zur Principal Component Analysis wurde die Idee des Autoencoders wurde
+schon relativ früh unter dem Begriff eines \textit{Autoassociative Neural Networks} untersucht \parencites{Kramer.1991}{Kramer.1992}{Bourlard.1988}. Seitdem hat sich vermehrt der Begriff
 \enquote{Autoencoder} durchgesetzt und die Architektur wurde auch auf andere Gebiete erweitert. So
 ist im Bereich der generativen neuronalen Netze vor allem der Variational Autoencoder \parencite{Kingma.2013} zu einem prominenten Vertreter geworden. Im Folgenden wird die Grundidee des
 Autoencoders beschrieben, woraufhin die mathematische Formulierung und Möglichkeiten der
