@@ -187,9 +187,9 @@ Um nun die Principal Component Analysis durchführen zu können, müssten die Ei
 	\mat{K} & = \left( \kappa(\vect{x}_i, \vect{x}_j) \right)_{i,j = 1}^n \label{eq:kPCA:KernelMatrix_A} \\
 	        & = \bm{\phi}(\mat{X}) \tr{\bm{\phi}(\mat{X})} \label{eq:kPCA:KernelMatrix_B}
 \end{align}
-definiert ist \parencite[68]{ShaweTaylor.2011}. Die Eigenwertzerlegung der zentrierten Kernel-Matrix liefert mit
-einer entsprechenden Skalierung die Eigenvektoren der Kovarianzmatrix $\mat{C}$. Konkret wird dazu
-die $n \times n$ Kernel-Matrix in einem ersten Schritt mittels
+definiert ist \parencites[68]{ShaweTaylor.2011}[584]{Scholkopf.1997}. Die Eigenwertzerlegung der zentrierten
+Kernel-Matrix liefert mit einer entsprechenden Skalierung die Eigenvektoren der Kovarianzmatrix
+$\mat{C}$. Konkret wird dazu die $n \times n$ Kernel-Matrix in einem ersten Schritt mittels
 \begin{equation}
 	\label{eq:KernelCentering}
 	\widetilde{\mat{K}} = \mat{K} - \frac{1}{n} \ones \tr{\ones} \mat{K} - \frac{1}{n} \mat{K} \ones \tr{\ones} + \frac{1}{n^2} (\tr{\ones} \mat{K} \ones) \ones \tr{\ones}
