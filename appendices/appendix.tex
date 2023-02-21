@@ -82,7 +82,7 @@ MNIST-Datensatz und in \figref{fig:FER2013Metrics} für den FER-Datensatz.
 	\begin{center}
 		\includegraphics{FER2013_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für den FER-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den FER-Datensatz. Hier ist die Performance des Convolutional Autoencoders und des vollvernetzten Autoencoders nahezu identisch. Aber auch der Autoencoder und die Kernel PCA können einen konstant hohen Wert für $T(K)$ und $C(K)$ erreichen. Auch auf diesem Datensatz schneiden LLE und der Contractive Autoencoder mit Abstand am schlechtesten ab. Besonders LLE zeigt hier die Schwäche einer lokalen Erhaltung der Struktur, da die Qualitätskriterien für steigende Werte von $K$ stark abfallen. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den FER-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den FER-Datensatz. Hier ist die Performance des Convolutional Autoencoders und des vollvernetzten Autoencoders nahezu identisch. Allerdings werden diese beiden Autoencoder durch die PCA und Kernel PCA hinsichtlich des LCMC outperformed. Die Vertrauenswürdigkeit und Kontinuität ist bei den vier Methoden nahezu perfekt. LLE und der Contractive Autoencoder schneiden auch auf diesem Datensatz mit Abstand am schlechtesten ab. Besonders LLE zeigt hier die Schwäche einer lokalen Erhaltung der Struktur, da die Qualitätskriterien für steigende Werte von $K$ stark abfallen. (Eigene Darstellung)}
 	\label{fig:FER2013Metrics}
 \end{figure}
 
