@@ -320,7 +320,7 @@ Nachdem in \secref{ch:MethodenDerDimRed:statistisch} einige statistische Methode
 Dimensionsreduktion näher betrachtet wurden, werden nun zwei ausgewählte Machine Learning Methoden,
 nämlich der \newterm{Autoencoder} in seiner klassischen Form in
 \subsecref{ch:MethodenDerDimRed:ML:AE} und eine Modifizierung in Form des \newterm{Contractive
-	Autoencoder} (CAE) in \subsecref{ch:MethodenDerDimRed:ML:CAE} vorgestellt.
+	Autoencoders} (CAE) in \subsecref{ch:MethodenDerDimRed:ML:CAE} vorgestellt.
 
 \subsection{Autoencoder}
 \label{ch:MethodenDerDimRed:ML:AE}
@@ -433,8 +433,8 @@ Einerseits muss zwischen vollvernetzten und \textit{Convolutional} Schichten ent
 Letztere können eingesetzt werden, wenn der Input des Autoencoders eine gitterartige Topologie, wie
 z.B. ein Bild aufweist \parencite[330]{Goodfellow.2016}. Der Autoencoder wird dann als Convolutional Autoencoder (ConvAE)
 bezeichnet. Im Kontext von Bildern wird dabei ein kleines Fenster (genannt: Kernel), meist der
-Größe $3 \times 3$ oder $5 \times 5$, über das Bild \enquote{geschoben} und die überlappenden
-Punkte miteinander multipliziert und aufsummiert \parencite[333]{Goodfellow.2016}. In dieser Weise werden die Gewichte im Netzwerk geteilt und die
+Größe $3 \times 3$ oder $5 \times 5$, über das Bild \enquote{geschoben} und die überlappenden Pixel
+miteinander multipliziert und aufsummiert \parencite[333]{Goodfellow.2016}. In dieser Weise werden die Gewichte im Netzwerk geteilt und die
 lokale Struktur des Bildes besser miteinbezogen. Für eine detaillierte Einführung in Convolutional
 Neural Networks wird auf die Ausführungen in \textcite[330 -- 372]{Goodfellow.2016} verwiesen. In
 den anderen Fällen können vollvernetzte Schichten eingesetzt werden, d.h. jedes Neuron hat eine

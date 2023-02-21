@@ -135,9 +135,8 @@ Schätzen der intrinsischen Dimension ist also ein nicht unwichtiges Teilproblem
 Dimensionsreduktion, da eine Unterschätzung von $d$ dazu führt, dass relevante Strukturen
 zwangsweise verloren gehen \parencite[1]{Levina.2004}. Erschwert wird dieses Problem durch die Tatsache, dass es viele
 Definitionen der intrinsischen Dimension und damit auch viele unterschiedliche Schätzer gibt. Im
-Folgenden soll ein kurzer Überblick verschafft werden, jedoch geht eine detaillierte Behandlung der
-Schätzung über den Rahmen dieser Arbeit hinaus. Daher wird für einen Überblick und Vergleich dieser
-Schätzer auf \textcites{Campadelli.2015}{Bac.2021}{Verveer.1995} verwiesen.
+Folgenden soll ein kurzer Überblick verschafft werden, jedoch wird für eine detaillierte Behandlung
+der Schätzung auf \textcites{Campadelli.2015}{Bac.2021}{Verveer.1995} verwiesen.
 
 In \secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim} haben wir die \textit{topologische
 	Dimension} kennengelernt, welche sich in der Literatur zur Strukturerkennung durchgesetzt hat \parencite[1]{Campadelli.2015}. Allerdings bringt diese Definition praktische Schwierigkeiten mit sich,
@@ -176,7 +175,7 @@ Zu den künstlichen Datensätzen gehören die weitverbreitete \textit{Swiss Roll
 	\begin{center}
 		\includegraphics{artificial_datasets.pdf}
 	\end{center}
-	\caption[Künstliche Datensätze]{\figleft Die Swiss Roll. Die intrinsische Dimension beträgt zwei, da die Daten auf einer \enquote{eingerollten Ebene} liegen. Die Dimensionsreduktionsmethoden müssen die Swiss Roll \enquote{entfalten}, um eine zweidimensionale Repräsentation zu erhalten. \figright Der Twin Peaks Datensatz. Dieser besteht aus vier spitzen Bergen (\textit{Peaks}), wobei je zwei nach oben und unten zeigen. Auch dieser Datensatz hat eine intrinsische Dimension von zwei. Intuitiv gesehen kann man sich lokal nur nach rechts oder links auf der Mannigfaltigkeit bewegen, d.h. die Twin Peaks sind homöomorph zum $\real^2$. Beide 2-Mannigfaltigkeiten sind glatt und zusammenhängend.}
+	\caption[Künstliche Datensätze]{\figleft Die Swiss Roll. Die intrinsische Dimension beträgt zwei, da die Daten auf einer eingerollten Ebene liegen. Die Dimensionsreduktionsmethoden müssen die Swiss Roll \enquote{entfalten}, um eine zweidimensionale Repräsentation zu erhalten. \figright Der Twin Peaks Datensatz. Dieser besteht aus vier spitzen Bergen (\textit{Peaks}), wobei je zwei nach oben und unten zeigen. Auch dieser Datensatz hat eine intrinsische Dimension von zwei. Intuitiv gesehen kann man sich lokal nur nach rechts oder links auf der Mannigfaltigkeit bewegen, d.h. die Twin Peaks sind homöomorph zum $\real^2$. Beide 2-Mannigfaltigkeiten sind glatt und zusammenhängend.}
 	\label{fig:ArtificialDatasets}
 \end{figure}
 Beide künstlichen Datensätze bestehen aus \num{5000} Datenpunkten und haben eine extrinsische Dimension von drei und eine intrinsische
@@ -237,7 +236,7 @@ Likelihood Schätzers für den jeweiligen Datensatz.
 		Facial Emotion Recognition (FER)          & 2304  & 26    & 28709 \\
 		\bottomrule
 	\end{tabular}
-	\caption[Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengrößen der in diesem Vergleich verwendeten Datensätze]{Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengröße der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild. Die intrinsische Dimension wurde mit dem Maximum Likelihood Schätzer aus \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} mit einer Nachbarschaftsgröße $\Kid = 5$ geschätzt.}
+	\caption[Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengrößen der in diesem Vergleich verwendeten Datensätze]{Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengrößen der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild. Die intrinsische Dimension wurde mit dem Maximum Likelihood Schätzer aus \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} mit einer Nachbarschaftsgröße $\Kid = 5$ geschätzt.}
 	\label{tab:uebersicht-datensaetze}
 \end{table}
 
@@ -430,7 +429,7 @@ Referenz.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{reconstructions_mnist_pca_ae_convae_cae.pdf}
-	\caption[Rekonstruierte MNIST-Zahlen]{Gezeigt sind rekonstruierten Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Jede Zeile gehört zu einer Methode. Von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch einen Convolutional Autoencoder und (5) Rekonstruktion durch einen Contractive Autoencoder.}
+	\caption[Rekonstruierte MNIST-Zahlen]{Gezeigt sind rekonstruierte Zahlen aus dem MNIST-Datensatz von mehreren Methoden. Zeilenweise von oben nach unten: (1) Originale Bilder als Referenz, (2) Rekonstruktion durch PCA, (3) Rekonstruktion durch einen vollvernetzten Autoencoder, (4) Rekonstruktion durch einen Convolutional Autoencoder und (5) Rekonstruktion durch einen Contractive Autoencoder.}
 	\label{fig:MNIST-reconstructions}
 \end{figure}
 Visuell ist die beste Rekonstruktion die des Convolutional Autoencoders, gefolgt vom vollvernetzten Autoencoder. Insbesondere die Rekonstruktionen des Contractive Autoencoders sind nicht gut, da die Zahlen miteinander vermischt und unscharf werden. Die vom kontrahierenden Fehlerterm geforderte robustere latente Repräsentation führt dazu, dass die Punkte lokal ähnlicher zueinander sind und erschwert somit sichtbar die Rekonstruktion. Die Rekonstruktionen der Principal Component Analysis sind besser, aber visuell ebenfalls nicht überzeugend, da sie unscharf sind. Der hier eingesetzte tiefe Convolutional Autoencoder mit insgesamt elf Schichten hat über zwölf Millionen trainierbare Gewichte und zeigt auf dem MNIST-Datensatz hinsichtlich der Qualitätskriterien eine hohe Güte der Dimensionsreduktion (siehe \figref{fig:MNISTMetrics}). Allerdings ist MNIST ein relativ simpler Datensatz von hoher Qualität, sodass dieser tiefe Autoencoder scheinbar eine sinnvolle Repräsentation lernen kann. Im direkten Vergleich zum vollvernetzten Autoencoder, der sieben Schichten und nur etwas mehr als zwei Millionen Gewichte hat, zeigt dies, dass eine höhere Anzahl an Schichten im Netz tatsächlich einen Vorteil erbringen kann. Dies gilt solange, bis das Netz aufgrund der vielen Gewichte zu früh in suboptimalen lokalen Minima steckenbleibt. Dies ist für vollvernetzte Autoencoder in diesem Vergleich bei mehr als sieben Schichten der Fall gewesen. Der Convolutional Autoencoder erleichtert die Optimierung, da die einzelnen Convolutional Schichten durch das Teilen der Gewichte bereits weniger zu trainierende Gewichte besitzen.
