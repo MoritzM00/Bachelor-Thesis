@@ -74,20 +74,23 @@ erhalten, wenn $\set{M}_i(K) = \widetilde{\set{M}}_i(K)$, das heißt die Nachbar
 der Dimensionsreduktion unverändert. Zum einen kann es nun passieren, dass weit entfernte Punkte nach der Projektion \textit{nahe}
 beieinander sind. Mit anderen Worten können Punkte, die eigentlich unterschiedlich sind, nun
 ähnlich erscheinen. Aus diesem Grund sagt man, dass die Vertrauenswürdigkeit der
-Dimensionsreduktion niedrig ist \parencite[486 -- 487]{Venna.2001}. Dieser Fall wird über die Menge $\set{U}_i(K)$ formal wie folgt
-definiert:
-\begin{equation}
-	\set{U}_i(K) =  \left\{ 1 \leq j \leq n \mid j \notin \set{M}_i(K) \land j \in \widetilde{\set{M}}_i(K) \right\} \, .
-\end{equation}
+Dimensionsreduktion niedrig ist \parencite[486 -- 487]{Venna.2001}. Dieser Fall wird formal über die Menge $\set{U}_i(K)$ für einen
+Punkt $i$ festgehalten, welche die Indizes $j$ enthält, sodass $j \in \widetilde{\set{M}}_i(K)$
+gilt, aber $j \notin \set{M}_i(K)$.
+% \begin{equation}
+% 	\set{U}_i(K) =  \left\{ 1 \leq j \leq n \mid j \notin \set{M}_i(K) \land j \in \widetilde{\set{M}}_i(K) \right\} \, .
+% \end{equation}
+
 Zum anderen ist der gegenteilige Fall möglich: Nahe beieinanderliegende Punkte sind nach der
 Projektion weit weg voneinander. Dies reduziert die Kontinuität einer Dimensionsreduktion und wird
-formal über die Menge $\set{V}_i(K)$ als
-\begin{equation}
-	\set{V}_i(K) =  \left\{ 1 \leq j \leq n \mid j \in \set{M}_i(K) \land j \notin \widetilde{\set{M}}_i(K) \right\}
-\end{equation}
-definiert \parencite[487]{Venna.2001}. Mithilfe dieser beiden Mengen können nun die beiden Qualitätskriterien wie
-folgt berechnet werden. Dabei wird die Vertrauenswürdigkeit $T(K)$ über die Menge $\set{U}_i(K)$
-mittels
+formal über die Menge $\set{V}_i(K)$
+% \begin{equation}
+% 	\set{V}_i(K) =  \left\{ 1 \leq j \leq n \mid j \in \set{M}_i(K) \land j \notin \widetilde{\set{M}}_i(K) \right\}
+% \end{equation}
+definiert \parencite[487]{Venna.2001}. $\set{V}_i(K)$ ist die Menge der Indizes $j$, für die gilt, dass $j \in
+	\set{M}_i(K)$, aber $j \notin \widetilde{\set{M}}_i(K)$. Mithilfe dieser beiden Mengen können nun
+die beiden Qualitätskriterien wie folgt berechnet werden. Dabei wird die Vertrauenswürdigkeit
+$T(K)$ über die Menge $\set{U}_i(K)$ mittels
 \begin{equation}
 	T(K) = 1 - \frac{2}{nK(2n - 3K - 1)} \sum_{i = 1}^{n}\sum_{j \in \set{U}_i(K) } \left( r­_{\vect{y}}(i, j) - K \right)
 \end{equation}
