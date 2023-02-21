@@ -257,25 +257,25 @@ Unterabschnitten genauer betrachtet.
 \label{ch:MethodenDerDimRed:statistisch:LLE:LineareRekonstruktion}
 LLE nimmt an, dass die ursprünglichen Daten auf einer $d$-dimensionalen glatten Mannigfaltigkeit im $\real^D$ eingebettet sind und dass diese Mannigfaltigkeit auf kleinen Stücken (engl. \textit{patches}) approximativ linear ist. Daher kann ein ursprünglicher Datenpunkt $\vect{x}_i$ mit $i = 1,\ldots,n$ durch eine Linearkombination seiner Nachbarn
 ausgedrückt werden \parencite[2323]{Roweis.2000}. Die Koeffizienten dieser Linearkombination sind die sogenannten
-Rekonstruktionsgewichte $W_{ij}$, welche durch Minimierung der Zielfunktion
+Rekonstruktionsgewichte $\mat{W}_{ij}$, welche durch Minimierung der Zielfunktion
 \begin{equation}
 	\label{eq:LLE:Zielfunktion}
-	\sum_{i = 1}^n \norm[\Big]{ \vect{x}_i - \sum_{j = 1}^n W_{ij}\vect{x}_j}^2
+	\sum_{i = 1}^n \norm[\Big]{ \vect{x}_i - \sum_{j = 1}^n \mat{W}_{ij}\vect{x}_j}^2
 \end{equation}
 gefunden werden. Die Minimierung erfolgt unter den folgenden zwei Nebenbedingungen \parencite[2]{Roweis.2000}. Erstens müssen sich alle Zeilen der Gewichtsmatrix $\mat{W} \in \real^{n
 		\times n}$ zu Eins summieren
 \begin{equation}
 	\label{eq:LLE:ErsteNebenbedingung}
-	\sum_{j = 1}^nW_{ij} = 1 \, , \quad \forall i = 1, \ldots, n
+	\sum_{j = 1}^n\mat{W}_{ij} = 1 \, , \quad \forall i = 1, \ldots, n
 \end{equation}
 und zweitens sollen Datenpunkte, die keine Nachbarn sind, keinen Einfluss auf die Rekonstruktion haben, das heißt
 \begin{equation}
 	\label{eq:LLE:ZweiteNebenbedingung}
-	W_{ij} = 0 \, , \quad \text{falls } \vect{x}_j \text{ kein Nachbar von } \vect{x}_i \text{ ist.}
+	\mat{W}_{ij} = 0 \, , \quad \text{falls } \vect{x}_j \text{ kein Nachbar von } \vect{x}_i \text{ ist.}
 \end{equation}
-Die erste Nebenbedingung (\eqref{eq:LLE:ErsteNebenbedingung}) macht die Gewichtsmatrix invariant gegenüber Translationen: Werden alle Datenpunkte um den Wert $\alpha \in \real$ verschoben, so ist $W_{ij}$ wegen $\sum_j W_{ij}\alpha = \alpha$ immer noch eine optimale Lösung \parencite[8]{Cayton.2005}:
+Die erste Nebenbedingung (\eqref{eq:LLE:ErsteNebenbedingung}) macht die Gewichtsmatrix invariant gegenüber Translationen: Werden alle Datenpunkte um den Wert $\alpha \in \real$ verschoben, so ist $\mat{W}_{ij}$ wegen $\sum_j \mat{W}_{ij}\alpha = \alpha$ immer noch eine optimale Lösung \parencite[8]{Cayton.2005}:
 \begin{equation}
-	\sum_{i = 1}^n \norm[\Big]{ \vect{x}_i + \alpha - \sum_{j = 1}^n W_{ij}(\vect{x}_j + \alpha)}^2 = \sum_{i = 1}^n \norm[\Big]{ \vect{x}_i - \sum_{j = 1}^n W_{ij}\vect{x}_j}^2 \, .
+	\sum_{i = 1}^n \norm[\Big]{ \vect{x}_i + \alpha - \sum_{j = 1}^n \mat{W}_{ij}(\vect{x}_j + \alpha)}^2 = \sum_{i = 1}^n \norm[\Big]{ \vect{x}_i - \sum_{j = 1}^n \mat{W}_{ij}\vect{x}_j}^2 \, .
 \end{equation}
 Des Weiteren sind die Gewichtsmatrizen, die dieses Optimierungsproblem lösen, invariant gegenüber Rotationen und Skalierungen. Damit begründen sie das in \subsecref{ch:MethodenDerDimRed:statistisch:LLE:FindenDerRepr} erläuterte Finden der niedrigdimensionalen Repräsentation mithilfe derselben Rekonstruktionsgewichte.
 
@@ -286,11 +286,13 @@ Des Weiteren sind die Gewichtsmatrizen, die dieses Optimierungsproblem lösen, i
 % wobei $\mat{C}$ die lokale Kovarianzmatrix ist. 
 \subsubsection{Finden der niedrigdimensionalen Repräsentation}
 \label{ch:MethodenDerDimRed:statistisch:LLE:FindenDerRepr}
-Wurden die optimalen Rekonstruktionsgewichte $W_{ij}$, die die Zielfunktion aus
-\eqref{eq:LLE:Zielfunktion} unter den genannten Nebenbedingungen minimieren, gefunden, so kann in einem zweiten Schritt die latente Repräsentation $\vect{y}$ hergeleitet werden. Dazu werden die Eigenschaften der Gewichtsmatrix $\mat{W}$ ausgenutzt. Nimmt man wie eingangs erwähnt die Einbettung der Daten auf einer $d$-Mannigfaltigkeit an, dann gibt es eine Abbildung eines Punktes $\vect{x}$ auf die latente Repräsentation $\vect{y}$. Diese Abbildung besteht aus einer Translation, Rotation und Skalierung -- genau die Eigenschaften gegenüber denen die Gewichtsmatrix invariant ist. Man benutzt also dieselben Gewichte $W_{ij}$, die auch für die Rekonstruktion der ursprünglichen Repräsentation genutzt wurden, und löst mit fixem $W_{ij}$ das folgende Optimierungsproblem, um die latente Repräsentation zu finden \parencite[2324]{Roweis.2000}:
+Wurden die optimalen Rekonstruktionsgewichte $\mat{W}_{ij}$, die die Zielfunktion aus
+\eqref{eq:LLE:Zielfunktion} unter den genannten Nebenbedingungen minimieren, gefunden, so kann in einem zweiten Schritt die latente Repräsentation $\vect{y}$ hergeleitet werden. Dazu werden die Eigenschaften der Gewichtsmatrix $\mat{W}$ ausgenutzt. Nimmt man wie eingangs erwähnt die Einbettung der Daten auf einer $d$-Mannigfaltigkeit an, dann gibt es eine approximative Abbildung eines Punktes $\vect{x}$ auf die latente Repräsentation $\vect{y}$. Diese Abbildung besteht aus einer Translation, Rotation und Skalierung -- genau die Eigenschaften gegenüber denen die Gewichtsmatrix invariant ist \parencite[2324]{Roweis.2000}. Man benutzt also dieselben Gewichte $\mat{W}_{ij}$, die auch für die
+Rekonstruktion der ursprünglichen Repräsentation genutzt wurden, und löst mit fixem $\mat{W}_{ij}$
+das folgende Optimierungsproblem, um die latente Repräsentation zu finden \parencite[2324]{Roweis.2000}:
 \begin{equation}
 	\label{eq:LLE:ZielfunktionY}
-	\min_{\mat{Y}}\, \sum_{i = 1}^n \norm[\Big]{\vect{y}_i - \sum_{j = 1}^n W_{ij}\vect{y}_j}^2 \, .
+	\min_{\mat{Y}}\, \sum_{i = 1}^n \norm[\Big]{\vect{y}_i - \sum_{j = 1}^n \mat{W}_{ij}\vect{y}_j}^2 \, .
 \end{equation}
 \eqref{eq:LLE:ZielfunktionY} kann äquivalent umgeformt werden zu \parencite[4]{Ghojogh.2020}
 \begin{equation}
