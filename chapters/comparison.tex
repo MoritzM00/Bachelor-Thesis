@@ -189,13 +189,6 @@ hohe extrinsische Dimension aufweisen und daher für die Dimensionsreduktion gut
 Konkret wurden die folgenden Datensätze ausgewählt: (1) \textbf{MNIST} \parencite{LeCun.2010}, (2) \textbf{Olivetti Research Ltd} (ORL)
 \parencite{Samaria.1994}, (3) \textbf{Fashion MNIST} \parencite{Xiao.2017}, (4) \textbf{Facial Emotion Recognition} (FER) \parencite{DumitruIanGoodfellowWillCukierskiYoshuaBengio.2013} und (5) \textbf{Indian Council of
 	Medical Research} (ICMR) \parencite{Mohapatra.2022}.
-\begin{figure}[hbt]
-	\begin{center}
-		\includegraphics{dataset_samples.pdf}
-	\end{center}
-	\caption[Beispielbilder der natürlichen Datensätze]{Zu sehen sind Beispielbilder der natürlichen Bilddatensätze aus dem Vergleich: \captiona Handgeschriebene Zahlen aus dem MNIST-Datensatz \captionb Gesichter mit unterschiedlichen Emotionen aus dem FER-Datensatz \captionc Verschiedene Kleidungsstücke aus dem Fashion MNIST-Datensatz \captiond Bilder der Gesichter unterschiedlicher Personen aus zehn Blickwinkeln (ORL-Datensatz)}
-	\label{fig:Dataset_samples}
-\end{figure}
 
 Der weitverbreitete MNIST-Datensatz besteht aus \num{60000} Grauton-Bildern von handgeschriebenen
 Zahlen in der Auflösung $28 \times 28$. Die Anzahl der Pixel entspricht der extrinsischen Dimension
@@ -208,6 +201,13 @@ ebenso wie bei MNIST 784. Der FER-Datensatz besteht aus \num{28 709} Bildern von
 sieben unterschiedlichen Emotionen. Die Bilder haben eine Auflösung von $48 \times 48$ und sind
 damit \num{2304}-dimensional. Beispiele der Bilddatensätze sind in \figref{fig:Dataset_samples} zu
 finden.
+\begin{figure}[hbt]
+	\begin{center}
+		\includegraphics{dataset_samples.pdf}
+	\end{center}
+	\caption[Beispielbilder der natürlichen Datensätze]{Zu sehen sind Beispielbilder der natürlichen Bilddatensätze aus dem Vergleich: \captiona Handgeschriebene Zahlen aus dem MNIST-Datensatz \captionb Gesichter mit unterschiedlichen Emotionen aus dem FER-Datensatz \captionc Verschiedene Kleidungsstücke aus dem Fashion MNIST-Datensatz \captiond Bilder der Gesichter unterschiedlicher Personen aus zehn Blickwinkeln (ORL-Datensatz)}
+	\label{fig:Dataset_samples}
+\end{figure}
 
 \nomenclature[Z]{MNIST}{Modified National Institute of Standards and Technology (Datensatz)}
 \nomenclature[Z]{FER}{Facial Emotion Recognition (Datensatz)}
@@ -233,7 +233,7 @@ intrinsischen Dimensionen, sowie die Stichprobengrößen der Datensätze zusamme
 		Facial Emotion Recognition (FER)          & 2304  & 26    & 28709 \\
 		\bottomrule
 	\end{tabular}
-	\caption[Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengrößen der in diesem Vergleich verwendeten Datensätze]{Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengrößen der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild. Die intrinsische Dimension wurde mit dem Maximum Likelihood Schätzer aus \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} mit einer Nachbarschaftsgröße $\Kid = 5$ geschätzt.}
+	\caption[Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengrößen der in diesem Vergleich verwendeten Datensätze]{Übersicht über die extrinsischen und intrinsischen Dimensionen, sowie die Stichprobengrößen der in diesem Vergleich verwendeten Datensätze. Bei Bilddatensätzen entspricht die extrinsische Dimension der Anzahl der Pixel im Bild. Die intrinsische Dimension wurde mit dem Maximum Likelihood Schätzer aus \subsecref{ch:Vergleich:sec:Methodik:subsec:SchaetzenDerIntrinsischenDim} mit einer Nachbarschaftsgröße $\Kid = 20$ geschätzt.}
 	\label{tab:uebersicht-datensaetze}
 \end{table}
 Die intrinsischen Dimensionen sind die Schätzungen des in
