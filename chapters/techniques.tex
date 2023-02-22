@@ -461,31 +461,32 @@ werden, da es sonst ebenfalls zu Schwierigkeiten in der Optimierung kommen kann.
 Abschließend muss die Aktivierungsfunktion festgelegt werden. Dabei könnte theoretisch nach jeder
 Schicht eine andere Aktivierungsfunktion eingesetzt werden. Hier wird jedoch angenommen, dass
 dieselbe Funktion für alle Schichten verwendet wird. Wie eingangs erwähnt, bestimmt die
-Aktivierungsfunktion die Nichtlinearität des Autoencoders. Die wohl populärsten
-Aktivierungsfunktionen sind die (logistische) Sigmoid-Funktion
+Aktivierungsfunktion die Nichtlinearität des Autoencoders. Drei häufig verwendete
+Aktivierungsfunktionen sind in \figref{fig:activations} dargestellt.
+\begin{figure}[ht]
+	\centering
+	\includegraphics{activations.pdf}
+	\caption[Drei weitverbreitete Aktivierungsfunktionen.]{Drei weitverbreitete Aktivierungsfunktionen. \captiona Die Sigmoid-Funktion \captionb der Tangens Hyperbolicus und \captionc die Rectified Linear Unit. Eigene Darstellung (angelehnt an \textcite[4]{Charte.2018})}
+	\label{fig:activations}
+\end{figure}
+Dabei ist in \captiona die (logistische) Sigmoid-Funktion
 \begin{equation}
 	\label{eq:Sigmoid}
 	\operatorname{sigmoid}(x) = \frac{1}{1 + \exp (-x)} \, ,
 \end{equation}
-der \textit{Tangens Hyperbolicus}
+in \captionb der \textit{Tangens Hyperbolicus}
 \begin{equation}
 	\label{eq:tanh}
 	\operatorname{tanh}(x) = \frac{\exp(x) - \exp(-x)}{\exp(x) + \exp(-x)}
 \end{equation}
-und die \textit{Rectified Linear Units}
+und in \captionc die \textit{Rectified Linear Unit}
 \begin{equation}
 	\label{eq:ReLU}
 	\operatorname{ReLU}(x) = \max\{0, x\} \, ,
 \end{equation}
-wobei $\exp(\, \cdot \,)$ die Exponentialfunktion darstellt \parencites[191 -- 195]{Goodfellow.2016}[4]{Charte.2018}.
-\begin{figure}[h]
-	\centering
-	\includegraphics{activations.pdf}
-	\caption[Drei weitverbreitete Aktivierungsfunktionen.]{Drei weitverbreitete Aktivierungsfunktionen. \captiona Die Sigmoid-Funktion \captionb der Tangens Hyperbolicus und \captionc die Rectified Linear Units. Eigene Darstellung (angelehnt an \textcite[4]{Charte.2018})}
-	\label{fig:activations}
-\end{figure}
-Die Aktivierungsfunktionen sind grafisch in \figref{fig:activations} dargestellt.
-Obwohl ReLU (\eqref{eq:ReLU}) die mittlerweile für neuronale Netze standardmäßig empfohlene Aktivierungsfunktion ist \parencite[195]{Goodfellow.2016}, wird für Autoencoder die Sigmoid-Funktion (\eqref{eq:Sigmoid})
+abgebildet \parencites[191 -- 195]{Goodfellow.2016}[4]{Charte.2018}. Hierbei bezeichnet $\exp(\, \cdot \,)$ die
+Exponentialfunktion. Obwohl ReLU (\eqref{eq:ReLU}) die mittlerweile für neuronale Netze
+standardmäßig empfohlene Aktivierungsfunktion ist \parencite[195]{Goodfellow.2016}, wird für Autoencoder die Sigmoid-Funktion (\eqref{eq:Sigmoid})
 empfohlen. Dies liegt daran, dass die \textit{Rectified Linear Units} alle negativen Inputs auf
 Null projiziert und damit die Rekonstruktion erschweren könnte \parencite[4]{Charte.2018}. Ein möglicher Nachteil der Sigmoid-Funktion ist allerdings der Wertebereich
 $[0, 1]$, was eine Rekonstruktion ebenfalls behindern könnte.
