@@ -25,7 +25,7 @@ Performance der Methoden auf mehreren künstlichen sowie natürlichen Datensätz
 \newterm{Vertrauenswürdigkeit}, der \newterm{Kontinuität} und dem \newterm{Local Continuity
 	Meta-Criterion} gemessen. Diese Kriterien messen die lokale Strukturerhaltung aus unterschiedlichen
 Sichtweisen und werden jeweils für mehrere Nachbarschaftsgrößen berechnet, um eine größere
-Aussagekraft über die Güte der gefundenen niedrigdimensionalen Repräsentation zu erreichen. Die
+Aussagekraft über die Güte der gefundenen latenten Repräsentation zu erreichen. Die
 Qualitätskriterien werden in \subsecref{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien} noch
 eingehend erläutert. Neben der Evaluierung hinsichtlich der Qualitätskriterien wird der
 Rechenaufwand und die Güte von Rekonstruktionen eines ursprünglichen Datenpunktes für relevante
@@ -326,7 +326,7 @@ Peaks-Datensatz in \figref{fig:TwinPeaksMetrics} dargestellt.
 	\begin{center}
 		\includegraphics{SwissRoll_comparison.pdf}
 	\end{center}
-	\caption[Qualitätskriterien für den Swiss Roll-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab, gefolgt vom klassischen Autoencoder. Die restlichen Methoden fallen insbesondere hinsichtlich der Vertrauenswürdigkeit und des LCMC nach unten ab. Der Autoencoder zeigt hier den Vorteil durch die Flexibilität in der Architektur gegenüber der linearen Principal Component Analysis, welche mehr Schwierigkeiten mit dieser nichtlinearen Mannigfaltigkeit hat. (Eigene Darstellung)}
+	\caption[Qualitätskriterien für den Swiss Roll-Datensatz]{Die Vertrauenswürdigkeit und Kontinuität der Dimensionsreduktion, sowie das Local Continuity Meta-Criterion (LCMC) für den Swiss Roll-Datensatz. Locally Linear Embedding (LLE) schneidet mit Abstand am besten ab, gefolgt vom klassischen Autoencoder. Die restlichen Methoden fallen insbesondere hinsichtlich der Vertrauenswürdigkeit und des LCMC nach unten ab. Der Autoencoder zeigt hier den Vorteil durch die Flexibilität in der Architektur gegenüber der linearen Principal Component Analysis, welche mehr Schwierigkeiten mit dieser nichtlinearen Mannigfaltigkeit hat. (Eigene Darstellung)}
 	\label{fig:SwissRollMetrics}
 \end{figure}
 Beide Abbildungen zeigen ein ähnliches Ergebnis: Locally Linear Embedding kann mit der lokalen Erhaltung der Struktur hohe Werte auf allen drei Qualitätskriterien erzielen. Insbesondere hinsichtlich des LCMC kann sich LLE deutlich nach oben absetzen.

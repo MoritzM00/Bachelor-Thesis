@@ -405,7 +405,7 @@ d.h. die Gewichte und Biases (siehe \eqref{eq:dreischichtigerAE}). Die Zielfunkt
 \begin{equation}
 	\mathcal{J}_{\text{AE+reg}} = \frac{1}{n} \sum_{i = 1}^{n}  L(\vect{x}_i, \estNormal{\vect{x}}_i) + \lambda \Omega(\bm{\theta}) \, ,
 \end{equation}
-wobei $\lambda \geq 0$ ein \newterm{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den Rekonstruktionsfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden, was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch also eine informativere niedrigdimensionale Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
+wobei $\lambda \geq 0$ ein \newterm{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den Rekonstruktionsfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden, was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch also eine informativere latente Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
 
 Eine Umsetzung dessen ist der \newterm{Sparse Autoencoder}, der eine dünn besetzte (engl.
 \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, d.h. nur wenige Einträge von $\vect{y}$ sind
