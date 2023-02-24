@@ -46,9 +46,9 @@ verschafft werden.
 
 \subsection{Qualitätskriterien der Dimensionsreduktion}
 \label{ch:Vergleich:sec:Methodik:subsec:Qualitaetskriterien}
-Wie bereits in \chapref{ch:Dimensionsreduktion} erläutert, hat die Dimensionsreduktion das Ziel einer möglichst \enquote{verlustfreien} Transformation der ursprünglichen Repräsentation in eine latente Repräsentation von geringerer Dimension. Für Autoencoder bedeutet \enquote{verlustfrei} die Minimierung des Rekonstruktionsfehlers wie z.B. die quadratische Abweichung (siehe \eqref{eq:MSE_loss}). Dieser Rekonstruktionsfehler ist jedoch wie \textcite[18]{vanderMaaten.2009} hervorhebt, nicht besonders aussagekräftig, da die lokale Struktur der Daten auch mit einem höheren Rekonstruktionsfehler noch erhalten werden kann. Hinzu kommt, dass der Rekonstruktionsfehler nicht für alle Methoden berechenbar ist, da eine inverse Transformation der niedrigdimensionalen in die ursprüngliche Repräsentation benötigt wird. Das Forschungsinteresse für Methoden der Dimensionsreduktion hat daher mit der Zeit dafür gesorgt, dass immer mehr Qualitätskriterien entwickelt wurden. \textcite{Gracia.2014} stellen einige Qualitätskriterien vor und vergleichen diese miteinander. Trotzdem gibt es in der Literatur keine eindeutige Kennzahl, die bei einem Vergleich von Dimensionsreduktionsmethoden standardmäßig eingesetzt wird \parencite[vgl.][1 -- 2]{Lee.2009}. Stattdessen bedient man sich mehrerer Kennzahlen, die
-unterschiedliche Dinge bestrafen und versucht so die Stärken und Schwächen einer
-Dimensionsreduktionsmethode zu erkennen \parencite[486]{Venna.2001}.
+Wie bereits in \chapref{ch:Dimensionsreduktion} erläutert, hat die Dimensionsreduktion das Ziel einer möglichst \enquote{verlustfreien} Transformation der ursprünglichen Repräsentation in eine latente Repräsentation von geringerer Dimension. Für Autoencoder bedeutet \enquote{verlustfrei} die Minimierung des Rekonstruktionsfehlers wie z.B. die quadratische Abweichung (siehe \eqref{eq:MSE_loss}). Dieser Rekonstruktionsfehler ist jedoch, wie \textcite[18]{vanderMaaten.2009} hervorhebt, nicht besonders aussagekräftig, da die lokale Struktur der Daten auch mit einem höheren Rekonstruktionsfehler noch erhalten werden kann. Hinzu kommt, dass der Rekonstruktionsfehler nicht für alle Methoden berechenbar ist, da eine inverse Transformation der niedrigdimensionalen in die ursprüngliche Repräsentation benötigt wird. Das Forschungsinteresse für Methoden der Dimensionsreduktion hat daher mit der Zeit dafür gesorgt, dass immer mehr Qualitätskriterien entwickelt wurden. \textcite{Gracia.2014} stellen einige Qualitätskriterien vor und vergleichen diese miteinander. Trotzdem gibt es in der Literatur keine eindeutige Kennzahl, die bei einem Vergleich von Dimensionsreduktionsmethoden standardmäßig eingesetzt wird \parencite[vgl.][1 -- 2]{Lee.2009}. Stattdessen man sich mehrerer Kennzahlen, die unterschiedliche
+Dinge bestrafen und versucht so die Stärken und Schwächen einer Dimensionsreduktionsmethode zu
+erkennen \parencite[486]{Venna.2001}.
 
 Im ausführlichen Vergleich von \textcite{vanderMaaten.2009} wird auf den Generalisierungsfehler
 eines 1-Nächste-Nachbar Klassifikators, sowie auf die zwei Kennzahlen Vertrauenswürdigkeit (engl.
@@ -483,8 +483,8 @@ latente Repräsentation ist nicht unkorreliert. (2) Die Spalten von $\mat{Y}$ si
 absteigender Varianz sortiert. (3) Hat man einen Encoder $f: \real^D \rightarrow \real^{k_1}$ und
 möchte man einen Vektor $\vect{x} \in \real^D$ auf nur $k_2$ Dimensionen mit $k_2 < k_1$
 reduzieren, so können nicht einfach die ersten $k_2$ Koordinaten von $f(\vect{x})$ verwendet
-werden. Das bedeutet, dass die Lösungen von Autoencodern auf unterschiedliche Dimensionen nicht
-geschachtelt sind.
+werden. Das bedeutet, dass die Lösungen von Autoencodern für unterschiedliche intrinsische
+Dimensionen $d$ nicht geschachtelt sind.
 
 Es wurden jedoch bereits Verfahren entwickelt, mit denen diese Eigenschaften wiederhergestellt oder
 von Beginn an sichergestellt werden können. Das Vorgehen von \textcite{Plaut.2018} rekonstruiert
@@ -515,20 +515,20 @@ ist. Dies macht die Links-Singulärvektoren der Decoder-Matrix wohldefiniert \pa
 
 \subsection{Visualisierung des Zusammenhangs}
 
-Der eben beschriebene Zusammenhang wird im Folgenden zur Verdeutlichung visualisiert. Dazu wird
-zuerst die Kovarianzmatrix der transformierten Daten und anschließend werden die gefundenen
-Gewichte der Methoden genauer analysiert.
+Der eben beschriebene Zusammenhang wird im Folgenden zur Verdeutlichung visualisiert. Dazu werden
+zuerst die Kovarianzmatrix der transformierten Daten und anschließend die gefundenen Gewichte der
+Methoden genauer analysiert.
 
 Um das Vorgehen von \textcite{Plaut.2018} zu überprüfen, sind in \figref{fig:Kovarianzmatrizen}
 \begin{figure}[ht]
 	\centering
 	\includegraphics{covariance-matrices.pdf}
-	\caption[Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von drei Methoden]{Die Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz, wobei in \captiona die Principal Component Analysis und die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei Transformation mittels der Principal Component Analysis ist per Konstruktion eine Diagonalmatrix mit absteigend sortierten Varianzen, das heißt es besteht keine Korrelation in $\mat{Y}$. Wendet man die Singulärwertzerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, so erhält man ohne \textit{weight decay} keine Diagonalmatrix. Wurde hingegen \textit{weight decay} verwendet, so ist die Kovarianzmatrix eine Diagonalmatrix. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
+	\caption[Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz von drei Methoden]{Die Kovarianzmatrizen der transformierten Daten $\mat{Y}$ für den FER-Datensatz, wobei in \captiona die Principal Component Analysis und die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet wurde, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei Transformation mittels der Principal Component Analysis ist per Konstruktion eine Diagonalmatrix mit absteigend sortierten Varianzen, das heißt es besteht keine Korrelation in $\mat{Y}$. Wendet man die Singulärwertzerlegung auf die Decoder-Gewichtsmatrix des linearen Autoencoders an, so erhält man ohne \textit{weight decay} keine Diagonalmatrix. Wird hingegen \textit{weight decay} verwendet, so ist die Kovarianzmatrix eine Diagonalmatrix. (Eigene Darstellung, angelehnt an \textcite[5]{Plaut.2018})}
 	\label{fig:Kovarianzmatrizen}
 \end{figure}
-die Kovarianzmatrizen der transformierten Daten dargestellt. Dabei wurde in \captiona die Principal Component Analysis und jeweils die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei der Principal Component Analysis ist wie erwartet eine Diagonalmatrix mit absteigend sortieren Varianzen auf der Diagonalen. Die von \textcite{Plaut.2018} vorgeschlagene Methode wurde in \captionb und \captionc angewandt. Hierbei bestimmt jedoch die Verwendung von \textit{weight decay} die Orthogonalität der latenten Repräsentation. Wird keine Regularisierung verwendet, so besteht Korrelation in $\mat{Y}$. Im Gegensatz dazu konnte die Korrelation fast vollständig eliminiert und damit Punkt (1) wiederhergestellt werden, wenn \textit{weight decay} verwendet wird. Außerdem kann durch die Singulärwertzerlegung die absteigende Sortierung nach den Varianzen (Punkt (2)) sichergestellt werden.
+die Kovarianzmatrizen der transformierten Daten dargestellt. Dabei wurde in \captiona die Principal Component Analysis und jeweils die Links-Singulärvektoren der Decoder-Gewichtsmatrix eines linearen Autoencoders \captionb ohne \textit{weight decay} und \captionc mit \textit{weight decay} verwendet, um die Daten auf neun Dimensionen zu reduzieren. Die Kovarianzmatrix bei der Principal Component Analysis ist wie erwartet eine Diagonalmatrix mit absteigend sortierten Varianzen auf der Diagonalen. Die von \textcite{Plaut.2018} vorgeschlagene Methode wurde in \captionb und \captionc angewandt. Hierbei bestimmt jedoch die Verwendung von \textit{weight decay} die Orthogonalität der latenten Repräsentation. Wird keine Regularisierung verwendet, so besteht Korrelation in $\mat{Y}$. Im Gegensatz dazu konnte die Korrelation fast vollständig eliminiert und damit Punkt (1) wiederhergestellt werden, wenn \textit{weight decay} verwendet wird. Außerdem kann durch die Singulärwertzerlegung die absteigende Sortierung nach den Varianzen (Punkt (2)) sichergestellt werden.
 
-Um nun die gefundenen Lösungen der Principal Component Analysis und Autoencodern genauer betrachten
+Um nun die gefundenen Lösungen der Principal Component Analysis und Autoencoder genauer betrachten
 zu können, kann die Ladungsmatrix $\mat{A}$ mit den Gewichtsmatrizen eines Autoencoders verglichen
 werden. Auf Bilddatensätzen können diese Matrizen so umgeformt werden, dass sich für jede Zeile von
 $\mat{W}_1$ oder Spalte von $\mat{W}_2$ ein Bild ergibt. \figref{fig:Gewichtsvergleich} setzt
@@ -548,13 +548,13 @@ Im Folgenden wird untersucht, inwiefern die Hinzunahme von Nichtlinearität die 
 Repräsentation eines Autoencoders und damit den Zusammenhang zur Principal Component Analysis
 beeinflusst. Dazu wurden mehrere dreischichtige Autoencoder mit unterschiedlichen
 Aktivierungsfunktionen auf dem MNIST-Datensatz trainiert, wobei schrittweise Nichtlinearität
-hinzugefügt wird. Mithilfe dieser Autoencoder wurde dann die latente Repräsentation $\mat{Y}$ für
+hinzugefügt wurde. Mithilfe dieser Autoencoder wurde dann die latente Repräsentation $\mat{Y}$ für
 den MNIST-Datensatz berechnet und in \figref{fig:Autoencoder-Nichtlinearitaet} dargestellt. Für die
 Visualisierung wurde die intrinsische Dimension dabei auf zwei gesetzt.
 \begin{figure}[ht]
 	\centering
 	\includegraphics{autoencoders-nonlinearity.pdf}
-	\caption[Latente Repräsentationen von PCA und drei Autoencodern mit unterschiedlichen Aktivierungsfunktionen]{Dargestellt sind die latenten Repräsentationen $\mat{Y}$ einer \captiona Principal Component Analysis und mehrerer Autoencoder mit \captionb linearem Encoder und Decoder (Linear-Linear), \captionc Sigmoid-Aktivierung im Encoder und linearem Decoder und \captiond Sigmoid-Aktivierungen im Encoder und Decoder. Alle Autoencoder wurden mit \textit{weight decay} ($\lambda = \num{e-6}$) trainiert. Der hier gezeigte lineare Autoencoder lernt die Richtungen der Hauptkomponenten bis hin zu einer orthogonalen Transformation. Mit nichtlinearem Encoder besteht noch Ähnlichkeit, was aber nicht auf ein vollständig nichtlinearen Autoencoder zutrifft.}
+	\caption[Latente Repräsentationen von PCA und drei Autoencodern mit unterschiedlichen Aktivierungsfunktionen]{Dargestellt sind die latenten Repräsentationen $\mat{Y}$ einer \captiona Principal Component Analysis und mehrerer Autoencoder mit \captionb linearem Encoder und Decoder (Linear-Linear), \captionc Sigmoid-Aktivierung im Encoder und linearem Decoder und \captiond Sigmoid-Aktivierungen im Encoder und Decoder. Alle Autoencoder wurden mit \textit{weight decay} ($\lambda = \num{e-6}$) trainiert. Der hier gezeigte lineare Autoencoder lernt die Richtungen der Hauptkomponenten bis hin zu einer orthogonalen Transformation. Mit nichtlinearem Encoder besteht noch Ähnlichkeit, was aber nicht auf einen vollständig nichtlinearen Autoencoder zutrifft.}
 	\label{fig:Autoencoder-Nichtlinearitaet}
 \end{figure}
 Als Referenz ist in \captiona die latente Repräsentation der Principal Component Analysis abgebildet. Wie bereits im theoretischen Zusammenhang erklärt, lernt ein linearer Autoencoder mit \textit{weight decay} die Richtungen der Hauptkomponenten bis hin zu einer orthogonalen Transformation. Vergleicht man \figref{fig:Autoencoder-Nichtlinearitaet} \captiona mit \captionb ist dies in der Tat der Fall. Ist der Encoder nichtlinear, so besteht immer noch eine große Ähnlichkeit zu der von PCA gefundenen latenten Repräsentation. Dies stimmt mit der von \textcite{Bourlard.1988} gemachten formalen Beobachtung überein. Ist der Decoder ebenfalls nichtlinear, so weicht die gefundene Repräsentation deutlich von der Repräsentation der Principal Component Analysis und anderer (teilweise) linearer Autoencoder ab. Bei der Hinzunahme von Nichtlinearität zum Autoencoder, gehen die beschriebenen Zusammenhänge also erst vollständig verloren, wenn sowohl Encoder als auch Decoder nichtlinear sind.
@@ -564,7 +564,7 @@ Aktivierungsfunktionen eine ähnliche latente Repräsentation wie die Principal 
 lernt. Allerdings weicht die gefundene Lösung des Autoencoders in einigen Punkten, wie z.B.
 bezüglich der fehlenden Sortierung nach Varianzen oder der bestehenden Korrelation in der latenten
 Repräsentation ab. Dabei begünstigt eine Regularisierung der Gewichte mittels \textit{weight decay}
-die Orthogonalität, d.h. Unkorreliertheit in der gefundenen Lösung des Autoencoders. Ohne dieser
+die Orthogonalität, d.h. Unkorreliertheit in der gefundenen Lösung des Autoencoders. Ohne diese
 Regularisierung lernt der Autoencoder lediglich einen Unterraum der Hauptkomponenten aufgrund der
 aufgezeigten Symmetrie der Zielfunktion. Mit dem Verfahren von \textcite{Plaut.2018} kann für große
 Datensätze ein alternativer Algorithmus mithilfe des Autoencoders eingesetzt werden, um die
