@@ -46,9 +46,9 @@ Varianz der im Folgenden definierten Hauptkomponenten maximiert. Dies führt daz
 Hauptkomponente die Richtung der größten Varianz abbildet, die zweite Hauptkomponente die Richtung
 der zweitgrößten Varianz und so weiter, d.h. die weiteren Hauptkomponenten bilden sukzessive
 weniger Varianz der ursprünglichen Variablen ab. Um nun die Dimension von $D$ auf $d$ zu
-reduzieren, werden die Richtungen der größten Varianz, d.h. die ersten $d$ Hauptkomponenten
-ausgewählt. Die Definition und Herleitung dieser Hauptkomponenten wird im nachfolgenden
-Unterabschnitt genauer betrachtet.
+reduzieren, werden die ersten $d$ Richtungen der größten Varianz, d.h. die ersten $d$
+Hauptkomponenten ausgewählt. Die Definition und Herleitung dieser Hauptkomponenten wird im
+nachfolgenden Unterabschnitt genauer betrachtet.
 
 \subsubsection{Herleitung der Hauptkomponenten}
 \label{ch:MethodenDerDimRed:statistisch:PCA:HerleitungPC}
@@ -120,7 +120,7 @@ die sogenannte \newterm{Kernel Principal Component Analysis} (Kernel PCA). Diese
 \nomenclature[Z]{kPCA}{Kernel Principal Component Analysis}
 Die Kernel Principal Components Analysis \parencite{Scholkopf.1997} ist eine nichtlineare Erweiterung der klassischen Principal Component
 Analysis und kann somit theoretisch nichtlineare Zusammenhänge in den Daten erkennen. Um das zu
-erreichen, wird der sogenannten \newterm{Kernel Trick} verwendet, der auch schon erfolgreich auf
+erreichen, wird der sog. \newterm{Kernel Trick} verwendet, der auch schon erfolgreich auf
 \textit{Support Vector Machines} \parencite{Boser.1992} angewandt wurde. Im Folgenden wird die Grundidee der Kernel PCA und das Konzept
 eines Kernels genauer erläutert. Daraufhin wird die konkrete Vorgehensweise vorgestellt und
 abschließend werden praktische Probleme besprochen.
@@ -161,11 +161,12 @@ Basisfunktionen (RBF))
 wobei der Parameter $\sigma > 0$ die Bandbreite des Kernels bestimmt \parencite[296]{ShaweTaylor.2011}. Ein zu großer Wert von $\sigma$ führt dazu, dass der Kernel fast
 konstant wird und somit die lokale Struktur nicht mehr passend berücksichtigen kann. Ein zu kleiner
 Wert führt zur Über- oder Unterschätzung der Ähnlichkeit zweier Punkte, d.h. der Kernel passt sich
-zu sehr an die Daten an (Overfitting) \parencite[296 -- 297]{ShaweTaylor.2011}. Des Weiteren sind polynomiale Funktionen \parencite[292]{ShaweTaylor.2011}
+zu sehr an die Daten an (Overfitting) \parencite[296 -- 297]{ShaweTaylor.2011}. Des Weiteren sind polynomiale Funktionen des Grades $p$ eine
+von vielen möglichen Kernel-Funktionen. Damit ist häufig der Spezialfall
 \begin{equation}
-	\kappa(\vect{x}_i, \vect{x}_j) = (\vect{x}_i \cdot \vect{x}_j)^p
+	\kappa(\vect{x}_i, \vect{x}_j) = (\tr{\vect{x}_i} \vect{x}_j + R)^p
 \end{equation}
-des Grades $p$ eine von vielen möglichen Kernel-Funktionen.
+für Vektorräume gemeint, wobei $R$ und $p$ Hyperparameter des polynomialen Kernels sind \parencite[292]{ShaweTaylor.2011}.
 
 Der Kernel Trick besteht nun darin, den Algorithmus so umzuformen, dass $\bm{\phi}$ ausschließlich
 als Skalarprodukt vorkommt. Diese Skalarprodukte können dann gemäß \eqref{eq:kPCA:KernelFunction}
@@ -189,7 +190,7 @@ Um nun die Principal Component Analysis durchführen zu können, müssten die Ei
 \end{align}
 definiert ist \parencites[68]{ShaweTaylor.2011}[584]{Scholkopf.1997}. Die Eigenwertzerlegung der zentrierten
 Kernel-Matrix liefert mit einer entsprechenden Skalierung die Eigenvektoren der Kovarianzmatrix
-$\mat{C}$. Konkret wird dazu die $n \times n$ Kernel-Matrix in einem ersten Schritt mittels
+$\mat{C}$. Konkret wird dazu die $n \times n$-Kernel-Matrix in einem ersten Schritt mittels
 \begin{equation}
 	\label{eq:KernelCentering}
 	\widetilde{\mat{K}} = \mat{K} - \frac{1}{n} \ones \tr{\ones} \mat{K} - \frac{1}{n} \mat{K} \ones \tr{\ones} + \frac{1}{n^2} (\tr{\ones} \mat{K} \ones) \ones \tr{\ones}
@@ -247,7 +248,7 @@ Datensätze wurden daher inkrementelle Versionen der Kernel Principal Component 
 \subsection{Locally Linear Embedding}
 \label{ch:MethodenDerDimRed:statistisch:LLE}
 \nomenclature[Z]{LLE}{Locally Linear Embedding}
-Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, versucht die lokale Struktur einer Mannigfaltigkeit durch die kollektive Analyse von überlappenden Nachbarschaften zu erhalten. Die Idee ist, dass durch die Analyse von Nachbarschaften die lokale Struktur erhalten werden kann, vorausgesetzt, die Daten liegen auf einer lokal linearen Mannigfaltigkeit. Theoretisch können dann aufgrund der Überlappungen der Nachbarschaften globale Eigenschaften implizit miteinbezogen werden \parencite[2325]{Roweis.2000}. Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die
+Locally Linear Embedding (LLE), entwickelt von \textcite{Roweis.2000}, versucht die lokale Struktur einer Mannigfaltigkeit durch die kollektive Analyse von überlappenden Nachbarschaften zu erhalten. Die Idee ist, dass  durch die Analyse von Nachbarschaften die lokale Struktur erhalten werden kann, vorausgesetzt, die Daten liegen auf einer lokal linearen Mannigfaltigkeit. Theoretisch können dann aufgrund der Überlappungen der Nachbarschaften globale Eigenschaften implizit miteinbezogen werden \parencite[2325]{Roweis.2000}. Um dies zu erreichen, geht LLE in zwei Schritten vor: Zuerst wird die
 optimale lineare Rekonstruktion durch die Nachbarn eines Datenpunktes bestimmt. Im zweiten Schritt
 werden geometrische Eigenschaften dieser Rekonstruktion ausgenutzt, durch die die latente
 Repräsentation abgeleitet werden kann. Diese beiden Schritte werden in den folgenden zwei

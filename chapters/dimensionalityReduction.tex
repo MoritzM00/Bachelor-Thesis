@@ -19,13 +19,14 @@ Mannigfaltigkeiten erläutert.
 
 Formell wird die ursprüngliche (hochdimensionale) Repräsentation mit dem $D$-dimensionalen
 Zufallsvektor $\rvect{x} = \tr{(x_1, \ldots, x_D)}$ und die latente (niedrigdimensionale)
-Repräsentation mit dem $d$-dimensionalen Zufallsvektor $\rvect{y}$ gekennzeichnet. Hierbei
-bezeichnet $\tr{\,(\cdot)\,}$ die Transponierte. Liegt eine konkrete Stichprobe vor, so werden die
-einzelnen Stichproben $\vect{x}_i$ mit $i = 1, \ldots,n$ als Spaltenvektoren in der $n \times
-	D$-Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die transformierten (auch: projizierten)
-Daten in der Matrix $\mat{Y} \in \real^{n \times d}$ angeordnet. Es wird angenommen, dass die
-Datenmatrix $\mat{X}$ \textit{zentriert} ist. Dies kann jederzeit durch Subtraktion des
-Erwartungswertes $\Exp[x_i]$ einer Variable $x_i$ von Spalte $i$ sichergestellt werden.
+Repräsentation mit dem $d$-dimensionalen Zufallsvektor $\rvect{y} = \tr{(y_1, \ldots, y_d)}$
+gekennzeichnet. Hierbei bezeichnet $\tr{\,(\cdot)\,}$ die Transponierte. Liegt eine konkrete
+Stichprobe vor, so werden die einzelnen Stichproben $\vect{x}_i$ mit $i = 1, \ldots,n$ als
+Spaltenvektoren in der $n \times D$-Datenmatrix $\mat{X}$ angeordnet. Analog dazu werden die
+transformierten (auch: projizierten) Daten in der Matrix $\mat{Y} \in \real^{n \times d}$
+angeordnet. Es wird angenommen, dass die Datenmatrix $\mat{X}$ \textit{zentriert} ist. Dies kann
+jederzeit durch Subtraktion des Erwartungswertes $\Exp[x_i]$ einer Variable $x_i$ von Spalte $i$
+sichergestellt werden.
 
 Nachdem nun die grundlegende Terminologie und das Ziel der Dimensionsreduktion geklärt wurde,
 werden im Folgenden einige weitere wichtige Ideen und Konzepte erläutert. Dazu wird in
@@ -172,7 +173,8 @@ wird, sind außerdem \textit{t-distributed Stochastic Neighbor Embedding} \paren
 Wie zu erkennen ist, gibt es eine große Auswahl an verschiedenen Methoden der Dimensionsreduktion.
 Nach dem \newterm{No Free Lunch Theorem} \parencite{Wolpert.1997} gibt es aber keinen \enquote{besten} Algorithmus für jede Situation, weswegen
 eine Methode domänenspezifisch ausgewählt werden muss. Zur Reduktion von Speicher- und
-Rechenanforderungen und aufgrund des Fluchs der Dimensionalität kann der Aufwand trotzdem sinnvoll
-sein. Mit dem Hintergrundwissen zu wichtigen Konzepten wie der Mannigfaltigkeit und der
-intrinsischen Dimension (\secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim}) können im
-Folgenden die einzelnen Methoden vorgestellt werden.
+Rechenanforderungen und aufgrund des Fluchs der Dimensionalität kann es trotzdem sinnvoll sein,
+diesen Aufwand zu betreiben. Mit dem Hintergrundwissen zu wichtigen Konzepten wie der
+Mannigfaltigkeit und der intrinsischen Dimension
+(\secref{ch:Dimensionsreduktion:MannigfaltigkeitenIntrinsDim}) können im Folgenden die einzelnen
+Methoden vorgestellt werden.
