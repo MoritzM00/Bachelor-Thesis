@@ -402,18 +402,21 @@ des Bottlenecks eine uninformative latente Repräsentation lernen. Neben dieser 
 Regularisierung, gibt es deswegen noch einige weitere \textit{explizite} Regularisierungsmethoden,
 die zusätzlich zum Rekonstruktionsfehler einen Bestrafungsterm $\Omega(\bm{\theta})$ zur
 Zielfunktion $\mathcal{J}$ hinzufügen. Hierbei bezeichnet $\bm{\theta}$ die Parameter im Netzwerk,
-d.h. die Gewichte und Biases (siehe \eqref{eq:dreischichtigerAE}). Die Zielfunktion lautet dann
+d.h. die Gewichte und Biases. Die Zielfunktion lautet dann
 \begin{equation}
 	\mathcal{J}_{\text{AE+reg}} = \frac{1}{n} \sum_{i = 1}^{n}  L(\vect{x}_i, \estNormal{\vect{x}}_i) + \lambda \Omega(\bm{\theta}) \, ,
 \end{equation}
-wobei $\lambda \geq 0$ ein \newterm{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den Rekonstruktionsfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden, was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch also eine informativere latente Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
+wobei $\lambda \geq 0$ ein \newterm{Hyperparameter} ist, der die Stärke der Regularisierung kontrolliert \parencite[230]{Goodfellow.2016}. Damit muss der Autoencoder zwischen zwei entgegengesetzten Kräften
+balancieren: Einerseits muss der Autoencoder lernen, den Inputvektor zu rekonstruieren um den
+Rekonstruktionsfehler gering zu halten. Andererseits darf der Bestrafungsterm nicht zu groß werden,
+was triviale Lösungen mit uninformativem Bottleneck ausschließen soll. Insgesamt wird sich dadurch
+also eine informativere latente Repräsentation erhofft \parencite[516]{Goodfellow.2016}.
 
 Eine Umsetzung dessen ist der \newterm{Sparse Autoencoder}, der eine dünn besetzte (engl.
 \textit{sparse}) Repräsentation $\vect{y}$ erzwingt, d.h. nur wenige Einträge von $\vect{y}$ sind
 ungleich Null \parencite[505]{Goodfellow.2016}. Eine weitere oft eingesetzte Regularisierung für neuronale Netze ist
-das sogenannte \newterm{weight decay}, das die Größe der Gewichte im Netzwerk bestraft. Der
-Regularisierungsterm entspricht bspw. im Falle eines dreischichtigen Autoencoders (siehe
-\eqref{eq:dreischichtigerAE})
+das sogenannte \newterm{weight decay}, das die Größe der Gewichte im Netzwerk bestraft \parencite[231]{Goodfellow.2016}. Der Regularisierungsterm entspricht bspw. im Falle eines
+dreischichtigen Autoencoders (siehe \eqref{eq:dreischichtigerAE})
 \begin{equation}
 	\label{eq:WeightDecay}
 	\Omega(\bm{\theta}) = \norm{\mat{W}_1}^2_F + \norm{\mat{W}_2}^2_F \, ,
@@ -421,7 +424,7 @@ Regularisierungsterm entspricht bspw. im Falle eines dreischichtigen Autoencoder
 wobei $\norm{\,\cdot\,}_F$ die Frobeniusnorm bezeichnet \parencite[1]{Kunin.2019}. Diese Regularisierung wird später im Vergleich von Autoencodern zur
 Principal Component Analysis in \secref{ch:Vergleich:sec:Resultate:PCA_AE} noch von Bedeutung sein.
 Für das Lernen von Mannigfaltigkeiten besonders interessant ist jedoch der \newterm{Contractive
-	Autoencoder} \parencite{Rifai.2011a}, der im \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird.
+	Autoencoder} \parencite{Rifai.2011a}, der in \subsecref{ch:MethodenDerDimRed:ML:CAE} genauer behandelt wird.
 
 \subsubsection{Wahl der Architektur}
 \label{ch:MethodenDerDimRed:ML:AE:WahlArchitektur}
@@ -512,10 +515,10 @@ Die Idee ist es, die \textit{Sensitivität} des Autoencoders für den Input zu b
 eine robustere latente Repräsentation zu erhalten. Das bedeutet, dass bei kleinen Änderungen des
 Inputs $\vect{x}$ die Kodierung $f(\vect{x})$ ebenfalls nur minimal geändert werden soll. Dies
 entspricht einer kleinen ersten Ableitung und kann über die (quadrierte) Frobeniusnorm der
-Jacobi-Matrix $\mat{J}$ des Encoders $f$ erzielt werden \parencites[2]{Rifai.2011a}[521]{Goodfellow.2016}. Der Regularisierungsterm lautet damit
+Jacobi-Matrix $\mat{J}_f$ des Encoders $f$ erzielt werden \parencites[2]{Rifai.2011a}[521]{Goodfellow.2016}. Der Regularisierungsterm lautet damit
 \begin{equation}
 	\label{eq:CAE-Regularisierung}
-	\Omega(\vect{y}) = \norm[\big]{\mat{J}_f(\vect{x})}_F^2 =  \norm[\Big]{ \frac{\partial f(\vect{x})}{\partial \vect{x}} }^2_F \, ,
+	\Omega(\vect{x}, \vect{y}, \bm{\theta}) = \norm[\big]{\mat{J}_f(\vect{x})}_F^2 =  \norm[\Big]{ \frac{\partial f(\vect{x})}{\partial \vect{x}} }^2_F \, ,
 \end{equation}
 was der Summe über die quadrierten Einträge der Jacobi-Matrix entspricht. Wird angenommen, dass die Daten auf einer $d$-dimensionalen Mannigfaltigkeit liegen, so kann der Regularisierungsterm wie folgt geometrisch interpretiert werden. Einerseits sorgt der Regularisierungsterm dafür, dass der Autoencoder die Kodierung bei einer kleinen Änderung des Inputs nur wenig ändert, d.h. $f(\vect{x})$ soll möglichst konstant sein. Andererseits muss der Autoencoder auch den Rekonstruktionsfehler minimieren, sodass nicht alle Richtungen bei einer Änderung kontrahiert werden dürfen. Diese zwei entgegengesetzten Kräfte kann der Autoencoder gleichzeitig am besten balancieren, wenn die Richtungen parallel zur Mannigfaltigkeit für die stärkste Änderung in der Kodierung verantwortlich sind. In diesen \enquote{lokal relevanten} Richtungen wirkt der Contractive Autoencoder also weniger kontrahierend und die Richtungen, die orthogonal zur Mannigfaltigkeit liegen, werden am stärksten kontrahiert \parencites[1]{Rifai.2011a}[649 -- 650]{Rifai.2011b}.
 
