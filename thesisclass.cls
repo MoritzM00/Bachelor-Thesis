@@ -41,8 +41,8 @@
 \usepackage{hyperref}
 \usepackage{xcolor}
 \hypersetup{
-    hidelinks, % uncomment for paper version
-    %colorlinks, % uncomment for online version
+    %hidelinks, % uncomment for paper version
+    colorlinks, % uncomment for online version
     linkcolor={red!50!black},
     citecolor={blue!50!black},
     urlcolor={blue!80!black}
